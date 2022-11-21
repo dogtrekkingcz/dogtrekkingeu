@@ -1,4 +1,5 @@
-﻿using DogtrekkingCz.Storage.Models;
+﻿using System.Threading.Tasks;
+using DogtrekkingCz.Storage.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;

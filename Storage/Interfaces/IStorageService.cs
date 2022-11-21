@@ -1,4 +1,5 @@
-﻿using Storage.Interfaces.Entities;
+﻿using System.Threading.Tasks;
+using Storage.Interfaces.Entities;
 
 namespace Storage.Interfaces.Services;
 

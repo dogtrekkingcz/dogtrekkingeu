@@ -1,4 +1,7 @@
-﻿using DogtrekkingCz.Storage.Models;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using DogtrekkingCz.Storage.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Storage.Interfaces.Options;

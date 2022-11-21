@@ -1,5 +1,8 @@
 using DogtrekkingCz.Storage;
 using DogtrekkingCzGRPCService.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Storage.Interfaces.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +22,7 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
         .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding", "X-Grpc-Web", "User-Agent");
 }));
 
-string MongoDbConnectionString = "";
+string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
 
 var app = builder.Build();
