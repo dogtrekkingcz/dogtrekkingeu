@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos";
+
+package actions;
+
+service Actions {
+  rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
+  rpc createAction (CreateActionRequest) returns (CreateActionResponse);
+}
+
+message GetAllActionsRequest {
+}
+
+message GetAllActionsResponse {
+  repeated ActionRecord actions = 1;
+}
+
+message CreateActionRequest {
+    string name = 1;
+    string condition = 2;
+}
+
+message CreateActionResponse {
+    ActionRecord createdAction = 1;
+}
+
+message ActionRecord {
+    int64 beachId = 1;
+    string name = 2;
+    string condition = 3;
+}
