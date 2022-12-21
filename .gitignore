@@ -1,1 +1,6 @@
 /DogtrekkingCzGRPCService/appsettings.json
+/DogtrekkingCzApp/obj
+/DogtrekkingCzGRPCService/obj
+/DogtrekkingCzProtos/obj
+/Storage/obj
+/.vs/dogtrekkingcz
