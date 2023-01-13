@@ -25,6 +25,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DogtrekkingCzProtos\DogtrekkingCzProtos.csproj" />
+      <ProjectReference Include="..\Storage\Storage.csproj" />
     </ItemGroup>
-
 </Project>
