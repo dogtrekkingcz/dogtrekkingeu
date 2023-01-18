@@ -1,0 +1,17 @@
+﻿version: '3.4'
+services:
+  dogtrekking_eu: 
+    image: ${DOCKER_REGISTRY-}frontend
+    build:
+      context: .
+      dockerfile: DogtrekkingCzApp/Dockerfile
+    ports:
+      - "53961:80"
+    entrypoint: ['dotnet', 'DogtrekkingCzApp.dll']
+  dogtrekking_eu_grpc:
+    image: ${docker_registry-}backend
+    build:
+      context: .
+      dockerfile: DogtrekkingCzGRPCService/Dockerfile
+    ports:
+      - "54011:80"
