@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["DogtrekkingCzGRPCService/DogtrekkingCzGRPCService.csproj", "DogtrekkingCzGRPCService/"]
 RUN dotnet restore "DogtrekkingCzGRPCService/DogtrekkingCzGRPCService.csproj"
 COPY . .
-WORKDIR "/src/DogtrekkingCzGRPCService"
+WORKDIR "DogtrekkingCzGRPCService"
 RUN dotnet build "DogtrekkingCzGRPCService.csproj" -c Release -o /app/build
 
 FROM build AS publish

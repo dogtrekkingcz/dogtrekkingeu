@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["DogtrekkingCzApp/DogtrekkingCzApp.csproj", "DogtrekkingCzApp/"]
 RUN dotnet restore "DogtrekkingCzApp/DogtrekkingCzApp.csproj"
 COPY . .
-WORKDIR "/src/DogtrekkingCzApp"
+WORKDIR "DogtrekkingCzApp"
 RUN dotnet build "DogtrekkingCzApp.csproj" -c Release -o /app/build
 
 FROM build AS publish
@@ -17,4 +17,4 @@ RUN dotnet publish "DogtrekkingCzApp.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DogtrekkingCzApp.dll"]                                                                                                                                                                                                                                                                                                     
+ENTRYPOINT ["dotnet", "DogtrekkingCzApp.dll"]
