@@ -1,20 +1,24 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+﻿FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["DogtrekkingCzApp/DogtrekkingCzApp.csproj", "DogtrekkingCzApp/"]
-RUN dotnet restore "DogtrekkingCzApp/DogtrekkingCzApp.csproj"
-COPY . .
-WORKDIR "DogtrekkingCzApp"
-RUN dotnet build "DogtrekkingCzApp.csproj" -c Release -o /app/build
+
+COPY DogtrekkingCzApp/DogtrekkingCzApp.csproj ./DogtrekkingCzApp/
+COPY DogtrekkingCzProtos/DogtrekkingCzProtos.csproj ./DogtrekkingCzProtos/
+COPY Storage/Storage.csproj ./Storage/
+
+COPY . ./
+
+RUN dotnet restore DogtrekkingCzApp/DogtrekkingCzApp.csproj
+
+RUN dotnet build DogtrekkingCzApp/DogtrekkingCzApp.csproj -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DogtrekkingCzApp.csproj" -c Release -o /app/publish
+RUN dotnet publish DogtrekkingCzApp/DogtrekkingCzApp.csproj -c Release -o /app/publish
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "DogtrekkingCzApp.dll"]
+FROM nginx:alpine AS final
+WORKDIR /usr/share/nginx/html
+COPY --from=publish /app/publish/wwwroot .
+COPY DogtrekkingCzApp/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+EXPOSE 443

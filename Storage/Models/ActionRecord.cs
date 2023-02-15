@@ -1,12 +1,13 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace DogtrekkingCz.Storage.Models;
 
 public sealed record ActionRecord
 {
-    [MongoDB.Bson.Serialization.Attributes.BsonElement("_id")]
-    public MongoDB.Bson.ObjectId MongoId { get; set; } = ObjectId.GenerateNewId();
-    public Guid Id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public DateTimeOffset? Begin { get; set; }
