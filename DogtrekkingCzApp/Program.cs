@@ -18,7 +18,8 @@ builder.Services.AddOidcAuthentication(options =>
 
 builder.Services.AddSingleton(services =>
 {
-    var baseUri = "https://localhost:7082"; 
+    var baseUri = "https://localhost:4443";
+
     return  GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
     {
         HttpHandler = new GrpcWebHandler(new HttpClientHandler())

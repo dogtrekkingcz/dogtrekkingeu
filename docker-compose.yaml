@@ -2,30 +2,79 @@
 
 services:
   dogtrekking_eu_grpc:
-    image: ${docker_registry-}backend
+    image: dogtrekking_eu_server
     build:
       context: .
       dockerfile: DogtrekkingCzGRPCService/Dockerfile
     ports:
       - 4080:80
       - 4443:443
+      
   dogtrekking_eu: 
-    image: ${DOCKER_REGISTRY-}frontend
+    image: dogtrekking_eu_client
     build:
       context: .
       dockerfile: DogtrekkingCzApp/Dockerfile
     ports:
       - 5080:80
       - 5443:443
-  mongodb:
+      
+  dtdata_db:
     image: mongo:latest
+    container_name: data_db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data_container:/data/db
+      - data_dtdata_db:/data/db
+   
+  postgres:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycl0ak
+      POSTGRES_USER: keycl0ak
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5431:5431
 
+  keycloak:
+    image: jboss/keycloak
+    volumes:
+      - ./imports:/opt/jboss/keycloak/imports
+    command: 
+      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycl0ak
+      DB_USER: keycl0ak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: administrat0r
+      KEYCLOAK_PASSWORD: asc88a8c0ssssqs
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
+  mq:
+    image: rabbitmq:management
+    container_name: message-queue
+    ports:
+      - 15672:15672
+      - 5672:5672
+      - 5671:5671
+    volumes:
+      - data_mq:/var/lib/rabbitmq
+      
 volumes:
-  mongodb_data_container:
+  data_dtdata_db:
+  data_mq:
+  postgres_data:
+      driver: local
+  
+  
+
