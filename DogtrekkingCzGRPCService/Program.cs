@@ -18,8 +18,8 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
         .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding", "X-Grpc-Web", "User-Agent", "Access-Control-Allow-Origin");
 }));
 
-// string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
-// builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
+string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
+builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
 
 var app = builder.Build();
 
