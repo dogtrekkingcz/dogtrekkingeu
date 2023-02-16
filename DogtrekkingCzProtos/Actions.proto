@@ -25,8 +25,22 @@ message CreateActionResponse {
     ActionRecord createdAction = 1;
 }
 
+message AddressDto {
+  string City = 1;
+  string Street = 2;
+  double GpsLatitude = 3;
+  double GpsLongitude = 4;
+}
+
 message ActionRecord {
-    int64 beachId = 1;
-    string name = 2;
-    string condition = 3;
+  string name = 1;
+  string description = 2;
+  int64 Begin = 3;
+  int64 End = 4;
+
+  AddressDto Address = 5;
+
+  bool IsHidden = 6;
+  bool IsCanceled = 7;
+  string CancelledReason = 8;
 }

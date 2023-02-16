@@ -12,18 +12,14 @@ namespace DogtrekkingCzGRPCService.Services;
 public class BeachConditionsService : BeachConditions.BeachConditionsBase
 {
     private readonly ILogger<BeachConditionsService> _logger;
-    private readonly IStorageService _storageService;
     
-    public BeachConditionsService(ILogger<BeachConditionsService> logger, IStorageService storageService)
+    public BeachConditionsService(ILogger<BeachConditionsService> logger)
     {
         _logger = logger;
-        _storageService = storageService;
     }
 
     public async override Task<GetAllBeachConditionResponse> getAllBeachConditions(GetAllBeachConditionRequest request, ServerCallContext context)
     {
-        await _storageService.AddActionAsync(new AddActionRequest { Name = "test" });
-        
         GetAllBeachConditionResponse result = new GetAllBeachConditionResponse();
         result.BeachConditions.Add(new BeachCondition { BeachId = 1, Name = "North Point", Condition = "Sandy" });
         result.BeachConditions.Add(new BeachCondition { BeachId = 2, Name = "South Point", Condition = "Murky" });

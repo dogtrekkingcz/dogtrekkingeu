@@ -1,0 +1,47 @@
+﻿@page "/actions"
+@inject GrpcChannel Channel
+
+<h1>Actions</h1>
+<p>Conditions at different points on the coast line.</p>
+
+@if (actionList  == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>BeachId</th>
+            <th>Name</th>
+            <th>Condition</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var action in actionList)
+        {
+            <tr>
+                <td>@action.</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IList<Protos.ActionRecord> actionList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = new Protos.Actions.ActionsClient(Channel);
+
+        var getAllActionsRequest = new Protos.GetAllActionsRequest();
+
+        Protos.GetAllActionsResponse response = await client.getAllActionsAsync(getAllActionsRequest);
+
+        actionList = response.Actions;
+    }
+}

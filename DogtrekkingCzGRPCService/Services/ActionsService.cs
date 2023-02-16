@@ -27,7 +27,15 @@ public class ActionsService : Actions.ActionsBase
         await _storageService.AddActionAsync(new AddActionRequest { Name = "test" });
         
         GetAllActionsResponse result = new GetAllActionsResponse();
-        result.Actions.Add(new ActionRecord { });
+        result.Actions.Add(new ActionRecord
+        {
+            Name = "prvni akce",
+            Address = new AddressDto { City = "nekde", Street = "jinde", GpsLatitude = 23.123456, GpsLongitude = 42.321456 },
+            Description = "sadfasdf",
+            CancelledReason = string.Empty,
+            IsCanceled = false,
+            IsHidden = false
+        });
 
         return result;
     }
@@ -35,11 +43,9 @@ public class ActionsService : Actions.ActionsBase
     public override Task<CreateActionResponse> createAction(CreateActionRequest request, ServerCallContext context)
     {
         ActionRecord action = new ActionRecord
-
         {
-            BeachId = new Random().Next(),
-            Name = request.Name,
-            Condition = request.Condition
+            Name = "asdfasdf",
+            IsCanceled = false
         };
 
         CreateActionResponse response = new CreateActionResponse
