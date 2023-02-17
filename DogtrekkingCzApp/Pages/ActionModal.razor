@@ -1,31 +1,56 @@
 ﻿@using System.Security.Claims
+@using DogtrekkingCzApp.Models
 @using Protos
 @inject GrpcChannel Channel
 @inject AuthenticationStateProvider AuthStateProvider 
 
-<h3>ActionModal</h3>
 <div>
-    <EditForm OnValidSubmit="SubmitForm">
-        <label for="message">Name</label>
-        <InputText @bind-Value="_name" />
+    <EditForm Model="@Model" OnValidSubmit="SubmitForm">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label for="message">Name</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@Model.Name"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label for="description">Description</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@Model.Description"/>
+                </div>
+            </div>
         
-        <label for="description">Description</label>
-        <InputText @bind-Value="_description" />
-        
-        <button type="submit">Submit</button>
-        <button @onclick="Cancel">Cancel</button>
+
+            <hr />
+            
+            <div class="row">
+                <div class="col">
+                    <button type="submit">Submit</button>
+                </div>
+                <div class="col">
+                    <button @onclick="Cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
     </EditForm>
 </div>
 
 @code {
+    private ActionModel Model = new();
     private Protos.Actions.ActionsClient _client = null;
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
-    private string _name = "";
-    private string _description = "";
+
     private AuthenticationState _authState = null;
     
     protected override async Task OnInitializedAsync()
     {
+        BlazoredModal.SetTitle("Add action");
+        
         _client = new Protos.Actions.ActionsClient(Channel);
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
     }
@@ -51,8 +76,8 @@
             },
             Action = new ActionRecord
             {
-                Name = _name,
-                Description = _description
+                Name = Model.Name,
+                Description = Model.Description
             }
         });
     }
