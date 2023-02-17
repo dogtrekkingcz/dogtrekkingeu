@@ -35,9 +35,24 @@ public static class DiCompositor
         
         BsonClassMap.RegisterClassMap<ActionRecord>();
 
-        serviceProvider.AddSingleton<IMongoCollection<ActionRecord>>(new MongoClient(options.MongoDbConnectionString)
-            .GetDatabase("DogtrekkingEu")
-            .GetCollection<ActionRecord>("Actions"));
+        var client = new MongoClient(options.MongoDbConnectionString);
+        Console.WriteLine($"MongoDb client: {client}");
+        
+        Console.WriteLine($"MongoDb databases: {string.Join(", ", client.ListDatabaseNames().ToList())}");
+
+        var db = client.GetDatabase("DogtrekkingEu");
+
+        var listOfCollections = db.ListCollectionNames().ToList();
+        Console.WriteLine($"MongoDb.DogtrekkingEu.Collections: {string.Join(", ", listOfCollections)}");
+        
+        if (listOfCollections.Contains("Actions") == false)
+        {
+            db.CreateCollection("Actions");
+        }
+
+        Console.WriteLine($"MongoDb.DogtrekkingEu.Collections with initialized collections: {db.ListCollectionNames()}");
+        
+        serviceProvider.AddSingleton<IMongoCollection<ActionRecord>>(db.GetCollection<ActionRecord>("Actions"));
 
         return serviceProvider;
     }   

@@ -16,8 +16,8 @@ services:
       context: .
       dockerfile: DogtrekkingCzApp/Dockerfile
     ports:
-      - 5080:80
       - 5443:443
+      - 5080:80
       
   dtdata_db:
     image: mongo:latest
@@ -25,6 +25,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: DogtrekkingEu
     ports:
       - 27017:27017
     volumes:

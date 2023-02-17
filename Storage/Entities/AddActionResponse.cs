@@ -1,6 +1,8 @@
-﻿namespace Storage.Interfaces.Entities;
+﻿using DogtrekkingCz.Storage.Models;
+
+namespace Storage.Interfaces.Entities;
 
 public sealed record AddActionResponse
 {
-    public bool Result { get; init; }
+    public ActionRecord Result { get; init; }
 }

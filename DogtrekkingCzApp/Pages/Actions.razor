@@ -1,10 +1,12 @@
 ﻿@page "/actions"
+@using Protos
+@using System.Security.Claims
 @inject GrpcChannel Channel
+@inject IModalService modal
 
 <h1>Actions</h1>
-<p>Conditions at different points on the coast line.</p>
 
-@if (actionList  == null)
+@if (_actionList  == null)
 {
     <p>
         <em>Loading...</em>
@@ -15,33 +17,63 @@ else
     <table class="table">
         <thead>
         <tr>
-            <th>BeachId</th>
+            @* <th>Date</th> *@
             <th>Name</th>
-            <th>Condition</th>
+            <th>Description</th>
+            <th>Owner</th>
+            @* <th>Address</th> *@
         </tr>
         </thead>
         <tbody>
-        @foreach (var action in actionList)
+        @foreach (var action in _actionList)
         {
             <tr>
-                <td>@action.</td>
+                @* <td>@action.DateFrom</td> *@
+                <td>@action.Name</td>
+                <td>@action.Description</td>
+                <td>@action.Owner.FirstName @action.Owner.FamilyName (@action.Owner.Id / @action.Owner.Email)</td>
+                @* <td>@action.Address.City, @action.Address.Street</td> *@
             </tr>
         }
         </tbody>
     </table>
+
+    <AuthorizeView>
+        <Authorized>
+            <button @onclick="@(async () => await PrepareToAddAction())" class="btn btn-primary">View</button>            
+        </Authorized>
+    </AuthorizeView>
 }
 
 @code {
-    private IList<Protos.ActionRecord> actionList;
+    private Protos.Actions.ActionsClient _client = null;
+    private IList<Protos.ActionRecord> _actionList = null;
 
     protected override async Task OnInitializedAsync()
     {
-        var client = new Protos.Actions.ActionsClient(Channel);
+        _client = new Protos.Actions.ActionsClient(Channel);
 
+        await ReloadData();
+    }
+
+    protected async Task PrepareToAddAction()
+    {
+        var messageForm = modal.Show<ActionModal>();
+        var result = await messageForm.Result;
+
+        if (result.Confirmed)
+        {
+            await ReloadData();
+        }
+    }
+
+    private async Task ReloadData()
+    {
         var getAllActionsRequest = new Protos.GetAllActionsRequest();
+        Protos.GetAllActionsResponse response = await _client.getAllActionsAsync(getAllActionsRequest);
 
-        Protos.GetAllActionsResponse response = await client.getAllActionsAsync(getAllActionsRequest);
-
-        actionList = response.Actions;
+        _actionList = response.Actions;
+        
+        StateHasChanged();
     }
 }

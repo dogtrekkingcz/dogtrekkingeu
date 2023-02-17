@@ -9,19 +9,38 @@ public sealed record ActionRecord
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
     public string Name { get; set; }
+    
+    public OwnerDto Owner { get; set; }
+    
     public string Description { get; set; }
-    public DateTimeOffset? Begin { get; set; }
-    public DateTimeOffset? End { get; set; }
+    
+    // public string DateFrom { get; set; }
+    // public string DateTo { get; set; }
+    //
+    // public AddressDto Address { get; set; }
+    //
+    
+    // public FlagsDto Flags { get; set; }
 
-    public AddressDto Address { get; set; }
+    // public IList<RaceDto> Races { get; set; }
 
-    public bool IsHidden { get; set; }
-    public bool IsCanceled { get; set; }
-
-    public string CancelledReason { get; set; }
-
-    public IList<RaceDto> Races { get; set; }
-
+    public class OwnerDto
+    {
+        public string Id { get; set; }
+        
+        public string Email { get; set; }
+        
+        public string FirstName { get; set; }
+        
+        public string FamilyName { get; set; }
+    }
+    public class FlagsDto
+    {
+        public bool IsHidden { get; set; }
+        
+        public bool IsCanceled { get; set; }
+        public string CancelledReason { get; set; }
+    }
     public class AddressDto
     {
         public string City { get; set; }
@@ -59,20 +78,20 @@ public sealed record ActionRecord
         public string City { get; set; }
         public string Address { get; set; }
 
-        public DateTimeOffset? Birthday { get; set; }
+        public string Birthday { get; set; }
 
 
         public List<DogDto> Dogs { get; set; }
 
-        public DateTimeOffset? Start { get; set; }
-        public DateTimeOffset? Finish { get; set; }
+        public string Start { get; set; }
+        public string Finish { get; set; }
 
         public IList<CheckpointDto> Checkpoints { get; set; }
 
         public RaceState State { get; set; }
 
-        public DateTimeOffset? Received { get; set; }
-        public DateTimeOffset? Payed { get; set; }
+        public string Received { get; set; }
+        public string Payed { get; set; }
 
         public List<(DateTimeOffset, string)> Notes { get; set; }
     }
@@ -88,7 +107,7 @@ public sealed record ActionRecord
     public class CheckpointDto
     {
         public Guid Id { get; set; }
-        public DateTimeOffset Passed { get; set; }
+        public string Passed { get; set; }
     }
 
     public enum RaceState

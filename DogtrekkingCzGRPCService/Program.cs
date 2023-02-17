@@ -1,5 +1,7 @@
 using DogtrekkingCz.Storage;
 using DogtrekkingCzGRPCService.Services;
+using Mapster;
+using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +10,22 @@ using Storage.Interfaces.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddGrpc();
+string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
+Console.WriteLine(MongoDbConnectionString);
+builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
+
+var typeAdapterConfig = new TypeAdapterConfig
+{
+    RequireDestinationMemberSource = true,
+    RequireExplicitMapping = true
+};
+
+builder.Services
+    .AddSingleton(typeAdapterConfig)
+    .AddScoped<IMapper, ServiceMapper>();
+
+typeAdapterConfig.AddActionServiceMapping();
+
 
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
@@ -17,9 +35,6 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
         .AllowAnyHeader()
         .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding", "X-Grpc-Web", "User-Agent", "Access-Control-Allow-Origin");
 }));
-
-string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
-builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
 
 var app = builder.Build();
 

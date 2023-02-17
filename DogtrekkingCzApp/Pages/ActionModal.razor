@@ -1,0 +1,59 @@
+﻿@using System.Security.Claims
+@using Protos
+@inject GrpcChannel Channel
+@inject AuthenticationStateProvider AuthStateProvider 
+
+<h3>ActionModal</h3>
+<div>
+    <EditForm OnValidSubmit="SubmitForm">
+        <label for="message">Name</label>
+        <InputText @bind-Value="_name" />
+        
+        <label for="description">Description</label>
+        <InputText @bind-Value="_description" />
+        
+        <button type="submit">Submit</button>
+        <button @onclick="Cancel">Cancel</button>
+    </EditForm>
+</div>
+
+@code {
+    private Protos.Actions.ActionsClient _client = null;
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    private string _name = "";
+    private string _description = "";
+    private AuthenticationState _authState = null;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _client = new Protos.Actions.ActionsClient(Channel);
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+    }
+    
+    private async Task SubmitForm()
+    {
+        await CreateNewAction();
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
+    }
+
+    private async Task Cancel() => await BlazoredModal.CancelAsync();
+    
+    private async Task CreateNewAction()
+    {
+        var result = await _client.createActionAsync(new CreateActionRequest
+        {
+            Owner = new OwnerDto
+            {
+                Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jti")?.Value ?? "",
+                Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "",
+                FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "",
+                FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? ""
+            },
+            Action = new ActionRecord
+            {
+                Name = _name,
+                Description = _description
+            }
+        });
+    }
+}

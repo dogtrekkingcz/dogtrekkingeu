@@ -10,19 +10,20 @@ service Actions {
 }
 
 message GetAllActionsRequest {
+  int32 Year = 1;
 }
 
 message GetAllActionsResponse {
-  repeated ActionRecord actions = 1;
+  repeated ActionRecord Actions = 1;
 }
 
 message CreateActionRequest {
-    string name = 1;
-    string condition = 2;
+    OwnerDto Owner = 1;
+    ActionRecord Action = 2;
 }
 
 message CreateActionResponse {
-    ActionRecord createdAction = 1;
+    ActionRecord Result = 1;
 }
 
 message AddressDto {
@@ -32,15 +33,25 @@ message AddressDto {
   double GpsLongitude = 4;
 }
 
+message OwnerDto {
+  string Id = 1;
+  string Email = 2;
+  string FirstName = 3;
+  string FamilyName = 4;
+}
+
 message ActionRecord {
-  string name = 1;
-  string description = 2;
-  int64 Begin = 3;
-  int64 End = 4;
+  OwnerDto Owner = 1;
+  
+  string Name = 2;
+  string Description = 3;
+  
+  // string DateFrom = 3;
+  // string DateTo = 4;
 
-  AddressDto Address = 5;
+  // AddressDto Address = 5;
 
-  bool IsHidden = 6;
-  bool IsCanceled = 7;
-  string CancelledReason = 8;
+  // bool IsHidden = 6;
+  // bool IsCanceled = 7;
+  // string CancelledReason = 8;
 }
