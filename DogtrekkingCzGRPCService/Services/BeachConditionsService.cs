@@ -1,11 +1,5 @@
 using Grpc.Core;
-using Microsoft.Extensions.Logging;
 using Protos;
-using System;
-using System.IO.IsolatedStorage;
-using System.Threading.Tasks;
-using Storage.Interfaces.Entities;
-using Storage.Interfaces.Services;
 
 namespace DogtrekkingCzGRPCService.Services;
 

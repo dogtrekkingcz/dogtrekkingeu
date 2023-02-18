@@ -3,11 +3,12 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DogtrekkingCz.Storage.Models;
 
-public sealed record ActionRecord
+internal sealed record ActionRecord
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
+
     public string Name { get; set; }
     
     public OwnerDto Owner { get; set; }

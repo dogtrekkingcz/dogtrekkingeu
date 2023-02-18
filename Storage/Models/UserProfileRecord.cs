@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DogtrekkingCz.Storage.Models;
 
-public sealed record UserProfileRecord
+internal sealed record UserProfileRecord
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]

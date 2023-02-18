@@ -1,10 +1,8 @@
-﻿using System.Threading.Tasks;
-using Storage.Interfaces.Entities;
+﻿namespace Storage.Interfaces.Services;
 
-namespace Storage.Interfaces.Services;
-
-public interface IStorageService
+internal interface IStorageService<T>
 {
-    public Task<AddActionResponse> AddActionAsync(AddActionRequest request);
-    public Task<GetAllActionsResponse> GetAllActionsAsync(GetAllActionsRequest request);
+    public Task<T> AddAsync(T request);
+
+    public Task<IReadOnlyList<T>> GetAllAsync();
 }

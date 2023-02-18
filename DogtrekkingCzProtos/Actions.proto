@@ -14,16 +14,16 @@ message GetAllActionsRequest {
 }
 
 message GetAllActionsResponse {
-  repeated ActionRecord Actions = 1;
+  repeated Action Actions = 1;
 }
 
 message CreateActionRequest {
     OwnerDto Owner = 1;
-    ActionRecord Action = 2;
+    Action Action = 2;
 }
 
 message CreateActionResponse {
-    ActionRecord Result = 1;
+    Action Result = 1;
 }
 
 message AddressDto {
@@ -40,9 +40,8 @@ message OwnerDto {
   string FamilyName = 4;
 }
 
-message ActionRecord {
+message Action {
   OwnerDto Owner = 1;
-  
   string Name = 2;
   string Description = 3;
   

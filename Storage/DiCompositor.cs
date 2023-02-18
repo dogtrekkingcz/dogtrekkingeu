@@ -31,7 +31,7 @@ public static class DiCompositor
         ArgumentNullException.ThrowIfNull(serviceProvider);
         
         serviceProvider.AddSingleton<IInitializeService>(new InitializeService(options));
-        serviceProvider.AddSingleton<IStorageService, StorageService>();
+        serviceProvider.AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>();
         
         BsonClassMap.RegisterClassMap<ActionRecord>();
 

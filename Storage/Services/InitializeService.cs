@@ -5,7 +5,7 @@ using Storage.Interfaces.Services;
 
 namespace Storage.Services;
 
-public class InitializeService : IInitializeService
+internal class InitializeService : IInitializeService
 {
     private readonly StorageOptions _options;
     
