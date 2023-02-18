@@ -19,7 +19,7 @@ builder.Services.AddBlazoredModal();
 
 builder.Services.AddSingleton(services =>
 {
-    var baseUri = "http://localhost:4080";
+    var baseUri = builder.Configuration["GrpcServerUri"];
 
     return  GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
     {

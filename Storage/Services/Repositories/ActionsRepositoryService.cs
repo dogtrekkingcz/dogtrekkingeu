@@ -16,7 +16,7 @@ namespace Storage.Services.Repositories
         private readonly IMapper _mapper;
         private readonly IStorageService<ActionRecord> _actionsStorageService;
 
-        ActionsRepositoryService(IMapper mapper, IStorageService<ActionRecord> actionsStorageService)
+        public ActionsRepositoryService(IMapper mapper, IStorageService<ActionRecord> actionsStorageService)
         {
             _mapper = mapper;
             _actionsStorageService = actionsStorageService;

@@ -12,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 Console.WriteLine(MongoDbConnectionString);
-builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
 
 var typeAdapterConfig = new TypeAdapterConfig
 {
@@ -22,7 +21,8 @@ var typeAdapterConfig = new TypeAdapterConfig
 
 builder.Services
     .AddSingleton(typeAdapterConfig)
-    .AddScoped<IMapper, ServiceMapper>();
+    .AddScoped<IMapper, ServiceMapper>()
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
 
 typeAdapterConfig.AddActionServiceMapping();
 

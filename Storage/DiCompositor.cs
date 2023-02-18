@@ -10,6 +10,9 @@ using Storage.Services;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using Storage.Interfaces;
+using Storage.Services.Repositories;
+using MapsterMapper;
 
 namespace DogtrekkingCz.Storage;
 
@@ -29,10 +32,12 @@ public static class DiCompositor
     public static IServiceCollection AddStorage(this IServiceCollection serviceProvider, StorageOptions options)
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
-        
+
+        serviceProvider.AddScoped<IMapper, ServiceMapper>();
         serviceProvider.AddSingleton<IInitializeService>(new InitializeService(options));
         serviceProvider.AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>();
-        
+        serviceProvider.AddScoped<IActionsRepositoryService, ActionsRepositoryService>();
+
         BsonClassMap.RegisterClassMap<ActionRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
