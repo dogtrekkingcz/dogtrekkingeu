@@ -1,29 +1,37 @@
 syntax = "proto3";
 
-option csharp_namespace = "Protos";
+option csharp_namespace = "Protos.Actions";
 
 package actions;
 
 service Actions {
   rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
   rpc createAction (CreateActionRequest) returns (CreateActionResponse);
+  rpc updateAction (UpdateActionRequest) returns (UpdateActionResponse);
 }
 
 message GetAllActionsRequest {
-  repeated Action Actions = 1;
+  repeated ActionDto Actions = 1;
 }
 
 message GetAllActionsResponse {
-  repeated Action Actions = 1;
+  repeated ActionDto Actions = 1;
 }
 
 message CreateActionRequest {
-    OwnerDto Owner = 1;
-    Action Action = 2;
+    ActionDto Action = 1;
 }
 
 message CreateActionResponse {
-    Action Result = 1;
+  string Id = 1;
+}
+
+message UpdateActionRequest {
+  ActionDto Action = 1;
+}
+
+message UpdateActionResponse {
+  string Id = 1;
 }
 
 message AddressDto {
@@ -40,13 +48,18 @@ message OwnerDto {
   string FamilyName = 4;
 }
 
-message Action {
-  OwnerDto Owner = 1;
-  string Name = 2;
-  string Description = 3;
+message TermDto {
+  string From = 1;
+  string To = 2;
+}
+
+message ActionDto {
+  string Id = 1;
   
-  // string DateFrom = 3;
-  // string DateTo = 4;
+  OwnerDto Owner = 2;
+  string Name = 3;
+  string Description = 4;
+  TermDto Term = 5;
 
   // AddressDto Address = 5;
 

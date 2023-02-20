@@ -22,9 +22,9 @@ var typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString });
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString }, typeAdapterConfig);
 
-typeAdapterConfig.AddActionServiceMapping();
+typeAdapterConfig.AddActionsServiceMapping();
 
 
 
@@ -36,9 +36,13 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
         .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding", "X-Grpc-Web", "User-Agent", "Access-Control-Allow-Origin");
 }));
 
+builder.Services.AddLocalization();
+
+
 var app = builder.Build();
 
 app.UseRouting();
+
 app.UseGrpcWeb();
 app.UseCors();
 

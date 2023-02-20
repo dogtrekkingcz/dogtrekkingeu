@@ -16,6 +16,7 @@ builder.Services.AddOidcAuthentication(options =>
     builder.Configuration.Bind("OIDC", options.ProviderOptions);
 });
 builder.Services.AddBlazoredModal();
+builder.Services.AddBootstrapBlazor();
 
 builder.Services.AddSingleton(services =>
 {
@@ -27,5 +28,12 @@ builder.Services.AddSingleton(services =>
     });
 });
 
-await builder.Build().RunAsync();
+builder.Services.AddLocalization();
+
+
+var host = builder.Build();
+
+await host.SetDefaultCulture();
+
+await host.RunAsync();
 

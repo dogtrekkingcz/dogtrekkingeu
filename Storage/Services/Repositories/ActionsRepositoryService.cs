@@ -1,13 +1,9 @@
 ﻿using DogtrekkingCz.Storage.Models;
 using MapsterMapper;
+using MongoDB.Bson;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 using Storage.Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Storage.Services.Repositories
 {
@@ -39,17 +35,39 @@ namespace Storage.Services.Repositories
 
             var addedActionRecord = await _actionsStorageService.AddAsync(action);
 
-            var response = _mapper.Map<AddActionResponse>(addedActionRecord);
+            var response = new AddActionResponse
+            {
+                Id = addedActionRecord?.Id ?? ""
+            };
 
             return response;
+        }
+
+        public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request)
+        {
+            Console.WriteLine(request.ToJson());
+            
+            var updateRequest = _mapper.Map<ActionRecord>(request);
+            
+            Console.WriteLine(updateRequest.ToJson());
+            
+            var result = await _actionsStorageService.UpdateAsync(updateRequest);
+
+            return new UpdateActionResponse
+            {
+                Id = result.Id
+            };
         }
 
         public async Task<GetAllActionsResponse> GetAllActionsAsync()
         {
             var getAllActions = await _actionsStorageService.GetAllAsync();
 
-            var response = _mapper.Map<GetAllActionsResponse>(getAllActions);
-
+            var response = new GetAllActionsResponse
+            {
+                Actions = _mapper.Map<IReadOnlyList<GetAllActionsResponse.ActionDto>>(getAllActions)
+            };
+            
             return response;
         }
     }

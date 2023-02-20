@@ -8,11 +8,15 @@ public sealed record GetAllActionsResponse
 
     public sealed record ActionDto
     {
-        public required string Name { get; set; }
+        public string Id { get; set; }
+        
+        public string Name { get; set; }
 
         public OwnerDto Owner { get; set; }
 
         public string Description { get; set; }
+        
+        public TermDto Term { get; set; }
     }
 
     public sealed record OwnerDto
@@ -24,5 +28,11 @@ public sealed record GetAllActionsResponse
         public string FirstName { get; set; }
 
         public string FamilyName { get; set; }
+    }
+
+    public sealed record TermDto
+    {
+        public DateTimeOffset From { get; set; }
+        public DateTimeOffset To { get; set; }
     }
 }

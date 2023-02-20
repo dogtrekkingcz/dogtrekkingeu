@@ -3,13 +3,14 @@
 @using System.Security.Claims
 @inject GrpcChannel Channel
 @inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
 
-<h1>Actions</h1>
+<h1>@localizer["Actions"]</h1>
 
 @if (_actionList  == null)
 {
     <p>
-        <em>Loading...</em>
+        <em>@localizer["Loading ..."]</em>
     </p>
 }
 else
@@ -17,22 +18,24 @@ else
     <table class="table">
         <thead>
         <tr>
-            @* <th>Date</th> *@
-            <th>Name</th>
-            <th>Description</th>
+            <th>@localizer["Term"]</th>
+            <th>@localizer["ActionName"]</th>
+            <th>@localizer["Enrolled races"]</th>
             <th>Owner</th>
-            @* <th>Address</th> *@
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var action in _actionList)
         {
             <tr>
-                @* <td>@action.DateFrom</td> *@
+                <td>@action.Term?.From</td>
                 <td>@action.Name</td>
                 <td>@action.Description</td>
-                <td>@action.Owner.FirstName @action.Owner.FamilyName (@action.Owner.Id / @action.Owner.Email)</td>
-                @* <td>@action.Address.City, @action.Address.Street</td> *@
+                <td>@action.Owner?.FirstName @action.Owner?.FamilyName (@action.Owner?.Id / @action.Owner?.Email)</td>
+                <td>
+                    <ActionDropDown PassedAction=@action OnItemChanged=@HandleOnItemChanged></ActionDropDown>
+                </td>
             </tr>
         }
         </tbody>
@@ -46,19 +49,19 @@ else
 }
 
 @code {
-    private Protos.Actions.ActionsClient _client = null;
-    private IList<Protos.Action> _actionList = null;
+    private Protos.Actions.Actions.ActionsClient _client = null;
+    private IList<Protos.Actions.ActionDto> _actionList = null;
 
     protected override async Task OnInitializedAsync()
     {
-        _client = new Protos.Actions.ActionsClient(Channel);
+        _client = new Protos.Actions.Actions.ActionsClient(Channel);
 
         await ReloadData();
     }
 
     protected async Task PrepareToAddAction()
     {
-        var messageForm = modal.Show<ActionModal>();
+        var messageForm = modal.Show<ActionModal>("Adding action");
         var result = await messageForm.Result;
 
         if (result.Confirmed)
@@ -69,10 +72,15 @@ else
 
     private async Task ReloadData()
     {
-        Protos.GetAllActionsResponse response = await _client.getAllActionsAsync(new GetAllActionsRequest());
+        Protos.Actions.GetAllActionsResponse response = await _client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
 
         _actionList = response.Actions;
         
         StateHasChanged();
+    }
+    
+    public async Task HandleOnItemChanged(Protos.Actions.ActionDto action)
+    {
+        await ReloadData();
     }
 }

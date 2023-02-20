@@ -6,10 +6,13 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <PublishTrimmed>false</PublishTrimmed>
         <UserSecretsId>4b837038-1852-4dca-8338-8f2620172eaa</UserSecretsId>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Blazored.Modal" Version="7.1.0" />
+        <PackageReference Include="bootstrap" Version="5.2.3" />
+        <PackageReference Include="BootstrapBlazor" Version="7.3.0" />
         <PackageReference Include="Google.Protobuf" Version="3.21.9" />
         <PackageReference Include="Grpc.Net.Client" Version="2.50.0-pre1" />
         <PackageReference Include="Grpc.Net.Client.Web" Version="2.50.0-pre1" />
@@ -20,6 +23,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,5 +39,29 @@
       <Content Update="wwwroot\appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Shared\ResourceFiles\Resource.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Shared\ResourceFiles\Resource.cs-CZ.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resource.cs-CZ.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Shared\ResourceFiles\Resource.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resource.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Shared\ResourceFiles\Resource.cs-CZ.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resource.cs-CZ.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

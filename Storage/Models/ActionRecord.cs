@@ -3,20 +3,15 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DogtrekkingCz.Storage.Models;
 
-internal sealed record ActionRecord
+internal sealed record ActionRecord : BaseRecord
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
-
     public string Name { get; set; }
     
     public OwnerDto Owner { get; set; }
     
     public string Description { get; set; }
     
-    // public string DateFrom { get; set; }
-    // public string DateTo { get; set; }
+    public TermDto Term { get; set; }
     //
     // public AddressDto Address { get; set; }
     //
@@ -25,7 +20,12 @@ internal sealed record ActionRecord
 
     // public IList<RaceDto> Races { get; set; }
 
-    public class OwnerDto
+    public record TermDto
+    {
+        public DateTimeOffset From { get; set; }
+        public DateTimeOffset To { get; set; }
+    }
+    public record OwnerDto
     {
         public string Id { get; set; }
         

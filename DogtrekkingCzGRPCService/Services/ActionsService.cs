@@ -1,9 +1,7 @@
 using Grpc.Core;
-using Protos;
 using Google.Protobuf.Collections;
 using MapsterMapper;
-using GetAllActionsRequest = Protos.GetAllActionsRequest;
-using GetAllActionsResponse = Protos.GetAllActionsResponse;
+using Protos.Actions;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 
@@ -22,35 +20,36 @@ public class ActionsService : Actions.ActionsBase
         _actionRepositoryService = actionsRepositoryService;
     }
 
-    public async override Task<GetAllActionsResponse> getAllActions(GetAllActionsRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.GetAllActionsResponse> getAllActions(Protos.Actions.GetAllActionsRequest request, ServerCallContext context)
     {
         var allActions = await _actionRepositoryService.GetAllActionsAsync();
 
-        var result = new Protos.GetAllActionsResponse
-        {
-            Actions = { _mapper.Map<RepeatedField<Protos.Action>>(allActions) }
-        };
+        var actions = _mapper.Map<RepeatedField<Protos.Actions.ActionDto>>(allActions.Actions);
+
+        var result = new Protos.Actions.GetAllActionsResponse();
+        result.Actions.AddRange(actions);
 
         return result;
     }
 
     public async override Task<CreateActionResponse> createAction(CreateActionRequest request, ServerCallContext context)
     {
-        var result = await _actionRepositoryService.AddActionAsync(
-            new AddActionRequest
-            {
-                Name = request.Action.Name,
-                Description = request.Action.Description,
-                Owner = new AddActionRequest.OwnerRecord
-                {
-                    Id = request.Owner.Id,
-                    Email = request.Owner.Email,
-                    FirstName = request.Owner.FirstName,
-                    FamilyName = request.Owner.FamilyName
-                }
-            });
+        var addActionRequest = _mapper.Map<AddActionRequest>(request.Action);
+
+        var result = await _actionRepositoryService.AddActionAsync(addActionRequest);
 
         var response = _mapper.Map<CreateActionResponse>(result);
+
+        return response;
+    }
+
+    public async override Task<Protos.Actions.UpdateActionResponse> updateAction(Protos.Actions.UpdateActionRequest request, ServerCallContext context)
+    {
+        var updateActionRequest = _mapper.Map<Storage.Entities.Actions.UpdateActionRequest>(request.Action);
+        
+        var result = await _actionRepositoryService.UpdateActionAsync(updateActionRequest);
+
+        var response = _mapper.Map<Protos.Actions.UpdateActionResponse>(result);
 
         return response;
     }

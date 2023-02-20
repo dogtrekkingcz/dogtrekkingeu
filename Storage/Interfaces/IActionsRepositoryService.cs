@@ -11,6 +11,8 @@ namespace Storage.Interfaces
     {
         public Task<AddActionResponse> AddActionAsync(AddActionRequest request);
 
+        public Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request);
+
         public Task<GetAllActionsResponse> GetAllActionsAsync();
     }
 }

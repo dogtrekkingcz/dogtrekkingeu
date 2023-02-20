@@ -4,8 +4,10 @@ using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace Storage.Entities.Actions;
 
-public sealed record AddActionRequest
+public sealed record UpdateActionRequest
 {
+    public required string Id { get; set; }
+    
     public required string Name { get; set; }
 
     public OwnerDto Owner { get; set; }

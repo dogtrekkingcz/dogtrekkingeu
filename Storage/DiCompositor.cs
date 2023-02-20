@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using DogtrekkingCz.Storage.Models;
+using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Storage.Interfaces.Options;
@@ -29,7 +30,7 @@ public static class DiCompositor
         return host;
     } 
     
-    public static IServiceCollection AddStorage(this IServiceCollection serviceProvider, StorageOptions options)
+    public static IServiceCollection AddStorage(this IServiceCollection serviceProvider, StorageOptions options, TypeAdapterConfig typeAdapterConfig)
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
@@ -38,6 +39,8 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>();
         serviceProvider.AddScoped<IActionsRepositoryService, ActionsRepositoryService>();
 
+        typeAdapterConfig.AddActionRepositoryMapping();
+        
         BsonClassMap.RegisterClassMap<ActionRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);

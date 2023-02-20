@@ -1,6 +1,8 @@
 ﻿@using System.Security.Claims
 @using DogtrekkingCzApp.Models
+@using Microsoft.AspNetCore.Components
 @using Protos
+@using Protos.Actions
 @inject GrpcChannel Channel
 @inject AuthenticationStateProvider AuthStateProvider 
 
@@ -42,22 +44,43 @@
 
 @code {
     private ActionModel Model = new();
-    private Protos.Actions.ActionsClient _client = null;
+    private Protos.Actions.Actions.ActionsClient _client = null;
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    private Protos.Actions.ActionDto _editingAction = null;
+    [Parameter] public Protos.Actions.ActionDto? PassedAction
+    {
+        get { return _editingAction; }
+        set
+        {
+            if (_editingAction != null)
+                return;
+            
+            _editingAction = value;
+            
+            Model.Name = value.Name;
+            Model.Description = value.Description;
+        }
+    }
+    
+    [Parameter]
+    public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; } 
 
     private AuthenticationState _authState = null;
     
     protected override async Task OnInitializedAsync()
     {
-        BlazoredModal.SetTitle("Add action");
-        
-        _client = new Protos.Actions.ActionsClient(Channel);
+        _client = new Protos.Actions.Actions.ActionsClient(Channel);
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
     }
     
     private async Task SubmitForm()
     {
-        await CreateNewAction();
+        if (PassedAction != null)
+            await UpdateAction(PassedAction);
+        else
+            await CreateNewAction();
+        
         await BlazoredModal.CloseAsync(ModalResult.Ok());
     }
 
@@ -65,20 +88,57 @@
     
     private async Task CreateNewAction()
     {
-        var result = await _client.createActionAsync(new CreateActionRequest
+        var item = new Protos.Actions.CreateActionRequest
         {
-            Owner = new OwnerDto
+            Action = new ActionDto
             {
-                Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jti")?.Value ?? "",
-                Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "",
-                FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "",
-                FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? ""
-            },
-            Action = new Protos.Action
-            {
+                Owner = new Protos.Actions.OwnerDto
+                {
+                    Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jti")?.Value ?? "",
+                    Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "",
+                    FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "",
+                    FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? ""
+                },
+
                 Name = Model.Name,
                 Description = Model.Description
             }
-        });
+        };
+        
+        var result = await _client.createActionAsync(item);
+
+        if (string.IsNullOrEmpty(result.Id) == false)
+        {
+            await OnItemChanged.InvokeAsync(item.Action);
+        }
+    }
+
+    private async Task UpdateAction(Protos.Actions.ActionDto action)
+    {
+        var updateActionRequest = new Protos.Actions.UpdateActionRequest
+        {
+            Action = new Protos.Actions.ActionDto
+            {
+                Id = action.Id,
+                
+                Owner = new OwnerDto
+                {
+                    Id = action.Owner.Id,
+                    Email = action.Owner.Email,
+                    FamilyName = action.Owner.FamilyName,
+                    FirstName = action.Owner.FirstName
+                },
+                
+                Name = Model.Name,
+                Description = Model.Description    
+            }
+        };
+
+        var result = await _client.updateActionAsync(updateActionRequest);
+        
+        if (string.IsNullOrEmpty(result.Id) == false)
+        {
+            await OnItemChanged.InvokeAsync(updateActionRequest.Action);
+        }
     }
 }

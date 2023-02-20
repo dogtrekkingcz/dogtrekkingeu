@@ -1,8 +1,12 @@
-﻿namespace Storage.Interfaces.Services;
+﻿using DogtrekkingCz.Storage.Models;
 
-internal interface IStorageService<T>
+namespace Storage.Interfaces.Services;
+
+internal interface IStorageService<T> where T: BaseRecord
 {
     public Task<T> AddAsync(T request);
+
+    public Task<T> UpdateAsync(T request);
 
     public Task<IReadOnlyList<T>> GetAllAsync();
 }

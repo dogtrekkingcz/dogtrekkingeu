@@ -1,0 +1,54 @@
+﻿@inject GrpcChannel Channel
+@inject AuthenticationStateProvider AuthStateProvider 
+@inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
+
+
+<div class="dropdown dropstart">
+  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <div class="three-dots"></div>
+  </a>
+
+    <ul class="dropdown-menu">
+        <AuthorizeView>
+            <Authorized>
+                @if (EditingEnabled)
+                {
+                    <li><a class="dropdown-item" @onclick="@(async () => await PrepareToEditAction(PassedAction))">@localizer["Edit"]</a></li>
+                }
+            </Authorized>
+        </AuthorizeView>
+    </ul>
+</div>
+
+@code {
+    [Parameter] public Protos.Actions.ActionDto? PassedAction { get; set; }
+    [Parameter] public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; } 
+    
+    private AuthenticationState _authState = null;
+    private Protos.Actions.Actions.ActionsClient _client = null;
+    private bool EditingEnabled = false;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _client = new Protos.Actions.Actions.ActionsClient(Channel);
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+
+        var loggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
+        var ownerOfAction = PassedAction.Owner.Email; 
+        
+        if (loggedUser == ownerOfAction)
+            EditingEnabled = true;
+    }
+    
+    protected async Task PrepareToEditAction(Protos.Actions.ActionDto action)
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(ActionModal.PassedAction), action);
+        
+        var messageForm = modal.Show<ActionModal>("Editing action", parameters);
+        var result = await messageForm.Result;
+        
+        await OnItemChanged.InvokeAsync(action);
+    }
+}

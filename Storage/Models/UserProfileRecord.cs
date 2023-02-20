@@ -3,12 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DogtrekkingCz.Storage.Models;
 
-internal sealed record UserProfileRecord
+internal sealed record UserProfileRecord : BaseRecord
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
-
     public Guid UserId { get; set; }
     public Guid? CompetitorId { get; set; }
 
