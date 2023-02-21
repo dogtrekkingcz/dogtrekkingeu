@@ -8,6 +8,7 @@ service Actions {
   rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
   rpc createAction (CreateActionRequest) returns (CreateActionResponse);
   rpc updateAction (UpdateActionRequest) returns (UpdateActionResponse);
+  rpc deleteAction (DeleteActionRequest) returns (DeleteActionResponse);
 }
 
 message GetAllActionsRequest {
@@ -34,11 +35,21 @@ message UpdateActionResponse {
   string Id = 1;
 }
 
+message DeleteActionRequest {
+  string Id = 1;
+}
+
+message DeleteActionResponse {
+  
+}
+
 message AddressDto {
-  string City = 1;
-  string Street = 2;
-  double GpsLatitude = 3;
-  double GpsLongitude = 4;
+  string Country = 1;
+  string Region = 2;
+  string City = 3;
+  string Street = 4;
+  double GpsLatitude = 5;
+  double GpsLongitude = 6;
 }
 
 message OwnerDto {
@@ -61,7 +72,7 @@ message ActionDto {
   string Description = 4;
   TermDto Term = 5;
 
-  // AddressDto Address = 5;
+  AddressDto Address = 6;
 
   // bool IsHidden = 6;
   // bool IsCanceled = 7;

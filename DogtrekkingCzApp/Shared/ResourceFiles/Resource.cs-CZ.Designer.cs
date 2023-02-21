@@ -60,20 +60,56 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Název.
-        /// </summary>
-        internal static string ActionName {
-            get {
-                return ResourceManager.GetString("ActionName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Akce.
         /// </summary>
         internal static string Actions {
             get {
                 return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přidat.
+        /// </summary>
+        internal static string Add_new_action {
+            get {
+                return ResourceManager.GetString("Add new action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uložit akci.
+        /// </summary>
+        internal static string Add_Update_action {
+            get {
+                return ResourceManager.GetString("Add/Update action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zpět.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smazat.
+        /// </summary>
+        internal static string Delete_action {
+            get {
+                return ResourceManager.GetString("Delete action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Popis.
+        /// </summary>
+        internal static string Description_of_action {
+            get {
+                return ResourceManager.GetString("Description of action", resourceCulture);
             }
         }
         
@@ -105,11 +141,74 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Co a kým.
+        /// </summary>
+        internal static string Name___description_of_action {
+            get {
+                return ResourceManager.GetString("Name & description of action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Název.
+        /// </summary>
+        internal static string Name_of_action {
+            get {
+                return ResourceManager.GetString("Name of action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Region, město.
+        /// </summary>
+        internal static string Region__city {
+            get {
+                return ResourceManager.GetString("Region, city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Termín.
         /// </summary>
         internal static string Term {
             get {
                 return ResourceManager.GetString("Term", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kdy a kde.
+        /// </summary>
+        internal static string Term___address_of_action {
+            get {
+                return ResourceManager.GetString("Term & address of action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Termín a název.
+        /// </summary>
+        internal static string Term___name_of_action {
+            get {
+                return ResourceManager.GetString("Term & name of action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Termín akce.
+        /// </summary>
+        internal static string Term_of_action {
+            get {
+                return ResourceManager.GetString("Term of action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uložit.
+        /// </summary>
+        internal static string Update_action {
+            get {
+                return ResourceManager.GetString("Update action", resourceCulture);
             }
         }
     }

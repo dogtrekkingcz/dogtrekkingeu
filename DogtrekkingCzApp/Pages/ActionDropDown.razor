@@ -1,4 +1,5 @@
-﻿@inject GrpcChannel Channel
+﻿@using DogtrekkingCzApp.Models
+@inject GrpcChannel Channel
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
@@ -15,6 +16,7 @@
                 @if (EditingEnabled)
                 {
                     <li><a class="dropdown-item" @onclick="@(async () => await PrepareToEditAction(PassedAction))">@localizer["Edit"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(PassedAction))">@localizer["Delete"]</a></li>
                 }
             </Authorized>
         </AuthorizeView>
@@ -22,8 +24,8 @@
 </div>
 
 @code {
-    [Parameter] public Protos.Actions.ActionDto? PassedAction { get; set; }
-    [Parameter] public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; } 
+    [Parameter] public ActionModel PassedAction { get; set; }
+    [Parameter] public EventCallback<ActionModel> OnItemChanged { get; set; } 
     
     private AuthenticationState _authState = null;
     private Protos.Actions.Actions.ActionsClient _client = null;
@@ -41,12 +43,25 @@
             EditingEnabled = true;
     }
     
-    protected async Task PrepareToEditAction(Protos.Actions.ActionDto action)
+    protected async Task PrepareToEditAction(ActionModel action)
     {
         var parameters = new ModalParameters()
-            .Add(nameof(ActionModal.PassedAction), action);
+            .Add(nameof(ActionModal.PassedAction), action)
+            .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.UpdateAction);
         
         var messageForm = modal.Show<ActionModal>("Editing action", parameters);
+        var result = await messageForm.Result;
+        
+        await OnItemChanged.InvokeAsync(action);
+    }
+    
+    protected async Task DeleteAction(ActionModel action)
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(ActionModal.PassedAction), action)
+            .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.DeleteAction);
+        
+        var messageForm = modal.Show<ActionModal>("Delete action", parameters);
         var result = await messageForm.Result;
         
         await OnItemChanged.InvokeAsync(action);

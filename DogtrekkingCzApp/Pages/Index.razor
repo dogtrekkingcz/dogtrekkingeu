@@ -1,10 +1,10 @@
-﻿@page "/"
+﻿@inject GrpcChannel Channel
+@inject AuthenticationStateProvider AuthStateProvider
+
+@page "/"
+@using Protos.UserProfiles
 
 <PageTitle>Index</PageTitle>
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
 
 <AuthorizeView>
     <Authorized>
@@ -15,5 +15,37 @@ Welcome to your new app.
     </NotAuthorized>
 </AuthorizeView>
 
+@code {
+    private Protos.UserProfiles.UserProfiles.UserProfilesClient _client = null;
+    private AuthenticationState _authState = null;
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+    protected override async Task OnInitializedAsync()
+    {
+        _client = new UserProfiles.UserProfilesClient(Channel);
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+
+        if (_authState?.User?.Identity?.IsAuthenticated == true && _authState?.User?.Claims != null)
+        {
+            var claims = _authState.User.Claims;
+            var emailClaim = claims.FirstOrDefault(claim => claim.Type == "email");
+            
+            if (emailClaim != null)
+            {
+                var request = new GetUserProfileRequest
+                {
+                    Email = emailClaim.Value
+                };
+                
+                if (string.IsNullOrEmpty(request.Email) == false)
+                {
+                    var response = await _client.getUserProfileAsync(request);
+
+                    if (response?.Id == null)
+                    {
+                        ; // start with registering user
+                    }
+                }
+            }
+        }
+    }
+}

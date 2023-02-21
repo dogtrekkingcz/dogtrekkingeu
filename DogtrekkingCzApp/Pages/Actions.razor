@@ -1,9 +1,13 @@
 ﻿@page "/actions"
 @using Protos
 @using System.Security.Claims
+@using DogtrekkingCzApp.Models
+@using MapsterMapper
 @inject GrpcChannel Channel
+@inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
 
 <h1>@localizer["Actions"]</h1>
 
@@ -18,10 +22,9 @@ else
     <table class="table">
         <thead>
         <tr>
-            <th>@localizer["Term"]</th>
-            <th>@localizer["ActionName"]</th>
+            <th>@localizer["Term & address of action"]</th>
+            <th>@localizer["Name & description of action"]</th>
             <th>@localizer["Enrolled races"]</th>
-            <th>Owner</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -29,10 +32,31 @@ else
         @foreach (var action in _actionList)
         {
             <tr>
-                <td>@action.Term?.From</td>
-                <td>@action.Name</td>
-                <td>@action.Description</td>
-                <td>@action.Owner?.FirstName @action.Owner?.FamilyName (@action.Owner?.Id / @action.Owner?.Email)</td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">@action.Term?.From.ToString("d.M.") - @action.Term?.To.ToString("d.M.")</div>
+                            <div class="col-12">@action.Address?.Country, @action.Address?.Region, @action.Address?.City</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">@action.Name</div>
+                            <div class="col-12">@action.Description</div>
+                            <div class="col-12">@action.Owner?.FirstName @action.Owner?.FamilyName</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">LONG</div>
+                            <div class="col-12">MID</div>
+                        </div>
+                    </div>
+                </td>
                 <td>
                     <ActionDropDown PassedAction=@action OnItemChanged=@HandleOnItemChanged></ActionDropDown>
                 </td>
@@ -50,18 +74,44 @@ else
 
 @code {
     private Protos.Actions.Actions.ActionsClient _client = null;
-    private IList<Protos.Actions.ActionDto> _actionList = null;
+    private List<ActionModel> _actionList = null;
+    private AuthenticationState _authState = null;
 
     protected override async Task OnInitializedAsync()
     {
         _client = new Protos.Actions.Actions.ActionsClient(Channel);
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
         await ReloadData();
     }
 
     protected async Task PrepareToAddAction()
     {
-        var messageForm = modal.Show<ActionModal>("Adding action");
+        var addedActionModel = new ActionModel
+        {
+            Address = new ActionModel.AddressDto
+            {
+                Country = "ČR"
+            },
+            Owner = new ActionModel.OwnerDto
+            {
+                Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jti")?.Value ?? "",
+                Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "",
+                FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "",
+                FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? ""
+            },
+            Term = new ActionModel.TermDto
+            {
+                From = DateTime.Now,
+                To = DateTimeOffset.Now.AddDays(3)
+            }
+        };
+        
+        var parameters = new ModalParameters()
+            .Add(nameof(ActionModal.PassedAction), addedActionModel)
+            .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.AddAction);
+
+        var messageForm = modal.Show<ActionModal>("Adding action", parameters);
         var result = await messageForm.Result;
 
         if (result.Confirmed)
@@ -74,12 +124,26 @@ else
     {
         Protos.Actions.GetAllActionsResponse response = await _client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
 
-        _actionList = response.Actions;
+        _actionList = mapper.Map<IList<ActionModel>>(response.Actions)
+            .OrderBy(action => action.Term?.From)
+            .ToList();
+        
+        _actionList
+            .ForEach(action =>
+            {
+                action.Term ??= new ActionModel.TermDto
+                {
+                    From = DateTime.Now,
+                    To = DateTime.Now.AddDays(3)
+                };
+                action.Address ??= new();
+                action.Owner ??= new();
+            });
         
         StateHasChanged();
     }
     
-    public async Task HandleOnItemChanged(Protos.Actions.ActionDto action)
+    public async Task HandleOnItemChanged(ActionModel action)
     {
         await ReloadData();
     }

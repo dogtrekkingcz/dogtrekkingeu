@@ -34,33 +34,40 @@ public static class DiCompositor
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
-        serviceProvider.AddScoped<IMapper, ServiceMapper>();
-        serviceProvider.AddSingleton<IInitializeService>(new InitializeService(options));
-        serviceProvider.AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>();
-        serviceProvider.AddScoped<IActionsRepositoryService, ActionsRepositoryService>();
+        serviceProvider
+            .AddScoped<IMapper, ServiceMapper>()
+            .AddSingleton<IInitializeService>(new InitializeService(options))
+            .AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>()
+            .AddScoped<IActionsRepositoryService, ActionsRepositoryService>()
+            .AddSingleton<IStorageService<UserProfileRecord>, StorageService<UserProfileRecord>>()
+            .AddScoped<IUserProfilesRepositoryService, UserProfilesRepositoryService>();
 
-        typeAdapterConfig.AddActionRepositoryMapping();
-        
+        typeAdapterConfig
+            .AddActionRepositoryMapping()
+            .AddUserProfilesRepositoryMapping();
+
         BsonClassMap.RegisterClassMap<ActionRecord>();
+        BsonClassMap.RegisterClassMap<UserProfileRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
-        Console.WriteLine($"MongoDb client: {client}");
-        
-        Console.WriteLine($"MongoDb databases: {string.Join(", ", client.ListDatabaseNames().ToList())}");
 
         var db = client.GetDatabase("DogtrekkingEu");
 
         var listOfCollections = db.ListCollectionNames().ToList();
-        Console.WriteLine($"MongoDb.DogtrekkingEu.Collections: {string.Join(", ", listOfCollections)}");
         
         if (listOfCollections.Contains("Actions") == false)
         {
             db.CreateCollection("Actions");
         }
+        if (listOfCollections.Contains("UserProfiles") == false)
+        {
+            db.CreateCollection("UserProfiles");
+        }
 
         Console.WriteLine($"MongoDb.DogtrekkingEu.Collections with initialized collections: {db.ListCollectionNames()}");
         
         serviceProvider.AddSingleton<IMongoCollection<ActionRecord>>(db.GetCollection<ActionRecord>("Actions"));
+        serviceProvider.AddSingleton<IMongoCollection<UserProfileRecord>>(db.GetCollection<UserProfileRecord>("UserProfiles"));
 
         return serviceProvider;
     }   

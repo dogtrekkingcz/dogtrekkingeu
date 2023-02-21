@@ -1,0 +1,45 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Protos.UserProfiles";
+
+package userprofiles;
+
+service UserProfiles {
+  rpc getUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse);
+}
+
+message GetUserProfileRequest {
+  string Email = 1;
+}
+
+message GetUserProfileResponse {
+  string Id = 1;
+  string UserId = 2;
+  string CompetitorId = 3;
+  string Email = 4;
+  string FirstName = 5;
+  string LastName = 6;
+  string Nickname = 7;
+  AddressDto Address = 8;
+  ContactDto Contact = 9;
+  repeated DogDto Dogs = 10;
+}
+
+message AddressDto {
+  string Street = 1;
+  string City = 2;
+}
+
+message ContactDto {
+  string Phone = 1;
+  string Mail = 2;
+}
+
+message DogDto {
+  string Name = 1;
+  string Kennel = 2;
+  string ChipNumber = 3;
+  string Pedigree = 4;
+  string BirthDate = 5;
+  string DeathDate = 6;
+}

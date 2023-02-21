@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DogtrekkingCz.Storage.Models;
 using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace Storage.Entities.Actions;
@@ -13,18 +14,20 @@ public sealed record UpdateActionRequest
     public OwnerDto Owner { get; set; }
 
     public TermDto Term { get; set; }
+    
+    public AddressDto Address { get; set; }
+    
     public string Description { get; set; }
 
 
-    public sealed record AddressRecord
+    public sealed record AddressDto
     {
+        public string Country { get; set; }
+        public string Region { get; set; }
         public string City { get; set; }
-
         public string Street { get; set; }
-
-        public string Longitude { get; set; }
-
-        public string Latitude { get; set; }
+        public double? GpsLatitude { get; set; }
+        public double? GpsLongitude { get; set; }
     }
 
     public sealed record OwnerDto

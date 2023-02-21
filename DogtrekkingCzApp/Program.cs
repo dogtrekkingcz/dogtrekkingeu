@@ -1,8 +1,11 @@
 using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using DogtrekkingCzApp;
+using DogtrekkingCzApp.Models;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
+using Mapster;
+using MapsterMapper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -17,6 +20,20 @@ builder.Services.AddOidcAuthentication(options =>
 });
 builder.Services.AddBlazoredModal();
 builder.Services.AddBootstrapBlazor();
+
+var typeAdapterConfig = new TypeAdapterConfig
+{
+    RequireDestinationMemberSource = true,
+    RequireExplicitMapping = true
+};
+
+typeAdapterConfig.AddActionModelMapping();
+
+builder.Services
+    .AddSingleton(typeAdapterConfig)
+    .AddScoped<IMapper, ServiceMapper>();
+
+
 
 builder.Services.AddSingleton(services =>
 {

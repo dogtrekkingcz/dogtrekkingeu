@@ -33,6 +33,35 @@ internal class StorageService<T> : IStorageService<T> where T: BaseRecord
         return request;
     }
 
+    public async Task DeleteAsync(T request)
+    {
+        var filter = Builders<T>.Filter.Eq("Id", request.Id);
+        
+        await _collection.DeleteOneAsync(filter);
+    }
+
+    public async Task<T> GetAsync(T request)
+    {
+        var filter = Builders<T>.Filter.Eq("Id", request.Id);
+
+        var document = await _collection
+            .Find(filter)
+            .FirstAsync();
+
+        return document;
+    }
+
+    public async Task<T> GetByFilterAsync(string key, string value)
+    {
+        var filter = Builders<T>.Filter.Eq(key, value);
+
+        var document = await _collection
+            .Find(filter)
+            .FirstOrDefaultAsync();
+
+        return document;
+    }
+    
     public async Task<IReadOnlyList<T>> GetAllAsync()
     {
         var documents = await _collection

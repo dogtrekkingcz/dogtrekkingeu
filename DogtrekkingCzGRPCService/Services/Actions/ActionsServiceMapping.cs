@@ -13,19 +13,23 @@ internal static class ActionsServiceMapping
     {
         typeAdapterConfig.NewConfig<Protos.Actions.ActionDto, AddActionRequest>();
         typeAdapterConfig.NewConfig<Protos.Actions.TermDto, AddActionRequest.TermDto>()
-            .Map(d => d.From, s => DateTime.ParseExact(s.From, "yyyy-MM-dd", CultureInfo.InvariantCulture))
-            .Map(d => d.To, s => DateTime.ParseExact(s.To, "yyyy-MM-dd", CultureInfo.InvariantCulture));
+            .Map(d => d.From, s => DateTime.ParseExact(s.From, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.To, s => DateTime.ParseExact(s.To, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
         typeAdapterConfig.NewConfig<Protos.Actions.OwnerDto, AddActionRequest.OwnerDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.AddressDto, AddActionRequest.AddressDto>();
         
         typeAdapterConfig.NewConfig<AddActionResponse, Protos.Actions.CreateActionResponse>();
         
         typeAdapterConfig.NewConfig<Protos.Actions.ActionDto, Storage.Entities.Actions.UpdateActionRequest>();
         typeAdapterConfig.NewConfig<Protos.Actions.TermDto, UpdateActionRequest.TermDto>()
-            .Map(d => d.From, s => DateTime.ParseExact(s.From, "yyyy-MM-dd", CultureInfo.InvariantCulture))
-            .Map(d => d.To, s => DateTime.ParseExact(s.To, "yyyy-MM-dd", CultureInfo.InvariantCulture));
+            .Map(d => d.From, s => DateTime.ParseExact(s.From, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.To, s => DateTime.ParseExact(s.To, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
         typeAdapterConfig.NewConfig<Protos.Actions.OwnerDto, UpdateActionRequest.OwnerDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.AddressDto, UpdateActionRequest.AddressDto>();
 
         typeAdapterConfig.NewConfig<UpdateActionResponse, Protos.Actions.UpdateActionResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.DeleteActionRequest, DeleteActionRequest>();
 
         typeAdapterConfig.NewConfig<GetAllActionsResponse, RepeatedField<Protos.Actions.ActionDto>>()
             .Map(d => d, s => s.Actions)
@@ -33,9 +37,10 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsResponse.ActionDto, Protos.Actions.ActionDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.OwnerDto, Protos.Actions.OwnerDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.TermDto, Protos.Actions.TermDto>()
-            .Map(d => d.From, s => s.From.ToString("dd.MM."))
-            .Map(d => d.To, s => s.To.ToString("dd.MM."));
-
+            .Map(d => d.From, s => s.From.ToString("yyyy-MM-dd HH:mm:ss"))
+            .Map(d => d.To, s => s.To.ToString("yyyy-MM-dd HH:mm:ss"));
+        typeAdapterConfig.NewConfig<GetAllActionsResponse.AddressDto, Protos.Actions.AddressDto>();
+        
         return typeAdapterConfig;
     }
 }

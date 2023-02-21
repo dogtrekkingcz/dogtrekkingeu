@@ -4,6 +4,7 @@ using MapsterMapper;
 using Protos.Actions;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
+using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
 
 namespace DogtrekkingCzGRPCService.Services;
 
@@ -52,5 +53,14 @@ public class ActionsService : Actions.ActionsBase
         var response = _mapper.Map<Protos.Actions.UpdateActionResponse>(result);
 
         return response;
+    }
+
+    public async override Task<DeleteActionResponse> deleteAction(Protos.Actions.DeleteActionRequest request, ServerCallContext context)
+    {
+        var deleteActionRequest = _mapper.Map<DeleteActionRequest>(request);
+
+        await _actionRepositoryService.DeleteActionAsync(deleteActionRequest);
+
+        return new DeleteActionResponse();
     }
 }

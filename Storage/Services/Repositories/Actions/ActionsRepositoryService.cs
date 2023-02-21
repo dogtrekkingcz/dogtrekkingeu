@@ -20,20 +20,9 @@ namespace Storage.Services.Repositories
 
         public async Task<AddActionResponse> AddActionAsync(AddActionRequest request)
         {
-            var action = new ActionRecord
-            {
-                Name = request.Name,
-                Description = request.Description,
-                Owner = new ActionRecord.OwnerDto
-                {
-                    Id = request.Owner.Id,
-                    Email = request.Owner.Email,
-                    FirstName = request.Owner.FirstName,
-                    FamilyName = request.Owner.FamilyName
-                }
-            };
-
-            var addedActionRecord = await _actionsStorageService.AddAsync(action);
+            var addRequest = _mapper.Map<ActionRecord>(request);
+            
+            var addedActionRecord = await _actionsStorageService.AddAsync(addRequest);
 
             var response = new AddActionResponse
             {
@@ -45,11 +34,7 @@ namespace Storage.Services.Repositories
 
         public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request)
         {
-            Console.WriteLine(request.ToJson());
-            
             var updateRequest = _mapper.Map<ActionRecord>(request);
-            
-            Console.WriteLine(updateRequest.ToJson());
             
             var result = await _actionsStorageService.UpdateAsync(updateRequest);
 
@@ -57,6 +42,13 @@ namespace Storage.Services.Repositories
             {
                 Id = result.Id
             };
+        }
+
+        public async Task DeleteActionAsync(DeleteActionRequest request)
+        {
+            var deleteRequest = _mapper.Map<ActionRecord>(request);
+
+            await _actionsStorageService.DeleteAsync(deleteRequest);
         }
 
         public async Task<GetAllActionsResponse> GetAllActionsAsync()

@@ -12,9 +12,8 @@ internal sealed record ActionRecord : BaseRecord
     public string Description { get; set; }
     
     public TermDto Term { get; set; }
-    //
-    // public AddressDto Address { get; set; }
-    //
+    
+    public AddressDto Address { get; set; }
     
     // public FlagsDto Flags { get; set; }
 
@@ -44,6 +43,8 @@ internal sealed record ActionRecord : BaseRecord
     }
     public class AddressDto
     {
+        public string Country { get; set; }
+        public string Region { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public double? GpsLatitude { get; set; }

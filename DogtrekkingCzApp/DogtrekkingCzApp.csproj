@@ -10,6 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="BlazorDateRangePicker" Version="4.3.0" />
         <PackageReference Include="Blazored.Modal" Version="7.1.0" />
         <PackageReference Include="bootstrap" Version="5.2.3" />
         <PackageReference Include="BootstrapBlazor" Version="7.3.0" />
@@ -20,6 +21,8 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Mapster" Version="7.3.0" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.0" />
@@ -63,5 +66,9 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Resource.cs-CZ.resx</DependentUpon>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\js" />
     </ItemGroup>
 </Project>

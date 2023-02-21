@@ -24,9 +24,9 @@ builder.Services
     .AddScoped<IMapper, ServiceMapper>()
     .AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString }, typeAdapterConfig);
 
-typeAdapterConfig.AddActionsServiceMapping();
-
-
+typeAdapterConfig
+    .AddActionsServiceMapping()
+    .AddUserProfilesServiceMapping();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {
@@ -53,8 +53,8 @@ app.MapGet("/", async context =>
 
 app.UseEndpoints(endpoints =>
     {
-        endpoints.MapGrpcService<BeachConditionsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<ActionsService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<UserProfilesService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 

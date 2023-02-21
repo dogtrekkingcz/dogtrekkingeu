@@ -1,41 +1,131 @@
-﻿@using System.Security.Claims
-@using DogtrekkingCzApp.Models
+﻿@using DogtrekkingCzApp.Models
 @using Microsoft.AspNetCore.Components
-@using Protos
-@using Protos.Actions
+@using BlazorDateRangePicker
+@using MapsterMapper
 @inject GrpcChannel Channel
 @inject AuthenticationStateProvider AuthStateProvider 
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
 
 <div>
-    <EditForm Model="@Model" OnValidSubmit="SubmitForm">
+    <EditForm Model="@PassedAction" OnValidSubmit="SubmitForm">
+        @if (RequiredAction != RequiredActionEnum.DeleteAction)
+        {
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        }
+
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <label for="message">Name</label>
+            <section>
+                <h4>@localizer["Term & name of action"]</h4>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="term">@localizer["Term of action"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <DateRangePicker
+                                MinDate="DateTimeOffset.Now"
+                                MaxDate="DateTimeOffset.Now.AddYears(1)"
+                                @bind-StartDate="ActionStartDate"
+                                @bind-EndDate="ActionEndDate"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="name">@localizer["Name of action"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputText @bind-Value="@PassedAction.Name"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="description">@localizer["Description of action"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputText @bind-Value="@PassedAction.Description"/>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-md-6">
-                    <InputText @bind-Value="@Model.Name"/>
+            </section>
+
+            <section>
+                <h4>@localizer["Address of action"]</h4>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="address_country">@localizer["Address country"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputText @bind-Value="@PassedAction.Address.Country"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="address_region">@localizer["Address region"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputText @bind-Value="@PassedAction.Address.Region"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="address_city">@localizer["Address city"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputText @bind-Value="@PassedAction.Address.City"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="address_street">@localizer["Address street"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputText @bind-Value="@PassedAction.Address.Street"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="address_gps_longitude">@localizer["Address GpsLongitude"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputNumber @bind-Value="@PassedAction.Address.GpsLongitude"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="address_gps_latitude">@localizer["Address GpsLatitude"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputNumber @bind-Value="@PassedAction.Address.GpsLatitude"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <hr/>
 
             <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <label for="description">Description</label>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    <InputText @bind-Value="@Model.Description"/>
-                </div>
-            </div>
-        
-
-            <hr />
-            
-            <div class="row">
                 <div class="col">
-                    <button type="submit">Submit</button>
+                    @if (RequiredAction == RequiredActionEnum.DeleteAction)
+                    {
+                        <button @onclick="@DeleteAction">@GetActionButtonText()</button>
+                    }
+                    else
+                    {
+                        <button type="submit">@GetActionButtonText</button>
+                    }
                 </div>
                 <div class="col">
-                    <button @onclick="Cancel">Cancel</button>
+                    <button @onclick="Cancel">@localizer["Cancel"]</button>
                 </div>
             </div>
         </div>
@@ -43,29 +133,26 @@
 </div>
 
 @code {
-    private ActionModel Model = new();
+    [Parameter] public RequiredActionEnum RequiredAction { get; set; }
+    [Parameter] public ActionModel PassedAction { get; set; }
     private Protos.Actions.Actions.ActionsClient _client = null;
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
-
-    private Protos.Actions.ActionDto _editingAction = null;
-    [Parameter] public Protos.Actions.ActionDto? PassedAction
-    {
-        get { return _editingAction; }
-        set
-        {
-            if (_editingAction != null)
-                return;
-            
-            _editingAction = value;
-            
-            Model.Name = value.Name;
-            Model.Description = value.Description;
-        }
-    }
+    private string ActionButtonText { get; set; }
     
     [Parameter]
-    public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; } 
+    public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; }
 
+    DateTimeOffset? ActionStartDate
+    {
+        get { return PassedAction.Term?.From; }
+        set { PassedAction.Term.From = value.Value; }
+    }
+    DateTimeOffset? ActionEndDate
+    {
+        get { return PassedAction.Term?.To;}
+        set { PassedAction.Term.To = value.Value; }
+    }
+    
     private AuthenticationState _authState = null;
     
     protected override async Task OnInitializedAsync()
@@ -73,13 +160,30 @@
         _client = new Protos.Actions.Actions.ActionsClient(Channel);
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
     }
+
+    private string GetActionButtonText()
+    {
+        switch (RequiredAction)
+        {
+            case RequiredActionEnum.AddAction: 
+                return localizer["Add new action"]; 
+                
+            case RequiredActionEnum.UpdateAction: 
+                return localizer["Update action"];
+                
+            case RequiredActionEnum.DeleteAction:
+                return localizer["Delete action"];
+        }
+
+        return "";
+    }
     
     private async Task SubmitForm()
     {
-        if (PassedAction != null)
-            await UpdateAction(PassedAction);
-        else
+        if (RequiredAction == RequiredActionEnum.AddAction && string.IsNullOrEmpty(PassedAction.Id))
             await CreateNewAction();
+        else if (RequiredAction == RequiredActionEnum.UpdateAction)
+            await UpdateAction();
         
         await BlazoredModal.CloseAsync(ModalResult.Ok());
     }
@@ -88,21 +192,16 @@
     
     private async Task CreateNewAction()
     {
+        PassedAction.Owner.Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jti")?.Value ?? "";
+        PassedAction.Owner.Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "";
+        PassedAction.Owner.FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
+        PassedAction.Owner.FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
+
+        PassedAction.Id = "";
+
         var item = new Protos.Actions.CreateActionRequest
         {
-            Action = new ActionDto
-            {
-                Owner = new Protos.Actions.OwnerDto
-                {
-                    Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jti")?.Value ?? "",
-                    Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "",
-                    FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "",
-                    FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? ""
-                },
-
-                Name = Model.Name,
-                Description = Model.Description
-            }
+            Action = mapper.Map<Protos.Actions.ActionDto>(PassedAction)
         };
         
         var result = await _client.createActionAsync(item);
@@ -113,25 +212,11 @@
         }
     }
 
-    private async Task UpdateAction(Protos.Actions.ActionDto action)
+    private async Task UpdateAction()
     {
         var updateActionRequest = new Protos.Actions.UpdateActionRequest
         {
-            Action = new Protos.Actions.ActionDto
-            {
-                Id = action.Id,
-                
-                Owner = new OwnerDto
-                {
-                    Id = action.Owner.Id,
-                    Email = action.Owner.Email,
-                    FamilyName = action.Owner.FamilyName,
-                    FirstName = action.Owner.FirstName
-                },
-                
-                Name = Model.Name,
-                Description = Model.Description    
-            }
+            Action = mapper.Map<Protos.Actions.ActionDto>(PassedAction)
         };
 
         var result = await _client.updateActionAsync(updateActionRequest);
@@ -140,5 +225,26 @@
         {
             await OnItemChanged.InvokeAsync(updateActionRequest.Action);
         }
+    }
+
+    private async Task DeleteAction()
+    {
+        var deleteActionRequest = new Protos.Actions.DeleteActionRequest
+        {
+            Id = PassedAction.Id
+        };
+
+        var result = await _client.deleteActionAsync(deleteActionRequest);
+
+        await OnItemChanged.InvokeAsync(null);
+    }
+    
+    private void OnRangeSelect(DateRange range)
+    {
+        PassedAction.Term = new ActionModel.TermDto
+        {
+            From = range.Start,
+            To = range.End
+        };
     }
 }

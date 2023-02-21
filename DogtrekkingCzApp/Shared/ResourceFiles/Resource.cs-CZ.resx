@@ -24,9 +24,6 @@
     <data name="Actions" xml:space="preserve">
         <value>Akce</value>
     </data>
-    <data name="ActionName" xml:space="preserve">
-        <value>Název</value>
-    </data>
     <data name="Term" xml:space="preserve">
         <value>Termín</value>
     </data>
@@ -35,5 +32,41 @@
     </data>
     <data name="Edit" xml:space="preserve">
         <value>Upravit</value>
+    </data>
+    <data name="Name of action" xml:space="preserve">
+        <value>Název</value>
+    </data>
+    <data name="Term of action" xml:space="preserve">
+        <value>Termín akce</value>
+    </data>
+    <data name="Description of action" xml:space="preserve">
+        <value>Popis</value>
+    </data>
+    <data name="Add/Update action" xml:space="preserve">
+        <value>Uložit akci</value>
+    </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Zpět</value>
+    </data>
+    <data name="Region, city" xml:space="preserve">
+        <value>Region, město</value>
+    </data>
+    <data name="Term &amp; name of action" xml:space="preserve">
+        <value>Termín a název</value>
+    </data>
+    <data name="Term &amp; address of action" xml:space="preserve">
+        <value>Kdy a kde</value>
+    </data>
+    <data name="Name &amp; description of action" xml:space="preserve">
+        <value>Co a kým</value>
+    </data>
+    <data name="Add new action" xml:space="preserve">
+        <value>Přidat</value>
+    </data>
+    <data name="Update action" xml:space="preserve">
+        <value>Uložit</value>
+    </data>
+    <data name="Delete action" xml:space="preserve">
+        <value>Smazat</value>
     </data>
 </root>
