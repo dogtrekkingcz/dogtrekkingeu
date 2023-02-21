@@ -17,7 +17,7 @@ internal sealed record ActionRecord : BaseRecord
     
     // public FlagsDto Flags { get; set; }
 
-    // public IList<RaceDto> Races { get; set; }
+    public IList<RaceDto> Races { get; set; }
 
     public record TermDto
     {
@@ -93,6 +93,7 @@ internal sealed record ActionRecord : BaseRecord
         public RaceState State { get; set; }
 
         public string Received { get; set; }
+
         public string Payed { get; set; }
 
         public List<(DateTimeOffset, string)> Notes { get; set; }

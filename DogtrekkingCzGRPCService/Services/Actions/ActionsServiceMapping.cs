@@ -17,7 +17,11 @@ internal static class ActionsServiceMapping
             .Map(d => d.To, s => DateTime.ParseExact(s.To, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
         typeAdapterConfig.NewConfig<Protos.Actions.OwnerDto, AddActionRequest.OwnerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.AddressDto, AddActionRequest.AddressDto>();
-        
+        typeAdapterConfig.NewConfig<Protos.Actions.RaceDto, AddActionRequest.RaceDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.CategoryDto, AddActionRequest.CategoryDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.RacerDto, AddActionRequest.RacerDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.DogDto, AddActionRequest.DogDto>();
+
         typeAdapterConfig.NewConfig<AddActionResponse, Protos.Actions.CreateActionResponse>();
         
         typeAdapterConfig.NewConfig<Protos.Actions.ActionDto, Storage.Entities.Actions.UpdateActionRequest>();
@@ -26,6 +30,10 @@ internal static class ActionsServiceMapping
             .Map(d => d.To, s => DateTime.ParseExact(s.To, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
         typeAdapterConfig.NewConfig<Protos.Actions.OwnerDto, UpdateActionRequest.OwnerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.AddressDto, UpdateActionRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.RaceDto, UpdateActionRequest.RaceDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.CategoryDto, UpdateActionRequest.CategoryDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.RacerDto, UpdateActionRequest.RacerDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.DogDto, UpdateActionRequest.DogDto>();
 
         typeAdapterConfig.NewConfig<UpdateActionResponse, Protos.Actions.UpdateActionResponse>();
 
@@ -40,6 +48,10 @@ internal static class ActionsServiceMapping
             .Map(d => d.From, s => s.From.ToString("yyyy-MM-dd HH:mm:ss"))
             .Map(d => d.To, s => s.To.ToString("yyyy-MM-dd HH:mm:ss"));
         typeAdapterConfig.NewConfig<GetAllActionsResponse.AddressDto, Protos.Actions.AddressDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsResponse.RaceDto, Protos.Actions.RaceDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsResponse.CategoryDto, Protos.Actions.CategoryDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsResponse.RacerDto, Protos.Actions.RacerDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsResponse.DogDto, Protos.Actions.DogDto>();
         
         return typeAdapterConfig;
     }

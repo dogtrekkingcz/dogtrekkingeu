@@ -64,6 +64,60 @@ message TermDto {
   string To = 2;
 }
 
+message RaceDto {
+  string Id = 1;
+  string Name = 2;
+  double Distance = 3;
+  double Incline = 4;
+
+  repeated CategoryDto Categories = 5;
+}
+
+message CategoryDto {
+  string Id = 1;
+  string Name = 2;
+  repeated RacerDto Racers = 3;
+}
+
+message RacerDto {
+  string Id  = 1;
+  string FirstName = 2;
+  string LastName = 3;
+
+  string Phone = 4;
+  string Email = 5;
+
+  string City = 6;
+  string Address = 7;
+
+  string Birthday = 8;
+
+
+  repeated DogDto Dogs = 9;
+
+  string Start = 10;
+  string Finish  = 11;
+
+  repeated CheckpointDto Checkpoints = 12;
+
+  repeated double State = 13;
+
+  string Received = 14;
+  string Payed = 15;
+}
+
+message DogDto {
+  string Id = 1;
+  string Name = 2;
+  string Pedigree = 3;
+  string Chip = 4;
+}
+
+message CheckpointDto {
+  string Id = 1;
+  string Passed = 2;
+}
+
 message ActionDto {
   string Id = 1;
   
@@ -74,7 +128,5 @@ message ActionDto {
 
   AddressDto Address = 6;
 
-  // bool IsHidden = 6;
-  // bool IsCanceled = 7;
-  // string CancelledReason = 8;
+  repeated RaceDto Races = 7;
 }
