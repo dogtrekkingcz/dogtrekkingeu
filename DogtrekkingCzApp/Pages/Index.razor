@@ -40,7 +40,7 @@
                 {
                     var response = await _client.getUserProfileAsync(request);
 
-                    if (response?.Id == null)
+                    if (string.IsNullOrEmpty(response?.Id))
                     {
                         ; // start with registering user
                     }

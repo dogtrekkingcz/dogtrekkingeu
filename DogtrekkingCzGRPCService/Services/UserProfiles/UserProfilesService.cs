@@ -27,7 +27,7 @@ public class UserProfilesService : UserProfiles.UserProfilesBase
         if (getUserProfileResponse == null)
             return new GetUserProfileResponse
             {
-                Id = null
+                Id = ""
             };
         
         var response = _mapper.Map<Protos.UserProfiles.GetUserProfileResponse>(getUserProfileResponse);
