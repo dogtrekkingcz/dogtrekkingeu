@@ -12,10 +12,12 @@ namespace Storage.Services.Repositories
             typeAdapterConfig.NewConfig<AddActionRequest.TermDto, ActionRecord.TermDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.OwnerDto, ActionRecord.OwnerDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.AddressDto, ActionRecord.AddressDto>();
+            typeAdapterConfig.NewConfig<AddActionRequest.FlagsDto, ActionRecord.FlagsDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.RaceDto, ActionRecord.RaceDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.CategoryDto, ActionRecord.CategoryDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.CheckpointDto, ActionRecord.CheckpointDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.RacerDto, ActionRecord.RacerDto>();
+            typeAdapterConfig.NewConfig<AddActionRequest.NoteDto, ActionRecord.NoteDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.DogDto, ActionRecord.DogDto>();
 
 
@@ -23,10 +25,12 @@ namespace Storage.Services.Repositories
             typeAdapterConfig.NewConfig<UpdateActionRequest.TermDto, ActionRecord.TermDto>();
             typeAdapterConfig.NewConfig<UpdateActionRequest.OwnerDto, ActionRecord.OwnerDto>();
             typeAdapterConfig.NewConfig<UpdateActionRequest.AddressDto, ActionRecord.AddressDto>();
+            typeAdapterConfig.NewConfig<UpdateActionRequest.FlagsDto, ActionRecord.FlagsDto>();
             typeAdapterConfig.NewConfig<UpdateActionRequest.RaceDto, ActionRecord.RaceDto>();
             typeAdapterConfig.NewConfig<UpdateActionRequest.CategoryDto, ActionRecord.CategoryDto>();
             typeAdapterConfig.NewConfig<UpdateActionRequest.CheckpointDto, ActionRecord.CheckpointDto>();
             typeAdapterConfig.NewConfig<UpdateActionRequest.RacerDto, ActionRecord.RacerDto>();
+            typeAdapterConfig.NewConfig<UpdateActionRequest.NoteDto, ActionRecord.NoteDto>();
             typeAdapterConfig.NewConfig<UpdateActionRequest.DogDto, ActionRecord.DogDto>();
 
             typeAdapterConfig.NewConfig<ActionRecord, AddActionResponse>();
@@ -38,10 +42,12 @@ namespace Storage.Services.Repositories
             typeAdapterConfig.NewConfig<ActionRecord.OwnerDto, GetAllActionsResponse.OwnerDto>();
             typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetAllActionsResponse.TermDto>();
             typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetAllActionsResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.FlagsDto, GetAllActionsResponse.FlagsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetAllActionsResponse.RaceDto>();
             typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetAllActionsResponse.CategoryDto>();
             typeAdapterConfig.NewConfig<ActionRecord.CheckpointDto, GetAllActionsResponse.CheckpointDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetAllActionsResponse.RaceDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetAllActionsResponse.RacerDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetAllActionsResponse.NoteDto>();
             typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetAllActionsResponse.DogDto>();
 
             return typeAdapterConfig;

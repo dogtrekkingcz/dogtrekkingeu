@@ -11,6 +11,9 @@ public sealed record UpdateUserProfileRequest
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Nickname { get; set; }
+    
+    public DateTimeOffset Birthday { get; set; }
+    
     public AddressDto Address { get; set; }
     public ContactDto Contact { get; set; }
     public IList<DogDto> Dogs { get; set; }

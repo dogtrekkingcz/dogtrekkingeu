@@ -1,8 +1,10 @@
-using Google.Protobuf.Collections;
+using DogtrekkingCz.Storage.Entities.UserProfiles;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.UserProfiles;
 using Storage.Interfaces;
+using GetUserProfileResponse = Protos.UserProfiles.GetUserProfileResponse;
+using UpdateUserProfileRequest = DogtrekkingCz.Storage.Entities.UserProfiles.UpdateUserProfileRequest;
 
 namespace DogtrekkingCzGRPCService.Services;
 
@@ -27,10 +29,33 @@ public class UserProfilesService : UserProfiles.UserProfilesBase
         if (getUserProfileResponse == null)
             return new GetUserProfileResponse
             {
-                Id = ""
+                UserProfile = new UserProfileDto
+                {
+                    Id = ""                    
+                }
             };
         
         var response = _mapper.Map<Protos.UserProfiles.GetUserProfileResponse>(getUserProfileResponse);
+
+        return response;
+    }
+
+    public async override Task<Protos.UserProfiles.CreateUserProfileResponse> registerUserProfile(Protos.UserProfiles.CreateUserProfileRequest request, ServerCallContext context)
+    {
+        var addUserProfileRequest = _mapper.Map<AddUserProfileRequest>(request.UserProfile);
+        var addUserProfileResponse = await _userProfilesRepositoryService.AddUserProfileAsync(addUserProfileRequest);
+
+        var response = _mapper.Map<Protos.UserProfiles.CreateUserProfileResponse>(addUserProfileResponse);
+
+        return response;
+    }
+    
+    public async override Task<Protos.UserProfiles.UpdateUserProfileResponse> updateUserProfile(Protos.UserProfiles.UpdateUserProfileRequest request, ServerCallContext context)
+    {
+        var updateUserProfileRequest = _mapper.Map<UpdateUserProfileRequest>(request.UserProfile);
+        var updateUserProfileResponse = await _userProfilesRepositoryService.UpdateUserProfileAsync(updateUserProfileRequest);
+
+        var response = _mapper.Map<Protos.UserProfiles.UpdateUserProfileResponse>(updateUserProfileResponse);
 
         return response;
     }

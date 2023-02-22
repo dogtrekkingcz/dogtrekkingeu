@@ -1,6 +1,7 @@
 ﻿@using DogtrekkingCzApp.Models
 @using Microsoft.AspNetCore.Components
 @using BlazorDateRangePicker
+@using Grpc.Core
 @using MapsterMapper
 @inject GrpcChannel Channel
 @inject AuthenticationStateProvider AuthStateProvider 
@@ -16,6 +17,34 @@
         }
 
         <div class="container">
+            <section>
+                <h4>@localizer["Approvements"]</h4>
+                <p>@localizer["Only administrator can change these values"]</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="approved">@localizer["Action approved"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputSelect @bind-Value="@PassedAction.Flags.Approved">
+                                <option value="true">@localizer["Yes"]</option>
+                                <option value="false">@localizer["No"]</option>
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="termLocked">@localizer["Action term locked"]</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <InputSelect @bind-Value="@PassedAction.Flags.TermLocked">
+                                <option value="true">@localizer["Yes"]</option>
+                                <option value="false">@localizer["No"]</option>
+                            </InputSelect>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section>
                 <h4>@localizer["Term & name of action"]</h4>
                 <div class="container">
@@ -121,7 +150,7 @@
                     }
                     else
                     {
-                        <button type="submit">@GetActionButtonText</button>
+                        <button type="submit">@GetActionButtonText()</button>
                     }
                 </div>
                 <div class="col">
@@ -154,11 +183,17 @@
     }
     
     private AuthenticationState _authState = null;
+    private Metadata _headers = null;
     
     protected override async Task OnInitializedAsync()
     {
-        _client = new Protos.Actions.Actions.ActionsClient(Channel);
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var token = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jwt");
+        
+        _headers = new Metadata();
+        _headers.Add("Authorization", $"Bearer {token}");
+        
+        _client = new Protos.Actions.Actions.ActionsClient(Channel);
     }
 
     private string GetActionButtonText()

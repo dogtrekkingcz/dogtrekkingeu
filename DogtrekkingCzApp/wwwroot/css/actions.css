@@ -1,0 +1,15 @@
+.term-locked {
+    background-color: greenyellow;
+}
+
+.term-unlocked {
+    background-color: #b6effb;
+}
+
+.approved {
+    background-color: lightgoldenrodyellow;
+}
+
+.non-approved {
+    background-color: lightpink;
+}

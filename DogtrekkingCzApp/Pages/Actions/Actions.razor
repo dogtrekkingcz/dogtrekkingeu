@@ -31,11 +31,14 @@ else
         <tbody>
         @foreach (var action in _actionList)
         {
-            <tr>
+            var approved = action.Flags?.Approved ?? false ? "approved" : "non-approved";
+            var termLocked = action.Flags?.TermLocked ?? false ? "term-locked" : "term-unlocked";
+            
+            <tr class="@approved">
                 <td>
                     <div class="container">
                         <div class="row">
-                            <div class="col-12">@action.Term?.From.ToString("d.M.") - @action.Term?.To.ToString("d.M.")</div>
+                            <div class="col-12 @termLocked">@action.Term?.From.ToString("d.M.") - @action.Term?.To.ToString("d.M.")</div>
                             <div class="col-12">@action.Address?.Country, @action.Address?.Region, @action.Address?.City</div>
                         </div>
                     </div>
@@ -95,7 +98,7 @@ else
             },
             Owner = new ActionModel.OwnerDto
             {
-                Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "jti")?.Value ?? "",
+                Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "",
                 Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "",
                 FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "",
                 FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? ""
@@ -125,7 +128,9 @@ else
         Protos.Actions.GetAllActionsResponse response = await _client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
 
         _actionList = mapper.Map<IList<ActionModel>>(response.Actions)
-            .OrderBy(action => action.Term?.From)
+            .OrderBy(action => action.Flags.Approved)
+            .ThenBy(action => action.Flags.TermLocked)
+            .ThenBy(action => action.Term?.From)
             .ToList();
         
         _actionList
@@ -138,6 +143,7 @@ else
                 };
                 action.Address ??= new();
                 action.Owner ??= new();
+                action.Flags ??= new ActionModel.FlagsDto { Approved = false, TermLocked = false, IsCanceled = false, IsHidden = false, CancelledReason = "" };
             });
         
         StateHasChanged();

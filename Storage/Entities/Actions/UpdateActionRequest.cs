@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using DogtrekkingCz.Storage.Models;
-using MongoDB.Driver.GeoJsonObjectModel;
-
-namespace Storage.Entities.Actions;
+﻿namespace Storage.Entities.Actions;
 
 public sealed record UpdateActionRequest
 {
@@ -20,6 +15,8 @@ public sealed record UpdateActionRequest
     public string Description { get; set; }
 
     public IReadOnlyList<RaceDto> Races { get; set; }
+    
+    public FlagsDto Flags { get; set; }
 
 
     public sealed record AddressDto
@@ -78,22 +75,28 @@ public sealed record UpdateActionRequest
         public string City { get; set; }
         public string Address { get; set; }
 
-        public string Birthday { get; set; }
+        public DateTimeOffset Birthday { get; set; }
 
 
         public List<DogDto> Dogs { get; set; }
 
-        public string Start { get; set; }
-        public string Finish { get; set; }
+        public DateTimeOffset Start { get; set; }
+        public DateTimeOffset Finish { get; set; }
 
         public IList<CheckpointDto> Checkpoints { get; set; }
 
         public RaceState State { get; set; }
 
-        public string Received { get; set; }
-        public string Payed { get; set; }
+        public DateTimeOffset Received { get; set; }
+        public DateTimeOffset Payed { get; set; }
 
-        public List<(DateTimeOffset, string)> Notes { get; set; }
+        public List<NoteDto> Notes { get; set; }
+    }
+
+    public class NoteDto
+    {
+        public DateTimeOffset Date { get; set; }
+        public string Note { get; set; }
     }
 
     public class DogDto
@@ -107,9 +110,20 @@ public sealed record UpdateActionRequest
     public class CheckpointDto
     {
         public Guid Id { get; set; }
-        public string Passed { get; set; }
+        public DateTimeOffset Passed { get; set; }
     }
 
+    public class FlagsDto
+    {
+        public bool IsHidden { get; set; }
+        
+        public bool IsCanceled { get; set; }
+        public string CancelledReason { get; set; }
+        
+        public bool TermLocked { get; set; }
+        
+        public bool Approved { get; set; }
+    }
     public enum RaceState
     {
         NotStarted = 0,

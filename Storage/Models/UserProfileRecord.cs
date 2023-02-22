@@ -13,6 +13,9 @@ internal sealed record UserProfileRecord : BaseRecord
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Nickname { get; set; }
+    
+    public DateTimeOffset Birthday { get; set; }
+    
     public AddressDto Address { get; set; }
     public ContactDto Contact { get; set; }
     public IList<DogDto> Dogs { get; set; }
@@ -35,5 +38,7 @@ internal sealed record UserProfileRecord : BaseRecord
         public string Kennel { get; set; }
         public string ChipNumber { get; set; }
         public string Pedigree { get; set; }
+        public DateTimeOffset? BirthDate { get; set; }
+        public DateTimeOffset? DeathDate { get; set; }
     }
 }

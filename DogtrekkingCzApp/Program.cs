@@ -2,11 +2,11 @@ using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using DogtrekkingCzApp;
 using DogtrekkingCzApp.Models;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Mapster;
 using MapsterMapper;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -27,22 +27,25 @@ var typeAdapterConfig = new TypeAdapterConfig
     RequireExplicitMapping = true
 };
 
-typeAdapterConfig.AddActionModelMapping();
+typeAdapterConfig
+    .AddActionModelMapping()
+    .AddUserProfileModelMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>();
 
 
-
 builder.Services.AddSingleton(services =>
 {
     var baseUri = builder.Configuration["GrpcServerUri"];
 
-    return  GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
+    var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions
     {
         HttpHandler = new GrpcWebHandler(new HttpClientHandler())
     });
+    
+    return channel;
 });
 
 builder.Services.AddLocalization();

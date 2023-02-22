@@ -15,7 +15,7 @@ internal sealed record ActionRecord : BaseRecord
     
     public AddressDto Address { get; set; }
     
-    // public FlagsDto Flags { get; set; }
+    public FlagsDto Flags { get; set; }
 
     public IList<RaceDto> Races { get; set; }
 
@@ -40,6 +40,10 @@ internal sealed record ActionRecord : BaseRecord
         
         public bool IsCanceled { get; set; }
         public string CancelledReason { get; set; }
+        
+        public bool TermLocked { get; set; }
+        
+        public bool Approved { get; set; }
     }
     public class AddressDto
     {
@@ -96,9 +100,14 @@ internal sealed record ActionRecord : BaseRecord
 
         public string Payed { get; set; }
 
-        public List<(DateTimeOffset, string)> Notes { get; set; }
+        public List<NoteDto> Notes { get; set; }
     }
 
+    public class NoteDto
+    {
+        public DateTimeOffset Date { get; set; }
+        public string Note { get; set; }
+    }
     public class DogDto
     {
         public Guid Id { get; set; }

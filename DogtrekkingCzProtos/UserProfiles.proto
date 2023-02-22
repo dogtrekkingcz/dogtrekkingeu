@@ -6,6 +6,24 @@ package userprofiles;
 
 service UserProfiles {
   rpc getUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse);
+  rpc registerUserProfile (CreateUserProfileRequest) returns (CreateUserProfileResponse);
+  rpc updateUserProfile (UpdateUserProfileRequest) returns (UpdateUserProfileResponse);
+}
+
+message CreateUserProfileRequest {
+  UserProfileDto UserProfile = 1;
+}
+
+message CreateUserProfileResponse {
+  
+}
+
+message UpdateUserProfileRequest {
+  UserProfileDto UserProfile = 1;
+}
+
+message UpdateUserProfileResponse {
+
 }
 
 message GetUserProfileRequest {
@@ -13,16 +31,7 @@ message GetUserProfileRequest {
 }
 
 message GetUserProfileResponse {
-  string Id = 1;
-  string UserId = 2;
-  string CompetitorId = 3;
-  string Email = 4;
-  string FirstName = 5;
-  string LastName = 6;
-  string Nickname = 7;
-  AddressDto Address = 8;
-  ContactDto Contact = 9;
-  repeated DogDto Dogs = 10;
+  UserProfileDto UserProfile = 1;
 }
 
 message AddressDto {
@@ -42,4 +51,18 @@ message DogDto {
   string Pedigree = 4;
   string BirthDate = 5;
   string DeathDate = 6;
+}
+
+message UserProfileDto {
+  string Id = 1;
+  string UserId = 2;
+  string CompetitorId = 3;
+  string Email = 4;
+  string FirstName = 5;
+  string LastName = 6;
+  string Nickname = 7;
+  string Birthday = 8;
+  AddressDto Address = 9;
+  ContactDto Contact = 10;
+  repeated DogDto Dogs = 11;
 }

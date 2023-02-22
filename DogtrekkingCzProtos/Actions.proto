@@ -69,7 +69,7 @@ message RaceDto {
   string Name = 2;
   double Distance = 3;
   double Incline = 4;
-
+  
   repeated CategoryDto Categories = 5;
 }
 
@@ -100,10 +100,17 @@ message RacerDto {
 
   repeated CheckpointDto Checkpoints = 12;
 
-  repeated double State = 13;
+  double State = 13;
 
   string Received = 14;
   string Payed = 15;
+  
+  repeated NoteDto Notes = 16;
+}
+
+message NoteDto {
+  string Date = 1;
+  string Note = 2;
 }
 
 message DogDto {
@@ -118,6 +125,17 @@ message CheckpointDto {
   string Passed = 2;
 }
 
+message FlagsDto {
+  bool IsHidden = 1;
+
+  bool IsCanceled = 2;
+  string CancelledReason = 3;
+
+  bool TermLocked = 4;
+
+  bool Approved = 5;
+}
+
 message ActionDto {
   string Id = 1;
   
@@ -129,4 +147,6 @@ message ActionDto {
   AddressDto Address = 6;
 
   repeated RaceDto Races = 7;
+  
+  FlagsDto Flags = 8;
 }
