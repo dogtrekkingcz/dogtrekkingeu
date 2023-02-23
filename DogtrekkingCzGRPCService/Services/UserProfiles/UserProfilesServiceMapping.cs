@@ -17,12 +17,16 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.AddressDto, AddUserProfileRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.ContactDto, AddUserProfileRequest.ContactDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.DogDto, AddUserProfileRequest.DogDto>();
+
+        typeAdapterConfig.NewConfig<AddUserProfileResponse, Protos.UserProfiles.CreateUserProfileResponse>();
         
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UserProfileDto, UpdateUserProfileRequest>()
             .Map(d => d.Birthday, s => DateTime.ParseExact(s.Birthday, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
         typeAdapterConfig.NewConfig<Protos.UserProfiles.AddressDto, UpdateUserProfileRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.ContactDto, UpdateUserProfileRequest.ContactDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.DogDto, UpdateUserProfileRequest.DogDto>();
+
+        typeAdapterConfig.NewConfig<UpdateUserProfileResponse, Protos.UserProfiles.UpdateUserProfileResponse>();
         
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfileRequest, GetUserProfileRequest>();
 

@@ -3,7 +3,7 @@
 @using BlazorDateRangePicker
 @using Grpc.Core
 @using MapsterMapper
-@inject GrpcChannel Channel
+@inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
@@ -164,7 +164,6 @@
 @code {
     [Parameter] public RequiredActionEnum RequiredAction { get; set; }
     [Parameter] public ActionModel PassedAction { get; set; }
-    private Protos.Actions.Actions.ActionsClient _client = null;
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
     private string ActionButtonText { get; set; }
     
@@ -187,7 +186,6 @@
     protected override async Task OnInitializedAsync()
     {
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
-        _client = new Protos.Actions.Actions.ActionsClient(Channel);
     }
 
     private string GetActionButtonText()
@@ -233,7 +231,7 @@
             Action = mapper.Map<Protos.Actions.ActionDto>(PassedAction)
         };
         
-        var result = await _client.createActionAsync(item);
+        var result = await Client.createActionAsync(item);
 
         if (string.IsNullOrEmpty(result.Id) == false)
         {
@@ -248,7 +246,7 @@
             Action = mapper.Map<Protos.Actions.ActionDto>(PassedAction)
         };
 
-        var result = await _client.updateActionAsync(updateActionRequest);
+        var result = await Client.updateActionAsync(updateActionRequest);
         
         if (string.IsNullOrEmpty(result.Id) == false)
         {
@@ -263,7 +261,7 @@
             Id = PassedAction.Id
         };
 
-        var result = await _client.deleteActionAsync(deleteActionRequest);
+        var result = await Client.deleteActionAsync(deleteActionRequest);
 
         await OnItemChanged.InvokeAsync(null);
     }

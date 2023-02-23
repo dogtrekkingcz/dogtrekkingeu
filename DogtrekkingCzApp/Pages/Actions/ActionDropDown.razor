@@ -1,5 +1,4 @@
 ﻿@using DogtrekkingCzApp.Models
-@inject GrpcChannel Channel
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
@@ -28,12 +27,10 @@
     [Parameter] public EventCallback<ActionModel> OnItemChanged { get; set; } 
     
     private AuthenticationState _authState = null;
-    private Protos.Actions.Actions.ActionsClient _client = null;
     private bool EditingEnabled = false;
     
     protected override async Task OnInitializedAsync()
     {
-        _client = new Protos.Actions.Actions.ActionsClient(Channel);
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
         var loggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;

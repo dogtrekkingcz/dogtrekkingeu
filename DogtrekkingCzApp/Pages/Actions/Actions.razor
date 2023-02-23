@@ -3,7 +3,7 @@
 @using System.Security.Claims
 @using DogtrekkingCzApp.Models
 @using MapsterMapper
-@inject GrpcChannel Channel
+@inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
@@ -76,13 +76,11 @@ else
 }
 
 @code {
-    private Protos.Actions.Actions.ActionsClient _client = null;
     private List<ActionModel> _actionList = null;
     private AuthenticationState _authState = null;
 
     protected override async Task OnInitializedAsync()
     {
-        _client = new Protos.Actions.Actions.ActionsClient(Channel);
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
         await ReloadData();
@@ -125,7 +123,7 @@ else
 
     private async Task ReloadData()
     {
-        Protos.Actions.GetAllActionsResponse response = await _client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
+        Protos.Actions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
 
         _actionList = mapper.Map<IList<ActionModel>>(response.Actions)
             .OrderBy(action => action.Flags.Approved)

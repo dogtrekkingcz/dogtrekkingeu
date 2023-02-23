@@ -1,6 +1,17 @@
 ﻿version: '3.4'
 
 services:
+  # For development - there is a need to configure certificates
+  # -----------------------------------------------------------
+  # Windows => Linux
+  # dotnet dev-certs https
+  # dotnet dev-certs https -ep "$env:USERPROFILE\.aspnet\https\aspnetapp.pfx"  -p cert_password
+  # dotnet dev-certs https --trust
+  #
+  # Linux
+  # dotnet dev-certs https
+  # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
+  # dotnet dev-certs https --trust
   dogtrekking_eu_grpc:
     image: dogtrekking_eu_server
     build:
@@ -9,6 +20,13 @@ services:
     ports:
       - 4080:80
       - 4443:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
       
   dogtrekking_eu: 
     image: dogtrekking_eu_client
