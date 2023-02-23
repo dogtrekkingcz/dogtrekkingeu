@@ -79,15 +79,16 @@ services:
     depends_on:
       - postgres
 
-  mq:
-    image: rabbitmq:management
-    container_name: message-queue
-    ports:
-      - 15672:15672
-      - 5672:5672
-      - 5671:5671
-    volumes:
-      - data_mq:/var/lib/rabbitmq
+  # MessageQueue not necessary yet
+  #mq:
+  #  image: rabbitmq:management
+  #  container_name: message-queue
+  #  ports:
+  #    - 15672:15672
+  #    - 5672:5672
+  #    - 5671:5671
+  #  volumes:
+  #    - data_mq:/var/lib/rabbitmq
       
 volumes:
   data_dtdata_db:

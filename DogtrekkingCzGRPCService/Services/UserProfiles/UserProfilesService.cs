@@ -34,8 +34,11 @@ public class UserProfilesService : UserProfiles.UserProfilesBase
                     Id = ""                    
                 }
             };
-        
-        var response = _mapper.Map<Protos.UserProfiles.GetUserProfileResponse>(getUserProfileResponse);
+
+        var response = new GetUserProfileResponse
+        {
+            UserProfile = _mapper.Map<Protos.UserProfiles.UserProfileDto>(getUserProfileResponse)
+        };
 
         return response;
     }

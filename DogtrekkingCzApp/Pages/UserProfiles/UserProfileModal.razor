@@ -43,7 +43,15 @@
 
 @code {
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
-    [Parameter] public UserProfileModel Model { get; set; }
+
+    private UserProfileModel _model;
+
+    [Parameter]
+    public UserProfileModel Model
+    {
+        get { return _model; }
+        set { _model = value; FixModel(); }
+    }
     [Parameter] public UserProfileRequiredAction RequiredAction { get; set; }
 
     private AuthenticationState _authState = null;
@@ -75,6 +83,14 @@
         }
         
         await BlazoredModal.CloseAsync(ModalResult.Ok());
+    }
+
+    private void FixModel()
+    {
+        Model.CompetitorId ??= Guid.Empty;
+        Model.Dogs ??= new List<UserProfileModel.DogDto>();
+        Model.Address ??= new();
+        Model.Contact ??= new();
     }
 
     private async Task Cancel()

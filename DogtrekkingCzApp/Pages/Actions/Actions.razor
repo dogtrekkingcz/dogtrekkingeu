@@ -19,6 +19,11 @@
 }
 else
 {
+    <InputSelect @bind-Value="SortingOptionsValue">
+        <option value="@SortingOptions.ApprovedWithLockedTermByDate">@localizer["Approved and term locked by date"]</option>
+        <option value="@SortingOptions.ApprovedByDate">@localizer["Approved by date"]</option>
+        <option value="@SortingOptions.AllByDate">@localizer["All by date"]</option>
+    </InputSelect>
     <table class="table">
         <thead>
         <tr>
@@ -79,6 +84,20 @@ else
     private List<ActionModel> _actionList = null;
     private AuthenticationState _authState = null;
 
+    private SortingOptions _sortingOptionsValue = SortingOptions.ApprovedWithLockedTermByDate;
+    private SortingOptions SortingOptionsValue
+    {
+        get { return _sortingOptionsValue; }
+        set { _sortingOptionsValue = value; SortActions(); }
+    }
+    
+    private enum SortingOptions
+    {
+        AllByDate = 1,
+        ApprovedByDate = 2,
+        ApprovedWithLockedTermByDate = 3
+    };
+
     protected override async Task OnInitializedAsync()
     {
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
@@ -109,7 +128,7 @@ else
         };
         
         var parameters = new ModalParameters()
-            .Add(nameof(ActionModal.PassedAction), addedActionModel)
+            .Add(nameof(ActionModal.Model), addedActionModel)
             .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.AddAction);
 
         var messageForm = modal.Show<ActionModal>("Adding action", parameters);
@@ -125,11 +144,7 @@ else
     {
         Protos.Actions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
 
-        _actionList = mapper.Map<IList<ActionModel>>(response.Actions)
-            .OrderBy(action => action.Flags.Approved)
-            .ThenBy(action => action.Flags.TermLocked)
-            .ThenBy(action => action.Term?.From)
-            .ToList();
+        _actionList = mapper.Map<List<ActionModel>>(response.Actions);
         
         _actionList
             .ForEach(action =>
@@ -143,6 +158,34 @@ else
                 action.Owner ??= new();
                 action.Flags ??= new ActionModel.FlagsDto { Approved = false, TermLocked = false, IsCanceled = false, IsHidden = false, CancelledReason = "" };
             });
+        
+        SortActions();
+    }
+
+    private void SortActions()
+    {
+        switch (SortingOptionsValue)
+        {
+            case SortingOptions.AllByDate:
+                _actionList = _actionList
+                    .OrderBy(action => action.Term?.From).ToList();
+                break;
+                
+            case SortingOptions.ApprovedWithLockedTermByDate:
+                _actionList = _actionList
+                    .OrderByDescending(action => action.Flags.Approved)
+                    .ThenByDescending(action => action.Flags.TermLocked)
+                    .ThenBy(action => action.Term?.From)
+                    .ToList();
+                    break;
+                
+            case SortingOptions.ApprovedByDate:
+                    _actionList = _actionList
+                        .OrderByDescending(action => action.Flags.Approved)
+                        .ThenBy(action => action.Term?.From)
+                        .ToList();
+                    break;
+        }
         
         StateHasChanged();
     }

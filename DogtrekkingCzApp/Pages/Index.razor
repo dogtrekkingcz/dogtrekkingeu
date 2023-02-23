@@ -1,12 +1,4 @@
-﻿@inject Protos.UserProfiles.UserProfiles.UserProfilesClient Client 
-@inject AuthenticationStateProvider AuthStateProvider
-@inject IModalService modal
-
-@page "/"
-@using Protos.UserProfiles
-@using DogtrekkingCzApp.Models
-@using DogtrekkingCzApp.Pages.UserProfiles
-@using Grpc.Net.ClientFactory
+﻿@page "/"
 
 <PageTitle>Index</PageTitle>
 
@@ -20,65 +12,8 @@
 </AuthorizeView>
 
 @code {
-    private AuthenticationState _authState = null;
-
     protected override async Task OnInitializedAsync()
     {
-        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
-        if (_authState?.User?.Identity?.IsAuthenticated == true && _authState?.User?.Claims != null)
-        {
-            var claims = _authState.User.Claims;
-            var emailClaim = claims.FirstOrDefault(claim => claim.Type == "email");
-            var userId = claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "";
-            var firstName = claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
-            var lastName = claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
-            
-            if (emailClaim != null)
-            {
-                var request = new GetUserProfileRequest
-                {
-                    Email = emailClaim.Value
-                };
-                
-                if (string.IsNullOrEmpty(request.Email) == false)
-                {
-                    var response = await Client.getUserProfileAsync(request);
-
-                    if (string.IsNullOrEmpty(response?.UserProfile?.Id))
-                    {
-                        var model = new UserProfileModel
-                        {
-                            UserId = userId,
-                            CompetitorId = Guid.Empty, 
-                            Email = emailClaim?.Value ?? "",
-                            FirstName = firstName,
-                            LastName = lastName,
-                            Nickname = "",
-                            Birthday = DateTime.Now
-                        };
-                        
-                        model.Address ??= new()
-                        {
-                            City = "",
-                            Street = ""
-                        };
-                        model.Dogs ??= new List<UserProfileModel.DogDto>();
-                        model.Contact ??= new()
-                        {
-                            Mail = emailClaim?.Value ?? "",
-                            Phone = ""
-                        };
-
-                        var parameters = new ModalParameters()
-                            .Add(nameof(UserProfileModal.Model), model)
-                            .Add(nameof(UserProfileModal.RequiredAction), UserProfileRequiredAction.Register);
-
-                        var messageForm = modal.Show<UserProfileModal>("Registering user", parameters);
-                        var result = await messageForm.Result;
-                    }
-                }
-            }
-        }
     }
 }

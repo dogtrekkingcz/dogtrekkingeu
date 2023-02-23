@@ -123,7 +123,7 @@ public sealed record AddActionRequest
     public class CheckpointDto
     {
         public Guid Id { get; set; }
-        public string Passed { get; set; }
+        public DateTimeOffset Passed { get; set; }
     }
 
     public enum RaceState

@@ -8,7 +8,8 @@ namespace Storage.Services.Repositories
     {
         internal static TypeAdapterConfig AddActionRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<AddActionRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<AddActionRequest, ActionRecord>()
+                .Ignore(d => d.Id);
             typeAdapterConfig.NewConfig<AddActionRequest.TermDto, ActionRecord.TermDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.OwnerDto, ActionRecord.OwnerDto>();
             typeAdapterConfig.NewConfig<AddActionRequest.AddressDto, ActionRecord.AddressDto>();

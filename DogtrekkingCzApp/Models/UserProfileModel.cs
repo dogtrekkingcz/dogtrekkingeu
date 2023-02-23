@@ -2,6 +2,7 @@
 
 public sealed record UserProfileModel
 {
+    public string Id { get; set; }
     public string UserId { get; set; }
     public Guid? CompetitorId { get; set; }
 

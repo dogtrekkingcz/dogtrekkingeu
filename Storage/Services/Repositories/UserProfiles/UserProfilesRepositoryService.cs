@@ -35,7 +35,11 @@ namespace Storage.Services.Repositories
 
         public async Task<UpdateUserProfileResponse> UpdateUserProfileAsync(UpdateUserProfileRequest request)
         {
+            Console.WriteLine(request.ToJson());
+            
             var updateRequest = _mapper.Map<UserProfileRecord>(request);
+            
+            Console.WriteLine(updateRequest);
             
             var result = await _userProfileStorageService.UpdateAsync(updateRequest);
 

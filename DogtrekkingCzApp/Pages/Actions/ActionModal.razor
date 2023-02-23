@@ -9,7 +9,7 @@
 @inject IMapper mapper
 
 <div>
-    <EditForm Model="@PassedAction" OnValidSubmit="SubmitForm">
+    <EditForm Model="@Model" OnValidSubmit="SubmitForm">
         @if (RequiredAction != RequiredActionEnum.DeleteAction)
         {
             <DataAnnotationsValidator />
@@ -26,7 +26,7 @@
                             <label for="approved">@localizer["Action approved"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputSelect @bind-Value="@PassedAction.Flags.Approved">
+                            <InputSelect @bind-Value="@Model.Flags.Approved">
                                 <option value="true">@localizer["Yes"]</option>
                                 <option value="false">@localizer["No"]</option>
                             </InputSelect>
@@ -37,7 +37,7 @@
                             <label for="termLocked">@localizer["Action term locked"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputSelect @bind-Value="@PassedAction.Flags.TermLocked">
+                            <InputSelect @bind-Value="@Model.Flags.TermLocked">
                                 <option value="true">@localizer["Yes"]</option>
                                 <option value="false">@localizer["No"]</option>
                             </InputSelect>
@@ -66,7 +66,7 @@
                             <label for="name">@localizer["Name of action"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputText @bind-Value="@PassedAction.Name"/>
+                            <InputText @bind-Value="@Model.Name"/>
                         </div>
                     </div>
 
@@ -75,7 +75,7 @@
                             <label for="description">@localizer["Description of action"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputText @bind-Value="@PassedAction.Description"/>
+                            <InputText @bind-Value="@Model.Description"/>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                             <label for="address_country">@localizer["Address country"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputText @bind-Value="@PassedAction.Address.Country"/>
+                            <InputText @bind-Value="@Model.Address.Country"/>
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                             <label for="address_region">@localizer["Address region"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputText @bind-Value="@PassedAction.Address.Region"/>
+                            <InputText @bind-Value="@Model.Address.Region"/>
                         </div>
                     </div>
 
@@ -107,7 +107,7 @@
                             <label for="address_city">@localizer["Address city"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputText @bind-Value="@PassedAction.Address.City"/>
+                            <InputText @bind-Value="@Model.Address.City"/>
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
                             <label for="address_street">@localizer["Address street"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputText @bind-Value="@PassedAction.Address.Street"/>
+                            <InputText @bind-Value="@Model.Address.Street"/>
                         </div>
                     </div>
 
@@ -125,7 +125,7 @@
                             <label for="address_gps_longitude">@localizer["Address GpsLongitude"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputNumber @bind-Value="@PassedAction.Address.GpsLongitude"/>
+                            <InputNumber @bind-Value="@Model.Address.GpsLongitude"/>
                         </div>
                     </div>
 
@@ -134,7 +134,7 @@
                             <label for="address_gps_latitude">@localizer["Address GpsLatitude"]</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <InputNumber @bind-Value="@PassedAction.Address.GpsLatitude"/>
+                            <InputNumber @bind-Value="@Model.Address.GpsLatitude"/>
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,15 @@
 
 @code {
     [Parameter] public RequiredActionEnum RequiredAction { get; set; }
-    [Parameter] public ActionModel PassedAction { get; set; }
+
+    private ActionModel _model = null;
+    [Parameter]
+    public ActionModel Model
+    {
+        get { return _model; }
+        set { _model = value; FixModel(); }
+    }
+    
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
     private string ActionButtonText { get; set; }
     
@@ -172,13 +180,13 @@
 
     DateTimeOffset? ActionStartDate
     {
-        get { return PassedAction.Term?.From; }
-        set { PassedAction.Term.From = value.Value; }
+        get { return Model.Term?.From; }
+        set { Model.Term.From = value.Value; }
     }
     DateTimeOffset? ActionEndDate
     {
-        get { return PassedAction.Term?.To;}
-        set { PassedAction.Term.To = value.Value; }
+        get { return Model.Term?.To;}
+        set { Model.Term.To = value.Value; }
     }
     
     private AuthenticationState _authState = null;
@@ -207,7 +215,7 @@
     
     private async Task SubmitForm()
     {
-        if (RequiredAction == RequiredActionEnum.AddAction && string.IsNullOrEmpty(PassedAction.Id))
+        if (RequiredAction == RequiredActionEnum.AddAction && string.IsNullOrEmpty(Model.Id))
             await CreateNewAction();
         else if (RequiredAction == RequiredActionEnum.UpdateAction)
             await UpdateAction();
@@ -219,16 +227,16 @@
     
     private async Task CreateNewAction()
     {
-        PassedAction.Owner.Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "";
-        PassedAction.Owner.Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "";
-        PassedAction.Owner.FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
-        PassedAction.Owner.FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
+        Model.Owner.Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "";
+        Model.Owner.Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "";
+        Model.Owner.FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
+        Model.Owner.FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
 
-        PassedAction.Id = "";
+        Model.Id = "";
 
         var item = new Protos.Actions.CreateActionRequest
         {
-            Action = mapper.Map<Protos.Actions.ActionDto>(PassedAction)
+            Action = mapper.Map<Protos.Actions.ActionDto>(Model)
         };
         
         var result = await Client.createActionAsync(item);
@@ -243,7 +251,7 @@
     {
         var updateActionRequest = new Protos.Actions.UpdateActionRequest
         {
-            Action = mapper.Map<Protos.Actions.ActionDto>(PassedAction)
+            Action = mapper.Map<Protos.Actions.ActionDto>(Model)
         };
 
         var result = await Client.updateActionAsync(updateActionRequest);
@@ -258,7 +266,7 @@
     {
         var deleteActionRequest = new Protos.Actions.DeleteActionRequest
         {
-            Id = PassedAction.Id
+            Id = Model.Id
         };
 
         var result = await Client.deleteActionAsync(deleteActionRequest);
@@ -268,10 +276,21 @@
     
     private void OnRangeSelect(DateRange range)
     {
-        PassedAction.Term = new ActionModel.TermDto
+        Model.Term = new ActionModel.TermDto
         {
             From = range.Start,
             To = range.End
         };
+    }
+
+    private void FixModel()
+    {
+        Model.Id ??= "";
+        Model.Term ??= new();
+        Model.Address ??= new();
+        Model.Flags ??= new();
+        Model.Flags.CancelledReason ??= "";
+        Model.Races ??= new List<ActionModel.RaceDto>();
+        Model.Owner ??= new();
     }
 }

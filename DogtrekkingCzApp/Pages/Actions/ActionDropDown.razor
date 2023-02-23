@@ -14,8 +14,8 @@
             <Authorized>
                 @if (EditingEnabled)
                 {
-                    <li><a class="dropdown-item" @onclick="@(async () => await PrepareToEditAction(PassedAction))">@localizer["Edit"]</a></li>
-                    <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(PassedAction))">@localizer["Delete"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await PrepareToEditAction(Model))">@localizer["Edit"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@localizer["Delete"]</a></li>
                 }
             </Authorized>
         </AuthorizeView>
@@ -23,7 +23,7 @@
 </div>
 
 @code {
-    [Parameter] public ActionModel PassedAction { get; set; }
+    [Parameter] public ActionModel Model { get; set; }
     [Parameter] public EventCallback<ActionModel> OnItemChanged { get; set; } 
     
     private AuthenticationState _authState = null;
@@ -34,7 +34,7 @@
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
         var loggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
-        var ownerOfAction = PassedAction.Owner.Email; 
+        var ownerOfAction = Model.Owner.Email; 
         
         if (loggedUser == ownerOfAction)
             EditingEnabled = true;
@@ -43,7 +43,7 @@
     protected async Task PrepareToEditAction(ActionModel action)
     {
         var parameters = new ModalParameters()
-            .Add(nameof(ActionModal.PassedAction), action)
+            .Add(nameof(ActionModal.Model), action)
             .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.UpdateAction);
         
         var messageForm = modal.Show<ActionModal>("Editing action", parameters);
@@ -55,7 +55,7 @@
     protected async Task DeleteAction(ActionModel action)
     {
         var parameters = new ModalParameters()
-            .Add(nameof(ActionModal.PassedAction), action)
+            .Add(nameof(ActionModal.Model), action)
             .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.DeleteAction);
         
         var messageForm = modal.Show<ActionModal>("Delete action", parameters);

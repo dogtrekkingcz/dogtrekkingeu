@@ -1,10 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Protos.UserProfiles
+@using DogtrekkingCzApp.Models
+@using DogtrekkingCzApp.Pages.UserProfiles
+@using Grpc.Net.ClientFactory
+@using System.Security.Claims
+@using MapsterMapper
+
 @inject NavigationManager Navigation
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient Client 
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IModalService modal
+@inject IMapper mapper
 
 <AuthorizeView>
     <Authorized>
-        Hello, @context.User.Identity?.Name!
+        Hello, <a @onclick="@(async () => await UpdateUserAsync())">@_nameOfLoggedUser</a>
         <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
     </Authorized>
     <NotAuthorized>
@@ -13,6 +24,94 @@
 </AuthorizeView>
 
 @code{
+    private AuthenticationState _authState = null;
+    private string _nameOfLoggedUser = "";
+    private UserProfileModel Model = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        
+        if (_authState?.User?.Identity?.IsAuthenticated == true && _authState?.User?.Claims != null)
+        {
+            var claims = _authState.User.Claims;
+            var emailClaim = claims.FirstOrDefault(claim => claim.Type == "email");
+            var userId = claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "";
+            var firstName = claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
+            var lastName = claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
+
+            _nameOfLoggedUser = firstName;
+            
+            if (emailClaim != null)
+            {
+                var request = new GetUserProfileRequest
+                {
+                    Email = emailClaim.Value
+                };
+                
+                if (string.IsNullOrEmpty(request.Email) == false)
+                {
+                    var response = await Client.getUserProfileAsync(request);
+
+                    if (string.IsNullOrEmpty(response?.UserProfile?.Id))
+                    {
+                        await RegisterUserAsync(userId, emailClaim, firstName, lastName);
+                    }
+                    else
+                    {
+                        _nameOfLoggedUser = $"{response.UserProfile.FirstName} {response.UserProfile.LastName}";
+                        
+                        Model = mapper.Map<UserProfileModel>(response.UserProfile);
+                    }
+                }
+            }
+            
+            StateHasChanged();
+        }
+    }
+
+    private async Task UpdateUserAsync()
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(UserProfileModal.Model), Model)
+            .Add(nameof(UserProfileModal.RequiredAction), UserProfileRequiredAction.Update);
+
+        var messageForm = modal.Show<UserProfileModal>("Registering user", parameters);
+        var result = await messageForm.Result;
+    }
+    
+    private async Task RegisterUserAsync(string userId, Claim emailClaim, string firstName, string lastName)
+    {
+        var model = new UserProfileModel
+        {
+            UserId = userId,
+            CompetitorId = Guid.Empty,
+            Email = emailClaim?.Value ?? "",
+            FirstName = firstName,
+            LastName = lastName,
+            Nickname = "",
+            Birthday = DateTime.Now
+        };
+
+        model.Address ??= new()
+        {
+            City = "",
+            Street = ""
+        };
+        model.Dogs ??= new List<UserProfileModel.DogDto>();
+        model.Contact ??= new()
+        {
+            Mail = emailClaim?.Value ?? "",
+            Phone = ""
+        };
+
+        var parameters = new ModalParameters()
+            .Add(nameof(UserProfileModal.Model), model)
+            .Add(nameof(UserProfileModal.RequiredAction), UserProfileRequiredAction.Register);
+
+        var messageForm = modal.Show<UserProfileModal>("Registering user", parameters);
+        var result = await messageForm.Result;
+    }
 
     private void BeginLogOut()
     {
