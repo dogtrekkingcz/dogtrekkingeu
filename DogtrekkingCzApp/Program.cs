@@ -1,6 +1,7 @@
 using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using DogtrekkingCzApp;
+using DogtrekkingCzApp.Interfaces;
 using DogtrekkingCzApp.Models;
 using Grpc.Core;
 using Grpc.Net.Client;
@@ -47,6 +48,41 @@ builder.Services.AddSingleton(services =>
     
     return channel;
 });
+
+builder.Services.AddScoped<ITokenProvider, AppTokenProvider>();
+builder.Services
+    .AddGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(o =>
+    {
+        o.Address = new Uri(builder.Configuration["GrpcServerUri"]);
+    })
+    .AddCallCredentials(async (context, metadata, serviceProvider) =>
+    {
+        var provider = serviceProvider.GetRequiredService<ITokenProvider>();
+        var token = await provider.GetTokenAsync();
+        metadata.Add("Authorization", $"Bearer {token}");
+    })
+    .ConfigureChannel(o =>
+    {
+        o.HttpHandler = new GrpcWebHandler(new HttpClientHandler());
+        o.UnsafeUseInsecureChannelCallCredentials = true;
+    });
+
+builder.Services
+    .AddGrpcClient<Protos.Actions.Actions.ActionsClient>(o =>
+    {
+        o.Address = new Uri(builder.Configuration["GrpcServerUri"]);
+    })
+    .AddCallCredentials(async (context, metadata, serviceProvider) =>
+    {
+        var provider = serviceProvider.GetRequiredService<ITokenProvider>();
+        var token = await provider.GetTokenAsync();
+        metadata.Add("Authorization", $"Bearer {token}");
+    })
+    .ConfigureChannel(o =>
+    {
+        o.HttpHandler = new GrpcWebHandler(new HttpClientHandler());
+        o.UnsafeUseInsecureChannelCallCredentials = true;
+    });
 
 builder.Services.AddLocalization();
 

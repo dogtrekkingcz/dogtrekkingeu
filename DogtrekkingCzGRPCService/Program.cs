@@ -38,7 +38,6 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 
 builder.Services.AddLocalization();
 
-
 var app = builder.Build();
 
 app.UseRouting();

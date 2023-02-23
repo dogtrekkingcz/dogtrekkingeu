@@ -15,6 +15,13 @@ internal static class UserProfileModelMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.DogDto, UserProfileModel.DogDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.ContactDto, UserProfileModel.ContactDto>();
 
+        typeAdapterConfig.NewConfig<UserProfileModel, Protos.UserProfiles.UserProfileDto>()
+            .Map(d => d.Birthday, s => s.Birthday.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.Id, s => "");
+        typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, Protos.UserProfiles.AddressDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.ContactDto, Protos.UserProfiles.ContactDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.DogDto, Protos.UserProfiles.DogDto>();
+
         return typeAdapterConfig;
     }
 }

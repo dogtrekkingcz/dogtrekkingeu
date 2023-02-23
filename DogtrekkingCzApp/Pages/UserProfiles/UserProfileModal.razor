@@ -1,7 +1,7 @@
 ﻿@using MapsterMapper
 @using DogtrekkingCzApp.Models
 @using Protos.UserProfiles
-@inject GrpcChannel Channel
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
@@ -47,11 +47,9 @@
     [Parameter] public UserProfileRequiredAction RequiredAction { get; set; }
 
     private AuthenticationState _authState = null;
-    private Protos.UserProfiles.UserProfiles.UserProfilesClient _client = null;
     
     protected override async Task OnInitializedAsync()
     {
-        _client = new Protos.UserProfiles.UserProfiles.UserProfilesClient(Channel);
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
     }
     
@@ -64,7 +62,7 @@
                 UserProfile = mapper.Map<UserProfileDto>(Model)
             };
             
-            await _client.registerUserProfileAsync(request);
+            await Client.registerUserProfileAsync(request);
         }
         else
         {
@@ -73,7 +71,7 @@
                 UserProfile = mapper.Map<UserProfileDto>(Model)
             };
             
-            await _client.updateUserProfileAsync(request);
+            await Client.updateUserProfileAsync(request);
         }
         
         await BlazoredModal.CloseAsync(ModalResult.Ok());
