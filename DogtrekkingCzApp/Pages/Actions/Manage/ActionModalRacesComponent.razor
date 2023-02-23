@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Components
+@using DogtrekkingCzApp.Models
+@using MongoDB.Driver.Core.Operations
+
+@inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
+
+<h3>ActionRaces</h3>
+
+<section>
+    <table>
+        <thead>
+            <th>@localizer["Name"]</th>
+            <th>@localizer["Categories"]</th>
+            <th>@localizer["Payments"]</th>
+            <th>@localizer["Actions"]</th>
+        </thead>
+        <tbody>
+
+        @foreach (var modelRace in Model.Races)
+        {
+            <tr>
+                <td>@modelRace.Name</td>
+                <td>
+                    <ul>
+                        @foreach (var ctg in modelRace.Categories)
+                        {
+                            <li>@ctg.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td> --- </td>
+                <td></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <button @onclick="@(() => FillByStandardDtTemplate())" class="btn btn-primary">@localizer["Fill by standard DT template"]</button>
+    <button @onclick="@(() => AddRace())" class="btn btn-primary">@localizer["Add new race"]</button>
+</section>
+
+
+@code {
+    [Parameter]
+    public ActionModel Model { get; set; }
+
+    private void FillByStandardDtTemplate()
+    {
+        var races = new List<ActionModel.RaceDto>();
+        races.Add(new ActionModel.RaceDto
+        {
+            Name = "LONG",
+            Categories = new List<ActionModel.CategoryDto>
+            {
+                { new ActionModel.CategoryDto { Name = "DTW1" }},
+                { new ActionModel.CategoryDto() { Name = "DTM1" }},
+                { new ActionModel.CategoryDto {  Name = "DTW2" }},
+                { new ActionModel.CategoryDto { Name = "DTM2" }}
+            }
+        });
+        
+        races.Add(new ActionModel.RaceDto
+        {
+            Name = "MID",
+            Categories = new List<ActionModel.CategoryDto>
+            {
+                { new ActionModel.CategoryDto { Name = "DMW" }},
+                { new ActionModel.CategoryDto { Name = "DMM" }}
+            }
+        });
+        
+        races.Add(new ActionModel.RaceDto
+        {
+            Name = "SHORT",
+            Categories = new List<ActionModel.CategoryDto>
+            {
+                { new ActionModel.CategoryDto { Name = "SHORT" }}
+            }
+        });
+
+        Model.Races = races;
+        
+        StateHasChanged();
+    }
+
+    private void AddRace()
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(ActionModal.Model), Model);
+
+        var messageForm = modal.Show<RaceModal>("Adding race", parameters);
+
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,159 @@
+﻿@using DogtrekkingCzApp.Models
+@using MapsterMapper
+@inject Protos.Actions.Actions.ActionsClient Client
+@inject AuthenticationStateProvider AuthStateProvider 
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+
+<div>
+    <EditForm Model="@Model" OnValidSubmit="SubmitForm">
+        @if (RequiredAction != RequiredActionEnum.DeleteAction)
+        {
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        }
+
+        <div class="container">
+            <ActionApprovesComponent Model="Model"></ActionApprovesComponent>
+
+            <ActionMainInfoComponent Model="Model"></ActionMainInfoComponent>
+            
+            <ActionLocationComponent Model="Model"></ActionLocationComponent>
+            
+            <ActionRacesComponent Model="Model"></ActionRacesComponent>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col">
+                    @if (RequiredAction == RequiredActionEnum.DeleteAction)
+                    {
+                        <button @onclick="@DeleteAction">@GetActionButtonText()</button>
+                    }
+                    else
+                    {
+                        <button type="submit">@GetActionButtonText()</button>
+                    }
+                </div>
+                <div class="col">
+                    <button @onclick="Cancel">@localizer["Cancel"]</button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public RequiredActionEnum RequiredAction { get; set; }
+
+    private ActionModel _model = null;
+    [Parameter]
+    public ActionModel Model
+    {
+        get { return _model; }
+        set { _model = value; FixModel(); }
+    }
+    
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    private string ActionButtonText { get; set; }
+    
+    [Parameter]
+    public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; }
+
+   
+    private AuthenticationState _authState = null;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+    }
+
+    private string GetActionButtonText()
+    {
+        switch (RequiredAction)
+        {
+            case RequiredActionEnum.AddAction: 
+                return localizer["Add new action"]; 
+                
+            case RequiredActionEnum.UpdateAction: 
+                return localizer["Update action"];
+                
+            case RequiredActionEnum.DeleteAction:
+                return localizer["Delete action"];
+        }
+
+        return "";
+    }
+    
+    private async Task SubmitForm()
+    {
+        if (RequiredAction == RequiredActionEnum.AddAction && string.IsNullOrEmpty(Model.Id))
+            await CreateNewAction();
+        else if (RequiredAction == RequiredActionEnum.UpdateAction)
+            await UpdateAction();
+        
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
+    }
+
+    private async Task Cancel() => await BlazoredModal.CancelAsync();
+    
+    private async Task CreateNewAction()
+    {
+        Model.Owner.Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "";
+        Model.Owner.Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "";
+        Model.Owner.FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
+        Model.Owner.FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
+
+        Model.Id = "";
+
+        var item = new Protos.Actions.CreateActionRequest
+        {
+            Action = mapper.Map<Protos.Actions.ActionDto>(Model)
+        };
+        
+        var result = await Client.createActionAsync(item);
+
+        if (string.IsNullOrEmpty(result.Id) == false)
+        {
+            await OnItemChanged.InvokeAsync(item.Action);
+        }
+    }
+
+    private async Task UpdateAction()
+    {
+        var updateActionRequest = new Protos.Actions.UpdateActionRequest
+        {
+            Action = mapper.Map<Protos.Actions.ActionDto>(Model)
+        };
+
+        var result = await Client.updateActionAsync(updateActionRequest);
+        
+        if (string.IsNullOrEmpty(result.Id) == false)
+        {
+            await OnItemChanged.InvokeAsync(updateActionRequest.Action);
+        }
+    }
+
+    private async Task DeleteAction()
+    {
+        var deleteActionRequest = new Protos.Actions.DeleteActionRequest
+        {
+            Id = Model.Id
+        };
+
+        var result = await Client.deleteActionAsync(deleteActionRequest);
+
+        await OnItemChanged.InvokeAsync(null);
+    }
+    
+    private void FixModel()
+    {
+        Model.Id ??= "";
+        Model.Term ??= new();
+        Model.Address ??= new();
+        Model.Flags ??= new();
+        Model.Flags.CancelledReason ??= "";
+        Model.Races ??= new List<ActionModel.RaceDto>();
+        Model.Owner ??= new();
+    }
+}
