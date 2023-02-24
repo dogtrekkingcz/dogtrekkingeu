@@ -5,6 +5,7 @@ using Protos.Actions;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
+using GetActionRequest = Storage.Entities.Actions.GetActionRequest;
 
 namespace DogtrekkingCzGRPCService.Services;
 
@@ -31,6 +32,20 @@ public class ActionsService : Actions.ActionsBase
         result.Actions.AddRange(actions);
 
         return result;
+    }
+
+    public async override Task<Protos.Actions.GetActionResponse> getAction(Protos.Actions.GetActionRequest request, ServerCallContext context)
+    {
+        var getActionRequest = _mapper.Map<GetActionRequest>(request);
+
+        var result = await _actionRepositoryService.GetActionAsync(getActionRequest);
+
+        var response = new Protos.Actions.GetActionResponse
+        {
+            Action = _mapper.Map<Protos.Actions.ActionDto>(result)
+        };
+
+        return response;
     }
 
     public async override Task<CreateActionResponse> createAction(CreateActionRequest request, ServerCallContext context)

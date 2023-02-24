@@ -30,7 +30,7 @@ namespace DogtrekkingCzApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.NoteDto, ActionModel.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.DogDto, ActionModel.DogDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.FlagsDto, ActionModel.FlagsDto>();
-        
+
         typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.ActionDto>();
         typeAdapterConfig.NewConfig<ActionModel.OwnerDto, Protos.Actions.OwnerDto>();
         typeAdapterConfig.NewConfig<ActionModel.TermDto, Protos.Actions.TermDto>()

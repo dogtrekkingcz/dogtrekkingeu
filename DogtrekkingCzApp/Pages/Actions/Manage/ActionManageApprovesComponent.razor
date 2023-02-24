@@ -9,10 +9,10 @@
     <p>@localizer["Only administrator can change these values"]</p>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-6">
                 <label for="approved">@localizer["Action approved"]</label>
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-6 col">
                 <InputSelect @bind-Value="@Model.Flags.Approved">
                     <option value="true">@localizer["Yes"]</option>
                     <option value="false">@localizer["No"]</option>
@@ -20,10 +20,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-6">
                 <label for="termLocked">@localizer["Action term locked"]</label>
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-6">
                 <InputSelect @bind-Value="@Model.Flags.TermLocked">
                     <option value="true">@localizer["Yes"]</option>
                     <option value="false">@localizer["No"]</option>

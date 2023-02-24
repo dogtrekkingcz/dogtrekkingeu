@@ -1,9 +1,13 @@
-﻿@using DogtrekkingCzApp.Models
+﻿@page "/action_manage/{Id}"
+
+@using DogtrekkingCzApp.Models
 @using MapsterMapper
+
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
+@inject NavigationManager NavManager
 
 <div>
     <EditForm Model="@Model" OnValidSubmit="SubmitForm">
@@ -12,18 +16,26 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
         }
-
+        
+        <TabControl></TabControl>
+        
+        <TabControl>
+            <TabPage Text="@localizer["Action main info"]">
+                <ActionManageApprovesComponent Model="Model"></ActionManageApprovesComponent>
+                <ActionManageMainInfoComponent Model="Model"></ActionManageMainInfoComponent>
+            </TabPage>
+            <TabPage Text="@localizer["Action location"]">
+                <ActionManageLocationComponent Model="Model"></ActionManageLocationComponent>
+            </TabPage>
+            <TabPage Text="@localizer["Races definition"]">
+                <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent>
+            </TabPage>
+            <TabPage Text="@localizer["Action entries"]">
+                ...
+            </TabPage>
+        </TabControl>
+        
         <div class="container">
-            <ActionApprovesComponent Model="Model"></ActionApprovesComponent>
-
-            <ActionMainInfoComponent Model="Model"></ActionMainInfoComponent>
-            
-            <ActionLocationComponent Model="Model"></ActionLocationComponent>
-            
-            <ActionRacesComponent Model="Model"></ActionRacesComponent>
-
-            <hr/>
-
             <div class="row">
                 <div class="col">
                     @if (RequiredAction == RequiredActionEnum.DeleteAction)
@@ -46,27 +58,41 @@
 @code {
     [Parameter] public RequiredActionEnum RequiredAction { get; set; }
 
-    private ActionModel _model = null;
     [Parameter]
-    public ActionModel Model
-    {
-        get { return _model; }
-        set { _model = value; FixModel(); }
-    }
-    
+    public string Id { get; set; }
+
+    public ActionModel Model { get; set; } = FixModel(new ActionModel());
+
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
     private string ActionButtonText { get; set; }
     
     [Parameter]
     public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; }
 
-   
     private AuthenticationState _authState = null;
     
     protected override async Task OnInitializedAsync()
     {
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+
+        if (string.IsNullOrEmpty(Id) == false && Id != "0") {
+            var getActionRequest = new Protos.Actions.GetActionRequest
+            {
+                Id = Id
+            };
+            var actionResponse = await Client.getActionAsync(getActionRequest);
+
+            Model = mapper.Map<ActionModel>(actionResponse.Action);
+
+            RequiredAction = RequiredActionEnum.UpdateAction;
+        }
+        else
+        {
+            RequiredAction = RequiredActionEnum.AddAction;
+        }
     }
+
+    
 
     private string GetActionButtonText()
     {
@@ -87,18 +113,20 @@
     
     private async Task SubmitForm()
     {
-        if (RequiredAction == RequiredActionEnum.AddAction && string.IsNullOrEmpty(Model.Id))
+        if (RequiredAction == RequiredActionEnum.AddAction || string.IsNullOrEmpty(Model.Id) || Id == "0")
             await CreateNewAction();
         else if (RequiredAction == RequiredActionEnum.UpdateAction)
             await UpdateAction();
         
-        await BlazoredModal.CloseAsync(ModalResult.Ok());
+        NavManager.NavigateTo("/actions");
     }
 
     private async Task Cancel() => await BlazoredModal.CancelAsync();
     
     private async Task CreateNewAction()
     {
+        Model = FixModel(Model);
+        
         Model.Owner.Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "";
         Model.Owner.Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "";
         Model.Owner.FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
@@ -121,17 +149,16 @@
 
     private async Task UpdateAction()
     {
+        Model = FixModel(Model);
+
         var updateActionRequest = new Protos.Actions.UpdateActionRequest
         {
-            Action = mapper.Map<Protos.Actions.ActionDto>(Model)
+            Action = mapper.Map<Protos.Actions.ActionDto>(Model),
         };
 
         var result = await Client.updateActionAsync(updateActionRequest);
         
-        if (string.IsNullOrEmpty(result.Id) == false)
-        {
-            await OnItemChanged.InvokeAsync(updateActionRequest.Action);
-        }
+        NavManager.NavigateTo("/actions");
     }
 
     private async Task DeleteAction()
@@ -143,17 +170,44 @@
 
         var result = await Client.deleteActionAsync(deleteActionRequest);
 
-        await OnItemChanged.InvokeAsync(null);
+        NavManager.NavigateTo("/actions");
     }
     
-    private void FixModel()
+    private static ActionModel FixModel(ActionModel model)
     {
-        Model.Id ??= "";
-        Model.Term ??= new();
-        Model.Address ??= new();
-        Model.Flags ??= new();
-        Model.Flags.CancelledReason ??= "";
-        Model.Races ??= new List<ActionModel.RaceDto>();
-        Model.Owner ??= new();
+        model.Id ??= "";
+        model.Description ??= "";
+        model.Term ??= new ActionModel.TermDto
+        {
+            From = DateTime.Now,
+            To = DateTime.Now
+        };
+        model.Address ??= new()
+        {
+            City = "",
+            Country = "",
+            Region = "",
+            Street = "",
+            GpsLatitude = 0.0,
+            GpsLongitude = 0.0
+        };
+        model.Flags ??= new()
+        {
+            CancelledReason = "",
+            Approved = false,
+            IsCanceled = false,
+            IsHidden = false,
+            TermLocked = false
+        };
+        model.Races ??= new List<ActionModel.RaceDto>();
+        model.Owner ??= new()
+        {
+            Email = "",
+            Id = "",
+            FamilyName = "",
+            FirstName = ""
+        };
+
+        return model;
     }
 }

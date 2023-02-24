@@ -36,5 +36,7 @@ public sealed record UserProfileModel
         public string Kennel { get; set; }
         public string ChipNumber { get; set; }
         public string Pedigree { get; set; }
+        public DateTimeOffset BirthDate { get; set; }
+        public DateTimeOffset DeathDate { get; set; }
     }
 }

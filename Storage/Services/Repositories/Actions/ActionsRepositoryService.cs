@@ -51,6 +51,17 @@ namespace Storage.Services.Repositories
             await _actionsStorageService.DeleteAsync(deleteRequest);
         }
 
+        public async Task<GetActionResponse> GetActionAsync(GetActionRequest request)
+        {
+            var getRequest = _mapper.Map<ActionRecord>(request);
+
+            var result = await _actionsStorageService.GetAsync(getRequest);
+
+            var response = _mapper.Map<GetActionResponse>(result);
+
+            return response;
+        }
+
         public async Task<GetAllActionsResponse> GetAllActionsAsync()
         {
             var getAllActions = await _actionsStorageService.GetAllAsync();

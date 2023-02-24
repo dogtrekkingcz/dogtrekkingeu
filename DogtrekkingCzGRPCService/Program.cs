@@ -1,5 +1,6 @@
 using DogtrekkingCz.Storage;
 using DogtrekkingCzGRPCService.Services;
+using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +17,19 @@ Console.WriteLine(MongoDbConnectionString);
 var typeAdapterConfig = new TypeAdapterConfig
 {
     RequireDestinationMemberSource = true,
-    RequireExplicitMapping = true
+    RequireExplicitMapping = true,
+    Default =
+    {
+        Settings =
+        {
+            UseDestinationValues =
+            {
+                (member => member.SetterModifier == AccessModifier.None &&
+                           member.Type.IsGenericType &&
+                           member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>))
+            }
+        }
+    }
 };
 
 builder.Services

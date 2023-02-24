@@ -64,6 +64,32 @@ internal static class ActionsServiceMapping
 
         typeAdapterConfig.NewConfig<Protos.Actions.DeleteActionRequest, DeleteActionRequest>();
 
+        typeAdapterConfig.NewConfig<Protos.Actions.GetActionRequest, GetActionRequest>();
+
+        typeAdapterConfig.NewConfig<GetActionResponse, Protos.Actions.ActionDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.OwnerDto, Protos.Actions.OwnerDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.TermDto, Protos.Actions.TermDto>()
+            .Map(d => d.From, s => s.From.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.To, s => s.To.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
+        typeAdapterConfig.NewConfig<GetActionResponse.AddressDto, Protos.Actions.AddressDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.RaceDto, Protos.Actions.RaceDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.CategoryDto, Protos.Actions.CategoryDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.RacerDto, Protos.Actions.RacerDto>()
+            .Map(d => d.Birthday, s => s.Birthday.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.Received, s => s.Received.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.Payed, s => s.Payed.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.Start, s => s.Start.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.Finish, s => s.Finish.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.State, s => (int)s.State);
+        typeAdapterConfig.NewConfig<GetActionResponse.CheckpointDto, Protos.Actions.CheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+            .Map(d => d.Id, s => s.Id.ToString());
+        typeAdapterConfig.NewConfig<GetActionResponse.NoteDto, Protos.Actions.NoteDto>()
+            .Map(d => d.Date, s => s.Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
+        typeAdapterConfig.NewConfig<GetActionResponse.DogDto, Protos.Actions.DogDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.FlagsDto, Protos.Actions.FlagsDto>();
+        
+        
         typeAdapterConfig.NewConfig<GetAllActionsResponse, RepeatedField<Protos.Actions.ActionDto>>()
             .Map(d => d, s => s.Actions)
             .Ignore(d => d.Capacity);

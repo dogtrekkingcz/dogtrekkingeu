@@ -3,6 +3,7 @@
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
+@inject NavigationManager NavManager
 
 
 <div class="dropdown dropstart">
@@ -15,7 +16,7 @@
             <Authorized>
                 @if (EditingEnabled)
                 {
-                    <li><a class="dropdown-item" @onclick="@(async () => await PrepareToEditAction(Model))">@localizer["Edit"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@localizer["Edit"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@localizer["Delete"]</a></li>
                 }
             </Authorized>
@@ -41,25 +42,18 @@
             EditingEnabled = true;
     }
     
-    protected async Task PrepareToEditAction(ActionModel action)
+    protected async Task ManageAction(ActionModel action)
     {
-        var parameters = new ModalParameters()
-            .Add(nameof(ActionModal.Model), action)
-            .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.UpdateAction);
-        
-        var messageForm = modal.Show<ActionModal>("Editing action", parameters);
-        var result = await messageForm.Result;
-        
-        await OnItemChanged.InvokeAsync(action);
+        NavManager.NavigateTo($"/action_manage/{action.Id}");
     }
     
     protected async Task DeleteAction(ActionModel action)
     {
         var parameters = new ModalParameters()
-            .Add(nameof(ActionModal.Model), action)
-            .Add(nameof(ActionModal.RequiredAction), RequiredActionEnum.DeleteAction);
+            .Add(nameof(ActionManage.Model), action)
+            .Add(nameof(ActionManage.RequiredAction), RequiredActionEnum.DeleteAction);
         
-        var messageForm = modal.Show<ActionModal>("Delete action", parameters);
+        var messageForm = modal.Show<ActionManage>("Delete action", parameters);
         var result = await messageForm.Result;
         
         await OnItemChanged.InvokeAsync(action);

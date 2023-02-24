@@ -6,6 +6,7 @@ package actions;
 
 service Actions {
   rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
+  rpc getAction    (GetActionRequest) returns (GetActionResponse);
   rpc createAction (CreateActionRequest) returns (CreateActionResponse);
   rpc updateAction (UpdateActionRequest) returns (UpdateActionResponse);
   rpc deleteAction (DeleteActionRequest) returns (DeleteActionResponse);
@@ -17,6 +18,14 @@ message GetAllActionsRequest {
 
 message GetAllActionsResponse {
   repeated ActionDto Actions = 1;
+}
+
+message GetActionRequest {
+  string Id = 1;
+}
+
+message GetActionResponse {
+  ActionDto Action = 1;
 }
 
 message CreateActionRequest {

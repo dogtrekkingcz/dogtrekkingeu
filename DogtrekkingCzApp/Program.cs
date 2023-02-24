@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using DogtrekkingCzApp;
 using DogtrekkingCzApp.Interfaces;
 using DogtrekkingCzApp.Models;
+using Google.Protobuf.Collections;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
@@ -25,13 +26,25 @@ builder.Services.AddBootstrapBlazor();
 var typeAdapterConfig = new TypeAdapterConfig
 {
     RequireDestinationMemberSource = true,
-    RequireExplicitMapping = true
+    RequireExplicitMapping = true,
+    Default =
+    {
+        Settings =
+        {
+            UseDestinationValues =
+            {
+                (member => member.SetterModifier == AccessModifier.None &&
+                           member.Type.IsGenericType &&
+                           member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>))
+            }
+        }
+    }
 };
 
 typeAdapterConfig
     .AddActionModelMapping()
     .AddUserProfileModelMapping();
-
+    
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>();

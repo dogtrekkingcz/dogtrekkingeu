@@ -10,6 +10,8 @@ namespace Storage.Interfaces
 
         public Task DeleteActionAsync(DeleteActionRequest request);
 
+        public Task<GetActionResponse> GetActionAsync(GetActionRequest request);
+
         public Task<GetAllActionsResponse> GetAllActionsAsync();
     }
 }

@@ -1,11 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using DogtrekkingCzApp.Models
-@using MongoDB.Driver.Core.Operations
 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
 
-<h3>ActionRaces</h3>
+<h3>@localizer["Action races"]</h3>
 
 <section>
     <table>
@@ -36,8 +35,8 @@
         </tbody>
     </table>
     
-    <button @onclick="@(() => FillByStandardDtTemplate())" class="btn btn-primary">@localizer["Fill by standard DT template"]</button>
-    <button @onclick="@(() => AddRace())" class="btn btn-primary">@localizer["Add new race"]</button>
+    <a @onclick="@(() => FillByStandardDtTemplate())">@localizer["Fill by standard DT template"]</a>
+    <button @onclick="@(() => AddRace())" class="btn">@localizer["Add new race"]</button>
 </section>
 
 
@@ -80,17 +79,10 @@
         });
 
         Model.Races = races;
-        
-        StateHasChanged();
     }
 
-    private void AddRace()
+    private async Task AddRace()
     {
-        var parameters = new ModalParameters()
-            .Add(nameof(ActionModal.Model), Model);
-
-        var messageForm = modal.Show<RaceModal>("Adding race", parameters);
-
-        StateHasChanged();
+        
     }
 }
