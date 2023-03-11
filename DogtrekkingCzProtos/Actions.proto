@@ -6,6 +6,7 @@ package actions;
 
 service Actions {
   rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
+  rpc getAllActionsDetails (GetAllActionsDetailsRequest) returns (GetAllActionsDetailsResponse);
   rpc getAction    (GetActionRequest) returns (GetActionResponse);
   rpc createAction (CreateActionRequest) returns (CreateActionResponse);
   rpc updateAction (UpdateActionRequest) returns (UpdateActionResponse);
@@ -18,6 +19,14 @@ message GetAllActionsRequest {
 
 message GetAllActionsResponse {
   repeated ActionDto Actions = 1;
+}
+
+message GetAllActionsDetailsRequest {
+  repeated ActionDetailDto Actions = 1;
+}
+
+message GetAllActionsDetailsResponse {
+  repeated ActionDetailDto Actions = 1;
 }
 
 message GetActionRequest {
@@ -78,8 +87,6 @@ message RaceDto {
   string Name = 2;
   double Distance = 3;
   double Incline = 4;
-  
-  repeated CategoryDto Categories = 5;
 }
 
 message CategoryDto {
@@ -145,6 +152,15 @@ message FlagsDto {
   bool Approved = 5;
 }
 
+message RaceDetailDto {
+  string Id = 1;
+  string Name = 2;
+  double Distance = 3;
+  double Incline = 4;
+
+  repeated CategoryDto Categories = 5;
+}
+
 message ActionDto {
   string Id = 1;
   
@@ -157,5 +173,20 @@ message ActionDto {
 
   repeated RaceDto Races = 7;
   
+  FlagsDto Flags = 8;
+}
+
+message ActionDetailDto {
+  string Id = 1;
+
+  OwnerDto Owner = 2;
+  string Name = 3;
+  string Description = 4;
+  TermDto Term = 5;
+
+  AddressDto Address = 6;
+
+  repeated RaceDetailDto Races = 7;
+
   FlagsDto Flags = 8;
 }

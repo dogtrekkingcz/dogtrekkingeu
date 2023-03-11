@@ -2,7 +2,7 @@
 
 namespace Storage.Entities.Actions;
 
-public sealed record GetAllActionsResponse
+public sealed record GetAllActionsWithDetailsResponse
 {
     public IReadOnlyList<ActionDto> Actions { get; init; }
 
@@ -58,6 +58,65 @@ public sealed record GetAllActionsResponse
         public string Name { get; set; }
         public double? Distance { get; set; }
         public double? Incline { get; set; }
+
+        public IList<CategoryDto> Categories { get; set; }
+    }
+
+    public class CategoryDto
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public IList<RacerDto> Racers { get; set; }
+    }
+
+    public class RacerDto
+    {
+        public Guid Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public string Phone { get; set; }
+        public string Email { get; set; }
+
+        public string City { get; set; }
+        public string Address { get; set; }
+
+        public DateTimeOffset Birthday { get; set; }
+
+
+        public List<DogDto> Dogs { get; set; }
+
+        public DateTimeOffset Start { get; set; }
+        public DateTimeOffset Finish { get; set; }
+
+        public IList<CheckpointDto> Checkpoints { get; set; }
+
+        public RaceState State { get; set; }
+
+        public DateTimeOffset Received { get; set; }
+        public DateTimeOffset Payed { get; set; }
+
+        public List<NoteDto> Notes { get; set; }
+    }
+
+    public class NoteDto
+    {
+        public DateTimeOffset Date { get; set; }
+        public string Note { get; set; }
+    }
+
+    public class DogDto
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Pedigree { get; set; }
+        public string Chip { get; set; }
+    }
+
+    public class CheckpointDto
+    {
+        public Guid Id { get; set; }
+        public DateTimeOffset Passed { get; set; }
     }
     
     public class FlagsDto
@@ -70,5 +129,14 @@ public sealed record GetAllActionsResponse
         public bool TermLocked { get; set; }
         
         public bool Approved { get; set; }
+    }
+
+    public enum RaceState
+    {
+        NotStarted = 0,
+        Started,
+        Finished,
+        DidNotFinished,
+        Disqualified
     }
 }

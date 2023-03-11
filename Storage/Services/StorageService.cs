@@ -70,4 +70,13 @@ internal class StorageService<T> : IStorageService<T> where T: BaseRecord
 
         return documents;
     }
+    
+    public async Task<IReadOnlyList<T>> GetAllAsync(string[] param)
+    {
+        var documents = await _collection.Find<T>(new BsonDocument())
+            .Project<T>(Builders<T>.Projection.Include(obj => obj.Id))
+            .ToListAsync();
+
+        return documents;
+    }
 }

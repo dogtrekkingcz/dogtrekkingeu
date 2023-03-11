@@ -33,6 +33,18 @@ public class ActionsService : Actions.ActionsBase
 
         return result;
     }
+    
+    public async override Task<Protos.Actions.GetAllActionsDetailsResponse> getAllActionsDetails(Protos.Actions.GetAllActionsDetailsRequest request, ServerCallContext context)
+    {
+        var allActions = await _actionRepositoryService.GetAllActionsAsync();
+
+        var actions = _mapper.Map<RepeatedField<Protos.Actions.ActionDetailDto>>(allActions.Actions);
+
+        var result = new Protos.Actions.GetAllActionsDetailsResponse();
+        result.Actions.AddRange(actions);
+
+        return result;
+    }
 
     public async override Task<Protos.Actions.GetActionResponse> getAction(Protos.Actions.GetActionRequest request, ServerCallContext context)
     {

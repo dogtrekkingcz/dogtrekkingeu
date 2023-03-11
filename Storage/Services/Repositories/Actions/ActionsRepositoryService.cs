@@ -73,5 +73,17 @@ namespace Storage.Services.Repositories
             
             return response;
         }
+
+        public async Task<GetAllActionsWithDetailsResponse> GetAllActionsDetailsAsync()
+        {
+            var getAllActions = await _actionsStorageService.GetAllAsync();
+
+            var response = new GetAllActionsWithDetailsResponse
+            {
+                Actions = _mapper.Map<IReadOnlyList<GetAllActionsWithDetailsResponse.ActionDto>>(getAllActions)
+            };
+            
+            return response;
+        }
     }
 }

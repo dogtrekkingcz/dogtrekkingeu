@@ -67,11 +67,18 @@ namespace Storage.Services.Repositories
             typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetAllActionsResponse.AddressDto>();
             typeAdapterConfig.NewConfig<ActionRecord.FlagsDto, GetAllActionsResponse.FlagsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetAllActionsResponse.RaceDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetAllActionsResponse.CategoryDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.CheckpointDto, GetAllActionsResponse.CheckpointDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetAllActionsResponse.RacerDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetAllActionsResponse.NoteDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetAllActionsResponse.DogDto>();
+            
+            typeAdapterConfig.NewConfig<ActionRecord, GetAllActionsWithDetailsResponse.ActionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.OwnerDto, GetAllActionsWithDetailsResponse.OwnerDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetAllActionsWithDetailsResponse.TermDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetAllActionsWithDetailsResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.FlagsDto, GetAllActionsWithDetailsResponse.FlagsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetAllActionsWithDetailsResponse.RaceDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetAllActionsWithDetailsResponse.CategoryDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.CheckpointDto, GetAllActionsWithDetailsResponse.CheckpointDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetAllActionsWithDetailsResponse.RacerDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetAllActionsWithDetailsResponse.NoteDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetAllActionsWithDetailsResponse.DogDto>();
 
             return typeAdapterConfig;
         }
