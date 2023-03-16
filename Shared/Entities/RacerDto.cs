@@ -12,6 +12,8 @@
 
     public sealed record RacerDto
     {
+        public string CompetitorId { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
