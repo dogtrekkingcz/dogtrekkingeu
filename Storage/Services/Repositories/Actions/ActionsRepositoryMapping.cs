@@ -5,7 +5,7 @@ using Storage.Entities.Actions;
 
 namespace Storage.Services.Repositories
 {
-    internal static class ActionsRepositoryMapping
+    internal static class ActionRepositoryMapping
     {
         internal static TypeAdapterConfig AddActionRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {

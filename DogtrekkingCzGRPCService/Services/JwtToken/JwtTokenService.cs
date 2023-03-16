@@ -31,7 +31,7 @@ namespace DogtrekkingCzGRPCService.Services.JwtToken
             }
         }
 
-        public string GetUserId(string token)
+        public string GetUserId()
         {
             return _userId;
         }

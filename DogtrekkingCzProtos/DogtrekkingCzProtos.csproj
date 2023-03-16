@@ -11,6 +11,7 @@
       <None Remove="Contact.proto" />
       <None Remove="Dog.proto" />
       <None Remove="Entities\ActionDetail.proto" />
+      <None Remove="Entities\ActionRights.proto" />
       <None Remove="Entities\ActionSimple.proto" />
       <None Remove="Entities\Category.proto" />
       <None Remove="Entities\Note.proto" />
@@ -22,6 +23,12 @@
 
     <ItemGroup>
       <Protobuf Include="Entities\ActionDetail.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <Protobuf Include="Entities\ActionRights.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <OutputDir>obj\Debug\net7.0\</OutputDir>
         <CompileOutputs>True</CompileOutputs>

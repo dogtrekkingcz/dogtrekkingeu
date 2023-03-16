@@ -12,6 +12,7 @@ using Storage.Services.Repositories;
 using MapsterMapper;
 using Storage.Models;
 using DogtrekkingCz.Shared.Mapping;
+using Storage.Services.Repositories.ActionRights;
 
 namespace DogtrekkingCz.Storage;
 
@@ -38,10 +39,10 @@ public static class DiCompositor
 
             .AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>()
             .AddScoped<IActionsRepositoryService, ActionsRepositoryService>()
-
+            .AddSingleton<IStorageService<ActionRightsRecord>, StorageService<ActionRightsRecord>>()
+            .AddScoped<IActionRightsRepositoryService, ActionRightsRepositoryService>()
             .AddSingleton<IStorageService<UserProfileRecord>, StorageService<UserProfileRecord>>()
             .AddScoped<IUserProfilesRepositoryService, UserProfilesRepositoryService>()
-
             .AddSingleton<IStorageService<DogRecord>, StorageService<DogRecord>>()
             .AddScoped<IDogsRepositoryService, DogsRepositoryService>();
 
@@ -49,6 +50,7 @@ public static class DiCompositor
         typeAdapterConfig
             .AddSharedMapping()
             .AddActionRepositoryMapping()
+            .AddActionRightsRepositoryMapping()
             .AddUserProfilesRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
@@ -72,12 +74,17 @@ public static class DiCompositor
         {
             db.CreateCollection("Dogs");
         }
+        if (listOfCollections.Contains("ActionRights") == false)
+        {
+            db.CreateCollection("ActionRights");
+        }
 
         Console.WriteLine($"MongoDb.DogtrekkingEu.Collections with initialized collections: {db.ListCollectionNames()}");
         
         serviceProvider.AddSingleton<IMongoCollection<ActionRecord>>(db.GetCollection<ActionRecord>("Actions"));
         serviceProvider.AddSingleton<IMongoCollection<UserProfileRecord>>(db.GetCollection<UserProfileRecord>("UserProfiles"));
         serviceProvider.AddSingleton<IMongoCollection<DogRecord>>(db.GetCollection<DogRecord>("Dogs"));
+        serviceProvider.AddSingleton<IMongoCollection<ActionRightsRecord>>(db.GetCollection<ActionRightsRecord>("ActionRights"));
 
         return serviceProvider;
     }   

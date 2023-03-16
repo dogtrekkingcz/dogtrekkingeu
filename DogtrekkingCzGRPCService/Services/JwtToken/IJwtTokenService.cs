@@ -6,6 +6,6 @@ namespace DogtrekkingCzGRPCService.Services.JwtToken
     {
         public void Parse(ServerCallContext context);
 
-        public string GetUserId(string token);
+        public string GetUserId();
     }
 }

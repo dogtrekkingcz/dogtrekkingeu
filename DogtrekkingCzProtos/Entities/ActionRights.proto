@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+message ActionRights {
+  string UserId = 1;
+  string ActionId = 2;
+  RightsType Rights = 3;
+
+  enum RightsType
+  {
+    None = 0;
+    Admin = 1;
+  }
+}

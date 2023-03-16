@@ -16,13 +16,15 @@ public class ActionsService : Actions.ActionsBase
     private readonly IMapper _mapper;
     private readonly IJwtTokenService _jwtTokenService;
     private readonly IActionsRepositoryService _actionRepositoryService;
+    private readonly IActionRightsRepositoryService _actionRightsRepositoryService;
 
-    public ActionsService(ILogger<ActionsService> logger, IJwtTokenService jwtTokenService, IMapper mapper, IActionsRepositoryService actionsRepositoryService)
+    public ActionsService(ILogger<ActionsService> logger, IJwtTokenService jwtTokenService, IMapper mapper, IActionsRepositoryService actionsRepositoryService, IActionRightsRepositoryService actionRightsRepositoryService)
     {
         _logger = logger;
         _jwtTokenService = jwtTokenService;
         _mapper = mapper;
         _actionRepositoryService = actionsRepositoryService;
+        _actionRightsRepositoryService = actionRightsRepositoryService;
     }
 
     public async override Task<Protos.Actions.GetAllActionsResponse> getAllActions(Protos.Actions.GetAllActionsRequest request, ServerCallContext context)
