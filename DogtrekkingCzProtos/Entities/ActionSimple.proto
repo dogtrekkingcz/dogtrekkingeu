@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "google/type/interval.proto";
+
+import "Entities/Address.proto";
+import "Entities/RaceSimple.proto";
+
+message ActionSimple {
+  enum ActionSimpleFlags {
+    NotValid = 0;
+    IsHidden = 1;
+    IsCanceled = 2;
+    CancelledReason = 3;
+    TermLocked = 4;
+    Approved = 5;
+  }
+
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  google.type.Interval Term = 4;
+
+  shared.Address Address = 5;
+
+  repeated RaceSimple Races = 6;
+  
+  repeated ActionSimpleFlags Flags = 7;
+}

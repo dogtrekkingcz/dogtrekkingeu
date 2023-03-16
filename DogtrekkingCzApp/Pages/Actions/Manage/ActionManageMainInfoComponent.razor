@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Components
+﻿@using DogtrekkingCz.Shared.Entities;
+@using Microsoft.AspNetCore.Components
 @using DogtrekkingCzApp.Models
 @using BlazorDateRangePicker
 
@@ -58,7 +59,7 @@
     
     private void OnRangeSelect(DateRange range)
     {
-        Model.Term = new ActionModel.TermDto
+        Model.Term = new TermDto
         {
             From = range.Start,
             To = range.End

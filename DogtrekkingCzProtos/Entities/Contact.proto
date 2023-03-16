@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+message Contact {
+  string PhoneNumber = 1;
+  string EmailAddress = 2;
+}

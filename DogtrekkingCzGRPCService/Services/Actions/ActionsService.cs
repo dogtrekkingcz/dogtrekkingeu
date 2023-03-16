@@ -6,6 +6,7 @@ using Storage.Entities.Actions;
 using Storage.Interfaces;
 using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
 using GetActionRequest = Storage.Entities.Actions.GetActionRequest;
+using DogtrekkingCzGRPCService.Services.JwtToken;
 
 namespace DogtrekkingCzGRPCService.Services;
 
@@ -13,11 +14,13 @@ public class ActionsService : Actions.ActionsBase
 {
     private readonly ILogger<ActionsService> _logger;
     private readonly IMapper _mapper;
+    private readonly IJwtTokenService _jwtTokenService;
     private readonly IActionsRepositoryService _actionRepositoryService;
 
-    public ActionsService(ILogger<ActionsService> logger, IMapper mapper, IActionsRepositoryService actionsRepositoryService)
+    public ActionsService(ILogger<ActionsService> logger, IJwtTokenService jwtTokenService, IMapper mapper, IActionsRepositoryService actionsRepositoryService)
     {
         _logger = logger;
+        _jwtTokenService = jwtTokenService;
         _mapper = mapper;
         _actionRepositoryService = actionsRepositoryService;
     }
@@ -26,7 +29,7 @@ public class ActionsService : Actions.ActionsBase
     {
         var allActions = await _actionRepositoryService.GetAllActionsAsync();
 
-        var actions = _mapper.Map<RepeatedField<Protos.Actions.ActionDto>>(allActions.Actions);
+        var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionSimple>>(allActions.Actions);
 
         var result = new Protos.Actions.GetAllActionsResponse();
         result.Actions.AddRange(actions);
@@ -38,7 +41,7 @@ public class ActionsService : Actions.ActionsBase
     {
         var allActions = await _actionRepositoryService.GetAllActionsAsync();
 
-        var actions = _mapper.Map<RepeatedField<Protos.Actions.ActionDetailDto>>(allActions.Actions);
+        var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionDetail>>(allActions.Actions);
 
         var result = new Protos.Actions.GetAllActionsDetailsResponse();
         result.Actions.AddRange(actions);
@@ -54,7 +57,7 @@ public class ActionsService : Actions.ActionsBase
 
         var response = new Protos.Actions.GetActionResponse
         {
-            Action = _mapper.Map<Protos.Actions.ActionDto>(result)
+            Action = _mapper.Map<Protos.Shared.ActionDetail>(result)
         };
 
         return response;
@@ -62,6 +65,9 @@ public class ActionsService : Actions.ActionsBase
 
     public async override Task<CreateActionResponse> createAction(CreateActionRequest request, ServerCallContext context)
     {
+        var token = context.RequestHeaders.GetValue("authorization");
+
+
         var addActionRequest = _mapper.Map<AddActionRequest>(request.Action);
 
         var result = await _actionRepositoryService.AddActionAsync(addActionRequest);

@@ -4,6 +4,14 @@ option csharp_namespace = "Protos.Actions";
 
 package actions;
 
+import "google/type/date.proto";
+import "google/type/interval.proto";
+import "Entities/Address.proto";
+import "Entities/Contact.proto";
+import "Entities/Dog.proto";
+import "Entities/ActionSimple.proto";
+import "Entities/ActionDetail.proto";
+
 service Actions {
   rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
   rpc getAllActionsDetails (GetAllActionsDetailsRequest) returns (GetAllActionsDetailsResponse);
@@ -14,19 +22,19 @@ service Actions {
 }
 
 message GetAllActionsRequest {
-  repeated ActionDto Actions = 1;
+  repeated shared.ActionSimple Actions = 1;
 }
 
 message GetAllActionsResponse {
-  repeated ActionDto Actions = 1;
+  repeated shared.ActionSimple Actions = 1;
 }
 
 message GetAllActionsDetailsRequest {
-  repeated ActionDetailDto Actions = 1;
+  repeated shared.ActionDetail Actions = 1;
 }
 
 message GetAllActionsDetailsResponse {
-  repeated ActionDetailDto Actions = 1;
+  repeated shared.ActionDetail Actions = 1;
 }
 
 message GetActionRequest {
@@ -34,11 +42,11 @@ message GetActionRequest {
 }
 
 message GetActionResponse {
-  ActionDto Action = 1;
+  shared.ActionDetail Action = 1;
 }
 
 message CreateActionRequest {
-    ActionDto Action = 1;
+  shared.ActionDetail Action = 1;
 }
 
 message CreateActionResponse {
@@ -46,7 +54,7 @@ message CreateActionResponse {
 }
 
 message UpdateActionRequest {
-  ActionDto Action = 1;
+  shared.ActionDetail Action = 1;
 }
 
 message UpdateActionResponse {
@@ -59,134 +67,4 @@ message DeleteActionRequest {
 
 message DeleteActionResponse {
   
-}
-
-message AddressDto {
-  string Country = 1;
-  string Region = 2;
-  string City = 3;
-  string Street = 4;
-  double GpsLatitude = 5;
-  double GpsLongitude = 6;
-}
-
-message OwnerDto {
-  string Id = 1;
-  string Email = 2;
-  string FirstName = 3;
-  string FamilyName = 4;
-}
-
-message TermDto {
-  string From = 1;
-  string To = 2;
-}
-
-message RaceDto {
-  string Id = 1;
-  string Name = 2;
-  double Distance = 3;
-  double Incline = 4;
-}
-
-message CategoryDto {
-  string Id = 1;
-  string Name = 2;
-  repeated RacerDto Racers = 3;
-}
-
-message RacerDto {
-  string Id  = 1;
-  string FirstName = 2;
-  string LastName = 3;
-
-  string Phone = 4;
-  string Email = 5;
-
-  string City = 6;
-  string Address = 7;
-
-  string Birthday = 8;
-
-
-  repeated DogDto Dogs = 9;
-
-  string Start = 10;
-  string Finish  = 11;
-
-  repeated CheckpointDto Checkpoints = 12;
-
-  double State = 13;
-
-  string Received = 14;
-  string Payed = 15;
-  
-  repeated NoteDto Notes = 16;
-}
-
-message NoteDto {
-  string Date = 1;
-  string Note = 2;
-}
-
-message DogDto {
-  string Id = 1;
-  string Name = 2;
-  string Pedigree = 3;
-  string Chip = 4;
-}
-
-message CheckpointDto {
-  string Id = 1;
-  string Passed = 2;
-}
-
-message FlagsDto {
-  bool IsHidden = 1;
-
-  bool IsCanceled = 2;
-  string CancelledReason = 3;
-
-  bool TermLocked = 4;
-
-  bool Approved = 5;
-}
-
-message RaceDetailDto {
-  string Id = 1;
-  string Name = 2;
-  double Distance = 3;
-  double Incline = 4;
-
-  repeated CategoryDto Categories = 5;
-}
-
-message ActionDto {
-  string Id = 1;
-  
-  OwnerDto Owner = 2;
-  string Name = 3;
-  string Description = 4;
-  TermDto Term = 5;
-
-  AddressDto Address = 6;
-
-  repeated RaceDto Races = 7;
-  
-  FlagsDto Flags = 8;
-}
-
-message ActionDetailDto {
-  string Id = 1;
-
-  OwnerDto Owner = 2;
-  string Name = 3;
-  string Description = 4;
-  TermDto Term = 5;
-
-  AddressDto Address = 6;
-
-  repeated RaceDetailDto Races = 7;
-
-  FlagsDto Flags = 8;
 }

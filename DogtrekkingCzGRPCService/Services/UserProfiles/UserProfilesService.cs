@@ -1,6 +1,7 @@
 using DogtrekkingCz.Storage.Entities.UserProfiles;
 using Grpc.Core;
 using MapsterMapper;
+using Protos.Shared;
 using Protos.UserProfiles;
 using Storage.Interfaces;
 using GetUserProfileResponse = Protos.UserProfiles.GetUserProfileResponse;
@@ -29,7 +30,7 @@ public class UserProfilesService : UserProfiles.UserProfilesBase
         if (getUserProfileResponse == null)
             return new GetUserProfileResponse
             {
-                UserProfile = new UserProfileDto
+                UserProfile = new UserProfile
                 {
                     Id = ""                    
                 }
@@ -37,7 +38,7 @@ public class UserProfilesService : UserProfiles.UserProfilesBase
 
         var response = new GetUserProfileResponse
         {
-            UserProfile = _mapper.Map<Protos.UserProfiles.UserProfileDto>(getUserProfileResponse)
+            UserProfile = _mapper.Map<UserProfile>(getUserProfileResponse)
         };
 
         return response;

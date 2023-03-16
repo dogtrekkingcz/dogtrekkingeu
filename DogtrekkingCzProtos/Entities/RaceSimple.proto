@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+message RaceSimple {
+  string Id = 1;
+  string Name = 2;
+  double Distance = 3;
+  double Incline = 4;
+}

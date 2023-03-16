@@ -13,10 +13,10 @@ namespace Storage.Services.Repositories
         private readonly IMapper _mapper;
         private readonly IStorageService<UserProfileRecord> _userProfileStorageService;
 
-        public UserProfilesRepositoryService(IMapper mapper, IStorageService<UserProfileRecord> actionsStorageService)
+        public UserProfilesRepositoryService(IMapper mapper, IStorageService<UserProfileRecord> userProfileStorageService)
         {
             _mapper = mapper;
-            _userProfileStorageService = actionsStorageService;
+            _userProfileStorageService = userProfileStorageService;
         }
 
         public async Task<AddUserProfileResponse> AddUserProfileAsync(AddUserProfileRequest request)

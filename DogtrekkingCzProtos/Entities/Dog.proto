@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "google/type/date.proto";
+
+message Dog {
+  string Id = 1;
+  string Name = 2;
+  string Pedigree = 3;
+  string Chip = 4;
+  google.type.Date Birthday = 5;
+  google.type.Date Decease = 6;
+  string UserProfileUri = 7;
+
+  repeated Vaccination Vaccinations = 8;
+}
+
+message Vaccination {
+  enum VaccinationType {
+    Vzteklina = 0;
+    Psinka = 1;
+    Parvoviroza = 2;
+    HepatitidaContagiosaCanis = 3;
+    Leptospiroza = 4;
+    Parainfluenza = 5;
+    LymskaBorelioza = 6;
+    Babesioza = 7;
+    PlisnoveInfekce = 8;
+    Leishmanioza = 9;
+  }
+
+  google.type.Date Date = 1;
+  google.type.Date ValidUntil = 2;
+  VaccinationType Type = 3;
+  string Note = 4;
+}

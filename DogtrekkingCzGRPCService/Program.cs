@@ -1,16 +1,23 @@
 using DogtrekkingCz.Storage;
+using DogtrekkingCzGRPCService.Interceptors;
 using DogtrekkingCzGRPCService.Services;
+using DogtrekkingCzGRPCService.Services.JwtToken;
 using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using DogtrekkingCz.Shared.Mapping;
 using Storage.Interfaces.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddGrpc();
+builder.Services.AddGrpc(options =>
+{
+    options.Interceptors.Add<JwtTokenInterceptor>();
+});
+
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 Console.WriteLine(MongoDbConnectionString);
 
@@ -35,9 +42,12 @@ var typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
+    .AddScoped<IJwtTokenService, JwtTokenService>()
+    .AddScoped<JwtTokenInterceptor>()
     .AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString }, typeAdapterConfig);
 
 typeAdapterConfig
+    .AddSharedMapping()
     .AddActionsServiceMapping()
     .AddUserProfilesServiceMapping();
 
@@ -56,6 +66,7 @@ var app = builder.Build();
 app.UseRouting();
 
 app.UseGrpcWeb();
+
 app.UseCors();
 
 app.MapGet("/", async context =>

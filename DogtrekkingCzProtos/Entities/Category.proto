@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "Entities/Racer.proto";
+
+message Category {
+  string Name = 1;
+  string Description = 2;
+
+  repeated Racer Racers = 3;
+}

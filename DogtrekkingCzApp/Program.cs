@@ -10,6 +10,7 @@ using Grpc.Net.Client.Web;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using DogtrekkingCz.Shared.Mapping;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -42,6 +43,7 @@ var typeAdapterConfig = new TypeAdapterConfig
 };
 
 typeAdapterConfig
+    .AddSharedMapping()
     .AddActionModelMapping()
     .AddUserProfileModelMapping();
     

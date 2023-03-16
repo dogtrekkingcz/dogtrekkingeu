@@ -36,10 +36,6 @@
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
         var loggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
-        var ownerOfAction = Model.Owner.Email; 
-        
-        if (loggedUser == ownerOfAction)
-            EditingEnabled = true;
     }
     
     protected async Task ManageAction(ActionModel action)

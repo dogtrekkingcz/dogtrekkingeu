@@ -21,7 +21,6 @@
         
         <TabControl>
             <TabPage Text="@localizer["Action main info"]">
-                <ActionManageApprovesComponent Model="Model"></ActionManageApprovesComponent>
                 <ActionManageMainInfoComponent Model="Model"></ActionManageMainInfoComponent>
             </TabPage>
             <TabPage Text="@localizer["Action location"]">
@@ -61,13 +60,13 @@
     [Parameter]
     public string Id { get; set; }
 
-    public ActionModel Model { get; set; } = FixModel(new ActionModel());
+    public ActionModel Model { get; set; }
 
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
     private string ActionButtonText { get; set; }
     
     [Parameter]
-    public EventCallback<Protos.Actions.ActionDto> OnItemChanged { get; set; }
+    public EventCallback<Protos.Shared.ActionDetail> OnItemChanged { get; set; }
 
     private AuthenticationState _authState = null;
     
@@ -125,18 +124,11 @@
     
     private async Task CreateNewAction()
     {
-        Model = FixModel(Model);
-        
-        Model.Owner.Id = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "oid")?.Value ?? "";
-        Model.Owner.Email = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value ?? "";
-        Model.Owner.FirstName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
-        Model.Owner.FamilyName = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
-
         Model.Id = "";
 
         var item = new Protos.Actions.CreateActionRequest
         {
-            Action = mapper.Map<Protos.Actions.ActionDto>(Model)
+            Action = mapper.Map<Protos.Shared.ActionDetail>(Model)
         };
         
         var result = await Client.createActionAsync(item);
@@ -149,11 +141,9 @@
 
     private async Task UpdateAction()
     {
-        Model = FixModel(Model);
-
         var updateActionRequest = new Protos.Actions.UpdateActionRequest
         {
-            Action = mapper.Map<Protos.Actions.ActionDto>(Model),
+            Action = mapper.Map<Protos.Shared.ActionDetail>(Model),
         };
 
         var result = await Client.updateActionAsync(updateActionRequest);
@@ -171,43 +161,5 @@
         var result = await Client.deleteActionAsync(deleteActionRequest);
 
         NavManager.NavigateTo("/actions");
-    }
-    
-    private static ActionModel FixModel(ActionModel model)
-    {
-        model.Id ??= "";
-        model.Description ??= "";
-        model.Term ??= new ActionModel.TermDto
-        {
-            From = DateTime.Now,
-            To = DateTime.Now
-        };
-        model.Address ??= new()
-        {
-            City = "",
-            Country = "",
-            Region = "",
-            Street = "",
-            GpsLatitude = 0.0,
-            GpsLongitude = 0.0
-        };
-        model.Flags ??= new()
-        {
-            CancelledReason = "",
-            Approved = false,
-            IsCanceled = false,
-            IsHidden = false,
-            TermLocked = false
-        };
-        model.Races ??= new List<ActionModel.RaceDto>();
-        model.Owner ??= new()
-        {
-            Email = "",
-            Id = "",
-            FamilyName = "",
-            FirstName = ""
-        };
-
-        return model;
     }
 }

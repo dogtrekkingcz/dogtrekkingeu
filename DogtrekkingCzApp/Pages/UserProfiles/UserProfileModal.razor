@@ -20,7 +20,7 @@
                     <InputText @bind-Value="@Model.LastName"></InputText>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputText @bind-Value="@Model.Email"></InputText>
+                    <InputText @bind-Value="@Model.Contact.EmailAddress"></InputText>
                 </div>
             </div>
             
@@ -44,15 +44,11 @@
 @code {
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
 
-    private UserProfileModel _model;
-
     [Parameter]
-    public UserProfileModel Model
-    {
-        get { return _model; }
-        set { _model = value; FixModel(); }
-    }
-    [Parameter] public UserProfileRequiredAction RequiredAction { get; set; }
+    public UserProfileModel Model { get; set; }
+
+    [Parameter] 
+    public UserProfileRequiredAction RequiredAction { get; set; }
 
     private AuthenticationState _authState = null;
     
@@ -67,7 +63,7 @@
         {
             var request = new CreateUserProfileRequest
             {
-                UserProfile = mapper.Map<UserProfileDto>(Model)
+                UserProfile = mapper.Map<Protos.Shared.UserProfile>(Model)
             };
             
             await Client.registerUserProfileAsync(request);
@@ -76,21 +72,13 @@
         {
             var request = new UpdateUserProfileRequest
             {
-                UserProfile = mapper.Map<UserProfileDto>(Model)
+                UserProfile = mapper.Map<Protos.Shared.UserProfile>(Model)
             };
             
             await Client.updateUserProfileAsync(request);
         }
         
         await BlazoredModal.CloseAsync(ModalResult.Ok());
-    }
-
-    private void FixModel()
-    {
-        Model.CompetitorId ??= Guid.Empty;
-        Model.Dogs ??= new List<UserProfileModel.DogDto>();
-        Model.Address ??= new();
-        Model.Contact ??= new();
     }
 
     private async Task Cancel()

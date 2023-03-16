@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "Entities/Category.proto";
+
+message RaceDetail {
+  string Id = 1;
+  string Name = 2;
+  double Distance = 3;
+  double Incline = 4;
+
+  repeated shared.Category Categories = 5;
+}

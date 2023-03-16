@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "google/type/datetime.proto";
+
+message Note {
+  google.type.DateTime Time = 1;
+  string Text = 2;
+}

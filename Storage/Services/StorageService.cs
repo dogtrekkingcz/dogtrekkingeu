@@ -8,9 +8,8 @@ using Storage.Interfaces.Services;
 
 namespace Storage.Services;
 
-internal class StorageService<T> : IStorageService<T> where T: BaseRecord
+internal class StorageService<T> : IStorageService<T> where T: IRecord
 {
-    private readonly MongoClient _client;
     private readonly IMongoCollection<T> _collection;
     
     public StorageService(IMongoCollection<T> collection)

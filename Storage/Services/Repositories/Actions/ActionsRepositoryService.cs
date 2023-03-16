@@ -1,6 +1,7 @@
 ﻿using DogtrekkingCz.Storage.Models;
 using MapsterMapper;
 using MongoDB.Bson;
+using DogtrekkingCz.Shared.Entities;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 using Storage.Interfaces.Services;
@@ -66,9 +67,15 @@ namespace Storage.Services.Repositories
         {
             var getAllActions = await _actionsStorageService.GetAllAsync();
 
+            var actions = new List<ActionDto>();
+            foreach (var action in getAllActions)
+            {
+                actions.Add(_mapper.Map<ActionDto>(action));
+            }
+
             var response = new GetAllActionsResponse
             {
-                Actions = _mapper.Map<IReadOnlyList<GetAllActionsResponse.ActionDto>>(getAllActions)
+                Actions = actions
             };
             
             return response;
@@ -78,9 +85,15 @@ namespace Storage.Services.Repositories
         {
             var getAllActions = await _actionsStorageService.GetAllAsync();
 
+            var actions = new List<ActionDto>();
+            foreach (var action in getAllActions)
+            {
+                actions.Add(_mapper.Map<ActionDto>(action));
+            }
+
             var response = new GetAllActionsWithDetailsResponse
             {
-                Actions = _mapper.Map<IReadOnlyList<GetAllActionsWithDetailsResponse.ActionDto>>(getAllActions)
+                Actions = actions
             };
             
             return response;

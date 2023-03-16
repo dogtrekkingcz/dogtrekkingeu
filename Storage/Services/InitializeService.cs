@@ -14,8 +14,8 @@ internal class InitializeService : IInitializeService
         _options = options;
     }
 
-    public async Task InitializeAsync(CancellationToken cancellationToken)
+    public Task InitializeAsync(CancellationToken cancellationToken)
     {
-        
+        return null;
     }
 }

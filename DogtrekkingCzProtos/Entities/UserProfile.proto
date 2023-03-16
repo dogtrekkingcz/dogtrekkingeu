@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "google/type/datetime.proto";
+import "Entities/Dog.proto";
+import "Entities/Contact.proto";
+import "Entities/Address.proto";
+
+
+message UserProfile {
+  string Id = 1;
+  string UserId = 2;
+  string CompetitorId = 3;
+  string FirstName = 4;
+  string LastName = 5;
+  string Nickname = 6;
+  google.type.DateTime Birthday = 7;
+  shared.Address Address = 8;
+  shared.Contact Contact = 9;
+  repeated shared.Dog Dogs = 10;
+}

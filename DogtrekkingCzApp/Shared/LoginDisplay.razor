@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Components.Authorization
+﻿@using DogtrekkingCz.Shared.Entities;
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Protos.UserProfiles
 @using DogtrekkingCzApp.Models
@@ -31,7 +32,7 @@
     protected override async Task OnInitializedAsync()
     {
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
-        
+
         if (_authState?.User?.Identity?.IsAuthenticated == true && _authState?.User?.Claims != null)
         {
             var claims = _authState.User.Claims;
@@ -41,14 +42,14 @@
             var lastName = claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
 
             _nameOfLoggedUser = firstName;
-            
+
             if (emailClaim != null)
             {
                 var request = new GetUserProfileRequest
                 {
                     Email = emailClaim.Value
                 };
-                
+
                 if (string.IsNullOrEmpty(request.Email) == false)
                 {
                     var response = await Client.getUserProfileAsync(request);
@@ -60,12 +61,12 @@
                     else
                     {
                         _nameOfLoggedUser = $"{response.UserProfile.FirstName} {response.UserProfile.LastName}";
-                        
+
                         Model = mapper.Map<UserProfileModel>(response.UserProfile);
                     }
                 }
             }
-            
+
             StateHasChanged();
         }
     }
@@ -79,30 +80,21 @@
         var messageForm = modal.Show<UserProfileModal>("Registering user", parameters);
         var result = await messageForm.Result;
     }
-    
+
     private async Task RegisterUserAsync(string userId, Claim emailClaim, string firstName, string lastName)
     {
         var model = new UserProfileModel
         {
             UserId = userId,
             CompetitorId = Guid.Empty,
-            Email = emailClaim?.Value ?? "",
+            Contact = new ContactDto
+            {
+                EmailAddress = emailClaim.Value
+            },
             FirstName = firstName,
             LastName = lastName,
             Nickname = "",
             Birthday = DateTime.Now
-        };
-
-        model.Address ??= new()
-        {
-            City = "",
-            Street = ""
-        };
-        model.Dogs ??= new List<UserProfileModel.DogDto>();
-        model.Contact ??= new()
-        {
-            Mail = emailClaim?.Value ?? "",
-            Phone = ""
         };
 
         var parameters = new ModalParameters()

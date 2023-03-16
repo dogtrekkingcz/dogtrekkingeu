@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "google/type/datetime.proto";
+
+import "Entities/Dog.proto";
+import "Entities/Note.proto";
+
+message Racer {
+  enum FinishState {
+    NotValid = 0;
+    DNS = 1;
+    DNF = 2;
+    DSQ = 3;
+  }
+
+  string CompetitorId = 1;
+  string FirstName = 2;
+  string LastName = 3;
+  repeated Dog Dogs = 4;
+  google.type.DateTime Start = 5;
+  google.type.DateTime Finish = 6;
+  FinishState State = 7;
+  repeated Note Notes = 8;
+}

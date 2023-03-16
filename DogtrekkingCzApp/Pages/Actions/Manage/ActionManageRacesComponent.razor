@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Components
+﻿@using DogtrekkingCz.Shared.Entities;
+@using Microsoft.AspNetCore.Components
 @using DogtrekkingCzApp.Models
 
 @inject IModalService modal
@@ -46,35 +47,35 @@
 
     private void FillByStandardDtTemplate()
     {
-        var races = new List<ActionModel.RaceDto>();
-        races.Add(new ActionModel.RaceDto
+        var races = new List<RaceDto>();
+        races.Add(new RaceDto
         {
             Name = "LONG",
-            Categories = new List<ActionModel.CategoryDto>
+            Categories = new List<CategoryDto>
             {
-                { new ActionModel.CategoryDto { Name = "DTW1" }},
-                { new ActionModel.CategoryDto() { Name = "DTM1" }},
-                { new ActionModel.CategoryDto {  Name = "DTW2" }},
-                { new ActionModel.CategoryDto { Name = "DTM2" }}
+                { new CategoryDto { Name = "DTW1" }},
+                { new CategoryDto() { Name = "DTM1" }},
+                { new CategoryDto {  Name = "DTW2" }},
+                { new CategoryDto { Name = "DTM2" }}
             }
         });
         
-        races.Add(new ActionModel.RaceDto
+        races.Add(new RaceDto
         {
             Name = "MID",
-            Categories = new List<ActionModel.CategoryDto>
+            Categories = new List<CategoryDto>
             {
-                { new ActionModel.CategoryDto { Name = "DMW" }},
-                { new ActionModel.CategoryDto { Name = "DMM" }}
+                { new CategoryDto { Name = "DMW" }},
+                { new CategoryDto { Name = "DMM" }}
             }
         });
         
-        races.Add(new ActionModel.RaceDto
+        races.Add(new RaceDto
         {
             Name = "SHORT",
-            Categories = new List<ActionModel.CategoryDto>
+            Categories = new List<CategoryDto>
             {
-                { new ActionModel.CategoryDto { Name = "SHORT" }}
+                { new CategoryDto { Name = "SHORT" }}
             }
         });
 

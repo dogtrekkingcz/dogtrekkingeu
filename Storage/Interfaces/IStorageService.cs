@@ -2,7 +2,7 @@
 
 namespace Storage.Interfaces.Services;
 
-internal interface IStorageService<T> where T: BaseRecord
+internal interface IStorageService<T> where T: IRecord
 {
     public Task<T> AddAsync(T request);
 

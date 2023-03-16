@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{BEBBE8
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogtrekkingCzShared", "Shared\DogtrekkingCzShared.csproj", "{2913CE3C-0A54-4E7F-B6A0-3AAF6FE311BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{6368156F-D0FD-4D60-8265-467242377A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6368156F-D0FD-4D60-8265-467242377A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6368156F-D0FD-4D60-8265-467242377A75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2913CE3C-0A54-4E7F-B6A0-3AAF6FE311BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2913CE3C-0A54-4E7F-B6A0-3AAF6FE311BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2913CE3C-0A54-4E7F-B6A0-3AAF6FE311BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2913CE3C-0A54-4E7F-B6A0-3AAF6FE311BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

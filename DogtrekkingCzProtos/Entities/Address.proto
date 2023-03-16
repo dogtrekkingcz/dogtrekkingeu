@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "google/type/latlng.proto";
+
+message Address {
+  string Country = 1;
+  string Region = 2;
+  string City = 3;
+  string Street = 4;
+  google.type.LatLng Position = 5;
+}

@@ -39,14 +39,11 @@ else
         <tbody>
         @foreach (var action in _actionList)
         {
-            var approved = action.Flags?.Approved ?? false ? "approved" : "non-approved";
-            var termLocked = action.Flags?.TermLocked ?? false ? "term-locked" : "term-unlocked";
-            
-            <tr class="@approved">
+            <tr>
                 <td>
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 @termLocked">@action.Term?.From.ToString("d.M.") - @action.Term?.To.ToString("d.M.")</div>
+                            <div class="col-12>@action.Term?.From.ToString("d.M.") - @action.Term?.To.ToString("d.M.")</div>
                             <div class="col-12">@action.Address?.Country, @action.Address?.Region, @action.Address?.City</div>
                         </div>
                     </div>
@@ -56,7 +53,6 @@ else
                         <div class="row">
                             <div class="col-12">@action.Name</div>
                             <div class="col-12">@action.Description</div>
-                            <div class="col-12">@action.Owner?.FirstName @action.Owner?.FamilyName</div>
                         </div>
                     </div>
                 </td>
@@ -137,20 +133,7 @@ else
         Protos.Actions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
 
         _actionList = mapper.Map<List<ActionModel>>(response.Actions);
-        
-        _actionList
-            .ForEach(action =>
-            {
-                action.Term ??= new ActionModel.TermDto
-                {
-                    From = DateTime.Now,
-                    To = DateTime.Now.AddDays(3)
-                };
-                action.Address ??= new();
-                action.Owner ??= new();
-                action.Flags ??= new ActionModel.FlagsDto { Approved = false, TermLocked = false, IsCanceled = false, IsHidden = false, CancelledReason = "" };
-            });
-        
+                
         SortActions();
     }
 
@@ -165,16 +148,13 @@ else
                 
             case SortingOptions.ApprovedWithLockedTermByDate:
                 _actionList = _actionList
-                    .OrderByDescending(action => action.Flags.Approved)
-                    .ThenByDescending(action => action.Flags.TermLocked)
-                    .ThenBy(action => action.Term?.From)
+                    .OrderByDescending(action => action.Term?.From)
                     .ToList();
                     break;
                 
             case SortingOptions.ApprovedByDate:
                     _actionList = _actionList
-                        .OrderByDescending(action => action.Flags.Approved)
-                        .ThenBy(action => action.Term?.From)
+                    .OrderByDescending(action => action.Term?.From)
                         .ToList();
                     break;
         }

@@ -1,0 +1,15 @@
+D:\repos\dogtrekkingeu\Shared\bin\Debug\net7.0\DogtrekkingCzShared.deps.json
+D:\repos\dogtrekkingeu\Shared\bin\Debug\net7.0\DogtrekkingCzShared.dll
+D:\repos\dogtrekkingeu\Shared\bin\Debug\net7.0\DogtrekkingCzShared.pdb
+D:\repos\dogtrekkingeu\Shared\bin\Debug\net7.0\DogtrekkingCzProtos.dll
+D:\repos\dogtrekkingeu\Shared\bin\Debug\net7.0\DogtrekkingCzProtos.pdb
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.csproj.AssemblyReference.cache
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.GeneratedMSBuildEditorConfig.editorconfig
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.AssemblyInfoInputs.cache
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.AssemblyInfo.cs
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.csproj.CoreCompileInputs.cache
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.csproj.CopyComplete
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.dll
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\refint\DogtrekkingCzShared.dll
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\DogtrekkingCzShared.pdb
+D:\repos\dogtrekkingeu\Shared\obj\Debug\net7.0\ref\DogtrekkingCzShared.dll
