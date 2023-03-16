@@ -7,8 +7,11 @@ package shared;
 import "Entities/Racer.proto";
 
 message Category {
-  string Name = 1;
-  string Description = 2;
+  string Id = 1;
 
-  repeated Racer Racers = 3;
+  string Name = 2;
+
+  string Description = 3;
+
+  repeated Racer Racers = 4;
 }
