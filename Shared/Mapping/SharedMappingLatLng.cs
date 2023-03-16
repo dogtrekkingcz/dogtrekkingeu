@@ -14,6 +14,8 @@ namespace DogtrekkingCz.Shared.Mapping
             typeAdapterConfig.NewConfig<Google.Type.LatLng, LatLngDto>()
                 .MapWith(s => new LatLngDto { GpsLatitude = s.Latitude, GpsLongitude = s.Longitude });
 
+            typeAdapterConfig.NewConfig<LatLngDto, LatLngDto>();
+
             return typeAdapterConfig;
         }
     }

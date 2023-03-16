@@ -11,6 +11,8 @@ namespace DogtrekkingCz.Shared.Mapping
             typeAdapterConfig.NewConfig<AddressDto, Protos.Shared.Address>()
                 .TwoWays();
 
+            typeAdapterConfig.NewConfig<AddressDto, AddressDto>();
+
             return typeAdapterConfig;
         }
     }

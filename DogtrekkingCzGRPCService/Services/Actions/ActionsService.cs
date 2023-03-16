@@ -69,6 +69,7 @@ public class ActionsService : Actions.ActionsBase
 
 
         var addActionRequest = _mapper.Map<AddActionRequest>(request.Action);
+        addActionRequest.Id = Guid.NewGuid().ToString();
 
         var result = await _actionRepositoryService.AddActionAsync(addActionRequest);
 

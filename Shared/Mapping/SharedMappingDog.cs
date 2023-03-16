@@ -28,6 +28,11 @@ namespace DogtrekkingCz.Shared.Mapping
                 .Map(d => d.Date, s => s.Date.ToDateTimeOffset())
                 .Map(d => d.ValidUntil, s => s.ValidUntil.ToDateTimeOffset());
 
+            // ----------
+
+            typeAdapterConfig.NewConfig<DogDto, DogDto>();
+            typeAdapterConfig.NewConfig<DogDto.VaccinationDto, DogDto.VaccinationDto>();
+
             return typeAdapterConfig;
         }
     }

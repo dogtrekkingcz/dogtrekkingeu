@@ -2,7 +2,8 @@
 {
     public class NoteDto
     {
-        public DateTimeOffset Date { get; set; }
-        public string Note { get; set; }
+        public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
+
+        public string Text { get; set; } = string.Empty;
     }
 }

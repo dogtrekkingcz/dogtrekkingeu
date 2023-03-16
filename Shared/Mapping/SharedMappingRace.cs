@@ -14,6 +14,8 @@ namespace DogtrekkingCz.Shared.Mapping
 
             typeAdapterConfig.NewConfig<RaceDto, Protos.Shared.RaceSimple>();
 
+            typeAdapterConfig.NewConfig<RaceDto, RaceDto>();
+
             return typeAdapterConfig;
         }
     }

@@ -2,5 +2,5 @@
 
 public sealed record UpdateActionResponse
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 }

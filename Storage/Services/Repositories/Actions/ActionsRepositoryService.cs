@@ -22,6 +22,11 @@ namespace Storage.Services.Repositories
         public async Task<AddActionResponse> AddActionAsync(AddActionRequest request)
         {
             var addRequest = _mapper.Map<ActionRecord>(request);
+
+            if (addRequest.Id == null)
+            {
+                addRequest.Id = Guid.NewGuid().ToString();
+            }
             
             var addedActionRecord = await _actionsStorageService.AddAsync(addRequest);
 
@@ -68,7 +73,8 @@ namespace Storage.Services.Repositories
             var getAllActions = await _actionsStorageService.GetAllAsync();
 
             var actions = new List<ActionDto>();
-            foreach (var action in getAllActions)
+            foreach (var action in getAllActions
+                .Where(a => a.Id != null))
             {
                 actions.Add(_mapper.Map<ActionDto>(action));
             }

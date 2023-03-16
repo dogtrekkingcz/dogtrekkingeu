@@ -14,6 +14,8 @@ namespace DogtrekkingCz.Shared.Mapping
             typeAdapterConfig.NewConfig<Protos.Shared.UserProfile, UserProfileDto>()
                 .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
 
+            typeAdapterConfig.NewConfig<UserProfileDto, UserProfileDto>();
+
             return typeAdapterConfig;
         }
     }

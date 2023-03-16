@@ -14,6 +14,8 @@ namespace DogtrekkingCz.Shared.Mapping
             typeAdapterConfig.NewConfig<Google.Type.Interval, TermDto>()
                 .MapWith(s => new TermDto { From = s.StartTime.ToDateTimeOffset(), To = s.EndTime.ToDateTimeOffset() });
 
+            typeAdapterConfig.NewConfig<TermDto, TermDto>();
+
             return typeAdapterConfig;
         }
     }

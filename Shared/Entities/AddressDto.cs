@@ -2,13 +2,13 @@
 {
     public sealed record AddressDto
     {
-        public string Country { get; set; }
+        public string Country { get; set; } = string.Empty;
 
-        public string Region { get; set; }
+        public string Region { get; set; } = string.Empty;
 
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
 
-        public string Street { get; set; }
+        public string Street { get; set; } = string.Empty;
 
         public LatLngDto Position { get; set; } = new();
     }

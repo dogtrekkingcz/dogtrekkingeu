@@ -5,5 +5,5 @@ namespace Storage.Entities.Actions;
 
 public sealed record AddActionResponse
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 }

@@ -14,6 +14,8 @@ namespace DogtrekkingCz.Shared.Mapping
             typeAdapterConfig.NewConfig<Protos.Shared.Category, CategoryDto>()
                 .Map(d => d.Id, s => Guid.Parse(s.Id));
 
+            typeAdapterConfig.NewConfig<CategoryDto, CategoryDto>();
+
             return typeAdapterConfig;
         }
     }

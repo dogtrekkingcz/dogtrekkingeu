@@ -9,10 +9,12 @@ namespace DogtrekkingCz.Shared.Mapping
         public static TypeAdapterConfig AddSharedMappingNote(this TypeAdapterConfig typeAdapterConfig)
         {
             typeAdapterConfig.NewConfig<NoteDto, Protos.Shared.Note>()
-                .Map(d => d.Time, s => s.Date.ToGoogleDateTime());
+                .Map(d => d.Time, s => s.Time.ToGoogleDateTime());
 
             typeAdapterConfig.NewConfig<Protos.Shared.Note, NoteDto>()
-                .Map(d => d.Date, s => s.Time.ToDateTimeOffset());
+                .Map(d => d.Time, s => s.Time.ToDateTimeOffset());
+
+            typeAdapterConfig.NewConfig<NoteDto, NoteDto>();
 
             return typeAdapterConfig;
         }

@@ -2,8 +2,8 @@
 {
     public sealed record LatLngDto
     {
-        public double GpsLatitude { get; set; }
+        public double GpsLatitude { get; set; } = 0.0;
 
-        public double GpsLongitude { get; set; }
+        public double GpsLongitude { get; set; } = 0.0;
     }
 }

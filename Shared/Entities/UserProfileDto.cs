@@ -2,24 +2,24 @@
 {
     public record UserProfileDto
     {
-        public string? Id { get; set; }
+        public string? Id { get; set; } = string.Empty;
 
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
-        public Guid CompetitorId { get; set; }
+        public Guid CompetitorId { get; set; } = default(Guid);
 
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
-        public string Nickname { get; set; }
+        public string Nickname { get; set; } = string.Empty;
 
-        public DateTimeOffset Birthday { get; set; }
+        public DateTimeOffset Birthday { get; set; } = DateTimeOffset.Now;
 
-        public AddressDto Address { get; set; }
+        public AddressDto Address { get; set; } = new();
 
-        public ContactDto Contact { get; set; }
+        public ContactDto Contact { get; set; } = new();
 
-        public List<string> Dogs { get; set; }
+        public List<string> Dogs { get; set; } = new List<string>();
     }
 }

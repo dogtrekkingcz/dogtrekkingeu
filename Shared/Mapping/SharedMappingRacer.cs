@@ -18,6 +18,8 @@ namespace DogtrekkingCz.Shared.Mapping
                 .Map(d => d.Start, s => s.Start.ToDateTimeOffset())
                 .Map(d => d.Finish, s => s.Finish.ToDateTimeOffset());
 
+            typeAdapterConfig.NewConfig<RacerDto, RacerDto>();
+
             return typeAdapterConfig;
         }
     }
