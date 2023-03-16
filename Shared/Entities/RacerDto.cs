@@ -16,7 +16,7 @@
 
         public string LastName { get; set; }
 
-        public List<string> Dogs { get; set; }
+        public List<string> Dogs { get; set; } = new List<string>();
 
         public DateTimeOffset? Start { get; set; }
 
@@ -24,6 +24,6 @@
 
         public RaceState State { get; set; }
 
-        public List<NoteDto> Notes { get; set; }
+        public List<NoteDto> Notes { get; set; } = new List<NoteDto>();
     }
 }

@@ -64,12 +64,12 @@
 
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
     private string ActionButtonText { get; set; }
-    
+
     [Parameter]
     public EventCallback<Protos.Shared.ActionDetail> OnItemChanged { get; set; }
 
     private AuthenticationState _authState = null;
-    
+
     protected override async Task OnInitializedAsync()
     {
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
@@ -88,6 +88,7 @@
         else
         {
             RequiredAction = RequiredActionEnum.AddAction;
+            Model = new();
         }
     }
 

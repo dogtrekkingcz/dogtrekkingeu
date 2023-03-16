@@ -7,6 +7,6 @@
         public double? Distance { get; set; }
         public double? Incline { get; set; }
 
-        public IList<CategoryDto> Categories { get; set; }
+        public IList<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
     }
 }

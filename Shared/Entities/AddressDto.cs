@@ -10,6 +10,6 @@
 
         public string Street { get; set; }
 
-        public LatLngDto Position { get; set; }
+        public LatLngDto Position { get; set; } = new();
     }
 }

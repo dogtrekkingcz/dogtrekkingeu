@@ -4,6 +4,6 @@
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public IList<RacerDto> Racers { get; set; }
+        public IList<RacerDto> Racers { get; set; } = new List<RacerDto>();
     }
 }
