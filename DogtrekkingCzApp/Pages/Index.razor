@@ -1,5 +1,8 @@
 ﻿@page "/"
 
+@inject Protos.Authorization.Authorization.AuthorizationClient Client
+@inject AuthenticationStateProvider AuthStateProvider
+
 <PageTitle>Index</PageTitle>
 
 <AuthorizeView>
@@ -12,8 +15,16 @@
 </AuthorizeView>
 
 @code {
+    private AuthenticationState _authState = null;
+
     protected override async Task OnInitializedAsync()
     {
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
+        if ((_authState?.User?.Identity?.IsAuthenticated ?? false) == true)
+        {
+            // load all rights of current user
+            Protos.Authorization.GetAllRightsResponse rights = await Client.getAllRightsAsync(new Protos.Authorization.GetAllRightsRequest());
+        }
     }
 }

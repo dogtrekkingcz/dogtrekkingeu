@@ -8,12 +8,6 @@
 
         public string ActionId { get; set; } = string.Empty;
 
-        public RightsType Rights { get; set; } = RightsType.None;
-
-        public enum RightsType
-        {
-            None = 0,
-            Admin = 1
-        }
+        public IList<string> Roles { get; set; }
     }
 }

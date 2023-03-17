@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <None Remove="Address.proto" />
+      <None Remove="Authorization.proto" />
       <None Remove="Contact.proto" />
       <None Remove="Dog.proto" />
       <None Remove="Entities\ActionDetail.proto" />
@@ -22,6 +23,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Protobuf Include="Authorization.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
       <Protobuf Include="Entities\ActionDetail.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <OutputDir>obj\Debug\net7.0\</OutputDir>

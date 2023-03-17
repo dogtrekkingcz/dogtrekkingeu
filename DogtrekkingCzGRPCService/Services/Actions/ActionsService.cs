@@ -10,7 +10,7 @@ using DogtrekkingCzGRPCService.Services.JwtToken;
 
 namespace DogtrekkingCzGRPCService.Services;
 
-public class ActionsService : Actions.ActionsBase
+internal class ActionsService : Actions.ActionsBase
 {
     private readonly ILogger<ActionsService> _logger;
     private readonly IMapper _mapper;
@@ -67,13 +67,17 @@ public class ActionsService : Actions.ActionsBase
 
     public async override Task<CreateActionResponse> createAction(CreateActionRequest request, ServerCallContext context)
     {
-        var token = context.RequestHeaders.GetValue("authorization");
-
-
         var addActionRequest = _mapper.Map<AddActionRequest>(request.Action);
         addActionRequest.Id = Guid.NewGuid().ToString();
 
         var result = await _actionRepositoryService.AddActionAsync(addActionRequest);
+
+        await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsRequest
+        {
+            ActionId = result.Id,
+            UserId = _jwtTokenService.GetUserId(),
+            Rights = DogtrekkingCzShared.Entities.ActionRightsDto.RightsType.Admin
+        });
 
         var response = _mapper.Map<CreateActionResponse>(result);
 

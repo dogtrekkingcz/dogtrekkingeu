@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Authorization";
+
+package authorization;
+
+import "Entities/ActionRights.proto";
+
+service Authorization {
+  rpc getAllRights (GetAllRightsRequest) returns (GetAllRightsResponse);
+}
+
+message GetAllRightsRequest {
+
+}
+
+message GetAllRightsResponse {
+  repeated shared.ActionRights ActionRights = 1;
+}

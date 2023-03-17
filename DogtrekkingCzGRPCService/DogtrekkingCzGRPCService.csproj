@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Services\Authorization\AuthorizationService.cs~RFce31e86.TMP" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
         <PackageReference Include="Grpc.AspNetCore.Web" Version="2.50.0-pre1" />
         <PackageReference Include="Mapster" Version="7.3.0" />

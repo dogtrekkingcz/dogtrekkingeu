@@ -13,6 +13,7 @@ using MapsterMapper;
 using Storage.Models;
 using DogtrekkingCz.Shared.Mapping;
 using Storage.Services.Repositories.ActionRights;
+using Storage.Services.Repositories.AuthorizationRoles;
 
 namespace DogtrekkingCz.Storage;
 
@@ -44,7 +45,9 @@ public static class DiCompositor
             .AddSingleton<IStorageService<UserProfileRecord>, StorageService<UserProfileRecord>>()
             .AddScoped<IUserProfilesRepositoryService, UserProfilesRepositoryService>()
             .AddSingleton<IStorageService<DogRecord>, StorageService<DogRecord>>()
-            .AddScoped<IDogsRepositoryService, DogsRepositoryService>();
+            .AddScoped<IDogsRepositoryService, DogsRepositoryService>()
+            .AddSingleton<IStorageService<AuthorizationRoleRecord>, StorageService<AuthorizationRoleRecord>>()
+            .AddScoped<IAuthorizationRolesService, AuthorizationRolesService>();
 
 
         typeAdapterConfig
@@ -78,6 +81,10 @@ public static class DiCompositor
         {
             db.CreateCollection("ActionRights");
         }
+        if (listOfCollections.Contains("AuthorizationRoles") == false)
+        {
+            db.CreateCollection("AuthorizationRoles");
+        }
 
         Console.WriteLine($"MongoDb.DogtrekkingEu.Collections with initialized collections: {db.ListCollectionNames()}");
         
@@ -85,6 +92,7 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IMongoCollection<UserProfileRecord>>(db.GetCollection<UserProfileRecord>("UserProfiles"));
         serviceProvider.AddSingleton<IMongoCollection<DogRecord>>(db.GetCollection<DogRecord>("Dogs"));
         serviceProvider.AddSingleton<IMongoCollection<ActionRightsRecord>>(db.GetCollection<ActionRightsRecord>("ActionRights"));
+        serviceProvider.AddSingleton<IMongoCollection<AuthorizationRoleRecord>>(db.GetCollection<AuthorizationRoleRecord>("AuthorizationRoles"));
 
         return serviceProvider;
     }   

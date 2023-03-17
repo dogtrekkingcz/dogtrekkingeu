@@ -5,9 +5,6 @@ using DogtrekkingCzGRPCService.Services.JwtToken;
 using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using DogtrekkingCz.Shared.Mapping;
 using Storage.Interfaces.Options;
 
@@ -48,6 +45,7 @@ builder.Services
 
 typeAdapterConfig
     .AddSharedMapping()
+    .AddAuthorizationServiceMapping()
     .AddActionsServiceMapping()
     .AddUserProfilesServiceMapping();
 
@@ -78,6 +76,7 @@ app.UseEndpoints(endpoints =>
     {
         endpoints.MapGrpcService<ActionsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<UserProfilesService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<AuthorizationService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 
