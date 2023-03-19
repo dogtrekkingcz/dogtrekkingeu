@@ -62,8 +62,6 @@ builder.Services.AddLocalization();
 
 var app = builder.Build();
 
-await app.SeedDataAsync();
-
 app.UseRouting();
 
 app.UseGrpcWeb();
@@ -85,3 +83,5 @@ app.UseEndpoints(endpoints =>
 
 
 app.Run();
+
+await app.SeedDataAsync();

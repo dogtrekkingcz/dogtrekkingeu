@@ -38,7 +38,7 @@ public static class DiCompositor
         serviceProvider
             .AddScoped<IMapper, ServiceMapper>()
             .AddSingleton<IInitializeService>(new InitializeService(options))
-            .AddSingleton<StorageSeedEngine>()
+            .AddScoped<StorageSeedEngine>()
 
             .AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>()
             .AddScoped<IActionsRepositoryService, ActionsRepositoryService>()
