@@ -7,7 +7,7 @@ namespace Storage.Interfaces
     {
         Task<AddActionRightsResponse> AddActionRightsAsync(AddActionRightsRequest request);
 
-        Task<GetActionRightsResponse> GetActionRightsAsync(GetActionRightsRequest request);
+        Task<GetAllRightsResponse> GetAllRightsAsync(GetAllRightsRequest request);
 
         Task DeleteActionRightsAsync(DeleteActionRightsRequest request);
     }

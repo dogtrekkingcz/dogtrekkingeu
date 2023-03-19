@@ -7,6 +7,7 @@ using Storage.Interfaces;
 using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
 using GetActionRequest = Storage.Entities.Actions.GetActionRequest;
 using DogtrekkingCzGRPCService.Services.JwtToken;
+using DogtrekkingCzShared.Entities;
 
 namespace DogtrekkingCzGRPCService.Services;
 
@@ -76,7 +77,7 @@ internal class ActionsService : Actions.ActionsBase
         {
             ActionId = result.Id,
             UserId = _jwtTokenService.GetUserId(),
-            Rights = DogtrekkingCzShared.Entities.ActionRightsDto.RightsType.Admin
+            Roles = new List<string> { AuthorizationRoleDto.RoleType.Owner.ToString() }
         });
 
         var response = _mapper.Map<CreateActionResponse>(result);

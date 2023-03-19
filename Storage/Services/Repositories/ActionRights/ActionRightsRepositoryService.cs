@@ -41,14 +41,15 @@ namespace Storage.Services.Repositories.ActionRights
             throw new NotImplementedException();
         }
 
-        public async Task<GetActionRightsResponse> GetActionRightsAsync(GetActionRightsRequest request)
+        public async Task<GetAllRightsResponse> GetAllRightsAsync(GetAllRightsRequest request)
         {
-            var result = await _actionRightsStorageService.GetByFilterAsync("UserId", request.UserId);
+            var filter = new List<(string key, string value)> { ("UserId", request.UserId) };
+            var result = await _actionRightsStorageService.GetByFilterAsync(filter);
 
             if (result == null)
                 return null;
 
-            var response = _mapper.Map<GetActionRightsResponse>(result);
+            var response = _mapper.Map<GetAllRightsResponse>(result);
 
             return response;
         }

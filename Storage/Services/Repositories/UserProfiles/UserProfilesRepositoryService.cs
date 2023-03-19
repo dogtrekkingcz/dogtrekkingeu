@@ -58,12 +58,13 @@ namespace Storage.Services.Repositories
 
         public async Task<GetUserProfileResponse> GetUserProfileAsync(GetUserProfileRequest request)
         {
-            var result = await _userProfileStorageService.GetByFilterAsync("Email", request.Email);
+            var filter = new List<(string key, string value)> { ("Email", request.Email) };
+            var result = await _userProfileStorageService.GetByFilterAsync(filter);
 
             if (result == null)
                 return null;
             
-            var response = _mapper.Map<GetUserProfileResponse>(result);
+            var response = _mapper.Map<GetUserProfileResponse>(result.FirstOrDefault());
 
             return response;
         }

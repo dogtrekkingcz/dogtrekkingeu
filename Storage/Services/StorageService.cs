@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DogtrekkingCz.Storage.Models;
+using Google.Protobuf.WellKnownTypes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -50,13 +51,19 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return document;
     }
 
-    public async Task<T> GetByFilterAsync(string key, string value)
+    public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, string value)> filterList)
     {
-        var filter = Builders<T>.Filter.Eq(key, value);
+        var filter = Builders<T>.Filter
+            .Eq(filterList[0].key, filterList[0].value);
+
+        foreach (var f in filterList.Skip(1))
+        {
+            filter &= (Builders<T>.Filter.Eq(f.key, f.value));
+        }
 
         var document = await _collection
             .Find(filter)
-            .FirstOrDefaultAsync();
+            .ToListAsync();
 
         return document;
     }

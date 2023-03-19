@@ -17,7 +17,7 @@ namespace Storage.Services.Repositories
 
             typeAdapterConfig.NewConfig<ActionRightsRecord, AddActionRightsResponse>();
 
-            typeAdapterConfig.NewConfig<GetActionRightsRequest, ActionRightsRecord>()
+            typeAdapterConfig.NewConfig<GetAllRightsRequest, ActionRightsRecord>()
                 .MapWith(s => new ActionRightsRecord { UserId = s.UserId });
 
             typeAdapterConfig.NewConfig<ActionRightsRecord, ActionRightsDto>()

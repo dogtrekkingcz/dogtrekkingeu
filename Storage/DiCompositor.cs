@@ -14,6 +14,7 @@ using Storage.Models;
 using DogtrekkingCz.Shared.Mapping;
 using Storage.Services.Repositories.ActionRights;
 using Storage.Services.Repositories.AuthorizationRoles;
+using Storage.Seed;
 
 namespace DogtrekkingCz.Storage;
 
@@ -37,6 +38,7 @@ public static class DiCompositor
         serviceProvider
             .AddScoped<IMapper, ServiceMapper>()
             .AddSingleton<IInitializeService>(new InitializeService(options))
+            .AddSingleton<StorageSeedEngine>()
 
             .AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>()
             .AddScoped<IActionsRepositoryService, ActionsRepositoryService>()

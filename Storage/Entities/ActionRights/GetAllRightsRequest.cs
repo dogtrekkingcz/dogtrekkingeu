@@ -1,6 +1,6 @@
 ﻿namespace Storage.Entities.ActionRights
 {
-    public sealed record GetActionRightsRequest
+    public sealed record GetAllRightsRequest
     {
         public string UserId { get; set; }
     }

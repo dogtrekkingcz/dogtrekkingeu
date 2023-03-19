@@ -7,6 +7,7 @@ using Mapster;
 using MapsterMapper;
 using DogtrekkingCz.Shared.Mapping;
 using Storage.Interfaces.Options;
+using DogtrekkingCzGRPCService.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,8 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 builder.Services.AddLocalization();
 
 var app = builder.Build();
+
+await app.SeedDataAsync();
 
 app.UseRouting();
 

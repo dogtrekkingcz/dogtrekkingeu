@@ -59,12 +59,13 @@ namespace Storage.Services.Repositories
 
         public async Task<GetDogResponse> GetDogAsync(GetDogRequest request)
         {
-            var result = await _dogStorageService.GetByFilterAsync("Chip", request.Chip);
+            var filter = new List<(string key, string value)> { ("Chip", request.Chip) };
+            var result = await _dogStorageService.GetByFilterAsync(filter);
 
             if (result == null)
                 return null;
             
-            var response = _mapper.Map<GetDogResponse>(result);
+            var response = _mapper.Map<GetDogResponse>(result.FirstOrDefault());
 
             return response;
         }

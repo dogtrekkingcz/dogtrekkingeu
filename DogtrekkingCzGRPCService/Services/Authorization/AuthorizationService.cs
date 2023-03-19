@@ -22,7 +22,7 @@ internal class AuthorizationService : Authorization.AuthorizationBase
 
     public override async Task<GetAllRightsResponse> getAllRights(GetAllRightsRequest request, ServerCallContext context)
     {
-        var rights = await _actionRightsRepositoryService.GetActionRightsAsync(new Storage.Entities.ActionRights.GetActionRightsRequest());
+        var rights = await _actionRightsRepositoryService.GetAllRightsAsync(new Storage.Entities.ActionRights.GetAllRightsRequest());
 
 
         var actionRights = _mapper.Map<RepeatedField<Protos.Shared.ActionRights>>(rights);

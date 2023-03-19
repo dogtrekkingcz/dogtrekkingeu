@@ -17,9 +17,11 @@
             Delete = 3
         }
 
-        public RoleType Id { get; set; }
+        public string? Id { get; set; } = string.Empty;
 
-        public string Name { get; set; }
+        public RoleType Type { get; set; } = RoleType.None;
+
+        public string Name { get; set; } = string.Empty;
 
         public IList<ActionType> Actions { get; set; } = new List<ActionType>();
     }
