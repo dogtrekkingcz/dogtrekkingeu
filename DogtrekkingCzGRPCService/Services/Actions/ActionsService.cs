@@ -8,10 +8,11 @@ using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
 using GetActionRequest = Storage.Entities.Actions.GetActionRequest;
 using DogtrekkingCzGRPCService.Services.JwtToken;
 using DogtrekkingCzShared.Entities;
+using DogtrekkingCzShared.Testable;
 
 namespace DogtrekkingCzGRPCService.Services;
 
-internal class ActionsService : Actions.ActionsBase
+internal class ActionsService : Actions.ActionsBase, ITestableService
 {
     private readonly ILogger<ActionsService> _logger;
     private readonly IMapper _mapper;
@@ -103,5 +104,15 @@ internal class ActionsService : Actions.ActionsBase
         await _actionRepositoryService.DeleteActionAsync(deleteActionRequest);
 
         return new DeleteActionResponse();
+    }
+
+    public async Task<TestResult> TestMeAsync()
+    {
+        return new TestResult { Result = true };
+    }
+
+    public TestResult TestMe()
+    {
+        return new TestResult { Result = true };
     }
 }
