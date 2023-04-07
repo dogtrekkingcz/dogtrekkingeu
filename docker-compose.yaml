@@ -13,13 +13,29 @@ services:
   # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
   # dotnet dev-certs https --trust
   dogtrekking_eu_grpc:
-    image: dogtrekking_eu_server
+    image: dogtrekking_eu_server_grpc
     build:
       context: .
       dockerfile: DogtrekkingCzGRPCService/Dockerfile
     ports:
       - 4080:80
       - 4443:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      
+  dogtrekking_eu_webapi:
+    image: dogtrekking_eu_server_api
+    build:
+      context: .
+      dockerfile: DogtrekkingCzWebApiService/Dockerfile
+    ports:
+      - 3080:80
+      - 3443:443
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
