@@ -24,3 +24,9 @@
 /Shared/obj/project.nuget.cache
 /Shared/obj/project.assets.json
 /Shared/obj/DogtrekkingCzShared.csproj.nuget.dgspec.json
+/DogtrekkingCz/bin/Debug/net7.0
+/DogtrekkingCz/obj
+/DogtrekkingCz.Interfaces/bin/Debug/net7.0
+/DogtrekkingCz.Interfaces/obj
+/DogtrekkingCzWebApiService/bin/Debug/net7.0
+/DogtrekkingCzWebApiService/obj
