@@ -20,7 +20,7 @@ namespace Storage.Services.Repositories
                 .MapWith(s => new ActionRecord { Id = s.Id });
 
             typeAdapterConfig.NewConfig<GetActionRequest, ActionRecord>()
-                .MapWith(s => new ActionRecord { Id = s.Id });
+                .MapWith(s => new ActionRecord { Id = s.Id.ToString() });
 
             typeAdapterConfig.NewConfig<ActionRecord, ActionDto>()
                 .TwoWays();

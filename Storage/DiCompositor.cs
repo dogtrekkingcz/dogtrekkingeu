@@ -36,7 +36,6 @@ public static class DiCompositor
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
         serviceProvider
-            .AddScoped<IMapper, ServiceMapper>()
             .AddSingleton<IInitializeService>(new InitializeService(options))
             .AddScoped<StorageSeedEngine>()
 
