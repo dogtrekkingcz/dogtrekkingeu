@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCz.Interfaces.Entities
+﻿namespace DogtrekkingCz.Interfaces.Actions.Entities
 {
     public sealed record ActionDetailRequest
     {

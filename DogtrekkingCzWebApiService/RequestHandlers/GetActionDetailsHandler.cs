@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Interfaces.Services;
+﻿using DogtrekkingCz.Interfaces.Actions.Services;
 using DogtrekkingCzWebApiService.Entities;
 using MapsterMapper;
 using Mediator;
@@ -22,7 +22,7 @@ namespace DogtrekkingCzWebApiService.RequestHandlers
 
                 var actionsService = scope.ServiceProvider.GetRequiredService<IActionsService>();
 
-                var actionDetailRequest = mapper.Map<DogtrekkingCz.Interfaces.Entities.ActionDetailRequest>(request);
+                var actionDetailRequest = mapper.Map<DogtrekkingCz.Interfaces.Actions.Entities.ActionDetailRequest>(request);
 
                 var action = await actionsService.GetActionDetail(actionDetailRequest, cancellationToken);
 

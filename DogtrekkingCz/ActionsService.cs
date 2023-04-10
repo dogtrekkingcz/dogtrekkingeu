@@ -1,9 +1,9 @@
-﻿using DogtrekkingCz.Interfaces.Entities;
-using DogtrekkingCz.Interfaces.Services;
+﻿using DogtrekkingCz.Interfaces.Actions.Entities;
+using DogtrekkingCz.Interfaces.Actions.Services;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 
-namespace DogtrekkingCz
+namespace DogtrekkingCz.Actions
 {
     internal class ActionsService : IActionsService
     {

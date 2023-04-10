@@ -18,11 +18,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{BEBBE8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCzShared", "Shared\DogtrekkingCzShared.csproj", "{2913CE3C-0A54-4E7F-B6A0-3AAF6FE311BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogtrekkingCzWebApiService", "DogtrekkingCzWebApiService\DogtrekkingCzWebApiService.csproj", "{998C9165-0178-402C-B7FD-31601A1F7E79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCzWebApiService", "DogtrekkingCzWebApiService\DogtrekkingCzWebApiService.csproj", "{998C9165-0178-402C-B7FD-31601A1F7E79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogtrekkingCz", "DogtrekkingCz\DogtrekkingCz.csproj", "{F58F7026-DF7D-45C9-ABE2-0C14A5B83A98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCz.Actions", "DogtrekkingCz\DogtrekkingCz.Actions.csproj", "{F58F7026-DF7D-45C9-ABE2-0C14A5B83A98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogtrekkingCz.Interfaces", "DogtrekkingCz.Interfaces\DogtrekkingCz.Interfaces.csproj", "{5B0E9F06-7890-496E-A248-F36D22A67979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCz.Interfaces.Actions", "DogtrekkingCz.Interfaces\DogtrekkingCz.Interfaces.Actions.csproj", "{5B0E9F06-7890-496E-A248-F36D22A67979}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

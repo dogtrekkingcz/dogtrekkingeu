@@ -1,6 +1,6 @@
-﻿using DogtrekkingCz.Interfaces.Entities;
+﻿using DogtrekkingCz.Interfaces.Actions.Entities;
 
-namespace DogtrekkingCz.Interfaces.Services
+namespace DogtrekkingCz.Interfaces.Actions.Services
 {
     public interface IActionsService
     {

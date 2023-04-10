@@ -3,11 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DogtrekkingCz.Interfaces\DogtrekkingCz.Interfaces.csproj" />
+    <ProjectReference Include="..\DogtrekkingCz.Interfaces\DogtrekkingCz.Interfaces.Actions.csproj" />
     <ProjectReference Include="..\Shared\DogtrekkingCzShared.csproj" />
     <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>

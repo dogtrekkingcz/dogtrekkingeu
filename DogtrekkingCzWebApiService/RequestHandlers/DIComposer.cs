@@ -15,7 +15,7 @@ namespace DogtrekkingCzWebApiService.RequestHandlers
 
         internal static TypeAdapterConfig AddActionsMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<ActionDetailRequest, DogtrekkingCz.Interfaces.Entities.ActionDetailRequest>();
+            typeAdapterConfig.NewConfig<ActionDetailRequest, DogtrekkingCz.Interfaces.Actions.Entities.ActionDetailRequest>();
 
             return typeAdapterConfig;
         }
