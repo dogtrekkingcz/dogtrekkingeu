@@ -1,4 +1,5 @@
 ﻿using DogtrekkingCz.Storage.Models;
+using DogtrekkingCzShared.Mapping;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,7 +12,6 @@ using Storage.Interfaces;
 using Storage.Services.Repositories;
 using MapsterMapper;
 using Storage.Models;
-using DogtrekkingCz.Shared.Mapping;
 using Storage.Services.Repositories.ActionRights;
 using Storage.Services.Repositories.AuthorizationRoles;
 using Storage.Seed;

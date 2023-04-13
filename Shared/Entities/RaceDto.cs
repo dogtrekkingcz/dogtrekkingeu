@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCz.Shared.Entities
+﻿namespace DogtrekkingCzShared.Entities
 {
     public sealed record RaceDto
     {

@@ -7,105 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Address.proto" />
-      <None Remove="Authorization.proto" />
-      <None Remove="Contact.proto" />
-      <None Remove="Dog.proto" />
-      <None Remove="Entities\ActionDetail.proto" />
-      <None Remove="Entities\ActionRights.proto" />
-      <None Remove="Entities\ActionSimple.proto" />
-      <None Remove="Entities\Category.proto" />
-      <None Remove="Entities\Note.proto" />
-      <None Remove="Entities\RaceDetail.proto" />
-      <None Remove="Entities\Racer.proto" />
-      <None Remove="Entities\RaceSimple.proto" />
-      <None Remove="Entities\UserProfile.proto" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Protobuf Include="Authorization.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\ActionDetail.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\ActionRights.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\RaceDetail.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\RaceSimple.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\ActionSimple.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\Note.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\Racer.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\Category.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\UserProfile.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="google\type\date.proto" />
-      <Protobuf Include="google\type\datetime.proto" />
-      <Protobuf Include="google\type\latlng.proto" />
-      <Protobuf Include="google\type\interval.proto" />
-      
-      <Protobuf Include="Entities\Dog.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\Contact.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Entities\Address.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <CompileOutputs>True</CompileOutputs>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <Protobuf Include="Actions.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -124,12 +25,162 @@
           <Generator>MSBuild:Compile</Generator>
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <None Remove="Entities\ActionDetail.proto" />
+      <Protobuf Include="Entities\ActionDetail.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\ActionRights.proto" />
+      <Protobuf Include="Entities\ActionRights.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\ActionSimple.proto" />
+      <Protobuf Include="Entities\ActionSimple.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\Address.proto" />
+      <Protobuf Include="Entities\Address.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\Category.proto" />
+      <Protobuf Include="Entities\Category.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\Contact.proto" />
+      <Protobuf Include="Entities\Contact.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\Dog.proto" />
+      <Protobuf Include="Entities\Dog.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\Note.proto" />
+      <Protobuf Include="Entities\Note.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\RaceDetail.proto" />
+      <Protobuf Include="Entities\RaceDetail.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\Racer.proto" />
+      <Protobuf Include="Entities\Racer.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\RaceSimple.proto" />
+      <Protobuf Include="Entities\RaceSimple.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Entities\UserProfile.proto" />
+      <Protobuf Include="Entities\UserProfile.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\calendar_period.proto" />
+      <Protobuf Include="google\type\calendar_period.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\color.proto" />
+      <Protobuf Include="google\type\color.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\date.proto" />
+      <Protobuf Include="google\type\date.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\datetime.proto" />
+      <Protobuf Include="google\type\datetime.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\dayofweek.proto" />
+      <Protobuf Include="google\type\dayofweek.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\decimal.proto" />
+      <Protobuf Include="google\type\decimal.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\expr.proto" />
+      <Protobuf Include="google\type\expr.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\fraction.proto" />
+      <Protobuf Include="google\type\fraction.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\interval.proto" />
+      <Protobuf Include="google\type\interval.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\latlng.proto" />
+      <Protobuf Include="google\type\latlng.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\localized_text.proto" />
+      <Protobuf Include="google\type\localized_text.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\money.proto" />
+      <Protobuf Include="google\type\money.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\month.proto" />
+      <Protobuf Include="google\type\month.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\phone_number.proto" />
+      <Protobuf Include="google\type\phone_number.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\postal_address.proto" />
+      <Protobuf Include="google\type\postal_address.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\quaternion.proto" />
+      <Protobuf Include="google\type\quaternion.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="google\type\timeofday.proto" />
+      <Protobuf Include="google\type\timeofday.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <None Remove="Authorization.proto" />
+      <Protobuf Include="Authorization.proto">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Google.Protobuf" Version="3.22.1" />
+      <PackageReference Include="Google.Protobuf" Version="3.21.9" />
       <PackageReference Include="Grpc.Net.Client" Version="2.51.0" />
-      <PackageReference Include="Grpc.Tools" Version="2.52.0">
+      <PackageReference Include="Grpc.Tools" Version="2.50.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>

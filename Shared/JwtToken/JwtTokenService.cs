@@ -1,7 +1,7 @@
-﻿using Grpc.Core;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Grpc.Core;
 
-namespace DogtrekkingCzShared.Services.JwtToken
+namespace DogtrekkingCzShared.JwtToken
 {
     public class JwtTokenService : IJwtTokenService
     {

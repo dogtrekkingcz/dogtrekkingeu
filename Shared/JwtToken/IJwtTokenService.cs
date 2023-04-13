@@ -1,6 +1,6 @@
 ﻿using Grpc.Core;
 
-namespace DogtrekkingCzShared.Services.JwtToken
+namespace DogtrekkingCzShared.JwtToken
 {
     public interface IJwtTokenService
     {

@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Xml;
 using DogtrekkingCz.Storage.Entities.UserProfiles;
+using DogtrekkingCzShared.Extensions;
 using Mapster;
-using DogtrekkingCz.Shared.Extensions;
 
 namespace DogtrekkingCzGRPCService.Services;
 

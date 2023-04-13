@@ -9,7 +9,7 @@
 
         public async Task<TestResult> TestMeAsync()
         {
-            return new TestResult { Result = true };
+            return await Task.FromResult(new TestResult { Result = true });
         }
     }
 }

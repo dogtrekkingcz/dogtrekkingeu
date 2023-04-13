@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Shared.Extensions;
+﻿using DogtrekkingCzShared.Extensions;
 using Mapster;
 
 namespace DogtrekkingCzApp.Models;

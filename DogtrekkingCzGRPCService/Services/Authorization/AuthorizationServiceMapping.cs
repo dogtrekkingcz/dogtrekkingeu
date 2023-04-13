@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
-using DogtrekkingCz.Shared.Entities;
-using DogtrekkingCz.Shared.Extensions;
+using DogtrekkingCzShared.Entities;
 using Google.Protobuf.Collections;
 using Mapster;
 using Storage.Entities.Actions;

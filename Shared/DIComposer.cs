@@ -1,6 +1,5 @@
 ﻿using DogtrekkingCzShared.Interceptors;
 using DogtrekkingCzShared.Options;
-using DogtrekkingCzShared.Services.JwtToken;
 using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;

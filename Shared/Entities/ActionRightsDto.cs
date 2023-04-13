@@ -8,6 +8,6 @@
 
         public string ActionId { get; set; } = string.Empty;
 
-        public IList<string> Roles { get; set; }
+        public IList<string> Roles { get; set; } = new List<string>();
     }
 }

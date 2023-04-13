@@ -5,9 +5,9 @@ using DogtrekkingCzGRPCService.Services.JwtToken;
 using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;
-using DogtrekkingCz.Shared.Mapping;
 using Storage.Interfaces.Options;
 using DogtrekkingCzGRPCService.Extensions;
+using DogtrekkingCzShared.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 

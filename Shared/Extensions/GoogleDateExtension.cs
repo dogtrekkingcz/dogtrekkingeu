@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCz.Shared.Extensions
+﻿namespace DogtrekkingCzShared.Extensions
 {
     public static class GoogleDateExtension
     {

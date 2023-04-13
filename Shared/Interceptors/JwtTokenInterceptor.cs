@@ -1,7 +1,7 @@
-﻿using Grpc.Core.Interceptors;
+﻿using DogtrekkingCzShared.JwtToken;
+using Grpc.Core.Interceptors;
 using Grpc.Core;
 using static Grpc.Core.Interceptors.Interceptor;
-using DogtrekkingCzShared.Services.JwtToken;
 
 namespace DogtrekkingCzShared.Interceptors
 {

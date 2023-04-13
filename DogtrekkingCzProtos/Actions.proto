@@ -4,11 +4,6 @@ option csharp_namespace = "Protos.Actions";
 
 package actions;
 
-import "google/type/date.proto";
-import "google/type/interval.proto";
-import "Entities/Address.proto";
-import "Entities/Contact.proto";
-import "Entities/Dog.proto";
 import "Entities/ActionSimple.proto";
 import "Entities/ActionDetail.proto";
 

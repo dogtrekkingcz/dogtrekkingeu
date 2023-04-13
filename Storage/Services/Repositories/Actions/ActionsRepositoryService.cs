@@ -1,7 +1,7 @@
 ﻿using DogtrekkingCz.Storage.Models;
+using DogtrekkingCzShared.Entities;
 using MapsterMapper;
 using MongoDB.Bson;
-using DogtrekkingCz.Shared.Entities;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 using Storage.Interfaces.Services;

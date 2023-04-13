@@ -1,8 +1,8 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Services;
 using DogtrekkingCz.Storage;
 using DogtrekkingCzShared.Interceptors;
+using DogtrekkingCzShared.JwtToken;
 using DogtrekkingCzShared.Options;
-using DogtrekkingCzShared.Services.JwtToken;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Interfaces.Options;

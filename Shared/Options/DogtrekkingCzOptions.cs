@@ -2,6 +2,6 @@
 {
     public sealed record DogtrekkingCzOptions
     {
-        public string MongoDbConnectionString { get; set; }
+        public string MongoDbConnectionString { get; set; } = "";
     }
 }

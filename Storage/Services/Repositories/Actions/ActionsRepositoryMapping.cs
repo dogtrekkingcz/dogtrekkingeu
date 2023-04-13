@@ -1,6 +1,6 @@
 ﻿using DogtrekkingCz.Storage.Models;
+using DogtrekkingCzShared.Entities;
 using Mapster;
-using DogtrekkingCz.Shared.Entities;
 using Storage.Entities.Actions;
 
 namespace Storage.Services.Repositories

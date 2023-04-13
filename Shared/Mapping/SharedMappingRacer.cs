@@ -1,8 +1,8 @@
-﻿using Mapster;
-using DogtrekkingCz.Shared.Entities;
-using DogtrekkingCz.Shared.Extensions;
+﻿using DogtrekkingCzShared.Entities;
+using DogtrekkingCzShared.Extensions;
+using Mapster;
 
-namespace DogtrekkingCz.Shared.Mapping
+namespace DogtrekkingCzShared.Mapping
 {
     public static class SharedMappingRacer
     {
@@ -10,8 +10,8 @@ namespace DogtrekkingCz.Shared.Mapping
         {
             typeAdapterConfig.NewConfig<RacerDto, Protos.Shared.Racer>()
                 .IgnoreNullValues(true)
-                .Map(d => d.Start, s => s.Start.Value.ToGoogleDateTime())
-                .Map(d => d.Finish, s => s.Finish.Value.ToGoogleDateTime());
+                .Map(d => d.Start, s => (Google.Type.DateTime) s.Start.Value.ToGoogleDateTime())
+                .Map(d => d.Finish, s => (Google.Type.DateTime) s.Finish.Value.ToGoogleDateTime());
 
             typeAdapterConfig.NewConfig<Protos.Shared.Racer, RacerDto>()
                 .IgnoreNullValues(true)

@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Shared.Entities;
+﻿using DogtrekkingCzShared.Entities;
 
 namespace Storage.Entities.Actions;
 

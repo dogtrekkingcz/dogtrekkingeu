@@ -1,8 +1,7 @@
 ﻿using System.Globalization;
+using DogtrekkingCzShared.Entities;
 using Google.Protobuf.Collections;
 using Mapster;
-using DogtrekkingCz.Shared.Extensions;
-using DogtrekkingCz.Shared.Entities;
 
 namespace DogtrekkingCzApp.Models;
 

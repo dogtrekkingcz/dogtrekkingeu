@@ -1,8 +1,7 @@
-﻿using Mapster;
-using DogtrekkingCz.Shared.Entities;
-using DogtrekkingCzShared.Entities;
+﻿using DogtrekkingCzShared.Entities;
+using Mapster;
 
-namespace DogtrekkingCz.Shared.Mapping
+namespace DogtrekkingCzShared.Mapping
 {
     public static class SharedMappingActionRights
     {

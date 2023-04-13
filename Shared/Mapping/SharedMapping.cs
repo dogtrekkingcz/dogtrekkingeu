@@ -1,8 +1,6 @@
 ﻿using Mapster;
-using DogtrekkingCz.Shared.Entities;
-using DogtrekkingCz.Shared.Extensions;
 
-namespace DogtrekkingCz.Shared.Mapping
+namespace DogtrekkingCzShared.Mapping
 {
     public static class SharedMapping
     {

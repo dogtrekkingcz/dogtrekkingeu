@@ -1,8 +1,8 @@
-﻿using Mapster;
-using DogtrekkingCz.Shared.Entities;
-using DogtrekkingCz.Shared.Extensions;
+﻿using DogtrekkingCzShared.Entities;
+using DogtrekkingCzShared.Extensions;
+using Mapster;
 
-namespace DogtrekkingCz.Shared.Mapping
+namespace DogtrekkingCzShared.Mapping
 {
     public static class SharedMappingDog
     {
@@ -10,8 +10,8 @@ namespace DogtrekkingCz.Shared.Mapping
         {
             typeAdapterConfig.NewConfig<DogDto, Protos.Shared.Dog>()
                 .IgnoreNullValues(true)
-                .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime())
-                .Map(d => d.Decease, s => s.Decease.Value.ToGoogleDateTime());
+                .Map(d => d.Birthday, s => (Google.Type.DateTime) s.Birthday.ToGoogleDateTime())
+                .Map(d => d.Decease, s => (Google.Type.DateTime) s.Decease.Value.ToGoogleDateTime());
 
             typeAdapterConfig.NewConfig<Protos.Shared.Dog, DogDto>()
                 .IgnoreNullValues(true)
@@ -21,8 +21,8 @@ namespace DogtrekkingCz.Shared.Mapping
             // -----------
 
             typeAdapterConfig.NewConfig<DogDto.VaccinationDto, Protos.Shared.Vaccination>()
-                .Map(d => d.Date, s => s.Date.ToGoogleDateTime())
-                .Map(d => d.ValidUntil, s => s.ValidUntil.ToGoogleDateTime());
+                .Map(d => d.Date, s => (Google.Type.DateTime) s.Date.ToGoogleDateTime())
+                .Map(d => d.ValidUntil, s => (Google.Type.DateTime) s.ValidUntil.ToGoogleDateTime());
 
             typeAdapterConfig.NewConfig<Protos.Shared.Vaccination, DogDto.VaccinationDto>()
                 .Map(d => d.Date, s => s.Date.ToDateTimeOffset())
