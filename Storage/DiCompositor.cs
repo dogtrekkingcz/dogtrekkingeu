@@ -15,6 +15,7 @@ using Storage.Models;
 using Storage.Services.Repositories.ActionRights;
 using Storage.Services.Repositories.AuthorizationRoles;
 using Storage.Seed;
+using Storage.Services.Repositories.Entries;
 
 namespace DogtrekkingCz.Storage;
 
@@ -48,7 +49,8 @@ public static class DiCompositor
             .AddSingleton<IStorageService<DogRecord>, StorageService<DogRecord>>()
             .AddScoped<IDogsRepositoryService, DogsRepositoryService>()
             .AddSingleton<IStorageService<AuthorizationRoleRecord>, StorageService<AuthorizationRoleRecord>>()
-            .AddScoped<IAuthorizationRolesService, AuthorizationRolesService>();
+            .AddScoped<IAuthorizationRolesService, AuthorizationRolesService>()
+            .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>();
 
 
         typeAdapterConfig

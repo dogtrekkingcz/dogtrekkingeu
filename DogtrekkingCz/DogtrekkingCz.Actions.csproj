@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DogtrekkingCz.Interfaces\DogtrekkingCz.Interfaces.Actions.csproj" />
+    <ProjectReference Include="..\DogtrekkingCz.Interfaces\DogtrekkingCz.Actions.Interface.csproj" />
     <ProjectReference Include="..\Shared\DogtrekkingCzShared.csproj" />
     <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>
