@@ -19,6 +19,9 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
     }
     public async Task<T> AddAsync(T request, CancellationToken cancellationToken)
     {
+        if (string.IsNullOrEmpty(request.Id))
+            request.Id = Guid.NewGuid().ToString();
+        
         await _collection.InsertOneAsync(request, cancellationToken: cancellationToken);
 
         return request;

@@ -9,6 +9,7 @@ namespace DogtrekkingCzWebApiService.Validators
         {
             services.AddSingleton<IPipelineBehavior<ActionDetailRequest, ActionDetailResponse>, ActionDetailValidator>();
             services.AddSingleton<IPipelineBehavior<CreateEntryRequest, CreateEntryResponse>, CreateEntryValidator>();
+            services.AddSingleton<IPipelineBehavior<GetEntriesByActionRequest, GetEntriesByActionResponse>, GetEntriesByActionValidator>();
 
             return services;
         }

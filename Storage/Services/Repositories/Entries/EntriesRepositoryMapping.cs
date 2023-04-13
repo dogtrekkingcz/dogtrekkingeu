@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using DogtrekkingCzShared.Entities;
+using Mapster;
 using Storage.Entities.Entries;
 using Storage.Models;
 
@@ -8,8 +9,11 @@ namespace Storage.Services.Repositories.Entries
     {
         internal static TypeAdapterConfig AddEntriesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateEntryStorageRequest, EntryRecord>()
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, EntryRecord>()
                 .Ignore(d => d.Id);
+
+            typeAdapterConfig.NewConfig<EntryRecord, EntryDto>()
+                .TwoWays();
 
             return typeAdapterConfig;
         }

@@ -2,7 +2,7 @@
 
 public sealed record CreateEntryResponse
 {
-    public Guid Id { get; init; }
+    public string Id { get; init; }
     
     public CreateEntryResponse(DogtrekkingCz.Entries.Interface.Entities.CreateEntryResponse response)
     {

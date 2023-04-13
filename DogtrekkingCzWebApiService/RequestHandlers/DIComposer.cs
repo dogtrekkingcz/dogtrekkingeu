@@ -1,5 +1,8 @@
-﻿using DogtrekkingCzShared.Entities;
+﻿using System.Runtime.CompilerServices;
+using DogtrekkingCzShared.Entities;
 using DogtrekkingCzWebApiService.Entities;
+using DogtrekkingCzWebApiService.RequestHandlers.Actions;
+using DogtrekkingCzWebApiService.RequestHandlers.Entries;
 using Google.Protobuf.Collections;
 using Mapster;
 using Mediator;
@@ -13,9 +16,11 @@ namespace DogtrekkingCzWebApiService.RequestHandlers
             return services;
         }
 
-        internal static TypeAdapterConfig AddActionsMapping(this TypeAdapterConfig typeAdapterConfig)
+        public static TypeAdapterConfig AddMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<ActionDetailRequest, DogtrekkingCz.Interfaces.Actions.Entities.ActionDetailRequest>();
+            typeAdapterConfig
+                .AddActionsMapping()
+                .AddEntriesMapping();
 
             return typeAdapterConfig;
         }

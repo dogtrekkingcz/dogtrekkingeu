@@ -23,5 +23,14 @@ namespace DogtrekkingCzWebApiService.Controllers
 
             return Ok(createEntryResponse);
         }
+
+        [HttpGet]
+        [Route("{actionId}")]
+        public async Task<IActionResult> GetEntriesByAction(string actionId)
+        {
+            var getEntriesByActionResponse = await _mediator.Send(new GetEntriesByActionRequest { ActionId = actionId });
+
+            return Ok(getEntriesByActionResponse);
+        }
     }
 }

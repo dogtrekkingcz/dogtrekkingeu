@@ -41,16 +41,22 @@ public static class DiCompositor
 
             .AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>()
             .AddScoped<IActionsRepositoryService, ActionsRepositoryService>()
+            
             .AddSingleton<IStorageService<ActionRightsRecord>, StorageService<ActionRightsRecord>>()
             .AddScoped<IActionRightsRepositoryService, ActionRightsRepositoryService>()
+            
             .AddSingleton<IStorageService<UserProfileRecord>, StorageService<UserProfileRecord>>()
             .AddScoped<IUserProfilesRepositoryService, UserProfilesRepositoryService>()
+            
             .AddSingleton<IStorageService<DogRecord>, StorageService<DogRecord>>()
             .AddScoped<IDogsRepositoryService, DogsRepositoryService>()
+            
             .AddSingleton<IStorageService<AuthorizationRoleRecord>, StorageService<AuthorizationRoleRecord>>()
             .AddScoped<IAuthorizationRolesService, AuthorizationRolesService>()
+            
+            .AddSingleton<IStorageService<EntryRecord>, StorageService<EntryRecord>>()
             .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>();
-
+            
 
         typeAdapterConfig
             .AddSharedMapping()

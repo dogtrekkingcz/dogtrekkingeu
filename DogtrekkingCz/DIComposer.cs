@@ -15,8 +15,7 @@ namespace DogtrekkingCz.Actions
         {
             services
                 .AddScoped<IJwtTokenService, JwtTokenService>()
-                .AddScoped<JwtTokenInterceptor>()
-                .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig);
+                .AddScoped<JwtTokenInterceptor>();
 
             services.AddScoped<IActionsService, ActionsService>();
 

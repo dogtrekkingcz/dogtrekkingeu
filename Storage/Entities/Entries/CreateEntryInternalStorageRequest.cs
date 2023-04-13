@@ -2,7 +2,7 @@
 
 namespace Storage.Entities.Entries;
 
-public sealed record CreateEntryStorageRequest : EntryDto
+public sealed record CreateEntryInternalStorageRequest : EntryDto
 {
     
 }

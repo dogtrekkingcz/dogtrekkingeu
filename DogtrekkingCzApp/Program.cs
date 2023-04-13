@@ -46,7 +46,8 @@ var typeAdapterConfig = new TypeAdapterConfig
 typeAdapterConfig
     .AddSharedMapping()
     .AddActionModelMapping()
-    .AddUserProfileModelMapping();
+    .AddUserProfileModelMapping()
+    .AddEntryModelMapping();
     
 builder.Services
     .AddSingleton(typeAdapterConfig)

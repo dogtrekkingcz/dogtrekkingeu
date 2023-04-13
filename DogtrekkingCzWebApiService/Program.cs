@@ -2,8 +2,11 @@ using DogtrekkingCz.Actions;
 using DogtrekkingCz.Entries;
 using DogtrekkingCzShared;
 using DogtrekkingCzWebApiService.RequestHandlers;
+using DogtrekkingCzWebApiService.RequestHandlers.Entries;
 using DogtrekkingCzWebApiService.Validators;
 using Mapster;
+using Storage;
+using Storage.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +25,12 @@ var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
 };
 
 builder.Services.AddDogtrekkingCzShared(out typeAdapterConfig, options);
+
+builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig);
 builder.Services.AddActions(typeAdapterConfig, options);
 builder.Services.AddEntries(typeAdapterConfig, options);
 
-typeAdapterConfig.AddActionsMapping();
+typeAdapterConfig.AddMapping();
 
 var app = builder.Build();
 

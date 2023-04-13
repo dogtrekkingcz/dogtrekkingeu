@@ -1,26 +1,40 @@
-﻿using MapsterMapper;
+﻿using DogtrekkingCzShared.Entities;
+using MapsterMapper;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
+using Storage.Models;
 
 namespace Storage.Services.Repositories.Entries;
 
 internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 {
     private readonly IMapper _mapper;
-    private readonly IEntriesRepositoryService _entriesRepositoryService;
+    private readonly IStorageService<EntryRecord> _entriesStorageService;
     
-    public EntriesRepositoryService(IMapper mapper, IEntriesRepositoryService entriesRepositoryService)
+    public EntriesRepositoryService(IMapper mapper, IStorageService<EntryRecord> entriesStorageService)
     {
         _mapper = mapper;
-        _entriesRepositoryService = entriesRepositoryService;
+        _entriesStorageService = entriesStorageService;
     }
     
-    public async Task<CreateEntryStorageResponse> CreateEntryAsync(CreateEntryStorageRequest request, CancellationToken cancellationToken)
+    public async Task<CreateEntryInternalStorageResponse> CreateEntryAsync(CreateEntryInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        var createEntryRequest = _mapper.Map<CreateEntryStorageRequest>(request);
+        var entryRecord = _mapper.Map<EntryRecord>(request);
         
-        var createdEntry = await _entriesRepositoryService.CreateEntryAsync(createEntryRequest, cancellationToken);
+        var createdEntry = await _entriesStorageService.AddAsync(entryRecord, cancellationToken);
         
-        return await Task.FromResult(new CreateEntryStorageResponse { Id = Guid.NewGuid() });
+        return new CreateEntryInternalStorageResponse { Id = createdEntry.Id };
+    }
+
+    public async Task<GetEntriesByActionInternalStorageResponse> GetEntriesByActionAsync(GetEntriesByActionInternalStorageRequest request, CancellationToken cancellationToken)
+    {
+        var entries = await _entriesStorageService.GetByFilterAsync(new List<(string, string)> { ("ActionId", request.ActionId)}, cancellationToken);
+
+        var response = new GetEntriesByActionInternalStorageResponse
+        {
+            Entries = _mapper.Map<List<EntryDto>>(entries)
+        };
+
+        return response;
     }
 }

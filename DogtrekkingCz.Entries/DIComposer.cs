@@ -1,10 +1,13 @@
-﻿using DogtrekkingCz.Entries.Interface.Services;
+﻿using DogtrekkingCz.Entries.Interface.Entities;
+using DogtrekkingCz.Entries.Interface.Services;
+using DogtrekkingCzShared.Entities;
 using DogtrekkingCzShared.Interceptors;
 using DogtrekkingCzShared.JwtToken;
 using DogtrekkingCzShared.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Storage;
+using Storage.Entities.Entries;
 using Storage.Options;
 
 namespace DogtrekkingCz.Entries
@@ -15,10 +18,15 @@ namespace DogtrekkingCz.Entries
         {
             services
                 .AddScoped<IJwtTokenService, JwtTokenService>()
-                .AddScoped<JwtTokenInterceptor>()
-                .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig);
+                .AddScoped<JwtTokenInterceptor>();
 
             services.AddScoped<IEntriesService, EntriesService>();
+
+            typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse, GetEntriesByActionResponse>();
+            typeAdapterConfig.NewConfig<GetEntriesByActionRequest, GetEntriesByActionInternalStorageRequest>();
+
+            typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageResponse, CreateEntryResponse>();
 
             return services;
         }
