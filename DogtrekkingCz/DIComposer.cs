@@ -1,11 +1,11 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Services;
-using DogtrekkingCz.Storage;
 using DogtrekkingCzShared.Interceptors;
 using DogtrekkingCzShared.JwtToken;
 using DogtrekkingCzShared.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using Storage.Interfaces.Options;
+using Storage;
+using Storage.Options;
 
 namespace DogtrekkingCz.Actions
 {

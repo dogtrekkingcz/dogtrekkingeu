@@ -1,9 +1,9 @@
-﻿using DogtrekkingCz.Storage.Models;
-using DogtrekkingCzShared.Entities;
+﻿using DogtrekkingCzShared.Entities;
 using Mapster;
 using Storage.Entities.Actions;
+using Storage.Models;
 
-namespace Storage.Services.Repositories
+namespace Storage.Services.Repositories.Actions
 {
     internal static class ActionRepositoryMapping
     {

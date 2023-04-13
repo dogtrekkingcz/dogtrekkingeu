@@ -2,7 +2,7 @@
 using Storage.Entities.Dogs;
 using Storage.Models;
 
-namespace Storage.Services.Repositories
+namespace Storage.Services.Repositories.Dogs
 {
     internal static class DogsRepositoryMapping
     {

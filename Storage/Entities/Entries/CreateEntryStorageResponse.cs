@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCz.Storage.Entities.Entries;
+﻿namespace Storage.Entities.Entries;
 
 public sealed record CreateEntryStorageResponse
 {

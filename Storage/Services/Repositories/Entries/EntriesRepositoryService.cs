@@ -1,5 +1,5 @@
-﻿using DogtrekkingCz.Storage.Entities.Entries;
-using MapsterMapper;
+﻿using MapsterMapper;
+using Storage.Entities.Entries;
 using Storage.Interfaces;
 
 namespace Storage.Services.Repositories.Entries;

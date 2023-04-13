@@ -1,8 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Storage.Interfaces.Options;
-
-namespace Storage.Interfaces.Services;
+﻿namespace Storage.Interfaces;
 
 public interface IInitializeService
 {

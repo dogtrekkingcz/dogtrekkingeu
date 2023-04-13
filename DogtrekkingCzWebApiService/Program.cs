@@ -1,4 +1,5 @@
 using DogtrekkingCz.Actions;
+using DogtrekkingCz.Entries;
 using DogtrekkingCzShared;
 using DogtrekkingCzWebApiService.RequestHandlers;
 using DogtrekkingCzWebApiService.Validators;
@@ -22,6 +23,7 @@ var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
 
 builder.Services.AddDogtrekkingCzShared(out typeAdapterConfig, options);
 builder.Services.AddActions(typeAdapterConfig, options);
+builder.Services.AddEntries(typeAdapterConfig, options);
 
 typeAdapterConfig.AddActionsMapping();
 

@@ -1,13 +1,13 @@
-﻿using Grpc.Core;
+﻿using DogtrekkingCzGRPCService.Services.Actions;
 using Google.Protobuf.Collections;
+using Grpc.Core;
 using MapsterMapper;
 using Protos.Authorization;
-using DogtrekkingCzGRPCService.Services.JwtToken;
 using Storage.Interfaces;
 
-namespace DogtrekkingCzGRPCService.Services;
+namespace DogtrekkingCzGRPCService.Services.Authorization;
 
-internal class AuthorizationService : Authorization.AuthorizationBase
+internal class AuthorizationService : Protos.Authorization.Authorization.AuthorizationBase
 {
     private readonly ILogger<ActionsService> _logger;
     private readonly IMapper _mapper;

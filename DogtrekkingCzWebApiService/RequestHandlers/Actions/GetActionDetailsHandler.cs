@@ -3,7 +3,7 @@ using DogtrekkingCzWebApiService.Entities;
 using MapsterMapper;
 using Mediator;
 
-namespace DogtrekkingCzWebApiService.RequestHandlers
+namespace DogtrekkingCzWebApiService.RequestHandlers.Actions
 {
     public sealed class GetActionDetailsHandler : IRequestHandler<ActionDetailRequest, ActionDetailResponse>
     {

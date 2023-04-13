@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCz.Storage.Entities.UserProfiles;
+﻿namespace Storage.Entities.UserProfiles;
 
 public sealed record UpdateUserProfileResponse
 {

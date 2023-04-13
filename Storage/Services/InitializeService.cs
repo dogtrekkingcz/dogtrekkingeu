@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Storage.Interfaces.Options;
-using Storage.Interfaces.Services;
+using Storage.Interfaces;
+using Storage.Options;
 
 namespace Storage.Services;
 

@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DogtrekkingCz.Entries\DogtrekkingCz.Entries.csproj" />
     <ProjectReference Include="..\DogtrekkingCz.Interfaces\DogtrekkingCz.Actions.Interface.csproj" />
     <ProjectReference Include="..\DogtrekkingCz\DogtrekkingCz.Actions.csproj" />
     <ProjectReference Include="..\Shared\DogtrekkingCzShared.csproj" />

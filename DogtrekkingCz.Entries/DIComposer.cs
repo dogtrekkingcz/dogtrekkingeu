@@ -1,17 +1,17 @@
 ﻿using DogtrekkingCz.Entries.Interface.Services;
-using DogtrekkingCz.Storage;
 using DogtrekkingCzShared.Interceptors;
 using DogtrekkingCzShared.JwtToken;
 using DogtrekkingCzShared.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using Storage.Interfaces.Options;
+using Storage;
+using Storage.Options;
 
 namespace DogtrekkingCz.Entries
 {
     public static class DIComposer
     {
-        public static IServiceCollection AddActions(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
+        public static IServiceCollection AddEntries(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
         {
             services
                 .AddScoped<IJwtTokenService, JwtTokenService>()

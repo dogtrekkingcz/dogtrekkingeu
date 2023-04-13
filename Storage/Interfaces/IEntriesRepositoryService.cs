@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Storage.Entities.Entries;
+﻿using Storage.Entities.Entries;
 
 namespace Storage.Interfaces;
 

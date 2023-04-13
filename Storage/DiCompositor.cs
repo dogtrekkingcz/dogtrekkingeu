@@ -1,23 +1,22 @@
-﻿using DogtrekkingCz.Storage.Models;
-using DogtrekkingCzShared.Mapping;
+﻿using DogtrekkingCzShared.Mapping;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Storage.Interfaces.Options;
-using Storage.Interfaces.Services;
-using Storage.Services;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Storage.Interfaces;
-using Storage.Services.Repositories;
-using MapsterMapper;
 using Storage.Models;
-using Storage.Services.Repositories.ActionRights;
-using Storage.Services.Repositories.AuthorizationRoles;
+using Storage.Options;
 using Storage.Seed;
+using Storage.Services;
+using Storage.Services.Repositories.ActionRights;
+using Storage.Services.Repositories.Actions;
+using Storage.Services.Repositories.AuthorizationRoles;
+using Storage.Services.Repositories.Dogs;
 using Storage.Services.Repositories.Entries;
+using Storage.Services.Repositories.UserProfiles;
 
-namespace DogtrekkingCz.Storage;
+namespace Storage;
 
 public static class DiCompositor
 {

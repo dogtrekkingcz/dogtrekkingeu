@@ -1,6 +1,6 @@
 ﻿using DogtrekkingCz.Entries.Interface.Entities;
 using DogtrekkingCz.Entries.Interface.Services;
-using DogtrekkingCz.Storage.Entities.Entries;
+using Storage.Entities.Entries;
 using Storage.Interfaces;
 
 namespace DogtrekkingCz.Entries

@@ -1,5 +1,4 @@
-﻿using DogtrekkingCz.Storage.Models;
-using DogtrekkingCzShared.Entities;
+﻿using DogtrekkingCzShared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

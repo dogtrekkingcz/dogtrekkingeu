@@ -1,8 +1,9 @@
 using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using DogtrekkingCzApp;
-using DogtrekkingCzApp.Interfaces;
+using DogtrekkingCzApp.Extensions;
 using DogtrekkingCzApp.Models;
+using DogtrekkingCzApp.Providers;
 using DogtrekkingCzShared.Mapping;
 using Google.Protobuf.Collections;
 using Grpc.Core;

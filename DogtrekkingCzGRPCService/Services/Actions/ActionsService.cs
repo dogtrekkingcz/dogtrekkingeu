@@ -1,18 +1,18 @@
-using Grpc.Core;
+using DogtrekkingCzGRPCService.Services.JwtToken;
+using DogtrekkingCzShared.Entities;
+using DogtrekkingCzShared.Testable;
 using Google.Protobuf.Collections;
+using Grpc.Core;
 using MapsterMapper;
 using Protos.Actions;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
 using GetActionRequest = Storage.Entities.Actions.GetActionRequest;
-using DogtrekkingCzGRPCService.Services.JwtToken;
-using DogtrekkingCzShared.Entities;
-using DogtrekkingCzShared.Testable;
 
-namespace DogtrekkingCzGRPCService.Services;
+namespace DogtrekkingCzGRPCService.Services.Actions;
 
-internal class ActionsService : Actions.ActionsBase, ITestableService
+internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableService
 {
     private readonly ILogger<ActionsService> _logger;
     private readonly IMapper _mapper;

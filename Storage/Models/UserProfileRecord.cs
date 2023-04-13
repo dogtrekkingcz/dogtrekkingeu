@@ -1,6 +1,6 @@
 ﻿using DogtrekkingCzShared.Entities;
 
-namespace DogtrekkingCz.Storage.Models;
+namespace Storage.Models;
 
 internal sealed record UserProfileRecord : UserProfileDto, IRecord
 {

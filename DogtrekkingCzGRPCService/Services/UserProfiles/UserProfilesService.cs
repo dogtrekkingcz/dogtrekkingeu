@@ -1,15 +1,15 @@
-using DogtrekkingCz.Storage.Entities.UserProfiles;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Shared;
-using Protos.UserProfiles;
+using Storage.Entities.UserProfiles;
 using Storage.Interfaces;
+using GetUserProfileRequest = Storage.Entities.UserProfiles.GetUserProfileRequest;
 using GetUserProfileResponse = Protos.UserProfiles.GetUserProfileResponse;
-using UpdateUserProfileRequest = DogtrekkingCz.Storage.Entities.UserProfiles.UpdateUserProfileRequest;
+using UpdateUserProfileRequest = Storage.Entities.UserProfiles.UpdateUserProfileRequest;
 
-namespace DogtrekkingCzGRPCService.Services;
+namespace DogtrekkingCzGRPCService.Services.UserProfiles;
 
-public class UserProfilesService : UserProfiles.UserProfilesBase
+public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfilesBase
 {
     private readonly ILogger<UserProfilesService> _logger;
     private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ public class UserProfilesService : UserProfiles.UserProfilesBase
     
     public async override Task<Protos.UserProfiles.GetUserProfileResponse> getUserProfile(Protos.UserProfiles.GetUserProfileRequest request, ServerCallContext context)
     {
-        var getUserProfileRequest = _mapper.Map<DogtrekkingCz.Storage.Entities.UserProfiles.GetUserProfileRequest>(request);
+        var getUserProfileRequest = _mapper.Map<GetUserProfileRequest>(request);
         var getUserProfileResponse = await _userProfilesRepositoryService.GetUserProfileAsync(getUserProfileRequest, context.CancellationToken);
 
         if (getUserProfileResponse == null)

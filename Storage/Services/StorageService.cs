@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using DogtrekkingCz.Storage.Models;
 using Google.Protobuf.WellKnownTypes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Storage.Entities.Actions;
-using Storage.Interfaces.Services;
+using Storage.Interfaces;
+using Storage.Models;
 
 namespace Storage.Services;
 

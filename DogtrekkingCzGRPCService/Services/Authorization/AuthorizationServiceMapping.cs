@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using DogtrekkingCzShared.Entities;
+﻿using DogtrekkingCzShared.Entities;
 using Google.Protobuf.Collections;
 using Mapster;
 using Storage.Entities.Actions;
@@ -7,10 +6,9 @@ using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
 using GetActionRequest = Storage.Entities.Actions.GetActionRequest;
 using GetActionResponse = Storage.Entities.Actions.GetActionResponse;
 using GetAllActionsResponse = Storage.Entities.Actions.GetAllActionsResponse;
-using UpdateActionRequest = Storage.Entities.Actions.UpdateActionRequest;
 using UpdateActionResponse = Storage.Entities.Actions.UpdateActionResponse;
 
-namespace DogtrekkingCzGRPCService.Services;
+namespace DogtrekkingCzGRPCService.Services.Authorization;
 
 internal static class AuthorizationServiceMapping
 {

@@ -1,6 +1,6 @@
-﻿using DogtrekkingCz.Storage.Models;
+﻿using Storage.Models;
 
-namespace Storage.Interfaces.Services;
+namespace Storage.Interfaces;
 
 internal interface IStorageService<T> where T: IRecord
 {

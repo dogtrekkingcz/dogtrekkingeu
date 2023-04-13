@@ -1,7 +1,7 @@
 ﻿using DogtrekkingCz.Entries.Interface.Entities;
 using Mapster;
 
-namespace DogtrekkingCzGRPCService.Services;
+namespace DogtrekkingCzGRPCService.Services.Entries;
 
 internal static class EntriesServiceMapping
 {

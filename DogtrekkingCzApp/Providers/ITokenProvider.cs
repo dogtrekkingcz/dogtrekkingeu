@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCzApp.Interfaces;
+﻿namespace DogtrekkingCzApp.Providers;
 
 public interface ITokenProvider
 {

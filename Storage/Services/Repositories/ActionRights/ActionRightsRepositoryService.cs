@@ -1,7 +1,6 @@
 ﻿using MapsterMapper;
 using Storage.Entities.ActionRights;
 using Storage.Interfaces;
-using Storage.Interfaces.Services;
 using Storage.Models;
 
 namespace Storage.Services.Repositories.ActionRights

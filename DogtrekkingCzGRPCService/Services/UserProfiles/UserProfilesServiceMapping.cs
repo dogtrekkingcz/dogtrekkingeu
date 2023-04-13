@@ -1,10 +1,8 @@
-﻿using System.Globalization;
-using System.Xml;
-using DogtrekkingCz.Storage.Entities.UserProfiles;
-using DogtrekkingCzShared.Extensions;
+﻿using DogtrekkingCzShared.Extensions;
 using Mapster;
+using Storage.Entities.UserProfiles;
 
-namespace DogtrekkingCzGRPCService.Services;
+namespace DogtrekkingCzGRPCService.Services.UserProfiles;
 
 internal static class UserProfilesServiceMapping
 {

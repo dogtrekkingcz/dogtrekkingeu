@@ -1,12 +1,10 @@
-﻿using DogtrekkingCz.Storage.Models;
-using DogtrekkingCzShared.Entities;
+﻿using DogtrekkingCzShared.Entities;
 using MapsterMapper;
-using MongoDB.Bson;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
-using Storage.Interfaces.Services;
+using Storage.Models;
 
-namespace Storage.Services.Repositories
+namespace Storage.Services.Repositories.Actions
 {
     internal class ActionsRepositoryService : IActionsRepositoryService
     {

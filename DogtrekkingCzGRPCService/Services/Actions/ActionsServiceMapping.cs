@@ -2,7 +2,7 @@
 using Google.Protobuf.Collections;
 using Mapster;
 
-namespace DogtrekkingCzGRPCService.Services;
+namespace DogtrekkingCzGRPCService.Services.Actions;
 
 internal static class ActionsServiceMapping
 {

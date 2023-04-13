@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Storage.Entities.UserProfiles;
+﻿using Storage.Entities.UserProfiles;
 
 namespace Storage.Interfaces
 {

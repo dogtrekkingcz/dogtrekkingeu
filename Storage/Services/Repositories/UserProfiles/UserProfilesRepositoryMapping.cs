@@ -1,9 +1,8 @@
-﻿using DogtrekkingCz.Storage.Entities.UserProfiles;
-using DogtrekkingCz.Storage.Models;
-using Mapster;
-using Storage.Entities.Actions;
+﻿using Mapster;
+using Storage.Entities.UserProfiles;
+using Storage.Models;
 
-namespace Storage.Services.Repositories
+namespace Storage.Services.Repositories.UserProfiles
 {
     internal static class UserProfilesRepositoryMapping
     {

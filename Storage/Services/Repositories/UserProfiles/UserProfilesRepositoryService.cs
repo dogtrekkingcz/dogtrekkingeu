@@ -1,12 +1,10 @@
-﻿using DogtrekkingCz.Storage.Entities.UserProfiles;
-using DogtrekkingCz.Storage.Models;
-using MapsterMapper;
+﻿using MapsterMapper;
 using MongoDB.Bson;
-using Storage.Entities.Actions;
+using Storage.Entities.UserProfiles;
 using Storage.Interfaces;
-using Storage.Interfaces.Services;
+using Storage.Models;
 
-namespace Storage.Services.Repositories
+namespace Storage.Services.Repositories.UserProfiles
 {
     internal class UserProfilesRepositoryService : IUserProfilesRepositoryService
     {

@@ -1,4 +1,4 @@
-﻿namespace Storage.Interfaces.Options;
+﻿namespace Storage.Options;
 
 public sealed record StorageOptions
 {

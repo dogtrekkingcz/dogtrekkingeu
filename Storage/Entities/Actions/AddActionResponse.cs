@@ -1,5 +1,4 @@
-﻿using DogtrekkingCz.Storage.Models;
-using static Storage.Entities.Actions.AddActionRequest;
+﻿using static Storage.Entities.Actions.AddActionRequest;
 
 namespace Storage.Entities.Actions;
 

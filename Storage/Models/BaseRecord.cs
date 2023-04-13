@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace DogtrekkingCz.Storage.Models;
+namespace Storage.Models;
 
 internal record BaseRecord
 {

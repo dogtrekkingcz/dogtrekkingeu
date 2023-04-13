@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-namespace DogtrekkingCzApp.Interfaces;
+namespace DogtrekkingCzApp.Providers;
 
 public class AppTokenProvider : ITokenProvider
 {

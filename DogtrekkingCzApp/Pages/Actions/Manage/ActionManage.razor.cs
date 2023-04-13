@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCzApp.Pages;
+﻿namespace DogtrekkingCzApp.Pages.Actions.Manage;
 
 public enum RequiredActionEnum
 {

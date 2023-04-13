@@ -1,8 +1,8 @@
-﻿using DogtrekkingCz.Storage.Entities.Entries;
-using Mapster;
+﻿using Mapster;
+using Storage.Entities.Entries;
 using Storage.Models;
 
-namespace Storage.Services.Repositories
+namespace Storage.Services.Repositories.Entries
 {
     internal static class EntriesRepositoryMapping
     {

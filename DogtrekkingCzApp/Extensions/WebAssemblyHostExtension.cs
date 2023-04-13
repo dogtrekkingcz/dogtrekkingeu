@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
 
+namespace DogtrekkingCzApp.Extensions;
+
 public static class WebAssemblyHostExtension
 {
     public async static Task SetDefaultCulture(this WebAssemblyHost host)
