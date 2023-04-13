@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DogtrekkingCz.Entries\DogtrekkingCz.Entries.csproj" />
       <ProjectReference Include="..\DogtrekkingCzProtos\DogtrekkingCzProtos.csproj" />
       <ProjectReference Include="..\Shared\DogtrekkingCzShared.csproj" />
       <ProjectReference Include="..\Storage\Storage.csproj" />

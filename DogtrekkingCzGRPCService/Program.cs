@@ -7,6 +7,7 @@ using Mapster;
 using MapsterMapper;
 using Storage.Interfaces.Options;
 using DogtrekkingCzGRPCService.Extensions;
+using DogtrekkingCzGRPCService.Services.Entries;
 using DogtrekkingCzShared.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,7 +49,8 @@ typeAdapterConfig
     .AddSharedMapping()
     .AddAuthorizationServiceMapping()
     .AddActionsServiceMapping()
-    .AddUserProfilesServiceMapping();
+    .AddUserProfilesServiceMapping()
+    .AddEntriesServiceMapping();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {
@@ -78,6 +80,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapGrpcService<ActionsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<UserProfilesService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<AuthorizationService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<EntriesService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 

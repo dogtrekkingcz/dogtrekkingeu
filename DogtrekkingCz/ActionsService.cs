@@ -19,7 +19,7 @@ namespace DogtrekkingCz.Actions
             var actionDetail = await _actionsRepositoryService.GetActionAsync(new GetActionRequest
             {
                 Id = request.Id
-            });
+            }, cancellationToken);
 
             return new ActionDetailResponse();
         }

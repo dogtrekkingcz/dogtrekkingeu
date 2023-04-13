@@ -20,11 +20,11 @@ namespace Storage.Services.Repositories
             _dogStorageService = dogsStorageService;
         }
 
-        public async Task<AddDogResponse> AddDogAsync(AddDogRequest request)
+        public async Task<AddDogResponse> AddDogAsync(AddDogRequest request, CancellationToken cancellationToken)
         {
             var addRequest = _mapper.Map<DogRecord>(request);
             
-            var addedActionRecord = await _dogStorageService.AddAsync(addRequest);
+            var addedActionRecord = await _dogStorageService.AddAsync(addRequest, cancellationToken);
 
             var response = new AddDogResponse
             {
@@ -34,7 +34,7 @@ namespace Storage.Services.Repositories
             return response;
         }
 
-        public async Task<UpdateDogResponse> UpdateDogAsync(UpdateDogRequest request)
+        public async Task<UpdateDogResponse> UpdateDogAsync(UpdateDogRequest request, CancellationToken cancellationToken)
         {
             Console.WriteLine(request.ToJson());
             
@@ -42,7 +42,7 @@ namespace Storage.Services.Repositories
             
             Console.WriteLine(updateRequest);
             
-            var result = await _dogStorageService.UpdateAsync(updateRequest);
+            var result = await _dogStorageService.UpdateAsync(updateRequest, cancellationToken);
 
             return new UpdateDogResponse
             {
@@ -50,17 +50,17 @@ namespace Storage.Services.Repositories
             };
         }
 
-        public async Task DeleteDogAsync(DeleteDogRequest request)
+        public async Task DeleteDogAsync(DeleteDogRequest request, CancellationToken cancellationToken)
         {
             var deleteRequest = _mapper.Map<DogRecord>(request);
 
-            await _dogStorageService.DeleteAsync(deleteRequest);
+            await _dogStorageService.DeleteAsync(deleteRequest, cancellationToken);
         }
 
-        public async Task<GetDogResponse> GetDogAsync(GetDogRequest request)
+        public async Task<GetDogResponse> GetDogAsync(GetDogRequest request, CancellationToken cancellationToken)
         {
             var filter = new List<(string key, string value)> { ("Chip", request.Chip) };
-            var result = await _dogStorageService.GetByFilterAsync(filter);
+            var result = await _dogStorageService.GetByFilterAsync(filter, cancellationToken);
 
             if (result == null)
                 return null;

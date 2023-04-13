@@ -19,7 +19,7 @@ namespace Storage.Services.Repositories
             _actionsStorageService = actionsStorageService;
         }
 
-        public async Task<AddActionResponse> AddActionAsync(AddActionRequest request)
+        public async Task<AddActionResponse> AddActionAsync(AddActionRequest request, CancellationToken cancellationToken)
         {
             var addRequest = _mapper.Map<ActionRecord>(request);
 
@@ -28,7 +28,7 @@ namespace Storage.Services.Repositories
                 addRequest.Id = Guid.NewGuid().ToString();
             }
             
-            var addedActionRecord = await _actionsStorageService.AddAsync(addRequest);
+            var addedActionRecord = await _actionsStorageService.AddAsync(addRequest, cancellationToken);
 
             var response = new AddActionResponse
             {
@@ -38,11 +38,11 @@ namespace Storage.Services.Repositories
             return response;
         }
 
-        public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request)
+        public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken)
         {
             var updateRequest = _mapper.Map<ActionRecord>(request);
             
-            var result = await _actionsStorageService.UpdateAsync(updateRequest);
+            var result = await _actionsStorageService.UpdateAsync(updateRequest, cancellationToken);
 
             return new UpdateActionResponse
             {
@@ -50,27 +50,27 @@ namespace Storage.Services.Repositories
             };
         }
 
-        public async Task DeleteActionAsync(DeleteActionRequest request)
+        public async Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken)
         {
             var deleteRequest = _mapper.Map<ActionRecord>(request);
 
-            await _actionsStorageService.DeleteAsync(deleteRequest);
+            await _actionsStorageService.DeleteAsync(deleteRequest, cancellationToken);
         }
 
-        public async Task<GetActionResponse> GetActionAsync(GetActionRequest request)
+        public async Task<GetActionResponse> GetActionAsync(GetActionRequest request, CancellationToken cancellationToken)
         {
             var getRequest = _mapper.Map<ActionRecord>(request);
 
-            var result = await _actionsStorageService.GetAsync(getRequest);
+            var result = await _actionsStorageService.GetAsync(getRequest, cancellationToken);
 
             var response = _mapper.Map<GetActionResponse>(result);
 
             return response;
         }
 
-        public async Task<GetAllActionsResponse> GetAllActionsAsync()
+        public async Task<GetAllActionsResponse> GetAllActionsAsync(CancellationToken cancellationToken)
         {
-            var getAllActions = await _actionsStorageService.GetAllAsync();
+            var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
 
             var actions = new List<ActionDto>();
             foreach (var action in getAllActions
@@ -87,9 +87,9 @@ namespace Storage.Services.Repositories
             return response;
         }
 
-        public async Task<GetAllActionsWithDetailsResponse> GetAllActionsDetailsAsync()
+        public async Task<GetAllActionsWithDetailsResponse> GetAllActionsDetailsAsync(CancellationToken cancellationToken)
         {
-            var getAllActions = await _actionsStorageService.GetAllAsync();
+            var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
 
             var actions = new List<ActionDto>();
             foreach (var action in getAllActions)

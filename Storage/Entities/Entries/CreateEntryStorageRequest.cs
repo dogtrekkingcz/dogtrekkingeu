@@ -1,6 +1,8 @@
-﻿namespace DogtrekkingCz.Storage.Entities.Entries;
+﻿using DogtrekkingCzShared.Entities;
 
-public sealed record CreateEntryStorageRequest
+namespace DogtrekkingCz.Storage.Entities.Entries;
+
+public sealed record CreateEntryStorageRequest : EntryDto
 {
     
 }

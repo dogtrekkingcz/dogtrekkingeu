@@ -1,6 +1,9 @@
-﻿namespace Storage.Models;
+﻿using DogtrekkingCz.Storage.Models;
+using DogtrekkingCzShared.Entities;
 
-internal sealed record EntryRecord
+namespace Storage.Models;
+
+internal sealed record EntryRecord : EntryDto, IRecord
 {
     
 }

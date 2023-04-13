@@ -5,10 +5,10 @@ namespace Storage.Interfaces
 {
     public interface IActionRightsRepositoryService : IRepositoryService
     {
-        Task<AddActionRightsResponse> AddActionRightsAsync(AddActionRightsRequest request);
+        Task<AddActionRightsResponse> AddActionRightsAsync(AddActionRightsRequest request, CancellationToken cancellationToken);
 
-        Task<GetAllRightsResponse> GetAllRightsAsync(GetAllRightsRequest request);
+        Task<GetAllRightsResponse> GetAllRightsAsync(GetAllRightsRequest request, CancellationToken cancellationToken);
 
-        Task DeleteActionRightsAsync(DeleteActionRightsRequest request);
+        Task DeleteActionRightsAsync(DeleteActionRightsRequest request, CancellationToken cancellationToken);
     }
 }

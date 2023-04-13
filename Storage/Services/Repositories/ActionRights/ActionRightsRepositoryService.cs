@@ -17,7 +17,7 @@ namespace Storage.Services.Repositories.ActionRights
             _actionRightsStorageService = actionRigtsStorageService;
         }
 
-        public async Task<AddActionRightsResponse> AddActionRightsAsync(AddActionRightsRequest request)
+        public async Task<AddActionRightsResponse> AddActionRightsAsync(AddActionRightsRequest request, CancellationToken cancellationToken)
         {
             var addRequest = _mapper.Map<ActionRightsRecord>(request);
 
@@ -26,7 +26,7 @@ namespace Storage.Services.Repositories.ActionRights
                 addRequest.Id = Guid.NewGuid().ToString();
             }
 
-            var addedActionRightsRecord = await _actionRightsStorageService.AddAsync(addRequest);
+            var addedActionRightsRecord = await _actionRightsStorageService.AddAsync(addRequest, cancellationToken);
 
             var response = new AddActionRightsResponse
             {
@@ -36,15 +36,15 @@ namespace Storage.Services.Repositories.ActionRights
             return response;
         }
 
-        public Task DeleteActionRightsAsync(DeleteActionRightsRequest request)
+        public Task DeleteActionRightsAsync(DeleteActionRightsRequest request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<GetAllRightsResponse> GetAllRightsAsync(GetAllRightsRequest request)
+        public async Task<GetAllRightsResponse> GetAllRightsAsync(GetAllRightsRequest request, CancellationToken cancellationToken)
         {
             var filter = new List<(string key, string value)> { ("UserId", request.UserId) };
-            var result = await _actionRightsStorageService.GetByFilterAsync(filter);
+            var result = await _actionRightsStorageService.GetByFilterAsync(filter, cancellationToken);
 
             if (result == null)
                 return null;

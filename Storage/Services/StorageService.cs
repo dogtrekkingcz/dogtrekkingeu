@@ -17,41 +17,41 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
     {
         _collection = collection;
     }
-    public async Task<T> AddAsync(T request)
+    public async Task<T> AddAsync(T request, CancellationToken cancellationToken)
     {
-        await _collection.InsertOneAsync(request);
+        await _collection.InsertOneAsync(request, cancellationToken: cancellationToken);
 
         return request;
     }
 
-    public async Task<T> UpdateAsync(T request)
+    public async Task<T> UpdateAsync(T request, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq("Id", request.Id);
         
-        await _collection.ReplaceOneAsync(filter, request);
+        await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
 
         return request;
     }
 
-    public async Task DeleteAsync(T request)
+    public async Task DeleteAsync(T request, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq("Id", request.Id);
         
-        await _collection.DeleteOneAsync(filter);
+        await _collection.DeleteOneAsync(filter, cancellationToken: cancellationToken);
     }
 
-    public async Task<T> GetAsync(T request)
+    public async Task<T> GetAsync(T request, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq("Id", request.Id);
 
         var document = await _collection
             .Find(filter)
-            .FirstAsync();
+            .FirstAsync(cancellationToken: cancellationToken);
 
         return document;
     }
 
-    public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, string value)> filterList)
+    public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, string value)> filterList, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter
             .Eq(filterList[0].key, filterList[0].value);
@@ -63,25 +63,25 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
         var document = await _collection
             .Find(filter)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         return document;
     }
     
-    public async Task<IReadOnlyList<T>> GetAllAsync()
+    public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken)
     {
         var documents = await _collection
             .Find<T>(new BsonDocument())
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         return documents;
     }
     
-    public async Task<IReadOnlyList<T>> GetAllAsync(string[] param)
+    public async Task<IReadOnlyList<T>> GetAllAsync(string[] param, CancellationToken cancellationToken)
     {
         var documents = await _collection.Find<T>(new BsonDocument())
             .Project<T>(Builders<T>.Projection.Include(obj => obj.Id))
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         return documents;
     }

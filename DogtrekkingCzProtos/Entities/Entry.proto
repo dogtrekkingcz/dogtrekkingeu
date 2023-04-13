@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+import "google/type/datetime.proto";
+
+message Entry {
+  string Id = 1;
+  string UserProfileId = 2;
+  string CompetitorId = 3;
+  string Name = 4;
+  string Surname = 5;
+  string Phone = 6;
+  string Email = 7;
+  repeated EntryDog Dogs = 8;
+  repeated string Notes = 9;
+  string ActionId = 10;
+  string RaceId = 11;
+  string CategoryId = 12;
+  google.type.DateTime Created = 13;
+}
+
+message EntryDog {
+  string Id = 1;
+  string Name = 2;
+  string Pedigree = 3;
+  string Chip = 4;
+  google.type.DateTime Birthday = 5;
+}

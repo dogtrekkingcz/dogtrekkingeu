@@ -4,13 +4,19 @@ option csharp_namespace = "Protos.Shared";
 
 package shared;
 
+import "google/type/datetime.proto";
 import "Entities/Category.proto";
+import "Entities/PaymentDefinition.proto";
 
 message RaceDetail {
   string Id = 1;
   string Name = 2;
   double Distance = 3;
   double Incline = 4;
+  google.type.DateTime EnteringFrom = 5;
+  google.type.DateTime EnteringTo = 6;
+  double MaxNumberOfCompetitors = 7;
 
-  repeated shared.Category Categories = 5;
+  repeated shared.Category Categories = 8;
+  repeated shared.PaymentDefinition Payments = 9;
 }

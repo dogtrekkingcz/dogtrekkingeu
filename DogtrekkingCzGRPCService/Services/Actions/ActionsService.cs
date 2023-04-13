@@ -31,7 +31,7 @@ internal class ActionsService : Actions.ActionsBase, ITestableService
 
     public async override Task<Protos.Actions.GetAllActionsResponse> getAllActions(Protos.Actions.GetAllActionsRequest request, ServerCallContext context)
     {
-        var allActions = await _actionRepositoryService.GetAllActionsAsync();
+        var allActions = await _actionRepositoryService.GetAllActionsAsync(context.CancellationToken);
 
         var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionSimple>>(allActions.Actions);
 
@@ -43,7 +43,7 @@ internal class ActionsService : Actions.ActionsBase, ITestableService
     
     public async override Task<Protos.Actions.GetAllActionsDetailsResponse> getAllActionsDetails(Protos.Actions.GetAllActionsDetailsRequest request, ServerCallContext context)
     {
-        var allActions = await _actionRepositoryService.GetAllActionsAsync();
+        var allActions = await _actionRepositoryService.GetAllActionsAsync(context.CancellationToken);
 
         var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionDetail>>(allActions.Actions);
 
@@ -57,7 +57,7 @@ internal class ActionsService : Actions.ActionsBase, ITestableService
     {
         var getActionRequest = _mapper.Map<GetActionRequest>(request);
 
-        var result = await _actionRepositoryService.GetActionAsync(getActionRequest);
+        var result = await _actionRepositoryService.GetActionAsync(getActionRequest, context.CancellationToken);
 
         var response = new Protos.Actions.GetActionResponse
         {
@@ -72,14 +72,14 @@ internal class ActionsService : Actions.ActionsBase, ITestableService
         var addActionRequest = _mapper.Map<AddActionRequest>(request.Action);
         addActionRequest.Id = Guid.NewGuid().ToString();
 
-        var result = await _actionRepositoryService.AddActionAsync(addActionRequest);
+        var result = await _actionRepositoryService.AddActionAsync(addActionRequest, context.CancellationToken);
 
         await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsRequest
         {
             ActionId = result.Id,
             UserId = _jwtTokenService.GetUserId(),
             Roles = new List<string> { AuthorizationRoleDto.RoleType.Owner.ToString() }
-        });
+        }, context.CancellationToken);
 
         var response = _mapper.Map<CreateActionResponse>(result);
 
@@ -90,7 +90,7 @@ internal class ActionsService : Actions.ActionsBase, ITestableService
     {
         var updateActionRequest = _mapper.Map<Storage.Entities.Actions.UpdateActionRequest>(request.Action);
         
-        var result = await _actionRepositoryService.UpdateActionAsync(updateActionRequest);
+        var result = await _actionRepositoryService.UpdateActionAsync(updateActionRequest, context.CancellationToken);
 
         var response = _mapper.Map<Protos.Actions.UpdateActionResponse>(result);
 
@@ -101,7 +101,7 @@ internal class ActionsService : Actions.ActionsBase, ITestableService
     {
         var deleteActionRequest = _mapper.Map<DeleteActionRequest>(request);
 
-        await _actionRepositoryService.DeleteActionAsync(deleteActionRequest);
+        await _actionRepositoryService.DeleteActionAsync(deleteActionRequest, context.CancellationToken);
 
         return new DeleteActionResponse();
     }

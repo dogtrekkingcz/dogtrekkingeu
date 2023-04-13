@@ -57,10 +57,15 @@ public static class DiCompositor
             .AddSharedMapping()
             .AddActionRepositoryMapping()
             .AddActionRightsRepositoryMapping()
-            .AddUserProfilesRepositoryMapping();
+            .AddUserProfilesRepositoryMapping()
+            .AddEntriesRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
         BsonClassMap.RegisterClassMap<UserProfileRecord>();
+        BsonClassMap.RegisterClassMap<EntryRecord>();
+        BsonClassMap.RegisterClassMap<ActionRightsRecord>();
+        BsonClassMap.RegisterClassMap<AuthorizationRoleRecord>();
+        BsonClassMap.RegisterClassMap<DogRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
 
@@ -88,6 +93,10 @@ public static class DiCompositor
         {
             db.CreateCollection("AuthorizationRoles");
         }
+        if (listOfCollections.Contains("Entries") == false)
+        {
+            db.CreateCollection("Entries");
+        }
 
         Console.WriteLine($"MongoDb.DogtrekkingEu.Collections with initialized collections: {db.ListCollectionNames()}");
         
@@ -96,6 +105,7 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IMongoCollection<DogRecord>>(db.GetCollection<DogRecord>("Dogs"));
         serviceProvider.AddSingleton<IMongoCollection<ActionRightsRecord>>(db.GetCollection<ActionRightsRecord>("ActionRights"));
         serviceProvider.AddSingleton<IMongoCollection<AuthorizationRoleRecord>>(db.GetCollection<AuthorizationRoleRecord>("AuthorizationRoles"));
+        serviceProvider.AddSingleton<IMongoCollection<EntryRecord>>(db.GetCollection<EntryRecord>("Entries"));
 
         return serviceProvider;
     }   
