@@ -1,4 +1,5 @@
 ﻿using DogtrekkingCzShared.Entities;
+using DogtrekkingCzShared.Extensions;
 using Mapster;
 
 namespace DogtrekkingCzShared.Mapping
@@ -14,10 +15,20 @@ namespace DogtrekkingCzShared.Mapping
                 .TwoWays();
 
             typeAdapterConfig.NewConfig<EntryDto, Protos.Shared.Entry>()
-                .TwoWays();
+                .IgnoreNullValues(true)
+                .Map(d => d.Created, s => s.Created.ToGoogleTimestamp());
+
+            typeAdapterConfig.NewConfig<Protos.Shared.Entry, EntryDto>()
+                .IgnoreNullValues(true)
+                .Map(d => d.Created, s => s.Created.ToDateTimeOffset());
 
             typeAdapterConfig.NewConfig<EntryDto.DogDto, Protos.Shared.EntryDog>()
-                .TwoWays();
+                .IgnoreNullValues(true)
+                .Map(d => d.Birthday, s => s.Birthday.ToGoogleTimestamp());
+
+            typeAdapterConfig.NewConfig<Protos.Shared.EntryDog, EntryDto.DogDto>()
+                .IgnoreNullValues(true)
+                .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
 
             return typeAdapterConfig;
         }

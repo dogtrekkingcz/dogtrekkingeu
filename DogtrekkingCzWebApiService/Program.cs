@@ -32,6 +32,8 @@ builder.Services
 
 typeAdapterConfig.AddMapping();
 
+typeAdapterConfig.Compile();
+
 var app = builder.Build();
 
 app.UseSwagger();

@@ -1,5 +1,6 @@
 ﻿using DogtrekkingCzShared.Interceptors;
 using DogtrekkingCzShared.JwtToken;
+using DogtrekkingCzShared.Mapping;
 using DogtrekkingCzShared.Options;
 using Google.Protobuf.Collections;
 using Mapster;
@@ -40,6 +41,8 @@ namespace DogtrekkingCzShared
                 {
                     config.AddConsole();
                 });
+
+            typeAdapterConfig.AddSharedMapping();
 
             return services;
         }

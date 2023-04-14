@@ -25,7 +25,7 @@ message CreateEntryResponse {
 }
 
 message GetEntriesByActionRequest {
-  string Id = 1;
+  string ActionId = 1;
 }
 
 message GetEntriesByActionResponse {

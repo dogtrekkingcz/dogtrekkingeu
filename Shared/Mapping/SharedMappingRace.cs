@@ -15,6 +15,8 @@ namespace DogtrekkingCzShared.Mapping
 
             typeAdapterConfig.NewConfig<RaceDto, RaceDto>();
 
+            typeAdapterConfig.NewConfig<RaceDto.PaymentDefinitionDto, RaceDto.PaymentDefinitionDto>();
+
             return typeAdapterConfig;
         }
     }

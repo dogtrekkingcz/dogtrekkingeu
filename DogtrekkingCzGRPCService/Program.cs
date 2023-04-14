@@ -8,7 +8,6 @@ using DogtrekkingCzGRPCService.Services.Entries;
 using DogtrekkingCzGRPCService.Services.UserProfiles;
 using DogtrekkingCzShared;
 using DogtrekkingCzShared.Interceptors;
-using DogtrekkingCzShared.Mapping;
 using Storage;
 using Storage.Options;
 
@@ -35,11 +34,12 @@ builder.Services
     .AddEntries(typeAdapterConfig, options);
 
 typeAdapterConfig
-    .AddSharedMapping()
     .AddAuthorizationServiceMapping()
     .AddActionsServiceMapping()
     .AddUserProfilesServiceMapping()
     .AddEntriesServiceMapping();
+
+typeAdapterConfig.Compile();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {
