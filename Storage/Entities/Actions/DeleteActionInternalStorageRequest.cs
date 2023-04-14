@@ -1,6 +1,6 @@
 ﻿namespace Storage.Entities.Actions;
 
-public sealed record DeleteActionRequest
+public sealed record DeleteActionInternalStorageRequest
 {
     public required string Id { get; set; }
 }

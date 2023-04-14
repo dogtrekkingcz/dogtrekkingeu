@@ -28,6 +28,9 @@ namespace DogtrekkingCz.Entries
             typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageResponse, CreateEntryResponse>();
 
+            typeAdapterConfig.NewConfig<GetAllEntriesRequest, GetAllEntriesInternalStorageRequest>();
+            typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse, GetAllEntriesResponse>();
+
             return services;
         }
     }

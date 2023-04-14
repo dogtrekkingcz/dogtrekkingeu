@@ -1,6 +1,6 @@
 ﻿using DogtrekkingCzShared.Entities;
 
-namespace Storage.Entities.Actions;
+namespace DogtrekkingCz.Interfaces.Actions.Entities;
 
 public sealed record GetAllActionsWithDetailsResponse
 {

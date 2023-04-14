@@ -1,6 +1,6 @@
 ﻿namespace Storage.Entities.Actions;
 
-public sealed record GetActionRequest
+public sealed record GetActionInternalStorageRequest
 {
     public Guid Id { get; set; }
 }

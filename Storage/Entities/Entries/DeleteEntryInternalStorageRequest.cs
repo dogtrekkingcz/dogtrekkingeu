@@ -1,0 +1,8 @@
+﻿using DogtrekkingCzShared.Entities;
+
+namespace Storage.Entities.Entries;
+
+public sealed record DeleteEntryInternalStorageRequest
+{
+    public string Id { get; set; }
+}

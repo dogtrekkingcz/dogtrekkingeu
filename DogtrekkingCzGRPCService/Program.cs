@@ -1,3 +1,5 @@
+using DogtrekkingCz.Actions;
+using DogtrekkingCz.Entries;
 using DogtrekkingCzGRPCService.Interceptors;
 using DogtrekkingCzGRPCService.Services;
 using DogtrekkingCzGRPCService.Services.JwtToken;
@@ -9,6 +11,7 @@ using DogtrekkingCzGRPCService.Services.Actions;
 using DogtrekkingCzGRPCService.Services.Authorization;
 using DogtrekkingCzGRPCService.Services.Entries;
 using DogtrekkingCzGRPCService.Services.UserProfiles;
+using DogtrekkingCzShared;
 using DogtrekkingCzShared.Mapping;
 using Storage;
 using Storage.Options;
@@ -23,30 +26,18 @@ builder.Services.AddGrpc(options =>
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 Console.WriteLine(MongoDbConnectionString);
 
-var typeAdapterConfig = new TypeAdapterConfig
+TypeAdapterConfig typeAdapterConfig = null;
+var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
 {
-    RequireDestinationMemberSource = true,
-    RequireExplicitMapping = true,
-    Default =
-    {
-        Settings =
-        {
-            UseDestinationValues =
-            {
-                (member => member.SetterModifier == AccessModifier.None &&
-                           member.Type.IsGenericType &&
-                           member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>))
-            }
-        }
-    }
+    MongoDbConnectionString = MongoDbConnectionString
 };
 
 builder.Services
-    .AddSingleton(typeAdapterConfig)
-    .AddScoped<IMapper, ServiceMapper>()
-    .AddScoped<IJwtTokenService, JwtTokenService>()
-    .AddScoped<JwtTokenInterceptor>()
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = MongoDbConnectionString }, typeAdapterConfig);
+    .AddDogtrekkingCzShared(out typeAdapterConfig, options)
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
+    .AddActions(typeAdapterConfig, options)
+    .AddEntries(typeAdapterConfig, options);
+    
 
 typeAdapterConfig
     .AddSharedMapping()

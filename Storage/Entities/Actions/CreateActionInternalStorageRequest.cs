@@ -2,6 +2,6 @@
 
 namespace Storage.Entities.Actions;
 
-public sealed record AddActionRequest : ActionDto
+public sealed record CreateActionInternalStorageRequest : ActionDto
 {
 }

@@ -37,4 +37,21 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 
         return response;
     }
+
+    public async Task<GetAllEntriesInternalStorageResponse> GetAllEntriesAsync(GetAllEntriesInternalStorageRequest request, CancellationToken cancellationToken)
+    {
+        var entries = await _entriesStorageService.GetAllAsync(cancellationToken);
+
+        var response = new GetAllEntriesInternalStorageResponse
+        {
+            Entries = _mapper.Map<List<EntryDto>>(entries)
+        };
+
+        return response;
+    }
+
+    public async Task DeleteEntryAsync(DeleteEntryInternalStorageRequest request, CancellationToken cancellationToken)
+    {
+        await _entriesStorageService.DeleteAsync(new EntryRecord { Id = request.Id }, cancellationToken);
+    }
 }

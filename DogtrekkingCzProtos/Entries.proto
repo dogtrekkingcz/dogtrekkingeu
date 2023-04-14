@@ -8,6 +8,12 @@ import "Entities/Entry.proto";
 
 service Entries {
   rpc createEntry (CreateEntryRequest) returns (CreateEntryResponse);
+  
+  rpc getEntriesByAction (GetEntriesByActionRequest) returns (GetEntriesByActionResponse);
+  
+  rpc getAllEntries (GetAllEntriesRequest) returns (GetAllEntriesResponse);
+  
+  rpc deleteEntry (DeleteEntryRequest) returns (DeleteEntryResponse);
 }
 
 message CreateEntryRequest {
@@ -17,3 +23,28 @@ message CreateEntryRequest {
 message CreateEntryResponse {
   shared.Entry Entry = 1;
 }
+
+message GetEntriesByActionRequest {
+  string Id = 1;
+}
+
+message GetEntriesByActionResponse {
+  repeated shared.Entry Entries = 1;
+}
+
+message GetAllEntriesRequest {
+  
+}
+
+message GetAllEntriesResponse {
+  repeated shared.Entry Entries = 1;
+}
+
+message DeleteEntryRequest {
+  string Id = 1;
+}
+
+message DeleteEntryResponse {
+  
+}
+

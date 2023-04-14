@@ -4,14 +4,14 @@ namespace Storage.Interfaces
 {
     public interface IActionsRepositoryService : IRepositoryService
     {
-        public Task<AddActionResponse> AddActionAsync(AddActionRequest request, CancellationToken cancellationToken);
+        public Task<CreateActionInternalStorageResponse> AddActionAsync(CreateActionInternalStorageRequest request, CancellationToken cancellationToken);
 
-        public Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken);
+        public Task<UpdateActionInternalStorageResponse> UpdateActionAsync(UpdateActionInternalStorageRequest request, CancellationToken cancellationToken);
 
-        public Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken);
+        public Task DeleteActionAsync(DeleteActionInternalStorageRequest request, CancellationToken cancellationToken);
 
-        public Task<GetActionResponse> GetActionAsync(GetActionRequest request, CancellationToken cancellationToken);
+        public Task<GetActionInternalStorageResponse> GetActionAsync(GetActionInternalStorageRequest request, CancellationToken cancellationToken);
 
-        public Task<GetAllActionsResponse> GetAllActionsAsync(CancellationToken cancellationToken);
+        public Task<GetAllActionsInternalStorageResponse> GetAllActionsAsync(CancellationToken cancellationToken);
     }
 }

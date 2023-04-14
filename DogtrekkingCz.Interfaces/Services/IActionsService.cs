@@ -4,6 +4,18 @@ namespace DogtrekkingCz.Interfaces.Actions.Services
 {
     public interface IActionsService
     {
-        Task<ActionDetailResponse> GetActionDetail(ActionDetailRequest request, CancellationToken cancellationToken);
+        Task<CreateActionResponse> CreateActionAsync(CreateActionRequest request, CancellationToken cancellationToken);
+
+        Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken);
+        
+        Task<GetActionDetailResponse> GetActionDetailAsync(GetActionDetailRequest request, CancellationToken cancellationToken);
+
+        Task<GetAllActionsResponse> GetAllActionsAsync(GetAllActionsRequest request, CancellationToken cancellationToken);
+
+        Task<GetAllActionsWithDetailsResponse> GetAllActionsWithDetailsAsync(GetAllActionsWithDetailsRequest request, CancellationToken cancellationToken);
+
+        Task<GetActionResponse> GetActionAsync(GetActionRequest request, CancellationToken cancellationToken);
+
+        Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Storage.Entities.Actions;
 
-public sealed record UpdateActionResponse
+public sealed record CreateActionInternalStorageResponse
 {
     public string Id { get; set; } = string.Empty;
 }

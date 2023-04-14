@@ -23,7 +23,7 @@ namespace DogtrekkingCzWebApiService.RequestHandlers.Entries
 
             var getEntriesByActionRequest = mapper.Map<DogtrekkingCz.Entries.Interface.Entities.GetEntriesByActionRequest>(request);
 
-            var entries = await entriesService.GetEntriesByAction(getEntriesByActionRequest, cancellationToken);
+            var entries = await entriesService.GetEntriesByActionAsync(getEntriesByActionRequest, cancellationToken);
 
             return new ValueTask<GetEntriesByActionResponse>(new GetEntriesByActionResponse { Entries = entries.Entries }).Result;
         }

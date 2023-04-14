@@ -24,11 +24,11 @@ var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
     MongoDbConnectionString = MongoDbConnectionString
 };
 
-builder.Services.AddDogtrekkingCzShared(out typeAdapterConfig, options);
-
-builder.Services.AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig);
-builder.Services.AddActions(typeAdapterConfig, options);
-builder.Services.AddEntries(typeAdapterConfig, options);
+builder.Services
+    .AddDogtrekkingCzShared(out typeAdapterConfig, options)
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
+    .AddActions(typeAdapterConfig, options)
+    .AddEntries(typeAdapterConfig, options);
 
 typeAdapterConfig.AddMapping();
 

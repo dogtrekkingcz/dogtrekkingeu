@@ -9,17 +9,17 @@ namespace Storage.Services.Repositories.Actions
     {
         internal static TypeAdapterConfig AddActionRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<AddActionRequest, ActionRecord>()
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>()
                 .Ignore(d => d.Id);
 
-            typeAdapterConfig.NewConfig<UpdateActionRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest, ActionRecord>();
 
-            typeAdapterConfig.NewConfig<ActionRecord, AddActionResponse>();
+            typeAdapterConfig.NewConfig<ActionRecord, CreateActionInternalStorageResponse>();
 
-            typeAdapterConfig.NewConfig<DeleteActionRequest, ActionRecord>()
+            typeAdapterConfig.NewConfig<DeleteActionInternalStorageRequest, ActionRecord>()
                 .MapWith(s => new ActionRecord { Id = s.Id });
 
-            typeAdapterConfig.NewConfig<GetActionRequest, ActionRecord>()
+            typeAdapterConfig.NewConfig<GetActionInternalStorageRequest, ActionRecord>()
                 .MapWith(s => new ActionRecord { Id = s.Id.ToString() });
 
             typeAdapterConfig.NewConfig<ActionRecord, ActionDto>()

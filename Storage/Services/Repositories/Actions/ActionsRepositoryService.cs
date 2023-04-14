@@ -17,7 +17,7 @@ namespace Storage.Services.Repositories.Actions
             _actionsStorageService = actionsStorageService;
         }
 
-        public async Task<AddActionResponse> AddActionAsync(AddActionRequest request, CancellationToken cancellationToken)
+        public async Task<CreateActionInternalStorageResponse> AddActionAsync(CreateActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var addRequest = _mapper.Map<ActionRecord>(request);
 
@@ -28,7 +28,7 @@ namespace Storage.Services.Repositories.Actions
             
             var addedActionRecord = await _actionsStorageService.AddAsync(addRequest, cancellationToken);
 
-            var response = new AddActionResponse
+            var response = new CreateActionInternalStorageResponse
             {
                 Id = addedActionRecord?.Id ?? ""
             };
@@ -36,37 +36,37 @@ namespace Storage.Services.Repositories.Actions
             return response;
         }
 
-        public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateActionInternalStorageResponse> UpdateActionAsync(UpdateActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var updateRequest = _mapper.Map<ActionRecord>(request);
             
             var result = await _actionsStorageService.UpdateAsync(updateRequest, cancellationToken);
 
-            return new UpdateActionResponse
+            return new UpdateActionInternalStorageResponse
             {
                 Id = result.Id
             };
         }
 
-        public async Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken)
+        public async Task DeleteActionAsync(DeleteActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var deleteRequest = _mapper.Map<ActionRecord>(request);
 
             await _actionsStorageService.DeleteAsync(deleteRequest, cancellationToken);
         }
 
-        public async Task<GetActionResponse> GetActionAsync(GetActionRequest request, CancellationToken cancellationToken)
+        public async Task<GetActionInternalStorageResponse> GetActionAsync(GetActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var getRequest = _mapper.Map<ActionRecord>(request);
 
             var result = await _actionsStorageService.GetAsync(getRequest, cancellationToken);
 
-            var response = _mapper.Map<GetActionResponse>(result);
+            var response = _mapper.Map<GetActionInternalStorageResponse>(result);
 
             return response;
         }
 
-        public async Task<GetAllActionsResponse> GetAllActionsAsync(CancellationToken cancellationToken)
+        public async Task<GetAllActionsInternalStorageResponse> GetAllActionsAsync(CancellationToken cancellationToken)
         {
             var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
 
@@ -77,7 +77,7 @@ namespace Storage.Services.Repositories.Actions
                 actions.Add(_mapper.Map<ActionDto>(action));
             }
 
-            var response = new GetAllActionsResponse
+            var response = new GetAllActionsInternalStorageResponse
             {
                 Actions = actions
             };
@@ -85,7 +85,7 @@ namespace Storage.Services.Repositories.Actions
             return response;
         }
 
-        public async Task<GetAllActionsWithDetailsResponse> GetAllActionsDetailsAsync(CancellationToken cancellationToken)
+        public async Task<GetAllActionsWithDetailsInternalStorageResponse> GetAllActionsDetailsAsync(CancellationToken cancellationToken)
         {
             var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
 
@@ -95,7 +95,7 @@ namespace Storage.Services.Repositories.Actions
                 actions.Add(_mapper.Map<ActionDto>(action));
             }
 
-            var response = new GetAllActionsWithDetailsResponse
+            var response = new GetAllActionsWithDetailsInternalStorageResponse
             {
                 Actions = actions
             };

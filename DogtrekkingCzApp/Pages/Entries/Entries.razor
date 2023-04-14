@@ -1,0 +1,61 @@
+﻿@page "/actions"
+@using DogtrekkingCzApp.Models
+@using MapsterMapper
+@inject Protos.Entries.Entries.EntriesClient Client
+@inject AuthenticationStateProvider AuthStateProvider 
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+@inject NavigationManager NavManager
+
+<h1>@localizer["Entries"]</h1>
+
+@if (_entriesList  == null)
+{
+    <p>
+        <em>@localizer["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@localizer["Surname"]</th>
+            <th>@localizer["Name"]</th>
+            <th>@localizer["Actions"]</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var entry in _entriesList)
+        {
+            <tr>
+                <td>
+                    <div class="col-12">@entry.Surname</div>
+                </td>
+                <td>
+                    <div class="col-12">@entry.Name</div>
+                </td>
+                <td>
+                    <ActionDropDown Model="@entry"></ActionDropDown>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<EntryModel> _entriesList = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadData();
+    }
+
+    private async Task ReloadData()
+    {
+        Protos.Entries.GetAllEntriesResponse response = await Client.getAllEntriesAsync(new Protos.Entries.GetAllEntriesRequest());
+
+        _entriesList = mapper.Map<List<EntryModel>>(response.Entries);
+    }
+}

@@ -28,7 +28,7 @@ namespace DogtrekkingCz.Entries
             };
         }
 
-        public async Task<GetEntriesByActionResponse> GetEntriesByAction(GetEntriesByActionRequest request, CancellationToken cancellationToken)
+        public async Task<GetEntriesByActionResponse> GetEntriesByActionAsync(GetEntriesByActionRequest request, CancellationToken cancellationToken)
         {
             var getEntriesByActionInternalStorageRequest = _mapper.Map<GetEntriesByActionInternalStorageRequest>(request);
 
@@ -37,6 +37,22 @@ namespace DogtrekkingCz.Entries
             var response = _mapper.Map<GetEntriesByActionResponse>(result);
 
             return response;
+        }
+        
+        public async Task<GetAllEntriesResponse> GetAllEntriesAsync(GetAllEntriesRequest request, CancellationToken cancellationToken)
+        {
+            var getAllEntriesInternalStorageRequest = _mapper.Map<GetAllEntriesInternalStorageRequest>(request);
+
+            var result = await _entriesRepositoryService.GetAllEntriesAsync(getAllEntriesInternalStorageRequest, cancellationToken);
+
+            var response = _mapper.Map<GetAllEntriesResponse>(result);
+
+            return response;
+        }
+
+        public async Task DeleteEntryAsync(DeleteEntryRequest request, CancellationToken cancellationToken)
+        {
+            await _entriesRepositoryService.DeleteEntryAsync(new DeleteEntryInternalStorageRequest { Id = request.Id }, cancellationToken);
         }
     }
 }

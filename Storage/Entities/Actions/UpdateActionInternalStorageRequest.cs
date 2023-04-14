@@ -2,6 +2,7 @@
 
 namespace Storage.Entities.Actions;
 
-public sealed record GetActionResponse : ActionDto
+public sealed record UpdateActionInternalStorageRequest : ActionDto
 {
+
 }

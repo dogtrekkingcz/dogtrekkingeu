@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@inject IStringLocalizer<Resource> localizer
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href=""><img src="logo.png" height="40" alt="logo dt" /> Dogtrekking.CZ</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -11,12 +13,17 @@
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <span class="oi oi-home" aria-hidden="true"></span> @localizer["Home"]
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="actions">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Actions
+                <span class="oi oi-list-rich" aria-hidden="true"></span> @localizer["Actions"]
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="entries">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> @localizer["Entries"]
             </NavLink>
         </div>
     </nav>

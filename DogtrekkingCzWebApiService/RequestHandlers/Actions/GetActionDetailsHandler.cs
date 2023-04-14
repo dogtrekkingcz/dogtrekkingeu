@@ -22,9 +22,9 @@ namespace DogtrekkingCzWebApiService.RequestHandlers.Actions
 
                 var actionsService = scope.ServiceProvider.GetRequiredService<IActionsService>();
 
-                var actionDetailRequest = mapper.Map<DogtrekkingCz.Interfaces.Actions.Entities.ActionDetailRequest>(request);
+                var actionDetailRequest = mapper.Map<DogtrekkingCz.Interfaces.Actions.Entities.GetActionDetailRequest>(request);
 
-                var action = await actionsService.GetActionDetail(actionDetailRequest, cancellationToken);
+                var action = await actionsService.GetActionDetailAsync(actionDetailRequest, cancellationToken);
 
                 return new ValueTask<ActionDetailResponse>(new ActionDetailResponse(Guid.NewGuid())).Result;
             }

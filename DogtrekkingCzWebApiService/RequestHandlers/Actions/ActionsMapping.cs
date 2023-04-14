@@ -7,7 +7,7 @@ internal static class ActionsMapping
 {
     internal static TypeAdapterConfig AddActionsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<ActionDetailRequest, DogtrekkingCz.Interfaces.Actions.Entities.ActionDetailRequest>();
+        typeAdapterConfig.NewConfig<ActionDetailRequest, DogtrekkingCz.Interfaces.Actions.Entities.GetActionDetailRequest>();
 
         return typeAdapterConfig;
     }

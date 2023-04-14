@@ -1,12 +1,10 @@
-﻿using DogtrekkingCzShared.Entities;
+﻿using DogtrekkingCz.Interfaces.Actions.Entities;
+using DogtrekkingCzShared.Entities;
 using Google.Protobuf.Collections;
 using Mapster;
 using Storage.Entities.Actions;
-using DeleteActionRequest = Storage.Entities.Actions.DeleteActionRequest;
-using GetActionRequest = Storage.Entities.Actions.GetActionRequest;
-using GetActionResponse = Storage.Entities.Actions.GetActionResponse;
-using GetAllActionsResponse = Storage.Entities.Actions.GetAllActionsResponse;
-using UpdateActionResponse = Storage.Entities.Actions.UpdateActionResponse;
+using DeleteActionRequest = DogtrekkingCz.Interfaces.Actions.Entities.DeleteActionRequest;
+using UpdateActionResponse = DogtrekkingCz.Interfaces.Actions.Entities.UpdateActionResponse;
 
 namespace DogtrekkingCzGRPCService.Services.Authorization;
 
@@ -14,11 +12,11 @@ internal static class AuthorizationServiceMapping
 {
     internal static TypeAdapterConfig AddActionsServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, AddActionRequest>();
+        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, CreateActionRequest>();
 
-        typeAdapterConfig.NewConfig<AddActionResponse, Protos.Actions.CreateActionResponse>();
+        typeAdapterConfig.NewConfig<CreateActionResponse, Protos.Actions.CreateActionResponse>();
 
-        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, Storage.Entities.Actions.UpdateActionRequest>();
+        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, UpdateActionRequest>();
 
         typeAdapterConfig.NewConfig<UpdateActionResponse, Protos.Actions.UpdateActionResponse>();
 
