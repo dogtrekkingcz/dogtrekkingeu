@@ -1,7 +1,6 @@
 using DogtrekkingCz.Interfaces.Actions.Entities;
 using DogtrekkingCz.Interfaces.Actions.Services;
-using DogtrekkingCzGRPCService.Services.JwtToken;
-using DogtrekkingCzShared.Entities;
+using DogtrekkingCzShared.JwtToken;
 using DogtrekkingCzShared.Testable;
 using Google.Protobuf.Collections;
 using Grpc.Core;
@@ -11,7 +10,7 @@ namespace DogtrekkingCzGRPCService.Services.Actions;
 
 internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableService
 {
-    private readonly ILogger<ActionsService> _logger;
+    private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IJwtTokenService _jwtTokenService;
     private readonly IActionsService _actionsService;

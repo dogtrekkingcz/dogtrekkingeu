@@ -13,6 +13,12 @@ namespace DogtrekkingCzShared.Mapping
             typeAdapterConfig.NewConfig<EntryDto.DogDto, EntryDto.DogDto>()
                 .TwoWays();
 
+            typeAdapterConfig.NewConfig<EntryDto, Protos.Shared.Entry>()
+                .TwoWays();
+
+            typeAdapterConfig.NewConfig<EntryDto.DogDto, Protos.Shared.EntryDog>()
+                .TwoWays();
+
             return typeAdapterConfig;
         }
     }

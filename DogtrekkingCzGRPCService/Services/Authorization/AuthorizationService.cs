@@ -9,11 +9,11 @@ namespace DogtrekkingCzGRPCService.Services.Authorization;
 
 internal class AuthorizationService : Protos.Authorization.Authorization.AuthorizationBase
 {
-    private readonly ILogger<ActionsService> _logger;
+    private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IActionRightsRepositoryService _actionRightsRepositoryService;
 
-    public AuthorizationService(ILogger<ActionsService> logger, IMapper mapper, IActionRightsRepositoryService actionRightsRepositoryService)
+    public AuthorizationService(ILogger<AuthorizationService> logger, IMapper mapper, IActionRightsRepositoryService actionRightsRepositoryService)
     {
         _logger = logger;
         _mapper = mapper;

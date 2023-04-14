@@ -15,7 +15,7 @@ internal class EntriesService : Protos.Entries.Entries.EntriesBase
     private readonly IMapper _mapper;
     private readonly IEntriesService _entriesService;
 
-    public EntriesService(ILogger logger, IMapper mapper, IEntriesService entriesService)
+    public EntriesService(ILogger<EntriesService> logger, IMapper mapper, IEntriesService entriesService)
     {
         _logger = logger;
         _mapper = mapper;

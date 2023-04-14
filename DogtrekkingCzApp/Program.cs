@@ -67,42 +67,13 @@ builder.Services.AddSingleton(services =>
 });
 
 builder.Services.AddScoped<ITokenProvider, AppTokenProvider>();
-builder.Services
-    .AddGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(o =>
-    {
-        o.Address = new Uri(builder.Configuration["GrpcServerUri"]);
-    })
-    .AddCallCredentials(async (context, metadata, serviceProvider) =>
-    {
-        var provider = serviceProvider.GetRequiredService<ITokenProvider>();
-        var token = await provider.GetTokenAsync();
-        metadata.Add("Authorization", $"Bearer {token}");
-    })
-    .ConfigureChannel(o =>
-    {
-        o.HttpHandler = new GrpcWebHandler(new HttpClientHandler());
-        o.UnsafeUseInsecureChannelCallCredentials = true;
-    });
 
 builder.Services
-    .AddGrpcClient<Protos.Actions.Actions.ActionsClient>(o =>
-    {
-        o.Address = new Uri(builder.Configuration["GrpcServerUri"]);
-    })
-    .AddCallCredentials(async (context, metadata, serviceProvider) =>
-    {
-        var provider = serviceProvider.GetRequiredService<ITokenProvider>();
-        var token = await provider.GetTokenAsync();
-        metadata.Add("Authorization", $"Bearer {token}");
-    })
-    .ConfigureChannel(o =>
-    {
-        o.HttpHandler = new GrpcWebHandler(new HttpClientHandler());
-        o.UnsafeUseInsecureChannelCallCredentials = true;
-    });
+    .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])
+    .AddAuthorizedGrpcClient<Protos.Actions.Actions.ActionsClient>(builder.Configuration["GrpcServerUri"])
+    .AddAuthorizedGrpcClient<Protos.Entries.Entries.EntriesClient>(builder.Configuration["GrpcServerUri"]);
 
 builder.Services.AddLocalization();
-
 
 var host = builder.Build();
 

@@ -1,9 +1,11 @@
 ﻿using DogtrekkingCzShared.Interceptors;
+using DogtrekkingCzShared.JwtToken;
 using DogtrekkingCzShared.Options;
 using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DogtrekkingCzShared
 {
@@ -31,7 +33,13 @@ namespace DogtrekkingCzShared
 
             services
                 .AddSingleton(typeAdapterConfig)
-                .AddScoped<IMapper, ServiceMapper>();
+                .AddScoped<IMapper, ServiceMapper>()
+                .AddScoped<IJwtTokenService, JwtTokenService>()
+                .AddScoped<JwtTokenInterceptor>()
+                .AddLogging(config =>
+                {
+                    config.AddConsole();
+                });
 
             return services;
         }

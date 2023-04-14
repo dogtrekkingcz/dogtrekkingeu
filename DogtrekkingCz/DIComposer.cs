@@ -13,10 +13,6 @@ namespace DogtrekkingCz.Actions
     {
         public static IServiceCollection AddActions(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
         {
-            services
-                .AddScoped<IJwtTokenService, JwtTokenService>()
-                .AddScoped<JwtTokenInterceptor>();
-
             services.AddScoped<IActionsService, ActionsService>();
 
             return services;

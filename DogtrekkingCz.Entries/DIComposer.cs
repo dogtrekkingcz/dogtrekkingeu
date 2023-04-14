@@ -16,10 +16,6 @@ namespace DogtrekkingCz.Entries
     {
         public static IServiceCollection AddEntries(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
         {
-            services
-                .AddScoped<IJwtTokenService, JwtTokenService>()
-                .AddScoped<JwtTokenInterceptor>();
-
             services.AddScoped<IEntriesService, EntriesService>();
 
             typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse, GetEntriesByActionResponse>();

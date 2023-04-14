@@ -1,17 +1,13 @@
 using DogtrekkingCz.Actions;
 using DogtrekkingCz.Entries;
-using DogtrekkingCzGRPCService.Interceptors;
-using DogtrekkingCzGRPCService.Services;
-using DogtrekkingCzGRPCService.Services.JwtToken;
-using Google.Protobuf.Collections;
 using Mapster;
-using MapsterMapper;
 using DogtrekkingCzGRPCService.Extensions;
 using DogtrekkingCzGRPCService.Services.Actions;
 using DogtrekkingCzGRPCService.Services.Authorization;
 using DogtrekkingCzGRPCService.Services.Entries;
 using DogtrekkingCzGRPCService.Services.UserProfiles;
 using DogtrekkingCzShared;
+using DogtrekkingCzShared.Interceptors;
 using DogtrekkingCzShared.Mapping;
 using Storage;
 using Storage.Options;
@@ -37,7 +33,6 @@ builder.Services
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
     .AddActions(typeAdapterConfig, options)
     .AddEntries(typeAdapterConfig, options);
-    
 
 typeAdapterConfig
     .AddSharedMapping()

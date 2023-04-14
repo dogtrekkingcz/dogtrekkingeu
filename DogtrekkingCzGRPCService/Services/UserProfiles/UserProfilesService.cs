@@ -11,7 +11,7 @@ namespace DogtrekkingCzGRPCService.Services.UserProfiles;
 
 public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfilesBase
 {
-    private readonly ILogger<UserProfilesService> _logger;
+    private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IUserProfilesRepositoryService _userProfilesRepositoryService;
 
