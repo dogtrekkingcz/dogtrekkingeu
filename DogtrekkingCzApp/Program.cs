@@ -71,7 +71,8 @@ builder.Services.AddScoped<ITokenProvider, AppTokenProvider>();
 builder.Services
     .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Actions.Actions.ActionsClient>(builder.Configuration["GrpcServerUri"])
-    .AddAuthorizedGrpcClient<Protos.Entries.Entries.EntriesClient>(builder.Configuration["GrpcServerUri"]);
+    .AddAuthorizedGrpcClient<Protos.Entries.Entries.EntriesClient>(builder.Configuration["GrpcServerUri"])
+    .AddAuthorizedGrpcClient<Protos.Authorization.Authorization.AuthorizationClient>(builder.Configuration["GrpcServerUri"]);
 
 builder.Services.AddLocalization();
 

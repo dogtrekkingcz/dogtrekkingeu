@@ -16,7 +16,7 @@ namespace DogtrekkingCz.Actions
             services.AddScoped<IActionsService, ActionsService>();
             
             typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse, GetAllActionsResponse>();
-
+            
             return services;
         }
     }

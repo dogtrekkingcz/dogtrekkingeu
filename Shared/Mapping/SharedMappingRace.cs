@@ -18,6 +18,10 @@ namespace DogtrekkingCzShared.Mapping
                 .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
                 .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset());
 
+            typeAdapterConfig.NewConfig<Protos.Shared.RaceSimple, RaceDto>()
+                .IgnoreNullValues(true)
+                .TwoWays();
+
             typeAdapterConfig.NewConfig<RaceDto.PaymentDefinitionDto, Protos.Shared.PaymentDefinition>()
                 .IgnoreNullValues(true)
                 .Map(d => d.From, s => s.From.ToGoogleDateTime())
