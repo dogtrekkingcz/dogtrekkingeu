@@ -14,7 +14,7 @@
 
         public DateTimeOffset? Decease { get; set; } = null;
 
-        public string UserProfileUri { get; set; } = string.Empty;
+        public string UriToPhoto { get; set; } = string.Empty;
 
 
         public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>();

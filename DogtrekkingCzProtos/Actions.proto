@@ -17,7 +17,7 @@ service Actions {
 }
 
 message GetAllActionsRequest {
-  repeated shared.ActionSimple Actions = 1;
+
 }
 
 message GetAllActionsResponse {

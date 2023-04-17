@@ -16,7 +16,7 @@ namespace DogtrekkingCzShared.Mapping
 
             typeAdapterConfig.NewConfig<EntryDto, Protos.Shared.Entry>()
                 .IgnoreNullValues(true)
-                .Map(d => d.Created, s => s.Created.ToGoogleTimestamp());
+                .Map(d => d.Created, s => s.Created.ToGoogleDateTime());
 
             typeAdapterConfig.NewConfig<Protos.Shared.Entry, EntryDto>()
                 .IgnoreNullValues(true)
@@ -24,7 +24,7 @@ namespace DogtrekkingCzShared.Mapping
 
             typeAdapterConfig.NewConfig<EntryDto.DogDto, Protos.Shared.EntryDog>()
                 .IgnoreNullValues(true)
-                .Map(d => d.Birthday, s => s.Birthday.ToGoogleTimestamp());
+                .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime());
 
             typeAdapterConfig.NewConfig<Protos.Shared.EntryDog, EntryDto.DogDto>()
                 .IgnoreNullValues(true)

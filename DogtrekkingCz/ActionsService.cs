@@ -70,7 +70,7 @@ namespace DogtrekkingCz.Actions
         {
             var allActions = await _actionsRepositoryService.GetAllActionsAsync(cancellationToken);
 
-            var response = _mapper.Map<GetAllActionsResponse>(allActions.Actions);
+            var response = _mapper.Map<GetAllActionsResponse>(allActions);
 
             return response;
         }

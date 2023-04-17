@@ -5,9 +5,11 @@ option csharp_namespace = "Protos.Shared";
 package shared;
 
 message ActionRights {
-  string UserId = 1;
-  string ActionId = 2;
-  RightsType Rights = 3;
+  string Id = 1;
+  string UserId = 2;
+  string ActionId = 3;
+  RightsType Rights = 4;
+  repeated string Roles = 5;
 
   enum RightsType
   {
