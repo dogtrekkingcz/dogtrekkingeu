@@ -18,7 +18,8 @@ namespace DogtrekkingCzShared.Mapping
                 .AddSharedMappingRacer()
                 .AddSharedMappingTerm()
                 .AddSharedMappingUserProfile()
-                .AddSharedMappingEntry();
+                .AddSharedMappingEntry()
+                .AddSharedMappingActionRights();
 
             typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
             typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();
