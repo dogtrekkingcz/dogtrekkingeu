@@ -24,7 +24,6 @@ internal class AuthorizationService : Protos.Authorization.Authorization.Authori
     {
         var rights = await _actionRightsRepositoryService.GetAllRightsAsync(new Storage.Entities.ActionRights.GetAllRightsRequest(), context.CancellationToken);
 
-
         var actionRights = _mapper.Map<RepeatedField<Protos.Shared.ActionRights>>(rights);
 
         var result = new GetAllRightsResponse();

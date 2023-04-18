@@ -2,5 +2,6 @@
 {
     public sealed record GetAllRightsRequest
     {
+        public string UserId { get; set; }
     }
 }

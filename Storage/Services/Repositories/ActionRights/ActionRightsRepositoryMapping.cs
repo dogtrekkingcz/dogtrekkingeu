@@ -34,7 +34,7 @@ namespace Storage.Services.Repositories.ActionRights
                         })
                         .ToList()
                 });
-
+            
             return typeAdapterConfig;
         }
     }
