@@ -1,4 +1,5 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Entities;
+using DogtrekkingCz.Interfaces.Actions.Entities.Actions;
 using DogtrekkingCzShared.Entities;
 using Google.Protobuf.Collections;
 using Mapster;

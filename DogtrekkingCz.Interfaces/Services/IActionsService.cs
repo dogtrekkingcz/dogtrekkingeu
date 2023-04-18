@@ -1,4 +1,5 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Entities;
+using DogtrekkingCz.Interfaces.Actions.Entities.Actions;
 
 namespace DogtrekkingCz.Interfaces.Actions.Services
 {

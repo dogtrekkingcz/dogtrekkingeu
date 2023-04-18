@@ -1,10 +1,11 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Entities;
+using DogtrekkingCz.Interfaces.Actions.Entities.Actions;
 using DogtrekkingCzShared.Entities;
 using Google.Protobuf.Collections;
 using Mapster;
 using Storage.Entities.Actions;
-using DeleteActionRequest = DogtrekkingCz.Interfaces.Actions.Entities.DeleteActionRequest;
-using UpdateActionResponse = DogtrekkingCz.Interfaces.Actions.Entities.UpdateActionResponse;
+using DeleteActionRequest = DogtrekkingCz.Interfaces.Actions.Entities.Actions.DeleteActionRequest;
+using UpdateActionResponse = DogtrekkingCz.Interfaces.Actions.Entities.Actions.UpdateActionResponse;
 
 namespace DogtrekkingCzGRPCService.Services.Authorization;
 

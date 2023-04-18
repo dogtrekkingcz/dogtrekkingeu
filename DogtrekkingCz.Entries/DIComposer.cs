@@ -18,14 +18,7 @@ namespace DogtrekkingCz.Entries
         {
             services.AddScoped<IEntriesService, EntriesService>();
 
-            typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse, GetEntriesByActionResponse>();
-            typeAdapterConfig.NewConfig<GetEntriesByActionRequest, GetEntriesByActionInternalStorageRequest>();
 
-            typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>();
-            typeAdapterConfig.NewConfig<CreateEntryInternalStorageResponse, CreateEntryResponse>();
-
-            typeAdapterConfig.NewConfig<GetAllEntriesRequest, GetAllEntriesInternalStorageRequest>();
-            typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse, GetAllEntriesResponse>();
 
             return services;
         }

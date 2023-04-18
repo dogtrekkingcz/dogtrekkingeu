@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Entries.Interface.Services;
+﻿using DogtrekkingCz.Interfaces.Actions.Services;
 using DogtrekkingCzWebApiService.Entities;
 using MapsterMapper;
 using Mediator;
@@ -23,7 +23,7 @@ namespace DogtrekkingCzWebApiService.RequestHandlers.Entries
                 var entriesService = scope.ServiceProvider.GetRequiredService<IEntriesService>();
 
                 var createEntryRequest =
-                    mapper.Map<DogtrekkingCz.Entries.Interface.Entities.CreateEntryRequest>(request);
+                    mapper.Map<DogtrekkingCz.Interfaces.Actions.Entities.Entries.CreateEntryRequest>(request);
 
                 var newEntry = await entriesService.CreateEntryAsync(createEntryRequest, cancellationToken);
 

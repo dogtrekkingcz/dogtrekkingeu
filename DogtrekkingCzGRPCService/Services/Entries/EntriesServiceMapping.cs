@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Entries.Interface.Entities;
+﻿using DogtrekkingCz.Interfaces.Actions.Entities.Entries;
 using DogtrekkingCzShared.Extensions;
 using Mapster;
 using Protos.Shared;

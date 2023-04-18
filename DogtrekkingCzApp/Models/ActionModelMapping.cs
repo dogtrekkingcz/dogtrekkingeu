@@ -18,10 +18,6 @@ namespace DogtrekkingCzApp.Models;
         typeAdapterConfig.NewConfig<Protos.Shared.ActionSimple, ActionModel>()
             .TwoWays();
 
-        typeAdapterConfig.NewConfig<Protos.Shared.RaceSimple, RaceDto>()
-            .Ignore(d => d.Categories)
-            .TwoWays();
-
         return typeAdapterConfig;
     }
 }

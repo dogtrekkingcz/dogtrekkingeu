@@ -1,11 +1,8 @@
-﻿using DogtrekkingCz.Interfaces.Actions.Entities;
-using DogtrekkingCz.Interfaces.Actions.Services;
-using DogtrekkingCzShared.Entities;
+﻿using DogtrekkingCz.Actions.Services.Entries;
+using DogtrekkingCz.Actions.Services.Rights;
 using DogtrekkingCzShared.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using Storage.Entities.Actions;
-
 
 namespace DogtrekkingCz.Actions
 {
@@ -13,9 +10,10 @@ namespace DogtrekkingCz.Actions
     {
         public static IServiceCollection AddActions(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
         {
-            services.AddScoped<IActionsService, ActionsService>();
-            
-            typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse, GetAllActionsResponse>();
+            services
+                .AddActions(typeAdapterConfig, options)
+                .AddEntries(typeAdapterConfig, options)
+                .AddRights(typeAdapterConfig);
             
             return services;
         }

@@ -33,8 +33,13 @@ namespace DogtrekkingCzShared.Mapping
                 .Map(d => d.To, s => s.To.ToDateTimeOffset());
 
             typeAdapterConfig.NewConfig<RaceDto, Protos.Shared.RaceSimple>()
-                .IgnoreNullValues(true)
-                .TwoWays();
+                .IgnoreNullValues(true);
+            typeAdapterConfig.NewConfig<Protos.Shared.RaceSimple, RaceDto>()
+                .Ignore(d => d.Payments)
+                .Ignore(d => d.EnteringTo)
+                .Ignore(d => d.EnteringFrom)
+                .Ignore(d => d.MaxNumberOfCompetitors)
+                .Ignore(d => d.Categories);
 
             typeAdapterConfig.NewConfig<RaceDto, RaceDto>();
 

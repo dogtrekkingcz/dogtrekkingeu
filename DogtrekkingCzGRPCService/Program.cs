@@ -1,5 +1,4 @@
 using DogtrekkingCz.Actions;
-using DogtrekkingCz.Entries;
 using Mapster;
 using DogtrekkingCzGRPCService.Extensions;
 using DogtrekkingCzGRPCService.Services.Actions;
@@ -30,8 +29,7 @@ var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
 builder.Services
     .AddDogtrekkingCzShared(out typeAdapterConfig, options)
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
-    .AddActions(typeAdapterConfig, options)
-    .AddEntries(typeAdapterConfig, options);
+    .AddActions(typeAdapterConfig, options);
 
 typeAdapterConfig
     .AddAuthorizationServiceMapping()

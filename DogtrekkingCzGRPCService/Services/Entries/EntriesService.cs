@@ -1,11 +1,11 @@
-﻿using DogtrekkingCz.Entries.Interface.Services;
+﻿using DogtrekkingCz.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Entries;
-using CreateEntryRequest = DogtrekkingCz.Entries.Interface.Entities.CreateEntryRequest;
-using DeleteEntryRequest = DogtrekkingCz.Entries.Interface.Entities.DeleteEntryRequest;
-using GetAllEntriesRequest = DogtrekkingCz.Entries.Interface.Entities.GetAllEntriesRequest;
-using GetEntriesByActionRequest = DogtrekkingCz.Entries.Interface.Entities.GetEntriesByActionRequest;
+using CreateEntryRequest = DogtrekkingCz.Interfaces.Actions.Entities.Entries.CreateEntryRequest;
+using DeleteEntryRequest = DogtrekkingCz.Interfaces.Actions.Entities.Entries.DeleteEntryRequest;
+using GetAllEntriesRequest = DogtrekkingCz.Interfaces.Actions.Entities.Entries.GetAllEntriesRequest;
+using GetEntriesByActionRequest = DogtrekkingCz.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest;
 
 namespace DogtrekkingCzGRPCService.Services.Entries;
 
