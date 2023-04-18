@@ -4,7 +4,7 @@ using MapsterMapper;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
 
-namespace DogtrekkingCz.Actions.Services.Entries
+namespace DogtrekkingCz.Actions.Services.EntriesManage
 {
     internal class EntriesService : IEntriesService
     {

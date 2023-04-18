@@ -1,5 +1,5 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Entities.Rights;
-using DogtrekkingCz.Interfaces.Rights.Services;
+using DogtrekkingCz.Interfaces.Actions.Services;
 
 namespace DogtrekkingCz.Actions.Services.Rights;
 

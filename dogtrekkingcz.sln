@@ -20,9 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCzShared", "Shar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCzWebApiService", "DogtrekkingCzWebApiService\DogtrekkingCzWebApiService.csproj", "{998C9165-0178-402C-B7FD-31601A1F7E79}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCz.Actions", "DogtrekkingCz\DogtrekkingCz.Actions.csproj", "{F58F7026-DF7D-45C9-ABE2-0C14A5B83A98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCz.BaseLayer", "DogtrekkingCz\DogtrekkingCz.BaseLayer.csproj", "{F58F7026-DF7D-45C9-ABE2-0C14A5B83A98}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCz.Actions.Interface", "DogtrekkingCz.Interfaces\DogtrekkingCz.Actions.Interface.csproj", "{5B0E9F06-7890-496E-A248-F36D22A67979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogtrekkingCz.BaseLayer.Interface", "DogtrekkingCz.Interfaces\DogtrekkingCz.BaseLayer.Interface.csproj", "{5B0E9F06-7890-496E-A248-F36D22A67979}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

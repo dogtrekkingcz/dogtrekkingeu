@@ -3,7 +3,7 @@ using DogtrekkingCzShared.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DogtrekkingCz.Actions.Services.Entries;
+namespace DogtrekkingCz.Actions.Services.EntriesManage;
 
 internal static class DiComposerEntries
 {

@@ -21,7 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DogtrekkingCzProtos\DogtrekkingCzProtos.csproj" />
-      <ProjectReference Include="..\DogtrekkingCz\DogtrekkingCz.Actions.csproj" />
+      <ProjectReference Include="..\DogtrekkingCz\DogtrekkingCz.BaseLayer.csproj" />
       <ProjectReference Include="..\Shared\DogtrekkingCzShared.csproj" />
     </ItemGroup>
 

@@ -6,7 +6,7 @@ using MapsterMapper;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 
-namespace DogtrekkingCz.Actions.Services.Actions
+namespace DogtrekkingCz.Actions.Services.ActionsManage
 {
     internal class ActionsService : IActionsService
     {

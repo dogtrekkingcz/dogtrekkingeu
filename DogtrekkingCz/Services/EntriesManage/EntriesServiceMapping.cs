@@ -2,7 +2,7 @@
 using Mapster;
 using Storage.Entities.Entries;
 
-namespace DogtrekkingCz.Actions.Services.Entries;
+namespace DogtrekkingCz.Actions.Services.EntriesManage;
 
 internal static class EntriesServiceMapping
 {

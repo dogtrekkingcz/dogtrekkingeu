@@ -1,6 +1,6 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Entities.Rights;
 
-namespace DogtrekkingCz.Interfaces.Rights.Services
+namespace DogtrekkingCz.Interfaces.Actions.Services
 {
     public interface IRightsService
     {

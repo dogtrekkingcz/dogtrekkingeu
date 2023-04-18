@@ -1,4 +1,5 @@
-﻿using DogtrekkingCz.Actions.Services.Entries;
+﻿using DogtrekkingCz.Actions.Services.ActionsManage;
+using DogtrekkingCz.Actions.Services.EntriesManage;
 using DogtrekkingCz.Actions.Services.Rights;
 using DogtrekkingCzShared.Options;
 using Mapster;
@@ -8,7 +9,7 @@ namespace DogtrekkingCz.Actions
 {
     public static class DIComposer
     {
-        public static IServiceCollection AddActions(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
+        public static IServiceCollection AddBaseLayer(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
         {
             services
                 .AddActions(typeAdapterConfig, options)

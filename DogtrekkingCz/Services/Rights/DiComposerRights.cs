@@ -1,4 +1,4 @@
-﻿using DogtrekkingCz.Interfaces.Rights.Services;
+﻿using DogtrekkingCz.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 

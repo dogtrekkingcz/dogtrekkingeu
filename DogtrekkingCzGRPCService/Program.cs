@@ -29,7 +29,7 @@ var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
 builder.Services
     .AddDogtrekkingCzShared(out typeAdapterConfig, options)
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
-    .AddActions(typeAdapterConfig, options);
+    .AddBaseLayer(typeAdapterConfig, options);
 
 typeAdapterConfig
     .AddAuthorizationServiceMapping()
