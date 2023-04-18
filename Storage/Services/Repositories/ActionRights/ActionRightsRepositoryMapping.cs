@@ -20,6 +20,21 @@ namespace Storage.Services.Repositories.ActionRights
             typeAdapterConfig.NewConfig<ActionRightsRecord, ActionRightsDto>()
                 .TwoWays();
 
+            typeAdapterConfig.NewConfig<IList<ActionRightsRecord>, GetAllRightsResponse>()
+                .MapWith(s => new GetAllRightsResponse
+                {
+                    Rights = s
+                        .Select(r => new ActionRightsDto
+                        {
+                            Id = r.Id, 
+                            Rights = r.Rights, 
+                            ActionId = r.ActionId, 
+                            UserId = r.UserId, 
+                            Roles = r.Roles
+                        })
+                        .ToList()
+                });
+
             return typeAdapterConfig;
         }
     }

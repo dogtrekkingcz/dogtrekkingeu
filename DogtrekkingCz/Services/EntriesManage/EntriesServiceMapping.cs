@@ -6,7 +6,7 @@ namespace DogtrekkingCz.Actions.Services.EntriesManage;
 
 internal static class EntriesServiceMapping
 {
-    public static TypeAdapterConfig AddActionsMapping(this TypeAdapterConfig typeAdapterConfig)
+    public static TypeAdapterConfig AddEntriesMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse, GetEntriesByActionResponse>();
         typeAdapterConfig.NewConfig<GetEntriesByActionRequest, GetEntriesByActionInternalStorageRequest>();
