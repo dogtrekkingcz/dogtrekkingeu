@@ -52,7 +52,7 @@ public static class DiCompositor
             .AddScoped<IDogsRepositoryService, DogsRepositoryService>()
             
             .AddSingleton<IStorageService<AuthorizationRoleRecord>, StorageService<AuthorizationRoleRecord>>()
-            .AddScoped<IAuthorizationRolesService, AuthorizationRolesService>()
+            .AddScoped<IAuthorizationRolesRepositoryService, AuthorizationRolesRepositoryService>()
             
             .AddSingleton<IStorageService<EntryRecord>, StorageService<EntryRecord>>()
             .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>();

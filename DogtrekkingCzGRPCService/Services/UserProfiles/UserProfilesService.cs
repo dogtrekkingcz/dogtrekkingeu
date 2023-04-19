@@ -3,9 +3,6 @@ using DogtrekkingCz.Interfaces.Actions.Services;
 using DogtrekkingCzShared.JwtToken;
 using Grpc.Core;
 using MapsterMapper;
-using Protos.Shared;
-using Storage.Entities.UserProfiles;
-using Storage.Interfaces;
 
 namespace DogtrekkingCzGRPCService.Services.UserProfiles;
 

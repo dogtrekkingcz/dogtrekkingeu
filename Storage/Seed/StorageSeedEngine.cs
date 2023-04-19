@@ -6,9 +6,9 @@ namespace Storage.Seed
 {
     public class StorageSeedEngine
     {
-        private readonly IAuthorizationRolesService _authorizationRolesService;
+        private readonly IAuthorizationRolesRepositoryService _authorizationRolesService;
 
-        public StorageSeedEngine(IAuthorizationRolesService authorizationRolesService)
+        public StorageSeedEngine(IAuthorizationRolesRepositoryService authorizationRolesService)
         {
             _authorizationRolesService = authorizationRolesService;
         }

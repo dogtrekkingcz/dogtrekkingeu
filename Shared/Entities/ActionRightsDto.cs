@@ -15,7 +15,10 @@
         public enum RightsType
         {
             None = 0,
-            Admin = 1
+            View = 1,
+            Edit = 2,
+            Delete = 3,
+            Admin = 4
         };
     }
 }
