@@ -11,7 +11,7 @@ service Authorization {
 }
 
 message GetAllRightsRequest {
-
+    string UserId = 1;
 }
 
 message GetAllRightsResponse {

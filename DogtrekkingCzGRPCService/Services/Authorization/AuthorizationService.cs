@@ -1,9 +1,9 @@
-﻿using DogtrekkingCzGRPCService.Services.Actions;
+﻿using DogtrekkingCz.Interfaces.Actions.Entities.Rights;
+using DogtrekkingCz.Interfaces.Actions.Services;
+using DogtrekkingCzShared.JwtToken;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;
-using Protos.Authorization;
-using Storage.Interfaces;
 
 namespace DogtrekkingCzGRPCService.Services.Authorization;
 
@@ -11,22 +11,26 @@ internal class AuthorizationService : Protos.Authorization.Authorization.Authori
 {
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
-    private readonly IActionRightsRepositoryService _actionRightsRepositoryService;
+    private readonly IJwtTokenService _jwtTokenService;
+    private readonly IRightsService _rightsService;
 
-    public AuthorizationService(ILogger<AuthorizationService> logger, IMapper mapper, IActionRightsRepositoryService actionRightsRepositoryService)
+    public AuthorizationService(ILogger<AuthorizationService> logger, IMapper mapper, IJwtTokenService jwtTokenService, IRightsService rightsService)
     {
         _logger = logger;
         _mapper = mapper;
-        _actionRightsRepositoryService = actionRightsRepositoryService;
+        _jwtTokenService = jwtTokenService;
+        _rightsService = rightsService;
     }
 
-    public override async Task<GetAllRightsResponse> getAllRights(GetAllRightsRequest request, ServerCallContext context)
+    public override async Task<Protos.Authorization.GetAllRightsResponse> getAllRights(Protos.Authorization.GetAllRightsRequest request, ServerCallContext context)
     {
-        var rights = await _actionRightsRepositoryService.GetAllRightsAsync(new Storage.Entities.ActionRights.GetAllRightsRequest(), context.CancellationToken);
+        var userId = _jwtTokenService.GetUserId();
+        
+        var rights = await _rightsService.GetAllRightsAsync(new GetAllRightsRequest { UserId = userId }, context.CancellationToken);
 
         var actionRights = _mapper.Map<RepeatedField<Protos.Shared.ActionRights>>(rights);
 
-        var result = new GetAllRightsResponse();
+        var result = new Protos.Authorization.GetAllRightsResponse();
         result.ActionRights.AddRange(actionRights);
 
         return result;

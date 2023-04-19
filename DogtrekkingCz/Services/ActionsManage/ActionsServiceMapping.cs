@@ -9,6 +9,10 @@ internal static class ActionsServiceMapping
     public static TypeAdapterConfig AddActionsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse, GetAllActionsResponse>();
+
+        typeAdapterConfig.NewConfig<CreateActionRequest, CreateActionInternalStorageRequest>();
+
+        typeAdapterConfig.NewConfig<CreateActionInternalStorageResponse, CreateActionResponse>();
             
         return typeAdapterConfig;
     }

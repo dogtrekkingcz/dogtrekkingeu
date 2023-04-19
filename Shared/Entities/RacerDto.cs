@@ -18,7 +18,7 @@
 
         public string LastName { get; set; } = string.Empty;
 
-        public List<string> Dogs { get; set; } = new List<string>();
+        public List<DogDto> Dogs { get; set; } = new List<DogDto>();
 
         public DateTimeOffset? Start { get; set; } = null;
 

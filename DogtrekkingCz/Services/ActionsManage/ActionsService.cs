@@ -35,6 +35,7 @@ namespace DogtrekkingCz.Actions.Services.ActionsManage
 
             await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsRequest
             {
+                Id = Guid.NewGuid().ToString(),
                 ActionId = result.Id,
                 UserId = _jwtTokenService.GetUserId(),
                 Roles = new List<string> { AuthorizationRoleDto.RoleType.Owner.ToString() }
