@@ -19,8 +19,9 @@ internal static class UserProfilesServiceMapping
             .Map(d => d.CompetitorId, s => Guid.Parse(s.CompetitorId));
 
         typeAdapterConfig.NewConfig<UpdateUserProfileResponse, Protos.UserProfiles.UpdateUserProfileResponse>();
-        
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfileRequest, GetUserProfileRequest>();
+
+        typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfileRequest, GetUserProfileRequest>()
+            .Ignore(d => d.UserId);
 
         typeAdapterConfig.NewConfig<GetUserProfileResponse, Protos.Shared.UserProfile>()
             .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime())

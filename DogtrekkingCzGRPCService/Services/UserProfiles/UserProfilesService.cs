@@ -1,3 +1,4 @@
+using DogtrekkingCzShared.JwtToken;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Shared;
@@ -13,18 +14,24 @@ public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfiles
 {
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
+    private readonly IJwtTokenService _jwtTokenService;
     private readonly IUserProfilesRepositoryService _userProfilesRepositoryService;
 
-    public UserProfilesService(ILogger<UserProfilesService> logger, IMapper mapper, IUserProfilesRepositoryService userProfilesRepositoryService)
+    public UserProfilesService(ILogger<UserProfilesService> logger, IMapper mapper, IJwtTokenService jwtTokenService, IUserProfilesRepositoryService userProfilesRepositoryService)
     {
         _logger = logger;
         _mapper = mapper;
+        _jwtTokenService = jwtTokenService;
         _userProfilesRepositoryService = userProfilesRepositoryService;
     }
     
     public async override Task<Protos.UserProfiles.GetUserProfileResponse> getUserProfile(Protos.UserProfiles.GetUserProfileRequest request, ServerCallContext context)
     {
-        var getUserProfileRequest = _mapper.Map<GetUserProfileRequest>(request);
+        var getUserProfileRequest = _mapper.Map<GetUserProfileRequest>(request) with 
+        {
+            UserId = _jwtTokenService.GetUserId()            
+        };
+        
         var getUserProfileResponse = await _userProfilesRepositoryService.GetUserProfileAsync(getUserProfileRequest, context.CancellationToken);
 
         if (getUserProfileResponse == null)
@@ -32,7 +39,7 @@ public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfiles
             {
                 UserProfile = new UserProfile
                 {
-                    Id = ""                    
+                    Id = ""
                 }
             };
 

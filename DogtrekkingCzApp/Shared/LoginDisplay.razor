@@ -43,28 +43,17 @@
 
             _nameOfLoggedUser = firstName;
 
-            if (emailClaim != null)
+            var response = await Client.getUserProfileAsync(new GetUserProfileRequest());
+
+            if (string.IsNullOrEmpty(response?.UserProfile?.Id))
             {
-                var request = new GetUserProfileRequest
-                {
-                    Email = emailClaim.Value
-                };
+                await RegisterUserAsync(userId, emailClaim, firstName, lastName);
+            }
+            else
+            {
+                _nameOfLoggedUser = $"{response.UserProfile.FirstName} {response.UserProfile.LastName}";
 
-                if (string.IsNullOrEmpty(request.Email) == false)
-                {
-                    var response = await Client.getUserProfileAsync(request);
-
-                    if (string.IsNullOrEmpty(response?.UserProfile?.Id))
-                    {
-                        await RegisterUserAsync(userId, emailClaim, firstName, lastName);
-                    }
-                    else
-                    {
-                        _nameOfLoggedUser = $"{response.UserProfile.FirstName} {response.UserProfile.LastName}";
-
-                        Model = mapper.Map<UserProfileModel>(response.UserProfile);
-                    }
-                }
+                Model = mapper.Map<UserProfileModel>(response.UserProfile);
             }
 
             StateHasChanged();

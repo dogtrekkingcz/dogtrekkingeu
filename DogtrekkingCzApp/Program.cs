@@ -4,6 +4,7 @@ using DogtrekkingCzApp;
 using DogtrekkingCzApp.Extensions;
 using DogtrekkingCzApp.Models;
 using DogtrekkingCzApp.Providers;
+using DogtrekkingCzApp.Services;
 using DogtrekkingCzShared.Mapping;
 using Google.Protobuf.Collections;
 using Grpc.Core;
@@ -51,6 +52,7 @@ typeAdapterConfig
     
 builder.Services
     .AddSingleton(typeAdapterConfig)
+    .AddSingleton<IUserProfileService, UserProfileService>()
     .AddScoped<IMapper, ServiceMapper>();
 
 

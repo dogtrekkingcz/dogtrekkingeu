@@ -9,8 +9,7 @@ namespace Storage.Services.Repositories.ActionRights
     {
         internal static TypeAdapterConfig AddActionRightsRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<AddActionRightsRequest, ActionRightsRecord>()
-                .Ignore(d => d.Id);
+            typeAdapterConfig.NewConfig<AddActionRightsRequest, ActionRightsRecord>();
 
             typeAdapterConfig.NewConfig<ActionRightsRecord, AddActionRightsResponse>();
 

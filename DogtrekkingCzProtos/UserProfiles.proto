@@ -30,7 +30,7 @@ message UpdateUserProfileResponse {
 }
 
 message GetUserProfileRequest {
-  string Email = 1;
+
 }
 
 message GetUserProfileResponse {

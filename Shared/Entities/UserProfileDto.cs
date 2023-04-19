@@ -20,6 +20,6 @@
 
         public ContactDto Contact { get; set; } = new();
 
-        public List<string> Dogs { get; set; } = new List<string>();
+        public List<DogDto> Dogs { get; set; } = new List<DogDto>();
     }
 }

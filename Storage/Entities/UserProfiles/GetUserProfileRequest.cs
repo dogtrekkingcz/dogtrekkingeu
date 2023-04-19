@@ -2,5 +2,5 @@
 
 public sealed record GetUserProfileRequest
 {
-    public required string Email { get; set; }
+    public required string UserId { get; set; }
 }
