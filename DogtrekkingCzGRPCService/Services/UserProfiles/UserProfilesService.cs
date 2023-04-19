@@ -1,12 +1,11 @@
+using DogtrekkingCz.Interfaces.Actions.Entities.UserProfile;
+using DogtrekkingCz.Interfaces.Actions.Services;
 using DogtrekkingCzShared.JwtToken;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Shared;
 using Storage.Entities.UserProfiles;
 using Storage.Interfaces;
-using GetUserProfileRequest = Storage.Entities.UserProfiles.GetUserProfileRequest;
-using GetUserProfileResponse = Protos.UserProfiles.GetUserProfileResponse;
-using UpdateUserProfileRequest = Storage.Entities.UserProfiles.UpdateUserProfileRequest;
 
 namespace DogtrekkingCzGRPCService.Services.UserProfiles;
 
@@ -15,37 +14,26 @@ public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfiles
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IJwtTokenService _jwtTokenService;
-    private readonly IUserProfilesRepositoryService _userProfilesRepositoryService;
+    private readonly IUserProfileService _userProfileService;
 
-    public UserProfilesService(ILogger<UserProfilesService> logger, IMapper mapper, IJwtTokenService jwtTokenService, IUserProfilesRepositoryService userProfilesRepositoryService)
+    public UserProfilesService(ILogger<UserProfilesService> logger, IMapper mapper, IJwtTokenService jwtTokenService, IUserProfileService userProfileService)
     {
         _logger = logger;
         _mapper = mapper;
         _jwtTokenService = jwtTokenService;
-        _userProfilesRepositoryService = userProfilesRepositoryService;
+        _userProfileService = userProfileService;
     }
     
     public async override Task<Protos.UserProfiles.GetUserProfileResponse> getUserProfile(Protos.UserProfiles.GetUserProfileRequest request, ServerCallContext context)
     {
-        var getUserProfileRequest = _mapper.Map<GetUserProfileRequest>(request) with 
-        {
-            UserId = _jwtTokenService.GetUserId()            
-        };
-        
-        var getUserProfileResponse = await _userProfilesRepositoryService.GetUserProfileAsync(getUserProfileRequest, context.CancellationToken);
+        var getUserProfileResponse = await _userProfileService.GetUserProfileAsync(new GetUserProfileRequest(), context.CancellationToken);
 
         if (getUserProfileResponse == null)
-            return new GetUserProfileResponse
-            {
-                UserProfile = new UserProfile
-                {
-                    Id = ""
-                }
-            };
+            return new Protos.UserProfiles.GetUserProfileResponse { UserProfile = null };
 
-        var response = new GetUserProfileResponse
+        var response = new Protos.UserProfiles.GetUserProfileResponse
         {
-            UserProfile = _mapper.Map<UserProfile>(getUserProfileResponse)
+            UserProfile = _mapper.Map<Protos.Shared.UserProfile>(getUserProfileResponse)
         };
 
         return response;
@@ -53,8 +41,9 @@ public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfiles
 
     public async override Task<Protos.UserProfiles.CreateUserProfileResponse> registerUserProfile(Protos.UserProfiles.CreateUserProfileRequest request, ServerCallContext context)
     {
-        var addUserProfileRequest = _mapper.Map<AddUserProfileRequest>(request.UserProfile);
-        var addUserProfileResponse = await _userProfilesRepositoryService.AddUserProfileAsync(addUserProfileRequest, context.CancellationToken);
+        var addUserProfileRequest = _mapper.Map<CreateUserProfileRequest>(request.UserProfile);
+
+        var addUserProfileResponse = await _userProfileService.CreateUserProfileAsync(addUserProfileRequest, context.CancellationToken);
 
         var response = _mapper.Map<Protos.UserProfiles.CreateUserProfileResponse>(addUserProfileResponse);
 
@@ -64,7 +53,7 @@ public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfiles
     public async override Task<Protos.UserProfiles.UpdateUserProfileResponse> updateUserProfile(Protos.UserProfiles.UpdateUserProfileRequest request, ServerCallContext context)
     {
         var updateUserProfileRequest = _mapper.Map<UpdateUserProfileRequest>(request.UserProfile);
-        var updateUserProfileResponse = await _userProfilesRepositoryService.UpdateUserProfileAsync(updateUserProfileRequest, context.CancellationToken);
+        var updateUserProfileResponse = await _userProfileService.UpdateUserProfileAsync(updateUserProfileRequest, context.CancellationToken);
 
         var response = _mapper.Map<Protos.UserProfiles.UpdateUserProfileResponse>(updateUserProfileResponse);
 

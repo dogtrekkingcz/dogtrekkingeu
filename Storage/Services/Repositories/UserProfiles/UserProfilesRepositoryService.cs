@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using Storage.Entities.UserProfiles;
 using Storage.Interfaces;
@@ -8,30 +9,29 @@ namespace Storage.Services.Repositories.UserProfiles
 {
     internal class UserProfilesRepositoryService : IUserProfilesRepositoryService
     {
+        private readonly ILogger _logger;
         private readonly IMapper _mapper;
         private readonly IStorageService<UserProfileRecord> _userProfileStorageService;
 
-        public UserProfilesRepositoryService(IMapper mapper, IStorageService<UserProfileRecord> userProfileStorageService)
+        public UserProfilesRepositoryService(ILogger<UserProfilesRepositoryService> logger, IMapper mapper, IStorageService<UserProfileRecord> userProfileStorageService)
         {
+            _logger = logger;
             _mapper = mapper;
             _userProfileStorageService = userProfileStorageService;
         }
 
-        public async Task<AddUserProfileResponse> AddUserProfileAsync(AddUserProfileRequest request, CancellationToken cancellationToken)
+        public async Task<AddUserProfileInternalStorageResponse> AddUserProfileAsync(AddUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var addRequest = _mapper.Map<UserProfileRecord>(request);
             
-            var addedActionRecord = await _userProfileStorageService.AddAsync(addRequest, cancellationToken);
+            var addedUserProfileRecord = await _userProfileStorageService.AddAsync(addRequest, cancellationToken);
 
-            var response = new AddUserProfileResponse
-            {
-                
-            };
+            var response = _mapper.Map<AddUserProfileInternalStorageResponse>(addedUserProfileRecord);
 
             return response;
         }
 
-        public async Task<UpdateUserProfileResponse> UpdateUserProfileAsync(UpdateUserProfileRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateUserProfileInternalStorageResponse> UpdateUserProfileAsync(UpdateUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
             Console.WriteLine(request.ToJson());
             
@@ -41,28 +41,32 @@ namespace Storage.Services.Repositories.UserProfiles
             
             var result = await _userProfileStorageService.UpdateAsync(updateRequest, cancellationToken);
 
-            return new UpdateUserProfileResponse
+            return new UpdateUserProfileInternalStorageResponse
             {
                 
             };
         }
 
-        public async Task DeleteUserProfileAsync(DeleteUserProfileRequest request, CancellationToken cancellationToken)
+        public async Task DeleteUserProfileAsync(DeleteUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var deleteRequest = _mapper.Map<UserProfileRecord>(request);
 
             await _userProfileStorageService.DeleteAsync(deleteRequest, cancellationToken);
         }
 
-        public async Task<GetUserProfileResponse> GetUserProfileAsync(GetUserProfileRequest request, CancellationToken cancellationToken)
+        public async Task<GetUserProfileInternalStorageResponse> GetUserProfileAsync(GetUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var filter = new List<(string key, string value)> { ("Id", request.UserId) };
+            _logger.LogInformation($"'{nameof(GetUserProfileAsync)}': Request: '{request}'");
+
+            var filter = new List<(string key, string value)> { ("UserId", request.UserId) };
             var result = await _userProfileStorageService.GetByFilterAsync(filter, cancellationToken);
+
+            _logger.LogInformation($"'{nameof(GetUserProfileAsync)}': Response: '{result}'");
 
             if (result == null)
                 return null;
             
-            var response = _mapper.Map<GetUserProfileResponse>(result.FirstOrDefault());
+            var response = _mapper.Map<GetUserProfileInternalStorageResponse>(result.FirstOrDefault());
 
             return response;
         }

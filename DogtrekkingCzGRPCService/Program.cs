@@ -12,11 +12,6 @@ using Storage.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddGrpc(options =>
-{
-    options.Interceptors.Add<JwtTokenInterceptor>();
-});
-
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 Console.WriteLine(MongoDbConnectionString);
 
@@ -29,7 +24,11 @@ var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
 builder.Services
     .AddDogtrekkingCzShared(out typeAdapterConfig, options)
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
-    .AddBaseLayer(typeAdapterConfig, options);
+    .AddBaseLayer(typeAdapterConfig, options)
+    .AddGrpc(options =>
+    {
+        options.Interceptors.Add<JwtTokenInterceptor>();
+    });
 
 typeAdapterConfig
     .AddAuthorizationServiceMapping()

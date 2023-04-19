@@ -69,7 +69,6 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
     public async override Task<Protos.Actions.CreateActionResponse> createAction(Protos.Actions.CreateActionRequest request, ServerCallContext context)
     {
         var addActionRequest = _mapper.Map<CreateActionRequest>(request);
-        addActionRequest.Id = Guid.NewGuid().ToString();
 
         var result = await _actionsService.CreateActionAsync(addActionRequest, context.CancellationToken);
 

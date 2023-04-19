@@ -2,15 +2,18 @@
 using Grpc.Core.Interceptors;
 using Grpc.Core;
 using static Grpc.Core.Interceptors.Interceptor;
+using Microsoft.Extensions.Logging;
 
 namespace DogtrekkingCzShared.Interceptors
 {
     public class JwtTokenInterceptor : Interceptor
     {
+        private readonly ILogger _logger;
         private readonly IJwtTokenService _jwtTokenService;
 
-        public JwtTokenInterceptor(IJwtTokenService jwtTokenService) 
+        public JwtTokenInterceptor(ILogger<JwtTokenInterceptor> logger, IJwtTokenService jwtTokenService) 
         { 
+            _logger = logger;
             _jwtTokenService = jwtTokenService;
         }
 

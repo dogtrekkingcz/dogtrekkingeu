@@ -8,12 +8,12 @@ namespace Storage.Services.Repositories.UserProfiles
     {
         internal static TypeAdapterConfig AddUserProfilesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<AddUserProfileRequest, UserProfileRecord>()
-                .Ignore(d => d.Id);
-            
-            typeAdapterConfig.NewConfig<UpdateUserProfileRequest, UserProfileRecord>();
+            typeAdapterConfig.NewConfig<AddUserProfileInternalStorageRequest, UserProfileRecord>();
+            typeAdapterConfig.NewConfig<UserProfileRecord, AddUserProfileInternalStorageResponse>();
 
-            typeAdapterConfig.NewConfig<UserProfileRecord, GetUserProfileResponse>();
+            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest, UserProfileRecord>();
+
+            typeAdapterConfig.NewConfig<UserProfileRecord, GetUserProfileInternalStorageResponse>();
 
             return typeAdapterConfig;
         }

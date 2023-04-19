@@ -14,7 +14,8 @@ namespace DogtrekkingCz.Actions
             services
                 .AddActions(typeAdapterConfig, options)
                 .AddEntries(typeAdapterConfig, options)
-                .AddRights(typeAdapterConfig);
+                .AddRights(typeAdapterConfig)
+                .AddUserProfiles(typeAdapterConfig, options);
             
             return services;
         }

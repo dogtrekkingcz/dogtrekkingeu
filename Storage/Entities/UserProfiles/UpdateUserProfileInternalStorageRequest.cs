@@ -2,6 +2,7 @@
 
 namespace Storage.Entities.UserProfiles;
 
-public sealed record AddUserProfileRequest : UserProfileDto
+public sealed record UpdateUserProfileInternalStorageRequest : UserProfileDto
 {
+
 }
