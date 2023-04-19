@@ -6,8 +6,9 @@
 
 @inject Protos.Authorization.Authorization.AuthorizationClient AuthorizationClient
 @inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
-@inject AuthenticationStateProvider AuthStateProvider
 @inject IUserProfileService UserProfileService
+@inject AuthenticationStateProvider AuthStateProvider
+
 
 <PageTitle>Index</PageTitle>
 
@@ -31,75 +32,7 @@
 
         if ((_authState?.User?.Identity?.IsAuthenticated ?? false) == true)
         {
-            Protos.UserProfiles.GetUserProfileResponse userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
-
-            UserProfileService.SetUserProfile(new UserProfileDto
-            {
-                Id = userProfile.UserProfile.Id,
-                UserId = userProfile.UserProfile.UserId,
-                Address = new AddressDto
-                {
-                    City = userProfile.UserProfile.Address.City,
-                    Country = userProfile.UserProfile.Address.Country,
-                    Position = new LatLngDto
-                    {
-                        GpsLatitude = userProfile.UserProfile.Address.Position.Latitude,
-                        GpsLongitude = userProfile.UserProfile.Address.Position.Longitude
-                    },
-                    Region = userProfile.UserProfile.Address.Region,
-                    Street = userProfile.UserProfile.Address.Street
-                },
-                Birthday = userProfile.UserProfile.Birthday.ToDateTimeOffset(),
-                Contact = new ContactDto
-                {
-                    EmailAddress = userProfile.UserProfile.Contact.EmailAddress,
-                    PhoneNumber = userProfile.UserProfile.Contact.PhoneNumber
-                }, 
-                Dogs = userProfile.UserProfile.Dogs
-                    .Select(dog => new DogDto
-                    {
-                        Birthday = dog.Birthday.ToDateTimeOffset(),
-                        Name = dog.Name,
-                        Chip = dog.Chip,
-                        Decease = dog.Decease.ToDateTimeOffset(),
-                        Id = dog.Id,
-                        Pedigree = dog.Pedigree,
-                        UriToPhoto = dog.UriToPhoto,
-                        Vaccinations = dog.Vaccinations
-                            .Select(vacc => new DogDto.VaccinationDto
-                            {
-                                UriToPhoto = vacc.UriToPhoto,
-                                Date = vacc.Date.ToDateTimeOffset(),
-                                Note = vacc.Note,
-                                ValidUntil = vacc.ValidUntil.ToDateTimeOffset(),
-                                Type = (DogDto.VaccinationType) vacc.Type
-                            })
-                            .ToList()
-                    })
-                    .ToList(),
-                Nickname = userProfile.UserProfile.Nickname,
-                CompetitorId = Guid.Parse(userProfile.UserProfile.CompetitorId),
-                FirstName = userProfile.UserProfile.FirstName,
-                LastName = userProfile.UserProfile.LastName
-            });
-    
-            // load all rights of current user
-            Protos.Authorization.GetAllRightsResponse rights = await AuthorizationClient.getAllRightsAsync(new Protos.Authorization.GetAllRightsRequest());
-
-            var userRights = new List<ActionRightsDto>(rights.ActionRights.Count);
-            foreach (var right in rights.ActionRights)
-            {
-                userRights.Add(new ActionRightsDto
-                {
-                    Id = right.Id,
-                    ActionId = right.ActionId,
-                    UserId = right.UserId,
-                    Rights = (ActionRightsDto.RightsType) right.Rights,
-                    Roles = right.Roles
-                });
-            }
             
-            UserProfileService.SetRights(userRights);
         }
     }
 }
