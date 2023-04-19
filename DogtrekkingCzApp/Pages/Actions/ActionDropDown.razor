@@ -53,7 +53,7 @@
             .Add(nameof(ActionManage.Model), action)
             .Add(nameof(ActionManage.RequiredAction), RequiredActionEnum.DeleteAction);
         
-        var messageForm = modal.Show<ActionManage>("Delete action", parameters);
+        var messageForm = modal.Show<ActionManage>(localizer["Delete action"], parameters);
         var result = await messageForm.Result;
         
         await OnItemChanged.InvokeAsync(action);

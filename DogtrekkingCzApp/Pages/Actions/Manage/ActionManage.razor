@@ -60,7 +60,7 @@
     [Parameter]
     public string Id { get; set; }
 
-    public ActionModel Model { get; set; }
+    [Parameter] public ActionModel Model { get; set; }
 
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
     private string ActionButtonText { get; set; }

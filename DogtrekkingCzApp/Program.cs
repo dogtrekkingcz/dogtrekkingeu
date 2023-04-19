@@ -13,6 +13,8 @@ using Grpc.Net.Client.Web;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Components.Authorization;
+using Blazored.LocalStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -49,12 +51,13 @@ typeAdapterConfig
     .AddActionModelMapping()
     .AddUserProfileModelMapping()
     .AddEntryModelMapping();
-    
+
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddSingleton<IUserProfileService, UserProfileService>()
-    .AddScoped<IMapper, ServiceMapper>();
-
+    .AddScoped<IMapper, ServiceMapper>()
+    .AddBlazoredLocalStorage()
+    .AddScoped<TokenStorage>();
 
 builder.Services.AddSingleton(services =>
 {
