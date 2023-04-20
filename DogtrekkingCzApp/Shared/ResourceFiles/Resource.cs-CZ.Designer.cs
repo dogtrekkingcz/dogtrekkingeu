@@ -87,6 +87,33 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Žádné.
+        /// </summary>
+        internal static string AuthorizationRoleType_None {
+            get {
+                return ResourceManager.GetString("AuthorizationRoleType.None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vlastník.
+        /// </summary>
+        internal static string AuthorizationRoleType_Owner {
+            get {
+                return ResourceManager.GetString("AuthorizationRoleType.Owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uživatel.
+        /// </summary>
+        internal static string AuthorizationRoleType_User {
+            get {
+                return ResourceManager.GetString("AuthorizationRoleType.User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zpět.
         /// </summary>
         internal static string Cancel {

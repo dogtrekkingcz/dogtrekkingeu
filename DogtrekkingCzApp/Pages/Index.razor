@@ -12,15 +12,50 @@
 @inject IUserProfileService UserProfileService
 @inject AuthenticationStateProvider AuthStateProvider
 @inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
 
 
 <PageTitle>Index</PageTitle>
 
 <AuthorizeView>
     <Authorized>
-        Jsi přihlášen jako @context.User.Identity?.Name!
-        
-        ID: @UserProfileService.Get().UserId
+        Jsi přihlášen jako @context.User.Identity?.Name!, UserID: @UserProfileService.Get().UserId<br />
+        <hr />
+        Práva:
+        <ul>
+            @{
+                foreach (var right in UserProfileService.Get().Rights)
+                {
+                    var roles = "";
+                    foreach (var role in right.Roles)
+                    {
+                        if (roles.Length > 0)
+                            roles += ", ";
+                        roles += role;
+                        //
+                        // switch ((AuthorizationRoleDto.RoleType)int.Parse(role))
+                        // {
+                        //     case AuthorizationRoleDto.RoleType.None:
+                        //         roles += localizer["AuthorizationRoleType.None"];
+                        //         break;
+                        //         
+                        //     case AuthorizationRoleDto.RoleType.User:
+                        //         roles += localizer["AuthorizationRoleType.User"];
+                        //         break;
+                        //         
+                        //     case AuthorizationRoleDto.RoleType.Owner:
+                        //         roles += localizer["AuthorizationRoleType.Owner"];
+                        //         break;
+                        //             
+                        //     default:
+                        //         break;
+                        // }
+                    }
+                    
+                    <li>@right.Id - @string.Join(",", roles) - @right.ActionId</li>
+                }
+            }
+        </ul>
     </Authorized>
     <NotAuthorized>
         Nejsi přihlášen

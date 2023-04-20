@@ -69,4 +69,13 @@
     <data name="Delete action" xml:space="preserve">
         <value>Delete action</value>
     </data>
+    <data name="AuthorizationRoleType.None" xml:space="preserve">
+        <value>None</value>
+    </data>
+    <data name="AuthorizationRoleType.User" xml:space="preserve">
+        <value>User</value>
+    </data>
+    <data name="AuthorizationRoleType.Owner" xml:space="preserve">
+        <value>Owner</value>
+    </data>
 </root>
