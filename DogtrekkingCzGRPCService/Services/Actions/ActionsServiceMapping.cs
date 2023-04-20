@@ -4,6 +4,7 @@ using DogtrekkingCzShared.Entities;
 using DogtrekkingCzShared.Extensions;
 using Google.Protobuf.Collections;
 using Mapster;
+using Protos.Shared;
 
 
 namespace DogtrekkingCzGRPCService.Services.Actions;

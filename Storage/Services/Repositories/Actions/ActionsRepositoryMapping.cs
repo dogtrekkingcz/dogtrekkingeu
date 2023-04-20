@@ -9,8 +9,7 @@ namespace Storage.Services.Repositories.Actions
     {
         internal static TypeAdapterConfig AddActionRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>()
-                .Ignore(d => d.Id);
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>();
 
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest, ActionRecord>();
 

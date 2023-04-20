@@ -38,13 +38,12 @@ namespace DogtrekkingCzShared.Mapping
                 .Ignore(d => d.Payments)
                 .Ignore(d => d.EnteringTo)
                 .Ignore(d => d.EnteringFrom)
-                .Ignore(d => d.MaxNumberOfCompetitors)
-                .Ignore(d => d.Categories);
+                .Ignore(d => d.MaxNumberOfCompetitors);
 
             typeAdapterConfig.NewConfig<RaceDto, RaceDto>();
 
             typeAdapterConfig.NewConfig<RaceDto.PaymentDefinitionDto, RaceDto.PaymentDefinitionDto>();
-
+            
             return typeAdapterConfig;
         }
     }

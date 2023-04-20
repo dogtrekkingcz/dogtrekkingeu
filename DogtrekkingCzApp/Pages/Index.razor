@@ -31,25 +31,25 @@
                     {
                         if (roles.Length > 0)
                             roles += ", ";
-                        roles += role;
-                        //
-                        // switch ((AuthorizationRoleDto.RoleType)int.Parse(role))
-                        // {
-                        //     case AuthorizationRoleDto.RoleType.None:
-                        //         roles += localizer["AuthorizationRoleType.None"];
-                        //         break;
-                        //         
-                        //     case AuthorizationRoleDto.RoleType.User:
-                        //         roles += localizer["AuthorizationRoleType.User"];
-                        //         break;
-                        //         
-                        //     case AuthorizationRoleDto.RoleType.Owner:
-                        //         roles += localizer["AuthorizationRoleType.Owner"];
-                        //         break;
-                        //             
-                        //     default:
-                        //         break;
-                        // }
+
+                        Enum.TryParse(role, out AuthorizationRoleDto.RoleType roleType);
+                        switch (roleType)
+                        {
+                            case AuthorizationRoleDto.RoleType.None:
+                                roles += localizer["AuthorizationRoleType.None"];
+                                break;
+                                
+                            case AuthorizationRoleDto.RoleType.User:
+                                roles += localizer["AuthorizationRoleType.User"];
+                                break;
+                                
+                            case AuthorizationRoleDto.RoleType.Owner:
+                                roles += localizer["AuthorizationRoleType.Owner"];
+                                break;
+                                    
+                            default:
+                                break;
+                        }
                     }
                     
                     <li>@right.Id - @string.Join(",", roles) - @right.ActionId</li>

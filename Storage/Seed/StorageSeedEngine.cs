@@ -1,4 +1,5 @@
-﻿using Storage.Entities.AuthorizationRoles;
+﻿using DogtrekkingCzShared.Entities;
+using Storage.Entities.AuthorizationRoles;
 using Storage.Interfaces;
 using static DogtrekkingCzShared.Entities.AuthorizationRoleDto;
 
@@ -18,8 +19,8 @@ namespace Storage.Seed
             await _authorizationRolesService.AddAuthorizationRoleAsync(
                 new Entities.AuthorizationRoles.AddAuthorizationRoleRequest
                 {
-                    Id = AddAuthorizationRoleRequest.RoleType.User.ToString(),
-                    Type = AddAuthorizationRoleRequest.RoleType.User,
+                    Id = AuthorizationRoleDto.RoleType.User.ToString(),
+                    Type = AuthorizationRoleDto.RoleType.User,
                     Name = "User",
                     Actions = new List<ActionType>
                     {
@@ -31,8 +32,8 @@ namespace Storage.Seed
             await _authorizationRolesService.AddAuthorizationRoleAsync(
                 new Entities.AuthorizationRoles.AddAuthorizationRoleRequest
                 {
-                    Id = AddAuthorizationRoleRequest.RoleType.Owner.ToString(),
-                    Type = AddAuthorizationRoleRequest.RoleType.Owner,
+                    Id = AuthorizationRoleDto.RoleType.Owner.ToString(),
+                    Type = AuthorizationRoleDto.RoleType.Owner,
                     Name = "Owner",
                     Actions = new List<ActionType>
                     {

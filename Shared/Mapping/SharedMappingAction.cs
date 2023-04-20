@@ -15,7 +15,7 @@ namespace DogtrekkingCzShared.Mapping
 
             typeAdapterConfig.NewConfig<ActionDto, ActionDto>()
                 .TwoWays();
-
+            
             return typeAdapterConfig;
         }
     }

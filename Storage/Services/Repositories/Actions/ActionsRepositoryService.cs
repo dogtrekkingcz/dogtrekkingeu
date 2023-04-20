@@ -1,5 +1,6 @@
 ﻿using DogtrekkingCzShared.Entities;
 using MapsterMapper;
+using Microsoft.Extensions.Logging;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 using Storage.Models;
@@ -8,23 +9,21 @@ namespace Storage.Services.Repositories.Actions
 {
     internal class ActionsRepositoryService : IActionsRepositoryService
     {
+        private readonly ILogger _logger;
         private readonly IMapper _mapper;
         private readonly IStorageService<ActionRecord> _actionsStorageService;
 
-        public ActionsRepositoryService(IMapper mapper, IStorageService<ActionRecord> actionsStorageService)
+        public ActionsRepositoryService(ILogger<ActionsRepositoryService> logger, IMapper mapper, IStorageService<ActionRecord> actionsStorageService)
         {
+            _logger = logger;
             _mapper = mapper;
             _actionsStorageService = actionsStorageService;
         }
 
         public async Task<CreateActionInternalStorageResponse> AddActionAsync(CreateActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
+            _logger.LogDebug("\'{AddActionAsyncName}\': {Request}", nameof(AddActionAsync), request);
             var addRequest = _mapper.Map<ActionRecord>(request);
-
-            if (addRequest.Id == null)
-            {
-                addRequest.Id = Guid.NewGuid().ToString();
-            }
             
             var addedActionRecord = await _actionsStorageService.AddAsync(addRequest, cancellationToken);
 

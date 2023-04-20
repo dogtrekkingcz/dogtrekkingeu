@@ -31,6 +31,12 @@ namespace DogtrekkingCz.Actions.Services.ActionsManage
             var addActionRequest = _mapper.Map<CreateActionInternalStorageRequest>(request);
             addActionRequest.Id = Guid.NewGuid().ToString();
 
+            foreach (var race in addActionRequest.Races)
+            {
+                if (race.Id == Guid.Empty)
+                    race.Id = Guid.NewGuid();
+            }
+
             var result = await _actionsRepositoryService.AddActionAsync(addActionRequest, cancellationToken);
 
             await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsRequest
