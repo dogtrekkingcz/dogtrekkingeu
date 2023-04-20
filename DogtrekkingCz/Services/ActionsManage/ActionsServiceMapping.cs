@@ -13,6 +13,8 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<CreateActionRequest, CreateActionInternalStorageRequest>();
 
         typeAdapterConfig.NewConfig<CreateActionInternalStorageResponse, CreateActionResponse>();
+
+        typeAdapterConfig.NewConfig<DeleteActionRequest, DeleteActionInternalStorageRequest>();
             
         return typeAdapterConfig;
     }
