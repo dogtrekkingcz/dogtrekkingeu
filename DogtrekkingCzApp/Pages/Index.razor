@@ -6,6 +6,7 @@
 @using DogtrekkingCzShared.Extensions
 @using Protos.UserProfiles
 @using System.Security.Claims;
+@using MapsterMapper
 
 @inject Protos.Authorization.Authorization.AuthorizationClient AuthorizationClient
 @inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
@@ -13,6 +14,7 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
 
 
 <PageTitle>Index</PageTitle>
@@ -125,55 +127,7 @@
         if (userProfile == null || userProfile.UserProfile == null)
             return null;
 
-        UserProfileService.SetUserProfile(new UserProfileDto
-            {
-                Id = userProfile.UserProfile.Id,
-                UserId = userProfile.UserProfile.UserId,
-                Address = new AddressDto
-                {
-                    City = userProfile.UserProfile.Address.City,
-                    Country = userProfile.UserProfile.Address.Country,
-                    Position = new LatLngDto
-                    {
-                        GpsLatitude = userProfile.UserProfile.Address.Position.Latitude,
-                        GpsLongitude = userProfile.UserProfile.Address.Position.Longitude
-                    },
-                    Region = userProfile.UserProfile.Address.Region,
-                    Street = userProfile.UserProfile.Address.Street
-                },
-                Birthday = userProfile.UserProfile.Birthday.ToDateTimeOffset(),
-                Contact = new ContactDto
-                {
-                    EmailAddress = userProfile.UserProfile.Contact.EmailAddress,
-                    PhoneNumber = userProfile.UserProfile.Contact.PhoneNumber
-                },
-                Dogs = userProfile.UserProfile.Dogs
-                    .Select(dog => new DogDto
-                    {
-                        Birthday = dog.Birthday.ToDateTimeOffset(),
-                        Name = dog.Name,
-                        Chip = dog.Chip,
-                        Decease = dog.Decease.ToDateTimeOffset(),
-                        Id = dog.Id,
-                        Pedigree = dog.Pedigree,
-                        UriToPhoto = dog.UriToPhoto,
-                        Vaccinations = dog.Vaccinations
-                            .Select(vacc => new DogDto.VaccinationDto
-                            {
-                                UriToPhoto = vacc.UriToPhoto,
-                                Date = vacc.Date.ToDateTimeOffset(),
-                                Note = vacc.Note,
-                                ValidUntil = vacc.ValidUntil.ToDateTimeOffset(),
-                                Type = (DogDto.VaccinationType)vacc.Type
-                            })
-                            .ToList()
-                    })
-                    .ToList(),
-                Nickname = userProfile.UserProfile.Nickname,
-                CompetitorId = Guid.Parse(userProfile.UserProfile.CompetitorId),
-                FirstName = userProfile.UserProfile.FirstName,
-                LastName = userProfile.UserProfile.LastName
-            });
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(userProfile));
 
         // load all rights of current user
         Protos.Authorization.GetAllRightsResponse rights = await AuthorizationClient.getAllRightsAsync(new Protos.Authorization.GetAllRightsRequest());

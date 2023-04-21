@@ -37,16 +37,13 @@
     protected override async Task OnInitializedAsync()
     {
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+
+        _nameOfLoggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "name")?.Value ?? "Unknown";
     }
 
     private async Task UpdateUserAsync()
     {
-        var parameters = new ModalParameters()
-            .Add(nameof(UserProfileModal.Model), Model)
-            .Add(nameof(UserProfileModal.RequiredAction), UserProfileRequiredAction.Update);
-
-        var messageForm = modal.Show<UserProfileModal>("Registering user", parameters);
-        var result = await messageForm.Result;
+        Navigation.NavigateTo("/userprofile/manage");
     }
 
     private void BeginLogOut()

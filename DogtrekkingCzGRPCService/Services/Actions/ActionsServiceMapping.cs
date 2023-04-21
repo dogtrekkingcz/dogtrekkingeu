@@ -109,7 +109,11 @@ internal static class ActionsServiceMapping
             {
                 Id = s.Id
             });
-        
+
+        typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse, Protos.Actions.GetActionEntrySettingsResponse>();
+        typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.CategoryDto, Protos.Actions.CategoryDto>();
+        typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.RaceDto, Protos.Actions.RaceDto>();
+
         return typeAdapterConfig;
     }
 }

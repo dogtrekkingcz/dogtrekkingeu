@@ -50,7 +50,8 @@ typeAdapterConfig
     .AddSharedMapping()
     .AddActionModelMapping()
     .AddUserProfileModelMapping()
-    .AddEntryModelMapping();
+    .AddEntryModelMapping()
+    .AddActionSettingsModelMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)

@@ -97,6 +97,15 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         return new Protos.Actions.DeleteActionResponse();
     }
 
+    public async override Task<Protos.Actions.GetActionEntrySettingsResponse> getActionEntrySettings(Protos.Actions.GetActionEntrySettingsRequest request, ServerCallContext context)
+    {
+        var actionEntrySettings = await _actionsService.GetActionEntrySettings(new GetActionEntrySettingsRequest { ActionId = request.Id }, context.CancellationToken);
+
+        var response = _mapper.Map<Protos.Actions.GetActionEntrySettingsResponse>(actionEntrySettings);
+
+        return response;
+    }
+
     public async Task<TestResult> TestMeAsync()
     {
         return new TestResult { Result = true };

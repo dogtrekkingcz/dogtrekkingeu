@@ -15,17 +15,19 @@
       <div class="three-dots"></div>
   </a>
 
-  <ul class="dropdown-menu">
-    <AuthorizeView>
-      <Authorized>
-        @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Model.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
-        {
-          <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@localizer["Edit"]</a></li>
-          <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@localizer["Delete"]</a></li>
-        }
-      </Authorized>
-    </AuthorizeView>
-  </ul>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" @onclick="@(async () => await CreateEntry(Model))">@localizer["Action.CreateEntry"]</a></li>
+        
+        <AuthorizeView>
+            <Authorized>
+                @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Model.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
+                {
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@localizer["Edit"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@localizer["Delete"]</a></li>
+                }
+            </Authorized>
+        </AuthorizeView>
+    </ul>
 </div>
 
 @code {
@@ -57,5 +59,10 @@
         var result = await messageForm.Result;
         
         await OnItemChanged.InvokeAsync(action);
+    }
+
+    protected async Task CreateEntry(ActionModel action)
+    {
+        NavManager.NavigateTo($"/action/{action.Id}/create_entry");
     }
 }

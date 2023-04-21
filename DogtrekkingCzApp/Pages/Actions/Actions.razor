@@ -1,10 +1,6 @@
 ﻿@page "/actions"
-@using Protos
-@using System.Security.Claims
 @using DogtrekkingCzApp.Models
-@using DogtrekkingCzApp.Pages.Actions.Manage
 @using MapsterMapper
-@using MongoDB.Driver
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
@@ -23,16 +19,16 @@
 else
 {
     <InputSelect @bind-Value="SortingOptionsValue">
-        <option value="@SortingOptions.ApprovedWithLockedTermByDate">@localizer["Approved and term locked by date"]</option>
-        <option value="@SortingOptions.ApprovedByDate">@localizer["Approved by date"]</option>
-        <option value="@SortingOptions.AllByDate">@localizer["All by date"]</option>
+        <option value="@SortingOptions.ApprovedWithLockedTermByDate">@localizer["Actions.ApprovedAndTermLockedByDate"]</option>
+        <option value="@SortingOptions.ApprovedByDate">@localizer["Actions.ApprovedByDate"]</option>
+        <option value="@SortingOptions.AllByDate">@localizer["Actions.AllByDate"]</option>
     </InputSelect>
     <table class="table">
         <thead>
         <tr>
-            <th>@localizer["Term & address of action"]</th>
-            <th>@localizer["Name & description of action"]</th>
-            <th>@localizer["Enrolled races"]</th>
+            <th>@localizer["Actions.Term&AddressOfAction"]</th>
+            <th>@localizer["Actions.Name&DescriptionOfAction"]</th>
+            <th>@localizer["Actions.EnrolledRaces"]</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -93,7 +89,7 @@ else
 
     <AuthorizeView>
         <Authorized>
-            <button @onclick="@(async () => await PrepareToAddAction())" class="btn btn-primary">Add action ...</button>            
+            <button @onclick="@(async () => await PrepareToAddAction())" class="btn btn-primary">@localizer["Actions.AddAction"]</button>            
         </Authorized>
     </AuthorizeView>
 }

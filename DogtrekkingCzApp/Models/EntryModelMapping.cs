@@ -20,6 +20,10 @@ internal static class EntryModelMapping
             .IgnoreNullValues(true)
             .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime());
 
+        typeAdapterConfig.NewConfig<EntryModel, Protos.Entries.CreateEntryRequest>()
+            .Ignore(d => d.Entry.Id)
+            .Ignore(d => d.Entry.Created);
+
         return typeAdapterConfig;
     }
 }

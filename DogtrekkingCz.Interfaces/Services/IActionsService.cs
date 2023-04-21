@@ -18,5 +18,7 @@ namespace DogtrekkingCz.Interfaces.Actions.Services
         Task<GetActionResponse> GetActionAsync(GetActionRequest request, CancellationToken cancellationToken);
 
         Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken);
+
+        Task<GetActionEntrySettingsResponse> GetActionEntrySettings(GetActionEntrySettingsRequest request, CancellationToken cancellationToken);
     }
 }

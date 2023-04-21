@@ -24,6 +24,8 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord, ActionDto>()
                 .TwoWays();
 
+            typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>();
+
             return typeAdapterConfig;
         }
     }

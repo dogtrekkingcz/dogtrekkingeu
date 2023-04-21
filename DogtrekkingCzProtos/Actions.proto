@@ -14,6 +14,7 @@ service Actions {
   rpc createAction (CreateActionRequest) returns (CreateActionResponse);
   rpc updateAction (UpdateActionRequest) returns (UpdateActionResponse);
   rpc deleteAction (DeleteActionRequest) returns (DeleteActionResponse);
+  rpc getActionEntrySettings (GetActionEntrySettingsRequest) returns (GetActionEntrySettingsResponse);
 }
 
 message GetAllActionsRequest {
@@ -62,4 +63,26 @@ message DeleteActionRequest {
 
 message DeleteActionResponse {
   
+}
+
+message GetActionEntrySettingsRequest {
+  string Id = 1;
+}
+
+message GetActionEntrySettingsResponse {
+  string Id = 1;
+  string Name = 2;
+  repeated RaceDto Races = 3;
+  repeated CategoryDto Categories = 4;
+}
+
+message RaceDto {
+  string Id = 1;
+  string Name = 2;  
+}
+
+message CategoryDto {
+  string Id = 1;
+  string RaceId = 2;
+  string Name = 3;
 }

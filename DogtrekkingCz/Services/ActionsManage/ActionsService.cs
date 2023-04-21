@@ -33,8 +33,14 @@ namespace DogtrekkingCz.Actions.Services.ActionsManage
 
             foreach (var race in addActionRequest.Races)
             {
-                if (race.Id == Guid.Empty)
+                if (race.Id == default)
                     race.Id = Guid.NewGuid();
+
+                foreach (var category in race.Categories)
+                {
+                    if (category.Id == default)
+                        category.Id = Guid.NewGuid();
+                }
             }
 
             var result = await _actionsRepositoryService.AddActionAsync(addActionRequest, cancellationToken);
@@ -107,6 +113,36 @@ namespace DogtrekkingCz.Actions.Services.ActionsManage
             var deleteActionRequest = _mapper.Map<DeleteActionInternalStorageRequest>(request);
 
             await _actionsRepositoryService.DeleteActionAsync(deleteActionRequest, cancellationToken);
+        }
+
+        public async Task<GetActionEntrySettingsResponse> GetActionEntrySettings(GetActionEntrySettingsRequest request, CancellationToken cancellationToken)
+        {
+            var getActionRequest = _mapper.Map<GetActionInternalStorageRequest>(request);
+
+            var result = await _actionsRepositoryService.GetActionAsync(getActionRequest, cancellationToken);
+
+            var response = new GetActionEntrySettingsResponse
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Races = result.Races.Select(r => 
+                        new GetActionEntrySettingsResponse.RaceDto
+                        {
+                            Id = r.Id.ToString(),
+                            Name = r.Name
+                        })
+                        .ToList(),
+                Categories = result.Races.SelectMany(r => r.Categories.Select(ctg =>
+                    new GetActionEntrySettingsResponse.CategoryDto
+                    {
+                        Id = ctg.Id.ToString(),
+                        Name = ctg.Name,
+                        RaceId = r.Id.ToString()
+                    }))
+                    .ToList()
+            };
+
+            return response;
         }
     }
 }

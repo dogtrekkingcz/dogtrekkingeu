@@ -27,7 +27,7 @@
     <data name="Term" xml:space="preserve">
         <value>Termín</value>
     </data>
-    <data name="Enrolled races" xml:space="preserve">
+    <data name="Actions.EnrolledRaces" xml:space="preserve">
         <value>Vypsané závody</value>
     </data>
     <data name="Edit" xml:space="preserve">
@@ -54,12 +54,6 @@
     <data name="Term &amp; name of action" xml:space="preserve">
         <value>Termín a název</value>
     </data>
-    <data name="Term &amp; address of action" xml:space="preserve">
-        <value>Kdy a kde</value>
-    </data>
-    <data name="Name &amp; description of action" xml:space="preserve">
-        <value>Co a kým</value>
-    </data>
     <data name="Add new action" xml:space="preserve">
         <value>Přidat</value>
     </data>
@@ -77,5 +71,95 @@
     </data>
     <data name="AuthorizationRoleType.Owner" xml:space="preserve">
         <value>Vlastník</value>
+    </data>
+    <data name="Action.CreateEntry" xml:space="preserve">
+        <value>Podat přihlášku</value>
+    </data>
+    <data name="Action.SendEntry" xml:space="preserve">
+        <value>Odeslat přihlášku</value>
+    </data>
+    <data name="Action.CreateEntry.Person" xml:space="preserve">
+        <value>Osobní</value>
+    </data>
+    <data name="Action.CreateEntry.RaceCategory" xml:space="preserve">
+        <value>Závod a kategorie</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs" xml:space="preserve">
+        <value>Psi</value>
+    </data>
+    <data name="Action.CreateEntry.Notes" xml:space="preserve">
+        <value>Poznámky</value>
+    </data>
+    <data name="Action.CreateEntry.Summary" xml:space="preserve">
+        <value>Shrnutí</value>
+    </data>
+    <data name="Action.CreateEntry.Person.Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="Action.CreateEntry.Person.Surname" xml:space="preserve">
+        <value>Příjmení</value>
+    </data>
+    <data name="Action.CreateEntry.Person.Name" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Action.CreateEntry.Person.Phone" xml:space="preserve">
+        <value>Mobilní telefon</value>
+    </data>
+    <data name="Action.CreateEntry.Race.Selection" xml:space="preserve">
+        <value>Vyber závod</value>
+    </data>
+    <data name="Action.CreateEntry.Category.Selection" xml:space="preserve">
+        <value>Vyber kategorii</value>
+    </data>
+    <data name="Action.CreateEntry.For.Action" xml:space="preserve">
+        <value>Podat přihlášku na akci: </value>
+    </data>
+    <data name="Action.Create.AddNewAction" xml:space="preserve">
+        <value>Přidat novou akci</value>
+    </data>
+    <data name="Action.Update.UpdateAction" xml:space="preserve">
+        <value>Upravit akci</value>
+    </data>
+    <data name="Action.Delete.DeleteAction" xml:space="preserve">
+        <value>Smazat akci</value>
+    </data>
+    <data name="Action.Manage.General" xml:space="preserve">
+        <value>Obecné</value>
+    </data>
+    <data name="Action.Manage.Location" xml:space="preserve">
+        <value>Pozice</value>
+    </data>
+    <data name="Action.Manage.Races" xml:space="preserve">
+        <value>Závody</value>
+    </data>
+    <data name="Menu.Home" xml:space="preserve">
+        <value>Domů</value>
+    </data>
+    <data name="Menu.Actions" xml:space="preserve">
+        <value>Akce</value>
+    </data>
+    <data name="Menu.Entries" xml:space="preserve">
+        <value>Přihlášky</value>
+    </data>
+    <data name="Actions.ApprovedAndTermLockedByDate" xml:space="preserve">
+        <value>Oficiální, schválené akce, dle datumu</value>
+    </data>
+    <data name="Actions.ApprovedByDate" xml:space="preserve">
+        <value>Schválené, dle datumu</value>
+    </data>
+    <data name="Actions.AllByDate" xml:space="preserve">
+        <value>Všechny akce, dle datumu</value>
+    </data>
+    <data name="Actions.Name&amp;DescriptionOfAction" xml:space="preserve">
+        <value>Co a kým</value>
+    </data>
+    <data name="Actions.Term&amp;AddressOfAction" xml:space="preserve">
+        <value>Kdy a kde</value>
+    </data>
+    <data name="Actions.AddAction" xml:space="preserve">
+        <value>Přidat akci</value>
+    </data>
+    <data name="Action.CreateEntry.Submit" xml:space="preserve">
+        <value>Odeslat přihlášku</value>
     </data>
 </root>

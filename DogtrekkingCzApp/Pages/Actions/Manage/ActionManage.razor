@@ -2,6 +2,7 @@
 
 @using DogtrekkingCzApp.Models
 @using MapsterMapper
+@using DogtrekkingCzApp.Shared
 
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
@@ -20,17 +21,14 @@
         <TabControl></TabControl>
         
         <TabControl>
-            <TabPage Text="@localizer["Action main info"]">
+            <TabPage Text="@localizer["Action.Manage.General"]">
                 <ActionManageMainInfoComponent Model="Model"></ActionManageMainInfoComponent>
             </TabPage>
-            <TabPage Text="@localizer["Action location"]">
+            <TabPage Text="@localizer["Action.Manage.Location"]">
                 <ActionManageLocationComponent Model="Model"></ActionManageLocationComponent>
             </TabPage>
-            <TabPage Text="@localizer["Races definition"]">
+            <TabPage Text="@localizer["Action.Manage.Races"]">
                 <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent>
-            </TabPage>
-            <TabPage Text="@localizer["Action entries"]">
-                ...
             </TabPage>
         </TabControl>
         
@@ -99,13 +97,13 @@
         switch (RequiredAction)
         {
             case RequiredActionEnum.AddAction: 
-                return localizer["Add new action"]; 
+                return localizer["Action.Create.AddNewAction"]; 
                 
             case RequiredActionEnum.UpdateAction: 
-                return localizer["Update action"];
+                return localizer["Action.Update.UpdateAction"];
                 
             case RequiredActionEnum.DeleteAction:
-                return localizer["Delete action"];
+                return localizer["Action.Delete.DeleteAction"];
         }
 
         return "";

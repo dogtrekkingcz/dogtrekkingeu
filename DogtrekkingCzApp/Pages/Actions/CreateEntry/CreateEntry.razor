@@ -1,0 +1,87 @@
+﻿@page "/action/{ActionId}/create_entry"
+@using DogtrekkingCzApp.Shared
+@using DogtrekkingCzApp.Models
+@using DogtrekkingCzApp.Services
+@using MapsterMapper
+@using Protos.Actions
+@using Protos.Entries
+@using Protos.Shared
+@inject Protos.Entries.Entries.EntriesClient EntriesClient
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+@inject NavigationManager NavManager
+@inject IUserProfileService UserProfileService
+
+<h1>@localizer["Action.CreateEntry.For.Action"]</h1>
+
+<EditForm Model="Entry" OnValidSubmit="SendAsync">
+    <TabControl>
+        <TabPage Text="@localizer["Action.CreateEntry.Person"]">
+            <CreateEntryPersonComponent Model="Entry"></CreateEntryPersonComponent>
+        </TabPage>
+        <TabPage Text="@localizer["Action.CreateEntry.RaceCategory"]">
+            <CreateEntryRaceCategoryComponent ActionSettings="ActionSettings" Model="Entry"></CreateEntryRaceCategoryComponent>
+        </TabPage>
+        @* <TabPage Text="@localizer["Action.CreateEntry.Dogs"]"> *@
+        @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
+        @* </TabPage> *@
+        @* <TabPage Text="@localizer["Action.CreateEntry.Notes"]"> *@
+        @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
+        @* </TabPage> *@
+        @* <TabPage Text="@localizer["Action.CreateEntry.Summary"]"> *@
+        @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
+        @* </TabPage> *@
+    </TabControl>
+    
+    <hr />
+    <input type="submit" class="btn btn-primary" value="@localizer["Action.CreateEntry.Submit"]" />
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public EntryModel Entry { get; set; } = new();
+
+    [Parameter]
+    public string ActionId { get; set; } = Guid.Empty.ToString();
+
+    public ActionSettingsModel ActionSettings = new ActionSettingsModel();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var actionSettings = await ActionsClient.getActionEntrySettingsAsync(new GetActionEntrySettingsRequest { Id = ActionId });
+
+        ActionSettings = mapper.Map<ActionSettingsModel>(actionSettings);
+
+        Entry.ActionId = actionSettings.Id;
+
+        if (string.IsNullOrEmpty(UserProfileService.Get().Id) == false)
+        {
+            Entry.Name = UserProfileService.Get().FirstName;
+            Entry.Surname = UserProfileService.Get().LastName;
+            Entry.Email = UserProfileService.Get().Contact.EmailAddress;
+            Entry.Phone = UserProfileService.Get().Contact.PhoneNumber;
+            Entry.UserProfileId = UserProfileService.Get().Id;
+            Entry.CompetitorId = UserProfileService.Get().CompetitorId.ToString();
+            Entry.Dogs = UserProfileService.Get().Dogs
+                .Where(dog => dog.Decease == null)
+                .Select(dog => new EntryModel.DogDto
+                {
+                    Id = dog.Id,
+                    Name = dog.Name,
+                    Birthday = dog.Birthday,
+                    Chip = dog.Chip,
+                    Pedigree = dog.Pedigree
+                })
+                .ToList();
+        }
+    }
+
+    protected async Task SendAsync()
+    {
+        var createEntryRequest = mapper.Map<CreateEntryRequest>(Entry);
+
+        await EntriesClient.createEntryAsync(createEntryRequest);
+    }
+}
