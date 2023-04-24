@@ -36,9 +36,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+//        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
-        _nameOfLoggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "name")?.Value ?? "Unknown";
+//        _nameOfLoggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "name")?.Value ?? "Unknown";
+        _nameOfLoggedUser = UserProfileService.Get().FirstName;
     }
 
     private async Task UpdateUserAsync()

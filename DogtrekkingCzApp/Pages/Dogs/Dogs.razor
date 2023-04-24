@@ -1,0 +1,26 @@
+﻿@page "/dogs"
+
+@using MapsterMapper
+@using DogtrekkingCzApp.Models
+
+@inject Protos.Dogs.Dogs.DogsClient DogsClient
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+
+<h3>@localizer["Dogs"]</h3>
+
+@code {
+    private IList<DogModel> _dogs { get; set; } = new List<DogModel>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadData();
+    }
+
+    private async Task ReloadData()
+    {
+        Protos.Dogs.GetAllDogsResponse response = await DogsClient.getAllDogsAsync(new Protos.Dogs.GetAllDogsRequest());
+
+        _dogs = mapper.Map<List<DogModel>>(response.Dogs);
+    }
+}

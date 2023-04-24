@@ -51,7 +51,8 @@ typeAdapterConfig
     .AddActionModelMapping()
     .AddUserProfileModelMapping()
     .AddEntryModelMapping()
-    .AddActionSettingsModelMapping();
+    .AddActionSettingsModelMapping()
+    .AddDogModelMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)
@@ -78,7 +79,8 @@ builder.Services
     .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Actions.Actions.ActionsClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Entries.Entries.EntriesClient>(builder.Configuration["GrpcServerUri"])
-    .AddAuthorizedGrpcClient<Protos.Authorization.Authorization.AuthorizationClient>(builder.Configuration["GrpcServerUri"]);
+    .AddAuthorizedGrpcClient<Protos.Authorization.Authorization.AuthorizationClient>(builder.Configuration["GrpcServerUri"])
+    .AddAuthorizedGrpcClient<Protos.Dogs.Dogs.DogsClient>(builder.Configuration["GrpcServerUri"]);
 
 builder.Services.AddLocalization();
 

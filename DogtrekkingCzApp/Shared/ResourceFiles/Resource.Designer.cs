@@ -393,6 +393,69 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date of birthday.
+        /// </summary>
+        internal static string Dog_Manage_Birthday {
+            get {
+                return ResourceManager.GetString("Dog.Manage.Birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact info.
+        /// </summary>
+        internal static string Dog_Manage_Contact {
+            get {
+                return ResourceManager.GetString("Dog.Manage.Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of decease.
+        /// </summary>
+        internal static string Dog_Manage_Decease {
+            get {
+                return ResourceManager.GetString("Dog.Manage.Decease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kennel.
+        /// </summary>
+        internal static string Dog_Manage_Kennel {
+            get {
+                return ResourceManager.GetString("Dog.Manage.Kennel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Dog_Manage_Name {
+            get {
+                return ResourceManager.GetString("Dog.Manage.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        internal static string Dog_Manage_Owner {
+            get {
+                return ResourceManager.GetString("Dog.Manage.Owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pedigree.
+        /// </summary>
+        internal static string Dog_Manage_Pedigree {
+            get {
+                return ResourceManager.GetString("Dog.Manage.Pedigree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string Edit {
@@ -416,6 +479,15 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         internal static string Menu_Actions {
             get {
                 return ResourceManager.GetString("Menu.Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dogs list.
+        /// </summary>
+        internal static string Menu_Dogs {
+            get {
+                return ResourceManager.GetString("Menu.Dogs", resourceCulture);
             }
         }
         

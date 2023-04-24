@@ -192,4 +192,28 @@
     <data name="UserProfile.Manage.Submit" xml:space="preserve">
         <value>Uložit změny</value>
     </data>
+    <data name="Dog.Manage.Pedigree" xml:space="preserve">
+        <value>Plemeno</value>
+    </data>
+    <data name="Dog.Manage.Name" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Dog.Manage.Birthday" xml:space="preserve">
+        <value>Datum narození</value>
+    </data>
+    <data name="Dog.Manage.Decease" xml:space="preserve">
+        <value>Datum úmrtí</value>
+    </data>
+    <data name="Dog.Manage.Kennel" xml:space="preserve">
+        <value>Chovná stanice</value>
+    </data>
+    <data name="Dog.Manage.Owner" xml:space="preserve">
+        <value>Owner</value>
+    </data>
+    <data name="Dog.Manage.Contact" xml:space="preserve">
+        <value>Záchranný kontakt</value>
+    </data>
+    <data name="Menu.Dogs" xml:space="preserve">
+        <value>Evidence psů</value>
+    </data>
 </root>

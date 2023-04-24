@@ -142,8 +142,13 @@
     protected override async Task OnInitializedAsync()
     {
         var myUserProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
-
-        UserProfile = mapper.Map<UserProfileModel>(myUserProfile);
+        
+        if (myUserProfile == null || myUserProfile.UserProfile == null)
+            return;
+        
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(myUserProfile.UserProfile));
+        
+        UserProfile = UserProfileService.Get();
     }
 
     protected async Task SendAsync()
@@ -159,5 +164,7 @@
             return;
 
         UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(userProfile.UserProfile));
+
+        UserProfile = UserProfileService.Get();
     }
 }

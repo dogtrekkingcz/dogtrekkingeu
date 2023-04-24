@@ -10,6 +10,8 @@ namespace Storage.Interfaces
 
         Task<GetDogResponse> GetDogAsync(GetDogRequest request, CancellationToken cancellationToken);
         
-        Task DeleteDogAsync(DeleteDogRequest request, CancellationToken cancellationToken);
+        Task DeleteDogAsync(DeleteDogInternalStorageRequest request, CancellationToken cancellationToken);
+
+        Task<GetAllDogsResponse> GetAllAsync(CancellationToken cancellationToken);
     }
 }

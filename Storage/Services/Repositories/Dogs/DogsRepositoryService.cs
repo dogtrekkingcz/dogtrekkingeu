@@ -1,4 +1,5 @@
-﻿using MapsterMapper;
+﻿using DogtrekkingCzShared.Entities;
+using MapsterMapper;
 using MongoDB.Bson;
 using Storage.Entities.Dogs;
 using Storage.Interfaces;
@@ -25,7 +26,7 @@ namespace Storage.Services.Repositories.Dogs
 
             var response = new AddDogResponse
             {
-                
+                Id = addedActionRecord.Id
             };
 
             return response;
@@ -47,7 +48,7 @@ namespace Storage.Services.Repositories.Dogs
             };
         }
 
-        public async Task DeleteDogAsync(DeleteDogRequest request, CancellationToken cancellationToken)
+        public async Task DeleteDogAsync(DeleteDogInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var deleteRequest = _mapper.Map<DogRecord>(request);
 
@@ -63,6 +64,20 @@ namespace Storage.Services.Repositories.Dogs
                 return null;
             
             var response = _mapper.Map<GetDogResponse>(result.FirstOrDefault());
+
+            return response;
+        }
+
+        public async Task<GetAllDogsResponse> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var result = await _dogStorageService.GetAllAsync(cancellationToken);
+
+            var response = new GetAllDogsResponse();
+
+            foreach (var dog in result)
+            {
+                response.Dogs.Add(_mapper.Map<DogDto>(dog));
+            }
 
             return response;
         }

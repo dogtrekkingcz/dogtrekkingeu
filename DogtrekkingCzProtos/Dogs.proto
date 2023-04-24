@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Dogs";
+
+package dogs;
+
+import "Entities/Dog.proto";
+
+service Dogs {
+  rpc createDog (CreateDogRequest) returns (CreateDogResponse);
+  
+  rpc getAllDogs (GetAllDogsRequest) returns (GetAllDogsResponse);
+  
+  rpc deleteDog (DeleteDogRequest) returns (DeleteDogResponse);
+}
+
+message CreateDogRequest {
+  shared.Dog Dog = 1;
+}
+
+message CreateDogResponse {
+  shared.Dog Dog = 1;
+}
+
+message GetAllDogsRequest {
+  
+}
+
+message GetAllDogsResponse {
+  repeated shared.Dog Dogs = 1;
+}
+
+message DeleteDogRequest {
+  string Id = 1;
+}
+
+message DeleteDogResponse {
+  
+}
+

@@ -1,0 +1,110 @@
+﻿@using Microsoft.AspNetCore.Components
+@using DogtrekkingCzApp.Models
+@inject IStringLocalizer<Resource> localizer
+
+<h3>@localizer["Dog.Manage.Add"]</h3>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Id"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText readonly="true" @bind-Value="@DogModel.Id"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Chip"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@DogModel.Chip"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Name"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@DogModel.Name"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Kennel"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@DogModel.Kennel"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Pedigree"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@DogModel.Pedigree"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Contact"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@DogModel.Contact"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Owner"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@DogModel.UserId"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Birthday"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                @* <InputText @bind-Value="@DogModel.Birthday"/> *@
+            </div>
+        </div>
+    </div>
+
+    @if (DisplayDecease)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@localizer["Dog.Manage.Decease"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    @* <InputText @bind-Value="@DogModel.Decease"/> *@
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter]
+    public DogModel DogModel { get; set; } = new();
+
+    [Parameter]
+    public bool DisplayDecease { get; set; } = false;
+
+}

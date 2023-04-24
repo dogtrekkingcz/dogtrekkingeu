@@ -192,4 +192,28 @@
     <data name="UserProfile.Manage.Submit" xml:space="preserve">
         <value>Submit</value>
     </data>
+    <data name="Dog.Manage.Pedigree" xml:space="preserve">
+        <value>Pedigree</value>
+    </data>
+    <data name="Dog.Manage.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Dog.Manage.Birthday" xml:space="preserve">
+        <value>Date of birthday</value>
+    </data>
+    <data name="Dog.Manage.Decease" xml:space="preserve">
+        <value>Date of decease</value>
+    </data>
+    <data name="Dog.Manage.Kennel" xml:space="preserve">
+        <value>Kennel</value>
+    </data>
+    <data name="Dog.Manage.Owner" xml:space="preserve">
+        <value>Owner</value>
+    </data>
+    <data name="Dog.Manage.Contact" xml:space="preserve">
+        <value>Contact info</value>
+    </data>
+    <data name="Menu.Dogs" xml:space="preserve">
+        <value>Dogs list</value>
+    </data>
 </root>

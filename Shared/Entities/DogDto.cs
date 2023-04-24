@@ -4,7 +4,11 @@
     {
         public string? Id { get; set; }
 
+        public string UserId { get; set; } = string.Empty;
+
         public string Name { get; set; } = string.Empty;
+
+        public string Kennel { get; set; } = string.Empty;
 
         public string Pedigree { get; set; } = string.Empty;
 
@@ -16,6 +20,7 @@
 
         public string UriToPhoto { get; set; } = string.Empty;
 
+        public string Contact { get; set; } = string.Empty;
 
         public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>();
 

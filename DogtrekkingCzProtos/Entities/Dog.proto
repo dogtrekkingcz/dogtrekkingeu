@@ -8,14 +8,17 @@ import "google/type/datetime.proto";
 
 message Dog {
   string Id = 1;
-  string Name = 2;
-  string Pedigree = 3;
-  string Chip = 4;
-  google.type.DateTime Birthday = 5;
-  google.type.DateTime Decease = 6;
-  string UriToPhoto = 7;
+  string UserId = 2;
+  string Contact = 3;
+  string Name = 4;
+  string Kennel = 5;
+  string Pedigree = 6;
+  string Chip = 7;
+  google.type.DateTime Birthday = 8;
+  google.type.DateTime Decease = 9;
+  string UriToPhoto = 10;
 
-  repeated Vaccination Vaccinations = 8;
+  repeated Vaccination Vaccinations = 11;
 }
 
 message Vaccination {

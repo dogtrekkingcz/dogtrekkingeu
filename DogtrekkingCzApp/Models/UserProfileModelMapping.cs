@@ -19,8 +19,8 @@ internal static class UserProfileModelMapping
         typeAdapterConfig.NewConfig<GetUserProfileResponse, UserProfileModel>()
             .Ignore(d => d.Rights);
         
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfileResponse, UserProfileModel>()
-            .MapWith(s => new UserProfileModel
+        typeAdapterConfig.NewConfig<GetUserProfileResponse, UserProfileDto>()
+            .MapWith(s => new UserProfileDto
             {
                 Id = s.UserProfile.Id,
                 UserId = s.UserProfile.UserId,
@@ -70,11 +70,6 @@ internal static class UserProfileModelMapping
                 LastName = s.UserProfile.LastName
             });
 
-        typeAdapterConfig.NewConfig<Protos.Shared.UserProfile, UserProfileDto>()
-            .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
-        typeAdapterConfig.NewConfig<UserProfileDto, Protos.Shared.UserProfile>()
-            .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime());
-        
         return typeAdapterConfig;
     }
 }
