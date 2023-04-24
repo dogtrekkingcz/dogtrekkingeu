@@ -216,4 +216,16 @@
     <data name="Menu.Dogs" xml:space="preserve">
         <value>Evidence psů</value>
     </data>
+    <data name="Dogs.Chip" xml:space="preserve">
+        <value>Číslo čipu</value>
+    </data>
+    <data name="Dogs.Name" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Dogs.Kennel" xml:space="preserve">
+        <value>Chovná stanice</value>
+    </data>
+    <data name="Dogs.Pedigree" xml:space="preserve">
+        <value>Plemeno</value>
+    </data>
 </root>

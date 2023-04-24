@@ -11,10 +11,23 @@
 <h3>@localizer["Dogs"]</h3>
 
 <table>
+    <thead>
+        <tr>
+            <th>@localizer["Dogs.Chip"]</th>
+            <th>@localizer["Dogs.Name"]</th>
+            <th>@localizer["Dogs.Kennel"]</th>
+            <th>@localizer["Dogs.Pedigree"]</th>
+        </tr>
+    </thead>
     <tdata>
         @foreach (var dog in _dogs)
         {
-            <tr><td>@dog.Chip</td><td>@dog.Name</td></tr>
+            <tr>
+                <td>@dog.Chip</td>
+                <td>@dog.Name</td>
+                <td>@dog.Kennel</td>
+                <td>@dog.Pedigree</td>
+            </tr>
         }
     </tdata>
 </table>

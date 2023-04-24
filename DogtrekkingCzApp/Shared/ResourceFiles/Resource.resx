@@ -216,4 +216,16 @@
     <data name="Menu.Dogs" xml:space="preserve">
         <value>Dogs list</value>
     </data>
+    <data name="Dogs.Chip" xml:space="preserve">
+        <value>Chip number</value>
+    </data>
+    <data name="Dogs.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Dogs.Kennel" xml:space="preserve">
+        <value>Kennel</value>
+    </data>
+    <data name="Dogs.Pedigree" xml:space="preserve">
+        <value>Pedigree</value>
+    </data>
 </root>

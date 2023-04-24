@@ -456,6 +456,42 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Číslo čipu.
+        /// </summary>
+        internal static string Dogs_Chip {
+            get {
+                return ResourceManager.GetString("Dogs.Chip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chovná stanice.
+        /// </summary>
+        internal static string Dogs_Kennel {
+            get {
+                return ResourceManager.GetString("Dogs.Kennel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jméno.
+        /// </summary>
+        internal static string Dogs_Name {
+            get {
+                return ResourceManager.GetString("Dogs.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plemeno.
+        /// </summary>
+        internal static string Dogs_Pedigree {
+            get {
+                return ResourceManager.GetString("Dogs.Pedigree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upravit.
         /// </summary>
         internal static string Edit {

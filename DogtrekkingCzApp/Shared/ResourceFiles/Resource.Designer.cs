@@ -456,6 +456,42 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chip number.
+        /// </summary>
+        internal static string Dogs_Chip {
+            get {
+                return ResourceManager.GetString("Dogs.Chip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kennel.
+        /// </summary>
+        internal static string Dogs_Kennel {
+            get {
+                return ResourceManager.GetString("Dogs.Kennel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Dogs_Name {
+            get {
+                return ResourceManager.GetString("Dogs.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pedigree.
+        /// </summary>
+        internal static string Dogs_Pedigree {
+            get {
+                return ResourceManager.GetString("Dogs.Pedigree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string Edit {
