@@ -18,13 +18,13 @@ namespace Storage.Services.Repositories.Dogs
             _dogStorageService = dogsStorageService;
         }
 
-        public async Task<AddDogResponse> AddDogAsync(AddDogRequest request, CancellationToken cancellationToken)
+        public async Task<AddDogInternalStorageResponse> AddDogAsync(AddDogInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var addRequest = _mapper.Map<DogRecord>(request);
             
             var addedActionRecord = await _dogStorageService.AddAsync(addRequest, cancellationToken);
 
-            var response = new AddDogResponse
+            var response = new AddDogInternalStorageResponse
             {
                 Id = addedActionRecord.Id
             };
@@ -68,11 +68,11 @@ namespace Storage.Services.Repositories.Dogs
             return response;
         }
 
-        public async Task<GetAllDogsResponse> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<GetAllDogsInternalStorageResponse> GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await _dogStorageService.GetAllAsync(cancellationToken);
 
-            var response = new GetAllDogsResponse();
+            var response = new GetAllDogsInternalStorageResponse();
 
             foreach (var dog in result)
             {

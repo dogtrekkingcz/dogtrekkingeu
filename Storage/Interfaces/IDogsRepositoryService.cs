@@ -4,7 +4,7 @@ namespace Storage.Interfaces
 {
     public interface IDogsRepositoryService : IRepositoryService
     {
-        Task<AddDogResponse> AddDogAsync(AddDogRequest request, CancellationToken cancellationToken);
+        Task<AddDogInternalStorageResponse> AddDogAsync(AddDogInternalStorageRequest request, CancellationToken cancellationToken);
 
         Task<UpdateDogResponse> UpdateDogAsync(UpdateDogRequest request, CancellationToken cancellationToken);
 
@@ -12,6 +12,6 @@ namespace Storage.Interfaces
         
         Task DeleteDogAsync(DeleteDogInternalStorageRequest request, CancellationToken cancellationToken);
 
-        Task<GetAllDogsResponse> GetAllAsync(CancellationToken cancellationToken);
+        Task<GetAllDogsInternalStorageResponse> GetAllAsync(CancellationToken cancellationToken);
     }
 }

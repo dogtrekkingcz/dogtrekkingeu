@@ -16,10 +16,10 @@ internal static class DogModelMapping
             .Map(d => d.Decease, s => s.Decease.ToDateTimeOffset());
 
         typeAdapterConfig.NewConfig<DogModel, Protos.Shared.Dog>()
+            .IgnoreNullValues(true)
             .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime())
-            .Map(d => d.Decease, s => s.Decease.Value.ToGoogleDateTime());
+            .Map(d => d.Decease, s => s.Decease.ToGoogleDateTime());
 
-        
         typeAdapterConfig.NewConfig<Protos.Shared.Vaccination, DogModel.VaccinationDto>()
             .IgnoreNullValues(true)
             .Map(d => d.Date, s => s.Date.ToDateTimeOffset())

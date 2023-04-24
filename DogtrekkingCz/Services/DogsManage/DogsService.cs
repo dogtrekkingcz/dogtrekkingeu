@@ -1,5 +1,6 @@
 ﻿using DogtrekkingCz.Interfaces.Actions.Entities.Dogs;
 using DogtrekkingCz.Interfaces.Actions.Services;
+using DogtrekkingCzShared.Entities;
 using MapsterMapper;
 using Storage.Entities.Dogs;
 using Storage.Interfaces;
@@ -20,7 +21,7 @@ internal class DogsService : IDogsService
     
     public async Task<CreateDogResponse> CreateDogAsync(CreateDogRequest request, CancellationToken cancellationToken)
     {
-        var addDogRequest = _mapper.Map<AddDogRequest>(request);
+        var addDogRequest = _mapper.Map<AddDogInternalStorageRequest>(request);
         
         var result = await _dogsRepositoryService.AddDogAsync(addDogRequest, cancellationToken);
 
@@ -33,7 +34,13 @@ internal class DogsService : IDogsService
     {
         var result = await _dogsRepositoryService.GetAllAsync(cancellationToken);
 
-        return new GetAllDogsResponse();
+        var response = new GetAllDogsResponse();
+        foreach (var dog in result.Dogs)
+        {
+            response.Dogs.Add(_mapper.Map<DogDto>(dog));
+        }
+        
+        return response;
     }
 
     public async Task<GetDogResponse> GetDogAsync(GetDogRequest request, CancellationToken cancellationToken)

@@ -2,7 +2,7 @@
 
 namespace DogtrekkingCz.Interfaces.Actions.Entities.Dogs;
 
-public record CreateDogResponse : DogDto
+public record CreateDogResponse
 {
-    
+    public string Id { get; init; }
 }

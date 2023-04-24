@@ -20,7 +20,7 @@ internal class DogsService : Protos.Dogs.Dogs.DogsBase
 
     public async override Task<Protos.Dogs.CreateDogResponse> createDog(Protos.Dogs.CreateDogRequest request, ServerCallContext context)
     {
-        var createDogRequest = _mapper.Map<CreateDogRequest>(request);
+        var createDogRequest = _mapper.Map<CreateDogRequest>(request.Dog);
         
         var newDog = await _dogsService.CreateDogAsync(createDogRequest, context.CancellationToken);
 

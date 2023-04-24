@@ -21,7 +21,7 @@ message CreateDogRequest {
 }
 
 message CreateDogResponse {
-  shared.Dog Dog = 1;
+  string Id = 1;
 }
 
 message GetAllDogsRequest {

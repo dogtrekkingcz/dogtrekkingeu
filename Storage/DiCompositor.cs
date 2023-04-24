@@ -56,14 +56,15 @@ public static class DiCompositor
             
             .AddSingleton<IStorageService<EntryRecord>, StorageService<EntryRecord>>()
             .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>();
-            
+
 
         typeAdapterConfig
             .AddSharedMapping()
             .AddActionRepositoryMapping()
             .AddActionRightsRepositoryMapping()
             .AddUserProfilesRepositoryMapping()
-            .AddEntriesRepositoryMapping();
+            .AddEntriesRepositoryMapping()
+            .AddDogsRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
         BsonClassMap.RegisterClassMap<UserProfileRecord>();

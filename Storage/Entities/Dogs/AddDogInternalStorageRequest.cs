@@ -2,7 +2,7 @@
 
 namespace Storage.Entities.Dogs
 {
-    public sealed record AddDogRequest : DogDto
+    public sealed record AddDogInternalStorageRequest : DogDto
     {
     }
 }

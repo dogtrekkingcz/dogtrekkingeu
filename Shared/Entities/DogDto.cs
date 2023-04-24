@@ -16,7 +16,7 @@
 
         public DateTimeOffset Birthday { get; set; } = DateTimeOffset.Now;
 
-        public DateTimeOffset? Decease { get; set; } = null;
+        public DateTimeOffset Decease { get; set; } = DateTimeOffset.MaxValue;
 
         public string UriToPhoto { get; set; } = string.Empty;
 

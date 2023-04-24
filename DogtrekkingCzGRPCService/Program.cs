@@ -3,6 +3,7 @@ using Mapster;
 using DogtrekkingCzGRPCService.Extensions;
 using DogtrekkingCzGRPCService.Services.Actions;
 using DogtrekkingCzGRPCService.Services.Authorization;
+using DogtrekkingCzGRPCService.Services.Dogs;
 using DogtrekkingCzGRPCService.Services.Entries;
 using DogtrekkingCzGRPCService.Services.UserProfiles;
 using DogtrekkingCzShared;
@@ -34,7 +35,8 @@ typeAdapterConfig
     .AddAuthorizationServiceMapping()
     .AddActionsServiceMapping()
     .AddUserProfilesServiceMapping()
-    .AddEntriesServiceMapping();
+    .AddEntriesServiceMapping()
+    .AddDogsServiceMapping();
 
 typeAdapterConfig.Compile();
 
@@ -67,6 +69,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapGrpcService<UserProfilesService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<AuthorizationService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<EntriesService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<DogsService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 
