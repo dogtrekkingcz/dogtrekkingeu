@@ -490,5 +490,95 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
                 return ResourceManager.GetString("Update action", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Město.
+        /// </summary>
+        internal static string UserProfile_Manage_City {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Země.
+        /// </summary>
+        internal static string UserProfile_Manage_Country {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string UserProfile_Manage_Email {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Křestní jméno.
+        /// </summary>
+        internal static string UserProfile_Manage_Name {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přezdívka.
+        /// </summary>
+        internal static string UserProfile_Manage_Nickname {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Nickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon.
+        /// </summary>
+        internal static string UserProfile_Manage_Phone {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Region.
+        /// </summary>
+        internal static string UserProfile_Manage_Region {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Region", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ulice.
+        /// </summary>
+        internal static string UserProfile_Manage_Street {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uložit změny.
+        /// </summary>
+        internal static string UserProfile_Manage_Submit {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Příjmení.
+        /// </summary>
+        internal static string UserProfile_Manage_Surname {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage.Surname", resourceCulture);
+            }
+        }
     }
 }

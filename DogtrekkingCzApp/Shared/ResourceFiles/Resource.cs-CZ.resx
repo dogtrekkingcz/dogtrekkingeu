@@ -162,4 +162,34 @@
     <data name="Action.CreateEntry.Submit" xml:space="preserve">
         <value>Odeslat přihlášku</value>
     </data>
+    <data name="UserProfile.Manage.Name" xml:space="preserve">
+        <value>Křestní jméno</value>
+    </data>
+    <data name="UserProfile.Manage.Surname" xml:space="preserve">
+        <value>Příjmení</value>
+    </data>
+    <data name="UserProfile.Manage.Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="UserProfile.Manage.Phone" xml:space="preserve">
+        <value>Telefon</value>
+    </data>
+    <data name="UserProfile.Manage.Street" xml:space="preserve">
+        <value>Ulice</value>
+    </data>
+    <data name="UserProfile.Manage.Region" xml:space="preserve">
+        <value>Region</value>
+    </data>
+    <data name="UserProfile.Manage.City" xml:space="preserve">
+        <value>Město</value>
+    </data>
+    <data name="UserProfile.Manage.Country" xml:space="preserve">
+        <value>Země</value>
+    </data>
+    <data name="UserProfile.Manage.Nickname" xml:space="preserve">
+        <value>Přezdívka</value>
+    </data>
+    <data name="UserProfile.Manage.Submit" xml:space="preserve">
+        <value>Uložit změny</value>
+    </data>
 </root>

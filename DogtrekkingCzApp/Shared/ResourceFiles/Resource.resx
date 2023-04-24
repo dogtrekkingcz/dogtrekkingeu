@@ -162,4 +162,34 @@
     <data name="Action.CreateEntry.Submit" xml:space="preserve">
         <value>Send entry form</value>
     </data>
+    <data name="UserProfile.Manage.Name" xml:space="preserve">
+        <value>First name</value>
+    </data>
+    <data name="UserProfile.Manage.Surname" xml:space="preserve">
+        <value>Surname</value>
+    </data>
+    <data name="UserProfile.Manage.Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="UserProfile.Manage.Phone" xml:space="preserve">
+        <value>Phone</value>
+    </data>
+    <data name="UserProfile.Manage.Street" xml:space="preserve">
+        <value>Street</value>
+    </data>
+    <data name="UserProfile.Manage.Region" xml:space="preserve">
+        <value>Region</value>
+    </data>
+    <data name="UserProfile.Manage.City" xml:space="preserve">
+        <value>City</value>
+    </data>
+    <data name="UserProfile.Manage.Country" xml:space="preserve">
+        <value>Country</value>
+    </data>
+    <data name="UserProfile.Manage.Nickname" xml:space="preserve">
+        <value>Nickname</value>
+    </data>
+    <data name="UserProfile.Manage.Submit" xml:space="preserve">
+        <value>Submit</value>
+    </data>
 </root>

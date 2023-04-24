@@ -131,7 +131,7 @@
         </div>
     </section>
     <hr />
-    <input type="submit" class="btn btn-primary" value="@localizer["Action.CreateEntry.Submit"]" />
+    <input type="submit" class="btn btn-primary" value="@localizer["UserProfile.Manage.Submit"]" />
 </EditForm>
 
 @code {
@@ -158,6 +158,6 @@
         if (userProfile == null || userProfile.UserProfile == null)
             return;
 
-        UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(userProfile));
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(userProfile.UserProfile));
     }
 }
