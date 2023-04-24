@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Storage.Entities.Dogs
 {
-    public sealed record GetDogRequest
+    public sealed record GetDogsFilteredByChipInternalStorageRequest
     {
-        public string Chip { get; set; }
+        public string Chip { get; set; } = string.Empty;
     }
 }

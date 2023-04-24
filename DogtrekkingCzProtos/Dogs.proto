@@ -11,6 +11,8 @@ service Dogs {
   
   rpc getAllDogs (GetAllDogsRequest) returns (GetAllDogsResponse);
   
+  rpc getDogsFilteredByChip (GetDogsFilteredByChipRequest) returns (GetDogsFilteredByChipResponse);
+  
   rpc deleteDog (DeleteDogRequest) returns (DeleteDogResponse);
 }
 
@@ -38,3 +40,10 @@ message DeleteDogResponse {
   
 }
 
+message GetDogsFilteredByChipRequest {
+  string Chip = 1;
+}
+
+message GetDogsFilteredByChipResponse {
+  repeated shared.Dog dogs = 1;
+}

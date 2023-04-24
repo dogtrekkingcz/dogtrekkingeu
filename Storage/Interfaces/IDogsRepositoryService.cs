@@ -8,7 +8,7 @@ namespace Storage.Interfaces
 
         Task<UpdateDogResponse> UpdateDogAsync(UpdateDogRequest request, CancellationToken cancellationToken);
 
-        Task<GetDogResponse> GetDogAsync(GetDogRequest request, CancellationToken cancellationToken);
+        Task<GetDogsFilteredByChipInternalStorageResponse> GetDogsFilteredByChipAsync(GetDogsFilteredByChipInternalStorageRequest request, CancellationToken cancellationToken);
         
         Task DeleteDogAsync(DeleteDogInternalStorageRequest request, CancellationToken cancellationToken);
 

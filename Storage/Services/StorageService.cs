@@ -70,6 +70,24 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
         return document;
     }
+
+    public async Task<IReadOnlyList<T>> GetByFilterBeLikeAsync(IList<(string key, string likeValue)> filterList, CancellationToken cancellationToken)
+    {
+        var filter = Builders<T>.Filter
+            .Regex(filterList[0].key, new BsonRegularExpression($".*{filterList[0].likeValue}.*"));
+
+        foreach (var f in filterList.Skip(1))
+        {
+            filter &= (Builders<T>.Filter
+                .Regex(f.key, new BsonRegularExpression($".*{f.likeValue}.*")));
+        }
+
+        var document = await _collection
+            .Find(filter)
+            .ToListAsync(cancellationToken);
+
+        return document;
+    }
     
     public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken)
     {

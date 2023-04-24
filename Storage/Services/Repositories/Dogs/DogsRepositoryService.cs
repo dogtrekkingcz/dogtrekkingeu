@@ -55,15 +55,15 @@ namespace Storage.Services.Repositories.Dogs
             await _dogStorageService.DeleteAsync(deleteRequest, cancellationToken);
         }
 
-        public async Task<GetDogResponse> GetDogAsync(GetDogRequest request, CancellationToken cancellationToken)
+        public async Task<GetDogsFilteredByChipInternalStorageResponse> GetDogsFilteredByChipAsync(GetDogsFilteredByChipInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var filter = new List<(string key, string value)> { ("Chip", request.Chip) };
-            var result = await _dogStorageService.GetByFilterAsync(filter, cancellationToken);
+            var filter = new List<(string key, string likeValue)> { ("Chip", request.Chip) };
+            var result = await _dogStorageService.GetByFilterBeLikeAsync(filter, cancellationToken);
 
             if (result == null)
                 return null;
             
-            var response = _mapper.Map<GetDogResponse>(result.FirstOrDefault());
+            var response = _mapper.Map<GetDogsFilteredByChipInternalStorageResponse>(result.FirstOrDefault());
 
             return response;
         }
