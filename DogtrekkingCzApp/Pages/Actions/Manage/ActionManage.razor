@@ -10,47 +10,56 @@
 @inject IMapper mapper
 @inject NavigationManager NavManager
 
-<div>
-    <EditForm Model="@Model" OnValidSubmit="SubmitForm">
-        @if (RequiredAction != RequiredActionEnum.DeleteAction)
-        {
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-        }
+@if (Model == null)
+{
+    <p>
+        <em>@localizer["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <div>
+        <EditForm Model="@Model" OnValidSubmit="SubmitForm">
+            @if (RequiredAction != RequiredActionEnum.DeleteAction)
+            {
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            }
         
-        <TabControl></TabControl>
+            <TabControl></TabControl>
         
-        <TabControl>
-            <TabPage Text="@localizer["Action.Manage.General"]">
-                <ActionManageMainInfoComponent Model="Model"></ActionManageMainInfoComponent>
-            </TabPage>
-            <TabPage Text="@localizer["Action.Manage.Location"]">
-                <ActionManageLocationComponent Model="Model"></ActionManageLocationComponent>
-            </TabPage>
-            <TabPage Text="@localizer["Action.Manage.Races"]">
-                <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent>
-            </TabPage>
-        </TabControl>
+            <TabControl>
+                <TabPage Text="@localizer["Action.Manage.General"]">
+                    <ActionManageMainInfoComponent Model="Model"></ActionManageMainInfoComponent>
+                </TabPage>
+                <TabPage Text="@localizer["Action.Manage.Location"]">
+                    <ActionManageLocationComponent Model="Model"></ActionManageLocationComponent>
+                </TabPage>
+                <TabPage Text="@localizer["Action.Manage.Races"]">
+                    <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent>
+                </TabPage>
+            </TabControl>
         
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    @if (RequiredAction == RequiredActionEnum.DeleteAction)
-                    {
-                        <button @onclick="@DeleteAction">@GetActionButtonText()</button>
-                    }
-                    else
-                    {
-                        <button type="submit">@GetActionButtonText()</button>
-                    }
-                </div>
-                <div class="col">
-                    <button @onclick="Cancel">@localizer["Cancel"]</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        @if (RequiredAction == RequiredActionEnum.DeleteAction)
+                        {
+                            <button @onclick="@DeleteAction">@GetActionButtonText()</button>
+                        }
+                        else
+                        {
+                            <button type="submit">@GetActionButtonText()</button>
+                        }
+                    </div>
+                    <div class="col">
+                        <button @onclick="Cancel">@localizer["Cancel"]</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </EditForm>
-</div>
+        </EditForm>
+    </div>
+}
 
 @code {
     [Parameter] public RequiredActionEnum RequiredAction { get; set; }

@@ -80,7 +80,10 @@
 
     protected async Task SendAsync()
     {
-        var createEntryRequest = mapper.Map<CreateEntryRequest>(Entry);
+        var createEntryRequest = new CreateEntryRequest
+        {
+            Entry = mapper.Map<Protos.Shared.Entry>(Entry)
+        };
 
         await EntriesClient.createEntryAsync(createEntryRequest);
     }

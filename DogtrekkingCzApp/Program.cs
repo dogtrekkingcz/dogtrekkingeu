@@ -80,7 +80,8 @@ builder.Services
     .AddAuthorizedGrpcClient<Protos.Actions.Actions.ActionsClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Entries.Entries.EntriesClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Authorization.Authorization.AuthorizationClient>(builder.Configuration["GrpcServerUri"])
-    .AddAuthorizedGrpcClient<Protos.Dogs.Dogs.DogsClient>(builder.Configuration["GrpcServerUri"]);
+    .AddAuthorizedGrpcClient<Protos.Dogs.Dogs.DogsClient>(builder.Configuration["GrpcServerUri"])
+    .AddAuthorizedGrpcClient<Protos.Results.Results.ResultsClient>(builder.Configuration["GrpcServerUri"]);
 
 builder.Services.AddLocalization();
 

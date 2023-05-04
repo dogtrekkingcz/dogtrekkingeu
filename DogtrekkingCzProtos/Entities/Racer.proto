@@ -17,12 +17,14 @@ message Racer {
     DSQ = 3;
   }
 
-  string CompetitorId = 1;
-  string FirstName = 2;
-  string LastName = 3;
-  repeated Dog Dogs = 4;
-  google.type.DateTime Start = 5;
-  google.type.DateTime Finish = 6;
-  FinishState State = 7;
-  repeated Note Notes = 8;
+  string Id = 1;
+  string CompetitorId = 2;
+  string FirstName = 3;
+  string LastName = 4;
+  repeated Dog Dogs = 5;
+  google.type.DateTime Start = 6;
+  google.type.DateTime Finish = 7;
+  FinishState State = 8;
+  bool Accepted = 9;
+  repeated Note Notes = 10;
 }

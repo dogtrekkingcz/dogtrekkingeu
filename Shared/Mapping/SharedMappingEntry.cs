@@ -4,7 +4,8 @@ using Mapster;
 
 namespace DogtrekkingCzShared.Mapping
 {
-    public static class SharedMappingEntry
+    public static class 
+        SharedMappingEntry
     {
         public static TypeAdapterConfig AddSharedMappingEntry(this TypeAdapterConfig typeAdapterConfig)
         {

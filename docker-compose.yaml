@@ -79,7 +79,7 @@ services:
   keycloak:
     image: jboss/keycloak
     volumes:
-      - ./imports:/opt/jboss/keycloak/imports
+      - ./keycloak/imports:/opt/jboss/keycloak/imports
     command: 
       - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:

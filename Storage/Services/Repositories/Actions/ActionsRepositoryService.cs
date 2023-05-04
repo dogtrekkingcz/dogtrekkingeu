@@ -101,5 +101,20 @@ namespace Storage.Services.Repositories.Actions
             
             return response;
         }
+
+        public async Task<AddResultInternalStorageResponse> AddResultAsync(AddResultInternalStorageRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsStorageService.GetAsync(new ActionRecord { Id = request.ActionId.ToString() }, cancellationToken);
+
+            var race = action.Races.First(race => race.Id == request.RaceId);
+
+            var category = race.Categories.First(category => category.Id == request.CategoryId);
+            
+            category.Racers.Add(_mapper.Map<RacerDto>(request));
+
+            await _actionsStorageService.UpdateAsync(action, cancellationToken);
+
+            return new AddResultInternalStorageResponse();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DogtrekkingCz.Actions.Services.ActionsManage;
 using DogtrekkingCz.Actions.Services.EntriesManage;
+using DogtrekkingCz.Actions.Services.ResultsManage;
 using DogtrekkingCz.Actions.Services.Rights;
 using DogtrekkingCzShared.Options;
 using Mapster;
@@ -16,7 +17,8 @@ namespace DogtrekkingCz.Actions
                 .AddEntries(typeAdapterConfig, options)
                 .AddRights(typeAdapterConfig)
                 .AddUserProfiles(typeAdapterConfig, options)
-                .AddDogs(typeAdapterConfig, options);
+                .AddDogs(typeAdapterConfig, options)
+                .AddResults(typeAdapterConfig, options);
             
             return services;
         }

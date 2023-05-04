@@ -18,6 +18,10 @@ internal static class ActionsServiceMapping
 
         typeAdapterConfig.NewConfig<GetActionEntrySettingsRequest, GetActionInternalStorageRequest>()
             .Map(d => d.Id, s => s.ActionId);
+
+        typeAdapterConfig.NewConfig<GetActionRequest, GetActionInternalStorageRequest>();
+
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse, GetActionResponse>();
             
         return typeAdapterConfig;
     }
