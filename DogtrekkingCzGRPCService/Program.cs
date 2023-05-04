@@ -5,6 +5,7 @@ using DogtrekkingCzGRPCService.Services.Actions;
 using DogtrekkingCzGRPCService.Services.Authorization;
 using DogtrekkingCzGRPCService.Services.Dogs;
 using DogtrekkingCzGRPCService.Services.Entries;
+using DogtrekkingCzGRPCService.Services.Results;
 using DogtrekkingCzGRPCService.Services.UserProfiles;
 using DogtrekkingCzShared;
 using DogtrekkingCzShared.Interceptors;
@@ -70,6 +71,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapGrpcService<AuthorizationService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<EntriesService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<DogsService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<ResultsService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 
