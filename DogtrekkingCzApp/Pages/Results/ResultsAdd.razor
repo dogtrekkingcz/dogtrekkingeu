@@ -72,6 +72,9 @@
     [Parameter] public RaceDto Race { get; set; }
     [Parameter] public CategoryDto Category { get; set; }
     
+    [Parameter]
+    public EventCallback<RacerDto> OnResultAddedCallback { get; set; }
+    
     public Racer Racer = new();
 
     private InputTimeModel StartProxy = new();
@@ -98,5 +101,7 @@
             CategoryId = Category.Id.ToString(),
             Racer = Racer
         });
+        
+        await OnResultAddedCallback.InvokeAsync(Mapper.Map<RacerDto>(Racer));
     }
 }

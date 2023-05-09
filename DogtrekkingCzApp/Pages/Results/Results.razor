@@ -24,7 +24,7 @@ else
         <div class="">
             @foreach (var category in race.Categories)
             {
-                <ResultsAdd ActionId="@ActionId" Race="@race" Category="@category"></ResultsAdd>
+                <ResultsAdd ActionId="@ActionId" Race="@race" Category="@category" OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)"></ResultsAdd>
                 
                 <table class="table">
                     <thead>
@@ -90,5 +90,14 @@ else
         Protos.Results.GetRacesForActionResponse response = await ResultsClient.getRacesForActionAsync(new GetRacesForActionRequest { ActionId = ActionId });
 
         _races = Mapper.Map<List<RaceDto>>(response.Races);
+    }
+
+    private void ResultAdded(string actionId, Guid raceId, Guid categoryId, RacerDto addedRacer)
+    {
+        _races.First(r => r.Id == raceId)
+            .Categories.First(c => c.Id == categoryId)
+            .Racers.Add(addedRacer);
+
+        StateHasChanged();
     }
 }
