@@ -5,16 +5,16 @@
 @using Protos.Results
 @inject Protos.Results.Results.ResultsClient ResultsClient
 @inject AuthenticationStateProvider AuthStateProvider 
-@inject IStringLocalizer<Resource> localizer
+@inject IStringLocalizer<Resource> Localizer
 @inject IMapper Mapper
 @inject NavigationManager NavManager
 
-<h1>@localizer["Results"]</h1>
+<h1>@Localizer["Results"]</h1>
 
 @if (_races  == null)
 {
     <p>
-        <em>@localizer["Loading ..."]</em>
+        <em>@Localizer["Loading ..."]</em>
     </p>
 }
 else
@@ -29,12 +29,12 @@ else
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>@localizer["#"]</th>
-                        <th>@localizer["Surname"]</th>
-                        <th>@localizer["Name"]</th>
-                        <th>@localizer["Start"]</th>
-                        <th>@localizer["Finish"]</th>
-                        <th>@localizer["Time"]</th>
+                        <th>@Localizer["#"]</th>
+                        <th>@Localizer["Results.List.Lastname"]</th>
+                        <th>@Localizer["Results.List.Firstname"]</th>
+                        <th>@Localizer["Results.List.Start"]</th>
+                        <th>@Localizer["Results.List.Finish"]</th>
+                        <th>@Localizer["Results.List.WholeTime"]</th>
                     </tr>
                     </thead>
                     <tbody>

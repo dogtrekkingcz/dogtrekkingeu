@@ -276,4 +276,19 @@
     <data name="Results.Manage.Add.Lastname" xml:space="preserve">
         <value>Příjmení</value>
     </data>
+    <data name="Results.List.Lastname" xml:space="preserve">
+        <value>Příjmení</value>
+    </data>
+    <data name="Results.List.Firstname" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Results.List.Start" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="Results.List.Finish" xml:space="preserve">
+        <value>Cíl</value>
+    </data>
+    <data name="Results.List.WholeTime" xml:space="preserve">
+        <value>Celkový čas</value>
+    </data>
 </root>
