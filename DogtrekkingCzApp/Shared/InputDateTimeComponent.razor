@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <input type="text" size="1" @ref="_refYearsInput" @bind="_years" @oninput="async (e)=> await YearsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Years"]"/>-
+            <input type="text" size="2" @ref="_refYearsInput" @bind="_years" @oninput="async (e)=> await YearsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Years"]"/>-
             <input type="text" size="1" @ref="_refMonthsInput" @bind="_months" @oninput="async (e) => await MonthsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Months"]"/>-
             <input type="text" size="1" @ref="_refDaysInput" @bind="_days" @oninput="async (e) => await DaysUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Days"]"/>
             <input type="text" size="1" @ref="_refHoursInput" @bind="_hours" @oninput="async (e) => await HoursUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Hours"]"/>:
@@ -92,7 +92,7 @@
         else
             _iYears = value;
 
-        if (e.Value.ToString().Length == 2)
+        if (e.Value.ToString().Length == 4)
             await _refMonthsInput.FocusAsync();
         
         Reload();

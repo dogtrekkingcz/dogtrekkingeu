@@ -555,11 +555,29 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Měsíc.
+        /// </summary>
+        internal static string InputTime_Months {
+            get {
+                return ResourceManager.GetString("InputTime.Months", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sek.
         /// </summary>
         internal static string InputTime_Seconds {
             get {
                 return ResourceManager.GetString("InputTime.Seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rok.
+        /// </summary>
+        internal static string InputTime_Years {
+            get {
+                return ResourceManager.GetString("InputTime.Years", resourceCulture);
             }
         }
         

@@ -26,6 +26,8 @@ namespace Storage.Services.Repositories.Actions
 
             typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>();
 
+            typeAdapterConfig.NewConfig<AddResultInternalStorageRequest, RacerDto>();
+
             return typeAdapterConfig;
         }
     }
