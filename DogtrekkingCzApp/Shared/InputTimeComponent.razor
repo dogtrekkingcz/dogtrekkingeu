@@ -7,17 +7,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-3">
-            <input type="text" @ref="refDaysInput" @bind="_days" @oninput="async (e)=> await DaysUpdatedAsync(e)" />
-        </div>
-        <div class="col-3">
-            <input type="text" @ref="refHoursInput" @bind="_hours" @oninput="async (e) => await HoursUpdatedAsync(e)" />:
-        </div>
-        <div class="col-3">
-            <input type="text" @ref="refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" />:
-        </div>
-        <div class="col-3">
-            <input type="text" @ref="refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" />
+        <div class="col">
+            <input type="text" size="2" @ref="_refDaysInput" @bind="_days" @oninput="async (e)=> await DaysUpdatedAsync(e)" onfocus="this.select()" />
+            <input type="text" size="2" @ref="_refHoursInput" @bind="_hours" @oninput="async (e) => await HoursUpdatedAsync(e)" onfocus="this.select()" />:
+            <input type="text" size="2" @ref="_refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" onfocus="this.select()" />:
+            <input type="text" size="2" @ref="_refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" onfocus="this.select()" />
         </div>
     </div>
 </div>
@@ -25,20 +19,20 @@
 @code {
     [Parameter] public InputTimeModel Model { get; set; }
 
-    private string _days = "--";
-    private string _hours = "--";
-    private string _minutes = "--";
-    private string _seconds = "--";
+    private string _days = "";
+    private string _hours = "";
+    private string _minutes = "";
+    private string _seconds = "";
 
     private int? _iDays = null;
     private int? _iHours = null;
     private int? _iMinutes = null;
     private int? _iSeconds = null;
     
-    private ElementReference refDaysInput;
-    private ElementReference refHoursInput;
-    private ElementReference refMinutesInput;
-    private ElementReference refSecondsInput;
+    private ElementReference _refDaysInput;
+    private ElementReference _refHoursInput;
+    private ElementReference _refMinutesInput;
+    private ElementReference _refSecondsInput;
     
     private void ClearDate()
     {
@@ -47,10 +41,10 @@
 
     private void Reload()
     {
-        _days = _iDays?.ToString("00") ?? "--";
-        _hours = _iHours?.ToString("00") ?? "--";
-        _minutes = _iMinutes?.ToString("00") ?? "--";
-        _seconds = _iSeconds?.ToString("00") ?? "--";
+        _days = _iDays?.ToString() ?? "";
+        _hours = _iHours?.ToString() ?? "";
+        _minutes = _iMinutes?.ToString() ?? "";
+        _seconds = _iSeconds?.ToString() ?? "";
 
         if (_iDays != null && _iHours != null && _iMinutes != null && _iSeconds != null)
         {
@@ -62,6 +56,8 @@
             Model.IsValid = false;
             Model.Value = null;
         }
+        
+        StateHasChanged();
     }
 
     private async Task DaysUpdatedAsync(ChangeEventArgs e)
@@ -75,10 +71,10 @@
         else
             _iDays = value;
 
-        Reload();
-
         if (e.Value.ToString().Length == 2)
-            await refHoursInput.FocusAsync();
+            await _refHoursInput.FocusAsync();
+        
+        Reload();
     }
 
     private async Task HoursUpdatedAsync(ChangeEventArgs e)
@@ -100,10 +96,10 @@
             }
         }
 
-        Reload();
-        
         if (e.Value.ToString().Length == 2)
-            await refMinutesInput.FocusAsync();
+            await _refMinutesInput.FocusAsync();
+        
+        Reload();
     }
 
     private async Task MinutesUpdatedAsync(ChangeEventArgs e)
@@ -131,10 +127,10 @@
             }
         }
 
-        Reload();
-        
         if (e.Value.ToString().Length == 2)
-            await refSecondsInput.FocusAsync();
+            await _refSecondsInput.FocusAsync();
+        
+        Reload();
     }
 
     private async Task SecondsUpdatedAsync(ChangeEventArgs e)
