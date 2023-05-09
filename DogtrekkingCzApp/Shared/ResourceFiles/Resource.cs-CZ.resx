@@ -208,7 +208,7 @@
         <value>Chovná stanice</value>
     </data>
     <data name="Dog.Manage.Owner" xml:space="preserve">
-        <value>Owner</value>
+        <value>Vlastník</value>
     </data>
     <data name="Dog.Manage.Contact" xml:space="preserve">
         <value>Záchranný kontakt</value>
@@ -227,5 +227,29 @@
     </data>
     <data name="Dogs.Pedigree" xml:space="preserve">
         <value>Plemeno</value>
+    </data>
+    <data name="Results.Manage.Add" xml:space="preserve">
+        <value>Přidej výsledek</value>
+    </data>
+    <data name="Results.AddResult.Submit" xml:space="preserve">
+        <value>Odešli</value>
+    </data>
+    <data name="Action.Results" xml:space="preserve">
+        <value>Výsledky</value>
+    </data>
+    <data name="Results.Manage.Add.Firstname" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Results.Manage.Add.Lastname " xml:space="preserve">
+        <value>Příjmení</value>
+    </data>
+    <data name="Results.Manage.Add.Start" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="Results.Manage.Add.Finish" xml:space="preserve">
+        <value>Cíl</value>
+    </data>
+    <data name="InputTime.ClearTime" xml:space="preserve">
+        <value>X</value>
     </data>
 </root>

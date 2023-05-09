@@ -1,0 +1,85 @@
+﻿@using DogtrekkingCzApp.Models
+@using DogtrekkingCzShared.Entities
+@using Google.Type
+@using MapsterMapper
+@using Protos.Results
+@using Protos.Shared
+@using DogtrekkingCzApp.Shared
+
+@inject IStringLocalizer<Resource> Localizer
+@inject Protos.Results.Results.ResultsClient ResultsClient
+@inject IMapper Mapper
+
+<h3>@Localizer["Results.Manage.Add"]</h3>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Dog.Manage.Id"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText readonly="true" @bind-Value="@Racer.Id"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Firstname"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Racer.FirstName"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Lastname"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Racer.LastName"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Start"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputTimeComponent Model="@StartProxy" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Finish"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputTimeComponent Model="@FinishProxy" />
+            </div>
+        </div>
+    </div>
+</section>
+<button @onclick="@(async () => await SubmitAsync())" class="btn btn-primary">@Localizer["Results.AddResult.Submit"]</button>
+
+@code {
+    [Parameter] public string ActionId { get; set; }
+    [Parameter] public RaceDto Race { get; set; }
+    [Parameter] public CategoryDto Category { get; set; }
+    
+    public Racer Racer = new();
+
+    private InputTimeModel StartProxy = new();
+    private InputTimeModel FinishProxy = new();
+
+    protected async Task SubmitAsync()
+    {
+        if (StartProxy.IsValid)
+            Racer.Start = StartProxy.Value;
+
+        if (FinishProxy.IsValid)
+            Racer.Finish = FinishProxy.Value;
+        
+        await ResultsClient.addResultAsync(new AddResultRequest {
+            ActionId = ActionId,
+            RaceId = Race.Id.ToString(),
+            CategoryId = Category.Id.ToString(),
+            Racer = Racer
+        });
+    }
+}

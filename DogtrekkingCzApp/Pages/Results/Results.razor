@@ -3,10 +3,10 @@
 @using DogtrekkingCzShared.Entities
 @using MapsterMapper
 @using Protos.Results
-@inject Protos.Results.Results.ResultsClient Client
+@inject Protos.Results.Results.ResultsClient ResultsClient
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IStringLocalizer<Resource> localizer
-@inject IMapper mapper
+@inject IMapper Mapper
 @inject NavigationManager NavManager
 
 <h1>@localizer["Results"]</h1>
@@ -21,45 +21,52 @@ else
 {
     foreach (var race in _races)
     {
-        <table class="table">
-            <thead>
-            <tr>
-                <th>@localizer["#"]</th>
-                <th>@localizer["Surname"]</th>
-                <th>@localizer["Name"]</th>
-                <th>@localizer["Start"]</th>
-                <th>@localizer["Finish"]</th>
-                <th>@localizer["Time"]</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var racer in race.Categories.SelectMany(category => category.Racers))
+        <div class="">
+            @foreach (var category in race.Categories)
             {
-                var time = racer.Finish.Value - racer.Start.Value;
+                <ResultsAdd ActionId="@ActionId" Race="@race" Category="@category"></ResultsAdd>
                 
-                <tr>
-                    <td>
-                        <div class="col-12">?</div>
-                    </td>
-                    <td>
-                        <div class="col-12">@racer.LastName</div>
-                    </td>
-                    <td>
-                        <div class="col-12">@racer.FirstName</div>
-                    </td>
-                    <td>
-                        <div class="col-12">@racer.Start?.ToString("dd HH:mm:ss")</div>
-                    </td>
-                    <td>
-                        <div class="col-12">@racer.Finish?.ToString("dd HH:mm:ss")</div>
-                    </td>
-                    <td>
-                        <div class="col-12">@time.ToString("HH:mm:ss")</div>
-                    </td>
-                </tr>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>@localizer["#"]</th>
+                        <th>@localizer["Surname"]</th>
+                        <th>@localizer["Name"]</th>
+                        <th>@localizer["Start"]</th>
+                        <th>@localizer["Finish"]</th>
+                        <th>@localizer["Time"]</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var racer in category.Racers)
+                    {
+                        var time = racer.Finish.HasValue && racer.Start.HasValue ? (racer.Finish.Value - racer.Start.Value).ToString("HH:mm:ss") : "--:--:--";
+
+                        <tr>
+                            <td>
+                                <div class="col-12">?</div>
+                            </td>
+                            <td>
+                                <div class="col-12">@racer.LastName</div>
+                            </td>
+                            <td>
+                                <div class="col-12">@racer.FirstName</div>
+                            </td>
+                            <td>
+                                <div class="col-12">@racer.Start?.ToString("dd HH:mm:ss")</div>
+                            </td>
+                            <td>
+                                <div class="col-12">@racer.Finish?.ToString("dd HH:mm:ss")</div>
+                            </td>
+                            <td>
+                                <div class="col-12">@time</div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
             }
-            </tbody>
-        </table>
+        </div>
     }
 }
 
@@ -74,8 +81,8 @@ else
 
     private async Task ReloadData()
     {
-        Protos.Results.GetRacesForActionResponse response = await Client.getRacesForActionAsync(new GetRacesForActionRequest { ActionId = ActionId });
+        Protos.Results.GetRacesForActionResponse response = await ResultsClient.getRacesForActionAsync(new GetRacesForActionRequest { ActionId = ActionId });
 
-        _races = mapper.Map<List<RaceDto>>(response.Races);
+        _races = Mapper.Map<List<RaceDto>>(response.Races);
     }
 }

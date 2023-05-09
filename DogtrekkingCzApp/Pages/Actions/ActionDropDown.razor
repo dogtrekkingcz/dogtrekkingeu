@@ -4,8 +4,8 @@
 @using DogtrekkingCzShared.Entities;
 
 @inject AuthenticationStateProvider AuthStateProvider 
-@inject IModalService modal
-@inject IStringLocalizer<Resource> localizer
+@inject IModalService ModalService
+@inject IStringLocalizer<Resource> Localizer
 @inject NavigationManager NavManager
 @inject IUserProfileService UserProfileService
 
@@ -16,14 +16,15 @@
   </a>
 
     <ul class="dropdown-menu">
-        <li><a class="dropdown-item" @onclick="@(async () => await CreateEntry(Model))">@localizer["Action.CreateEntry"]</a></li>
+        <li><a class="dropdown-item" @onclick="@(async () => await CreateEntry(Model))">@Localizer["Action.CreateEntry"]</a></li>
+        <li><a class="dropdown-item" @onclick="@(async () => await GoToResults(Model))">@Localizer["Action.Results"]</a></li>
         
         <AuthorizeView>
             <Authorized>
                 @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Model.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
                 {
-                    <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@localizer["Edit"]</a></li>
-                    <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@localizer["Delete"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@Localizer["Edit"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@Localizer["Delete"]</a></li>
                 }
             </Authorized>
         </AuthorizeView>
@@ -34,14 +35,8 @@
     [Parameter] public ActionModel Model { get; set; }
     [Parameter] public EventCallback<ActionModel> OnItemChanged { get; set; } 
     
-    private AuthenticationState _authState = null;
-    private bool EditingEnabled = false;
-    
     protected override async Task OnInitializedAsync()
     {
-        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
-
-        var loggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
     }
     
     protected async Task ManageAction(ActionModel action)
@@ -55,7 +50,7 @@
             .Add(nameof(ActionManage.Model), action)
             .Add(nameof(ActionManage.RequiredAction), RequiredActionEnum.DeleteAction);
         
-        var messageForm = modal.Show<ActionManage>(localizer["Delete action"], parameters);
+        var messageForm = ModalService.Show<ActionManage>(Localizer["Delete action"], parameters);
         var result = await messageForm.Result;
         
         await OnItemChanged.InvokeAsync(action);
@@ -64,5 +59,10 @@
     protected async Task CreateEntry(ActionModel action)
     {
         NavManager.NavigateTo($"/action/{action.Id}/create_entry");
+    }
+
+    protected async Task GoToResults(ActionModel action)
+    {
+        NavManager.NavigateTo($"/results/{action.Id}");
     }
 }

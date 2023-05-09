@@ -1,0 +1,173 @@
+﻿@using MapsterMapper
+@using DogtrekkingCzApp.Models
+@using Google.Type
+
+@inject IMapper Mapper
+@inject IStringLocalizer<Resource> Localizer
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <input type="text" @ref="refDaysInput" @bind="_days" @oninput="async (e)=> await DaysUpdatedAsync(e)" />
+        </div>
+        <div class="col-3">
+            <input type="text" @ref="refHoursInput" @bind="_hours" @oninput="async (e) => await HoursUpdatedAsync(e)" />:
+        </div>
+        <div class="col-3">
+            <input type="text" @ref="refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" />:
+        </div>
+        <div class="col-3">
+            <input type="text" @ref="refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" />
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public InputTimeModel Model { get; set; }
+
+    private string _days = "--";
+    private string _hours = "--";
+    private string _minutes = "--";
+    private string _seconds = "--";
+
+    private int? _iDays = null;
+    private int? _iHours = null;
+    private int? _iMinutes = null;
+    private int? _iSeconds = null;
+    
+    private ElementReference refDaysInput;
+    private ElementReference refHoursInput;
+    private ElementReference refMinutesInput;
+    private ElementReference refSecondsInput;
+    
+    private void ClearDate()
+    {
+        Model.Value = null;
+    }
+
+    private void Reload()
+    {
+        _days = _iDays?.ToString("00") ?? "--";
+        _hours = _iHours?.ToString("00") ?? "--";
+        _minutes = _iMinutes?.ToString("00") ?? "--";
+        _seconds = _iSeconds?.ToString("00") ?? "--";
+
+        if (_iDays != null && _iHours != null && _iMinutes != null && _iSeconds != null)
+        {
+            Model.IsValid = true;
+            Model.Value = new Google.Type.DateTime() { Year = 0, Month = 0, Day = _iDays.Value, Hours = _iHours.Value, Minutes = _iMinutes.Value, Seconds = _iSeconds.Value };
+        }
+        else
+        {
+            Model.IsValid = false;
+            Model.Value = null;
+        }
+    }
+
+    private async Task DaysUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iDays = null;
+        }
+        else
+            _iDays = value;
+
+        Reload();
+
+        if (e.Value.ToString().Length == 2)
+            await refHoursInput.FocusAsync();
+    }
+
+    private async Task HoursUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iHours = null;
+        }
+        else 
+        {
+            _iHours = value;
+
+            while (_iHours > 23)
+            {
+                _iDays++;
+                _iHours -= 24;
+            }
+        }
+
+        Reload();
+        
+        if (e.Value.ToString().Length == 2)
+            await refMinutesInput.FocusAsync();
+    }
+
+    private async Task MinutesUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false) 
+        {
+            _iMinutes = null;
+        }
+        else
+        {
+            _iMinutes = value;
+
+            while (_iMinutes > 59)
+            {
+                _iHours++;
+                _iMinutes -= 60;
+
+                if (_iHours > 23)
+                {
+                    _iDays++;
+                    _iHours -= 24;
+                }
+            }
+        }
+
+        Reload();
+        
+        if (e.Value.ToString().Length == 2)
+            await refSecondsInput.FocusAsync();
+    }
+
+    private async Task SecondsUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iSeconds = null;
+        }
+        else
+        {
+            _iSeconds = value;
+            
+            while (_iSeconds > 59)
+            {
+                _iMinutes++;
+                _iSeconds -= 60;
+
+                if (_iMinutes > 59)
+                {
+                    _iHours++;
+                    _iMinutes -= 60;
+                }
+
+                if (_iHours > 23)
+                {
+                    _iDays++;
+                    _iHours -= 24;
+                }
+            }
+        }
+
+        Reload();
+    }
+}

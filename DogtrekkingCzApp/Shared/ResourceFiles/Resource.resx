@@ -228,4 +228,28 @@
     <data name="Dogs.Pedigree" xml:space="preserve">
         <value>Pedigree</value>
     </data>
+    <data name="Results.Manage.Add" xml:space="preserve">
+        <value>Add result</value>
+    </data>
+    <data name="Results.AddResult.Submit" xml:space="preserve">
+        <value>Submit</value>
+    </data>
+    <data name="Action.Results" xml:space="preserve">
+        <value>Results</value>
+    </data>
+    <data name="Results.Manage.Add.Firstname" xml:space="preserve">
+        <value>First name</value>
+    </data>
+    <data name="Results.Manage.Add.Lastname " xml:space="preserve">
+        <value>Last name</value>
+    </data>
+    <data name="Results.Manage.Add.Start" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="Results.Manage.Add.Finish" xml:space="preserve">
+        <value>Finish</value>
+    </data>
+    <data name="InputTime.ClearTime" xml:space="preserve">
+        <value>X</value>
+    </data>
 </root>

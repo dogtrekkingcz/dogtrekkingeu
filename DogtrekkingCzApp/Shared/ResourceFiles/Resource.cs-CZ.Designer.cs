@@ -231,6 +231,15 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Výsledky.
+        /// </summary>
+        internal static string Action_Results {
+            get {
+                return ResourceManager.GetString("Action.Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odeslat přihlášku.
         /// </summary>
         internal static string Action_SendEntry {
@@ -438,7 +447,7 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Owner.
+        ///   Looks up a localized string similar to Vlastník.
         /// </summary>
         internal static string Dog_Manage_Owner {
             get {
@@ -497,6 +506,15 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         internal static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X.
+        /// </summary>
+        internal static string InputTime_ClearTime {
+            get {
+                return ResourceManager.GetString("InputTime.ClearTime", resourceCulture);
             }
         }
         
@@ -560,6 +578,60 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         internal static string Region__city {
             get {
                 return ResourceManager.GetString("Region, city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odešli.
+        /// </summary>
+        internal static string Results_AddResult_Submit {
+            get {
+                return ResourceManager.GetString("Results.AddResult.Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přidej výsledek.
+        /// </summary>
+        internal static string Results_Manage_Add {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cíl.
+        /// </summary>
+        internal static string Results_Manage_Add_Finish {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jméno.
+        /// </summary>
+        internal static string Results_Manage_Add_Firstname {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Firstname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Příjmení.
+        /// </summary>
+        internal static string Results_Manage_Add_Lastname_ {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Lastname ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Results_Manage_Add_Start {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Start", resourceCulture);
             }
         }
         
