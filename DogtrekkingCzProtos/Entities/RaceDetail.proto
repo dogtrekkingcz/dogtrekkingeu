@@ -16,7 +16,8 @@ message RaceDetail {
   google.type.DateTime EnteringFrom = 5;
   google.type.DateTime EnteringTo = 6;
   double MaxNumberOfCompetitors = 7;
+  google.type.DateTime Begin = 8;
 
-  repeated shared.Category Categories = 8;
-  repeated shared.PaymentDefinition Payments = 9;
+  repeated shared.Category Categories = 9;
+  repeated shared.PaymentDefinition Payments = 10;
 }

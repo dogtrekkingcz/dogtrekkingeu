@@ -11,12 +11,14 @@ namespace DogtrekkingCzShared.Mapping
             typeAdapterConfig.NewConfig<RaceDto, Protos.Shared.RaceDetail>()
                 .IgnoreNullValues(true)
                 .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToGoogleDateTime())
-                .Map(d => d.EnteringTo, s => s.EnteringTo.ToGoogleDateTime());
+                .Map(d => d.EnteringTo, s => s.EnteringTo.ToGoogleDateTime())
+                .Map(d => d.Begin, s => s.Begin.ToGoogleDateTime());
 
             typeAdapterConfig.NewConfig<Protos.Shared.RaceDetail, RaceDto>()
                 .IgnoreNullValues(true)
                 .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
-                .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset());
+                .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset())
+                .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset());
 
             typeAdapterConfig.NewConfig<Protos.Shared.RaceSimple, RaceDto>()
                 .IgnoreNullValues(true)
@@ -38,6 +40,7 @@ namespace DogtrekkingCzShared.Mapping
                 .Ignore(d => d.Payments)
                 .Ignore(d => d.EnteringTo)
                 .Ignore(d => d.EnteringFrom)
+                .Ignore(d => d.Begin)
                 .Ignore(d => d.MaxNumberOfCompetitors);
 
             typeAdapterConfig.NewConfig<RaceDto, RaceDto>();
