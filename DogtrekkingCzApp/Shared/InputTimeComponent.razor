@@ -8,10 +8,11 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <input type="text" size="2" @ref="_refDaysInput" @bind="_days" @oninput="async (e)=> await DaysUpdatedAsync(e)" onfocus="this.select()" />
-            <input type="text" size="2" @ref="_refHoursInput" @bind="_hours" @oninput="async (e) => await HoursUpdatedAsync(e)" onfocus="this.select()" />:
-            <input type="text" size="2" @ref="_refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" onfocus="this.select()" />:
-            <input type="text" size="2" @ref="_refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" onfocus="this.select()" />
+            <input type="text" size="1" @ref="_refDaysInput" @bind="_days" @oninput="async (e)=> await DaysUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Days"]"/>
+            <input type="text" size="1" @ref="_refHoursInput" @bind="_hours" @oninput="async (e) => await HoursUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Hours"]"/>:
+            <input type="text" size="1" @ref="_refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Minutes"]"/>:
+            <input type="text" size="1" @ref="_refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Seconds"]"/>
+            <input type="button" value="@Localizer["InputTime.ClearTime"]" @onclick="ClearDate" />
         </div>
     </div>
 </div>
@@ -37,6 +38,13 @@
     private void ClearDate()
     {
         Model.Value = null;
+
+        _iDays = null;
+        _iHours = null;
+        _iMinutes = null;
+        _iSeconds = null;
+
+        Reload();
     }
 
     private void Reload()

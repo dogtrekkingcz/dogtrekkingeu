@@ -1,18 +1,41 @@
-﻿using DogtrekkingCz.Interfaces.Actions.Entities;
-using DogtrekkingCz.Interfaces.Actions.Entities.Actions;
+﻿using DogtrekkingCz.Interfaces.Actions.Entities.Actions;
 using DogtrekkingCzShared.Entities;
 using DogtrekkingCzShared.Extensions;
 using Google.Protobuf.Collections;
 using Mapster;
-using Protos.Shared;
-
 
 namespace DogtrekkingCzGRPCService.Services.Actions;
 
 internal static class ActionsServiceMapping
 {
-    internal static TypeAdapterConfig AddAuthorizationServiceMapping(this TypeAdapterConfig typeAdapterConfig)
+    internal static TypeAdapterConfig AddActionsServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
+        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, CreateActionRequest>();
+
+        typeAdapterConfig.NewConfig<CreateActionResponse, Protos.Actions.CreateActionResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, UpdateActionRequest>();
+
+        typeAdapterConfig.NewConfig<UpdateActionResponse, Protos.Actions.UpdateActionResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.DeleteActionRequest, DeleteActionRequest>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.GetActionRequest, GetActionRequest>();
+
+        typeAdapterConfig.NewConfig<GetActionResponse, Protos.Shared.ActionDetail>();
+        
+        
+        typeAdapterConfig.NewConfig<GetAllActionsWithDetailsResponse, RepeatedField<Protos.Shared.ActionDetail>>()
+            .Map(d => d, s => s.Actions)
+            .Ignore(d => d.Capacity);
+
+        typeAdapterConfig.NewConfig<ActionDto, Protos.Shared.ActionDetail>()
+            .TwoWays();
+        
+        typeAdapterConfig.NewConfig<GetAllActionsResponse, RepeatedField<Protos.Shared.ActionSimple>>()
+            .Map(d => d, s => s.Actions)
+            .Ignore(d => d.Capacity);
+        
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActionsRequest, GetAllActionsRequest>();
 
         typeAdapterConfig.NewConfig<RepeatedField<Protos.Shared.ActionRights>, IReadOnlyList<ActionRightsDto>>();

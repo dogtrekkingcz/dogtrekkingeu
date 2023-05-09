@@ -15,7 +15,6 @@ using Storage.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
-Console.WriteLine(MongoDbConnectionString);
 
 TypeAdapterConfig typeAdapterConfig = null;
 var options = new DogtrekkingCzShared.Options.DogtrekkingCzOptions()
@@ -37,7 +36,8 @@ typeAdapterConfig
     .AddActionsServiceMapping()
     .AddUserProfilesServiceMapping()
     .AddEntriesServiceMapping()
-    .AddDogsServiceMapping();
+    .AddDogsServiceMapping()
+    .AddResultsMapping();
 
 typeAdapterConfig.Compile();
 

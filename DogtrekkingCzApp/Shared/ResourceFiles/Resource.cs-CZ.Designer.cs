@@ -519,6 +519,51 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dny.
+        /// </summary>
+        internal static string InputTime_Dayes {
+            get {
+                return ResourceManager.GetString("InputTime.Dayes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dny.
+        /// </summary>
+        internal static string InputTime_Days {
+            get {
+                return ResourceManager.GetString("InputTime.Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hod.
+        /// </summary>
+        internal static string InputTime_Hours {
+            get {
+                return ResourceManager.GetString("InputTime.Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min.
+        /// </summary>
+        internal static string InputTime_Minutes {
+            get {
+                return ResourceManager.GetString("InputTime.Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sek.
+        /// </summary>
+        internal static string InputTime_Seconds {
+            get {
+                return ResourceManager.GetString("InputTime.Seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nahrávám ....
         /// </summary>
         internal static string Loading____ {

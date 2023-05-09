@@ -252,4 +252,19 @@
     <data name="InputTime.ClearTime" xml:space="preserve">
         <value>X</value>
     </data>
+    <data name="InputTime.Dayes" xml:space="preserve">
+        <value>Dayes</value>
+    </data>
+    <data name="InputTime.Hours" xml:space="preserve">
+        <value>Hrs</value>
+    </data>
+    <data name="InputTime.Minutes" xml:space="preserve">
+        <value>Min</value>
+    </data>
+    <data name="InputTime.Seconds" xml:space="preserve">
+        <value>Sec</value>
+    </data>
+    <data name="InputTime.Days" xml:space="preserve">
+        <value>Days</value>
+    </data>
 </root>
