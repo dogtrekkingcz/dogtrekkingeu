@@ -683,6 +683,15 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         /// <summary>
         ///   Looks up a localized string similar to Příjmení.
         /// </summary>
+        internal static string Results_Manage_Add_Lastname {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Lastname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Příjmení.
+        /// </summary>
         internal static string Results_Manage_Add_Lastname_ {
             get {
                 return ResourceManager.GetString("Results.Manage.Add.Lastname ", resourceCulture);

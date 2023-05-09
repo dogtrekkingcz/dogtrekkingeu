@@ -681,6 +681,15 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        internal static string Results_Manage_Add_Lastname {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Lastname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         internal static string Results_Manage_Add_Lastname_ {

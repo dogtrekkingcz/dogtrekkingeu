@@ -273,4 +273,7 @@
     <data name="InputTime.Months" xml:space="preserve">
         <value>Měsíc</value>
     </data>
+    <data name="Results.Manage.Add.Lastname" xml:space="preserve">
+        <value>Příjmení</value>
+    </data>
 </root>

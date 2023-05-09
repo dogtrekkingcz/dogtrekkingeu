@@ -38,9 +38,15 @@ else
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var racer in category.Racers)
+                    @foreach (var racer in category.Racers
+                        .OrderBy(r =>
+                        {
+                            var totalTime = r.Finish.HasValue && r.Start.HasValue ? r.Finish.Value - r.Start.Value : TimeSpan.MaxValue;
+                            return (int) totalTime.TotalSeconds;
+                        }))
                     {
-                        var time = racer.Finish.HasValue && racer.Start.HasValue ? (racer.Finish.Value - racer.Start.Value).ToString("HH:mm:ss") : "--:--:--";
+                        var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
+                        string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int) totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
 
                         <tr>
                             <td>
