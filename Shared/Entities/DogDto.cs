@@ -14,9 +14,9 @@
 
         public string Chip { get; set; } = string.Empty;
 
-        public DateTimeOffset Birthday { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset? Birthday { get; set; } = null;
 
-        public DateTimeOffset Decease { get; set; } = DateTimeOffset.MaxValue;
+        public DateTimeOffset? Decease { get; set; } = null;
 
         public string UriToPhoto { get; set; } = string.Empty;
 
@@ -27,9 +27,9 @@
 
         public sealed record VaccinationDto
         {
-            public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
+            public DateTimeOffset? Date { get; set; } = null;
 
-            public DateTimeOffset ValidUntil { get; set; } = DateTimeOffset.Now;
+            public DateTimeOffset? ValidUntil { get; set; } = null;
 
             public VaccinationType Type { get; set; } = VaccinationType.NotValid;
 

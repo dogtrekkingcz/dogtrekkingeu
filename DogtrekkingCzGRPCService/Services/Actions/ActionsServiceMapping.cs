@@ -88,8 +88,8 @@ internal static class ActionsServiceMapping
                                         FirstName = racer.FirstName,
                                         LastName = racer.LastName,
                                         CompetitorId = racer.CompetitorId,
-                                        Finish = racer.Finish.ToDateTimeOffset(),
-                                        Start = racer.Start.ToDateTimeOffset(),
+                                        Finish = (racer.Finish != null) ? racer.Finish.ToDateTimeOffset() : null,
+                                        Start = (racer.Start != null) ? racer.Start.ToDateTimeOffset() : null,
                                         Notes = racer.Notes
                                             .Select(note => new NoteDto
                                             {
@@ -102,9 +102,9 @@ internal static class ActionsServiceMapping
                                             {
                                                 Id = dog.Id,
                                                 Name = dog.Name,
-                                                Birthday = dog.Birthday.ToDateTimeOffset(),
+                                                Birthday = (dog.Birthday != null) ? dog.Birthday.ToDateTimeOffset() : null,
                                                 Chip = dog.Chip,
-                                                Decease = dog.Decease.ToDateTimeOffset(),
+                                                Decease = (dog.Decease != null) ? dog.Decease.ToDateTimeOffset() : null,
                                                 Pedigree = dog.Pedigree,
                                                 UriToPhoto = dog.UriToPhoto,
                                                 Vaccinations = dog.Vaccinations
@@ -113,7 +113,7 @@ internal static class ActionsServiceMapping
                                                         UriToPhoto = vacc.UriToPhoto,
                                                         Date = vacc.Date.ToDateTimeOffset(),
                                                         Note = vacc.Note,
-                                                        ValidUntil = vacc.ValidUntil.ToDateTimeOffset(),
+                                                        ValidUntil = (vacc.ValidUntil != null) ? vacc.ValidUntil.ToDateTimeOffset() : null,
                                                         Type = (DogDto.VaccinationType) vacc.Type
                                                     })
                                                     .ToList()

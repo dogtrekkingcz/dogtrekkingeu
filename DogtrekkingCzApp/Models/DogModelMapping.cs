@@ -17,8 +17,8 @@ internal static class DogModelMapping
 
         typeAdapterConfig.NewConfig<DogModel, Protos.Shared.Dog>()
             .IgnoreNullValues(true)
-            .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime())
-            .Map(d => d.Decease, s => s.Decease.ToGoogleDateTime());
+            .Map(d => d.Birthday, s => s.Birthday != null ? s.Birthday.Value.ToGoogleDateTime() : null)
+            .Map(d => d.Decease, s => s.Decease != null ? s.Decease.Value.ToGoogleDateTime() : null);
 
         typeAdapterConfig.NewConfig<Protos.Shared.Vaccination, DogModel.VaccinationDto>()
             .IgnoreNullValues(true)
@@ -27,8 +27,8 @@ internal static class DogModelMapping
 
         typeAdapterConfig.NewConfig<DogModel.VaccinationDto, Protos.Shared.Vaccination>()
             .IgnoreNullValues(true)
-            .Map(d => d.Date, s => s.Date.ToGoogleDateTime())
-            .Map(d => d.ValidUntil, s => s.ValidUntil.ToGoogleDateTime());
+            .Map(d => d.Date, s => s.Date != null ? s.Date.Value.ToGoogleDateTime() : null)
+            .Map(d => d.ValidUntil, s => s.ValidUntil != null ? s.ValidUntil.Value.ToGoogleDateTime() : null);
 
         
         return typeAdapterConfig;

@@ -18,7 +18,7 @@ internal static class EntryModelMapping
             .IgnoreNullValues(true);
         typeAdapterConfig.NewConfig<EntryModel.DogDto, Protos.Shared.EntryDog>()
             .IgnoreNullValues(true)
-            .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime());
+            .Map(d => d.Birthday, s => s.Birthday != null ? s.Birthday.Value.ToGoogleDateTime() : null);
 
         typeAdapterConfig.NewConfig<EntryModel, Protos.Entries.CreateEntryRequest>()
             .Ignore(d => d.Entry.Id)

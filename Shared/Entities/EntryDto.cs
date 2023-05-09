@@ -38,6 +38,6 @@ public record EntryDto
 
         public string Chip { get; set; } = string.Empty;
 
-        public DateTimeOffset Birthday { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset? Birthday { get; set; } = null;
     }
 }
