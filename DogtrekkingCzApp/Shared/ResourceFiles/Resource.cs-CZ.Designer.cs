@@ -654,51 +654,6 @@ namespace DogtrekkingCzApp.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cíl.
-        /// </summary>
-        internal static string Results_List_Finish {
-            get {
-                return ResourceManager.GetString("Results.List.Finish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Jméno.
-        /// </summary>
-        internal static string Results_List_Firstname {
-            get {
-                return ResourceManager.GetString("Results.List.Firstname", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Příjmení.
-        /// </summary>
-        internal static string Results_List_Lastname {
-            get {
-                return ResourceManager.GetString("Results.List.Lastname", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start.
-        /// </summary>
-        internal static string Results_List_Start {
-            get {
-                return ResourceManager.GetString("Results.List.Start", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Celkový čas.
-        /// </summary>
-        internal static string Results_List_WholeTime {
-            get {
-                return ResourceManager.GetString("Results.List.WholeTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Přidej výsledek.
         /// </summary>
         internal static string Results_Manage_Add {

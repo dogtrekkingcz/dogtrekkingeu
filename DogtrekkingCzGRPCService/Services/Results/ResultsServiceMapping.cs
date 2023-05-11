@@ -16,8 +16,8 @@ internal static class ResultsServiceMapping
                 RaceId = s.RaceId,
                 Accepted = s.Racer.Accepted,
                 Id = s.Racer.Id,
-                Start = (s.Racer.Start != null) ? s.Racer.Start.ToDateTimeOffset() : null,
-                Finish = (s.Racer.Finish != null) ? s.Racer.Finish.ToDateTimeOffset() : null,
+                Start = s.Racer.Start != null ? s.Racer.Start.ToDateTimeOffset() : null,
+                Finish = s.Racer.Finish != null ? s.Racer.Finish.ToDateTimeOffset() : null,
                 FirstName = s.Racer.FirstName,
                 LastName = s.Racer.LastName,
                 State = (RaceState) s.Racer.State,
@@ -45,11 +45,11 @@ internal static class ResultsServiceMapping
                             Vaccinations = dog.Vaccinations
                                 .Select(vaccination => new DogDto.VaccinationDto
                                 {
-                                    Date = vaccination.Date.ToDateTimeOffset(),
+                                    Date = vaccination.Date != null ? vaccination.Date.ToDateTimeOffset() : null,
                                     UriToPhoto = vaccination.UriToPhoto,
                                     Note = vaccination.Note,
                                     Type = (DogDto.VaccinationType) vaccination.Type,
-                                    ValidUntil = vaccination.ValidUntil.ToDateTimeOffset()
+                                    ValidUntil = vaccination.ValidUntil != null ? vaccination.ValidUntil.ToDateTimeOffset() : null
                                 })
                                 .ToList()
                         })

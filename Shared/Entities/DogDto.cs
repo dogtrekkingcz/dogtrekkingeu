@@ -27,9 +27,9 @@
 
         public sealed record VaccinationDto
         {
-            public DateTimeOffset? Date { get; set; } = null;
+            public DateTimeOffset? Date { get; set; } = DateTimeOffset.Now;
 
-            public DateTimeOffset? ValidUntil { get; set; } = null;
+            public DateTimeOffset? ValidUntil { get; set; } = DateTimeOffset.Now;
 
             public VaccinationType Type { get; set; } = VaccinationType.NotValid;
 

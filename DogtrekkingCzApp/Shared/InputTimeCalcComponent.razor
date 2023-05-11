@@ -13,6 +13,7 @@
             <input type="text" size="1" @ref="_refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Minutes"]"/>:
             <input type="text" size="1" @ref="_refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Seconds"]"/>
             <input type="button" value="@Localizer["InputTime.ClearTime"]" @onclick="ClearDate" />
+            <input type="text" size="2" readonly="readonly" @BindAttributes="_totalSeconds" />
         </div>
     </div>
 </div>
@@ -24,6 +25,7 @@
     private string _hours = "";
     private string _minutes = "";
     private string _seconds = "";
+    private string _totalSeconds = "";
 
     private int? _iDays = null;
     private int? _iHours = null;
@@ -64,6 +66,12 @@
                           + _iMinutes.Value * 60 
                           + _iSeconds.Value
             };
+
+            _totalSeconds = (_iDays.Value * 24
+                             + _iHours.Value * 60
+                             + _iMinutes.Value * 60
+                             + _iSeconds.Value)
+                .ToString();
         }
         else
         {
