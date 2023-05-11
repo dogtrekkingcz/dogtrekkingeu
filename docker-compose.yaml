@@ -12,8 +12,8 @@ services:
   # dotnet dev-certs https --clean
   # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
   # dotnet dev-certs https --trust
-  dogtrekking_eu_grpc:
-    image: dogtrekking_eu_server_grpc
+  dogsontrail_grpc:
+    image: dogsontrail_server_grpc
     build:
       context: .
       dockerfile: DogtrekkingCzGRPCService/Dockerfile
@@ -28,8 +28,8 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
       
-  dogtrekking_eu_webapi:
-    image: dogtrekking_eu_server_api
+  dogsontrail_webapi:
+    image: dogsontrail_server_api
     build:
       context: .
       dockerfile: DogtrekkingCzWebApiService/Dockerfile
@@ -44,8 +44,8 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
       
-  dogtrekking_eu: 
-    image: dogtrekking_eu_client
+  dogsontrail_app: 
+    image: dogsontrail_client_app
     build:
       context: .
       dockerfile: DogtrekkingCzApp/Dockerfile
@@ -59,11 +59,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: DogtrekkingEu
+      MONGO_INITDB_DATABASE: DogsOnTrailDb
     ports:
       - 27017:27017
     volumes:
-      - data_dtdata_db:/data/db
+      - data_dogsontrail_db:/data/db
    
   postgres:
     image: postgres
@@ -107,7 +107,7 @@ services:
   #    - data_mq:/var/lib/rabbitmq
       
 volumes:
-  data_dtdata_db:
+  data_dogsontrail_db:
   data_mq:
   postgres_data:
       driver: local

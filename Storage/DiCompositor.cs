@@ -75,7 +75,7 @@ public static class DiCompositor
 
         var client = new MongoClient(options.MongoDbConnectionString);
 
-        var db = client.GetDatabase("DogtrekkingEu");
+        var db = client.GetDatabase("DogsOnTrailDb");
 
         var listOfCollections = db.ListCollectionNames().ToList();
         
