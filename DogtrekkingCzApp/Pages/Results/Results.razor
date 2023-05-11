@@ -1,20 +1,17 @@
 ﻿@page "/results/{ActionId}"
-@using DogtrekkingCzApp.Models
 @using DogtrekkingCzShared.Entities
 @using MapsterMapper
 @using Protos.Results
 @inject Protos.Results.Results.ResultsClient ResultsClient
-@inject AuthenticationStateProvider AuthStateProvider 
-@inject IStringLocalizer<Resource> localizer
+@inject IStringLocalizer<Resource> Localizer
 @inject IMapper Mapper
-@inject NavigationManager NavManager
 
-<h1>@localizer["Results"]</h1>
+<h1>@Localizer["Results"]</h1>
 
 @if (_races  == null)
 {
     <p>
-        <em>@localizer["Loading ..."]</em>
+        <em>@Localizer["Loading ..."]</em>
     </p>
 }
 else
@@ -24,53 +21,8 @@ else
         <div class="">
             @foreach (var category in race.Categories)
             {
-                <ResultsAdd ActionId="@ActionId" Race="@race" Category="@category" OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)"></ResultsAdd>
-                
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>@localizer["#"]</th>
-                        <th>@localizer["Surname"]</th>
-                        <th>@localizer["Name"]</th>
-                        <th>@localizer["Start"]</th>
-                        <th>@localizer["Finish"]</th>
-                        <th>@localizer["Time"]</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var racer in category.Racers
-                        .OrderBy(r =>
-                        {
-                            var totalTime = r.Finish.HasValue && r.Start.HasValue ? r.Finish.Value - r.Start.Value : TimeSpan.MaxValue;
-                            return (int) totalTime.TotalSeconds;
-                        }))
-                    {
-                        var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
-                        string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int) totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
-
-                        <tr>
-                            <td>
-                                <div class="col-12">?</div>
-                            </td>
-                            <td>
-                                <div class="col-12">@racer.LastName</div>
-                            </td>
-                            <td>
-                                <div class="col-12">@racer.FirstName</div>
-                            </td>
-                            <td>
-                                <div class="col-12">@racer.Start?.ToString("dd HH:mm:ss")</div>
-                            </td>
-                            <td>
-                                <div class="col-12">@racer.Finish?.ToString("dd HH:mm:ss")</div>
-                            </td>
-                            <td>
-                                <div class="col-12">@time</div>
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
+                @* <ResultsAdd ActionId="@ActionId" Race="@race" Category="@category" OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)"></ResultsAdd> *@
+                <ResultsCategory ActionId="@ActionId" Race="@race" Category="@category" />
             }
         </div>
     }
@@ -79,7 +31,7 @@ else
 @code {
     [Parameter] public string ActionId { get; set; }
     private List<RaceDto> _races = null;
-
+    
     protected override async Task OnInitializedAsync()
     {
         await ReloadData();
@@ -90,14 +42,5 @@ else
         Protos.Results.GetRacesForActionResponse response = await ResultsClient.getRacesForActionAsync(new GetRacesForActionRequest { ActionId = ActionId });
 
         _races = Mapper.Map<List<RaceDto>>(response.Races);
-    }
-
-    private void ResultAdded(string actionId, Guid raceId, Guid categoryId, RacerDto addedRacer)
-    {
-        _races.First(r => r.Id == raceId)
-            .Categories.First(c => c.Id == categoryId)
-            .Racers.Add(addedRacer);
-
-        StateHasChanged();
     }
 }
