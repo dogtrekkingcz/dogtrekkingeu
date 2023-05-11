@@ -31,6 +31,7 @@
     private int? _iHours = null;
     private int? _iMinutes = null;
     private int? _iSeconds = null;
+    private int? _iTotalSeconds = null;
     
     private ElementReference _refDaysInput;
     private ElementReference _refHoursInput;
@@ -58,15 +59,15 @@
         _minutes = _iMinutes?.ToString() ?? "";
         _seconds = _iSeconds?.ToString() ?? "";
 
-        if (_iDays != null && _iHours != null && _iMinutes != null && _iSeconds != null)
+        if (_iTotalSeconds.HasValue)
         {
             Model.IsValid = true;
             Model.Value = new Google.Protobuf.WellKnownTypes.Timestamp
             {
-                Seconds = ((_iDays.Value * 24 + _iHours.Value) * 60 + _iMinutes.Value) * 60 + _iSeconds.Value
+                Seconds = _iTotalSeconds.Value
             };
 
-            _totalSeconds = ((_iDays.Value * 24 + _iHours.Value) * 60 + _iMinutes.Value) * 60 + _iSeconds.Value
+            _totalSeconds = _iTotalSeconds
                 .ToString();
         }
         else
@@ -80,6 +81,13 @@
 
     private void Recount()
     {
+        var isValid = (_iDays.HasValue && _iHours.HasValue && _iMinutes.HasValue && _iSeconds.HasValue);
+        if (isValid == false)
+        {
+            _iTotalSeconds = null;
+            return;
+        }
+        
         while (_iSeconds > 59)
         {
             _iMinutes++;
@@ -97,6 +105,8 @@
             _iDays++;
             _iHours -= 24;
         }
+
+        _iTotalSeconds = ((_iDays.Value * 24 + _iHours.Value) * 60 + _iMinutes.Value) * 60 + _iSeconds.Value;
     }
     
     private async Task DaysUpdatedAsync(ChangeEventArgs e)
