@@ -1,0 +1,12 @@
+C:\projects\_private\dogtrekkingeu\Protos\bin\Debug\net7.0\Protos.deps.json
+C:\projects\_private\dogtrekkingeu\Protos\bin\Debug\net7.0\Protos.dll
+C:\projects\_private\dogtrekkingeu\Protos\bin\Debug\net7.0\Protos.pdb
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\Protos.csproj.AssemblyReference.cache
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\Protos.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\Protos.AssemblyInfoInputs.cache
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\Protos.AssemblyInfo.cs
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\Protos.csproj.CoreCompileInputs.cache
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\Protos.dll
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\refint\Protos.dll
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\Protos.pdb
+C:\projects\_private\dogtrekkingeu\Protos\obj\Debug\net7.0\ref\Protos.dll

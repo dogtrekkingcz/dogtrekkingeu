@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Components
+@using DogsOnTrailApp.Models
+@using SharedCode.Entities
+@using Protos.Actions
+@using Protos.Shared
+@inject IStringLocalizer<Resource> localizer
+
+<h3>@localizer["Action.CreateEntry.Person"]</h3>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Action.CreateEntry.Race.Selection"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputSelect 
+                    ValueChanged="@((string selectedRaceId) => RaceSelected(selectedRaceId))"
+                    ValueExpression="@(() => Model.RaceId)"
+                >
+                    @foreach (var race in @ActionSettings.Races)
+                    {
+                        <option value="@race.Id">@race.Name</option>
+                    }
+                </InputSelect>
+                <InputText @bind-Value="@Model.Name"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Action.CreateEntry.Category.Selection"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputSelect @bind-Value="@Model.CategoryId">
+                    @foreach (var category in _categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public EntryModel Model { get; set; }
+    
+    [Parameter]
+    public ActionSettingsModel ActionSettings { get; set; }
+
+    private List<ActionSettingsDto.CategoryDto> _categories = new List<ActionSettingsDto.CategoryDto>();
+
+    protected void RaceSelected(string selectedRaceId)
+    {
+        Model.RaceId = selectedRaceId; 
+        
+        _categories = ActionSettings.Categories
+            .Where(ctg => ctg.RaceId == selectedRaceId)
+            .ToList();
+        
+        StateHasChanged();
+    }
+}

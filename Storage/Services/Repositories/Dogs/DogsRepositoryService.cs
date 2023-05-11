@@ -1,4 +1,4 @@
-﻿using DogtrekkingCzShared.Entities;
+﻿using SharedCode.Entities;
 using MapsterMapper;
 using MongoDB.Bson;
 using Storage.Entities.Dogs;

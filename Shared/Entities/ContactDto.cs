@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCzShared.Entities
+﻿namespace SharedCode.Entities
 {
     public sealed record ContactDto
     {

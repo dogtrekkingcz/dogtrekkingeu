@@ -1,4 +1,4 @@
-﻿using DogtrekkingCzShared.Entities;
+﻿using SharedCode.Entities;
 
 namespace Storage.Entities.AuthorizationRoles
 {

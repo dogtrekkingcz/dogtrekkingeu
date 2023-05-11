@@ -1,0 +1,55 @@
+﻿@page "/dogs"
+
+@using MapsterMapper
+@using DogsOnTrailApp.Models
+
+@inject Protos.Dogs.Dogs.DogsClient DogsClient
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+@inject NavigationManager NavManager
+
+<h3>@localizer["Dogs"]</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>@localizer["Dogs.Chip"]</th>
+            <th>@localizer["Dogs.Name"]</th>
+            <th>@localizer["Dogs.Kennel"]</th>
+            <th>@localizer["Dogs.Pedigree"]</th>
+        </tr>
+    </thead>
+    <tdata>
+        @foreach (var dog in _dogs)
+        {
+            <tr>
+                <td>@dog.Chip</td>
+                <td>@dog.Name</td>
+                <td>@dog.Kennel</td>
+                <td>@dog.Pedigree</td>
+            </tr>
+        }
+    </tdata>
+</table>
+<button @onclick="@(() => AddDog())" class="btn btn-primary">@localizer["Dogs.AddDog"]</button>  
+
+@code {
+    private IList<DogModel> _dogs { get; set; } = new List<DogModel>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadData();
+    }
+
+    private async Task ReloadData()
+    {
+        Protos.Dogs.GetAllDogsResponse response = await DogsClient.getAllDogsAsync(new Protos.Dogs.GetAllDogsRequest());
+
+        _dogs = mapper.Map<List<DogModel>>(response.Dogs);
+    }
+
+    protected void AddDog()
+    {
+        NavManager.NavigateTo($"/dogsadd");
+    }
+}

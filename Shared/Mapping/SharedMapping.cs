@@ -1,6 +1,6 @@
 ﻿using Mapster;
 
-namespace DogtrekkingCzShared.Mapping
+namespace SharedCode.Mapping
 {
     public static class SharedMapping
     {

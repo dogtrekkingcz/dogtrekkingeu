@@ -1,7 +1,7 @@
-﻿using DogtrekkingCzShared.Entities;
+﻿using SharedCode.Entities;
 using Storage.Entities.AuthorizationRoles;
 using Storage.Interfaces;
-using static DogtrekkingCzShared.Entities.AuthorizationRoleDto;
+using static SharedCode.Entities.AuthorizationRoleDto;
 
 namespace Storage.Seed
 {

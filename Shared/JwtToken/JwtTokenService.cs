@@ -2,7 +2,7 @@
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 
-namespace DogtrekkingCzShared.JwtToken
+namespace SharedCode.JwtToken
 {
     public class JwtTokenService : IJwtTokenService
     {

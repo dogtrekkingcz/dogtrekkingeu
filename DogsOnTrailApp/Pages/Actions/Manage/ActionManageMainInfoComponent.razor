@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Components
+@using DogsOnTrailApp.Models
+@using BlazorDateRangePicker
+@using SharedCode.Entities
+
+@inject IStringLocalizer<Resource> localizer
+
+<h3>@localizer["Action main info"]</h3>
+<section>
+    <h4>@localizer["Term & name of action"]</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label for="term">@localizer["Term of action"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <DateRangePicker
+                    MinDate="DateTimeOffset.Now"
+                    MaxDate="DateTimeOffset.Now.AddYears(1)"
+                    @bind-StartDate="ActionStartDate"
+                    @bind-EndDate="ActionEndDate"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label for="name">@localizer["Name of action"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Name"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label for="description">@localizer["Description of action"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Description"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter]
+    public ActionModel Model { get; set; }
+    
+    DateTimeOffset? ActionStartDate
+    {
+        get { return Model.Term?.From; }
+        set { Model.Term.From = value.Value; }
+    }
+    DateTimeOffset? ActionEndDate
+    {
+        get { return Model.Term?.To;}
+        set { Model.Term.To = value.Value; }
+    }
+    
+    private void OnRangeSelect(DateRange range)
+    {
+        Model.Term = new TermDto
+        {
+            From = range.Start,
+            To = range.End
+        };
+    }
+}

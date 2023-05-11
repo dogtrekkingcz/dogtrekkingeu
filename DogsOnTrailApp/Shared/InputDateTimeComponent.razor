@@ -1,0 +1,257 @@
+﻿@using MapsterMapper
+@using DogsOnTrailApp.Models
+@using Google.Type
+
+@inject IMapper Mapper
+@inject IStringLocalizer<Resource> Localizer
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 col-sm-12">
+            <input type="text" 
+                   @ref="_refYearsInput" 
+                   @bind="_years" 
+                   @oninput="async (e)=> await YearsUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Years"]" 
+                   style="width: 40px;" />-
+            
+            <input type="text" 
+                   @ref="_refMonthsInput" 
+                   @bind="_months" 
+                   @oninput="async (e) => await MonthsUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Months"]" 
+                   style="width: 20px;" />-
+            
+            <input type="text" 
+                   @ref="_refDaysInput" 
+                   @bind="_days" 
+                   @oninput="async (e) => await DaysUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Days"]" 
+                   style="width: 20px;" />
+        </div>
+        <div class="col-6 col-sm-12">
+            <input type="text" 
+                   @ref="_refHoursInput" 
+                   @bind="_hours" 
+                   @oninput="async (e) => await HoursUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Hours"]" 
+                   style="width: 20px;" />:
+            
+            <input type="text" 
+                   @ref="_refMinutesInput" 
+                   @bind="_minutes" 
+                   @oninput="async (e) => await MinutesUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Minutes"]" 
+                   style="width: 20px;" />:
+            
+            <input type="text" 
+                   @ref="_refSecondsInput" 
+                   @bind="_seconds" 
+                   @oninput="async (e) => await SecondsUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Seconds"]" 
+                   style="width: 20px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="button" value="@Localizer["InputTime.ClearTime"]" @onclick="ClearDate"/>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public InputTimeModel Model { get; set; }
+
+    [Parameter]
+    public System.DateTime StartDate
+    {
+        get
+        {
+            if (_iYears.HasValue && _iMonths.HasValue && _iDays.HasValue)
+                return new System.DateTime(_iYears.Value, _iMonths.Value, _iDays.Value);
+            
+            return System.DateTime.Now;
+        }
+        set
+        {
+            _years = value.Year.ToString();
+            _months = value.Month.ToString();
+            _days = value.Day.ToString();
+            _hours = value.Hour.ToString();
+            _minutes = value.Minute.ToString();
+            _seconds = value.Second.ToString();
+            
+            _iYears = value.Year;
+            _iMonths = value.Month;
+            _iDays = value.Day;
+            _iHours = value.Hour;
+            _iMinutes = value.Minute;
+            _iSeconds = value.Second;
+            
+            Reload();
+        }
+    }
+
+    private string _years = "";
+    private string _months = "";
+    private string _days = "";
+    private string _hours = "";
+    private string _minutes = "";
+    private string _seconds = "";
+
+    private int? _iYears = null;
+    private int? _iMonths = null;
+    private int? _iDays = null;
+    private int? _iHours = null;
+    private int? _iMinutes = null;
+    private int? _iSeconds = null;
+    
+    private ElementReference _refYearsInput;
+    private ElementReference _refMonthsInput;
+    private ElementReference _refDaysInput;
+    private ElementReference _refHoursInput;
+    private ElementReference _refMinutesInput;
+    private ElementReference _refSecondsInput;
+    
+    private void ClearDate()
+    {
+        Model.Value = null;
+
+        _iYears = null;
+        _iMonths = null;
+        _iDays = null;
+        _iHours = null;
+        _iMinutes = null;
+        _iSeconds = null;
+
+        Reload();
+    }
+
+    private void Reload()
+    {
+        _years = _iYears?.ToString() ?? "";
+        _months = _iMonths?.ToString() ?? "";
+        _days = _iDays?.ToString() ?? "";
+        _hours = _iHours?.ToString() ?? "";
+        _minutes = _iMinutes?.ToString() ?? "";
+        _seconds = _iSeconds?.ToString() ?? "";
+
+        if (_iYears != null && _iMonths != null && _iDays != null && _iHours != null && _iMinutes != null && _iSeconds != null)
+        {
+            Model.IsValid = true;
+            Model.Value = new Google.Type.DateTime() { Year = _iYears.Value, Month = _iMonths.Value, Day = _iDays.Value, Hours = _iHours.Value, Minutes = _iMinutes.Value, Seconds = _iSeconds.Value };
+        }
+        else
+        {
+            Model.IsValid = false;
+            Model.Value = null;
+        }
+        
+        StateHasChanged();
+    }
+
+    private async Task YearsUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iYears = null;
+        }
+        else
+            _iYears = value;
+
+        if (e.Value.ToString().Length == 4)
+            await _refMonthsInput.FocusAsync();
+        
+        Reload();
+    }
+    
+    private async Task MonthsUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iMonths = null;
+        }
+        else
+            _iMonths = value;
+
+        if (e.Value.ToString().Length == 2)
+            await _refDaysInput.FocusAsync();
+        
+        Reload();
+    }
+    
+    private async Task DaysUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iDays = null;
+        }
+        else
+            _iDays = value;
+
+        if (e.Value.ToString().Length == 2)
+            await _refHoursInput.FocusAsync();
+        
+        Reload();
+    }
+
+    private async Task HoursUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iHours = null;
+        }
+        else 
+            _iHours = value;
+
+        if (e.Value.ToString().Length == 2)
+            await _refMinutesInput.FocusAsync();
+        
+        Reload();
+    }
+
+    private async Task MinutesUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false) 
+        {
+            _iMinutes = null;
+        }
+        else
+            _iMinutes = value;
+
+        if (e.Value.ToString().Length == 2)
+            await _refSecondsInput.FocusAsync();
+        
+        Reload();
+    }
+
+    private async Task SecondsUpdatedAsync(ChangeEventArgs e)
+    {
+        int value = 0;
+        
+        if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
+        {
+            _iSeconds = null;
+        }
+        else
+            _iSeconds = value;
+
+        Reload();
+    }
+}

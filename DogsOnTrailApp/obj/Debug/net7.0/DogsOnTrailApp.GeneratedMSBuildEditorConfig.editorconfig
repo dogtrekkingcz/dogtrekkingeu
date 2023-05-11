@@ -1,0 +1,153 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = DogsOnTrailApp
+build_property.RootNamespace = DogsOnTrailApp
+build_property.ProjectDir = C:\projects\_private\dogtrekkingeu\DogsOnTrailApp\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\projects\_private\dogtrekkingeu\DogsOnTrailApp
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/ActionDropDown.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xBY3Rpb25Ecm9wRG93bi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/Actions.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xBY3Rpb25zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xDcmVhdGVFbnRyeVxDcmVhdGVFbnRyeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryPersonComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xDcmVhdGVFbnRyeVxDcmVhdGVFbnRyeVBlcnNvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryRaceCategoryComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xDcmVhdGVFbnRyeVxDcmVhdGVFbnRyeVJhY2VDYXRlZ29yeUNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/Manage/ActionManage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xNYW5hZ2VcQWN0aW9uTWFuYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/Manage/ActionManageLocationComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xNYW5hZ2VcQWN0aW9uTWFuYWdlTG9jYXRpb25Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/Manage/ActionManageMainInfoComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xNYW5hZ2VcQWN0aW9uTWFuYWdlTWFpbkluZm9Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/Manage/ActionManageRacesComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xNYW5hZ2VcQWN0aW9uTWFuYWdlUmFjZXNDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Actions/Manage/RaceModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWN0aW9uc1xNYW5hZ2VcUmFjZU1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Authentication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Dogs/Dogs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9nc1xEb2dzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Dogs/DogsAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9nc1xEb2dzQWRkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Entries/Entries.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW50cmllc1xFbnRyaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Results/Results.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzdWx0c1xSZXN1bHRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Results/ResultsAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzdWx0c1xSZXN1bHRzQWRkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/Results/ResultsCategory.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVzdWx0c1xSZXN1bHRzQ2F0ZWdvcnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/UserProfiles/Manage/UserProfileManage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclByb2ZpbGVzXE1hbmFnZVxVc2VyUHJvZmlsZU1hbmFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Pages/UserProfiles/UserProfileModal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclByb2ZpbGVzXFVzZXJQcm9maWxlTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/CultureSelector.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEN1bHR1cmVTZWxlY3Rvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/DogComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERvZ0NvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/InputDateTimeComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXElucHV0RGF0ZVRpbWVDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/InputTimeCalcComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXElucHV0VGltZUNhbGNDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/LoginDisplay.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luRGlzcGxheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/NumericKeyPadComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE51bWVyaWNLZXlQYWRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/TabControl.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRhYkNvbnRyb2wucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/TabPage.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRhYlBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-a3ftivjyqk
+
+[C:/projects/_private/dogtrekkingeu/DogsOnTrailApp/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-j5xdmun83t

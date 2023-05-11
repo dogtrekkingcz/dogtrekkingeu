@@ -1,6 +1,6 @@
-﻿namespace DogtrekkingCzShared.Options
+﻿namespace SharedCode.Options
 {
-    public sealed record DogtrekkingCzOptions
+    public sealed record DogsOnTrailOptions
     {
         public string MongoDbConnectionString { get; set; } = "";
     }

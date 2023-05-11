@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Components
+@using DogsOnTrailApp.Models
+@using SharedCode.Entities
+
+@inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
+
+<h3>@localizer["Action races"]</h3>
+
+<section>
+    <table>
+        <thead>
+            <th>@localizer["Name"]</th>
+            <th>@localizer["Categories"]</th>
+            <th>@localizer["Payments"]</th>
+            <th>@localizer["Actions"]</th>
+        </thead>
+        <tbody>
+
+        @foreach (var modelRace in Model.Races)
+        {
+            <tr>
+                <td>@modelRace.Name</td>
+                <td>
+                    <ul>
+                        @foreach (var ctg in modelRace.Categories)
+                        {
+                            <li>@ctg.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td> --- </td>
+                <td></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <a @onclick="@(() => FillByStandardDtTemplate())">@localizer["Fill by standard DT template"]</a>
+    <button @onclick="@(() => AddRace())" class="btn">@localizer["Add new race"]</button>
+</section>
+
+
+@code {
+    [Parameter]
+    public ActionModel Model { get; set; }
+
+    private void FillByStandardDtTemplate()
+    {
+        var races = new List<RaceDto>();
+        races.Add(new RaceDto
+        {
+            Name = "LONG",
+            Categories = new List<CategoryDto>
+            {
+                { new CategoryDto { Name = "DTW1" }},
+                { new CategoryDto() { Name = "DTM1" }},
+                { new CategoryDto {  Name = "DTW2" }},
+                { new CategoryDto { Name = "DTM2" }}
+            }
+        });
+        
+        races.Add(new RaceDto
+        {
+            Name = "MID",
+            Categories = new List<CategoryDto>
+            {
+                { new CategoryDto { Name = "DMW" }},
+                { new CategoryDto { Name = "DMM" }}
+            }
+        });
+        
+        races.Add(new RaceDto
+        {
+            Name = "SHORT",
+            Categories = new List<CategoryDto>
+            {
+                { new CategoryDto { Name = "SHORT" }}
+            }
+        });
+
+        Model.Races = races;
+    }
+
+    private async Task AddRace()
+    {
+        
+    }
+}

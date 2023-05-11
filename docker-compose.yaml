@@ -16,7 +16,7 @@ services:
     image: dogsontrail_server_grpc
     build:
       context: .
-      dockerfile: DogtrekkingCzGRPCService/Dockerfile
+      dockerfile: API.GRPCService/Dockerfile
     ports:
       - 4080:80
       - 4443:443
@@ -32,7 +32,7 @@ services:
     image: dogsontrail_server_api
     build:
       context: .
-      dockerfile: DogtrekkingCzWebApiService/Dockerfile
+      dockerfile: API.WebApiService/Dockerfile
     ports:
       - 3080:80
       - 3443:443
@@ -48,7 +48,7 @@ services:
     image: dogsontrail_client_app
     build:
       context: .
-      dockerfile: DogtrekkingCzApp/Dockerfile
+      dockerfile: DogsOnTrailApp/Dockerfile
     ports:
       - 5443:443
       - 5080:80

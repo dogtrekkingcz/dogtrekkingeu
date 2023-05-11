@@ -1,4 +1,4 @@
-﻿using DogtrekkingCzShared.Entities;
+﻿using SharedCode.Entities;
 using MapsterMapper;
 using Storage.Entities.Entries;
 using Storage.Interfaces;

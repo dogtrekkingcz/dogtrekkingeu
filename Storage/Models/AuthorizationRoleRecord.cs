@@ -1,4 +1,4 @@
-﻿using DogtrekkingCzShared.Entities;
+﻿using SharedCode.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

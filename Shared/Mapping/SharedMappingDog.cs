@@ -1,8 +1,8 @@
-﻿using DogtrekkingCzShared.Entities;
-using DogtrekkingCzShared.Extensions;
+﻿using SharedCode.Extensions;
 using Mapster;
+using SharedCode.Entities;
 
-namespace DogtrekkingCzShared.Mapping
+namespace SharedCode.Mapping
 {
     public static class SharedMappingDog
     {

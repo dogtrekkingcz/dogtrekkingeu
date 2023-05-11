@@ -1,0 +1,99 @@
+﻿@using DogsOnTrailApp.Models
+@using SharedCode.Entities
+@using Google.Type
+@using MapsterMapper
+@using Protos.Results
+@using Protos.Shared
+@using DogsOnTrailApp.Shared
+@using SharedCode.Extensions
+@using DateTime = System.DateTime
+
+@inject IStringLocalizer<Resource> Localizer
+@inject Protos.Results.Results.ResultsClient ResultsClient
+@inject IMapper Mapper
+
+<h3>@Localizer["Results.Manage.Add"]</h3>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Firstname"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Racer.FirstName"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Lastname"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Racer.LastName"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Start"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputDateTimeComponent Model="@StartProxy" StartDate="DateTime.Today" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.Finish"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputDateTimeComponent Model="@FinishProxy" StartDate="DateTime.Today" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@Localizer["Results.Manage.Add.WholeTime"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputTimeCalcComponent Model="@WholeTimeProxy" />
+            </div>
+        </div>
+    </div>
+</section>
+<button @onclick="@(async () => await SubmitAsync())" class="btn btn-primary">@Localizer["Results.AddResult.Submit"]</button>
+
+@code {
+    [Parameter] public string ActionId { get; set; }
+    [Parameter] public RaceDto Race { get; set; }
+    [Parameter] public CategoryDto Category { get; set; }
+    
+    [Parameter]
+    public EventCallback<RacerDto> OnResultAddedCallback { get; set; }
+    
+    public Racer Racer = new();
+
+    private InputTimeModel StartProxy = new();
+    private InputTimeModel FinishProxy = new();
+    private InputTimeSpanModel WholeTimeProxy = new();
+
+    protected async Task SubmitAsync()
+    {
+        if (StartProxy.IsValid)
+            Racer.Start = StartProxy.Value;
+
+        if (FinishProxy.IsValid)
+            Racer.Finish = FinishProxy.Value;
+
+        if (WholeTimeProxy.IsValid)
+        {
+            Racer.Start = Race.Begin.ToGoogleDateTime();
+            Racer.Finish = (Race.Begin.AddSeconds(WholeTimeProxy.Value.Seconds)).ToGoogleDateTime();
+        }
+        
+        await ResultsClient.addResultAsync(new AddResultRequest {
+            ActionId = ActionId,
+            RaceId = Race.Id.ToString(),
+            CategoryId = Category.Id.ToString(),
+            Racer = Racer
+        });
+        
+        await OnResultAddedCallback.InvokeAsync(Mapper.Map<RacerDto>(Racer));
+    }
+}

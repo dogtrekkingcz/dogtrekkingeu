@@ -1,4 +1,4 @@
-﻿namespace DogtrekkingCzShared.Testable
+﻿namespace SharedCode.Testable
 {
     internal class TestableService : ITestableService
     {

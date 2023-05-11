@@ -1,18 +1,18 @@
-﻿using DogtrekkingCzShared.Interceptors;
-using DogtrekkingCzShared.JwtToken;
-using DogtrekkingCzShared.Mapping;
-using DogtrekkingCzShared.Options;
+﻿using SharedCode.Mapping;
 using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SharedCode.Interceptors;
+using SharedCode.JwtToken;
+using SharedCode.Options;
 
-namespace DogtrekkingCzShared
+namespace SharedCode
 {
-    public static class DIComposerDogtrekkingCzShared
+    public static class DIComposerDogsOnTrailShared
     {
-        public static IServiceCollection AddDogtrekkingCzShared(this IServiceCollection services, out TypeAdapterConfig typeAdapterConfig, DogtrekkingCzOptions options)
+        public static IServiceCollection AddDogsOnTrailShared(this IServiceCollection services, out TypeAdapterConfig typeAdapterConfig, DogsOnTrailOptions options)
         {
             typeAdapterConfig = new TypeAdapterConfig
             {

@@ -1,10 +1,10 @@
-﻿using DogtrekkingCzShared.JwtToken;
-using Grpc.Core.Interceptors;
+﻿using Grpc.Core.Interceptors;
 using Grpc.Core;
 using static Grpc.Core.Interceptors.Interceptor;
 using Microsoft.Extensions.Logging;
+using SharedCode.JwtToken;
 
-namespace DogtrekkingCzShared.Interceptors
+namespace SharedCode.Interceptors
 {
     public class JwtTokenInterceptor : Interceptor
     {
