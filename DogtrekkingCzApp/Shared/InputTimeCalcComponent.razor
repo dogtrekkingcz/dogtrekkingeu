@@ -13,7 +13,7 @@
             <input type="text" size="1" @ref="_refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Minutes"]"/>:
             <input type="text" size="1" @ref="_refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Seconds"]"/>
             <input type="button" value="@Localizer["InputTime.ClearTime"]" @onclick="ClearDate" />
-            <input type="text" size="2" readonly="readonly" @BindAttributes="_totalSeconds" />
+            <input type="text" size="2" readonly="readonly" @bind="_totalSeconds" />
         </div>
     </div>
 </div>
@@ -51,6 +51,8 @@
 
     private void Reload()
     {
+        Recount();
+        
         _days = _iDays?.ToString() ?? "";
         _hours = _iHours?.ToString() ?? "";
         _minutes = _iMinutes?.ToString() ?? "";
@@ -61,16 +63,10 @@
             Model.IsValid = true;
             Model.Value = new Google.Protobuf.WellKnownTypes.Timestamp
             {
-                Seconds = _iDays.Value * 24 
-                          + _iHours.Value * 60 
-                          + _iMinutes.Value * 60 
-                          + _iSeconds.Value
+                Seconds = ((_iDays.Value * 24 + _iHours.Value) * 60 + _iMinutes.Value) * 60 + _iSeconds.Value
             };
 
-            _totalSeconds = (_iDays.Value * 24
-                             + _iHours.Value * 60
-                             + _iMinutes.Value * 60
-                             + _iSeconds.Value)
+            _totalSeconds = ((_iDays.Value * 24 + _iHours.Value) * 60 + _iMinutes.Value) * 60 + _iSeconds.Value
                 .ToString();
         }
         else
@@ -82,6 +78,27 @@
         StateHasChanged();
     }
 
+    private void Recount()
+    {
+        while (_iSeconds > 59)
+        {
+            _iMinutes++;
+            _iSeconds -= 60;
+        }
+
+        while (_iMinutes > 59)
+        {
+            _iHours++;
+            _iMinutes -= 60;
+        }
+
+        while (_iHours > 23)
+        {
+            _iDays++;
+            _iHours -= 24;
+        }
+    }
+    
     private async Task DaysUpdatedAsync(ChangeEventArgs e)
     {
         int value = 0;
@@ -104,19 +121,9 @@
         int value = 0;
         
         if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
-        {
             _iHours = null;
-        }
         else 
-        {
             _iHours = value;
-
-            while (_iHours > 23)
-            {
-                _iDays++;
-                _iHours -= 24;
-            }
-        }
 
         if (e.Value.ToString().Length == 2)
             await _refMinutesInput.FocusAsync();
@@ -129,25 +136,9 @@
         int value = 0;
         
         if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false) 
-        {
             _iMinutes = null;
-        }
         else
-        {
             _iMinutes = value;
-
-            while (_iMinutes > 59)
-            {
-                _iHours++;
-                _iMinutes -= 60;
-
-                if (_iHours > 23)
-                {
-                    _iDays++;
-                    _iHours -= 24;
-                }
-            }
-        }
 
         if (e.Value.ToString().Length == 2)
             await _refSecondsInput.FocusAsync();
@@ -160,31 +151,9 @@
         int value = 0;
         
         if (e.Value == null || int.TryParse(e.Value.ToString(), out value) == false)
-        {
             _iSeconds = null;
-        }
         else
-        {
             _iSeconds = value;
-            
-            while (_iSeconds > 59)
-            {
-                _iMinutes++;
-                _iSeconds -= 60;
-
-                if (_iMinutes > 59)
-                {
-                    _iHours++;
-                    _iMinutes -= 60;
-                }
-
-                if (_iHours > 23)
-                {
-                    _iDays++;
-                    _iHours -= 24;
-                }
-            }
-        }
 
         Reload();
     }
