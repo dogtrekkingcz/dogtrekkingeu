@@ -7,13 +7,59 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-6 col-sm-12">
+            <input type="text" 
+                   @ref="_refYearsInput" 
+                   @bind="_years" 
+                   @oninput="async (e)=> await YearsUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Years"]" 
+                   style="width: 40px;" />-
+            
+            <input type="text" 
+                   @ref="_refMonthsInput" 
+                   @bind="_months" 
+                   @oninput="async (e) => await MonthsUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Months"]" 
+                   style="width: 20px;" />-
+            
+            <input type="text" 
+                   @ref="_refDaysInput" 
+                   @bind="_days" 
+                   @oninput="async (e) => await DaysUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Days"]" 
+                   style="width: 20px;" />
+        </div>
+        <div class="col-6 col-sm-12">
+            <input type="text" 
+                   @ref="_refHoursInput" 
+                   @bind="_hours" 
+                   @oninput="async (e) => await HoursUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Hours"]" 
+                   style="width: 20px;" />:
+            
+            <input type="text" 
+                   @ref="_refMinutesInput" 
+                   @bind="_minutes" 
+                   @oninput="async (e) => await MinutesUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Minutes"]" 
+                   style="width: 20px;" />:
+            
+            <input type="text" 
+                   @ref="_refSecondsInput" 
+                   @bind="_seconds" 
+                   @oninput="async (e) => await SecondsUpdatedAsync(e)" 
+                   onfocus="this.select()" 
+                   placeholder="@Localizer["InputTime.Seconds"]" 
+                   style="width: 20px;" />
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <input type="text" size="2" @ref="_refYearsInput" @bind="_years" @oninput="async (e)=> await YearsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Years"]"/>-
-            <input type="text" size="1" @ref="_refMonthsInput" @bind="_months" @oninput="async (e) => await MonthsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Months"]"/>-
-            <input type="text" size="1" @ref="_refDaysInput" @bind="_days" @oninput="async (e) => await DaysUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Days"]"/>
-            <input type="text" size="1" @ref="_refHoursInput" @bind="_hours" @oninput="async (e) => await HoursUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Hours"]"/>:
-            <input type="text" size="1" @ref="_refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Minutes"]"/>:
-            <input type="text" size="1" @ref="_refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Seconds"]"/>
             <input type="button" value="@Localizer["InputTime.ClearTime"]" @onclick="ClearDate"/>
         </div>
     </div>
