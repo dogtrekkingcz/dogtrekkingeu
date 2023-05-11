@@ -13,7 +13,7 @@
             <input type="text" size="1" @ref="_refMinutesInput" @bind="_minutes" @oninput="async (e) => await MinutesUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Minutes"]"/>:
             <input type="text" size="1" @ref="_refSecondsInput" @bind="_seconds" @oninput="async (e) => await SecondsUpdatedAsync(e)" onfocus="this.select()" placeholder="@Localizer["InputTime.Seconds"]"/>
             <input type="button" value="@Localizer["InputTime.ClearTime"]" @onclick="ClearDate" />
-            <input type="text" size="2" readonly="readonly" @bind="_totalSeconds" />
+            @* <input type="text" size="2" readonly="readonly" @bind="_totalSeconds" /> *@
         </div>
     </div>
 </div>

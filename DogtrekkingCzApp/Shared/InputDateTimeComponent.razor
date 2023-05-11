@@ -21,7 +21,36 @@
 
 @code {
     [Parameter] public InputTimeModel Model { get; set; }
-    [Parameter] public System.DateTime StartDate { get; set; }
+
+    [Parameter]
+    public System.DateTime StartDate
+    {
+        get
+        {
+            if (_iYears.HasValue && _iMonths.HasValue && _iDays.HasValue)
+                return new System.DateTime(_iYears.Value, _iMonths.Value, _iDays.Value);
+            
+            return System.DateTime.Now;
+        }
+        set
+        {
+            _years = value.Year.ToString();
+            _months = value.Month.ToString();
+            _days = value.Day.ToString();
+            _hours = value.Hour.ToString();
+            _minutes = value.Minute.ToString();
+            _seconds = value.Second.ToString();
+            
+            _iYears = value.Year;
+            _iMonths = value.Month;
+            _iDays = value.Day;
+            _iHours = value.Hour;
+            _iMinutes = value.Minute;
+            _iSeconds = value.Second;
+            
+            Reload();
+        }
+    }
 
     private string _years = "";
     private string _months = "";
