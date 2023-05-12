@@ -1,0 +1,19 @@
+﻿version: '3.4'
+
+services:
+  webserver:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /dogsontrail_data/nginx/conf/:/etc/nginx/conf.d/:ro
+      - /dogsontrail_data/certbot/www:/var/www/certbot/:ro
+      - /dogsontrail_data/certbot/conf/:/etc/nginx/ssl/:ro
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - /dogsontrail_data/certbot/www/:/var/www/certbot/:rw
+      - /dogsontrail_data/certbot/conf/:/etc/letsencrypt/:rw
