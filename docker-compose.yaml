@@ -12,8 +12,37 @@ services:
   # dotnet dev-certs https --clean
   # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
   # dotnet dev-certs https --trust
+  #
+  # Linux production
+  # docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d dogsontrail.eu
+  webserver:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /dogsontrail_data/data_nginx/conf/:/etc/nginx/conf.d/:ro
+      - /dogsontrail_data/data_certbot/www:/var/www/certbot/:ro
+      - /dogsontrail_data/data_certbot/conf/:/etc/nginx/ssl/:ro
+    links:
+      - web
+    networks:
+      - frontend
+      - backend
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - /dogsontrail_data/data_certbot/www/:/var/www/certbot/:rw
+      - /dogsontrail_data/data_certbot/conf/:/etc/letsencrypt/:rw
+    networks:
+      - frontend
+      - backend
+
   dogsontrail_grpc:
     image: dogsontrail_server_grpc
+    container_name: DogsOnTrail.gRPC
     build:
       context: .
       dockerfile: API.GRPCService/Dockerfile
@@ -24,12 +53,16 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/aspnetapp.pfx
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - /dogsontrail_data/data_certbot/www:/www:ro
+    networks:
+      - backend
+      - frontend
       
   dogsontrail_webapi:
     image: dogsontrail_server_api
+    container_name: DogsOnTrail.WebApi
     build:
       context: .
       dockerfile: API.WebApiService/Dockerfile
@@ -40,22 +73,28 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/aspnetapp.pfx
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - /dogsontrail_data/data_certbot/www:/www:ro
+    networks:
+      - frontend
+      - backend
       
-  dogsontrail_app: 
+  web: 
     image: dogsontrail_client_app
+    container_name: DogsOnTrail.App
+    expose:
+      - "5000"
     build:
       context: .
       dockerfile: DogsOnTrailApp/Dockerfile
-    ports:
-      - 5443:443
-      - 5080:80
+    networks:
+      - frontend
+      - backend
       
   dtdata_db:
     image: mongo:latest
-    container_name: data_db
+    container_name: DogsOnTrail.DB
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
@@ -63,23 +102,27 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - data_dogsontrail_db:/data/db
+      - /dogsontrail_data/mongo_db:/data/db
+    networks:
+      - backend
    
   postgres:
     image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    container_name: DogsOnTrail.KeyCloakDB
     environment:
       POSTGRES_DB: keycl0ak
       POSTGRES_USER: keycl0ak
       POSTGRES_PASSWORD: password
     ports:
       - 5431:5431
+    volumes:
+      - /dogsontrail_data/postgres_db:/var/lib/postgresql/data
+    networks:
+      - backend
 
   keycloak:
     image: jboss/keycloak
-    volumes:
-      - ./keycloak/imports:/opt/jboss/keycloak/imports
+    container_name: DogsOnTrail.KeyCloak
     command: 
       - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:
@@ -92,8 +135,13 @@ services:
       KEYCLOAK_PASSWORD: asc88a8c0ssssqs
     ports:
       - 8080:8080
+    volumes:
+      - /dogsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
     depends_on:
       - postgres
+    networks:
+      - frontend
+      - backend
 
   # MessageQueue not necessary yet
   #mq:
@@ -111,6 +159,10 @@ volumes:
   data_mq:
   postgres_data:
       driver: local
-  
-  
 
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    
