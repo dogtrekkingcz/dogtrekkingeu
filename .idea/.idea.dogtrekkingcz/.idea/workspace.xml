@@ -19,7 +19,7 @@
     <projectFile profileName="https">DogtrekkingCzWebApiService/DogtrekkingCzWebApiService.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dbfdbdbe-d8d7-41fd-91a6-a85c46b6f36c" name="Changes" comment="renaming" />
+    <list default="true" id="dbfdbdbe-d8d7-41fd-91a6-a85c46b6f36c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -297,7 +297,7 @@
       <workItem from="1683781478267" duration="2487000" />
       <workItem from="1683796300499" duration="3930000" />
       <workItem from="1683802539289" duration="1970000" />
-      <workItem from="1683806194530" duration="1878000" />
+      <workItem from="1683806194530" duration="2037000" />
     </task>
     <task id="LOCAL-00001" summary="fixies">
       <created>1683781122540</created>
@@ -355,7 +355,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683808050441</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added workspace">
+      <created>1683808285673</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1683808285673</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +381,7 @@
     <MESSAGE value="formatting of html" />
     <MESSAGE value="first part of renaming and structuring" />
     <MESSAGE value="renaming" />
-    <option name="LAST_COMMIT_MESSAGE" value="renaming" />
+    <MESSAGE value="added workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="added workspace" />
   </component>
 </project>

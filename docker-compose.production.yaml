@@ -1,0 +1,134 @@
+﻿version: '3.4'
+
+services:
+  # For development - there is a need to configure certificates
+  # -----------------------------------------------------------
+  # Windows => Linux
+  # dotnet dev-certs https --clean
+  # dotnet dev-certs https -ep "$env:USERPROFILE\.aspnet\https\aspnetapp.pfx"  -p cert_password
+  # dotnet dev-certs https --trust
+  #
+  # Linux
+  # dotnet dev-certs https --clean
+  # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
+  # dotnet dev-certs https --trust
+  webserver:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    links:
+      - web
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+
+  dogsontrail_grpc:
+    image: dogsontrail_server_grpc
+    build:
+      context: .
+      dockerfile: API.GRPCService/Dockerfile
+    ports:
+      - 4080:80
+      - 4443:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      
+  dogsontrail_webapi:
+    image: dogsontrail_server_api
+    build:
+      context: .
+      dockerfile: API.WebApiService/Dockerfile
+    ports:
+      - 3080:80
+      - 3443:443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      
+  web: 
+    image: dogsontrail_client_app
+    expose:
+      - "5000"
+    build:
+      context: .
+      dockerfile: DogsOnTrailApp/Dockerfile
+      
+  dtdata_db:
+    image: mongo:latest
+    container_name: data_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: DogsOnTrailDb
+    ports:
+      - 27017:27017
+    volumes:
+      - data_dogsontrail_db:/data/db
+   
+  postgres:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycl0ak
+      POSTGRES_USER: keycl0ak
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5431:5431
+
+  keycloak:
+    image: jboss/keycloak
+    volumes:
+      - ./keycloak/imports:/opt/jboss/keycloak/imports
+    command: 
+      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycl0ak
+      DB_USER: keycl0ak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: administrat0r
+      KEYCLOAK_PASSWORD: asc88a8c0ssssqs
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
+  # MessageQueue not necessary yet
+  #mq:
+  #  image: rabbitmq:management
+  #  container_name: message-queue
+  #  ports:
+  #    - 15672:15672
+  #    - 5672:5672
+  #    - 5671:5671
+  #  volumes:
+  #    - data_mq:/var/lib/rabbitmq
+      
+volumes:
+  data_dogsontrail_db:
+  data_mq:
+  postgres_data:
+      driver: local
+  
+  
+
