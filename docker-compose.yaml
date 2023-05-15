@@ -25,7 +25,6 @@ services:
       - backend
 
   dogsontrail_grpc:
-    image: dogsontrail_server_grpc
     container_name: DogsOnTrail.gRPC
     build:
       context: .
@@ -42,7 +41,6 @@ services:
       - frontend
       
   dogsontrail_webapi:
-    image: dogsontrail_server_api
     container_name: DogsOnTrail.WebApi
     build:
       context: .
@@ -59,7 +57,6 @@ services:
       - backend
       
   dogsontrail_app: 
-    image: dogsontrail_client_app
     container_name: DogsOnTrail.App
     build:
       context: .

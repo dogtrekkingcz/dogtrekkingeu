@@ -15,22 +15,6 @@ services:
   #
   # Linux production
   # docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d dogsontrail.eu
-  webserver:
-    image: nginx:latest
-    ports:
-      - 80:80
-      - 443:443
-    restart: always
-    volumes:
-      - /dogsontrail_data/data_nginx/conf/:/etc/nginx/conf.d/:ro
-      - /dogsontrail_data/data_certbot/www:/var/www/certbot/:ro
-      - /dogsontrail_data/data_certbot/conf/:/etc/nginx/ssl/:ro
-    links:
-      - web
-    networks:
-      - frontend
-      - backend
-
   certbot:
     image: certbot/certbot:latest
     volumes:
@@ -41,7 +25,6 @@ services:
       - backend
 
   dogsontrail_grpc:
-    image: dogsontrail_server_grpc
     container_name: DogsOnTrail.gRPC
     build:
       context: .
@@ -50,10 +33,7 @@ services:
       - 4080:80
       - 4443:443
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-#      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
-#      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/aspnetapp.pfx
     volumes:
       - /dogsontrail_data/data_certbot/www:/www:ro
     networks:
@@ -61,7 +41,6 @@ services:
       - frontend
       
   dogsontrail_webapi:
-    image: dogsontrail_server_api
     container_name: DogsOnTrail.WebApi
     build:
       context: .
@@ -70,24 +49,21 @@ services:
       - 3080:80
       - 3443:443
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-#      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
-#      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/aspnetapp.pfx
     volumes:
       - /dogsontrail_data/data_certbot/www:/www:ro
     networks:
       - frontend
       - backend
       
-  web: 
-    image: dogsontrail_client_app
+  dogsontrail_app: 
     container_name: DogsOnTrail.App
-    expose:
-      - "5000"
     build:
       context: .
       dockerfile: DogsOnTrailApp/Dockerfile
+    ports:
+      - 443:443
+      - 80:80
     networks:
       - frontend
       - backend
