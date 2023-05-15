@@ -1,6 +1,7 @@
 ﻿1. sudo mkdir /dogsontrail_data/
 2. sudo docker compose up
 3. cp nginx.conf /dogsontrail_data/nginx/conf/
+4. Create ingress rules for EVERY port the docker containers uses (eg, 80, 443, 27017, ...) - in case of Oracle Cloud service
 4. sudo iptables -I INPUT 1 -m state --state NEW -p tcp --dport 443 -j ACCEPT
 5. sudo iptables -I INPUT 1 -m state --state NEW -p tcp --dport 80 -j ACCEPT
 6. sudo docker restart opc-certbot-1 opc-webserver-1
