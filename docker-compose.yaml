@@ -34,8 +34,10 @@ services:
       - 4443:443
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/dogsontrail.eu.pfx
     volumes:
-      - /dogsontrail_data/data_certbot/www:/www:ro
+      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu:/www:ro
     networks:
       - backend
       - frontend
@@ -50,8 +52,10 @@ services:
       - 3443:443
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/dogsontrail.eu.pfx
     volumes:
-      - /dogsontrail_data/data_certbot/www:/www:ro
+      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu:/www:ro
     networks:
       - frontend
       - backend
@@ -67,6 +71,8 @@ services:
     networks:
       - frontend
       - backend
+    volumes:
+      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu:/etc/nginx/ssl/live/dogsontrail.eu:ro
       
   dtdata_db:
     image: mongo:latest
