@@ -13,5 +13,6 @@ sudo docker secret create $SecretName /dogsontrail_data/certbot/conf/live/dogson
 sudo docker service update --secret-add $SecretName --secret-rm $OldSecretName --env-add Kestrel__Certificates__Default__Path=/run/secrets/$SecretName $AppName
 sudo docker service update --secret-add $SecretName --secret-rm $OldSecretName --env-add Kestrel__Certificates__Default__Path=/run/secrets/$SecretName DogsOnTrail.gRPC
 sudo docker service update --secret-add $SecretName --secret-rm $OldSecretName --env-add Kestrel__Certificates__Default__Path=/run/secrets/$SecretName DogsOnTrail.WebApi
+sudo docker service update --secret-add $SecretName --secret-rm $OldSecretName --env-add Kestrel__Certificates__Default__Path=/run/secrets/$SecretName DogsOnTrail.App
 
 sudo docker secret rm $OldSecretName

@@ -15,22 +15,6 @@ services:
   #
   # Linux production
   # docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d dogsontrail.eu
-  webserver:
-    image: nginx:latest
-    ports:
-      - 80:80
-      - 443:443
-    restart: always
-    volumes:
-      - /dogsontrail_data/data_nginx/conf/:/etc/nginx/conf.d/:ro
-      - /dogsontrail_data/data_certbot/www:/var/www/certbot/:ro
-      - /dogsontrail_data/data_certbot/conf/:/etc/nginx/ssl/:ro
-    links:
-      - web
-    networks:
-      - frontend
-      - backend
-
   certbot:
     image: certbot/certbot:latest
     volumes:
@@ -74,14 +58,15 @@ services:
       - frontend
       - backend
       
-  web: 
+  dogsontrail_app: 
     image: dogsontrail_client_app
     container_name: DogsOnTrail.App
-    expose:
-      - "5000"
     build:
       context: .
       dockerfile: DogsOnTrailApp/Dockerfile
+    ports:
+      - 443:443
+      - 80:80
     networks:
       - frontend
       - backend
