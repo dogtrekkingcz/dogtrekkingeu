@@ -35,9 +35,9 @@ services:
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/dogsontrail.eu.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/dogsontrail.eu.pfx
     volumes:
-      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu:/www:ro
+      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu/dogsontrail.eu.pfx:/app/dogsontrail.eu.pfx:ro
     networks:
       - backend
       - frontend
@@ -53,9 +53,9 @@ services:
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/www/dogsontrail.eu.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/dogsontrail.eu.pfx
     volumes:
-      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu:/www:ro
+      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu/dogsontrail.eu.pfx:/app/dogsontrail.eu.pfx:ro
     networks:
       - frontend
       - backend
