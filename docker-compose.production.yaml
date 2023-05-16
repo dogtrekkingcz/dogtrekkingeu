@@ -73,6 +73,7 @@ services:
       - backend
     volumes:
       - /dogsontrail_data/certbot/conf/live/dogsontrail.eu:/etc/nginx/ssl/live/dogsontrail.eu:ro
+      - /dogsontrail_data/DogsOnTrail.App/appsettings.json:/app/appsettings.json
       
   dtdata_db:
     image: mongo:latest
