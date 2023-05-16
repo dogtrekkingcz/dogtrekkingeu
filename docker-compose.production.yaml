@@ -116,9 +116,11 @@ services:
       KEYCLOAK_USER: administrat0r
       KEYCLOAK_PASSWORD: asc88a8c0ssssqs
     ports:
-      - 8080:8080
+      - 8443:8443
     volumes:
       - /dogsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
+      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu/fullchain.pem:/etc/x509/https/tls.crt
+      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu/privkey.pem:/etc/x509/https/tls.key
     depends_on:
       - postgres
     networks:
