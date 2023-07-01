@@ -26,10 +26,11 @@
 
             if (!isValid)
             {
-                message = string.Format("{0} ({1}: '{2}')", 
+                message = string.Format("{0} ({1}: '{2} / {3}')", 
                     localizer["Messages.Limits.Failed.MinimalAgeOfDogForRace"], 
                     localizer["Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs"], 
-                    RaceLimits.MinimalAgeOfTheDogInDayes);
+                    RaceLimits.MinimalAgeOfTheDogInDayes,
+                    age.TotalDays);
             }
                 
             <tr>

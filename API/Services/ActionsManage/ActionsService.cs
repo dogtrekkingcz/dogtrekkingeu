@@ -134,7 +134,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                             Limits = new ActionSettingsDto.RaceLimits
                             {
                                 MinimalAgeOfRacerInDayes = r.Limits?.MinimalAgeOfRacerInDayes ?? 0,
-                                MinimalAgeOfTheDogInDayes = r.Limits?.MinimalAgeOfRacerInDayes ?? 0
+                                MinimalAgeOfTheDogInDayes = r.Limits?.MinimalAgeOfTheDogInDayes ?? 0
                             }
                         })
                         .ToList(),
