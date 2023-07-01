@@ -5,12 +5,14 @@ option csharp_namespace = "Protos.Shared";
 package shared;
 
 import "Entities/Category.proto";
+import "Entities/RaceLimits.proto";
 
 message RaceSimple {
   string Id = 1;
   string Name = 2;
   double Distance = 3;
   double Incline = 4;
+  shared.RaceLimits Limits = 5;
   
-  repeated shared.Category Categories = 5;
+  repeated shared.Category Categories = 6;
 }
