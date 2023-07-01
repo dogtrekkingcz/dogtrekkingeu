@@ -13,10 +13,10 @@
                 <label>@localizer["Action.CreateEntry.Race.Selection"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputSelect 
+                <InputSelect
                     ValueChanged="@((string selectedRaceId) => RaceSelected(selectedRaceId))"
-                    ValueExpression="@(() => Model.RaceId)"
-                >
+                    ValueExpression="@(() => Model.RaceId)">
+                    <option value="0">@localizer["Action.CreateEntry.Race.SelectRace"]</option>
                     @foreach (var race in @ActionSettings.Races)
                     {
                         <option value="@race.Id">@race.Name</option>
@@ -32,6 +32,7 @@
             </div>
             <div class="col-xs-12 col-md-6">
                 <InputSelect @bind-Value="@Model.CategoryId">
+                    <option value="0">@localizer["Action.CreateEntry.Category.SelectCategory"]</option>
                     @foreach (var category in _categories)
                     {
                         <option value="@category.Id">@category.Name</option>

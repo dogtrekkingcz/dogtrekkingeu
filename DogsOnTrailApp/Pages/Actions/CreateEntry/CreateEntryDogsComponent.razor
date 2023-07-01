@@ -105,9 +105,9 @@
     public ActionSettingsModel.RaceLimits RaceLimits { get; set; }
 
     private EntryModel.DogDto NewDog { get; set; } = new();
-    
-    private InputTimeModel NewDogBirthday { get; set; }
-    private InputTimeModel NewDogVaccinationAgainsRabies { get; set; }
+
+    private InputTimeModel NewDogBirthday { get; set; } = new();
+    private InputTimeModel NewDogVaccinationAgainsRabies { get; set; } = new();
 
     private void AddNewDog()
     {

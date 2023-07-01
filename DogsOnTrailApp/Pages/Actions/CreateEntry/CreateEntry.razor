@@ -20,12 +20,22 @@
         <TabPage Text="@localizer["Action.CreateEntry.Person"]">
             <CreateEntryPersonComponent Model="Entry"></CreateEntryPersonComponent>
         </TabPage>
+        
         <TabPage Text="@localizer["Action.CreateEntry.RaceCategory"]">
-            <CreateEntryRaceCategoryComponent ActionSettings="ActionSettings" Model="Entry"></CreateEntryRaceCategoryComponent>
+            <CreateEntryRaceCategoryComponent
+                ActionSettings="ActionSettings"
+                Model="Entry">
+            </CreateEntryRaceCategoryComponent>
         </TabPage>
+        
         <TabPage Text="@localizer["Action.CreateEntry.Dogs"]">
-            <CreateEntryDogsComponent RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits" Dogs="@Entry.Dogs"></CreateEntryDogsComponent>
+            <CreateEntryDogsComponent
+                RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits"
+                Race="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)"
+                Dogs="@Entry.Dogs">
+            </CreateEntryDogsComponent>
         </TabPage>
+        
         @* <TabPage Text="@localizer["Action.CreateEntry.Notes"]"> *@
         @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
         @* </TabPage> *@

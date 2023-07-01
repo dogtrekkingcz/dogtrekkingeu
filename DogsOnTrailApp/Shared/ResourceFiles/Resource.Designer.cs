@@ -78,6 +78,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to --== Select category ==--.
+        /// </summary>
+        internal static string Action_CreateEntry_Category_SelectCategory {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Category.SelectCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select category.
         /// </summary>
         internal static string Action_CreateEntry_Category_Selection {
@@ -218,6 +227,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Action_CreateEntry_Race_Selection {
             get {
                 return ResourceManager.GetString("Action.CreateEntry.Race.Selection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to --== Select race ==--.
+        /// </summary>
+        internal static string Action_CreateEntry_Race_SelectRace {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Race.SelectRace", resourceCulture);
             }
         }
         

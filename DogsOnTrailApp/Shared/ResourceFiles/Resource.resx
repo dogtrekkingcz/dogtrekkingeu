@@ -315,4 +315,10 @@
     <data name="Actions.Races.Limits.MinimalAgeOfRacerForRace" xml:space="preserve">
         <value>Minimal age of a racer</value>
     </data>
+    <data name="Action.CreateEntry.Race.SelectRace" xml:space="preserve">
+        <value>--== Select race ==--</value>
+    </data>
+    <data name="Action.CreateEntry.Category.SelectCategory" xml:space="preserve">
+        <value>--== Select category ==--</value>
+    </data>
 </root>

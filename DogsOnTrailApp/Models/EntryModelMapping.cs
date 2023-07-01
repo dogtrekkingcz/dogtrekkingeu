@@ -10,7 +10,9 @@ internal static class EntryModelMapping
     {
         typeAdapterConfig.NewConfig<Protos.Shared.Entry, EntryModel>()
             .IgnoreNullValues(true)
-            .Map(d => d.Created, s => s.Created.ToDateTimeOffset());
+            .Map(d => d.Created, s => s.Created.ToDateTimeOffset())
+            .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
+        
         typeAdapterConfig.NewConfig<Protos.Shared.EntryDog, EntryModel.DogDto>()
             .IgnoreNullValues(true)
             .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());

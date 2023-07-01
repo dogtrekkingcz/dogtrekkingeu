@@ -315,4 +315,10 @@
     <data name="Actions.Races.Limits.MinimalAgeOfRacerForRace" xml:space="preserve">
         <value>Minimální věk závodníka</value>
     </data>
+    <data name="Action.CreateEntry.Race.SelectRace" xml:space="preserve">
+        <value>--== Vyber závod ==--</value>
+    </data>
+    <data name="Action.CreateEntry.Category.SelectCategory" xml:space="preserve">
+        <value>--== Vyber kategorii ==--</value>
+    </data>
 </root>

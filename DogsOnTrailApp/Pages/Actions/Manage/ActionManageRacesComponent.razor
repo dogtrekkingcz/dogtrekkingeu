@@ -52,9 +52,9 @@
         </tbody>
     </table>
     
-    <button @onclick="@(() => FillOfficialDtRaceTemplate())">@localizer["Actions.Races.FillOfficialDogTrekkingRace"]</button>
-    <button @onclick="@(() => FillOfficialDmRaceTemplate())">@localizer["Actions.Races.FillOfficialDogMarathonRace"]</button>
-    <button @onclick="@(() => FillShortRaceTemplate())">@localizer["Actions.Races.FillShortRace"]</button>
+    <input type="button" @onclick="@(() => FillOfficialDtRaceTemplate())">@localizer["Actions.Races.FillOfficialDogTrekkingRace"]</input>
+    <input type="button" @onclick="@(() => FillOfficialDmRaceTemplate())">@localizer["Actions.Races.FillOfficialDogMarathonRace"]</input>
+    <input type="button" @onclick="@(() => FillShortRaceTemplate())">@localizer["Actions.Races.FillShortRace"]</input>
 </section>
 
 
@@ -69,6 +69,10 @@
         Model.Races.Add(new RaceDto
         {
             Name = "DogTrekking",
+            Begin = Model.Term.From.AddDays(1),
+            MaxNumberOfCompetitors = int.MaxValue,
+            EnteringFrom = DateTimeOffset.Now,
+            EnteringTo = Model.Term.To,
             Categories = new List<CategoryDto>
             {
                 { new CategoryDto { Name = "DTW1" } },
@@ -101,6 +105,10 @@
         Model.Races.Add(new RaceDto
         {
             Name = "DogMarathon",
+            Begin = Model.Term.From.AddDays(2),
+            MaxNumberOfCompetitors = int.MaxValue,
+            EnteringFrom = DateTimeOffset.Now,
+            EnteringTo = Model.Term.To,
             Categories = new List<CategoryDto>
             {
                 { new CategoryDto { Name = "DMW1" }},
@@ -133,6 +141,10 @@
         Model.Races.Add(new RaceDto
         {
             Name = "Short",
+            Begin = Model.Term.From.AddDays(2),
+            MaxNumberOfCompetitors = int.MaxValue,
+            EnteringFrom = DateTimeOffset.Now,
+            EnteringTo = Model.Term.To,
             Categories = new List<CategoryDto>
             {
                 { new CategoryDto { Name = "Short" }}
