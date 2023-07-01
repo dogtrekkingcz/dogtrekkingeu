@@ -300,4 +300,19 @@
     <data name="Action.CreateEntry.Dogs.Vaccinations.AgainstRabies" xml:space="preserve">
         <value>Date of vacc against rabies</value>
     </data>
+    <data name="Actions.Races.FillOfficialDogTrekkingRace" xml:space="preserve">
+        <value>Fill using official DogTrekking template</value>
+    </data>
+    <data name="Actions.Races.FillOfficialDogMarathonRace" xml:space="preserve">
+        <value>Fill using official DogMarathon template</value>
+    </data>
+    <data name="Actions.Races.FillShortRace" xml:space="preserve">
+        <value>Fill using Short template</value>
+    </data>
+    <data name="Actions.Races.Limits.MinimalAgeOfDogForRace" xml:space="preserve">
+        <value>Minimal age of a dog in months</value>
+    </data>
+    <data name="Actions.Races.Limits.MinimalAgeOfRacerForRace" xml:space="preserve">
+        <value>Minimal age of a racer</value>
+    </data>
 </root>

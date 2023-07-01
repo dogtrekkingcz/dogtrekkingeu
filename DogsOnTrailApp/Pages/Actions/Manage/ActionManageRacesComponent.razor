@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using DogsOnTrailApp.Models
+@using MongoDB.Driver.Core.Operations
 @using SharedCode.Entities
+@using System.Collections.ObjectModel
 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
@@ -10,9 +12,10 @@
 <section>
     <table>
         <thead>
-            <th>@localizer["Name"]</th>
-            <th>@localizer["Categories"]</th>
-            <th>@localizer["Payments"]</th>
+            <th>@localizer["Actions.Races.Name"]</th>
+            <th>@localizer["Actions.Races.Categories"]</th>
+            <th>@localizer["Actions.Races.Payments"]</th>
+            <th>@localizer["Actions.Races.Limits"]</th>
             <th>@localizer["Actions"]</th>
         </thead>
         <tbody>
@@ -29,15 +32,29 @@
                         }
                     </ul>
                 </td>
-                <td> --- </td>
+                <td>
+                    <ul>
+                        @foreach (var payment in modelRace.Payments)
+                        {
+                            <li>@payment.From.ToString("yyyy-MM-dd") - @payment.To.ToString("yyyy-MM-dd"): <b>@payment.Price @payment.Currency</b></li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfDogForRace"]: @modelRace.Limits.MinimalAgeOfTheDogInDayes / 30</li>
+                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfRacerForRace"]: @modelRace.Limits.MinimalAgeOfRacerInDayes / 365</li>
+                    </ul>
+                </td>
                 <td></td>
             </tr>
         }
         </tbody>
     </table>
     
-    <a @onclick="@(() => FillByStandardDtTemplate())">@localizer["Fill by standard DT template"]</a>
-    <button @onclick="@(() => AddRace())" class="btn">@localizer["Add new race"]</button>
+    <button @onclick="@(() => FillOfficialDtRaceTemplate())">@localizer["Actions.Races.FillOfficialDogTrekkingRace"]</button>
+    <button @onclick="@(() => FillOfficialDmRaceTemplate())">@localizer["Actions.Races.FillOfficialDogMarathonRace"]</button>
+    <button @onclick="@(() => FillShortRaceTemplate())">@localizer["Actions.Races.FillShortRace"]</button>
 </section>
 
 
@@ -45,45 +62,96 @@
     [Parameter]
     public ActionModel Model { get; set; }
 
-    private void FillByStandardDtTemplate()
+    private void FillOfficialDtRaceTemplate()
     {
-        var races = new List<RaceDto>();
-        races.Add(new RaceDto
-        {
-            Name = "LONG",
-            Categories = new List<CategoryDto>
-            {
-                { new CategoryDto { Name = "DTW1" }},
-                { new CategoryDto() { Name = "DTM1" }},
-                { new CategoryDto {  Name = "DTW2" }},
-                { new CategoryDto { Name = "DTM2" }}
-            }
-        });
-        
-        races.Add(new RaceDto
-        {
-            Name = "MID",
-            Categories = new List<CategoryDto>
-            {
-                { new CategoryDto { Name = "DMW" }},
-                { new CategoryDto { Name = "DMM" }}
-            }
-        });
-        
-        races.Add(new RaceDto
-        {
-            Name = "SHORT",
-            Categories = new List<CategoryDto>
-            {
-                { new CategoryDto { Name = "SHORT" }}
-            }
-        });
+        Model.Races ??= new List<RaceDto>();
 
-        Model.Races = races;
+        Model.Races.Add(new RaceDto
+        {
+            Name = "DogTrekking",
+            Categories = new List<CategoryDto>
+            {
+                { new CategoryDto { Name = "DTW1" } },
+                { new CategoryDto() { Name = "DTM1" } },
+                { new CategoryDto { Name = "DTW2" } },
+                { new CategoryDto { Name = "DTM2" } }
+            },
+            Limits = new RaceDto.LimitsDto
+            {
+                MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
+                MinimalAgeOfRacerInDayes = 15 * 12 * 365 // 15 years
+            },
+            Payments = new List<RaceDto.PaymentDefinitionDto>
+            {
+                new RaceDto.PaymentDefinitionDto
+                {
+                    Currency = "Czk",
+                    From = DateTimeOffset.Now,
+                    To = DateTimeOffset.MaxValue,
+                    Price = 500
+                }
+            }
+        });
     }
 
-    private async Task AddRace()
+    private void FillOfficialDmRaceTemplate()
     {
+        Model.Races ??= new List<RaceDto>();
         
+        Model.Races.Add(new RaceDto
+        {
+            Name = "DogMarathon",
+            Categories = new List<CategoryDto>
+            {
+                { new CategoryDto { Name = "DMW1" }},
+                { new CategoryDto { Name = "DMM1" }},
+                { new CategoryDto { Name = "DMW2" }},
+                { new CategoryDto { Name = "DMM2" }}
+            },
+            Limits = new RaceDto.LimitsDto
+            {
+                MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
+                MinimalAgeOfRacerInDayes = 15 * 12 * 365 // 15 years
+            },
+            Payments = new List<RaceDto.PaymentDefinitionDto>
+            {
+                new RaceDto.PaymentDefinitionDto
+                {
+                    Currency = "Czk",
+                    From = DateTimeOffset.Now,
+                    To = DateTimeOffset.MaxValue,
+                    Price = 400
+                }
+            }
+        });
+    }
+
+    private void FillShortRaceTemplate()
+    {
+        Model.Races ??= new List<RaceDto>();
+       
+        Model.Races.Add(new RaceDto
+        {
+            Name = "Short",
+            Categories = new List<CategoryDto>
+            {
+                { new CategoryDto { Name = "Short" }}
+            },
+            Limits = new RaceDto.LimitsDto
+            {
+                MinimalAgeOfTheDogInDayes = 0,
+                MinimalAgeOfRacerInDayes = 0
+            },
+            Payments = new List<RaceDto.PaymentDefinitionDto>
+            {
+                new RaceDto.PaymentDefinitionDto
+                {
+                    Currency = "Czk",
+                    From = DateTimeOffset.Now,
+                    To = DateTimeOffset.MaxValue,
+                    Price = 300
+                }
+            }
+        });
     }
 }

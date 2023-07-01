@@ -300,4 +300,19 @@
     <data name="Action.CreateEntry.Dogs.Vaccinations.AgainstRabies" xml:space="preserve">
         <value>Datum očkování proti vzteklině</value>
     </data>
+    <data name="Actions.Races.FillOfficialDogTrekkingRace" xml:space="preserve">
+        <value>Vyplnit dle oficiální DogTrekking šablony</value>
+    </data>
+    <data name="Actions.Races.FillOfficialDogMarathonRace" xml:space="preserve">
+        <value>Vyplnit dle oficiální DogMarathon šablony</value>
+    </data>
+    <data name="Actions.Races.FillShortRace" xml:space="preserve">
+        <value>Vyplnit dle šablony pro závody typu Short</value>
+    </data>
+    <data name="Actions.Races.Limits.MinimalAgeOfDogForRace" xml:space="preserve">
+        <value>Minimální věk psa v měsících</value>
+    </data>
+    <data name="Actions.Races.Limits.MinimalAgeOfRacerForRace" xml:space="preserve">
+        <value>Minimální věk závodníka</value>
+    </data>
 </root>

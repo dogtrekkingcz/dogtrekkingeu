@@ -375,6 +375,51 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vyplnit dle oficiální DogMarathon šablony.
+        /// </summary>
+        internal static string Actions_Races_FillOfficialDogMarathonRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.FillOfficialDogMarathonRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyplnit dle oficiální DogTrekking šablony.
+        /// </summary>
+        internal static string Actions_Races_FillOfficialDogTrekkingRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.FillOfficialDogTrekkingRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyplnit dle šablony pro závody typu Short.
+        /// </summary>
+        internal static string Actions_Races_FillShortRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.FillShortRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimální věk psa v měsících.
+        /// </summary>
+        internal static string Actions_Races_Limits_MinimalAgeOfDogForRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.Limits.MinimalAgeOfDogForRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimální věk závodníka.
+        /// </summary>
+        internal static string Actions_Races_Limits_MinimalAgeOfRacerForRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.Limits.MinimalAgeOfRacerForRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kdy a kde.
         /// </summary>
         internal static string Actions_Term_AddressOfAction {

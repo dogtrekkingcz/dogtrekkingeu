@@ -94,8 +94,9 @@
 </section>
 
 @code {
+
     [Parameter]
-    public IList<EntryModel.DogDto> Dogs { get; set; }
+    public List<EntryModel.DogDto> Dogs { get; set; } = new();
     
     [Parameter]
     public ActionSettingsModel.RaceDto Race { get; set; }

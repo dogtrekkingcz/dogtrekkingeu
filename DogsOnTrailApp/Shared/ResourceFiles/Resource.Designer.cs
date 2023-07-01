@@ -375,6 +375,51 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fill using official DogMarathon template.
+        /// </summary>
+        internal static string Actions_Races_FillOfficialDogMarathonRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.FillOfficialDogMarathonRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fill using official DogTrekking template.
+        /// </summary>
+        internal static string Actions_Races_FillOfficialDogTrekkingRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.FillOfficialDogTrekkingRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fill using Short template.
+        /// </summary>
+        internal static string Actions_Races_FillShortRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.FillShortRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal age of a dog in months.
+        /// </summary>
+        internal static string Actions_Races_Limits_MinimalAgeOfDogForRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.Limits.MinimalAgeOfDogForRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal age of a racer.
+        /// </summary>
+        internal static string Actions_Races_Limits_MinimalAgeOfRacerForRace {
+            get {
+                return ResourceManager.GetString("Actions.Races.Limits.MinimalAgeOfRacerForRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When &amp; where.
         /// </summary>
         internal static string Actions_Term_AddressOfAction {
