@@ -16,9 +16,9 @@ public record EntryDto
 
     public string Email { get; set; } = "";
 
-    public IList<DogDto> Dogs { get; set; } = new List<DogDto>();
+    public List<DogDto> Dogs { get; set; } = new List<DogDto>();
 
-    public IList<string> Notes { get; set; } = new List<string>();
+    public List<string> Notes { get; set; } = new List<string>();
 
     public string ActionId { get; set; } = "";
 

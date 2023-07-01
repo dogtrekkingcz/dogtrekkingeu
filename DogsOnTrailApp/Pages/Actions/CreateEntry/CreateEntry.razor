@@ -24,7 +24,7 @@
             <CreateEntryRaceCategoryComponent ActionSettings="ActionSettings" Model="Entry"></CreateEntryRaceCategoryComponent>
         </TabPage>
         <TabPage Text="@localizer["Action.CreateEntry.Dogs"]">
-            <CreateEntryDogsComponent RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits" Model="Model"></CreateEntryDogsComponent>
+            <CreateEntryDogsComponent RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits" Dogs="@Entry.Dogs"></CreateEntryDogsComponent>
         </TabPage>
         @* <TabPage Text="@localizer["Action.CreateEntry.Notes"]"> *@
         @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
