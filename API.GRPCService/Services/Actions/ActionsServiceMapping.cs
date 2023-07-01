@@ -75,6 +75,22 @@ internal static class ActionsServiceMapping
                         EnteringFrom = race.EnteringFrom.ToDateTimeOffset(),
                         EnteringTo = race.EnteringTo.ToDateTimeOffset(),
                         MaxNumberOfCompetitors = (int) race.MaxNumberOfCompetitors,
+                        Payments = race.Payments
+                            .Select(payment => new RaceDto.PaymentDefinitionDto
+                            {
+                                Id = Guid.Parse(payment.Id),
+                                To = payment.To.ToDateTimeOffset(),
+                                From = payment.From.ToDateTimeOffset(),
+                                Currency = payment.Currency,
+                                Price = payment.Price
+                            })
+                            .ToList(),
+                        Begin = race.Begin.ToDateTimeOffset(),
+                        Limits = new RaceDto.LimitsDto
+                        {
+                            MinimalAgeOfRacerInDayes = race.Limits.MinimalAgeOfRacerInDayes,
+                            MinimalAgeOfTheDogInDayes = race.Limits.MinimalAgeOfTheDogInDayes
+                        },
                         Categories = race.Categories
                             .Select(category => new CategoryDto
                             {
@@ -107,6 +123,9 @@ internal static class ActionsServiceMapping
                                                 Decease = dog.Decease.ToDateTimeOffset(),
                                                 Pedigree = dog.Pedigree,
                                                 UriToPhoto = dog.UriToPhoto,
+                                                Contact = dog.Contact,
+                                                Kennel = dog.Kennel,
+                                                UserId = dog.UserId,
                                                 Vaccinations = dog.Vaccinations
                                                     .Select(vacc => new DogDto.VaccinationDto
                                                     {

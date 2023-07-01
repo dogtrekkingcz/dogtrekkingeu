@@ -2,6 +2,7 @@
 using SharedCode.Entities;
 using Google.Protobuf.Collections;
 using Mapster;
+using SharedCode.Extensions;
 
 namespace DogsOnTrailApp.Models;
 
@@ -17,7 +18,7 @@ namespace DogsOnTrailApp.Models;
 
         typeAdapterConfig.NewConfig<Protos.Shared.ActionSimple, ActionModel>()
             .TwoWays();
-
+        
         return typeAdapterConfig;
     }
 }
