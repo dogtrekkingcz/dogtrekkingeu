@@ -96,6 +96,60 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add dog.
+        /// </summary>
+        internal static string Action_CreateEntry_Dogs_AddNewDog {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Dogs.AddNewDog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        internal static string Action_CreateEntry_Dogs_Age {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Dogs.Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chip.
+        /// </summary>
+        internal static string Action_CreateEntry_Dogs_Chip {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Dogs.Chip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Action_CreateEntry_Dogs_Name {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Dogs.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pedigree.
+        /// </summary>
+        internal static string Action_CreateEntry_Dogs_Pedigree {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Dogs.Pedigree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of vacc against rabies.
+        /// </summary>
+        internal static string Action_CreateEntry_Dogs_Vaccinations_AgainstRabies {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Dogs.Vaccinations.AgainstRabies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create entry for action: .
         /// </summary>
         internal static string Action_CreateEntry_For_Action {
@@ -623,6 +677,24 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Menu_Home {
             get {
                 return ResourceManager.GetString("Menu.Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not valid minimal age of dog for this race.
+        /// </summary>
+        internal static string Messages_Limits_Failed_MinimalAgeOfDogForRace {
+            get {
+                return ResourceManager.GetString("Messages.Limits.Failed.MinimalAgeOfDogForRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal age for dog for this race in dayes is.
+        /// </summary>
+        internal static string Messages_Limits_Info_MinimalAgeOfDogForRaceInDaysIs {
+            get {
+                return ResourceManager.GetString("Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs", resourceCulture);
             }
         }
         

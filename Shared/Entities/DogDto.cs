@@ -22,8 +22,13 @@
 
         public string Contact { get; set; } = string.Empty;
 
-        public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>();
-
+        public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>
+        {
+            new VaccinationDto
+            {
+                Type = VaccinationType.Rabies
+            }
+        };
 
         public sealed record VaccinationDto
         {
@@ -41,7 +46,7 @@
         public enum VaccinationType
         {
             NotValid = 0,
-            Vzteklina = 1,
+            Rabies = 1, // Vzteklina
             Psinka = 2,
             Parvoviroza = 3,
             HepatitidaContagiosaCanis = 4,

@@ -12,20 +12,8 @@ services:
   # dotnet dev-certs https --clean
   # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
   # dotnet dev-certs https --trust
-  #
-  # Linux production
-  # docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d dogsontrail.eu
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - /dogsontrail_data/data_certbot/www/:/var/www/certbot/:rw
-      - /dogsontrail_data/data_certbot/conf/:/etc/letsencrypt/:rw
-    networks:
-      - frontend
-      - backend
-
   dogsontrail_grpc:
-    container_name: DogsOnTrail.gRPC
+    image: dogsontrail_server_grpc
     build:
       context: .
       dockerfile: API.GRPCService/Dockerfile
@@ -33,17 +21,15 @@ services:
       - 4080:80
       - 4443:443
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/dogsontrail.eu.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
-      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu/dogsontrail.eu.pfx:/app/dogsontrail.eu.pfx:ro
-    networks:
-      - backend
-      - frontend
+      - ~/.aspnet/https:/https:ro
       
   dogsontrail_webapi:
-    container_name: DogsOnTrail.WebApi
+    image: dogsontrail_server_api
     build:
       context: .
       dockerfile: API.WebApiService/Dockerfile
@@ -51,32 +37,25 @@ services:
       - 3080:80
       - 3443:443
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/dogsontrail.eu.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
-      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu/dogsontrail.eu.pfx:/app/dogsontrail.eu.pfx:ro
-    networks:
-      - frontend
-      - backend
+      - ~/.aspnet/https:/https:ro
       
   dogsontrail_app: 
-    container_name: DogsOnTrail.App
+    image: dogsontrail_client_app
     build:
       context: .
       dockerfile: DogsOnTrailApp/Dockerfile
     ports:
       - 443:443
       - 80:80
-    networks:
-      - frontend
-      - backend
-    volumes:
-      - /dogsontrail_data/certbot/conf/live/dogsontrail.eu:/etc/nginx/ssl/live/dogsontrail.eu:ro
       
   dtdata_db:
     image: mongo:latest
-    container_name: DogsOnTrail.DB
+    container_name: data_db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
@@ -84,27 +63,23 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - /dogsontrail_data/mongo_db:/data/db
-    networks:
-      - backend
+      - data_dogsontrail_db:/data/db
    
   postgres:
     image: postgres
-    container_name: DogsOnTrail.KeyCloakDB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: keycl0ak
       POSTGRES_USER: keycl0ak
       POSTGRES_PASSWORD: password
     ports:
       - 5431:5431
-    volumes:
-      - /dogsontrail_data/postgres_db:/var/lib/postgresql/data
-    networks:
-      - backend
 
   keycloak:
     image: jboss/keycloak
-    container_name: DogsOnTrail.KeyCloak
+    volumes:
+      - ./keycloak/imports:/opt/jboss/keycloak/imports
     command: 
       - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:
@@ -117,13 +92,8 @@ services:
       KEYCLOAK_PASSWORD: asc88a8c0ssssqs
     ports:
       - 8080:8080
-    volumes:
-      - /dogsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
     depends_on:
       - postgres
-    networks:
-      - frontend
-      - backend
 
   # MessageQueue not necessary yet
   #mq:
@@ -141,10 +111,6 @@ volumes:
   data_mq:
   postgres_data:
       driver: local
+  
+  
 
-networks:
-  frontend:
-    driver: bridge
-  backend:
-    driver: bridge
-    

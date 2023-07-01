@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using DogsOnTrailApp.Models
+@using DogsOnTrailApp.Shared
 @inject IStringLocalizer<Resource> localizer
 
 <h3>@localizer["Action.CreateEntry.Person"]</h3>
@@ -38,6 +39,42 @@
             </div>
             <div class="col-xs-12 col-md-6">
                 <InputText @bind-Value="@Model.Phone"/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Action.CreateEntry.Person.AddressStreet"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Address.Street"/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Action.CreateEntry.Person.AddressCity"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Address.City"/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Action.CreateEntry.Person.AddressZipCode"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Address.ZipCode"/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Action.CreateEntry.Person.Birthday"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputDateComponent Model="@Model.Birthday" />
             </div>
         </div>
     </div>

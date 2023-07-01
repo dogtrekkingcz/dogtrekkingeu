@@ -25,6 +25,10 @@ public record EntryDto
     public string RaceId { get; set; } = "";
 
     public string CategoryId { get; set; } = "";
+
+    public AddressDto Address { get; set; } = new();
+
+    public DateTimeOffset? Birthday { get; set; } = null;
     
     public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
 
@@ -39,5 +43,16 @@ public record EntryDto
         public string Chip { get; set; } = string.Empty;
 
         public DateTimeOffset? Birthday { get; set; } = null;
+
+        public List<Entities.DogDto.VaccinationDto> Vaccinations { get; set; } = new();
+    }
+
+    public record AddressDto
+    {
+        public string Street { get; set; }
+        
+        public string City { get; set; }
+        
+        public string ZipCode { get; set; }
     }
 }

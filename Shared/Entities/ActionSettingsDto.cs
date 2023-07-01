@@ -15,6 +15,10 @@ public record ActionSettingsDto
         public string Id { get; set; }
         
         public string Name { get; set; }
+        
+        public DateTimeOffset Start { get; set; }
+
+        public RaceLimits Limits { get; set; } = new();
     }
 
     public sealed record CategoryDto
@@ -24,5 +28,12 @@ public record ActionSettingsDto
         public string RaceId { get; set; }
         
         public string Name { get; set; }
+    }
+
+    public sealed record RaceLimits
+    {
+        public int MinimalAgeOfTheDogInDayes = 0;
+
+        public int MinimalAgeOfRacerInDayes = 0;
     }
 }

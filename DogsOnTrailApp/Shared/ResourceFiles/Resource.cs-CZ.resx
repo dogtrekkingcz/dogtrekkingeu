@@ -276,4 +276,28 @@
     <data name="Results.Manage.Add.Lastname" xml:space="preserve">
         <value>Příjmení</value>
     </data>
+    <data name="Messages.Limits.Failed.MinimalAgeOfDogForRace" xml:space="preserve">
+        <value>Není splněn minimální věk psa pro tento závod</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Chip" xml:space="preserve">
+        <value>Čip</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Pedigree" xml:space="preserve">
+        <value>Plemeno</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Name" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Age" xml:space="preserve">
+        <value>Věk</value>
+    </data>
+    <data name="Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs" xml:space="preserve">
+        <value>Minimální věk psa pro tento závod ve dnech je</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.AddNewDog" xml:space="preserve">
+        <value>Přidej psa</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Vaccinations.AgainstRabies" xml:space="preserve">
+        <value>Datum očkování proti vzteklině</value>
+    </data>
 </root>

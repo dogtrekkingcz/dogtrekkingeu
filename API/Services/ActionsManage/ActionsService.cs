@@ -129,7 +129,13 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                         new GetActionEntrySettingsResponse.RaceDto
                         {
                             Id = r.Id.ToString(),
-                            Name = r.Name
+                            Name = r.Name,
+                            Start = r.Begin,
+                            Limits = new ActionSettingsDto.RaceLimits
+                            {
+                                MinimalAgeOfRacerInDayes = r.Limits?.MinimalAgeOfRacerInDayes ?? 0,
+                                MinimalAgeOfTheDogInDayes = r.Limits?.MinimalAgeOfRacerInDayes ?? 0
+                            }
                         })
                         .ToList(),
                 Categories = result.Races.SelectMany(r => r.Categories.Select(ctg =>

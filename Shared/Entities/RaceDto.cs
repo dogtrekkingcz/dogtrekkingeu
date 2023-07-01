@@ -21,6 +21,8 @@
 
         public IList<PaymentDefinitionDto> Payments { get; set; } = new List<PaymentDefinitionDto>();
 
+        public LimitsDto Limits { get; set; } = new();
+
         public sealed record PaymentDefinitionDto
         {
             public Guid Id { get; set; } = default(Guid);
@@ -32,6 +34,13 @@
             public double Price { get; set; }
 
             public string Currency { get; set; } = "Kc";
+        }
+
+        public sealed record LimitsDto
+        {
+            public int MinimalAgeOfRacerInDayes { get; set; } = 0;
+            
+            public int MinimalAgeOfTheDogInDayes { get; set; } = 0;
         }
     }
 }

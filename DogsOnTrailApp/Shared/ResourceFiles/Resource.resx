@@ -276,4 +276,28 @@
     <data name="Results.Manage.Add.Lastname" xml:space="preserve">
         <value>Surname</value>
     </data>
+    <data name="Messages.Limits.Failed.MinimalAgeOfDogForRace" xml:space="preserve">
+        <value>Not valid minimal age of dog for this race</value>
+    </data>
+    <data name="Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs" xml:space="preserve">
+        <value>Minimal age for dog for this race in dayes is</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Chip" xml:space="preserve">
+        <value>Chip</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Pedigree" xml:space="preserve">
+        <value>Pedigree</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Age" xml:space="preserve">
+        <value>Age</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.AddNewDog" xml:space="preserve">
+        <value>Add dog</value>
+    </data>
+    <data name="Action.CreateEntry.Dogs.Vaccinations.AgainstRabies" xml:space="preserve">
+        <value>Date of vacc against rabies</value>
+    </data>
 </root>
