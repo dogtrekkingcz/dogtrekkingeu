@@ -44,15 +44,13 @@ public record EntryDto
 
         public DateTimeOffset? Birthday { get; set; } = null;
 
-        public List<Entities.DogDto.VaccinationDto> Vaccinations { get; set; } = new();
-    }
-
-    public record AddressDto
-    {
-        public string Street { get; set; }
-        
-        public string City { get; set; }
-        
-        public string ZipCode { get; set; }
+        public List<Entities.DogDto.VaccinationDto> Vaccinations { get; set; } =
+            new List<Entities.DogDto.VaccinationDto>
+            {
+                new Entities.DogDto.VaccinationDto
+                {
+                    Type = Entities.DogDto.VaccinationType.Rabies
+                }
+            };
     }
 }

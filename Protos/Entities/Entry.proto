@@ -5,6 +5,7 @@ option csharp_namespace = "Protos.Shared";
 package shared;
 
 import "google/type/datetime.proto";
+import "Entities/Address.proto";
 
 message Entry {
   string Id = 1;
@@ -19,7 +20,9 @@ message Entry {
   string ActionId = 10;
   string RaceId = 11;
   string CategoryId = 12;
-  google.type.DateTime Created = 13;
+  shared.Address Address = 13;
+  google.type.DateTime Birthday = 14;
+  google.type.DateTime Created = 15;
 }
 
 message EntryDog {

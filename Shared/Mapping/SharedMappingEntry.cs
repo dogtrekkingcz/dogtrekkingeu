@@ -30,7 +30,7 @@ namespace SharedCode.Mapping
             typeAdapterConfig.NewConfig<Protos.Shared.EntryDog, EntryDto.DogDto>()
                 .IgnoreNullValues(true)
                 .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
-
+            
             return typeAdapterConfig;
         }
     }

@@ -34,6 +34,9 @@ namespace SharedCode.Mapping
                 .Map(d => d.From, s => s.From.ToDateTimeOffset())
                 .Map(d => d.To, s => s.To.ToDateTimeOffset());
 
+            typeAdapterConfig.NewConfig<Protos.Shared.RaceLimits, RaceDto.LimitsDto>()
+                .IgnoreNullValues(true);
+
             typeAdapterConfig.NewConfig<RaceDto, Protos.Shared.RaceSimple>()
                 .IgnoreNullValues(true);
             typeAdapterConfig.NewConfig<Protos.Shared.RaceSimple, RaceDto>()
@@ -46,6 +49,7 @@ namespace SharedCode.Mapping
             typeAdapterConfig.NewConfig<RaceDto, RaceDto>();
 
             typeAdapterConfig.NewConfig<RaceDto.PaymentDefinitionDto, RaceDto.PaymentDefinitionDto>();
+            typeAdapterConfig.NewConfig<RaceDto.LimitsDto, RaceDto.LimitsDto>();
             
             return typeAdapterConfig;
         }
