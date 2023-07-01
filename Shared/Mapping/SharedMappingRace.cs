@@ -22,6 +22,7 @@ namespace SharedCode.Mapping
 
             typeAdapterConfig.NewConfig<Protos.Shared.RaceSimple, RaceDto>()
                 .IgnoreNullValues(true)
+                .Ignore(d => d.Limits)
                 .TwoWays();
 
             typeAdapterConfig.NewConfig<RaceDto.PaymentDefinitionDto, Protos.Shared.PaymentDefinition>()
