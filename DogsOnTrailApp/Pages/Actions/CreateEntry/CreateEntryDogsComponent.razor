@@ -21,14 +21,14 @@
         {
             var age = Race.Start - (dog.Birthday ?? DateTimeOffset.Now);
             var ageInYears = (Math.Floor(age.TotalDays / 365)).ToString();
-            var isValid = Limits.MinimalAgeOfTheDogInDayes <= age.TotalDays;
+            var isValid = RaceLimits.MinimalAgeOfTheDogInDayes <= age.TotalDays;
 
             if (!isValid)
             {
                 ageInYears += string.Format($"{0} ({1}: '{2}')", 
                     localizer["Messages.Limits.Failed.MinimalAgeOfDogForRace"], 
                     localizer["Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs"], 
-                    Limits.MinimalAgeOfTheDogInDayes);
+                    RaceLimits.MinimalAgeOfTheDogInDayes);
             }
                 
             <tr>
@@ -102,7 +102,7 @@
     public ActionSettingsModel.RaceDto Race { get; set; }
     
     [Parameter]
-    public ActionSettingsModel.RaceLimits Limits { get; set; }
+    public ActionSettingsModel.RaceLimits RaceLimits { get; set; }
 
     private EntryModel.DogDto NewDog { get; set; } = new();
     
