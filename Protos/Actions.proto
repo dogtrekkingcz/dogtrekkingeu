@@ -4,8 +4,10 @@ option csharp_namespace = "Protos.Actions";
 
 package actions;
 
+import "google/type/datetime.proto";
 import "Entities/ActionSimple.proto";
 import "Entities/ActionDetail.proto";
+import "Entities/RaceLimits.proto";
 
 service Actions {
   rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
@@ -78,7 +80,9 @@ message GetActionEntrySettingsResponse {
 
 message RaceDto {
   string Id = 1;
-  string Name = 2;  
+  string Name = 2;
+  google.type.DateTime Start = 3;
+  shared.RaceLimits Limits = 4;
 }
 
 message CategoryDto {

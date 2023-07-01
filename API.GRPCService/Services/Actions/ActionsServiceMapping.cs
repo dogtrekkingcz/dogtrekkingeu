@@ -137,6 +137,11 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.CategoryDto, Protos.Actions.CategoryDto>();
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.RaceDto, Protos.Actions.RaceDto>();
 
+        typeAdapterConfig.NewConfig<ActionSettingsDto.RaceDto, Protos.Actions.RaceDto>()
+            .Map(d => d.Start, s => s.Start.ToGoogleDateTime());
+
+        typeAdapterConfig.NewConfig<ActionSettingsDto.RaceLimits, Protos.Shared.RaceLimits>();
+
         return typeAdapterConfig;
     }
 }
