@@ -1,6 +1,7 @@
 ﻿@using DogsOnTrailApp.Models
 @using DogsOnTrailApp.Shared
 @using SharedCode.Entities
+@using SharedCode.Extensions
 @inject IStringLocalizer<Resource> localizer
 
 <h3>CreateEntryDogsComponent</h3>
@@ -74,7 +75,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Birthday"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent Model="@NewDog.Birthday"></InputDateComponent>
+                    <InputDateComponent Model="NewDogBirthday"></InputDateComponent>
                 </div>
             </div>
             <div class="row">
@@ -82,7 +83,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Vaccinations.AgainstRabies"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent Model="@NewDog.Vaccinations.First(vac => vac.Type == DogDto.VaccinationType.Rabies).Date"></InputDateComponent>
+                    <InputDateComponent Model="NewDogVaccinationAgainsRabies"></InputDateComponent>
                 </div>
             </div>
         </div>
@@ -103,9 +104,18 @@
     public ActionSettingsModel.RaceLimits Limits { get; set; }
 
     private EntryModel.DogDto NewDog { get; set; } = new();
+    
+    private InputTimeModel NewDogBirthday { get; set; }
+    private InputTimeModel NewDogVaccinationAgainsRabies { get; set; }
 
     private void AddNewDog()
     {
+        if (NewDogBirthday.IsValid)
+            NewDog.Birthday = NewDogBirthday.Value.ToDateTimeOffset();
+
+        if (NewDogVaccinationAgainsRabies.IsValid)
+            NewDog.Vaccinations.First(vac => vac.Type == DogDto.VaccinationType.Rabies).Date = NewDogVaccinationAgainsRabies.Value.ToDateTimeOffset();
+        
         Dogs.Add(NewDog);
 
         NewDog = new();

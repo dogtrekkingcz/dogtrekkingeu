@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using DogsOnTrailApp.Models
 @using DogsOnTrailApp.Shared
+@using SharedCode.Extensions
 @inject IStringLocalizer<Resource> localizer
 
 <h3>@localizer["Action.CreateEntry.Person"]</h3>
@@ -74,7 +75,7 @@
                 <label>@localizer["Action.CreateEntry.Person.Birthday"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputDateComponent Model="@Model.Birthday" />
+                <InputDateComponent Model="Birthday" @onchange="UpdateBirthday" />
             </div>
         </div>
     </div>
@@ -83,4 +84,12 @@
 @code {
     [Parameter]
     public EntryModel Model { get; set; }
+    
+    private InputTimeModel Birthday { get; set; }
+
+    private void UpdateBirthday()
+    {
+        if (Birthday.IsValid)
+            Model.Birthday = Birthday.Value.ToDateTimeOffset();
+    }
 }
