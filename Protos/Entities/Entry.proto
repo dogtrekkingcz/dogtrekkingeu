@@ -32,5 +32,5 @@ message EntryDog {
   string Pedigree = 3;
   string Chip = 4;
   google.type.DateTime Birthday = 5;
-  shared.Vaccination Vaccination = 6;
+  repeated shared.Vaccination Vaccinations = 6;
 }
