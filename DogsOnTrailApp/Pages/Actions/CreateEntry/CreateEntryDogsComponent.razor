@@ -20,12 +20,13 @@
         @foreach (var dog in Dogs)
         {
             var age = Race.Start - (dog.Birthday ?? DateTimeOffset.Now);
-            var ageInYears = (Math.Floor(age.TotalDays / 365)).ToString();
+            var ageInYears = (Math.Floor(age.TotalDays / 365));
             var isValid = RaceLimits.MinimalAgeOfTheDogInDayes <= age.TotalDays;
+            var message = "";
 
             if (!isValid)
             {
-                ageInYears += string.Format($"{0} ({1}: '{2}')", 
+                message = string.Format("{0} ({1}: '{2}')", 
                     localizer["Messages.Limits.Failed.MinimalAgeOfDogForRace"], 
                     localizer["Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs"], 
                     RaceLimits.MinimalAgeOfTheDogInDayes);
@@ -35,7 +36,7 @@
                 <td>@dog.Chip</td>
                 <td>@dog.Pedigree</td>
                 <td>@dog.Name</td>
-                <td>@ageInYears"</td>
+                <td>@ageInYears @message</td>
             </tr>
         }
         </tbody>

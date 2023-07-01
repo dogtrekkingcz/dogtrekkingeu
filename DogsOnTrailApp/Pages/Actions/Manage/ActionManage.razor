@@ -134,9 +134,10 @@ else
     {
         Model.Id = "";
 
+        var action = mapper.Map<Protos.Shared.ActionDetail>(Model);
         var item = new Protos.Actions.CreateActionRequest
         {
-            Action = mapper.Map<Protos.Shared.ActionDetail>(Model)
+            Action = action
         };
         
         var result = await Client.createActionAsync(item);

@@ -42,8 +42,8 @@
                 </td>
                 <td>
                     <ul>
-                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfDogForRace"]: @modelRace.Limits.MinimalAgeOfTheDogInDayes / 30</li>
-                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfRacerForRace"]: @modelRace.Limits.MinimalAgeOfRacerInDayes / 365</li>
+                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfDogForRace"]: @(modelRace.Limits.MinimalAgeOfTheDogInDayes / 30)</li>
+                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfRacerForRace"]: @(modelRace.Limits.MinimalAgeOfRacerInDayes / 365)</li>
                     </ul>
                 </td>
                 <td></td>
@@ -52,9 +52,19 @@
         </tbody>
     </table>
     
-    <input type="button" @onclick="@(() => FillOfficialDtRaceTemplate())">@localizer["Actions.Races.FillOfficialDogTrekkingRace"]</input>
-    <input type="button" @onclick="@(() => FillOfficialDmRaceTemplate())">@localizer["Actions.Races.FillOfficialDogMarathonRace"]</input>
-    <input type="button" @onclick="@(() => FillShortRaceTemplate())">@localizer["Actions.Races.FillShortRace"]</input>
+    <hr />
+    <input type="button" 
+           @onclick="@(() => FillOfficialDtRaceTemplate())" 
+           value="@localizer["Actions.Races.FillOfficialDogTrekkingRace"]"
+    />
+    <input type="button" 
+           @onclick="@(() => FillOfficialDmRaceTemplate())" 
+           value="@localizer["Actions.Races.FillOfficialDogMarathonRace"]" 
+    />
+    <input type="button" 
+           @onclick="@(() => FillShortRaceTemplate())" 
+           value="@localizer["Actions.Races.FillShortRace"]" 
+    />
 </section>
 
 
