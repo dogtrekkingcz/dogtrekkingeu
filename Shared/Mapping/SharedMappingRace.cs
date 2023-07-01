@@ -34,6 +34,8 @@ namespace SharedCode.Mapping
                 .Map(d => d.From, s => s.From.ToDateTimeOffset())
                 .Map(d => d.To, s => s.To.ToDateTimeOffset());
 
+            typeAdapterConfig.NewConfig<RaceDto.LimitsDto, Protos.Shared.RaceLimits>()
+                .IgnoreNullValues(true);
             typeAdapterConfig.NewConfig<Protos.Shared.RaceLimits, RaceDto.LimitsDto>()
                 .IgnoreNullValues(true);
 
