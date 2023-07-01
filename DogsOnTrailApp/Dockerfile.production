@@ -2,8 +2,10 @@
 
 WORKDIR /src
 
-COPY DogsOnTrailApp/DogsOnTrailApp.csproj ./DogsOnTrailApp/
+ENV ASPNETCORE_URLS http://+:5000
+EXPOSE 5000
 
+COPY DogsOnTrailApp/DogsOnTrailApp.csproj ./DogsOnTrailApp/
 COPY . ./
 
 RUN dotnet restore DogsOnTrailApp/DogsOnTrailApp.csproj
@@ -17,6 +19,3 @@ FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html
 COPY --from=publish /app/publish/wwwroot .
 COPY DogsOnTrailApp/nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-EXPOSE 443

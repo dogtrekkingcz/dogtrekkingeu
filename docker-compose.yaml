@@ -50,8 +50,8 @@ services:
       context: .
       dockerfile: DogsOnTrailApp/Dockerfile
     ports:
-      - 443:443
-      - 80:80
+      - 1443:443
+      - 1080:80
       
   dtdata_db:
     image: mongo:latest
