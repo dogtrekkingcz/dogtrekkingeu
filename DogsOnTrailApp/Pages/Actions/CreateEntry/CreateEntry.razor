@@ -56,6 +56,9 @@
     [Parameter]
     public string ActionId { get; set; } = Guid.Empty.ToString();
 
+    private bool SubmitEnabled { get; set; } = false;
+    
+
     public ActionSettingsModel ActionSettings = new ActionSettingsModel();
     
     protected override async Task OnInitializedAsync()

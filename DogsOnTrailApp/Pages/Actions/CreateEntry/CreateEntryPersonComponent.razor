@@ -2,6 +2,7 @@
 @using DogsOnTrailApp.Models
 @using DogsOnTrailApp.Shared
 @using SharedCode.Extensions
+@using BootstrapBlazor.Components
 @inject IStringLocalizer<Resource> localizer
 
 <h3>@localizer["Action.CreateEntry.Person"]</h3>
@@ -81,24 +82,26 @@
     </div>
 </section>
 
+<input type="button" value="@localizer["Button.Previous"]" @onclick="() => Previous())"/>
+<input type="button" value="@localizer["Button.Next"]" @onclick="() => Next())"/>
+
 @code {
     [Parameter]
     public EntryModel Model { get; set; }
 
-    private InputTimeModel Birthday
+    private InputTimeModel Birthday { get; set; } = new();
+
+    private void Previous()
     {
-        get
-        {
-            return new InputTimeModel
-            {
-                IsValid = false, 
-                Value = Model.Birthday?.ToGoogleDateTime() ?? null
-            };
-        }
-        set
-        {
-            if (value.IsValid)
-                Model.Birthday = value.Value.ToDateTimeOffset();
-        }
+        if (Birthday.IsValid)
+            Model.Birthday = Birthday.Value.ToDateTimeOffset();
+        
+    }
+    
+    private void Next()
+    {
+        if (Birthday.IsValid)
+            Model.Birthday = Birthday.Value.ToDateTimeOffset();
+        
     }
 }

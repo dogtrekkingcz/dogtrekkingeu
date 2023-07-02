@@ -17,6 +17,7 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    private int ActivePageIdx { get; set; } = 0;
     public TabPage ActivePage { get; set; }
     List<TabPage> Pages = new List<TabPage>();
 
@@ -36,5 +37,17 @@
     void ActivatePage(TabPage page)
     {
         ActivePage = page;
+    }
+
+    public void Next()
+    {
+        if (ActivePageIdx < Pages.Count)
+            ActivatePage(Pages[++ActivePageIdx]);
+    }
+
+    public void Previous()
+    {
+        if (ActivePageIdx > 0)
+            ActivatePage(Pages[--ActivePageIdx]);
     }
 }
