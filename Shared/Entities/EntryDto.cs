@@ -32,6 +32,8 @@ public record EntryDto
     
     public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
 
+    public string LanguageCode { get; set; } = "en-US";
+    
     public record DogDto
     {
         public string? Id { get; set; }

@@ -10,6 +10,9 @@ internal static class ActionsServiceMapping
     {
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse, GetAllActionsResponse>();
 
+        typeAdapterConfig.NewConfig<GetSelectedActionsRequest, GetSelectedActionsInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse, GetSelectedActionsResponse>();
+
         typeAdapterConfig.NewConfig<CreateActionRequest, CreateActionInternalStorageRequest>();
 
         typeAdapterConfig.NewConfig<CreateActionInternalStorageResponse, CreateActionResponse>();

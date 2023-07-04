@@ -64,6 +64,7 @@ services:
       - 27017:27017
     volumes:
       - data_dogsontrail_db:/data/db
+    restart: always
    
   postgres:
     image: postgres
@@ -75,6 +76,7 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - 5431:5431
+    restart: always
 
   keycloak:
     image: jboss/keycloak
@@ -94,6 +96,11 @@ services:
       - 8080:8080
     depends_on:
       - postgres
+    restart: always
+      
+  mail:
+    image: bytemark/smtp
+    restart: always
 
   # MessageQueue not necessary yet
   #mq:

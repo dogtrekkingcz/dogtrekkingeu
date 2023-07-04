@@ -76,32 +76,13 @@
                 <label>@localizer["Action.CreateEntry.Person.Birthday"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputDateComponent Model="Birthday" />
+                <InputDateComponent @bind-Date="Model.Birthday" />
             </div>
         </div>
     </div>
 </section>
 
-<input type="button" value="@localizer["Button.Previous"]" @onclick="() => Previous())"/>
-<input type="button" value="@localizer["Button.Next"]" @onclick="() => Next())"/>
-
 @code {
     [Parameter]
     public EntryModel Model { get; set; }
-
-    private InputTimeModel Birthday { get; set; } = new();
-
-    private void Previous()
-    {
-        if (Birthday.IsValid)
-            Model.Birthday = Birthday.Value.ToDateTimeOffset();
-        
-    }
-    
-    private void Next()
-    {
-        if (Birthday.IsValid)
-            Model.Birthday = Birthday.Value.ToDateTimeOffset();
-        
-    }
 }

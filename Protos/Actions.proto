@@ -17,6 +17,7 @@ service Actions {
   rpc updateAction (UpdateActionRequest) returns (UpdateActionResponse);
   rpc deleteAction (DeleteActionRequest) returns (DeleteActionResponse);
   rpc getActionEntrySettings (GetActionEntrySettingsRequest) returns (GetActionEntrySettingsResponse);
+  rpc getSelectedActions (GetSelectedActionsRequest) returns (GetSelectedActionsResponse);
 }
 
 message GetAllActionsRequest {
@@ -41,6 +42,14 @@ message GetActionRequest {
 
 message GetActionResponse {
   shared.ActionDetail Action = 1;
+}
+
+message GetSelectedActionsRequest {
+  repeated string Ids = 1;
+}
+
+message GetSelectedActionsResponse {
+  repeated shared.ActionDetail Actions = 1;
 }
 
 message CreateActionRequest {

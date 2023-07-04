@@ -97,6 +97,7 @@
         {
             Entry = mapper.Map<Protos.Shared.Entry>(Entry)
         };
+        createEntryRequest.Entry.LanguageCode = "cs-CZ";
 
         await EntriesClient.createEntryAsync(createEntryRequest);
     }

@@ -150,5 +150,14 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
 
             return response;
         }
+
+        public async Task<GetSelectedActionsResponse> GetSelectedActionsAsync(GetSelectedActionsRequest request, CancellationToken cancellationToken)
+        {
+            var getSelectedActionsRequest = _mapper.Map<GetSelectedActionsInternalStorageRequest>(request);
+            
+            var result = await _actionsRepositoryService.GetSelectedActionsAsync(getSelectedActionsRequest, cancellationToken);
+            
+            return _mapper.Map<GetSelectedActionsResponse>(result.Actions);
+        }
     }
 }

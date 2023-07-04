@@ -15,5 +15,7 @@ namespace Storage.Interfaces
         public Task<GetAllActionsInternalStorageResponse> GetAllActionsAsync(CancellationToken cancellationToken);
 
         public Task<AddResultInternalStorageResponse> AddResultAsync(AddResultInternalStorageRequest request, CancellationToken cancellationToken);
+        
+        public Task<GetSelectedActionsInternalStorageResponse> GetSelectedActionsAsync(GetSelectedActionsInternalStorageRequest request, CancellationToken cancellationToken);
     }
 }

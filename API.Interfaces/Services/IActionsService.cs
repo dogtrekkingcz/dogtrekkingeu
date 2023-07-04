@@ -20,5 +20,7 @@ namespace DogsOnTrail.Interfaces.Actions.Services
         Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken);
 
         Task<GetActionEntrySettingsResponse> GetActionEntrySettings(GetActionEntrySettingsRequest request, CancellationToken cancellationToken);
+
+        Task<GetSelectedActionsResponse> GetSelectedActionsAsync(GetSelectedActionsRequest request, CancellationToken cancellationToken);
     }
 }

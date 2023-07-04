@@ -1,13 +1,12 @@
 ﻿@using MapsterMapper
 @using DogsOnTrailApp.Models
-@using Google.Type
 
 @inject IMapper Mapper
 @inject IStringLocalizer<Resource> Localizer
 
 <div class="container">
     <div class="row">
-        <div class="col-6 col-sm-12">
+        <div class="col-9 col-sm-12">
             <input type="text" 
                    @ref="_refYearsInput" 
                    @bind="_years" 
@@ -22,7 +21,7 @@
                    @oninput="async (e) => await MonthsUpdatedAsync(e)" 
                    onfocus="this.select()" 
                    placeholder="@Localizer["InputTime.Months"]" 
-                   style="width: 20px;" />-
+                   style="width: 30px;" />-
             
             <input type="text" 
                    @ref="_refDaysInput" 
@@ -30,77 +29,39 @@
                    @oninput="async (e) => await DaysUpdatedAsync(e)" 
                    onfocus="this.select()" 
                    placeholder="@Localizer["InputTime.Days"]" 
-                   style="width: 20px;" />
+                   style="width: 30px;" />
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-3 col-sm-12">
             <input type="button" value="@Localizer["InputTime.ClearTime"]" @onclick="ClearDate"/>
         </div>
     </div>
 </div>
 
 @code {
-    [Parameter] public InputTimeModel Model { get; set; }
-
-    [Parameter]
-    public System.DateTime StartDate
-    {
-        get
-        {
-            if (_iYears.HasValue && _iMonths.HasValue && _iDays.HasValue)
-                return new System.DateTime(_iYears.Value, _iMonths.Value, _iDays.Value);
-            
-            return System.DateTime.Now;
-        }
-        set
-        {
-            _years = value.Year.ToString();
-            _months = value.Month.ToString();
-            _days = value.Day.ToString();
-            _hours = "0";
-            _minutes = "0";
-            _seconds = "0";
-            
-            _iYears = value.Year;
-            _iMonths = value.Month;
-            _iDays = value.Day;
-            _iHours = 0;
-            _iMinutes = 0;
-            _iSeconds = 0;
-            
-            Reload();
-        }
-    }
+    [Parameter] public DateTimeOffset? Date { get; set; }
 
     private string _years = "";
     private string _months = "";
     private string _days = "";
-    private string _hours = "";
-    private string _minutes = "";
-    private string _seconds = "";
 
     private int? _iYears = null;
     private int? _iMonths = null;
     private int? _iDays = null;
-    private int? _iHours = null;
-    private int? _iMinutes = null;
-    private int? _iSeconds = null;
     
     private ElementReference _refYearsInput;
     private ElementReference _refMonthsInput;
     private ElementReference _refDaysInput;
     
+    [Parameter]
+    public EventCallback<DateTimeOffset?> DateChanged { get; set; }
+    
     private void ClearDate()
     {
-        Model.Value = null;
-
         _iYears = null;
         _iMonths = null;
         _iDays = null;
-        _iHours = null;
-        _iMinutes = null;
-        _iSeconds = null;
 
         Reload();
     }
@@ -110,19 +71,12 @@
         _years = _iYears?.ToString() ?? "";
         _months = _iMonths?.ToString() ?? "";
         _days = _iDays?.ToString() ?? "";
-        _hours = "00";
-        _minutes = "00";
-        _seconds = "00";
 
         if (_iYears != null && _iMonths != null && _iDays != null)
         {
-            Model.IsValid = true;
-            Model.Value = new Google.Type.DateTime() { Year = _iYears.Value, Month = _iMonths.Value, Day = _iDays.Value };
-        }
-        else
-        {
-            Model.IsValid = false;
-            Model.Value = null;
+            Date = new DateTime(_iYears.Value, _iMonths.Value, _iDays.Value);
+            
+            DateChanged.InvokeAsync(Date);
         }
         
         StateHasChanged();
@@ -173,6 +127,7 @@
         else
             _iDays = value;
 
-        Reload();
+        if (_iDays != null && _iDays > 0)
+            Reload();
     }
 }

@@ -1,7 +1,9 @@
 ﻿@page "/entries"
 @using DogsOnTrailApp.Models
+@using Google.Protobuf.Collections
 @using MapsterMapper
 @inject Protos.Entries.Entries.EntriesClient Client
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
@@ -20,8 +22,9 @@ else
     <table class="table">
         <thead>
         <tr>
-            <th>@localizer["Surname"]</th>
-            <th>@localizer["Name"]</th>
+            <th>@localizer["Surname"], @localizer["Name"]</th>
+            <th>Action - Race - Category</th>
+            <th>Dogs</th>
             <th>@localizer["Actions"]</th>
         </tr>
         </thead>
@@ -30,10 +33,18 @@ else
         {
             <tr>
                 <td>
-                    <div class="col-12">@entry.Surname</div>
+                    <div class="col-12">@entry.Surname, @entry.Name</div>
                 </td>
                 <td>
-                    <div class="col-12">@entry.Name</div>
+                    <div class="col-12">@entry.ActionId - @entry.RaceId - @entry.CategoryId</div>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var dog in entry.Dogs)
+                        {
+                            <li>@dog.Chip - @dog.Birthday?.ToString("yyyy-MM-dd") - @dog.Pedigree - @dog.Name</li>
+                        }
+                    </ul>
                 </td>
                 <td>
                     <ActionDropDown Model="@entry"></ActionDropDown>
@@ -49,13 +60,18 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await ReloadData();
+        await ReloadDataAsync();
     }
 
-    private async Task ReloadData()
+    private async Task ReloadDataAsync()
     {
         Protos.Entries.GetAllEntriesResponse response = await Client.getAllEntriesAsync(new Protos.Entries.GetAllEntriesRequest());
 
         _entriesList = mapper.Map<List<EntryModel>>(response.Entries);
+
+        var selectedActions = await ActionsClient.getSelectedActionsAsync(new Protos.Actions.GetSelectedActionsRequest
+        {
+            Ids = { _entriesList.Select(entry => entry.ActionId).ToList() }
+        });
     }
 }

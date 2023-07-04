@@ -88,6 +88,7 @@ services:
       - /dogsontrail_data/mongo_db:/data/db
     networks:
       - backend
+    restart: always
    
   postgres:
     image: postgres
@@ -102,6 +103,7 @@ services:
       - /dogsontrail_data/postgres_db:/var/lib/postgresql/data
     networks:
       - backend
+    restart: always
 
   keycloak:
     image: jboss/keycloak
@@ -127,6 +129,11 @@ services:
     networks:
       - frontend
       - backend
+    restart: always
+      
+  mail:
+    image: bytemark/smtp
+    restart: always
 
   # MessageQueue not necessary yet
   #mq:

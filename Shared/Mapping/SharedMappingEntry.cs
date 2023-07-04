@@ -1,5 +1,6 @@
 ﻿using SharedCode.Extensions;
 using Mapster;
+using Protos.Shared;
 using SharedCode.Entities;
 
 namespace SharedCode.Mapping

@@ -2,6 +2,7 @@
 using DogsOnTrail.Actions.Services.EntriesManage;
 using DogsOnTrail.Actions.Services.ResultsManage;
 using DogsOnTrail.Actions.Services.Rights;
+using Mails;
 using SharedCode.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +19,8 @@ namespace DogsOnTrail.Actions
                 .AddRights(typeAdapterConfig)
                 .AddUserProfiles(typeAdapterConfig, options)
                 .AddDogs(typeAdapterConfig, options)
-                .AddResults(typeAdapterConfig, options);
+                .AddResults(typeAdapterConfig, options)
+                .AddEmails(typeAdapterConfig, options);
             
             return services;
         }

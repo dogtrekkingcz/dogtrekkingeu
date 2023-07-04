@@ -1,13 +1,12 @@
-using DogsOnTrail.Interfaces.Actions.Entities;
 using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.JwtToken;
-using SharedCode.Testable;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;
+using SharedCode.JwtToken;
+using SharedCode.Testable;
 
-namespace DogsOnTrailGRPCService.Services.Actions;
+namespace API.GRPCService.Services.Actions;
 
 internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableService
 {
@@ -33,6 +32,20 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionSimple>>(allActions.Actions);
 
         var result = new Protos.Actions.GetAllActionsResponse();
+        result.Actions.AddRange(actions);
+
+        return result;
+    }
+
+    public async override Task<Protos.Actions.GetSelectedActionsResponse> getSelectedActions(Protos.Actions.GetSelectedActionsRequest request, ServerCallContext context)
+    {
+        var getSelectedActionsRequest = new GetSelectedActionsRequest { Ids = request.Ids.Select(id => Guid.Parse(id)).ToList() };
+
+        var selectedActions = await _actionsService.GetSelectedActionsAsync(getSelectedActionsRequest, context.CancellationToken);
+        
+        var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionDetail>>(selectedActions.Actions);
+
+        var result = new Protos.Actions.GetSelectedActionsResponse();
         result.Actions.AddRange(actions);
 
         return result;

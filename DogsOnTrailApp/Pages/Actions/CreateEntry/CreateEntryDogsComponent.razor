@@ -30,7 +30,7 @@
                     localizer["Messages.Limits.Failed.MinimalAgeOfDogForRace"], 
                     localizer["Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs"], 
                     RaceLimits.MinimalAgeOfTheDogInDayes,
-                    age.TotalDays);
+                    Math.Floor(age.TotalDays));
             }
                 
             <tr>
@@ -77,7 +77,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Birthday"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent Model="NewDogBirthday"></InputDateComponent>
+                    <InputDateComponent @bind-Date="@NewDog.Birthday"></InputDateComponent>
                 </div>
             </div>
             <div class="row">
@@ -85,7 +85,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Vaccinations.AgainstRabies"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent Model="NewDogVaccinationAgainsRabies"></InputDateComponent>
+                    <InputDateComponent @bind-Date="@NewDog.Vaccinations.First(vac => vac.Type == DogDto.VaccinationType.Rabies).Date"></InputDateComponent>
                 </div>
             </div>
         </div>
@@ -107,18 +107,12 @@
     public ActionSettingsModel.RaceLimits RaceLimits { get; set; }
 
     private EntryModel.DogDto NewDog { get; set; } = new();
-
-    private InputTimeModel NewDogBirthday { get; set; } = new();
-    private InputTimeModel NewDogVaccinationAgainsRabies { get; set; } = new();
+    
+    private DateTimeOffset NewDogBirthday { get; set; }
+    private DateTimeOffset NewDogVaccinationDate { get; set; }
 
     private void AddNewDog()
     {
-        if (NewDogBirthday.IsValid)
-            NewDog.Birthday = NewDogBirthday.Value.ToDateTimeOffset();
-
-        if (NewDogVaccinationAgainsRabies.IsValid)
-            NewDog.Vaccinations.First(vac => vac.Type == DogDto.VaccinationType.Rabies).Date = NewDogVaccinationAgainsRabies.Value.ToDateTimeOffset();
-        
         Dogs.Add(NewDog);
 
         NewDog = new();

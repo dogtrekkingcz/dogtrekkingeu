@@ -28,6 +28,10 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsWithDetailsResponse, RepeatedField<Protos.Shared.ActionDetail>>()
             .Map(d => d, s => s.Actions)
             .Ignore(d => d.Capacity);
+        
+        typeAdapterConfig.NewConfig<GetSelectedActionsResponse, RepeatedField<Protos.Shared.ActionDetail>>()
+            .Map(d => d, s => s.Actions)
+            .Ignore(d => d.Capacity);
 
         typeAdapterConfig.NewConfig<ActionDto, Protos.Shared.ActionDetail>()
             .TwoWays();
