@@ -1,11 +1,19 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Runtime.CompilerServices;
+using Mails.Entities;
+using Mapster;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Mails.Services.Emails;
 
-public class AddEmailsMapping
+internal static class EmailsServiceMapping
 {
-    public AddEmailsMapping()
+    internal static TypeAdapterConfig AddEmailsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        services.AddScoped<IMailSenderService, MailSenderService>();
+        typeAdapterConfig
+            .NewConfig<NewActionRegistrationEmailRequest.ActionDto, NewActionRegistrationEmailRequest.ActionDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+        
+        return typeAdapterConfig;
     }
 }

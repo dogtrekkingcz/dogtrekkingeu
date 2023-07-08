@@ -10,9 +10,9 @@ public static class DIComposer
 {
     public static IServiceCollection AddEmails(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrailOptions options)
     {
-        services.AddEmails(typeAdapterConfig, options);
-        services.AddScoped<IMailSenderService, MailSenderService>();
+        typeAdapterConfig.AddEmailsMapping();
         
+        services.AddScoped<IMailSenderService, MailSenderService>();
         
         return services;
     }

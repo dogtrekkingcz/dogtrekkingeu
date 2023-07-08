@@ -19,6 +19,7 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse, GetAllEntriesResponse>();
 
         typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
+            .IgnoreNullValues(true)
             .Map(d => d.Race.Name, s => s.RaceId)
             .Map(d => d.Category.Name, s => s.CategoryId)
             .Map(d => d.Racer.Name, s => s.Name)
@@ -41,6 +42,10 @@ internal static class EntriesServiceMapping
             .NewConfig<SharedCode.Entities.DogDto.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>()
             .Map(d => d.Type, s => s.Type.ToString())
             .Map(d => d.Date, s => s.Date);
+
+        typeAdapterConfig
+            .NewConfig<SharedCode.Entities.RaceDto, NewActionRegistrationEmailRequest.RaceDto>()
+            .Map(d => d.Name, s => s.Name);
         
         return typeAdapterConfig;
     }
