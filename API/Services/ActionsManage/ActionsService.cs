@@ -156,8 +156,11 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             var getSelectedActionsRequest = _mapper.Map<GetSelectedActionsInternalStorageRequest>(request);
             
             var result = await _actionsRepositoryService.GetSelectedActionsAsync(getSelectedActionsRequest, cancellationToken);
-            
-            return _mapper.Map<GetSelectedActionsResponse>(result.Actions);
+
+            return new GetSelectedActionsResponse
+            {
+                Actions = result.Actions
+            };
         }
     }
 }

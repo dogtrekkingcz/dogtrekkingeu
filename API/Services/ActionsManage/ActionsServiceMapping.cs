@@ -25,7 +25,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionRequest, GetActionInternalStorageRequest>();
 
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse, GetActionResponse>();
-            
+
         return typeAdapterConfig;
     }
 }
