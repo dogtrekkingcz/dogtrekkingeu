@@ -20,15 +20,39 @@ internal static class EntriesServiceMapping
 
         typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
             .IgnoreNullValues(true)
-            .Map(d => d.Race.Name, s => s.RaceId)
-            .Map(d => d.Category.Name, s => s.CategoryId)
-            .Map(d => d.Racer.Name, s => s.Name)
-            .Map(d => d.Racer.Surname, s => s.Surname)
-            .Map(d => d.Racer.Dogs, s => s.Dogs)
             .Map(d => d.Action, s => new NewActionRegistrationEmailRequest.ActionDto
             {
                 Name = s.ActionId,
                 Term = null
+            })
+            .Map(d => d.Category, s => new NewActionRegistrationEmailRequest.CategoryDto
+            {
+                Name = s.CategoryId
+            })
+            .Map(d => d.Race, s => new NewActionRegistrationEmailRequest.RaceDto
+            {
+                Name = s.RaceId
+            })
+            .Map(d => d.Racer, s => new NewActionRegistrationEmailRequest.RacerDto
+            {
+                Name = s.Name,
+                Surname = s.Surname,
+                Dogs = s.Dogs
+                    .Select(dog => new NewActionRegistrationEmailRequest.DogDto
+                    {
+                        Name = dog.Name,
+                        Birthday = dog.Birthday,
+                        Chip = dog.Chip,
+                        Pedigree = dog.Pedigree,
+                        Vaccinations = dog.Vaccinations
+                            .Select(vacc => new NewActionRegistrationEmailRequest.VaccinationDto
+                            {
+                                Date = vacc.Date,
+                                Type = vacc.Type.ToString()
+                            })
+                            .ToList()
+                    })
+                    .ToList()
             });
         
         typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, NewActionRegistrationEmailRequest.DogDto>()
@@ -43,10 +67,6 @@ internal static class EntriesServiceMapping
             .Map(d => d.Type, s => s.Type.ToString())
             .Map(d => d.Date, s => s.Date);
 
-        typeAdapterConfig
-            .NewConfig<SharedCode.Entities.RaceDto, NewActionRegistrationEmailRequest.RaceDto>()
-            .Map(d => d.Name, s => s.Name);
-        
         return typeAdapterConfig;
     }
 }

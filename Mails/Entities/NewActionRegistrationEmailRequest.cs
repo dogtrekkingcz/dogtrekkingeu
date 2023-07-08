@@ -43,7 +43,7 @@ public record NewActionRegistrationEmailRequest
         
         public string Pedigree { get; set; }
         
-        public DateTimeOffset Birthday { get; set; }
+        public DateTimeOffset? Birthday { get; set; }
         
         public string Name { get; set; }
 
@@ -54,6 +54,6 @@ public record NewActionRegistrationEmailRequest
     {
         public string Type { get; set; }
         
-        public DateTimeOffset Date { get; set; }
+        public DateTimeOffset? Date { get; set; }
     }
 }
