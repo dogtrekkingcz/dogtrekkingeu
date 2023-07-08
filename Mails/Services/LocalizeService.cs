@@ -24,6 +24,7 @@ public class LocalizeService : ILocalizeService
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.ActionRaceCategory"] = "Akce, závod, kategorie";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.NewRegistrationReceived"] = "Nová registrace přijata";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.InformNewRegistrationReceived"] = "Potvrzujeme přijetí přihlášky, vyčkejte na akceptaci přihlášky s informacemi o startovném";
+        _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.Dogs"] = "Psi";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.Dogs.Chip"] = "Čip";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.Dogs.Pedigree"] = "Plemeno";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.Dogs.Birthday"] = "Datum narození";
@@ -38,6 +39,7 @@ public class LocalizeService : ILocalizeService
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.ActionRaceCategory"] = "Action, race, category";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.NewRegistrationReceived"] = "New registration recieved";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.InformNewRegistrationReceived"] = "We are acknowledge we received the registration, please wait for acceptation of the registration and the payment information";
+        _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.Dogs"] = "Dogs";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.Dogs.Chip"] = "Chip";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.Dogs.Pedigree"] = "Pedigree";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.Dogs.Birthday"] = "Birthday";
