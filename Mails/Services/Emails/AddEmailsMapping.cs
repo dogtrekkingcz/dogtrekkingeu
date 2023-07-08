@@ -13,6 +13,31 @@ internal static class EmailsServiceMapping
             .NewConfig<NewActionRegistrationEmailRequest.ActionDto, NewActionRegistrationEmailRequest.ActionDto>()
             .IgnoreNullValues(true)
             .TwoWays();
+
+        typeAdapterConfig
+            .NewConfig<NewActionRegistrationEmailRequest.RaceDto, NewActionRegistrationEmailRequest.RaceDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+
+        typeAdapterConfig
+            .NewConfig<NewActionRegistrationEmailRequest.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+
+        typeAdapterConfig
+            .NewConfig<NewActionRegistrationEmailRequest.DogDto, NewActionRegistrationEmailRequest.DogDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+
+        typeAdapterConfig
+            .NewConfig<NewActionRegistrationEmailRequest.CategoryDto, NewActionRegistrationEmailRequest.CategoryDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+
+        typeAdapterConfig
+            .NewConfig<NewActionRegistrationEmailRequest.RacerDto, NewActionRegistrationEmailRequest.RacerDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
         
         return typeAdapterConfig;
     }
