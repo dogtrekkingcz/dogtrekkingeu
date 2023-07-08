@@ -10,8 +10,8 @@ public sealed class NewActionRegistrationReceivedEmailService : IEmailBuilderSer
     private Dictionary<string, string> _localize { get; set; }
 
     public List<IFormFile> Attachments { get; set; } = new();
-    
-    public string To { get; set; }
+
+    public string To => $@"{ _request.Racer.Email }";
 
     public string Subject => $@"[{_request.Action.Name} - {_request.Race.Name} - {_request.Category.Name}] {_localize["NewActionRegistration.Emails.NewRegistrationReceived"]}";
     

@@ -37,6 +37,7 @@ internal static class EntriesServiceMapping
             {
                 Name = s.Name,
                 Surname = s.Surname,
+                Email = s.Email,
                 Dogs = s.Dogs
                     .Select(dog => new NewActionRegistrationEmailRequest.DogDto
                     {

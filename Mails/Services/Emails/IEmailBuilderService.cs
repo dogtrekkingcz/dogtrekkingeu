@@ -5,7 +5,7 @@ namespace Mails.Services.Emails;
 
 public interface IEmailBuilderService
 {
-    public string To { get; set; }
+    public string To { get; }
     
     public string Subject { get; }
     
