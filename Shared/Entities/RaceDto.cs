@@ -27,6 +27,8 @@
         {
             public Guid Id { get; set; } = default(Guid);
             
+            public string BankAccount { get; set; }
+            
             public DateTimeOffset From { get; set; }
             
             public DateTimeOffset To { get; set; }

@@ -6,6 +6,7 @@ using Mails.Services.Emails;
 using MapsterMapper;
 using MongoDB.Bson;
 using SharedCode.JwtToken;
+using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
 
@@ -15,13 +16,19 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
     {
         private readonly IMapper _mapper;
         private readonly IEntriesRepositoryService _entriesRepositoryService;
+        private readonly IActionsRepositoryService _actionsRepositoryService;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly IMailSenderService _emailSenderService;
 
-        public EntriesService(IMapper mapper, IEntriesRepositoryService entriesRepositoryService, IJwtTokenService jwtTokenService, IMailSenderService emailSenderService)
+        public EntriesService(IMapper mapper, 
+                                IEntriesRepositoryService entriesRepositoryService,
+                                IActionsRepositoryService actionsRepositoryService,
+                                IJwtTokenService jwtTokenService, 
+                                IMailSenderService emailSenderService)
         {
             _mapper = mapper;
             _entriesRepositoryService = entriesRepositoryService;
+            _actionsRepositoryService = actionsRepositoryService;
             _jwtTokenService = jwtTokenService;
             _emailSenderService = emailSenderService;
         }
@@ -33,13 +40,41 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
 
             var emailRequest = _mapper.Map<NewActionRegistrationEmailRequest>(request);
 
-            ILocalizeService.LanguageCode languageCode = ILocalizeService.LanguageCode.English;
+            ILocalizeService.LanguageCode languageCode;
             switch (request.LanguageCode)
             {
                 case "en-US": languageCode = ILocalizeService.LanguageCode.English; break;
                 case "cs-CZ": languageCode = ILocalizeService.LanguageCode.Czech; break;
                 
                 default: languageCode = ILocalizeService.LanguageCode.English; break;
+            }
+
+            var actionDetail = await _actionsRepositoryService.GetActionAsync(
+                new GetActionInternalStorageRequest { Id = Guid.Parse(request.ActionId) }, 
+                cancellationToken);
+
+            emailRequest.Action.Name = actionDetail.Name;
+            emailRequest.Action.Term = new NewActionRegistrationEmailRequest.TermDto
+            {
+                From = actionDetail.Term.From,
+                To = actionDetail.Term.To
+            };
+
+            var raceDetail = actionDetail.Races.First(race => race.Id == Guid.Parse(request.RaceId));
+            emailRequest.Race.Name = raceDetail.Name;
+            emailRequest.Category.Name = raceDetail.Categories.First(ctg => ctg.Id == Guid.Parse(request.CategoryId)).Name;
+
+            foreach (var payment in raceDetail.Payments)
+            {
+                emailRequest.Payments[new NewActionRegistrationEmailRequest.TermDto { From = payment.From, To = payment.To }] =
+                    new NewActionRegistrationEmailRequest.PaymentDto
+                    {
+                        BankAccount = payment.BankAccount,
+                        From = payment.From,
+                        To = payment.To,
+                        Price = payment.Price,
+                        Currency = payment.Currency
+                    };
             }
             
             await _emailSenderService.SendAsync(

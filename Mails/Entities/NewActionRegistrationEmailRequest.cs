@@ -9,13 +9,15 @@ public record NewActionRegistrationEmailRequest
     public CategoryDto Category { get; set; }
     
     public RacerDto Racer { get; set; }
+
+    public Dictionary<TermDto, PaymentDto> Payments { get; set; } = new();
     
     
     public sealed record ActionDto
     {
         public string Name { get; set; }
         
-        public string Term { get; set; }
+        public TermDto Term { get; set; }
     }
 
     public sealed record RaceDto
@@ -57,5 +59,25 @@ public record NewActionRegistrationEmailRequest
         public string Type { get; set; }
         
         public DateTimeOffset? Date { get; set; }
+    }
+
+    public sealed record TermDto
+    {
+        public DateTimeOffset From { get; set; }
+        
+        public DateTimeOffset To { get; set; }
+    }
+
+    public sealed record PaymentDto
+    {
+        public string BankAccount { get; set; }
+        
+        public DateTimeOffset From { get; set; }
+        
+        public DateTimeOffset To { get; set; }
+        
+        public double Price { get; set; }
+        
+        public string Currency { get; set; }
     }
 }

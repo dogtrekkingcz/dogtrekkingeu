@@ -70,6 +70,14 @@
           }
         }
       },
+      "IBAN4Net/2.0.6": {
+        "runtime": {
+          "lib/net6.0/SinKien.IBAN4Net.dll": {
+            "assemblyVersion": "2.0.6.0",
+            "fileVersion": "2.0.6.0"
+          }
+        }
+      },
       "MailKit/3.2.0": {
         "dependencies": {
           "MimeKit": "3.2.0"
@@ -670,6 +678,14 @@
           }
         }
       },
+      "QRCoder/1.4.3": {
+        "runtime": {
+          "lib/net6.0/QRCoder.dll": {
+            "assemblyVersion": "1.4.3.0",
+            "fileVersion": "1.4.3.0"
+          }
+        }
+      },
       "SharpCompress/0.30.1": {
         "runtime": {
           "lib/net5.0/SharpCompress.dll": {
@@ -842,6 +858,7 @@
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
           "NETCore.MailKit": "2.1.0",
+          "QrGenerator": "1.0.0",
           "SharedCode": "1.0.0"
         },
         "runtime": {
@@ -855,6 +872,18 @@
         },
         "runtime": {
           "Protos.dll": {}
+        }
+      },
+      "QrGenerator/1.0.0": {
+        "dependencies": {
+          "IBAN4Net": "2.0.6",
+          "Mapster": "7.3.0",
+          "Mapster.DependencyInjection": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection": "7.0.0",
+          "QRCoder": "1.4.3"
+        },
+        "runtime": {
+          "QrGenerator.dll": {}
         }
       },
       "SharedCode/1.0.0": {
@@ -928,6 +957,13 @@
       "sha512": "sha512-lAymSKjOHFopWt7RAF/Rxkf7SKGZaj+tJdabcnobm6XkdHX1zIQdkByeqIwmJesDbbCTpLEae6oSrn4eWWE9TQ==",
       "path": "grpc.net.common/2.51.0",
       "hashPath": "grpc.net.common.2.51.0.nupkg.sha512"
+    },
+    "IBAN4Net/2.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yMtEyoycwIpWO8BuaZBClhnOlqIXcg9fxOE0yGdHglqTby64B4CYvjaChBEh+UgGphHFWv3lWnz4RIi7Pc9YqA==",
+      "path": "iban4net/2.0.6",
+      "hashPath": "iban4net.2.0.6.nupkg.sha512"
     },
     "MailKit/3.2.0": {
       "type": "package",
@@ -1279,6 +1315,13 @@
       "path": "portable.bouncycastle/1.9.0",
       "hashPath": "portable.bouncycastle.1.9.0.nupkg.sha512"
     },
+    "QRCoder/1.4.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fWuFqjm8GTlEb2GqBl3Hi8HZZeZQwBSHxvRPtPjyNbT82H0ff0JwavKRBmMaXCno1Av6McPC8aJzri0Mj2w9Jw==",
+      "path": "qrcoder/1.4.3",
+      "hashPath": "qrcoder.1.4.3.nupkg.sha512"
+    },
     "SharpCompress/0.30.1": {
       "type": "package",
       "serviceable": true,
@@ -1451,6 +1494,11 @@
       "sha512": ""
     },
     "Protos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "QrGenerator/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
