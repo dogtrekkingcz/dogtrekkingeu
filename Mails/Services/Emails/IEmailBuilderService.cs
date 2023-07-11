@@ -5,11 +5,17 @@ namespace Mails.Services.Emails;
 
 public interface IEmailBuilderService
 {
-    public string To { get; }
+    public string ToRacer { get; }
     
-    public string Subject { get; }
+    public string ToAdmin { get; }
     
-    public string Body { get; }
+    public string SubjectAdmin { get; }
+    
+    public string BodyAdmin { get; }
+    
+    public string SubjectRacer { get; }
+    
+    public string BodyRacer { get; }
 
     public List<IFormFile> Attachments { get; set; }
 }

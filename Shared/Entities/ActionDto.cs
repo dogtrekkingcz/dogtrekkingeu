@@ -8,6 +8,8 @@
 
         public string Description { get; set; } = string.Empty;
 
+        public string ContactMail { get; set; } = string.Empty;
+
         public TermDto Term { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();

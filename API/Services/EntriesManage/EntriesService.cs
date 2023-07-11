@@ -63,6 +63,7 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
             var raceDetail = actionDetail.Races.First(race => race.Id == Guid.Parse(request.RaceId));
             emailRequest.Race.Name = raceDetail.Name;
             emailRequest.Category.Name = raceDetail.Categories.First(ctg => ctg.Id == Guid.Parse(request.CategoryId)).Name;
+            emailRequest.Action.Email = actionDetail.ContactMail;
 
             foreach (var payment in raceDetail.Payments)
             {
