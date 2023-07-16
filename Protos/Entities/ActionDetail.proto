@@ -22,11 +22,13 @@ message ActionDetail {
   string Id = 1;
   string Name = 2;
   string Description = 3;
-  google.type.Interval Term = 4;
-
-  shared.Address Address = 5;
-
-  repeated shared.RaceDetail Races = 6;
+  string ContactMail = 4;
   
-  repeated ActionDetailFlags Flags = 7;
+  google.type.Interval Term = 5;
+
+  shared.Address Address = 6;
+
+  repeated shared.RaceDetail Races = 7;
+  
+  repeated ActionDetailFlags Flags = 8;
 }
