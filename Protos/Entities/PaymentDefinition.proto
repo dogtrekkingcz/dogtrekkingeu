@@ -12,4 +12,5 @@ message PaymentDefinition {
   google.type.DateTime  To = 3;
   double Price = 4;
   string Currency = 5;
+  string BankAccount = 6;
 }
