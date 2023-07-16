@@ -20,19 +20,9 @@ internal static class EntriesServiceMapping
 
         typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
             .IgnoreNullValues(true)
-            .Map(d => d.Action, s => new NewActionRegistrationEmailRequest.ActionDto
-            {
-                Name = s.ActionId,
-                Term = null
-            })
-            .Map(d => d.Category, s => new NewActionRegistrationEmailRequest.CategoryDto
-            {
-                Name = s.CategoryId
-            })
-            .Map(d => d.Race, s => new NewActionRegistrationEmailRequest.RaceDto
-            {
-                Name = s.RaceId
-            })
+            .Ignore(d => d.Action)
+            .Ignore(d => d.Category)
+            .Ignore(d => d.Race)
             .Map(d => d.Racer, s => new NewActionRegistrationEmailRequest.RacerDto
             {
                 Name = s.Name,

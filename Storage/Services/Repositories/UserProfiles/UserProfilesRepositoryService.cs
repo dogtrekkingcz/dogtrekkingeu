@@ -49,9 +49,7 @@ namespace Storage.Services.Repositories.UserProfiles
 
         public async Task DeleteUserProfileAsync(DeleteUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var deleteRequest = _mapper.Map<UserProfileRecord>(request);
-
-            await _userProfileStorageService.DeleteAsync(deleteRequest, cancellationToken);
+            await _userProfileStorageService.DeleteAsync(request.Email, cancellationToken);
         }
 
         public async Task<GetUserProfileInternalStorageResponse> GetUserProfileAsync(GetUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
@@ -66,7 +64,7 @@ namespace Storage.Services.Repositories.UserProfiles
             if (result == null)
                 return null;
             
-            var response = _mapper.Map<GetUserProfileInternalStorageResponse>(result.FirstOrDefault());
+            var response = _mapper.Map<GetUserProfileInternalStorageResponse>(result.First());
 
             return response;
         }

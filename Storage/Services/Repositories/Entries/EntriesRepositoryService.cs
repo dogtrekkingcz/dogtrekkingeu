@@ -52,6 +52,12 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 
     public async Task DeleteEntryAsync(DeleteEntryInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        await _entriesStorageService.DeleteAsync(new EntryRecord { Id = request.Id }, cancellationToken);
+        await _entriesStorageService.DeleteAsync(request.Id, cancellationToken);
+    }
+
+    public async Task<GetEntryResponse> GetAsync(Guid registrationId, CancellationToken cancellationToken)
+    {
+        var entry = await _entriesStorageService.GetAsync(registrationId.ToString(), cancellationToken);
+        return new GetEntryResponse();
     }
 }

@@ -1,10 +1,10 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Entries;
 using DogsOnTrail.Interfaces.Actions.Services;
+using Mails.Builders.Emails;
+using Mails.Builders.Emails.Admin;
 using Mails.Entities;
 using Mails.Services;
-using Mails.Services.Emails;
 using MapsterMapper;
-using MongoDB.Bson;
 using SharedCode.JwtToken;
 using Storage.Entities.Actions;
 using Storage.Entities.Entries;
@@ -49,9 +49,7 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
                 default: languageCode = ILocalizeService.LanguageCode.English; break;
             }
 
-            var actionDetail = await _actionsRepositoryService.GetActionAsync(
-                new GetActionInternalStorageRequest { Id = Guid.Parse(request.ActionId) }, 
-                cancellationToken);
+            var actionDetail = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
 
             emailRequest.Action.Name = actionDetail.Name;
             emailRequest.Action.Term = new NewActionRegistrationEmailRequest.TermDto
@@ -60,10 +58,19 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
                 To = actionDetail.Term.To
             };
 
-            var raceDetail = actionDetail.Races.First(race => race.Id == Guid.Parse(request.RaceId));
-            emailRequest.Race.Name = raceDetail.Name;
-            emailRequest.Category.Name = raceDetail.Categories.First(ctg => ctg.Id == Guid.Parse(request.CategoryId)).Name;
-            emailRequest.Action.Email = actionDetail.ContactMail;
+            var raceDetail = actionDetail.Races.First(race => race.Id == request.RaceId);
+            emailRequest.Race = new NewActionRegistrationEmailRequest.RaceDto
+            {
+                Name = raceDetail.Name   
+            };
+            emailRequest.Category = new NewActionRegistrationEmailRequest.CategoryDto
+            {
+                Name = raceDetail.Categories.First(ctg => ctg.Id == request.CategoryId).Name
+            };
+            emailRequest.Action = new NewActionRegistrationEmailRequest.ActionDto
+            {
+                Email = actionDetail.ContactMail   
+            };
 
             foreach (var payment in raceDetail.Payments)
             {
@@ -77,12 +84,15 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
                         Currency = payment.Currency
                     };
             }
+
+            List<IEmailBuilder> mailBuilders = new();
             
-            await _emailSenderService.SendAsync(
-                new NewActionRegistrationReceivedEmailService(
-                    new LocalizeService(languageCode), emailRequest),
-                    cancellationToken
-                );
+            mailBuilders.Add(new Mails.Builders.Emails.Admin.NewActionRegistrationReceivedEmailBuilder(
+                new LocalizeService(languageCode), emailRequest));
+            mailBuilders.Add(new Mails.Builders.Emails.Participant.NewActionRegistrationReceivedEmailBuilder(
+                new LocalizeService(languageCode), emailRequest));
+
+            await _emailSenderService.SendAsync(mailBuilders, cancellationToken);
 
             return new CreateEntryResponse
             {

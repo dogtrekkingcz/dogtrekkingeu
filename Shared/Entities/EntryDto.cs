@@ -20,11 +20,11 @@ public record EntryDto
 
     public List<string> Notes { get; set; } = new List<string>();
 
-    public string ActionId { get; set; } = "";
+    public Guid ActionId { get; set; } = Guid.Empty;
 
-    public string RaceId { get; set; } = "";
+    public Guid RaceId { get; set; } = Guid.Empty;
 
-    public string CategoryId { get; set; } = "";
+    public Guid CategoryId { get; set; } = Guid.Empty;
 
     public AddressDto Address { get; set; } = new();
 

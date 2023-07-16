@@ -22,10 +22,8 @@ namespace DogsOnTrailWebApiService.RequestHandlers.Actions
                 var mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
 
                 var actionsService = scope.ServiceProvider.GetRequiredService<IActionsService>();
-
-                var actionDetailRequest = mapper.Map<GetActionDetailRequest>(request);
-
-                var action = await actionsService.GetActionDetailAsync(actionDetailRequest, cancellationToken);
+                
+                var action = await actionsService.GetActionDetailAsync(request.Id, cancellationToken);
 
                 return new ValueTask<ActionDetailResponse>(new ActionDetailResponse(Guid.NewGuid())).Result;
             }

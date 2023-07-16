@@ -28,7 +28,7 @@ namespace DogsOnTrail.Actions.Services.ResultsManage;
 
     public async Task<List<RaceDto>> GetRacesForAction(GetRacesForActionRequest request, CancellationToken cancellationToken)
     {
-        var action = await _actionsRepositoryService.GetActionAsync(new GetActionInternalStorageRequest { Id = request.ActionId }, cancellationToken);
+        var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
 
         return action.Races.ToList();
     }

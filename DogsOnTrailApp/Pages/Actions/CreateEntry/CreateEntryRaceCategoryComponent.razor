@@ -14,7 +14,7 @@
             </div>
             <div class="col-xs-12 col-md-6">
                 <InputSelect
-                    ValueChanged="@((string selectedRaceId) => RaceSelected(selectedRaceId))"
+                    ValueChanged="@((Guid selectedRaceId) => RaceSelected(selectedRaceId))"
                     ValueExpression="@(() => Model.RaceId)">
                     <option value="0">@localizer["Action.CreateEntry.Race.SelectRace"]</option>
                     @foreach (var race in @ActionSettings.Races)
@@ -52,7 +52,7 @@
 
     private List<ActionSettingsDto.CategoryDto> _categories = new List<ActionSettingsDto.CategoryDto>();
 
-    protected void RaceSelected(string selectedRaceId)
+    protected void RaceSelected(Guid selectedRaceId)
     {
         Model.RaceId = selectedRaceId; 
         

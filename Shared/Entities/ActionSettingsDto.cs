@@ -12,7 +12,7 @@ public record ActionSettingsDto
 
     public sealed record RaceDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         
         public string Name { get; set; }
         
@@ -23,9 +23,9 @@ public record ActionSettingsDto
 
     public sealed record CategoryDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         
-        public string RaceId { get; set; }
+        public Guid RaceId { get; set; }
         
         public string Name { get; set; }
     }

@@ -67,7 +67,7 @@
 
         ActionSettings = mapper.Map<ActionSettingsModel>(actionSettings);
 
-        Entry.ActionId = actionSettings.Id;
+        Entry.ActionId = Guid.Parse(actionSettings.Id);
 
         if (string.IsNullOrEmpty(UserProfileService.Get().Id) == false)
         {

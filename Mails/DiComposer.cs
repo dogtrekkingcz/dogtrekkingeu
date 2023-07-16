@@ -1,12 +1,12 @@
-﻿using Mails.Services;
-using Mails.Services.Emails;
+﻿using Mails.Builders.Emails;
+using Mails.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using SharedCode.Options;
 
 namespace Mails;
 
-public static class DIComposer
+public static class DiComposer
 {
     public static IServiceCollection AddEmails(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrailOptions options)
     {

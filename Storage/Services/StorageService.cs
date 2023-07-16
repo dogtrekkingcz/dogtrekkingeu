@@ -36,16 +36,16 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return request;
     }
 
-    public async Task DeleteAsync(T request, CancellationToken cancellationToken)
+    public async Task DeleteAsync(string id, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("Id", request.Id);
+        var filter = Builders<T>.Filter.Eq("Id", id);
         
         await _collection.DeleteOneAsync(filter, cancellationToken: cancellationToken);
     }
 
-    public async Task<T> GetAsync(T request, CancellationToken cancellationToken)
+    public async Task<T> GetAsync(string id, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("Id", request.Id);
+        var filter = Builders<T>.Filter.Eq("Id", id);
 
         var document = await _collection
             .Find(filter)

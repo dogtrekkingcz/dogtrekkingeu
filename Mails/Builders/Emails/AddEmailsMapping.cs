@@ -1,9 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using Mails.Entities;
+﻿using Mails.Entities;
 using Mapster;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Mails.Services.Emails;
+namespace Mails.Builders.Emails;
 
 internal static class EmailsServiceMapping
 {

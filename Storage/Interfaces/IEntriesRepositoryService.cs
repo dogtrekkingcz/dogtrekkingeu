@@ -10,5 +10,7 @@ public interface IEntriesRepositoryService
     
     Task<GetAllEntriesInternalStorageResponse> GetAllEntriesAsync(GetAllEntriesInternalStorageRequest request, CancellationToken cancellationToken);
 
+    Task<GetEntryResponse> GetAsync(Guid registrationId, CancellationToken cancellationToken);
+    
     Task DeleteEntryAsync(DeleteEntryInternalStorageRequest request, CancellationToken cancellationToken);
 }

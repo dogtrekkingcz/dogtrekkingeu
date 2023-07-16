@@ -9,18 +9,22 @@ namespace DogsOnTrail.Interfaces.Actions.Services
 
         Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken);
         
-        Task<GetActionDetailResponse> GetActionDetailAsync(GetActionDetailRequest request, CancellationToken cancellationToken);
+        Task<GetActionDetailResponse> GetActionDetailAsync(Guid id, CancellationToken cancellationToken);
 
         Task<GetAllActionsResponse> GetAllActionsAsync(GetAllActionsRequest request, CancellationToken cancellationToken);
 
         Task<GetAllActionsWithDetailsResponse> GetAllActionsWithDetailsAsync(GetAllActionsWithDetailsRequest request, CancellationToken cancellationToken);
 
-        Task<GetActionResponse> GetActionAsync(GetActionRequest request, CancellationToken cancellationToken);
+        Task<GetActionResponse> GetActionAsync(Guid id, CancellationToken cancellationToken);
 
-        Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken);
+        Task DeleteActionAsync(Guid id, CancellationToken cancellationToken);
 
-        Task<GetActionEntrySettingsResponse> GetActionEntrySettings(GetActionEntrySettingsRequest request, CancellationToken cancellationToken);
+        Task<GetActionEntrySettingsResponse> GetActionEntrySettings(Guid id, CancellationToken cancellationToken);
 
         Task<GetSelectedActionsResponse> GetSelectedActionsAsync(GetSelectedActionsRequest request, CancellationToken cancellationToken);
+
+        Task AcceptRegistrationAsync(Guid registrationId, CancellationToken cancellationToken);
+
+        Task DenyRegistrationAsync(Guid registrationId, string reason, CancellationToken cancellationToken);
     }
 }

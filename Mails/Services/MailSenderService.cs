@@ -1,25 +1,27 @@
 ﻿using MimeKit;
-using System.IO;
-using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Mails.Services.Emails;
-using Mapster.Models;
+using Mails.Builders.Emails;
 using Microsoft.AspNetCore.Http;
 
 namespace Mails.Services;
 
 public class MailSenderService : IMailSenderService
 {
-    public async Task SendAsync(IEmailBuilderService model, CancellationToken cancellationToken)
+    public async Task SendAsync(IEnumerable<IEmailBuilder> builders, CancellationToken cancellationToken)
     {
         using var smtp = new SmtpClient();
         
         await smtp.ConnectAsync("mail", 25, SecureSocketOptions.Auto, cancellationToken: cancellationToken);
-        
-        await Task.WhenAll(
-            SendMailAsync(smtp, model.ToAdmin, model.SubjectAdmin, model.BodyAdmin, model.Attachments, cancellationToken),
-            SendMailAsync(smtp, model.ToRacer, model.SubjectRacer, model.BodyRacer, model.Attachments, cancellationToken));
+
+        await Task.WhenAll(builders
+            .Select(builder =>
+                SendMailAsync(smtp,
+                    builder.To,
+                    builder.Subject,
+                    builder.Body,
+                    builder.Attachments,
+                    cancellationToken)));
         
         await smtp.DisconnectAsync(true, cancellationToken: cancellationToken);
     }

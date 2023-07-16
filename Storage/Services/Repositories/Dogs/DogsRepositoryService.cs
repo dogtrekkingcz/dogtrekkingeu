@@ -50,9 +50,7 @@ namespace Storage.Services.Repositories.Dogs
 
         public async Task DeleteDogAsync(DeleteDogInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var deleteRequest = _mapper.Map<DogRecord>(request);
-
-            await _dogStorageService.DeleteAsync(deleteRequest, cancellationToken);
+            await _dogStorageService.DeleteAsync(request.Id, cancellationToken);
         }
 
         public async Task<GetDogsFilteredByChipInternalStorageResponse> GetDogsFilteredByChipAsync(GetDogsFilteredByChipInternalStorageRequest request, CancellationToken cancellationToken)

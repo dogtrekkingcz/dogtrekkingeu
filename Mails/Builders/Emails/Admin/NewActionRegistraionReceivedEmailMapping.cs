@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Mails.Services.Emails;
+namespace Mails.Builders.Emails.Admin;
 
-public static class NewActionRegistraionReceivedEmailMapping
+public static class NewActionRegistrationReceivedEmailMapping
 {
     public static IServiceCollection AddNewAtionRegistrationEmailMapping(this IServiceCollection services)
     {

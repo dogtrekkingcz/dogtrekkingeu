@@ -47,18 +47,14 @@ namespace Storage.Services.Repositories.Actions
             };
         }
 
-        public async Task DeleteActionAsync(DeleteActionInternalStorageRequest request, CancellationToken cancellationToken)
+        public async Task DeleteActionAsync(Guid id, CancellationToken cancellationToken)
         {
-            var deleteRequest = _mapper.Map<ActionRecord>(request);
-
-            await _actionsStorageService.DeleteAsync(deleteRequest, cancellationToken);
+            await _actionsStorageService.DeleteAsync(id.ToString(), cancellationToken);
         }
 
-        public async Task<GetActionInternalStorageResponse> GetActionAsync(GetActionInternalStorageRequest request, CancellationToken cancellationToken)
+        public async Task<GetActionInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken)
         {
-            var getRequest = _mapper.Map<ActionRecord>(request);
-
-            var result = await _actionsStorageService.GetAsync(getRequest, cancellationToken);
+            var result = await _actionsStorageService.GetAsync(id.ToString(), cancellationToken);
 
             var response = _mapper.Map<GetActionInternalStorageResponse>(result);
 
@@ -104,7 +100,7 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<AddResultInternalStorageResponse> AddResultAsync(AddResultInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var action = await _actionsStorageService.GetAsync(new ActionRecord { Id = request.ActionId.ToString() }, cancellationToken);
+            var action = await _actionsStorageService.GetAsync(request.ActionId.ToString(), cancellationToken);
 
             var race = action.Races.First(race => race.Id == request.RaceId);
 

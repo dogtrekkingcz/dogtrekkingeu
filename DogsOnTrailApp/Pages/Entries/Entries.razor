@@ -71,7 +71,7 @@ else
 
         var selectedActions = await ActionsClient.getSelectedActionsAsync(new Protos.Actions.GetSelectedActionsRequest
         {
-            Ids = { _entriesList.Select(entry => entry.ActionId).ToList() }
+            Ids = { _entriesList.Select(entry => entry.ActionId.ToString()).ToList() }
         });
     }
 }

@@ -2,5 +2,5 @@
 
 public sealed record GetActionEntrySettingsRequest
 {
-    public string ActionId { get; set; }
+    public Guid ActionId { get; set; }
 }

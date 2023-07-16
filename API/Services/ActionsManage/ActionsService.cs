@@ -13,16 +13,19 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         private readonly IMapper _mapper;
         private readonly IActionsRepositoryService _actionsRepositoryService;
         private readonly IActionRightsRepositoryService _actionRightsRepositoryService;
+        private readonly IEntriesRepositoryService _entriesRepositoryService;
         private readonly IJwtTokenService _jwtTokenService;
 
         public ActionsService(IMapper mapper, 
             IActionsRepositoryService actionsRepositoryService, 
             IActionRightsRepositoryService actionRightsRepositoryService,
+            IEntriesRepositoryService entriesRepositoryService,
             IJwtTokenService jwtTokenService)
         {
             _mapper = mapper;
             _actionsRepositoryService = actionsRepositoryService;
             _actionRightsRepositoryService = actionRightsRepositoryService;
+            _entriesRepositoryService = entriesRepositoryService;
             _jwtTokenService = jwtTokenService;
         }
 
@@ -69,14 +72,11 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
         
-        public async Task<GetActionDetailResponse> GetActionDetailAsync(GetActionDetailRequest request, CancellationToken cancellationToken)
+        public async Task<GetActionDetailResponse> GetActionDetailAsync(Guid id, CancellationToken cancellationToken)
         {
-            var actionDetail = await _actionsRepositoryService.GetActionAsync(new GetActionInternalStorageRequest
-            {
-                Id = request.Id
-            }, cancellationToken);
+            var actionDetail = await _actionsRepositoryService.GetAsync(id, cancellationToken);
 
-            return new GetActionDetailResponse();
+            return _mapper.Map<GetActionDetailResponse>(actionDetail);
         }
 
         public async Task<GetAllActionsResponse> GetAllActionsAsync(GetAllActionsRequest request, CancellationToken cancellationToken)
@@ -97,29 +97,23 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
-        public async Task<GetActionResponse> GetActionAsync(GetActionRequest request, CancellationToken cancellationToken)
+        public async Task<GetActionResponse> GetActionAsync(Guid id, CancellationToken cancellationToken)
         {
-            var getActionRequest = _mapper.Map<GetActionInternalStorageRequest>(request);
-
-            var result = await _actionsRepositoryService.GetActionAsync(getActionRequest, cancellationToken);
+            var result = await _actionsRepositoryService.GetAsync(id, cancellationToken);
 
             var response = _mapper.Map<GetActionResponse>(result);
 
             return response;
         }
 
-        public async Task DeleteActionAsync(DeleteActionRequest request, CancellationToken cancellationToken)
+        public async Task DeleteActionAsync(Guid id, CancellationToken cancellationToken)
         {
-            var deleteActionRequest = _mapper.Map<DeleteActionInternalStorageRequest>(request);
-
-            await _actionsRepositoryService.DeleteActionAsync(deleteActionRequest, cancellationToken);
+            await _actionsRepositoryService.DeleteActionAsync(id, cancellationToken);
         }
 
-        public async Task<GetActionEntrySettingsResponse> GetActionEntrySettings(GetActionEntrySettingsRequest request, CancellationToken cancellationToken)
+        public async Task<GetActionEntrySettingsResponse> GetActionEntrySettings(Guid id, CancellationToken cancellationToken)
         {
-            var getActionRequest = _mapper.Map<GetActionInternalStorageRequest>(request);
-
-            var result = await _actionsRepositoryService.GetActionAsync(getActionRequest, cancellationToken);
+            var result = await _actionsRepositoryService.GetAsync(id, cancellationToken);
 
             var response = new GetActionEntrySettingsResponse
             {
@@ -128,7 +122,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                 Races = result.Races.Select(r => 
                         new GetActionEntrySettingsResponse.RaceDto
                         {
-                            Id = r.Id.ToString(),
+                            Id = r.Id,
                             Name = r.Name,
                             Start = r.Begin,
                             Limits = new ActionSettingsDto.RaceLimits
@@ -141,9 +135,9 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                 Categories = result.Races.SelectMany(r => r.Categories.Select(ctg =>
                     new GetActionEntrySettingsResponse.CategoryDto
                     {
-                        Id = ctg.Id.ToString(),
+                        Id = ctg.Id,
                         Name = ctg.Name,
-                        RaceId = r.Id.ToString()
+                        RaceId = r.Id
                     }))
                     .ToList()
             };
@@ -161,6 +155,29 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             {
                 Actions = result.Actions
             };
+        }
+
+        public async Task AcceptRegistrationAsync(Guid registrationId, CancellationToken cancellationToken)
+        {
+            var registration = await _entriesRepositoryService.GetAsync(registrationId, cancellationToken);
+
+            var action = await _actionsRepositoryService.GetAsync(registration.ActionId, cancellationToken);
+
+            var race = action.Races.First(race => race.Id == registration.RaceId);
+
+            var category = race.Categories.First(category => category.Id == registration.CategoryId);
+
+            var racer = _mapper.Map<RacerDto>(registration);
+            category.Racers.Add(racer);
+
+            await _actionsRepositoryService.UpdateActionAsync(
+                _mapper.Map<UpdateActionInternalStorageRequest>(action),
+                cancellationToken);
+        }
+
+        public async Task DenyRegistrationAsync(Guid registrationId, string reason, CancellationToken cancellationToken)
+        {
+            
         }
     }
 }

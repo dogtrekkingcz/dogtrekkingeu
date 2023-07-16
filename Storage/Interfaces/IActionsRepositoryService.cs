@@ -8,9 +8,9 @@ namespace Storage.Interfaces
 
         public Task<UpdateActionInternalStorageResponse> UpdateActionAsync(UpdateActionInternalStorageRequest request, CancellationToken cancellationToken);
 
-        public Task DeleteActionAsync(DeleteActionInternalStorageRequest request, CancellationToken cancellationToken);
+        public Task DeleteActionAsync(Guid id, CancellationToken cancellationToken);
 
-        public Task<GetActionInternalStorageResponse> GetActionAsync(GetActionInternalStorageRequest request, CancellationToken cancellationToken);
+        public Task<GetActionInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken);
 
         public Task<GetAllActionsInternalStorageResponse> GetAllActionsAsync(CancellationToken cancellationToken);
 

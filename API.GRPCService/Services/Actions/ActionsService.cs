@@ -67,9 +67,7 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
 
     public async override Task<Protos.Actions.GetActionResponse> getAction(Protos.Actions.GetActionRequest request, ServerCallContext context)
     {
-        var getActionRequest = _mapper.Map<GetActionRequest>(request);
-
-        var result = await _actionsService.GetActionAsync(getActionRequest, context.CancellationToken);
+        var result = await _actionsService.GetActionAsync(Guid.Parse(request.Id), context.CancellationToken);
 
         var response = new Protos.Actions.GetActionResponse
         {
@@ -103,16 +101,14 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
 
     public async override Task<Protos.Actions.DeleteActionResponse> deleteAction(Protos.Actions.DeleteActionRequest request, ServerCallContext context)
     {
-        var deleteActionRequest = _mapper.Map<DeleteActionRequest>(request);
-
-        await _actionsService.DeleteActionAsync(deleteActionRequest, context.CancellationToken);
+        await _actionsService.DeleteActionAsync(Guid.Parse(request.Id), context.CancellationToken);
 
         return new Protos.Actions.DeleteActionResponse();
     }
 
     public async override Task<Protos.Actions.GetActionEntrySettingsResponse> getActionEntrySettings(Protos.Actions.GetActionEntrySettingsRequest request, ServerCallContext context)
     {
-        var actionEntrySettings = await _actionsService.GetActionEntrySettings(new GetActionEntrySettingsRequest { ActionId = request.Id }, context.CancellationToken);
+        var actionEntrySettings = await _actionsService.GetActionEntrySettings(Guid.Parse(request.Id), context.CancellationToken);
 
         var response = _mapper.Map<Protos.Actions.GetActionEntrySettingsResponse>(actionEntrySettings);
 
