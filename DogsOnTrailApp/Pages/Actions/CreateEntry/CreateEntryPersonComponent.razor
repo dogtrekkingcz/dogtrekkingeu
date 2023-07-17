@@ -5,80 +5,45 @@
 @using BootstrapBlazor.Components
 @inject IStringLocalizer<Resource> localizer
 
-<h3>@localizer["Action.CreateEntry.Person"]</h3>
 <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.Name"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.Name"/>
-            </div>
-        </div>
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.Name"]</label>
+        <input type="text" @bind="@Model.Name" required />
+    </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.Surname"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.Surname"/>
-            </div>
-        </div>
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.Surname"]</label>
+        <input type="text" @bind="@Model.Surname" required />
+    </div>
+    
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.Email"]</label>
+        <input type="email" @bind="@Model.Email" required />
+    </div>
+    
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.Phone"]</label>
+        <input type="tel" @bind="@Model.Phone" required />
+    </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.Email"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.Email"/>
-            </div>
-        </div>
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.AddressStreet"]</label>
+        <input type="text" @bind="@Model.Address.Street" />
+    </div>
+    
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.AddressCity"]</label>
+        <input type="text" @bind="@Model.Address.City" />
+    </div>
+    
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.AddressZipCode"]</label>
+        <input type="text" @bind="@Model.Address.ZipCode" />
+    </div>
 
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.Phone"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.Phone"/>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.AddressStreet"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.Address.Street"/>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.AddressCity"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.Address.City"/>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.AddressZipCode"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.Address.ZipCode"/>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Person.Birthday"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputDateComponent @bind-Date="Model.Birthday" />
-            </div>
-        </div>
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Person.Birthday"]</label>
+        <InputDateComponent @bind-Date="Model.Birthday"/>
     </div>
 </section>
 

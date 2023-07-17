@@ -2,13 +2,13 @@
 
 public record NewActionRegistrationEmailRequest
 {
-    public ActionDto Action { get; set; }
-    
-    public RaceDto Race { get; set; }
-    
-    public CategoryDto Category { get; set; }
-    
-    public RacerDto Racer { get; set; }
+    public ActionDto Action { get; set; } = new();
+
+    public RaceDto Race { get; set; } = new();
+
+    public CategoryDto Category { get; set; } = new();
+
+    public RacerDto Racer { get; set; } = new();
 
     public Dictionary<TermDto, PaymentDto> Payments { get; set; } = new();
     

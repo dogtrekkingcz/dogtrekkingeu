@@ -33,6 +33,7 @@ public class LocalizeService : ILocalizeService
                 "NewActionRegistration.Emails.NextActionWillBeAcceptingOfTheRegistrationByActionAdministratorPleaseWaitForAcceptanceEmail"] =
             "Nyní bude následovat akceptování přihlášky administrátory akce, prosím vyčkejte na potvrzující email";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.ReceivedInformations"] = "Poskytnuté informace o příhlášce";
+        _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.InCaseOfUrgencyWriteUsAnEmailTo"] = "V případě potřeby nás kontaktujte na mail: ";
 
         _vocabularies[ILocalizeService.LanguageCode.English] = new Dictionary<string, string>();
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.NameSurname"] = "Name, surname";
@@ -48,5 +49,6 @@ public class LocalizeService : ILocalizeService
                 "NewActionRegistration.Emails.NextActionWillBeAcceptingOfTheRegistrationByActionAdministratorPleaseWaitForAcceptanceEmail"] =
             "Now the administrator of the action needs to accept your registration, please wait for the acceptation email";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.ReceivedInformations"] = "Received information";
+        _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.InCaseOfUrgencyWriteUsAnEmailTo"] = "In case of urgency - contact us at mail: ";
     }
 }

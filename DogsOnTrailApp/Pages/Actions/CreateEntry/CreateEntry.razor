@@ -15,38 +15,39 @@
 
 <h1>@localizer["Action.CreateEntry.For.Action"]</h1>
 
-<EditForm Model="Entry" OnValidSubmit="SendAsync">
-    <TabControl>
-        <TabPage Text="@localizer["Action.CreateEntry.Person"]">
-            <CreateEntryPersonComponent Model="Entry"></CreateEntryPersonComponent>
-        </TabPage>
-        
-        <TabPage Text="@localizer["Action.CreateEntry.RaceCategory"]">
-            <CreateEntryRaceCategoryComponent
-                ActionSettings="ActionSettings"
-                Model="Entry">
-            </CreateEntryRaceCategoryComponent>
-        </TabPage>
-        
-        <TabPage Text="@localizer["Action.CreateEntry.Dogs"]">
+<CascadingValue Value="this">
+    <EditForm Model="Entry" OnValidSubmit="SendAsync">
+        @* <DataAnnotationsValidator /> *@
+        @* <ValidationSummary /> *@
+                
+        <CreateEntryPersonComponent Model="Entry"></CreateEntryPersonComponent>
+
+        <hr />
+    
+        <CreateEntryRaceCategoryComponent
+            ActionSettings="ActionSettings"
+            Model="Entry">
+        </CreateEntryRaceCategoryComponent>
+
+        <hr />
+    
+        @if (Entry.RaceId != null && Entry.RaceId != Guid.Empty)
+        {
             <CreateEntryDogsComponent
                 RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits"
                 Race="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)"
                 Dogs="@Entry.Dogs">
             </CreateEntryDogsComponent>
-        </TabPage>
-        
-        @* <TabPage Text="@localizer["Action.CreateEntry.Notes"]"> *@
+        }
+
         @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
-        @* </TabPage> *@
-        @* <TabPage Text="@localizer["Action.CreateEntry.Summary"]"> *@
         @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
-        @* </TabPage> *@
-    </TabControl>
-    
-    <hr />
-    <input type="submit" class="btn btn-primary" value="@localizer["Action.CreateEntry.Submit"]" />
-</EditForm>
+
+        <hr/>
+
+        <button class="btn btn--radius-2 btn--red" type="submit" onClick="register()">@localizer["Action.CreateEntry.Submit"]</button>
+    </EditForm>
+</CascadingValue>
 
 @code {
 
@@ -75,7 +76,7 @@
             Entry.Surname = UserProfileService.Get().LastName;
             Entry.Email = UserProfileService.Get().Contact.EmailAddress;
             Entry.Phone = UserProfileService.Get().Contact.PhoneNumber;
-            Entry.UserProfileId = UserProfileService.Get().Id;
+            Entry.UserProfileId = UserProfileService.Get().Id ?? Guid.Empty.ToString();
             Entry.CompetitorId = UserProfileService.Get().CompetitorId.ToString();
             Entry.Dogs = UserProfileService.Get().Dogs
                 .Where(dog => dog.Decease == null)
@@ -100,5 +101,15 @@
         createEntryRequest.Entry.LanguageCode = "cs-CZ";
 
         await EntriesClient.createEntryAsync(createEntryRequest);
+    }
+
+    public void RaceChanged()
+    {
+        StateHasChanged();
+    }
+
+    public void CategoryChanged()
+    {
+        StateHasChanged();
     }
 }

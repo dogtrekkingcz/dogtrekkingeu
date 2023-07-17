@@ -186,6 +186,42 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Město.
+        /// </summary>
+        internal static string Action_CreateEntry_Person_AddressCity {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Person.AddressCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ulice.
+        /// </summary>
+        internal static string Action_CreateEntry_Person_AddressStreet {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Person.AddressStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PSČ.
+        /// </summary>
+        internal static string Action_CreateEntry_Person_AddressZipCode {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Person.AddressZipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum narození.
+        /// </summary>
+        internal static string Action_CreateEntry_Person_Birthday {
+            get {
+                return ResourceManager.GetString("Action.CreateEntry.Person.Birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string Action_CreateEntry_Person_Email {
@@ -380,6 +416,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Actions_EnrolledRaces {
             get {
                 return ResourceManager.GetString("Actions.EnrolledRaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mailový kontakt.
+        /// </summary>
+        internal static string Actions_Manage_MailContact {
+            get {
+                return ResourceManager.GetString("Actions.Manage.MailContact", resourceCulture);
             }
         }
         

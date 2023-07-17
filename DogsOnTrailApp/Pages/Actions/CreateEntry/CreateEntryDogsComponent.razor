@@ -85,7 +85,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Vaccinations.AgainstRabies"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent @bind-Date="@NewDog.Vaccinations.First(vac => vac.Type == DogDto.VaccinationType.Rabies).Date"></InputDateComponent>
+                    <InputDateComponent @bind-Date="@NewDog.Vaccinations.First(vac => vac.Type == EntryModel.VaccinationType.Rabies).Date"></InputDateComponent>
                 </div>
             </div>
         </div>

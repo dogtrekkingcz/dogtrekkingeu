@@ -39,6 +39,15 @@
                 <InputText @bind-Value="@Model.Description"/>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label for="mail_contact">@localizer["Actions.Manage.MailContact"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.ContactMail"/>
+            </div>
+        </div>
     </div>
 </section>
 

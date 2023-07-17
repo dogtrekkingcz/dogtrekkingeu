@@ -5,45 +5,36 @@
 @using Protos.Shared
 @inject IStringLocalizer<Resource> localizer
 
-<h3>@localizer["Action.CreateEntry.Person"]</h3>
 <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Race.Selection"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputSelect
-                    ValueChanged="@((Guid selectedRaceId) => RaceSelected(selectedRaceId))"
-                    ValueExpression="@(() => Model.RaceId)">
-                    <option value="0">@localizer["Action.CreateEntry.Race.SelectRace"]</option>
-                    @foreach (var race in @ActionSettings.Races)
-                    {
-                        <option value="@race.Id">@race.Name</option>
-                    }
-                </InputSelect>
-                <InputText @bind-Value="@Model.Name"/>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@localizer["Action.CreateEntry.Category.Selection"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputSelect @bind-Value="@Model.CategoryId">
-                    <option value="0">@localizer["Action.CreateEntry.Category.SelectCategory"]</option>
-                    @foreach (var category in _categories)
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
-                </InputSelect>
-            </div>
-        </div>
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Race.Selection"]</label>
+        <select @onchange="RaceSelected">
+            <option value="0" selected="selected">@localizer["Action.CreateEntry.Race.SelectRace"]</option>
+            
+            @foreach (var race in @ActionSettings.Races)
+            {
+                <option value="@race.Id">@race.Name</option>
+            }
+        </select>
+    </div>
+    
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Category.Selection"]</label>
+        <select @onchange="CategorySelected">
+            <option value="0">@localizer["Action.CreateEntry.Category.SelectCategory"]</option>
+            
+            @foreach (var category in _categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
     </div>
 </section>
 
 @code {
+    [CascadingParameter]
+    private CreateEntry Parent { get; set; }
+    
     [Parameter]
     public EntryModel Model { get; set; }
     
@@ -52,14 +43,21 @@
 
     private List<ActionSettingsDto.CategoryDto> _categories = new List<ActionSettingsDto.CategoryDto>();
 
-    protected void RaceSelected(Guid selectedRaceId)
+    protected void RaceSelected(ChangeEventArgs e)
     {
-        Model.RaceId = selectedRaceId; 
+        Model.RaceId = Guid.Parse(e.Value.ToString()); 
         
         _categories = ActionSettings.Categories
-            .Where(ctg => ctg.RaceId == selectedRaceId)
+            .Where(ctg => ctg.RaceId == Model.RaceId)
             .ToList();
+
+        Parent.RaceChanged();
+    }
+    
+    protected void CategorySelected(ChangeEventArgs e)
+    {
+        Model.CategoryId = Guid.Parse(e.Value.ToString());
         
-        StateHasChanged();
+        Parent.CategoryChanged();
     }
 }

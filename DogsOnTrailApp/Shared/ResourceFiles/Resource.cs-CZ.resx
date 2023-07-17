@@ -321,4 +321,19 @@
     <data name="Action.CreateEntry.Category.SelectCategory" xml:space="preserve">
         <value>--== Vyber kategorii ==--</value>
     </data>
+    <data name="Actions.Manage.MailContact" xml:space="preserve">
+        <value>Mailový kontakt</value>
+    </data>
+    <data name="Action.CreateEntry.Person.AddressStreet" xml:space="preserve">
+        <value>Ulice</value>
+    </data>
+    <data name="Action.CreateEntry.Person.AddressCity" xml:space="preserve">
+        <value>Město</value>
+    </data>
+    <data name="Action.CreateEntry.Person.AddressZipCode" xml:space="preserve">
+        <value>PSČ</value>
+    </data>
+    <data name="Action.CreateEntry.Person.Birthday" xml:space="preserve">
+        <value>Datum narození</value>
+    </data>
 </root>

@@ -1,10 +1,12 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Entries;
+﻿using DogsOnTrail.Actions.Extensions;
+using DogsOnTrail.Interfaces.Actions.Entities.Entries;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Mails.Builders.Emails;
 using Mails.Builders.Emails.Admin;
 using Mails.Entities;
 using Mails.Services;
 using MapsterMapper;
+using MongoDB.Bson;
 using SharedCode.JwtToken;
 using Storage.Entities.Actions;
 using Storage.Entities.Entries;
@@ -35,6 +37,8 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
 
         public async Task<CreateEntryResponse> CreateEntryAsync(CreateEntryRequest request, CancellationToken cancellationToken)
         {
+            Console.WriteLine($"Received createEntry request: '{request.Dump()}'");
+            
             var createEntryInternalStorageRequest = _mapper.Map<CreateEntryInternalStorageRequest>(request);
             var response = await _entriesRepositoryService.CreateEntryAsync(createEntryInternalStorageRequest, cancellationToken);
 

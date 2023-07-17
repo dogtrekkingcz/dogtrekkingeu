@@ -4,6 +4,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Storage.Entities.Actions;
+using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
 
@@ -29,7 +30,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
     public async Task<T> UpdateAsync(T request, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("Id", request.Id);
+        var filter = Builders<T>.Filter.Eq("_id", request.Id);
         
         await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
 
@@ -38,18 +39,25 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
     public async Task DeleteAsync(string id, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("Id", id);
+        var filter = Builders<T>.Filter.Eq("_id", id);
         
         await _collection.DeleteOneAsync(filter, cancellationToken: cancellationToken);
     }
 
     public async Task<T> GetAsync(string id, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("Id", id);
+        Console.WriteLine($"StorageService:GetAsync({id}");
+        
+        var filter = Builders<T>.Filter.Eq("_id", id);
 
         var document = await _collection
             .Find(filter)
             .FirstAsync(cancellationToken: cancellationToken);
+        
+        if (document != null)
+            Console.WriteLine($"StorageService:GetAsync(): {document.Dump()}");
+        else
+            Console.WriteLine($"StorageService:GetAsync(): document with ID:'{id}' not found");
 
         return document;
     }

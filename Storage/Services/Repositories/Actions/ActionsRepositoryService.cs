@@ -2,6 +2,7 @@
 using MapsterMapper;
 using Microsoft.Extensions.Logging;
 using Storage.Entities.Actions;
+using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
 
@@ -55,8 +56,13 @@ namespace Storage.Services.Repositories.Actions
         public async Task<GetActionInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken)
         {
             var result = await _actionsStorageService.GetAsync(id.ToString(), cancellationToken);
-
+            Console.WriteLine($"{nameof(GetAsync)} - response from storage: '{result?.Dump()}'");
+            
             var response = _mapper.Map<GetActionInternalStorageResponse>(result);
+            if (response == null)
+                Console.WriteLine($"{nameof(GetAsync)} - action with id: '{id}' not found");
+            else
+                Console.WriteLine($"{nameof(GetAsync)}: '{response.Dump()}'");
 
             return response;
         }
