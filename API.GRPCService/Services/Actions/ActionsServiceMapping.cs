@@ -11,7 +11,7 @@ internal static class ActionsServiceMapping
     internal static TypeAdapterConfig AddActionsServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, CreateActionRequest>();
-
+        
         typeAdapterConfig.NewConfig<CreateActionResponse, Protos.Actions.CreateActionResponse>();
 
         typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, UpdateActionRequest>();
@@ -34,6 +34,12 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.Capacity);
 
         typeAdapterConfig.NewConfig<ActionDto, Protos.Shared.ActionDetail>()
+            .TwoWays();
+
+        typeAdapterConfig.NewConfig<ActionDto.ActionSaleDto, Protos.Shared.ActionSale>()
+            .TwoWays();
+
+        typeAdapterConfig.NewConfig<ActionDto.ActionSaleItemDto, Protos.Shared.ActionSaleItem>()
             .TwoWays();
         
         typeAdapterConfig.NewConfig<GetAllActionsResponse, RepeatedField<Protos.Shared.ActionSimple>>()

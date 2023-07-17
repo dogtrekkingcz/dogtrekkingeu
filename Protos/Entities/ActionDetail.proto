@@ -8,6 +8,7 @@ import "google/type/interval.proto";
 
 import "Entities/Address.proto";
 import "Entities/RaceDetail.proto";
+import "Entities/ActionSale.proto";
 
 message ActionDetail {
   enum ActionDetailFlags {
@@ -31,4 +32,6 @@ message ActionDetail {
   repeated shared.RaceDetail Races = 7;
   
   repeated ActionDetailFlags Flags = 8;
+
+  shared.ActionSale Sale = 9;
 }

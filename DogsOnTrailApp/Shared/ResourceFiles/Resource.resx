@@ -336,4 +336,10 @@
     <data name="Action.CreateEntry.Person.Birthday" xml:space="preserve">
         <value>Birthday</value>
     </data>
+    <data name="Action.Manage.DefineAccompanyingSale" xml:space="preserve">
+        <value>Accompanying sale</value>
+    </data>
+    <data name="Actions.Races.Limits.WithDogs" xml:space="preserve">
+        <value>With dogs</value>
+    </data>
 </root>

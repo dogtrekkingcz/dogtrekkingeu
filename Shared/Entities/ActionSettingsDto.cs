@@ -35,5 +35,7 @@ public record ActionSettingsDto
         public int MinimalAgeOfTheDogInDayes = 0;
 
         public int MinimalAgeOfRacerInDayes = 0;
+
+        public bool WithDogs = true;
     }
 }

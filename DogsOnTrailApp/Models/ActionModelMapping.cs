@@ -16,6 +16,12 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, ActionModel>()
             .TwoWays();
 
+        typeAdapterConfig.NewConfig<Protos.Shared.ActionSale, ActionModel.ActionSaleDto>()
+            .TwoWays();
+
+        typeAdapterConfig.NewConfig<Protos.Shared.ActionSaleItem, ActionModel.ActionSaleItemDto>()
+            .TwoWays();
+
         typeAdapterConfig.NewConfig<Protos.Shared.ActionSimple, ActionModel>()
             .TwoWays();
         

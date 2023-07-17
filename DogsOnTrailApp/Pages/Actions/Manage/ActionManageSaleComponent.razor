@@ -1,0 +1,118 @@
+﻿@using Microsoft.AspNetCore.Components
+@using DogsOnTrailApp.Models
+@using MongoDB.Driver.Core.Operations
+@using SharedCode.Entities
+@using System.Collections.ObjectModel
+
+@inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
+
+<h3>@localizer["Action.Manage.DefineAccompanyingSale"]</h3>
+
+<section>
+    <table>
+        <thead>
+            <th>@localizer["Actions.Sale.Name"]</th>
+            <th>@localizer["Actions.Sale.Description"]</th>
+            <th>@localizer["Actions.Sale.Price"]</th>
+            <th>@localizer["Actions.Sale.Currency"]</th>
+            <th>@localizer["Actions.Sale.Variants"]</th>
+            <th>@localizer["Actions.Sale.Sizes"]</th>
+            <th>@localizer["Actions.Sale.Colors"]</th>
+            <th>@localizer["Actions"]</th>
+        </thead>
+        <tbody>
+
+        @foreach (var saleItem in Model.Sale.Items)
+        {
+            <tr>
+                <td>@saleItem.Name</td>
+                <td>@saleItem.Description</td>
+                <td>@saleItem.Price</td>
+                <td>@saleItem.Currency</td>
+                <td>
+                    <ul>
+                        @foreach (var variant in saleItem.Variants)
+                        {
+                            <li>@variant</li>
+                        }
+                        
+                        <li>
+                            <input type="text" @bind="TmpVariant" @onblur="(args) => AddedVariant(saleItem)" />
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var size in saleItem.Sizes)
+                        {
+                            <li>@size</li>
+                        }
+                        
+                        <li>
+                            <input type="text" @bind="TmpSize" @onblur="(args) => AddedSize(saleItem)" />
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var color in saleItem.Colors)
+                        {
+                            <li>@color</li>
+                        }
+                        
+                        <li>
+                            <input type="text" @bind="TmpColor" @onblur="(args) => AddedColor(saleItem)" />
+                        </li>
+                    </ul>
+                </td>
+                <td></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <hr />
+
+    
+</section>
+
+
+@code {
+    [Parameter]
+    public ActionModel Model { get; set; }
+    
+    private string TmpColor { get; set; }
+    private string TmpSize { get; set; }
+    private string TmpVariant { get; set; }
+
+    private void AddedVariant(ActionDto.ActionSaleItemDto saleItem)
+    {
+        if (string.IsNullOrEmpty(TmpVariant) == false)
+            saleItem.Variants.Add(TmpVariant);
+
+        TmpVariant = "";
+        
+        StateHasChanged();
+    }
+    
+    private void AddedColor(ActionDto.ActionSaleItemDto saleItem)
+    {
+        if (string.IsNullOrEmpty(TmpColor) == false)
+            saleItem.Colors.Add(TmpColor);
+
+        TmpColor = "";
+        
+        StateHasChanged();
+    }
+
+    private void AddedSize(ActionDto.ActionSaleItemDto saleItem)
+    {
+        if (string.IsNullOrEmpty(TmpSize) == false)
+            saleItem.Sizes.Add(TmpSize);
+
+        TmpSize = "";
+        
+        StateHasChanged();
+    }
+}

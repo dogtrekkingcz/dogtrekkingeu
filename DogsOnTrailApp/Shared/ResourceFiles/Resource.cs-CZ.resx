@@ -336,4 +336,10 @@
     <data name="Action.CreateEntry.Person.Birthday" xml:space="preserve">
         <value>Datum narození</value>
     </data>
+    <data name="Action.Manage.DefineAccompanyingSale" xml:space="preserve">
+        <value>Doprovodný prodej</value>
+    </data>
+    <data name="Actions.Races.Limits.WithDogs" xml:space="preserve">
+        <value>Se psy</value>
+    </data>
 </root>

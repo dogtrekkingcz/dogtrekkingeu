@@ -17,8 +17,8 @@
 
 <CascadingValue Value="this">
     <EditForm Model="Entry" OnValidSubmit="SendAsync">
-        @* <DataAnnotationsValidator /> *@
-        @* <ValidationSummary /> *@
+        <DataAnnotationsValidator />
+        <ValidationSummary />
                 
         <CreateEntryPersonComponent Model="Entry"></CreateEntryPersonComponent>
 
@@ -33,11 +33,14 @@
     
         @if (Entry.RaceId != null && Entry.RaceId != Guid.Empty)
         {
-            <CreateEntryDogsComponent
-                RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits"
-                Race="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)"
-                Dogs="@Entry.Dogs">
-            </CreateEntryDogsComponent>
+            if (ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits.WithDogs == true)
+            {
+                <CreateEntryDogsComponent
+                    RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits"
+                    Race="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)"
+                    Dogs="@Entry.Dogs">
+                </CreateEntryDogsComponent>
+            }
         }
 
         @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@

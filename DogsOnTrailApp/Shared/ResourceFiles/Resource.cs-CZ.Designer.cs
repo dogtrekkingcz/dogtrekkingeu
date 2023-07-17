@@ -312,6 +312,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Doprovodný prodej.
+        /// </summary>
+        internal static string Action_Manage_DefineAccompanyingSale {
+            get {
+                return ResourceManager.GetString("Action.Manage.DefineAccompanyingSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obecné.
         /// </summary>
         internal static string Action_Manage_General {
@@ -479,6 +488,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Actions_Races_Limits_MinimalAgeOfRacerForRace {
             get {
                 return ResourceManager.GetString("Actions.Races.Limits.MinimalAgeOfRacerForRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Se psy.
+        /// </summary>
+        internal static string Actions_Races_Limits_WithDogs {
+            get {
+                return ResourceManager.GetString("Actions.Races.Limits.WithDogs", resourceCulture);
             }
         }
         

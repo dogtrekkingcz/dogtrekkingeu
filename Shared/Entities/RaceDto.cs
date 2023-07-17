@@ -43,6 +43,8 @@
             public int MinimalAgeOfRacerInDayes { get; set; } = 0;
             
             public int MinimalAgeOfTheDogInDayes { get; set; } = 0;
+
+            public bool WithDogs { get; set; } = true;
         }
     }
 }

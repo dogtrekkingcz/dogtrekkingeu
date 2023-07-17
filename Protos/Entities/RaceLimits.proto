@@ -7,4 +7,5 @@ package shared;
 message RaceLimits {
   int32 MinimalAgeOfTheDogInDayes = 1;
   int32 MinimalAgeOfRacerInDayes = 2;
+  bool WithDogs = 3;
 }
