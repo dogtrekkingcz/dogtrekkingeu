@@ -342,4 +342,7 @@
     <data name="Actions.Races.Limits.WithDogs" xml:space="preserve">
         <value>Se psy</value>
     </data>
+    <data name="Actions.Sales.AddNewItem" xml:space="preserve">
+        <value>Přidat novou položku</value>
+    </data>
 </root>

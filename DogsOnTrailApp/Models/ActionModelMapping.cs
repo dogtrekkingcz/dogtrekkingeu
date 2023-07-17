@@ -23,6 +23,7 @@ namespace DogsOnTrailApp.Models;
             .TwoWays();
 
         typeAdapterConfig.NewConfig<Protos.Shared.ActionSimple, ActionModel>()
+            .Ignore(d => d.Sale)
             .TwoWays();
         
         return typeAdapterConfig;

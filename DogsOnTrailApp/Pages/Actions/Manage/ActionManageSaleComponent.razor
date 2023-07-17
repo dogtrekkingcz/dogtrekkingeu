@@ -74,6 +74,9 @@
     
     <hr />
 
+    <EditForm Model="Model" OnValidSubmit="AddNewSaleItem">
+        <button type="submit" class="btn btn-primary" value="@localizer["Actions.Sales.AddNewItem"]" />
+    </EditForm>
     
 </section>
 
@@ -86,6 +89,16 @@
     private string TmpSize { get; set; }
     private string TmpVariant { get; set; }
 
+    private void AddNewSaleItem()
+    {
+        Model.Sale.Items.Add(new ActionDto.ActionSaleItemDto
+        {
+            Id = Guid.NewGuid().ToString()
+        });
+        
+        StateHasChanged();
+    }
+    
     private void AddedVariant(ActionDto.ActionSaleItemDto saleItem)
     {
         if (string.IsNullOrEmpty(TmpVariant) == false)

@@ -15,6 +15,12 @@ namespace SharedCode.Mapping
 
             typeAdapterConfig.NewConfig<ActionDto, ActionDto>()
                 .TwoWays();
+
+            typeAdapterConfig.NewConfig<ActionDto.ActionSaleDto, ActionDto.ActionSaleDto>()
+                .TwoWays();
+
+            typeAdapterConfig.NewConfig<ActionDto.ActionSaleItemDto, ActionDto.ActionSaleItemDto>()
+                .TwoWays();
             
             return typeAdapterConfig;
         }

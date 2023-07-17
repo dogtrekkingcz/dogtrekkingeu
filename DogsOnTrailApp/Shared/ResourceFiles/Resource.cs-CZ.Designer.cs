@@ -501,6 +501,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Přidat novou položku.
+        /// </summary>
+        internal static string Actions_Sales_AddNewItem {
+            get {
+                return ResourceManager.GetString("Actions.Sales.AddNewItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kdy a kde.
         /// </summary>
         internal static string Actions_Term_AddressOfAction {
