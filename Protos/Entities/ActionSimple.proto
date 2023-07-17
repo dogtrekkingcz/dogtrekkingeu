@@ -23,10 +23,11 @@ message ActionSimple {
   string Name = 2;
   string Description = 3;
   google.type.Interval Term = 4;
+  string ContactMail = 5;
 
-  shared.Address Address = 5;
+  shared.Address Address = 6;
 
-  repeated RaceSimple Races = 6;
+  repeated RaceSimple Races = 7;
   
-  repeated ActionSimpleFlags Flags = 7;
+  repeated ActionSimpleFlags Flags = 8;
 }

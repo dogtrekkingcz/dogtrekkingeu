@@ -23,6 +23,7 @@ internal static class EntriesServiceMapping
             .Ignore(d => d.Action)
             .Ignore(d => d.Category)
             .Ignore(d => d.Race)
+            .Ignore(d => d.Payments)
             .Map(d => d.Racer, s => new NewActionRegistrationEmailRequest.RacerDto
             {
                 Name = s.Name,

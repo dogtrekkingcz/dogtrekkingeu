@@ -1,14 +1,27 @@
-﻿using Mails.Entities;
-using Mapster;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Mapster;
 
-namespace Mails.Builders.Emails.Admin;
+namespace Mails.Entities;
 
 public static class NewActionRegistrationReceivedEmailMapping
 {
-    public static TypeAdapterConfig AddNewAtionRegistrationEmailMapping(this TypeAdapterConfig typeAdapterConfig)
+    private static Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>
+        CreateCopyOfPayments(
+            Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto> src)
+    {
+        Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto> ret =
+            new Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>();
+
+        foreach (var item in src)
+        {
+            ret.Add(item.Key, item.Value);
+        }
+        
+        return ret;
+    }
+    public static TypeAdapterConfig AddNewActionRegistrationEmailMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<NewActionRegistrationEmailRequest, NewActionRegistrationEmailRequest>()
+            .Map(d => d.Payments, s => CreateCopyOfPayments(s.Payments))
             .IgnoreNullValues(true)
             .TwoWays();
 
@@ -49,6 +62,17 @@ public static class NewActionRegistrationReceivedEmailMapping
 
         typeAdapterConfig
             .NewConfig<NewActionRegistrationEmailRequest.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+
+        typeAdapterConfig
+                .NewConfig<Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>, Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>>()
+                .MapWith(s => CreateCopyOfPayments(s));
+
+        typeAdapterConfig
+            .NewConfig<
+                KeyValuePair<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>,
+                KeyValuePair<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>>()
             .IgnoreNullValues(true)
             .TwoWays();
         
