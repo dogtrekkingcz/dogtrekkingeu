@@ -447,6 +447,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kategorie.
+        /// </summary>
+        internal static string Actions_Races_Categories {
+            get {
+                return ResourceManager.GetString("Actions.Races.Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vyplnit dle oficiální DogMarathon šablony.
         /// </summary>
         internal static string Actions_Races_FillOfficialDogMarathonRace {
@@ -470,6 +479,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Actions_Races_FillShortRace {
             get {
                 return ResourceManager.GetString("Actions.Races.FillShortRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Omezení závodu.
+        /// </summary>
+        internal static string Actions_Races_Limits {
+            get {
+                return ResourceManager.GetString("Actions.Races.Limits", resourceCulture);
             }
         }
         
@@ -501,11 +519,101 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Název.
+        /// </summary>
+        internal static string Actions_Races_Name {
+            get {
+                return ResourceManager.GetString("Actions.Races.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Definice plateb.
+        /// </summary>
+        internal static string Actions_Races_Payments {
+            get {
+                return ResourceManager.GetString("Actions.Races.Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Barvy.
+        /// </summary>
+        internal static string Actions_Sale_Colors {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Colors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Měna.
+        /// </summary>
+        internal static string Actions_Sale_Currency {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Popisek.
+        /// </summary>
+        internal static string Actions_Sale_Description {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Název položky.
+        /// </summary>
+        internal static string Actions_Sale_Name {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cena.
+        /// </summary>
+        internal static string Actions_Sale_Price {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Velikosti.
+        /// </summary>
+        internal static string Actions_Sale_Sizes {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Sizes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Varianty.
+        /// </summary>
+        internal static string Actions_Sale_Variants {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Variants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Přidat novou položku.
         /// </summary>
         internal static string Actions_Sales_AddNewItem {
             get {
                 return ResourceManager.GetString("Actions.Sales.AddNewItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Přidat položku typu tričko.
+        /// </summary>
+        internal static string Actions_Sales_AddNewTShirtItem {
+            get {
+                return ResourceManager.GetString("Actions.Sales.AddNewTShirtItem", resourceCulture);
             }
         }
         

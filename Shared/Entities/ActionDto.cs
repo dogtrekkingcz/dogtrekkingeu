@@ -14,13 +14,13 @@
 
         public AddressDto Address { get; set; } = new();
 
-        public IList<RaceDto> Races { get; set; } = new List<RaceDto>();
+        public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 
         public ActionSaleDto Sale { get; set; } = new();
 
         public sealed record ActionSaleDto
         {
-            public IList<ActionSaleItemDto> Items { get; set; } = new List<ActionSaleItemDto>();
+            public List<ActionSaleItemDto> Items { get; set; } = new List<ActionSaleItemDto>();
         }
 
         public sealed record ActionSaleItemDto
@@ -35,11 +35,11 @@
 
             public string Currency { get; set; } = "Kč";
 
-            public IList<string> Variants { get; set; } = new List<string>();
+            public List<string> Variants { get; set; } = new List<string>();
 
-            public IList<string> Sizes { get; set; } = new List<string> { "XS", "S", "M", "L", "XL", "XXL", "XXXL" };
+            public List<string> Sizes { get; set; } = new List<string>();
 
-            public IList<string> Colors { get; set; } = new List<string> { "Color.NotSpecified" };
+            public List<string> Colors { get; set; } = new List<string>();
         }
     }
 }

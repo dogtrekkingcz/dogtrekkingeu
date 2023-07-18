@@ -447,6 +447,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        internal static string Actions_Races_Categories {
+            get {
+                return ResourceManager.GetString("Actions.Races.Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fill using official DogMarathon template.
         /// </summary>
         internal static string Actions_Races_FillOfficialDogMarathonRace {
@@ -470,6 +479,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Actions_Races_FillShortRace {
             get {
                 return ResourceManager.GetString("Actions.Races.FillShortRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limits of race.
+        /// </summary>
+        internal static string Actions_Races_Limits {
+            get {
+                return ResourceManager.GetString("Actions.Races.Limits", resourceCulture);
             }
         }
         
@@ -501,11 +519,101 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Actions_Races_Name {
+            get {
+                return ResourceManager.GetString("Actions.Races.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment definitions.
+        /// </summary>
+        internal static string Actions_Races_Payments {
+            get {
+                return ResourceManager.GetString("Actions.Races.Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colors.
+        /// </summary>
+        internal static string Actions_Sale_Colors {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Colors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        internal static string Actions_Sale_Currency {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string Actions_Sale_Description {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name of item.
+        /// </summary>
+        internal static string Actions_Sale_Name {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        internal static string Actions_Sale_Price {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sizes.
+        /// </summary>
+        internal static string Actions_Sale_Sizes {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Sizes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variants.
+        /// </summary>
+        internal static string Actions_Sale_Variants {
+            get {
+                return ResourceManager.GetString("Actions.Sale.Variants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new item.
         /// </summary>
         internal static string Actions_Sales_AddNewItem {
             get {
                 return ResourceManager.GetString("Actions.Sales.AddNewItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new t-shirt item.
+        /// </summary>
+        internal static string Actions_Sales_AddNewTShirtItem {
+            get {
+                return ResourceManager.GetString("Actions.Sales.AddNewTShirtItem", resourceCulture);
             }
         }
         

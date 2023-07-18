@@ -345,4 +345,40 @@
     <data name="Actions.Sales.AddNewItem" xml:space="preserve">
         <value>Add new item</value>
     </data>
+    <data name="Actions.Races.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Actions.Races.Categories" xml:space="preserve">
+        <value>Categories</value>
+    </data>
+    <data name="Actions.Races.Payments" xml:space="preserve">
+        <value>Payment definitions</value>
+    </data>
+    <data name="Actions.Races.Limits" xml:space="preserve">
+        <value>Limits of race</value>
+    </data>
+    <data name="Actions.Sale.Name" xml:space="preserve">
+        <value>Name of item</value>
+    </data>
+    <data name="Actions.Sale.Description" xml:space="preserve">
+        <value>Description</value>
+    </data>
+    <data name="Actions.Sale.Price" xml:space="preserve">
+        <value>Price</value>
+    </data>
+    <data name="Actions.Sale.Currency" xml:space="preserve">
+        <value>Currency</value>
+    </data>
+    <data name="Actions.Sale.Variants" xml:space="preserve">
+        <value>Variants</value>
+    </data>
+    <data name="Actions.Sale.Sizes" xml:space="preserve">
+        <value>Sizes</value>
+    </data>
+    <data name="Actions.Sale.Colors" xml:space="preserve">
+        <value>Colors</value>
+    </data>
+    <data name="Actions.Sales.AddNewTShirtItem" xml:space="preserve">
+        <value>Add new t-shirt item</value>
+    </data>
 </root>

@@ -3,6 +3,7 @@
 @using MongoDB.Driver.Core.Operations
 @using SharedCode.Entities
 @using System.Collections.ObjectModel
+@using Protos.Shared
 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
@@ -26,15 +27,40 @@
         @foreach (var saleItem in Model.Sale.Items)
         {
             <tr>
-                <td>@saleItem.Name</td>
-                <td>@saleItem.Description</td>
+                <td>
+                    @if (saleItem == EditableItem)
+                    {
+                        <input type="text" @bind="@saleItem.Name" @onblur="(args) => StateHasChanged()" />
+                    }
+                    else
+                    {
+                        @saleItem.Name
+                    }
+                </td>
+                <td>
+                    @if (saleItem == EditableItem)
+                    {
+                        <input type="text" @bind="@saleItem.Description" @onblur="(args) => StateHasChanged()"/>
+                    }
+                    else
+                    {
+                        @saleItem.Description
+                    }
+                </td>
                 <td>@saleItem.Price</td>
                 <td>@saleItem.Currency</td>
                 <td>
                     <ul>
                         @foreach (var variant in saleItem.Variants)
                         {
-                            <li>@variant</li>
+                            if (saleItem == EditableItem)
+                            {
+                                <li><input type="text" @bind="@saleItem.Variants[saleItem.Variants.FindIndex(v => v == variant)]" @onblur="(args) => StateHasChanged()" /></li>
+                            }
+                            else
+                            {
+                                <li>@variant</li>
+                            }
                         }
                         
                         <li>
@@ -46,7 +72,14 @@
                     <ul>
                         @foreach (var size in saleItem.Sizes)
                         {
-                            <li>@size</li>
+                            if (saleItem == EditableItem)
+                            {
+                                <li><input type="text" @bind="@saleItem.Sizes[saleItem.Sizes.FindIndex(s => s == size)]" @onblur="(args) => StateHasChanged()" /></li>
+                            }
+                            else
+                            {
+                                <li>@size</li>
+                            }
                         }
                         
                         <li>
@@ -58,7 +91,16 @@
                     <ul>
                         @foreach (var color in saleItem.Colors)
                         {
-                            <li>@color</li>
+                            if (saleItem == EditableItem)
+                            {
+                                <li>
+                                    <input type="text" @bind="saleItem.Colors[saleItem.Colors.FindIndex(c => c == color)]" @onblur="(args) => StateHasChanged()"/>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>@color</li>
+                            }
                         }
                         
                         <li>
@@ -66,7 +108,9 @@
                         </li>
                     </ul>
                 </td>
-                <td></td>
+                <td>
+                    <button type="button" class="btn btn-secondary" @onclick="(args) => MakeEditable(saleItem)">Edit</button>
+                </td>
             </tr>
         }
         </tbody>
@@ -74,9 +118,8 @@
     
     <hr />
 
-    <EditForm Model="Model" OnValidSubmit="AddNewSaleItem">
-        <button type="submit" class="btn btn-primary" value="@localizer["Actions.Sales.AddNewItem"]" />
-    </EditForm>
+    <button type="button" class="btn btn-primary" @onclick="AddNewCommonItem">@localizer["Actions.Sales.AddNewItem"]</button>
+    <button type="button" class="btn btn-primary" @onclick="AddNewTShirtItem">@localizer["Actions.Sales.AddNewTShirtItem"]</button>
     
 </section>
 
@@ -89,11 +132,30 @@
     private string TmpSize { get; set; }
     private string TmpVariant { get; set; }
 
-    private void AddNewSaleItem()
+    private ActionDto.ActionSaleItemDto EditableItem { get; set; } = null;
+
+    private void AddNewCommonItem()
     {
         Model.Sale.Items.Add(new ActionDto.ActionSaleItemDto
         {
             Id = Guid.NewGuid().ToString()
+        });
+        
+        StateHasChanged();
+    }
+
+    private void AddNewTShirtItem()
+    {
+        Model.Sale.Items.Add(new ActionDto.ActionSaleItemDto
+        {
+            Id = Guid.NewGuid().ToString(),
+            Sizes = new List<string> { "XS", "S", "M", "L", "XL", "XXL", "XXXL" },
+            Variants = new List<string> { "Unisex", "M", "F" },
+            Colors = new List<string> { "white", "blue", "red" },
+            Name = "T-Shirt",
+            Price = 100,
+            Currency = "Kč",
+            Description = "T-Shirt from cotton with race-motif"
         });
         
         StateHasChanged();
@@ -125,6 +187,13 @@
             saleItem.Sizes.Add(TmpSize);
 
         TmpSize = "";
+        
+        StateHasChanged();
+    }
+
+    private void MakeEditable(ActionDto.ActionSaleItemDto saleItem)
+    {
+        EditableItem = saleItem;
         
         StateHasChanged();
     }

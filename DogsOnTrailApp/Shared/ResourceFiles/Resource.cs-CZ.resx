@@ -345,4 +345,40 @@
     <data name="Actions.Sales.AddNewItem" xml:space="preserve">
         <value>Přidat novou položku</value>
     </data>
+    <data name="Actions.Races.Name" xml:space="preserve">
+        <value>Název</value>
+    </data>
+    <data name="Actions.Races.Categories" xml:space="preserve">
+        <value>Kategorie</value>
+    </data>
+    <data name="Actions.Races.Payments" xml:space="preserve">
+        <value>Definice plateb</value>
+    </data>
+    <data name="Actions.Races.Limits" xml:space="preserve">
+        <value>Omezení závodu</value>
+    </data>
+    <data name="Actions.Sale.Name" xml:space="preserve">
+        <value>Název položky</value>
+    </data>
+    <data name="Actions.Sale.Description" xml:space="preserve">
+        <value>Popisek</value>
+    </data>
+    <data name="Actions.Sale.Price" xml:space="preserve">
+        <value>Cena</value>
+    </data>
+    <data name="Actions.Sale.Currency" xml:space="preserve">
+        <value>Měna</value>
+    </data>
+    <data name="Actions.Sale.Variants" xml:space="preserve">
+        <value>Varianty</value>
+    </data>
+    <data name="Actions.Sale.Sizes" xml:space="preserve">
+        <value>Velikosti</value>
+    </data>
+    <data name="Actions.Sale.Colors" xml:space="preserve">
+        <value>Barvy</value>
+    </data>
+    <data name="Actions.Sales.AddNewTShirtItem" xml:space="preserve">
+        <value>Přidat položku typu tričko</value>
+    </data>
 </root>
