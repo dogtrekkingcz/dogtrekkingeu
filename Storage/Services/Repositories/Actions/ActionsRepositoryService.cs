@@ -121,7 +121,7 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<GetSelectedActionsInternalStorageResponse> GetSelectedActionsAsync(GetSelectedActionsInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var getAllActions = await _actionsStorageService.GetByFilterAsync(request.Ids.Select(id => ( id: "id", key: id.ToString() )).ToList(), cancellationToken);
+            var getAllActions = await _actionsStorageService.GetByFilterAsync(request.Ids.Select(id => ( id: "_id", key: id.ToString() )).ToList(), cancellationToken);
 
             var actions = new List<ActionDto>();
             foreach (var action in getAllActions)

@@ -381,4 +381,7 @@
     <data name="Actions.Sales.AddNewTShirtItem" xml:space="preserve">
         <value>Přidat položku typu tričko</value>
     </data>
+    <data name="General.New" xml:space="preserve">
+        <value>Nový</value>
+    </data>
 </root>

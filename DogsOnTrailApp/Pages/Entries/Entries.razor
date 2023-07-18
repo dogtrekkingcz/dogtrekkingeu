@@ -2,6 +2,8 @@
 @using DogsOnTrailApp.Models
 @using Google.Protobuf.Collections
 @using MapsterMapper
+@using Protos.Shared
+@using DogsOnTrailApp.Extensions
 @inject Protos.Entries.Entries.EntriesClient Client
 @inject Protos.Actions.Actions.ActionsClient ActionsClient
 @inject AuthenticationStateProvider AuthStateProvider 
@@ -33,10 +35,10 @@ else
         {
             <tr>
                 <td>
-                    <div class="col-12">@entry.Surname, @entry.Name</div>
+                    @entry.Surname, @entry.Name
                 </td>
                 <td>
-                    <div class="col-12">@entry.ActionId - @entry.RaceId - @entry.CategoryId</div>
+                    @ResolveActionRaceCategory(entry)
                 </td>
                 <td>
                     <ul>
@@ -47,7 +49,9 @@ else
                     </ul>
                 </td>
                 <td>
-                    <ActionDropDown Model="@entry"></ActionDropDown>
+                    <ActionDropDown Model="@entry">
+                        
+                    </ActionDropDown>
                 </td>
             </tr>
         }
@@ -57,6 +61,8 @@ else
 
 @code {
     private List<EntryModel> _entriesList = null;
+
+    private List<ActionDetail> _actionsList = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,9 +75,39 @@ else
 
         _entriesList = mapper.Map<List<EntryModel>>(response.Entries);
 
+        StateHasChanged();
+
+        var ids = _entriesList.Select(entry => entry.ActionId.ToString()).ToList();
+        
         var selectedActions = await ActionsClient.getSelectedActionsAsync(new Protos.Actions.GetSelectedActionsRequest
         {
-            Ids = { _entriesList.Select(entry => entry.ActionId.ToString()).ToList() }
+            Ids = { ids }
         });
+
+        _actionsList = selectedActions.Actions.ToList();
+        
+        StateHasChanged();
+    }
+
+    private string ResolveActionRaceCategory(EntryModel entry)
+    {
+        var ret = "";
+        
+        if (_actionsList == null)
+        {
+            ret = $"{entry.ActionId} - {entry.RaceId} - {entry.CategoryId}";
+        }
+        else
+        {
+            var action = _actionsList.First(a => a.Id.ToGuid() == entry.ActionId);
+
+            var race = action.Races.First(r => r.Id.ToGuid() == entry.RaceId);
+
+            var category = race.Categories.First(c => c.Id.ToGuid() == entry.CategoryId);
+
+            ret = $"{action?.Name ?? entry.ActionId.ToString()} - {race?.Name ?? entry.RaceId.ToString()} - {category?.Name ?? entry.CategoryId.ToString()}";
+        }
+
+        return ret;
     }
 }

@@ -26,6 +26,11 @@ internal static class EntryModelMapping
             .IgnoreNullValues(true)
             .Map(d => d.Date, s => s.Date != null ? s.Date.Value.ToGoogleDateTime() : null)
             .Map(d => d.ValidUntil, s => s.ValidUntil != null ? s.ValidUntil.Value.ToGoogleDateTime() : null);
+
+        typeAdapterConfig.NewConfig<Protos.Shared.Vaccination, EntryModel.VaccinationDto>()
+            .IgnoreNullValues(true)
+            .Map(d => d.Date, s => s.Date.ToDateTimeOffset())
+            .Map(d => d.ValidUntil, s => s.ValidUntil.ToDateTimeOffset());
             
         typeAdapterConfig.NewConfig<EntryModel, Protos.Entries.CreateEntryRequest>()
             .Ignore(d => d.Entry.Id)

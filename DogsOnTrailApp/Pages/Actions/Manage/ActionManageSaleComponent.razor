@@ -8,8 +8,6 @@
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
 
-<h3>@localizer["Action.Manage.DefineAccompanyingSale"]</h3>
-
 <section>
     <table>
         <thead>
@@ -30,7 +28,7 @@
                 <td>
                     @if (saleItem == EditableItem)
                     {
-                        <input type="text" @bind="@saleItem.Name" @onblur="(args) => StateHasChanged()" />
+                        <input type="text" @bind="@saleItem.Name" @onblur="(args) => StateHasChanged()" required />
                     }
                     else
                     {
@@ -47,15 +45,33 @@
                         @saleItem.Description
                     }
                 </td>
-                <td>@saleItem.Price</td>
-                <td>@saleItem.Currency</td>
+                <td>
+                    @if (saleItem == EditableItem)
+                    {
+                        <input type="number" @bind="@saleItem.Price" @onblur="(args) => StateHasChanged()" required />
+                    }
+                    else
+                    {
+                        @saleItem.Price
+                    }
+                </td>
+                <td>
+                    @if (saleItem == EditableItem)
+                    {
+                        <input type="text" @bind="@saleItem.Currency" @onblur="(args) => StateHasChanged()" required />
+                    }
+                    else
+                    {
+                        @saleItem.Currency
+                    }
+                </td>
                 <td>
                     <ul>
                         @foreach (var variant in saleItem.Variants)
                         {
                             if (saleItem == EditableItem)
                             {
-                                <li><input type="text" @bind="@saleItem.Variants[saleItem.Variants.FindIndex(v => v == variant)]" @onblur="(args) => StateHasChanged()" /></li>
+                                <li><input type="text" @bind="@saleItem.Variants[saleItem.Variants.FindIndex(v => v == variant)]" @onblur="(args) => StateHasChanged()" required /></li>
                             }
                             else
                             {
@@ -63,9 +79,12 @@
                             }
                         }
                         
-                        <li>
-                            <input type="text" @bind="TmpVariant" @onblur="(args) => AddedVariant(saleItem)" />
-                        </li>
+                        @if (saleItem == EditableItem)
+                        {
+                            <li>
+                                <input type="text" @bind="TmpVariant" @onblur="(args) => AddedVariant(saleItem)" placeholder="@localizer["General.New"]" />
+                            </li>
+                        }
                     </ul>
                 </td>
                 <td>
@@ -82,9 +101,12 @@
                             }
                         }
                         
-                        <li>
-                            <input type="text" @bind="TmpSize" @onblur="(args) => AddedSize(saleItem)" />
-                        </li>
+                        @if (saleItem == EditableItem)
+                        {
+                            <li>
+                                <input type="text" @bind="TmpSize" @onblur="(args) => AddedSize(saleItem)" placeholder="@localizer["General.New"]" />
+                            </li>
+                        }
                     </ul>
                 </td>
                 <td>
@@ -103,9 +125,12 @@
                             }
                         }
                         
-                        <li>
-                            <input type="text" @bind="TmpColor" @onblur="(args) => AddedColor(saleItem)" />
-                        </li>
+                        @if (saleItem == EditableItem)
+                        {
+                            <li>
+                                <input type="text" @bind="TmpColor" @onblur="(args) => AddedColor(saleItem)" placeholder="@localizer["General.New"]" />
+                            </li>
+                        }
                     </ul>
                 </td>
                 <td>

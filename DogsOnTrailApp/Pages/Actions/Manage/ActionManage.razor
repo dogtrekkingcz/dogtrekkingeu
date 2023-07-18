@@ -131,7 +131,7 @@ else
         NavManager.NavigateTo("/actions");
     }
 
-    private async Task Cancel() => await BlazoredModal.CancelAsync();
+    private async Task Cancel() => NavManager.NavigateTo("/actions");
     
     private async Task CreateNewAction()
     {

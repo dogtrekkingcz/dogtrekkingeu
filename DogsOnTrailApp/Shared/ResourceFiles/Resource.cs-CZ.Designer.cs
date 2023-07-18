@@ -807,6 +807,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nový.
+        /// </summary>
+        internal static string General_New {
+            get {
+                return ResourceManager.GetString("General.New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to X.
         /// </summary>
         internal static string InputTime_ClearTime {
