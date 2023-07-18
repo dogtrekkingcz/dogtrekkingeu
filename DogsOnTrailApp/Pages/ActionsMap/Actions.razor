@@ -1,0 +1,33 @@
+﻿@page "/actions_map"
+@using DogsOnTrailApp.Models
+@using MapsterMapper
+@inject Protos.Actions.Actions.ActionsClient Client
+@inject AuthenticationStateProvider AuthStateProvider 
+@inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+@inject NavigationManager NavManager
+
+<h1>@localizer["Actions"]</h1>
+
+@if (_actionList  == null)
+{
+    <p>
+        <em>@localizer["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <img src="images/maps/cr.jpg" />
+}
+
+@code {
+    private List<ActionModel> _actionList = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Protos.Actions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
+
+        _actionList = mapper.Map<List<ActionModel>>(response.Actions);
+    }
+}
