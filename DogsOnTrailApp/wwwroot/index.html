@@ -46,7 +46,7 @@
     </script>
     
     <script>
-        window.drawCircleAtPosition = async function (id, imgSrc, longitude, latitude, mapBottom, mapRight, mapLeft) 
+        window.drawCircleAtPosition = async function (id, imgSrc, positions, mapBottom, mapRight, mapLeft) 
         {
             var canvas = document.getElementById(id);
             var ctx = canvas.getContext('2d');
@@ -67,23 +67,24 @@
 
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img.width * ratio, img.height * ratio);
 
-
-            var mapLatBottomRad = mapBottom * Math.PI / 180;
-            var latitudeRad = latitude * Math.PI / 180;
-            var mapLngDelta = (mapRight - mapLeft);
-            var mapWidth = img.width * ratio;
-            var mapHeight = img.height * ratio;
-
-            var worldMapWidth = ((mapWidth / mapLngDelta) * 360) / (2 * Math.PI);
-            var mapOffsetY = (worldMapWidth / 2 * Math.log((1 + Math.sin(mapLatBottomRad)) / (1 - Math.sin(mapLatBottomRad))));
-
-            var x = (longitude - mapLeft) * (mapWidth / mapLngDelta);
-            var y = mapHeight - ((worldMapWidth / 2 * Math.log((1 + Math.sin(latitudeRad)) / (1 - Math.sin(latitudeRad)))) - mapOffsetY);
-
-            ctx.fillStyle = "#00FF00";
-            ctx.beginPath();
-            ctx.arc(x, y, 10, 0, 2 * Math.PI);
-            ctx.fill();
+            positions.forEach(position => {
+                let mapLatBottomRad = mapBottom * Math.PI / 180;
+                let latitudeRad = position.latitude * Math.PI / 180;
+                let mapLngDelta = (mapRight - mapLeft);
+                let mapWidth = img.width * ratio;
+                let mapHeight = img.height * ratio;
+    
+                let worldMapWidth = ((mapWidth / mapLngDelta) * 360) / (2 * Math.PI);
+                let mapOffsetY = (worldMapWidth / 2 * Math.log((1 + Math.sin(mapLatBottomRad)) / (1 - Math.sin(mapLatBottomRad))));
+    
+                let x = (position.longitude - mapLeft) * (mapWidth / mapLngDelta);
+                let y = mapHeight - ((worldMapWidth / 2 * Math.log((1 + Math.sin(latitudeRad)) / (1 - Math.sin(latitudeRad)))) - mapOffsetY);
+    
+                ctx.fillStyle = "#00FF00";
+                ctx.beginPath();
+                ctx.arc(x, y, 10, 0, 2 * Math.PI);
+                ctx.fill();
+            });
         }
     </script>
 </body>

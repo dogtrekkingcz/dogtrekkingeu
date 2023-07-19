@@ -2,6 +2,7 @@
 @using DogsOnTrailApp.Models
 @using MapsterMapper
 @using System.Xml.Schema
+@using SharedCode.Entities
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
@@ -76,6 +77,8 @@
         public double Latitude { get; set; }
         
         public double Longitude { get; set; }
+        
+        public string Text { get; set; }
     }
 
     private enum GpsLocationPosition
@@ -97,15 +100,44 @@
 
     private async Task RedrawPositions()
     {
-        await DrawPosition(new GpsLocation
+        foreach (var action in _actionList)
+        {
+            var position = action.Address?.Position ?? new LatLngDto { GpsLatitude = -1, GpsLongitude = -1 }; 
+            
+            if (position is { GpsLatitude: >= 0.0, GpsLongitude: >= 0.0 })
+            {
+                
+            }
+        }
+
+        List<GpsLocation> locationsToDraw = new List<GpsLocation>();
+        
+        locationsToDraw.Add(new GpsLocation
+        {
+            Latitude = 49.4432275,
+            Longitude = 17.9490989,
+            Text = "Praha"
+        });
+        
+        locationsToDraw.Add(new GpsLocation
         {
             Latitude = 50.0875761,
-            Longitude = 14.4370422
-        }, "test");        
+            Longitude = 14.4370422,
+            Text = "Krplov"
+        });
+
+        await DrawPositions(locationsToDraw);
     } 
 
-    private async Task DrawPosition(GpsLocation location, string text)
+    private async Task DrawPositions(List<GpsLocation> locations)
     {
-        await JsRuntime.InvokeVoidAsync("drawCircleAtPosition", "theMapCanvas", "images/maps/cr.png", location.Longitude, location.Latitude, Bottom, Right, Left);
+        await JsRuntime.InvokeVoidAsync(
+            "drawCircleAtPosition", 
+            "theMapCanvas", 
+            "images/maps/cr.png", 
+            locations, 
+            Bottom, 
+            Right, 
+            Left);
     }
 }
