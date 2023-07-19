@@ -1,33 +1,111 @@
 ﻿@page "/actions_map"
 @using DogsOnTrailApp.Models
 @using MapsterMapper
+@using System.Xml.Schema
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
 @inject NavigationManager NavManager
+@inject IJSRuntime JsRuntime
 
 <h1>@localizer["Actions"]</h1>
 
-@if (_actionList  == null)
-{
-    <p>
-        <em>@localizer["Loading ..."]</em>
-    </p>
-}
-else
-{
-    <img src="images/maps/cr.jpg" />
-}
+<canvas id="theMapCanvas" />
 
 @code {
     private List<ActionModel> _actionList = null;
+        
+    private const double Left = 12.0906633;
+    private const double Right = 18.8591456;
+    private const double Top = 51.0556997;
+    private const double Bottom = 48.5519972;
+    
+    private Dictionary<string, GpsLocations> MapSettings { get; set; } = new Dictionary<string, GpsLocations>
+    {
+        {
+            "images/maps/cr.png", new GpsLocations
+            {
+                Corners = new Dictionary<GpsLocationPosition, GpsLocation>
+                {
+                    {
+                        GpsLocationPosition.TopLeft,
+                        new GpsLocation
+                        {
+                            Latitude = 51.0556997,
+                            Longitude = 12.0906633
+                        }
+                    },
+                    {
+                        GpsLocationPosition.TopRight,
+                        new GpsLocation
+                        {
+                            Latitude = 51.0556997,
+                            Longitude = 18.8591456
+                        }
+                    },
+                    {
+                        GpsLocationPosition.BottomLeft,
+                        new GpsLocation
+                        {
+                            Latitude = 48.5519972,
+                            Longitude = 12.0906633
+                        }
+                    },
+                    {
+                        GpsLocationPosition.BottomRight,
+                        new GpsLocation
+                        {
+                            Latitude = 48.5519972,
+                            Longitude = 18.8591456
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    private record GpsLocations
+    {
+        public Dictionary<GpsLocationPosition, GpsLocation> Corners { get; set; }
+    }
+
+    private record GpsLocation
+    {
+        public double Latitude { get; set; }
+        
+        public double Longitude { get; set; }
+    }
+
+    private enum GpsLocationPosition
+    {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight
+    };
 
     protected override async Task OnInitializedAsync()
     {
         Protos.Actions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
 
         _actionList = mapper.Map<List<ActionModel>>(response.Actions);
+
+        await RedrawPositions();
+    }
+
+    private async Task RedrawPositions()
+    {
+        await DrawPosition(new GpsLocation
+        {
+            Latitude = 50.0875761,
+            Longitude = 14.4370422
+        }, "test");        
+    } 
+
+    private async Task DrawPosition(GpsLocation location, string text)
+    {
+        await JsRuntime.InvokeVoidAsync("drawCircleAtPosition", "theMapCanvas", "images/maps/cr.png", location.Longitude, location.Latitude, Bottom, Right, Left);
     }
 }

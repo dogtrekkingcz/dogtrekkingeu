@@ -36,7 +36,6 @@
     </div>
     <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
-    <script src="_content/Blazored.Modal/blazored.modal.js"></script>
     <script src="_content/BootstrapBlazor/js/bootstrap.blazor.bundle.min.js"></script>
 
     <script>
@@ -44,6 +43,48 @@
             get: () => localStorage['BlazorCulture'],
             set: (value) => localStorage['BlazorCulture'] = value
         };
+    </script>
+    
+    <script>
+        window.drawCircleAtPosition = async function (id, imgSrc, longitude, latitude, mapBottom, mapRight, mapLeft) 
+        {
+            var canvas = document.getElementById(id);
+            var ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            var img = new Image();
+
+            await new Promise(r => {
+                img.onload = r;
+                img.src = imgSrc;
+            });
+
+            var hRatio = canvas.width / img.width    ;
+            var vRatio = canvas.height / img.height  ;
+            var ratio  = Math.min ( hRatio, vRatio );
+
+            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img.width * ratio, img.height * ratio);
+
+
+            var mapLatBottomRad = mapBottom * Math.PI / 180;
+            var latitudeRad = latitude * Math.PI / 180;
+            var mapLngDelta = (mapRight - mapLeft);
+            var mapWidth = img.width * ratio;
+            var mapHeight = img.height * ratio;
+
+            var worldMapWidth = ((mapWidth / mapLngDelta) * 360) / (2 * Math.PI);
+            var mapOffsetY = (worldMapWidth / 2 * Math.log((1 + Math.sin(mapLatBottomRad)) / (1 - Math.sin(mapLatBottomRad))));
+
+            var x = (longitude - mapLeft) * (mapWidth / mapLngDelta);
+            var y = mapHeight - ((worldMapWidth / 2 * Math.log((1 + Math.sin(latitudeRad)) / (1 - Math.sin(latitudeRad)))) - mapOffsetY);
+
+            ctx.fillStyle = "#00FF00";
+            ctx.beginPath();
+            ctx.arc(x, y, 10, 0, 2 * Math.PI);
+            ctx.fill();
+        }
     </script>
 </body>
 

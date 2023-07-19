@@ -906,6 +906,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions Map.
+        /// </summary>
+        internal static string Menu_ActionsMap {
+            get {
+                return ResourceManager.GetString("Menu.ActionsMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dogs list.
         /// </summary>
         internal static string Menu_Dogs {

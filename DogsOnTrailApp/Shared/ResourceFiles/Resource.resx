@@ -384,4 +384,7 @@
     <data name="General.New" xml:space="preserve">
         <value>New</value>
     </data>
+    <data name="Menu.ActionsMap" xml:space="preserve">
+        <value>Actions Map</value>
+    </data>
 </root>
