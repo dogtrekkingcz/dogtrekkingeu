@@ -41,6 +41,7 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.Payed)
             .Ignore(d => d.Payments)
             .Ignore(d => d.State)
+            .Ignore(d => d.RequestedPayments)
             .Map(d => d.FirstName, s => s.Name)
             .Map(d => d.LastName, s => s.Surname);
 

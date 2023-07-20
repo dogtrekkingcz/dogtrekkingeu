@@ -104,7 +104,9 @@ else
         
         @foreach (var race in Action.Races)
         {
-            var startingPrice = race.Payments.First(paymentDef => paymentDef.From >= DateTimeOffset.Now && paymentDef.To < DateTimeOffset.Now).Price;
+            var startingPrice = race.Payments
+                .First(paymentDef => paymentDef.From <= DateTimeOffset.Now && paymentDef.To > DateTimeOffset.Now)?
+                .Price ?? 0.0;
             
             @foreach (var category in race.Categories)
             {
@@ -115,8 +117,6 @@ else
                         Name = "RegistrationFee",
                         Price = startingPrice
                     });
-                    
-                    
                     
                     <tr>
                         <td>
