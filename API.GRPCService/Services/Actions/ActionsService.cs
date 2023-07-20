@@ -1,10 +1,16 @@
 using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
+using DogsOnTrailGRPCService.Extensions;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;
+using Protos.Actions;
 using SharedCode.JwtToken;
 using SharedCode.Testable;
+using CreateActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.CreateActionRequest;
+using GetAllActionsRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.GetAllActionsRequest;
+using GetSelectedActionsRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.GetSelectedActionsRequest;
+using UpdateActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.UpdateActionRequest;
 
 namespace API.GRPCService.Services.Actions;
 
@@ -113,6 +119,13 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         var response = _mapper.Map<Protos.Actions.GetActionEntrySettingsResponse>(actionEntrySettings);
 
         return response;
+    }
+    
+    public async override Task<Protos.Actions.ImportRegistrationToActionResponse>  importRegistrationToAction(Protos.Actions.ImportRegistrationToActionRequest request, ServerCallContext context)
+    {
+        await _actionsService.AcceptRegistrationAsync(request.EntryId.ToGuid(), context.CancellationToken);
+
+        return new ImportRegistrationToActionResponse();
     }
 
     public async Task<TestResult> TestMeAsync()

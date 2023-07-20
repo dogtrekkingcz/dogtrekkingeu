@@ -6,7 +6,7 @@ namespace DogsOnTrailApp.Models;
 
 public sealed record EntryModel
 {
-    public string? Id { get; set; } = "";
+    public Guid? Id { get; set; } = Guid.Empty;
 
     public string UserProfileId { get; set; } = "";
     

@@ -21,11 +21,11 @@ internal static class EntryModelMapping
             .IgnoreNullValues(true);
         typeAdapterConfig.NewConfig<EntryModel.DogDto, Protos.Shared.EntryDog>()
             .IgnoreNullValues(true)
-            .Map(d => d.Birthday, s => s.Birthday != null ? s.Birthday.Value.ToGoogleDateTime() : null);
+            .Map(d => d.Birthday, s => s.Birthday != null ? s.Birthday.ToGoogleDateTime() : null);
         typeAdapterConfig.NewConfig<EntryModel.VaccinationDto, Protos.Shared.Vaccination>()
             .IgnoreNullValues(true)
-            .Map(d => d.Date, s => s.Date != null ? s.Date.Value.ToGoogleDateTime() : null)
-            .Map(d => d.ValidUntil, s => s.ValidUntil != null ? s.ValidUntil.Value.ToGoogleDateTime() : null);
+            .Map(d => d.Date, s => s.Date != null ? s.Date.ToGoogleDateTime() : null)
+            .Map(d => d.ValidUntil, s => s.ValidUntil != null ? s.ValidUntil.ToGoogleDateTime() : null);
 
         typeAdapterConfig.NewConfig<Protos.Shared.Vaccination, EntryModel.VaccinationDto>()
             .IgnoreNullValues(true)

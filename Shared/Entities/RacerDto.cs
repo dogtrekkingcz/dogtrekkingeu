@@ -20,6 +20,10 @@
 
         public string LastName { get; set; } = string.Empty;
 
+        public string Phone { get; set; } = string.Empty;
+
+        public string Email { get; set; } = string.Empty;
+
         public List<DogDto> Dogs { get; set; } = new List<DogDto>();
 
         public DateTimeOffset? Start { get; set; } = null;
@@ -30,6 +34,23 @@
 
         public bool Accepted { get; set; } = false;
 
+        public bool Payed { get; set; } = false;
+
+        public List<PaymentDto> Payments { get; set; } = new();
+
         public List<NoteDto> Notes { get; set; } = new List<NoteDto>();
+    }
+
+    public record PaymentDto
+    {
+        public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
+
+        public double Amount { get; set; } = 0.0;
+
+        public string Currency { get; set; } = "Kč";
+
+        public string BankAccount { get; set; } = string.Empty;
+
+        public string Note { get; set; } = string.Empty;
     }
 }

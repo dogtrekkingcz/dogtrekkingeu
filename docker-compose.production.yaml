@@ -1,19 +1,6 @@
 ﻿version: '3.5'
 
 services:
-  # For development - there is a need to configure certificates
-  # -----------------------------------------------------------
-  # Windows => Linux
-  # dotnet dev-certs https --clean
-  # dotnet dev-certs https -ep "$env:USERPROFILE\.aspnet\https\aspnetapp.pfx"  -p cert_password
-  # dotnet dev-certs https --trust
-  #
-  # Linux
-  # dotnet dev-certs https --clean
-  # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
-  # dotnet dev-certs https --trust
-  #
-  # Linux production
   # docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d dogsontrail.eu
   certbot:
     image: certbot/certbot:latest

@@ -15,6 +15,9 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<EntryRecord, EntryDto>()
                 .TwoWays();
 
+            typeAdapterConfig.NewConfig<EntryRecord, GetEntryResponse>()
+                .IgnoreNullValues(true);
+            
             return typeAdapterConfig;
         }
     }

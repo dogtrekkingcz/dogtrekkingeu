@@ -82,20 +82,20 @@ internal static class ActionsServiceMapping
                         Name = race.Name,
                         Distance = race.Distance,
                         Incline = race.Incline,
-                        EnteringFrom = race.EnteringFrom.ToDateTimeOffset(),
-                        EnteringTo = race.EnteringTo.ToDateTimeOffset(),
+                        EnteringFrom = race.EnteringFrom.ToDateTimeOffset() ?? DateTimeOffset.Now,
+                        EnteringTo = race.EnteringTo.ToDateTimeOffset() ?? DateTimeOffset.Now.AddYears(1),
                         MaxNumberOfCompetitors = (int) race.MaxNumberOfCompetitors,
                         Payments = race.Payments
                             .Select(payment => new RaceDto.PaymentDefinitionDto
                             {
                                 Id = Guid.Parse(payment.Id),
-                                To = payment.To.ToDateTimeOffset(),
-                                From = payment.From.ToDateTimeOffset(),
+                                To = payment.To.ToDateTimeOffset() ?? DateTimeOffset.Now,
+                                From = payment.From.ToDateTimeOffset() ?? DateTimeOffset.Now.AddYears(1),
                                 Currency = payment.Currency,
                                 Price = payment.Price
                             })
                             .ToList(),
-                        Begin = race.Begin.ToDateTimeOffset(),
+                        Begin = race.Begin.ToDateTimeOffset() ?? DateTimeOffset.Now,
                         Limits = new RaceDto.LimitsDto
                         {
                             MinimalAgeOfRacerInDayes = race.Limits.MinimalAgeOfRacerInDayes,
@@ -119,7 +119,7 @@ internal static class ActionsServiceMapping
                                         Notes = racer.Notes
                                             .Select(note => new NoteDto
                                             {
-                                                Time = note.Time.ToDateTimeOffset(),
+                                                Time = note.Time.ToDateTimeOffset() ?? DateTimeOffset.Now,
                                                 Text = note.Text
                                             })
                                             .ToList(),

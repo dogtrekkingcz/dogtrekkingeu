@@ -15,8 +15,8 @@ message Dog {
   string Kennel = 5;
   string Pedigree = 6;
   string Chip = 7;
-  google.type.DateTime Birthday = 8;
-  google.type.DateTime Decease = 9;
+  optional google.type.DateTime Birthday = 8;
+  optional google.type.DateTime Decease = 9;
   string UriToPhoto = 10;
 
   repeated shared.Vaccination Vaccinations = 11;

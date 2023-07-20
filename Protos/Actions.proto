@@ -18,6 +18,7 @@ service Actions {
   rpc deleteAction (DeleteActionRequest) returns (DeleteActionResponse);
   rpc getActionEntrySettings (GetActionEntrySettingsRequest) returns (GetActionEntrySettingsResponse);
   rpc getSelectedActions (GetSelectedActionsRequest) returns (GetSelectedActionsResponse);
+  rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
 }
 
 message GetAllActionsRequest {
@@ -98,4 +99,13 @@ message CategoryDto {
   string Id = 1;
   string RaceId = 2;
   string Name = 3;
+}
+
+message ImportRegistrationToActionRequest {
+  string ActionId = 1;
+  string EntryId = 2;
+}
+
+message ImportRegistrationToActionResponse {
+  
 }

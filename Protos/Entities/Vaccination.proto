@@ -21,8 +21,8 @@ message Vaccination {
     Leishmanioza = 10;
   }
 
-  google.type.DateTime Date = 1;
-  google.type.DateTime ValidUntil = 2;
+  optional google.type.DateTime Date = 1;
+  optional google.type.DateTime ValidUntil = 2;
   VaccinationType Type = 3;
   string Note = 4;
   string UriToPhoto = 5;

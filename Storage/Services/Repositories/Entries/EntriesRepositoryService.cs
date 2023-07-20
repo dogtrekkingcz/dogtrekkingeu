@@ -58,6 +58,7 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
     public async Task<GetEntryResponse> GetAsync(Guid registrationId, CancellationToken cancellationToken)
     {
         var entry = await _entriesStorageService.GetAsync(registrationId.ToString(), cancellationToken);
-        return new GetEntryResponse();
+        
+        return _mapper.Map<GetEntryResponse>(entry);
     }
 }

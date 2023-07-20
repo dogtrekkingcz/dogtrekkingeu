@@ -26,7 +26,7 @@ internal static class ResultsServiceMapping
                 Notes = s.Racer.Notes
                     .Select(note => new NoteDto
                         {
-                            Time = note.Time.ToDateTimeOffset(),
+                            Time = note.Time.ToDateTimeOffset() ?? DateTimeOffset.Now,
                             Text = note.Text
                         })
                     .ToList(),

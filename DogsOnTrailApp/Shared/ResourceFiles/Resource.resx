@@ -387,4 +387,16 @@
     <data name="Menu.ActionsMap" xml:space="preserve">
         <value>Actions Map</value>
     </data>
+    <data name="Action.Manage.Payments" xml:space="preserve">
+        <value>Manage payments</value>
+    </data>
+    <data name="Action.Manage.Entries" xml:space="preserve">
+        <value>Manage registrations</value>
+    </data>
+    <data name="General.Save" xml:space="preserve">
+        <value>Save</value>
+    </data>
+    <data name="Action.Manage.AcceptRegistration" xml:space="preserve">
+        <value>Accept registration</value>
+    </data>
 </root>

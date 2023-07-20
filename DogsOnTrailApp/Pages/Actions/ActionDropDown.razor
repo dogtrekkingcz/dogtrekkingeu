@@ -2,6 +2,7 @@
 @using DogsOnTrailApp.Pages.Actions.Manage
 @using DogsOnTrailApp.Services;
 @using SharedCode.Entities;
+@using BootstrapBlazor.Components
 
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService ModalService
@@ -23,6 +24,8 @@
             <Authorized>
                 @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Model.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
                 {
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageRegistrations(Model))">@Localizer["Action.Manage.Entries"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManagePayments(Model))">@Localizer["Action.Manage.Payments"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@Localizer["Edit"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@Localizer["Delete"]</a></li>
                 }
@@ -42,6 +45,16 @@
     protected async Task ManageAction(ActionModel action)
     {
         NavManager.NavigateTo($"/action_manage/{action.Id}");
+    }
+
+    protected async Task ManageRegistrations(ActionModel action)
+    {
+        NavManager.NavigateTo($"/action_manage/{action.Id}/registrations");
+    }
+
+    protected async Task ManagePayments(ActionModel action)
+    {
+        NavManager.NavigateTo($"/action_manage/{action.Id}/payments");
     }
     
     protected async Task DeleteAction(ActionModel action)

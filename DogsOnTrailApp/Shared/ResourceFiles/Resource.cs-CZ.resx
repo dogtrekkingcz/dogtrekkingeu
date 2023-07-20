@@ -387,4 +387,16 @@
     <data name="Menu.ActionsMap" xml:space="preserve">
         <value>Mapa akcí</value>
     </data>
+    <data name="Action.Manage.Payments" xml:space="preserve">
+        <value>Spravovat platby</value>
+    </data>
+    <data name="Action.Manage.Entries" xml:space="preserve">
+        <value>Spravovat přihlášky</value>
+    </data>
+    <data name="General.Save" xml:space="preserve">
+        <value>Uložit</value>
+    </data>
+    <data name="Action.Manage.AcceptRegistration" xml:space="preserve">
+        <value>Schválit přihlášku</value>
+    </data>
 </root>

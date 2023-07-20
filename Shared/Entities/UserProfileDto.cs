@@ -14,7 +14,7 @@
 
         public string Nickname { get; set; } = string.Empty;
 
-        public DateTimeOffset Birthday { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset? Birthday { get; set; } = null;
 
         public AddressDto Address { get; set; } = new();
 

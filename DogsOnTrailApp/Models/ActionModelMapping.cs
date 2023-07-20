@@ -14,6 +14,7 @@ namespace DogsOnTrailApp.Models;
             .TwoWays();
 
         typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, ActionModel>()
+            .IgnoreNullValues(true)
             .TwoWays();
 
         typeAdapterConfig.NewConfig<Protos.Shared.ActionSale, ActionModel.ActionSaleDto>()
@@ -23,6 +24,7 @@ namespace DogsOnTrailApp.Models;
             .TwoWays();
 
         typeAdapterConfig.NewConfig<Protos.Shared.ActionSimple, ActionModel>()
+            .IgnoreNullValues(true)
             .Ignore(d => d.Sale)
             .TwoWays();
         

@@ -19,7 +19,7 @@ namespace SharedCode.Mapping
                 .Map(d => d.Finish, s => (DateTimeOffset?) (s.Finish != null ? s.Finish.ToDateTimeOffset() : null));
 
             typeAdapterConfig.NewConfig<RacerDto, RacerDto>();
-
+            
             return typeAdapterConfig;
         }
     }

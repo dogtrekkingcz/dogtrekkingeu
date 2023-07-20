@@ -312,11 +312,29 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept registration.
+        /// </summary>
+        internal static string Action_Manage_AcceptRegistration {
+            get {
+                return ResourceManager.GetString("Action.Manage.AcceptRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accompanying sale.
         /// </summary>
         internal static string Action_Manage_DefineAccompanyingSale {
             get {
                 return ResourceManager.GetString("Action.Manage.DefineAccompanyingSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage registrations.
+        /// </summary>
+        internal static string Action_Manage_Entries {
+            get {
+                return ResourceManager.GetString("Action.Manage.Entries", resourceCulture);
             }
         }
         
@@ -335,6 +353,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Action_Manage_Location {
             get {
                 return ResourceManager.GetString("Action.Manage.Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage payments.
+        /// </summary>
+        internal static string Action_Manage_Payments {
+            get {
+                return ResourceManager.GetString("Action.Manage.Payments", resourceCulture);
             }
         }
         
@@ -812,6 +839,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string General_New {
             get {
                 return ResourceManager.GetString("General.New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string General_Save {
+            get {
+                return ResourceManager.GetString("General.Save", resourceCulture);
             }
         }
         

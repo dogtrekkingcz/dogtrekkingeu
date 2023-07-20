@@ -19,7 +19,8 @@ namespace SharedCode.Mapping
                 .AddSharedMappingTerm()
                 .AddSharedMappingUserProfile()
                 .AddSharedMappingEntry()
-                .AddSharedMappingActionRights();
+                .AddSharedMappingActionRights()
+                .AddSharedMappingPayment();
 
             typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
             typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();

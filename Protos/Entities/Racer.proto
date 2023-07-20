@@ -8,6 +8,7 @@ import "google/type/datetime.proto";
 
 import "Entities/Dog.proto";
 import "Entities/Note.proto";
+import "Entities/Payment.proto";
 
 message Racer {
   enum FinishState {
@@ -21,10 +22,14 @@ message Racer {
   string CompetitorId = 2;
   string FirstName = 3;
   string LastName = 4;
-  repeated Dog Dogs = 5;
-  google.type.DateTime Start = 6;
-  google.type.DateTime Finish = 7;
-  FinishState State = 8;
-  bool Accepted = 9;
-  repeated Note Notes = 10;
+  string Phone = 5;
+  string Email = 6;
+  bool Payed = 7;
+  repeated Dog Dogs = 8;
+  google.type.DateTime Start = 9;
+  google.type.DateTime Finish = 10;
+  FinishState State = 11;
+  bool Accepted = 12;
+  repeated Note Notes = 13;
+  repeated Payment Payments = 14;
 }
