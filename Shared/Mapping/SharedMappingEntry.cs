@@ -37,6 +37,10 @@ namespace SharedCode.Mapping
             typeAdapterConfig.NewConfig<Protos.Shared.MerchandizeItem, EntryDto.MerchandizeItemDto>()
                 .IgnoreNullValues(true)
                 .TwoWays();
+
+            typeAdapterConfig.NewConfig<EntryDto.MerchandizeItemDto, EntryDto.MerchandizeItemDto>()
+                .IgnoreNullValues(true)
+                .TwoWays();
             
             return typeAdapterConfig;
         }

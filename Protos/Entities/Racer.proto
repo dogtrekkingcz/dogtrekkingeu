@@ -34,4 +34,15 @@ message Racer {
   repeated Note Notes = 13;
   repeated Payment Payments = 14;
   repeated MerchandizeItem Merchandize = 15;
+  RequestedPaymentsDto RequestedPayments = 16;
+}
+
+message RequestedPaymentsDto {
+  double Sum = 1;
+  repeated RequestedPaymentItem Items = 2;
+}
+
+message RequestedPaymentItem {
+  string Name = 1;
+  double Price = 2;
 }

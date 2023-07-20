@@ -15,8 +15,12 @@ namespace SharedCode.Mapping
 
             typeAdapterConfig.NewConfig<Protos.Shared.Racer, RacerDto>()
                 .IgnoreNullValues(true)
-                .Map(d => d.Start, s => (DateTimeOffset?) (s.Start != null ? s.Start.ToDateTimeOffset() : null))
-                .Map(d => d.Finish, s => (DateTimeOffset?) (s.Finish != null ? s.Finish.ToDateTimeOffset() : null));
+                .Map(d => d.Start, s => (DateTimeOffset?)(s.Start != null ? s.Start.ToDateTimeOffset() : null))
+                .Map(d => d.Finish, s => (DateTimeOffset?)(s.Finish != null ? s.Finish.ToDateTimeOffset() : null));
+
+            typeAdapterConfig.NewConfig<Protos.Shared.RequestedPaymentsDto, RequestedPaymentsDto>();
+
+            typeAdapterConfig.NewConfig<Protos.Shared.RequestedPaymentItem, RequestedPaymentItem>();
 
             typeAdapterConfig.NewConfig<RacerDto, RacerDto>();
             

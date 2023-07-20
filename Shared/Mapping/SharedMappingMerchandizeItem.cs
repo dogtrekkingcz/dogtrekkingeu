@@ -11,7 +11,7 @@ namespace SharedCode.Mapping
                 .TwoWays();
             
             typeAdapterConfig.NewConfig<MerchandizeItemDto, MerchandizeItemDto>();
-
+            
             return typeAdapterConfig;
         }
     }

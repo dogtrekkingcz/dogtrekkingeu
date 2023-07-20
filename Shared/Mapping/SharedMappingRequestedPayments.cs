@@ -8,7 +8,17 @@ namespace SharedCode.Mapping
     {
         public static TypeAdapterConfig AddSharedMappingRequestedPayments(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<RequestedPaymentsDto, RequestedPaymentsDto>();
+            typeAdapterConfig.NewConfig<RequestedPaymentsDto, Protos.Shared.RequestedPaymentsDto>()
+                .TwoWays();
+
+            typeAdapterConfig.NewConfig<RequestedPaymentItem, Protos.Shared.RequestedPaymentItem>()
+                .TwoWays();
+
+            typeAdapterConfig.NewConfig<RequestedPaymentsDto, RequestedPaymentsDto>()
+                .TwoWays();
+
+            typeAdapterConfig.NewConfig<RequestedPaymentItem, RequestedPaymentItem>()
+                .TwoWays();
             
             return typeAdapterConfig;
         }
