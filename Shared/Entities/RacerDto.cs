@@ -90,6 +90,8 @@
 
         public string Color { get; set; } = string.Empty;
 
+        public string Note { get; set; } = string.Empty;
+
         public int Count { get; set; } = 0;
     }
 }
