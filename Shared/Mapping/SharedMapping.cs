@@ -21,7 +21,8 @@ namespace SharedCode.Mapping
                 .AddSharedMappingEntry()
                 .AddSharedMappingActionRights()
                 .AddSharedMappingPayment()
-                .AddSharedMappingMerchandizeItem();
+                .AddSharedMappingMerchandizeItem()
+                .AddSharedMappingRequestedPayments();
 
             typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
             typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();
