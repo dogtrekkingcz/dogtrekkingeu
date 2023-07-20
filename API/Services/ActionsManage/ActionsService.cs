@@ -179,5 +179,25 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         {
             
         }
+
+        public async Task AcceptPaymentAsync(AcceptPaymentRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+
+            action.Races
+                .SelectMany(r => r.Categories)
+                .SelectMany(c => c.Racers)
+                .First(racer => racer.Id == request.Id)
+                .Payments.Add(new PaymentDto
+                    {
+                        Date = DateTimeOffset.Now,
+                        Amount = request.Amount,
+                        Currency = request.Currency,
+                        Note = request.Note,
+                        BankAccount = request.BankAccount
+                    });
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+        }
     }
 }

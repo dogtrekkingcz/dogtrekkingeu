@@ -19,6 +19,7 @@ service Actions {
   rpc getActionEntrySettings (GetActionEntrySettingsRequest) returns (GetActionEntrySettingsResponse);
   rpc getSelectedActions (GetSelectedActionsRequest) returns (GetSelectedActionsResponse);
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
+  rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);
 }
 
 message GetAllActionsRequest {
@@ -107,5 +108,18 @@ message ImportRegistrationToActionRequest {
 }
 
 message ImportRegistrationToActionResponse {
+  
+}
+
+message AcceptPaymentRequest {
+  string Id = 1;
+  string ActionId = 2;
+  double Amount = 3;
+  string Currency = 4;
+  string Note = 5;
+  string BankAccount = 6;
+}
+
+message AcceptPaymentResponse {
   
 }

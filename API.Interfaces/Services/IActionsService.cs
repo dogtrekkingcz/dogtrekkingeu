@@ -26,5 +26,7 @@ namespace DogsOnTrail.Interfaces.Actions.Services
         Task AcceptRegistrationAsync(Guid registrationId, CancellationToken cancellationToken);
 
         Task DenyRegistrationAsync(Guid registrationId, string reason, CancellationToken cancellationToken);
+
+        Task AcceptPaymentAsync(AcceptPaymentRequest request, CancellationToken cancellationToken);
     }
 }

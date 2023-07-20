@@ -7,6 +7,7 @@ package shared;
 import "google/type/datetime.proto";
 import "Entities/Address.proto";
 import "Entities/Vaccination.proto";
+import "Entities/MerchandizeItem.proto";
 
 message Entry {
   string Id = 1;
@@ -25,6 +26,7 @@ message Entry {
   optional google.type.DateTime Birthday = 14;
   google.type.DateTime Created = 15;
   string LanguageCode = 16;
+  repeated MerchandizeItem Merchandize = 17;
 }
 
 message EntryDog {

@@ -44,6 +44,8 @@ internal static class ActionsServiceMapping
             .Map(d => d.FirstName, s => s.Name)
             .Map(d => d.LastName, s => s.Surname);
 
+        typeAdapterConfig.NewConfig<GetEntryResponse.MerchandizeItemDto, MerchandizeItemDto>();
+
         typeAdapterConfig.NewConfig<EntryDto.DogDto, DogDto>()
             .Ignore(d => d.UserId)
             .Ignore(d => d.Kennel)

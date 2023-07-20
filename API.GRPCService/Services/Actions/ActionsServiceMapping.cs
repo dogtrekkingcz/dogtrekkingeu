@@ -123,6 +123,11 @@ internal static class ActionsServiceMapping
                                                 Text = note.Text
                                             })
                                             .ToList(),
+                                        Merchandize = racer.Merchandize
+                                            .Select(merchItem => new MerchandizeItemDto
+                                            {
+                                                
+                                            }).ToList(),
                                         Dogs = racer.Dogs
                                             .Select(dog => new DogDto
                                             {

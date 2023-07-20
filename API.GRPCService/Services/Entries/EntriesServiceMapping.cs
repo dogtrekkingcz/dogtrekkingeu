@@ -52,7 +52,21 @@ internal static class EntriesServiceMapping
                     ValidUntil = vacc.ValidUntil != null ? vacc.ValidUntil.ToDateTimeOffset() : null,
                     UriToPhoto = vacc.UriToPhoto
                 }).ToList()
-            }).ToList());
+            }).ToList())
+            .Map(d => d.Merchandize, s => s.Entry.Merchandize.Select(merchandizeItem =>
+                new CreateEntryRequest.MerchandizeItemDto
+                {
+                    Id = merchandizeItem.Id,
+                    Name = merchandizeItem.Name,
+                    Color = merchandizeItem.Color,
+                    Note = merchandizeItem.Note,
+                    Count = merchandizeItem.Count,
+                    Description = merchandizeItem.Description,
+                    Currency = merchandizeItem.Currency,
+                    Price = merchandizeItem.Price,
+                    Size = merchandizeItem.Size,
+                    Variant = merchandizeItem.Variant
+                }).ToList());
         
         typeAdapterConfig.NewConfig<CreateEntryResponse, Protos.Entries.CreateEntryResponse>()
             .IgnoreNullValues(true)

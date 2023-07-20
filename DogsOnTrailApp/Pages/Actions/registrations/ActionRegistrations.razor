@@ -25,6 +25,7 @@
 }
 else
 {
+    <h4>@Localizer["Action.Manage.RegistrationToAccept"]</h4>
     <table class="table">
         <thead>
         <tr>
@@ -82,13 +83,41 @@ else
                 </td>
             </tr>
         }
+        </tbody>
+    </table>
+    
+    <hr />
+    
+    <h4>@Localizer["Admin.Manage.Registrations"]</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@Localizer["Surname"], @Localizer["Name"]</th>
+            <th>@Localizer["Race"]</th>
+            <th>@Localizer["Category"]</th>
+            <th>@Localizer["Dogs"]</th>
+            <th>@Localizer["Payments"]</th>
+            <th>@Localizer["Actions"]</th>
+        </tr>
+        </thead>
+        <tbody>
         
         @foreach (var race in Action.Races)
         {
+            var startingPrice = race.Payments.First(paymentDef => paymentDef.From >= DateTimeOffset.Now && paymentDef.To < DateTimeOffset.Now).Price;
+            
             @foreach (var category in race.Categories)
             {
                 foreach (var racer in category.Racers)
                 {
+                    racer.RequestedPayments.Items.Add(new RequestedPaymentItem
+                    {
+                        Name = "RegistrationFee",
+                        Price = startingPrice
+                    });
+                    
+                    
+                    
                     <tr>
                         <td>
                             @racer.LastName, @racer.FirstName
@@ -126,7 +155,7 @@ else
                                         <Authorized>
                                             @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
                                             {
-                                                @* <li><a class="dropdown-item" @onclick="@(async () => await ImportRegistrationToAction(racer))">@Localizer["Action.Manage.AcceptRegistration"]</a></li> *@
+                                                <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Localizer["Action.Manage.AcceptPayment"]</a></li>
                                             }
                                         </Authorized>
                                     </AuthorizeView>
@@ -178,6 +207,19 @@ else
         });
         
         StateHasChanged();
+    }
+
+    private async Task AcceptPayment(RacerDto racer)
+    {
+        await ActionsClient.acceptPaymentAsync(new AcceptPaymentRequest
+        {
+            Id = racer.Id.ToString(),
+            ActionId = Action.Id,
+            Amount = racer.RequestedPayments.Sum,
+            Note = "",
+            Currency = "Kč",
+            BankAccount = ""
+        });
     }
     
     private async Task SaveChangesAsync()

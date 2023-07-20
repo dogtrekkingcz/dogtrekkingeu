@@ -33,6 +33,8 @@ public record EntryDto
     public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
 
     public string LanguageCode { get; set; } = "en-US";
+
+    public List<MerchandizeItemDto> Merchandize { get; set; } = new();
     
     public record DogDto
     {
@@ -54,5 +56,28 @@ public record EntryDto
                     Type = Entities.DogDto.VaccinationType.Rabies
                 }
             };
+    }
+    
+    public sealed record MerchandizeItemDto
+    {
+        public string? Id { get; set; } = string.Empty;
+
+        public string Name { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+            
+        public double Price { get; set; } = 0.0;
+
+        public string Currency { get; set; } = "Kč";
+
+        public string Variant { get; set; } = string.Empty;
+
+        public string Size { get; set; } = string.Empty;
+
+        public string Color { get; set; } = string.Empty;
+
+        public int Count { get; set; } = 0;
+
+        public string Note { get; set; } = string.Empty;
     }
 }

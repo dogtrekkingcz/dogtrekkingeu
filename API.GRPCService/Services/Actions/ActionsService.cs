@@ -4,9 +4,12 @@ using DogsOnTrailGRPCService.Extensions;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;
+using Microsoft.AspNetCore.WebUtilities;
 using Protos.Actions;
 using SharedCode.JwtToken;
 using SharedCode.Testable;
+using AcceptPaymentRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
+using AcceptPaymentResponse = Protos.Actions.AcceptPaymentResponse;
 using CreateActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.CreateActionRequest;
 using GetAllActionsRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.GetAllActionsRequest;
 using GetSelectedActionsRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.GetSelectedActionsRequest;
@@ -126,6 +129,23 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         await _actionsService.AcceptRegistrationAsync(request.EntryId.ToGuid(), context.CancellationToken);
 
         return new ImportRegistrationToActionResponse();
+    }
+
+    public async override Task<Protos.Actions.AcceptPaymentResponse> acceptPayment(Protos.Actions.AcceptPaymentRequest request, ServerCallContext context)
+    {
+        var acceptPaymentRequest = new AcceptPaymentRequest
+        {
+            Id = request.Id.ToGuid(),
+            Amount = request.Amount,
+            Currency = request.Currency,
+            ActionId = request.ActionId.ToGuid(),
+            Note = request.Note,
+            BankAccount = request.BankAccount
+        };
+
+        await _actionsService.AcceptPaymentAsync(acceptPaymentRequest, context.CancellationToken);
+
+        return new AcceptPaymentResponse();
     }
 
     public async Task<TestResult> TestMeAsync()

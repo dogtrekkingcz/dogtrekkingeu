@@ -12,7 +12,7 @@
 
     public record RacerDto
     {
-        public string Id { get; set; } = string.Empty;
+        public Guid Id { get; set; } = Guid.Empty;
         
         public string CompetitorId { get; set; } = string.Empty;
 
@@ -39,6 +39,24 @@
         public List<PaymentDto> Payments { get; set; } = new();
 
         public List<NoteDto> Notes { get; set; } = new List<NoteDto>();
+        
+        public RequestedPaymentsDto RequestedPayments { get; set; } = new();
+
+        public List<MerchandizeItemDto> Merchandize { get; set; } = new();
+    }
+
+    public sealed record RequestedPaymentsDto
+    {
+        public double Sum => Items.Sum(item => item.Price);
+
+        public List<RequestedPaymentItem> Items { get; set; } = new();
+    }
+
+    public sealed record RequestedPaymentItem
+    {
+        public string Name { get; set; }
+        
+        public double Price { get; set; }
     }
 
     public record PaymentDto
@@ -52,5 +70,26 @@
         public string BankAccount { get; set; } = string.Empty;
 
         public string Note { get; set; } = string.Empty;
+    }
+
+    public record MerchandizeItemDto
+    {
+        public string? Id { get; set; } = string.Empty;
+
+        public string Name { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+            
+        public double Price { get; set; } = 0.0;
+
+        public string Currency { get; set; } = "Kč";
+
+        public string Variant { get; set; } = string.Empty;
+        
+        public string Size { get; set; } = string.Empty;
+
+        public string Color { get; set; } = string.Empty;
+
+        public int Count { get; set; } = 0;
     }
 }

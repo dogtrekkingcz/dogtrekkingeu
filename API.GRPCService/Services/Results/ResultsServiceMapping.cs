@@ -1,4 +1,5 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
+using DogsOnTrailGRPCService.Extensions;
 using SharedCode.Entities;
 using SharedCode.Extensions;
 using Mapster;
@@ -15,7 +16,7 @@ internal static class ResultsServiceMapping
                 ActionId = s.ActionId,
                 RaceId = s.RaceId,
                 Accepted = s.Racer.Accepted,
-                Id = s.Racer.Id,
+                Id = s.Racer.Id.ToGuid(),
                 Start = s.Racer.Start != null ? s.Racer.Start.ToDateTimeOffset() : null,
                 Finish = s.Racer.Finish != null ? s.Racer.Finish.ToDateTimeOffset() : null,
                 FirstName = s.Racer.FirstName,

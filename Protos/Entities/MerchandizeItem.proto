@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Shared";
+
+package shared;
+
+message MerchandizeItem {
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  double Price = 4;
+  string Currency = 5;
+  string Variant = 6;
+  string Size = 7;
+  string Color = 8;
+  int32 Count = 9;
+  string Note = 10;
+}
