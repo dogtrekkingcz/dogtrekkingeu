@@ -120,7 +120,26 @@ else
                     
                     <tr>
                         <td>
-                            @racer.LastName, @racer.FirstName
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        @racer.LastName, @racer.FirstName
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        @racer.Address.ZipCode, @racer.Address.City, @racer.Address.Street
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        @racer.Email    
+                                    </div>
+                                    <div class="col-6">
+                                        @racer.Phone
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                         <td>
                             @race.Name
@@ -137,12 +156,28 @@ else
                             </ul>
                         </td>
                         <td>
-                            <ul>
-                                @foreach (var payment in racer.Payments)
-                                {
-                                    <li>@payment.Date - @payment.Amount @payment.Currency</li>
-                                }
-                            </ul>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul>
+                                            @foreach (var payment in racer.Payments)
+                                            {
+                                                <li>@payment.Date.ToString("yyyy-MM-dd HH:mm") - @payment.Amount @payment.Currency</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul>
+                                            @foreach (var rq in racer.RequestedPayments.Items)
+                                            {
+                                                <li>@rq.Name - @rq.Price</li>
+                                            }
+                                        </ul>
+                                        <hr />
+                                        @racer.RequestedPayments.Items.Sum(it => it.Price)
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                         <td>
                             <div class="dropdown dropstart">
@@ -206,6 +241,13 @@ else
             ActionId = entry.ActionId.ToString()
         });
         
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse.Action);
+        
         StateHasChanged();
     }
 
@@ -220,6 +262,15 @@ else
             Currency = "Kč",
             BankAccount = ""
         });
+        
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse.Action);
+        
+        StateHasChanged();
     }
     
     private async Task SaveChangesAsync()

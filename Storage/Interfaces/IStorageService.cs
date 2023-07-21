@@ -12,7 +12,7 @@ internal interface IStorageService<T> where T: IRecord
 
     public Task<T> GetAsync(string id, CancellationToken cancellationToken);
 
-    public Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, string value)> filterList, CancellationToken cancellationToken);
+    public Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, Type typeOfValue, object value)> filterList, CancellationToken cancellationToken);
 
     public Task<IReadOnlyList<T>> GetByFilterBeLikeAsync(IList<(string key, string likeValue)> filterList, CancellationToken cancellationToken);
     

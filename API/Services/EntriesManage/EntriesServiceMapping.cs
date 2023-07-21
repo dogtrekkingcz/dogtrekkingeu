@@ -18,6 +18,8 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetAllEntriesRequest, GetAllEntriesInternalStorageRequest>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse, GetAllEntriesResponse>();
 
+        typeAdapterConfig.NewConfig<GetEntryResponse, UpdateEntryInternalStorageRequest>();
+
         typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
             .IgnoreNullValues(true)
             .Ignore(d => d.Action)

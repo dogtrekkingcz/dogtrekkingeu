@@ -56,7 +56,7 @@ namespace Storage.Services.Repositories.UserProfiles
         {
             _logger.LogInformation($"'{nameof(GetUserProfileAsync)}': Request: '{request}'");
 
-            var filter = new List<(string key, string value)> { ("UserId", request.UserId) };
+            var filter = new List<(string key, Type typeOfValue, object value)> { ("UserId", typeof(string), request.UserId) };
             var result = await _userProfileStorageService.GetByFilterAsync(filter, cancellationToken);
 
             _logger.LogInformation($"'{nameof(GetUserProfileAsync)}': Response: '{result}'");

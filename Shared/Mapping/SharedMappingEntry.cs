@@ -19,12 +19,14 @@ namespace SharedCode.Mapping
             typeAdapterConfig.NewConfig<EntryDto, Protos.Shared.Entry>()
                 .IgnoreNullValues(true)
                 .Map(d => d.Created, s => s.Created.ToGoogleDateTime())
-                .Map(d => d.Birthday, s => s.Birthday.Value.ToGoogleDateTime());
+                .Map(d => d.Birthday, s => s.Birthday.Value.ToGoogleDateTime())
+                .Map(d => d.AcceptedDate, s => s.AcceptedDate != null ? s.AcceptedDate.ToGoogleDateTime() : null);
 
             typeAdapterConfig.NewConfig<Protos.Shared.Entry, EntryDto>()
                 .IgnoreNullValues(true)
                 .Map(d => d.Created, s => s.Created.ToDateTimeOffset())
-                .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
+                .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset())
+                .Map(d => d.AcceptedDate, s => s.AcceptedDate != null ? s.AcceptedDate.ToDateTimeOffset() : null);
 
             typeAdapterConfig.NewConfig<EntryDto.DogDto, Protos.Shared.EntryDog>()
                 .IgnoreNullValues(true)

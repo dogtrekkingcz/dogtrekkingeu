@@ -43,6 +43,8 @@
         public RequestedPaymentsDto RequestedPayments { get; set; } = new();
 
         public List<MerchandizeItemDto> Merchandize { get; set; } = new();
+
+        public AddressDto Address { get; set; } = new();
     }
 
     public sealed record RequestedPaymentsDto

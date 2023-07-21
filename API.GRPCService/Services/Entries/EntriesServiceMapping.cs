@@ -31,6 +31,8 @@ internal static class EntriesServiceMapping
     internal static TypeAdapterConfig AddEntriesServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<Protos.Entries.CreateEntryRequest, CreateEntryRequest>()
+            .Map(d => d.Accepted, s => false)
+            .Map(d => d.AcceptedDate, s => (DateTimeOffset?) null)
             .Map(d => d, s => s.Entry)
             .Map(d => d.Created, s => s.Entry.Created.ToDateTimeOffset())
             .Map(d => d.Birthday, s => s.Entry.Birthday.ToDateTimeOffset())

@@ -10,6 +10,7 @@ import "Entities/Dog.proto";
 import "Entities/Note.proto";
 import "Entities/Payment.proto";
 import "Entities/MerchandizeItem.proto";
+import "Entities/Address.proto";
 
 message Racer {
   enum FinishState {
@@ -35,6 +36,7 @@ message Racer {
   repeated Payment Payments = 14;
   repeated MerchandizeItem Merchandize = 15;
   RequestedPaymentsDto RequestedPayments = 16;
+  Address Address = 17;
 }
 
 message RequestedPaymentsDto {

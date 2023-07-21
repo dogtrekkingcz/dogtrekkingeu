@@ -4,6 +4,7 @@ using SharedCode.Entities;
 using SharedCode.JwtToken;
 using MapsterMapper;
 using Storage.Entities.Actions;
+using Storage.Entities.Entries;
 using Storage.Interfaces;
 
 namespace DogsOnTrail.Actions.Services.ActionsManage
@@ -75,6 +76,38 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         public async Task<GetActionDetailResponse> GetActionDetailAsync(Guid id, CancellationToken cancellationToken)
         {
             var actionDetail = await _actionsRepositoryService.GetAsync(id, cancellationToken);
+
+            foreach (var race in actionDetail.Races)
+            {
+                var price = race.Payments.First(payment => payment.From <= DateTimeOffset.Now && payment.To > DateTimeOffset.Now).Price;
+                
+                foreach (var category in race.Categories)
+                {
+                    foreach (var racer in category.Racers)
+                    {
+                        racer.RequestedPayments = new RequestedPaymentsDto
+                        {
+                            Items = new List<RequestedPaymentItem>
+                            {
+                                new RequestedPaymentItem
+                                {
+                                    Name = "RegistrationFee",
+                                    Price = price
+                                }
+                            }
+                        };
+                        
+                        foreach (var merch in racer.Merchandize)
+                        {
+                            racer.RequestedPayments.Items.Add(new RequestedPaymentItem
+                            {
+                                Name = merch.Name,
+                                Price = merch.Price * merch.Count
+                            });
+                        }
+                    }
+                }
+            }
 
             return _mapper.Map<GetActionDetailResponse>(actionDetail);
         }
@@ -173,6 +206,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             await _actionsRepositoryService.UpdateActionAsync(
                 _mapper.Map<UpdateActionInternalStorageRequest>(action),
                 cancellationToken);
+
+            var updateEntryRequest = _mapper.Map<UpdateEntryInternalStorageRequest>(registration);
+            updateEntryRequest.Accepted = true;
+            updateEntryRequest.AcceptedDate = DateTime.Now;
+
+            await _entriesRepositoryService.UpdateEntryAsync(updateEntryRequest, cancellationToken);
         }
 
         public async Task DenyRegistrationAsync(Guid registrationId, string reason, CancellationToken cancellationToken)

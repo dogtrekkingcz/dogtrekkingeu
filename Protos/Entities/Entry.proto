@@ -27,6 +27,8 @@ message Entry {
   google.type.DateTime Created = 15;
   string LanguageCode = 16;
   repeated MerchandizeItem Merchandize = 17;
+  bool Accepted = 18;
+  optional google.type.DateTime AcceptedDate = 19;
 }
 
 message EntryDog {

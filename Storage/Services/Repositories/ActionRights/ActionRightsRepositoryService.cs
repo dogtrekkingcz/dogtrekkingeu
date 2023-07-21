@@ -42,7 +42,7 @@ namespace Storage.Services.Repositories.ActionRights
 
         public async Task<GetAllRightsResponse> GetAllRightsAsync(GetAllRightsRequest request, CancellationToken cancellationToken)
         {
-            var filter = new List<(string key, string value)> { ("UserId", request.UserId) };
+            var filter = new List<(string key, Type typeOfValue, object value)> { ("UserId", typeof(string), request.UserId) };
             var result = await _actionRightsStorageService.GetByFilterAsync(filter, cancellationToken);
 
             if (result == null)

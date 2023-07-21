@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using SharedCode.Extensions;
 
 namespace SharedCode.Mapping
 {
@@ -30,6 +31,12 @@ namespace SharedCode.Mapping
             typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Duration, Google.Protobuf.WellKnownTypes.Duration>();
             typeAdapterConfig.NewConfig<Google.Type.TimeZone, Google.Type.TimeZone>();
             typeAdapterConfig.NewConfig<Google.Type.LatLng, Google.Type.LatLng>();
+
+            typeAdapterConfig.NewConfig<DateTimeOffset?, Google.Type.DateTime>()
+                .MapWith(s => s != null ? s.ToGoogleDateTime() : null);
+            
+            typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
+                .MapWith(s => s != null ? s.ToDateTimeOffset() : null);
 
             return typeAdapterConfig;
         }

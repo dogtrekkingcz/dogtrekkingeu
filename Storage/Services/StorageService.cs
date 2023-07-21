@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -62,15 +63,51 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return document;
     }
 
-    public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, string value)> filterList, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, System.Type typeOfValue, object value)> filterList, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter
-            .Eq(filterList[0].key, filterList[0].value);
-
+        FilterDefinition<T> filter = null;
+        
+        if (filterList[0].typeOfValue == typeof(Guid))
+        {
+            filter = Builders<T>.Filter
+                .Eq(filterList[0].key, (Guid) filterList[0].value); 
+        }
+        else if (filterList[0].typeOfValue == typeof(string))
+        {
+            filter = Builders<T>.Filter
+                .Eq(filterList[0].key, (string) filterList[0].value);
+        }
+        else if (filterList[0].typeOfValue == typeof(bool))
+        {
+            filter = Builders<T>.Filter
+                .Eq(filterList[0].key, (bool) filterList[0].value);
+        }
+        else if (filterList[0].typeOfValue == typeof(int))
+        {
+            filter = Builders<T>.Filter
+                .Eq(filterList[0].key, (int) filterList[0].value);
+        }
+        else if (filterList[0].typeOfValue == typeof(double))
+        {
+            filter = Builders<T>.Filter
+                .Eq(filterList[0].key, (double) filterList[0].value);
+        }
+        
         foreach (var f in filterList.Skip(1))
         {
-            filter &= (Builders<T>.Filter.Eq(f.key, f.value));
+            if (f.typeOfValue == typeof(Guid))
+                filter &= (Builders<T>.Filter.Eq(f.key, (Guid) f.value));
+            else if (f.typeOfValue == typeof(string))
+                filter &= (Builders<T>.Filter.Eq(f.key, (string) f.value));
+            else if (f.typeOfValue == typeof(bool))
+                filter &= (Builders<T>.Filter.Eq(f.key, (bool) f.value));
+            else if (f.typeOfValue == typeof(int))
+                filter &= (Builders<T>.Filter.Eq(f.key, (int) f.value));
+            else if (f.typeOfValue == typeof(double))
+                filter &= (Builders<T>.Filter.Eq(f.key, (double) f.value));
         }
+
+
 
         var document = await _collection
             .Find(filter)

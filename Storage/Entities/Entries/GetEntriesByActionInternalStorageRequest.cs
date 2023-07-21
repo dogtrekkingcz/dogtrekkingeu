@@ -2,5 +2,7 @@
 
 public sealed record GetEntriesByActionInternalStorageRequest
 {
-    public string ActionId { get; set; }
+    public Guid ActionId { get; set; }
+
+    public bool IncludeAlreadyAccepted { get; set; } = false;
 }

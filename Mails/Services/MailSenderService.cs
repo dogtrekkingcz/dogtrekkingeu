@@ -10,20 +10,23 @@ public class MailSenderService : IMailSenderService
 {
     public async Task SendAsync(IEnumerable<IEmailBuilder> builders, CancellationToken cancellationToken)
     {
-        using var smtp = new SmtpClient();
-        
-        await smtp.ConnectAsync("mail", 25, SecureSocketOptions.Auto, cancellationToken: cancellationToken);
+        using (var smtp = new SmtpClient())
+        {
+            await smtp.ConnectAsync("mail", 25, SecureSocketOptions.Auto, cancellationToken: cancellationToken);
 
-        await Task.WhenAll(builders
-            .Select(builder =>
-                SendMailAsync(smtp,
-                    builder.To,
-                    builder.Subject,
-                    builder.Body,
-                    builder.Attachments,
-                    cancellationToken)));
-        
-        await smtp.DisconnectAsync(true, cancellationToken: cancellationToken);
+            foreach (var emailBuilder in builders)
+            {
+                await SendMailAsync(
+                    smtp,
+                    emailBuilder.To,
+                    emailBuilder.Subject,
+                    emailBuilder.Body,
+                    emailBuilder.Attachments,
+                    cancellationToken);
+            }
+            
+            await smtp.DisconnectAsync(true, cancellationToken: cancellationToken);
+        }
     }
 
     private async Task SendMailAsync(SmtpClient smtp, string to, string subject, string body, IList<IFormFile> attachments, CancellationToken cancellationToken)

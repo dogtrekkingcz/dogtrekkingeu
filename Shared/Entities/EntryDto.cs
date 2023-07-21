@@ -32,6 +32,10 @@ public record EntryDto
     
     public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
 
+    public bool Accepted { get; set; } = false;
+    
+    public DateTimeOffset? AcceptedDate { get; set; } = null;
+
     public string LanguageCode { get; set; } = "en-US";
 
     public List<MerchandizeItemDto> Merchandize { get; set; } = new();

@@ -26,6 +26,7 @@ message CreateEntryResponse {
 
 message GetEntriesByActionRequest {
   string ActionId = 1;
+  bool IncludeAlreadyAccepted = 2;
 }
 
 message GetEntriesByActionResponse {
