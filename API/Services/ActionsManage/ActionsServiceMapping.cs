@@ -34,7 +34,7 @@ internal static class ActionsServiceMapping
 
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse, UpdateActionInternalStorageRequest>();
 
-        typeAdapterConfig.NewConfig<GetEntryResponse, RacerDto>()
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, RacerDto>()
             .Ignore(d => d.Start)
             .Ignore(d => d.Finish)
             .Ignore(d => d.Accepted)
@@ -45,7 +45,7 @@ internal static class ActionsServiceMapping
             .Map(d => d.FirstName, s => s.Name)
             .Map(d => d.LastName, s => s.Surname);
 
-        typeAdapterConfig.NewConfig<GetEntryResponse.MerchandizeItemDto, MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.MerchandizeItemDto, MerchandizeItemDto>();
 
         typeAdapterConfig.NewConfig<EntryDto.DogDto, DogDto>()
             .Ignore(d => d.UserId)

@@ -13,12 +13,20 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetEntriesByActionRequest, GetEntriesByActionInternalStorageRequest>();
 
         typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, CreateEntryInternalStorageRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, CreateEntryInternalStorageRequest.DogDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.MerchandizeItemDto, CreateEntryInternalStorageRequest.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.AddressDto, CreateEntryInternalStorageRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.LatLngDto, CreateEntryInternalStorageRequest.LatLngDto>();
+        
+        
+        
         typeAdapterConfig.NewConfig<CreateEntryInternalStorageResponse, CreateEntryResponse>();
 
         typeAdapterConfig.NewConfig<GetAllEntriesRequest, GetAllEntriesInternalStorageRequest>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse, GetAllEntriesResponse>();
 
-        typeAdapterConfig.NewConfig<GetEntryResponse, UpdateEntryInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateEntryInternalStorageRequest>();
 
         typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
             .IgnoreNullValues(true)

@@ -1,5 +1,4 @@
-﻿using SharedCode.Entities;
-using MapsterMapper;
+﻿using MapsterMapper;
 using Storage.Entities.Entries;
 using Storage.Extensions;
 using Storage.Interfaces;
@@ -43,7 +42,7 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 
         var response = new GetEntriesByActionInternalStorageResponse
         {
-            Entries = _mapper.Map<List<EntryDto>>(entries)
+            Entries = _mapper.Map<List<GetEntriesByActionInternalStorageResponse.EntryDto>>(entries)
         };
 
         return response;
@@ -55,7 +54,7 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 
         var response = new GetAllEntriesInternalStorageResponse
         {
-            Entries = _mapper.Map<List<EntryDto>>(entries)
+            Entries = _mapper.Map<List<GetAllEntriesInternalStorageResponse.EntryDto>>(entries)
         };
 
         return response;
@@ -66,11 +65,11 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
         await _entriesStorageService.DeleteAsync(request.Id, cancellationToken);
     }
 
-    public async Task<GetEntryResponse> GetAsync(Guid registrationId, CancellationToken cancellationToken)
+    public async Task<GetEntryInternalStorageResponse> GetAsync(Guid registrationId, CancellationToken cancellationToken)
     {
         var entry = await _entriesStorageService.GetAsync(registrationId.ToString(), cancellationToken);
         
-        return _mapper.Map<GetEntryResponse>(entry);
+        return _mapper.Map<GetEntryInternalStorageResponse>(entry);
     }
 
     public async Task UpdateEntryAsync(UpdateEntryInternalStorageRequest request, CancellationToken cancellationToken)

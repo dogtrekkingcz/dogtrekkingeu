@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
 using Storage.Options;
@@ -57,7 +58,11 @@ public static class DiCompositor
             .AddSingleton<IStorageService<EntryRecord>, StorageService<EntryRecord>>()
             .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>();
 
-
+        typeAdapterConfig.NewConfig<string, Guid>()
+            .Map(d => d, s => s.ToGuid());
+        typeAdapterConfig.NewConfig<Guid, string>()
+            .Map(d => d, s => s.ToString());
+        
         typeAdapterConfig
             .AddSharedMapping()
             .AddActionRepositoryMapping()

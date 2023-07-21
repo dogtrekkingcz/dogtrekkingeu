@@ -1,7 +1,5 @@
-﻿using SharedCode.Entities;
-using Mapster;
+﻿using Mapster;
 using Storage.Entities.Entries;
-using Storage.Extensions;
 using Storage.Models;
 
 namespace Storage.Services.Repositories.Entries
@@ -10,24 +8,33 @@ namespace Storage.Services.Repositories.Entries
     {
         internal static TypeAdapterConfig AddEntriesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, EntryRecord>()
-                .Ignore(d => d.Id)
-                .Map(d => d.ActionId, s => s.ActionId.ToString())
-                .Map(d => d.RaceId, s => s.RaceId.ToString())
-                .Map(d => d.CategoryId, s => s.CategoryId.ToString());
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, EntryRecord>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.VaccinationDto, EntryRecord.VaccinationDto>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.DogDto, EntryRecord.DogDto>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.MerchandizeItemDto, EntryRecord.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.AddressDto, EntryRecord.AddressDto>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.LatLngDto, EntryRecord.LatLngDto>();
+            
+            typeAdapterConfig.NewConfig<EntryRecord, GetEntryInternalStorageResponse>();
+            typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntryInternalStorageResponse.VaccinationDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.DogDto, GetEntryInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetEntryInternalStorageResponse.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.AddressDto, GetEntryInternalStorageResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.LatLngDto, GetEntryInternalStorageResponse.LatLngDto>();
 
-            typeAdapterConfig.NewConfig<EntryRecord, EntryDto>()
-                .Map(d => d.ActionId, s => s.ActionId.ToGuid())
-                .Map(d => d.RaceId, s => s.RaceId.ToGuid())
-                .Map(d => d.CategoryId, s => s.CategoryId.ToGuid());
-
-            typeAdapterConfig.NewConfig<EntryDto, EntryRecord>()
-                .Map(d => d.ActionId, s => s.ActionId.ToString())
-                .Map(d => d.RaceId, s => s.RaceId.ToString())
-                .Map(d => d.CategoryId, s => s.CategoryId.ToString());
-
-            typeAdapterConfig.NewConfig<EntryRecord, GetEntryResponse>()
-                .IgnoreNullValues(true);
+            typeAdapterConfig.NewConfig<EntryRecord, GetEntriesByActionInternalStorageResponse.EntryDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntriesByActionInternalStorageResponse.VaccinationDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.DogDto, GetEntriesByActionInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetEntriesByActionInternalStorageResponse.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.AddressDto, GetEntriesByActionInternalStorageResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.LatLngDto, GetEntriesByActionInternalStorageResponse.LatLngDto>();
+            
+            typeAdapterConfig.NewConfig<EntryRecord, GetAllEntriesInternalStorageResponse.EntryDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetAllEntriesInternalStorageResponse.VaccinationDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.DogDto, GetAllEntriesInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetAllEntriesInternalStorageResponse.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.AddressDto, GetAllEntriesInternalStorageResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.LatLngDto, GetAllEntriesInternalStorageResponse.LatLngDto>();
             
             return typeAdapterConfig;
         }
