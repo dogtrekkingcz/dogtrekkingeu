@@ -123,7 +123,19 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.PaymentDefinitionDto, GetActionInternalStorageResponse.PaymentDefinitionDto>();
             typeAdapterConfig.NewConfig<ActionRecord.ActionSaleItemDto, GetActionInternalStorageResponse.ActionSaleItemDto>();
 
-            typeAdapterConfig.NewConfig<AddResultInternalStorageRequest, ActionRecord.RacerDto>();
+            typeAdapterConfig.NewConfig<AddResultInternalStorageRequest, ActionRecord.RacerDto>()
+                .Ignore(d => d.Id)
+                .Ignore(d => d.CompetitorId)
+                .Ignore(d => d.Payments)
+                .Ignore(d => d.Notes)
+                .Ignore(d => d.RequestedPayments)
+                .Ignore(d => d.Merchandize)
+                .Ignore(d => d.Address)
+                .Ignore(d => d.Dogs)
+                .Map(d => d.FirstName, s => s.Name)
+                .Map(d => d.LastName, s => s.Surname)
+                .Map(d => d.Accepted, s => true)
+                .Map(d => d.Payed, s => false);
 
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateActionInternalStorageRequest.RacerDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();

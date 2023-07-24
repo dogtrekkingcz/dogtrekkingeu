@@ -3,6 +3,8 @@
 public sealed record GetActionInternalStorageResponse
 {
     public Guid Id { get; set; }
+    
+    public DateTimeOffset Created { get; set; }
 
     public string Name { get; set; } = string.Empty;
 

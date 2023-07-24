@@ -11,6 +11,27 @@ internal static class ActionsServiceMapping
     public static TypeAdapterConfig AddActionsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse, GetAllActionsResponse>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.ActionDto, GetAllActionsResponse.ActionDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.RacerDto, GetAllActionsResponse.RacerDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.NoteDto, GetAllActionsResponse.NoteDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.PaymentDto, GetAllActionsResponse.PaymentDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.RequestedPaymentItem, GetAllActionsResponse.RequestedPaymentItem>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.RequestedPaymentsDto, GetAllActionsResponse.RequestedPaymentsDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.AddressDto, GetAllActionsResponse.AddressDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.CategoryDto, GetAllActionsResponse.CategoryDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.DogDto, GetAllActionsResponse.DogDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.LimitsDto, GetAllActionsResponse.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.RaceDto, GetAllActionsResponse.RaceDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.RaceState, GetAllActionsResponse.RaceState>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.TermDto, GetAllActionsResponse.TermDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.VaccinationDto, GetAllActionsResponse.VaccinationDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.VaccinationType, GetAllActionsResponse.VaccinationType>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.ActionSaleDto, GetAllActionsResponse.ActionSaleDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.LatLngDto, GetAllActionsResponse.LatLngDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.MerchandizeItemDto, GetAllActionsResponse.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.PaymentDefinitionDto, GetAllActionsResponse.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.ActionSaleItemDto, GetAllActionsResponse.ActionSaleItemDto>();
+        
 
         typeAdapterConfig.NewConfig<GetSelectedActionsRequest, GetSelectedActionsInternalStorageRequest>();
         

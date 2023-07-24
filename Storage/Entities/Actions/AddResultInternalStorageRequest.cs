@@ -18,6 +18,10 @@ public record AddResultInternalStorageRequest
 
     public string Email { get; set; } = string.Empty;
 
+    public DateTimeOffset? Start { get; set; } = null;
+
+    public DateTimeOffset? Finish { get; set; } = null;
+
     public FinalState State { get; set; } = FinalState.Finished;
     
     public enum FinalState {
