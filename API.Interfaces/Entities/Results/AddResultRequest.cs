@@ -19,6 +19,10 @@ public sealed record AddResultRequest
     public string Email { get; set; } = string.Empty;
 
     public FinalState State { get; set; } = FinalState.Finished;
+
+    public DateTimeOffset? Start { get; set; } = null;
+
+    public DateTimeOffset? Finish { get; set; } = null;
     
     public enum FinalState {
         NotSpecified = 0,
