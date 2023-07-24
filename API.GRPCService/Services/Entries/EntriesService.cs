@@ -44,13 +44,13 @@ internal class EntriesService : Protos.Entries.Entries.EntriesBase
         return response;
     }
 
-    public async override Task<Protos.Entries.GetAllEntriesResponse> getAllEntries(Protos.Entries.GetAllEntriesRequest request, ServerCallContext context)
+    public async override Task<Protos.Entries.GetAllEntries.GetAllEntriesResponse> getAllEntries(Protos.Entries.GetAllEntriesRequest request, ServerCallContext context)
     {
         var getAllEntriesRequest = _mapper.Map<GetAllEntriesRequest>(request);
 
         var entries = await _entriesService.GetAllEntriesAsync(getAllEntriesRequest, context.CancellationToken);
 
-        var response = _mapper.Map<Protos.Entries.GetAllEntriesResponse>(entries);
+        var response = _mapper.Map<Protos.Entries.GetAllEntries.GetAllEntriesResponse>(entries);
 
         return response;
     }

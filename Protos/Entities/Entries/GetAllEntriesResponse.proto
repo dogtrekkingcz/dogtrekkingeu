@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Protos.Entries";
+option csharp_namespace = "Protos.Entries.GetAllEntries";
 
 package entries.getallentriesresponse;
 
@@ -8,30 +8,30 @@ import "google/type/datetime.proto";
 import "google/type/latlng.proto";
 
 message GetAllEntriesResponse {
-  repeated GetAllEntriesResponse_Entry Entries = 1;
+  repeated Entry Entries = 1;
 }
 
-message GetAllEntriesResponse_Entry {
+message Entry {
   string UserProfileId = 2;
   string CompetitorId = 3;
   string Name = 4;
   string Surname = 5;
   string Phone = 6;
   string Email = 7;
-  repeated GetAllEntriesResponse_Dog Dogs = 8;
+  repeated Dog Dogs = 8;
   repeated string Notes = 9;
   string ActionId = 10;
   string RaceId = 11;
   string CategoryId = 12;
-  GetAllEntriesResponse_Address Address = 13;
+  Address Address = 13;
   optional google.type.DateTime Birthday = 14;
   string LanguageCode = 15;
-  repeated GetAllEntriesResponse_MerchandizeItem Merchandize = 16;
+  repeated MerchandizeItem Merchandize = 16;
   bool Accepted = 17;
   optional google.type.DateTime AcceptedDate = 18;
 }
 
-message GetAllEntriesResponse_Address {
+message Address {
   string Country = 1;
   string Region = 2;
   string ZipCode = 3;
@@ -40,16 +40,16 @@ message GetAllEntriesResponse_Address {
   google.type.LatLng Position = 6;
 }
 
-message GetAllEntriesResponse_Dog {
+message Dog {
   string Id = 1;
   string Name = 2;
   string Pedigree = 3;
   string Chip = 4;
   google.type.DateTime Birthday = 5;
-  repeated GetAllEntriesResponse_Vaccination Vaccinations = 6;
+  repeated Vaccination Vaccinations = 6;
 }
 
-message GetAllEntriesResponse_MerchandizeItem {
+message MerchandizeItem {
   string Id = 1;
   string Name = 2;
   string Description = 3;
@@ -62,15 +62,15 @@ message GetAllEntriesResponse_MerchandizeItem {
   string Note = 10;
 }
 
-message GetAllEntriesResponse_Vaccination {
+message Vaccination {
   optional google.type.DateTime Date = 1;
   optional google.type.DateTime ValidUntil = 2;
-  GetAllEntriesResponse_VaccinationType Type = 3;
+  VaccinationType Type = 3;
   string Note = 4;
   string UriToPhoto = 5;
 }
 
-enum GetAllEntriesResponse_VaccinationType {
+enum VaccinationType {
   Unspecified = 0;
   Rabies = 1; // vzteklina
   Psinka = 2;

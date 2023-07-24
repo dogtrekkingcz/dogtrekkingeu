@@ -71,7 +71,7 @@ else
 
     private async Task ReloadDataAsync()
     {
-        Protos.Entries.GetAllEntriesResponse response = await Client.getAllEntriesAsync(new Protos.Entries.GetAllEntriesRequest());
+        Protos.Entries.GetAllEntries.GetAllEntriesResponse response = await Client.getAllEntriesAsync(new Protos.Entries.GetAllEntriesRequest());
 
         _entriesList = mapper.Map<List<EntryModel>>(response.Entries);
 

@@ -1,15 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using SharedCode.Entities;
 
 namespace DogsOnTrailApp.Models;
 
 public sealed record EntryModel
 {
-    public Guid? Id { get; set; } = Guid.Empty;
+    public string? Id { get; set; } = "";
 
     public string UserProfileId { get; set; } = "";
-    
+
     public string CompetitorId { get; set; } = "";
 
     [Required]
@@ -19,6 +17,7 @@ public sealed record EntryModel
     public string Surname { get; set; } = "";
 
     [Required]
+    [Phone]
     public string Phone { get; set; } = "";
 
     [Required]
@@ -38,23 +37,48 @@ public sealed record EntryModel
     public AddressDto Address { get; set; } = new();
 
     public DateTimeOffset? Birthday { get; set; } = null;
-    
+
     public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
+
+    public bool Accepted { get; set; } = false;
+
+    public DateTimeOffset? AcceptedDate { get; set; } = null;
 
     public string LanguageCode { get; set; } = "en-US";
 
+    public List<MerchandizeItemDto> Merchandize { get; set; } = new();
+
+    
+    public sealed record AddressDto
+    {
+        public string Country { get; set; } = string.Empty;
+
+        public string Region { get; set; } = string.Empty;
+
+        public string ZipCode { get; set; } = string.Empty;
+
+        public string City { get; set; } = string.Empty;
+
+        public string Street { get; set; } = string.Empty;
+
+        public LatLngDto Position { get; set; } = new();
+    }
+
+    public sealed record LatLngDto
+    {
+        public double GpsLatitude { get; set; } = 0.0;
+
+        public double GpsLongitude { get; set; } = 0.0;
+    }
     
     public record DogDto
     {
         public string? Id { get; set; }
         
-        [Required]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
         public string Pedigree { get; set; } = string.Empty;
 
-        [Required]
         public string Chip { get; set; } = string.Empty;
 
         public DateTimeOffset? Birthday { get; set; } = null;
@@ -68,7 +92,7 @@ public sealed record EntryModel
                 }
             };
     }
-
+    
     public sealed record VaccinationDto
     {
         public DateTimeOffset? Date { get; set; } = DateTimeOffset.Now;
@@ -95,5 +119,28 @@ public sealed record EntryModel
         Babesioza = 8,
         PlisnoveInfekce = 9,
         Leishmanioza = 10
+    }
+    
+    public sealed record MerchandizeItemDto
+    {
+        public string? Id { get; set; } = string.Empty;
+
+        public string Name { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+            
+        public double Price { get; set; } = 0.0;
+
+        public string Currency { get; set; } = "Kč";
+
+        public string Variant { get; set; } = string.Empty;
+
+        public string Size { get; set; } = string.Empty;
+
+        public string Color { get; set; } = string.Empty;
+
+        public int Count { get; set; } = 0;
+
+        public string Note { get; set; } = string.Empty;
     }
 }

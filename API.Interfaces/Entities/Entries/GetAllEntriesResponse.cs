@@ -1,8 +1,8 @@
 ﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Entries;
 
 public sealed record GetAllEntriesResponse
-{
-public List<EntryDto> Entries { get; init; } = new();
+{ 
+    public List<EntryDto> Entries { get; init; } = new();
     
     public sealed record EntryDto
     {
