@@ -72,7 +72,12 @@ else
                         <ul class="dropdown-menu">
                             <AuthorizeView>
                                 <Authorized>
-                                    @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
+                                    @if (UserProfileService.Get()?
+                                        .Rights?
+                                        .FirstOrDefault(right => 
+                                            right.ActionId == Action.Id.ToString() && 
+                                            right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())
+                                            ) != null)
                                     {
                                         <li><a class="dropdown-item" @onclick="@(async () => await ImportRegistrationToAction(entry))">@Localizer["Action.Manage.AcceptRegistration"]</a></li>
                                     }
@@ -112,7 +117,7 @@ else
             {
                 foreach (var racer in category.Racers)
                 {
-                    racer.RequestedPayments.Items.Add(new RequestedPaymentItem
+                    racer.RequestedPayments.Items.Add(new ActionModel.RequestedPaymentItem
                     {
                         Name = "RegistrationFee",
                         Price = startingPrice
@@ -188,7 +193,7 @@ else
                                 <ul class="dropdown-menu">
                                     <AuthorizeView>
                                         <Authorized>
-                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
+                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id.ToString() && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
                                             {
                                                 <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Localizer["Action.Manage.AcceptPayment"]</a></li>
                                             }
@@ -216,12 +221,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetActionRequest
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
         {
             Id = Id
         });
 
-        Action = Mapper.Map<ActionModel>(actionResponse.Action);
+        Action = Mapper.Map<ActionModel>(actionResponse);
         
         // ---
         
@@ -241,41 +246,41 @@ else
             ActionId = entry.ActionId.ToString()
         });
         
-        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetActionRequest
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
         {
             Id = Id
         });
 
-        Action = Mapper.Map<ActionModel>(actionResponse.Action);
+        Action = Mapper.Map<ActionModel>(actionResponse);
         
         StateHasChanged();
     }
 
-    private async Task AcceptPayment(RacerDto racer)
+    private async Task AcceptPayment(ActionModel.RacerDto racer)
     {
         await ActionsClient.acceptPaymentAsync(new AcceptPaymentRequest
         {
             Id = racer.Id.ToString(),
-            ActionId = Action.Id,
+            ActionId = Action.Id.ToString(),
             Amount = racer.RequestedPayments.Sum,
             Note = "",
             Currency = "Kč",
             BankAccount = ""
         });
         
-        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetActionRequest
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
         {
             Id = Id
         });
 
-        Action = Mapper.Map<ActionModel>(actionResponse.Action);
+        Action = Mapper.Map<ActionModel>(actionResponse);
         
         StateHasChanged();
     }
     
     private async Task SaveChangesAsync()
     {
-        var request = Mapper.Map<UpdateActionRequest>(Action);
+        var request = Mapper.Map<Protos.Actions.UpdateAction.UpdateActionRequest>(Action);
         
         await ActionsClient.updateActionAsync(request);
     }

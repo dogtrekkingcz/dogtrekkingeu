@@ -128,7 +128,7 @@ else
 
     private async Task ReloadData()
     {
-        Protos.Actions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
+        Protos.Actions.GetAllActions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActions.GetAllActionsRequest());
 
         _actionList = mapper.Map<List<ActionModel>>(response.Actions);
                 

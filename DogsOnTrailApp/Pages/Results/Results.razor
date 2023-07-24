@@ -1,8 +1,9 @@
 ﻿@page "/results/{ActionId}"
-@using SharedCode.Entities
 @using MapsterMapper
-@using Protos.Results
+@using Protos.Actions.GetRacesForAction
+@using DogsOnTrailApp.Models
 @inject Protos.Results.Results.ResultsClient ResultsClient
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
 @inject IStringLocalizer<Resource> Localizer
 @inject IMapper Mapper
 
@@ -30,7 +31,7 @@ else
 
 @code {
     [Parameter] public string ActionId { get; set; }
-    private List<RaceDto> _races = null;
+    private List<ActionModel.RaceDto> _races = null;
     
     protected override async Task OnInitializedAsync()
     {
@@ -39,8 +40,8 @@ else
 
     private async Task ReloadData()
     {
-        Protos.Results.GetRacesForActionResponse response = await ResultsClient.getRacesForActionAsync(new GetRacesForActionRequest { ActionId = ActionId });
+        var response = await ActionsClient.getRacesForActionAsync(new GetRacesForActionRequest { ActionId = ActionId });
 
-        _races = Mapper.Map<List<RaceDto>>(response.Races);
+        _races = Mapper.Map<List<ActionModel.RaceDto>>(response.Races);
     }
 }

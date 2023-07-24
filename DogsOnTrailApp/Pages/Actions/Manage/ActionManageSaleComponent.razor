@@ -1,9 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using DogsOnTrailApp.Models
-@using MongoDB.Driver.Core.Operations
-@using SharedCode.Entities
-@using System.Collections.ObjectModel
-@using Protos.Shared
 
 @inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
@@ -157,11 +153,11 @@
     private string TmpSize { get; set; }
     private string TmpVariant { get; set; }
 
-    private ActionDto.ActionSaleItemDto EditableItem { get; set; } = null;
+    private ActionModel.ActionSaleItemDto EditableItem { get; set; } = null;
 
     private void AddNewCommonItem()
     {
-        Model.Sale.Items.Add(new ActionDto.ActionSaleItemDto
+        Model.Sale.Items.Add(new ActionModel.ActionSaleItemDto
         {
             Id = Guid.NewGuid().ToString()
         });
@@ -171,7 +167,7 @@
 
     private void AddNewTShirtItem()
     {
-        Model.Sale.Items.Add(new ActionDto.ActionSaleItemDto
+        Model.Sale.Items.Add(new ActionModel.ActionSaleItemDto
         {
             Id = Guid.NewGuid().ToString(),
             Sizes = new List<string> { "XS", "S", "M", "L", "XL", "XXL", "XXXL" },
@@ -186,7 +182,7 @@
         StateHasChanged();
     }
     
-    private void AddedVariant(ActionDto.ActionSaleItemDto saleItem)
+    private void AddedVariant(ActionModel.ActionSaleItemDto saleItem)
     {
         if (string.IsNullOrEmpty(TmpVariant) == false)
             saleItem.Variants.Add(TmpVariant);
@@ -196,7 +192,7 @@
         StateHasChanged();
     }
     
-    private void AddedColor(ActionDto.ActionSaleItemDto saleItem)
+    private void AddedColor(ActionModel.ActionSaleItemDto saleItem)
     {
         if (string.IsNullOrEmpty(TmpColor) == false)
             saleItem.Colors.Add(TmpColor);
@@ -206,7 +202,7 @@
         StateHasChanged();
     }
 
-    private void AddedSize(ActionDto.ActionSaleItemDto saleItem)
+    private void AddedSize(ActionModel.ActionSaleItemDto saleItem)
     {
         if (string.IsNullOrEmpty(TmpSize) == false)
             saleItem.Sizes.Add(TmpSize);
@@ -216,7 +212,7 @@
         StateHasChanged();
     }
 
-    private void MakeEditable(ActionDto.ActionSaleItemDto saleItem)
+    private void MakeEditable(ActionModel.ActionSaleItemDto saleItem)
     {
         EditableItem = saleItem;
         

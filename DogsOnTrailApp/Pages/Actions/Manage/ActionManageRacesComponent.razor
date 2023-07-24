@@ -75,30 +75,30 @@
 
     private void FillOfficialDtRaceTemplate()
     {
-        Model.Races ??= new List<RaceDto>();
+        Model.Races ??= new List<ActionModel.RaceDto>();
 
-        Model.Races.Add(new RaceDto
+        Model.Races.Add(new ActionModel.RaceDto
         {
             Name = "DogTrekking",
             Begin = Model.Term.From.AddDays(1),
             MaxNumberOfCompetitors = int.MaxValue,
             EnteringFrom = DateTimeOffset.Now,
             EnteringTo = Model.Term.To,
-            Categories = new List<CategoryDto>
+            Categories = new List<ActionModel.CategoryDto>
             {
-                { new CategoryDto { Name = "DTW1" } },
-                { new CategoryDto() { Name = "DTM1" } },
-                { new CategoryDto { Name = "DTW2" } },
-                { new CategoryDto { Name = "DTM2" } }
+                { new ActionModel.CategoryDto { Name = "DTW1" } },
+                { new ActionModel.CategoryDto() { Name = "DTM1" } },
+                { new ActionModel.CategoryDto { Name = "DTW2" } },
+                { new ActionModel.CategoryDto { Name = "DTM2" } }
             },
-            Limits = new RaceDto.LimitsDto
+            Limits = new ActionModel.LimitsDto
             {
                 MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
                 MinimalAgeOfRacerInDayes = 15 * 12 * 30 // 15 years
             },
-            Payments = new List<RaceDto.PaymentDefinitionDto>
+            Payments = new List<ActionModel.PaymentDefinitionDto>
             {
-                new RaceDto.PaymentDefinitionDto
+                new ActionModel.PaymentDefinitionDto
                 {
                     Currency = "Czk",
                     From = DateTimeOffset.Now,
@@ -111,30 +111,30 @@
 
     private void FillOfficialDmRaceTemplate()
     {
-        Model.Races ??= new List<RaceDto>();
+        Model.Races ??= new List<ActionModel.RaceDto>();
         
-        Model.Races.Add(new RaceDto
+        Model.Races.Add(new ActionModel.RaceDto
         {
             Name = "DogMarathon",
             Begin = Model.Term.From.AddDays(2),
             MaxNumberOfCompetitors = int.MaxValue,
             EnteringFrom = DateTimeOffset.Now,
             EnteringTo = Model.Term.To,
-            Categories = new List<CategoryDto>
+            Categories = new List<ActionModel.CategoryDto>
             {
-                { new CategoryDto { Name = "DMW1" }},
-                { new CategoryDto { Name = "DMM1" }},
-                { new CategoryDto { Name = "DMW2" }},
-                { new CategoryDto { Name = "DMM2" }}
+                { new ActionModel.CategoryDto { Name = "DMW1" }},
+                { new ActionModel.CategoryDto { Name = "DMM1" }},
+                { new ActionModel.CategoryDto { Name = "DMW2" }},
+                { new ActionModel.CategoryDto { Name = "DMM2" }}
             },
-            Limits = new RaceDto.LimitsDto
+            Limits = new ActionModel.LimitsDto
             {
                 MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
                 MinimalAgeOfRacerInDayes = 15 * 12 * 30 // 15 years
             },
-            Payments = new List<RaceDto.PaymentDefinitionDto>
+            Payments = new List<ActionModel.PaymentDefinitionDto>
             {
-                new RaceDto.PaymentDefinitionDto
+                new ActionModel.PaymentDefinitionDto
                 {
                     Currency = "Czk",
                     From = DateTimeOffset.Now,
@@ -147,27 +147,27 @@
 
     private void FillShortRaceTemplate()
     {
-        Model.Races ??= new List<RaceDto>();
+        Model.Races ??= new List<ActionModel.RaceDto>();
        
-        Model.Races.Add(new RaceDto
+        Model.Races.Add(new ActionModel.RaceDto
         {
             Name = "Short",
             Begin = Model.Term.From.AddDays(2),
             MaxNumberOfCompetitors = int.MaxValue,
             EnteringFrom = DateTimeOffset.Now,
             EnteringTo = Model.Term.To,
-            Categories = new List<CategoryDto>
+            Categories = new List<ActionModel.CategoryDto>
             {
-                { new CategoryDto { Name = "Short" }}
+                { new ActionModel.CategoryDto { Name = "Short" }}
             },
-            Limits = new RaceDto.LimitsDto
+            Limits = new ActionModel.LimitsDto
             {
                 MinimalAgeOfTheDogInDayes = 0,
                 MinimalAgeOfRacerInDayes = 0
             },
-            Payments = new List<RaceDto.PaymentDefinitionDto>
+            Payments = new List<ActionModel.PaymentDefinitionDto>
             {
-                new RaceDto.PaymentDefinitionDto
+                new ActionModel.PaymentDefinitionDto
                 {
                     Currency = "Czk",
                     From = DateTimeOffset.Now,

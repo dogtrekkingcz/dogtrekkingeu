@@ -3,6 +3,7 @@
 @using DogsOnTrailApp.Models
 @using MapsterMapper
 @using DogsOnTrailApp.Shared
+@using Protos.Actions.UpdateAction
 
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
@@ -76,7 +77,7 @@ else
     private string ActionButtonText { get; set; }
 
     [Parameter]
-    public EventCallback<Protos.Shared.ActionDetail> OnItemChanged { get; set; }
+    public EventCallback<ActionModel> OnItemChanged { get; set; }
 
     private AuthenticationState _authState = null;
 
@@ -85,13 +86,13 @@ else
         _authState = await AuthStateProvider.GetAuthenticationStateAsync();
 
         if (string.IsNullOrEmpty(Id) == false && Id != "0") {
-            var getActionRequest = new Protos.Actions.GetActionRequest
+            var getActionRequest = new Protos.Actions.GetAction.GetActionRequest
             {
                 Id = Id
             };
             var actionResponse = await Client.getActionAsync(getActionRequest);
 
-            Model = mapper.Map<ActionModel>(actionResponse.Action);
+            Model = mapper.Map<ActionModel>(actionResponse);
 
             RequiredAction = RequiredActionEnum.UpdateAction;
         }
@@ -123,7 +124,7 @@ else
     
     private async Task SubmitForm()
     {
-        if (RequiredAction == RequiredActionEnum.AddAction || string.IsNullOrEmpty(Model.Id) || Id == "0")
+        if (RequiredAction == RequiredActionEnum.AddAction || Model.Id == Guid.Empty)
             await CreateNewAction();
         else if (RequiredAction == RequiredActionEnum.UpdateAction)
             await UpdateAction();
@@ -135,28 +136,19 @@ else
     
     private async Task CreateNewAction()
     {
-        Model.Id = "";
-
-        var action = mapper.Map<Protos.Shared.ActionDetail>(Model);
-        var item = new Protos.Actions.CreateActionRequest
-        {
-            Action = action
-        };
+        var createActionRequest = mapper.Map<Protos.Actions.CreateAction.CreateActionRequest>(Model);
         
-        var result = await Client.createActionAsync(item);
+        var result = await Client.createActionAsync(createActionRequest);
 
         if (string.IsNullOrEmpty(result.Id) == false)
         {
-            await OnItemChanged.InvokeAsync(item.Action);
+            await OnItemChanged.InvokeAsync(Model);
         }
     }
 
     private async Task UpdateAction()
     {
-        var updateActionRequest = new Protos.Actions.UpdateActionRequest
-        {
-            Action = mapper.Map<Protos.Shared.ActionDetail>(Model),
-        };
+        var updateActionRequest = mapper.Map<Protos.Actions.UpdateAction.UpdateActionRequest>(Model);
 
         var result = await Client.updateActionAsync(updateActionRequest);
         
@@ -165,9 +157,9 @@ else
 
     private async Task DeleteAction()
     {
-        var deleteActionRequest = new Protos.Actions.DeleteActionRequest
+        var deleteActionRequest = new Protos.Actions.DeleteAction.DeleteActionRequest
         {
-            Id = Model.Id
+            Id = Model.Id.ToString()
         };
 
         var result = await Client.deleteActionAsync(deleteActionRequest);

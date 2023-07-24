@@ -62,7 +62,7 @@ else
 @code {
     private List<EntryModel> _entriesList = null;
 
-    private List<ActionDetail> _actionsList = null;
+    private List<ActionModel> _actionsList = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -79,12 +79,12 @@ else
 
         var ids = _entriesList.Select(entry => entry.ActionId.ToString()).ToList();
         
-        var selectedActions = await ActionsClient.getSelectedActionsAsync(new Protos.Actions.GetSelectedActionsRequest
+        var selectedActions = await ActionsClient.getSelectedActionsAsync(new Protos.Actions.GetSelectedActions.GetSelectedActionsRequest
         {
             Ids = { ids }
         });
 
-        _actionsList = selectedActions.Actions.ToList();
+        _actionsList = mapper.Map<List<ActionModel>>(selectedActions.Actions);
         
         StateHasChanged();
     }
@@ -99,11 +99,11 @@ else
         }
         else
         {
-            var action = _actionsList.First(a => a.Id.ToGuid() == entry.ActionId);
+            var action = _actionsList.First(a => a.Id == entry.ActionId);
 
-            var race = action.Races.First(r => r.Id.ToGuid() == entry.RaceId);
+            var race = action.Races.First(r => r.Id == entry.RaceId);
 
-            var category = race.Categories.First(c => c.Id.ToGuid() == entry.CategoryId);
+            var category = race.Categories.First(c => c.Id == entry.CategoryId);
 
             ret = $"{action?.Name ?? entry.ActionId.ToString()} - {race?.Name ?? entry.RaceId.ToString()} - {category?.Name ?? entry.CategoryId.ToString()}";
         }

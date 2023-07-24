@@ -61,11 +61,11 @@
 
 @code {
     [Parameter] public string ActionId { get; set; }
-    [Parameter] public RaceDto Race { get; set; }
-    [Parameter] public CategoryDto Category { get; set; }
+    [Parameter] public ActionModel.RaceDto Race { get; set; }
+    [Parameter] public ActionModel.CategoryDto Category { get; set; }
     
     [Parameter]
-    public EventCallback<RacerDto> OnResultAddedCallback { get; set; }
+    public EventCallback<ActionModel.RacerDto> OnResultAddedCallback { get; set; }
     
     public string FirstName { get; set; }
     public string LastName { get; set; }

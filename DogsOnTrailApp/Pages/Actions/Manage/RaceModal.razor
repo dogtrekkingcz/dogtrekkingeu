@@ -38,7 +38,7 @@
     [Parameter] public ActionModel Model { get; set; }
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
     
-    public RaceDto RaceModel { get; set; }
+    public ActionModel.RaceDto RaceModel { get; set; }
 
     private async Task SubmitForm()
     {

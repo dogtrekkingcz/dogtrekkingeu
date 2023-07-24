@@ -91,7 +91,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Protos.Actions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActionsRequest());
+        Protos.Actions.GetAllActions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActions.GetAllActionsRequest());
 
         _actionList = mapper.Map<List<ActionModel>>(response.Actions);
 
@@ -102,7 +102,7 @@
     {
         foreach (var action in _actionList)
         {
-            var position = action.Address?.Position ?? new LatLngDto { GpsLatitude = -1, GpsLongitude = -1 }; 
+            var position = action.Address?.Position ?? new ActionModel.LatLngDto { GpsLatitude = -1, GpsLongitude = -1 }; 
             
             if (position is { GpsLatitude: >= 0.0, GpsLongitude: >= 0.0 })
             {

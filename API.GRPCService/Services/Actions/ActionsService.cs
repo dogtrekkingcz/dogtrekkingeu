@@ -93,11 +93,11 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         return response;
     }
 
-    public async override Task<Protos.Actions.DeleteActionResponse> deleteAction(Protos.Actions.DeleteActionRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.DeleteAction.DeleteActionResponse> deleteAction(Protos.Actions.DeleteAction.DeleteActionRequest request, ServerCallContext context)
     {
         await _actionsService.DeleteActionAsync(Guid.Parse(request.Id), context.CancellationToken);
 
-        return new Protos.Actions.DeleteActionResponse();
+        return new Protos.Actions.DeleteAction.DeleteActionResponse();
     }
 
     public async override Task<Protos.Actions.GetActionEntrySettings.GetActionEntrySettingsResponse> getActionEntrySettings(Protos.Actions.GetActionEntrySettings.GetActionEntrySettingsRequest request, ServerCallContext context)

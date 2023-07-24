@@ -70,8 +70,8 @@
 
 @code {
     [Parameter] public string ActionId { get; set; }
-    [Parameter] public RaceDto Race { get; set; }
-    [Parameter] public CategoryDto Category { get; set; }
+    [Parameter] public ActionModel.RaceDto Race { get; set; }
+    [Parameter] public ActionModel.CategoryDto Category { get; set; }
     
     private Racer NewRacer { get; set; } = new();
     private InputTimeModel StartProxy = new();
@@ -100,7 +100,7 @@
             
         });
         
-        Category.Racers.Add(Mapper.Map<RacerDto>(NewRacer));
+        Category.Racers.Add(Mapper.Map<ActionModel.RacerDto>(NewRacer));
 
         NewRacer = new();
 

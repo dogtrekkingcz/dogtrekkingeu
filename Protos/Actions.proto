@@ -20,6 +20,8 @@ import "Entities/Actions/GetActionRequest.proto";
 import "Entities/Actions/GetActionResponse.proto";
 import "Entities/Actions/GetSelectedActionsRequest.proto";
 import "Entities/Actions/GetSelectedActionsResponse.proto";
+import "Entities/Actions/DeleteActionRequest.proto";
+import "Entities/Actions/DeleteActionResponse.proto";
 
 service Actions {
   rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
@@ -29,18 +31,10 @@ service Actions {
   rpc getAllActions (getallactions.GetAllActionsRequest) returns (getallactions.GetAllActionsResponse);
   rpc getAction    (getaction.GetActionRequest) returns (getaction.GetActionResponse);
   rpc getSelectedActions (getselectedactions.GetSelectedActionsRequest) returns (getselectedactions.GetSelectedActionsResponse);
+  rpc deleteAction (deleteaction.DeleteActionRequest) returns (deleteaction.DeleteActionResponse);
   
-  rpc deleteAction (DeleteActionRequest) returns (DeleteActionResponse);
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
   rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);
-}
-
-message DeleteActionRequest {
-  string Id = 1;
-}
-
-message DeleteActionResponse {
-  
 }
 
 message ImportRegistrationToActionRequest {

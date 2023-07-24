@@ -22,7 +22,7 @@
         
         <AuthorizeView>
             <Authorized>
-                @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Model.Id && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
+                @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Model.Id.ToString() && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
                 {
                     <li><a class="dropdown-item" @onclick="@(async () => await ManageRegistrations(Model))">@Localizer["Action.Manage.Entries"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await ManagePayments(Model))">@Localizer["Action.Manage.Payments"]</a></li>
