@@ -10,28 +10,11 @@ internal static class ActionsServiceMapping
 {
     internal static TypeAdapterConfig AddActionsServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, CreateActionRequest>();
-        
-        typeAdapterConfig.NewConfig<CreateActionResponse, Protos.Actions.CreateAction.CreateActionResponse>();
-
-        typeAdapterConfig.NewConfig<Protos.Shared.ActionDetail, UpdateActionRequest>();
-
         typeAdapterConfig.NewConfig<UpdateActionResponse, Protos.Actions.UpdateAction.UpdateActionResponse>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.DeleteActionRequest, DeleteActionRequest>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionRequest, GetActionRequest>();
-
-        typeAdapterConfig.NewConfig<GetActionResponse, Protos.Shared.ActionDetail>();
-        
-        
-        typeAdapterConfig.NewConfig<GetAllActionsWithDetailsResponse, RepeatedField<Protos.Shared.ActionDetail>>()
-            .Map(d => d, s => s.Actions)
-            .Ignore(d => d.Capacity);
-        
-        typeAdapterConfig.NewConfig<GetSelectedActionsResponse, RepeatedField<Protos.Shared.ActionDetail>>()
-            .Map(d => d, s => s.Actions)
-            .Ignore(d => d.Capacity);
 
         typeAdapterConfig.NewConfig<GetAllActionsResponse, RepeatedField<Protos.Shared.ActionSimple>>()
             .Map(d => d, s => s.Actions)

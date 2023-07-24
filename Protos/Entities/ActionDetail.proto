@@ -10,7 +10,7 @@ import "Entities/Address.proto";
 import "Entities/RaceDetail.proto";
 import "Entities/ActionSale.proto";
 
-message ActionDetail {
+message Action___Detail {
   enum ActionDetailFlags {
     NotValid = 0;
     IsHidden = 1;
