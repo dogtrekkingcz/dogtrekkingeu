@@ -12,13 +12,15 @@ message GetSelectedActionsResponse {
 }
 
 message Action {
-  string Name = 1;
-  string Description = 2;
-  string ContactMail = 3;
-  TermDto Term = 4;
-  AddressDto Address = 5;
-  repeated RaceDto Races = 6;
-  ActionSaleDto Sale = 7;
+  string Id = 1;
+  google.type.DateTime Created = 2;
+  string Name = 3;
+  string Description = 4;
+  string ContactMail = 5;
+  TermDto Term = 6;
+  AddressDto Address = 7;
+  repeated RaceDto Races = 8;
+  ActionSaleDto Sale = 9;
 }
 
 message RaceDto {

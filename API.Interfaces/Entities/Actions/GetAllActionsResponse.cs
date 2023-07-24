@@ -6,6 +6,10 @@ public sealed record GetAllActionsResponse
 
     public sealed record ActionDto
     {
+        public Guid Id { get; set; }
+        
+        public DateTimeOffset Created { get; set; }
+        
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
