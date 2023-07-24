@@ -53,6 +53,9 @@ typeAdapterConfig.NewConfig<DateTimeOffset?, Google.Type.DateTime>()
 typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
     .MapWith(s => s != null ? s.ToDateTimeOffset() : null);
 
+typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset>()
+    .MapWith(s => s.ToDateTimeOffset() ?? DateTimeOffset.MinValue);
+
 typeAdapterConfig.Compile();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>

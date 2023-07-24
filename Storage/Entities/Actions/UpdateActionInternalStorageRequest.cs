@@ -5,6 +5,8 @@ namespace Storage.Entities.Actions;
 public sealed record UpdateActionInternalStorageRequest
 {
     public Guid Id { get; set; }
+    
+    public DateTimeOffset Created { get; set; }
 
     public string Name { get; set; } = string.Empty;
 
