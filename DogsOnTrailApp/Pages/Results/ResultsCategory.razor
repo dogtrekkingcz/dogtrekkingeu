@@ -91,12 +91,13 @@
             NewRacer.Start = Race.Begin.ToGoogleDateTime();
             NewRacer.Finish = (Race.Begin.AddSeconds(WholeTimeProxy.Value.Seconds)).ToGoogleDateTime();
         }
-        
+
         await ResultsClient.addResultAsync(new AddResultRequest {
             ActionId = ActionId,
             RaceId = Race.Id.ToString(),
             CategoryId = Category.Id.ToString(),
-            Racer = NewRacer
+            
+            
         });
         
         Category.Racers.Add(Mapper.Map<RacerDto>(NewRacer));

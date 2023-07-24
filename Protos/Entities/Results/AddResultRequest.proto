@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Results";
+
+package results;
+
+import "google/type/datetime.proto";
+
+message AddResultRequest {
+  string ActionId = 1;
+  string RaceId = 2;
+  string CategoryId = 3;
+  
+  string Name = 4;
+  string Surname = 5;
+  string Phone = 6;
+  string Email = 7;
+  AddResultRequest_FinalState State = 8;
+  google.type.DateTime Start = 9;
+  google.type.DateTime Finish = 10;
+}
+
+enum AddResultRequest_FinalState {
+  NotSpecified = 0;
+  Accepted = 1;
+  Started = 2;
+  Finished = 3;
+  DNF = 4;
+  DNS = 5;
+  DSQ = 6;
+}

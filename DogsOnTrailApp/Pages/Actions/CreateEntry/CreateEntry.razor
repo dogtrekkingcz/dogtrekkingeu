@@ -9,7 +9,7 @@
 @inject Protos.Entries.Entries.EntriesClient EntriesClient
 @inject Protos.Actions.Actions.ActionsClient ActionsClient
 @inject IStringLocalizer<Resource> localizer
-@inject IMapper mapper
+@inject IMapper Mapper
 @inject NavigationManager NavManager
 @inject IUserProfileService UserProfileService
 
@@ -69,7 +69,7 @@
     {
         var actionSettings = await ActionsClient.getActionEntrySettingsAsync(new GetActionEntrySettingsRequest { Id = ActionId });
 
-        ActionSettings = mapper.Map<ActionSettingsModel>(actionSettings);
+        ActionSettings = Mapper.Map<ActionSettingsModel>(actionSettings);
 
         Entry.ActionId = Guid.Parse(actionSettings.Id);
 
@@ -97,12 +97,9 @@
 
     protected async Task SendAsync()
     {
-        var createEntryRequest = new CreateEntryRequest
-        {
-            Entry = mapper.Map<Protos.Shared.Entry>(Entry)
-        };
-        createEntryRequest.Entry.LanguageCode = "cs-CZ";
-
+        var createEntryRequest = Mapper.Map<Protos.Entries.CreateEntryRequest>(Entry);
+        createEntryRequest.LanguageCode = "cs-CZ";
+        
         await EntriesClient.createEntryAsync(createEntryRequest);
     }
 

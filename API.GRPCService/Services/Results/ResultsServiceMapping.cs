@@ -10,52 +10,8 @@ internal static class ResultsServiceMapping
 {
     internal static TypeAdapterConfig AddResultsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Results.AddResultRequest, AddResultRequest>()
-            .MapWith(s => new AddResultRequest
-            {
-                ActionId = s.ActionId,
-                RaceId = s.RaceId,
-                Accepted = s.Racer.Accepted,
-                Id = s.Racer.Id.ToGuid(),
-                Start = s.Racer.Start != null ? s.Racer.Start.ToDateTimeOffset() : null,
-                Finish = s.Racer.Finish != null ? s.Racer.Finish.ToDateTimeOffset() : null,
-                FirstName = s.Racer.FirstName,
-                LastName = s.Racer.LastName,
-                State = (RaceState) s.Racer.State,
-                CategoryId = s.CategoryId,
-                CompetitorId = s.Racer.CompetitorId,
-                Notes = s.Racer.Notes
-                    .Select(note => new NoteDto
-                        {
-                            Time = note.Time.ToDateTimeOffset() ?? DateTimeOffset.Now,
-                            Text = note.Text
-                        })
-                    .ToList(),
-                Dogs = s.Racer.Dogs
-                    .Select(dog => new DogDto
-                        {
-                            Id = dog.Id,
-                            Birthday = dog.Birthday.ToDateTimeOffset(),
-                            Chip = dog.Chip,
-                            Contact = dog.Contact,
-                            Kennel = dog.Kennel,
-                            Name = dog.Name,
-                            Pedigree = dog.Pedigree,
-                            UserId = dog.UserId,
-                            UriToPhoto = dog.UriToPhoto,
-                            Vaccinations = dog.Vaccinations
-                                .Select(vaccination => new DogDto.VaccinationDto
-                                {
-                                    Date = vaccination.Date != null ? vaccination.Date.ToDateTimeOffset() : null,
-                                    UriToPhoto = vaccination.UriToPhoto,
-                                    Note = vaccination.Note,
-                                    Type = (DogDto.VaccinationType) vaccination.Type,
-                                    ValidUntil = vaccination.ValidUntil != null ? vaccination.ValidUntil.ToDateTimeOffset() : null
-                                })
-                                .ToList()
-                        })
-                    .ToList(),
-            });
+        typeAdapterConfig.NewConfig<Protos.Results.AddResultRequest, AddResultRequest>();
+        typeAdapterConfig.NewConfig<Protos.Results.AddResultRequest_FinalState, AddResultRequest.FinalState>();
 
         return typeAdapterConfig;
     }

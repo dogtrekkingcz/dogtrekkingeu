@@ -34,10 +34,11 @@ internal static class EntryModelMapping
             .IgnoreNullValues(true)
             .Map(d => d.Date, s => s.Date.ToDateTimeOffset())
             .Map(d => d.ValidUntil, s => s.ValidUntil.ToDateTimeOffset());
-            
-        typeAdapterConfig.NewConfig<EntryModel, Protos.Entries.CreateEntryRequest>()
-            .Ignore(d => d.Entry.Id)
-            .Ignore(d => d.Entry.Created);
+
+        typeAdapterConfig.NewConfig<EntryModel, Protos.Entries.CreateEntryRequest>();
+        typeAdapterConfig.NewConfig<EntryModel.VaccinationDto, Protos.Entries.CreateEntryRequest_Vaccination>();
+        typeAdapterConfig.NewConfig<EntryModel.DogDto, Protos.Entries.CreateEntryRequest_Dog>();
+        typeAdapterConfig.NewConfig<EntryModel.VaccinationType, Protos.Entries.CreateEntryRequest_VaccinationType>();
 
         return typeAdapterConfig;
     }

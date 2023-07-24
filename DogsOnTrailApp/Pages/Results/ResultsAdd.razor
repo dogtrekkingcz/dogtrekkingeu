@@ -20,7 +20,7 @@
                 <label>@Localizer["Results.Manage.Add.Firstname"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Racer.FirstName"/>
+                <InputText @bind-Value="@FirstName"/>
             </div>
         </div>
         <div class="row">
@@ -28,7 +28,7 @@
                 <label>@Localizer["Results.Manage.Add.Lastname"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Racer.LastName"/>
+                <InputText @bind-Value="@LastName"/>
             </div>
         </div>
         <div class="row">
@@ -67,7 +67,13 @@
     [Parameter]
     public EventCallback<RacerDto> OnResultAddedCallback { get; set; }
     
-    public Racer Racer = new();
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    private string Phone { get; set; }
+    private string Email { get; set; }
+    private AddNewResult_FinalState State { get; set; }
+    private Google.Type.DateTime Start { get; set; }
+    private Google.Type.DateTime Finish { get; set; }
 
     private InputTimeModel StartProxy = new();
     private InputTimeModel FinishProxy = new();
@@ -76,24 +82,28 @@
     protected async Task SubmitAsync()
     {
         if (StartProxy.IsValid)
-            Racer.Start = StartProxy.Value;
+            Start = StartProxy.Value;
 
         if (FinishProxy.IsValid)
-            Racer.Finish = FinishProxy.Value;
+            Finish = FinishProxy.Value;
 
         if (WholeTimeProxy.IsValid)
         {
-            Racer.Start = Race.Begin.ToGoogleDateTime();
-            Racer.Finish = (Race.Begin.AddSeconds(WholeTimeProxy.Value.Seconds)).ToGoogleDateTime();
+            Start = Race.Begin.ToGoogleDateTime();
+            Finish = (Race.Begin.AddSeconds(WholeTimeProxy.Value.Seconds)).ToGoogleDateTime();
         }
         
         await ResultsClient.addResultAsync(new AddResultRequest {
             ActionId = ActionId,
             RaceId = Race.Id.ToString(),
             CategoryId = Category.Id.ToString(),
-            Racer = Racer
+            Name = FirstName,
+            Surname = LastName,
+            Phone = Phone,
+            Email = Email,
+            State = Mapper.Map<AddResultRequest_FinalState>(State),
+            Start = Start,
+            Finish = Finish
         });
-        
-        await OnResultAddedCallback.InvokeAsync(Mapper.Map<RacerDto>(Racer));
     }
 }

@@ -6,6 +6,7 @@ package entries;
 
 import "Entities/Entry.proto";
 import "Entities/Entries/CreateEntryRequest.proto";
+import "Entities/Entries/CreateEntryResponse.proto";
 
 service Entries {
   rpc createEntry (CreateEntryRequest) returns (CreateEntryResponse);
@@ -15,10 +16,6 @@ service Entries {
   rpc getAllEntries (GetAllEntriesRequest) returns (GetAllEntriesResponse);
   
   rpc deleteEntry (DeleteEntryRequest) returns (DeleteEntryResponse);
-}
-
-message CreateEntryResponse {
-  shared.Entry Entry = 1;
 }
 
 message GetEntriesByActionRequest {
