@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetAction";
+
+package getaction;
+
+message GetActionRequest {
+  string Id = 1;
+}

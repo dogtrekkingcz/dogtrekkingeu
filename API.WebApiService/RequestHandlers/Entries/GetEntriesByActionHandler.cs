@@ -25,7 +25,9 @@ namespace DogsOnTrailWebApiService.RequestHandlers.Entries
 
             var entries = await entriesService.GetEntriesByActionAsync(getEntriesByActionRequest, cancellationToken);
 
-            return new ValueTask<GetEntriesByActionResponse>(new GetEntriesByActionResponse { Entries = entries.Entries }).Result;
+            var response = mapper.Map<GetEntriesByActionResponse>(entries);
+            
+            return new ValueTask<GetEntriesByActionResponse>(response).Result;
         }
     }
 }

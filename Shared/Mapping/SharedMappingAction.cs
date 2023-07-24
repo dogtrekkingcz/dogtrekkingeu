@@ -7,19 +7,19 @@ namespace SharedCode.Mapping
     {
         public static TypeAdapterConfig AddSharedMappingAction(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<ActionDto, Protos.Shared.ActionDetail>()
+            typeAdapterConfig.NewConfig<Action___Dto, Protos.Shared.ActionDetail>()
                 .TwoWays();
 
-            typeAdapterConfig.NewConfig<ActionDto, Protos.Shared.ActionSimple>()
+            typeAdapterConfig.NewConfig<Action___Dto, Protos.Shared.ActionSimple>()
                 .TwoWays();
 
-            typeAdapterConfig.NewConfig<ActionDto, ActionDto>()
+            typeAdapterConfig.NewConfig<Action___Dto, Action___Dto>()
                 .TwoWays();
 
-            typeAdapterConfig.NewConfig<ActionDto.ActionSaleDto, ActionDto.ActionSaleDto>()
+            typeAdapterConfig.NewConfig<Action___Dto.ActionSaleDto, Action___Dto.ActionSaleDto>()
                 .TwoWays();
 
-            typeAdapterConfig.NewConfig<ActionDto.ActionSaleItemDto, ActionDto.ActionSaleItemDto>()
+            typeAdapterConfig.NewConfig<Action___Dto.ActionSaleItemDto, Action___Dto.ActionSaleItemDto>()
                 .TwoWays();
             
             return typeAdapterConfig;

@@ -7,13 +7,15 @@ package entries;
 import "Entities/Entry.proto";
 import "Entities/Entries/CreateEntryRequest.proto";
 import "Entities/Entries/CreateEntryResponse.proto";
+import "Entities/Entries/GetEntriesByActionResponse.proto";
+import "Entities/Entries/GetAllEntriesResponse.proto";
 
 service Entries {
   rpc createEntry (CreateEntryRequest) returns (CreateEntryResponse);
   
-  rpc getEntriesByAction (GetEntriesByActionRequest) returns (GetEntriesByActionResponse);
+  rpc getEntriesByAction (GetEntriesByActionRequest) returns (getentriesbyactionresponse.GetEntriesByActionResponse);
   
-  rpc getAllEntries (GetAllEntriesRequest) returns (GetAllEntriesResponse);
+  rpc getAllEntries (GetAllEntriesRequest) returns (getallentriesresponse.GetAllEntriesResponse);
   
   rpc deleteEntry (DeleteEntryRequest) returns (DeleteEntryResponse);
 }
@@ -23,16 +25,8 @@ message GetEntriesByActionRequest {
   bool IncludeAlreadyAccepted = 2;
 }
 
-message GetEntriesByActionResponse {
-  repeated shared.Entry Entries = 1;
-}
-
 message GetAllEntriesRequest {
   
-}
-
-message GetAllEntriesResponse {
-  repeated shared.Entry Entries = 1;
 }
 
 message DeleteEntryRequest {

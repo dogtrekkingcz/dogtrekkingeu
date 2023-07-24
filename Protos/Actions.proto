@@ -5,69 +5,34 @@ option csharp_namespace = "Protos.Actions";
 package actions;
 
 import "google/type/datetime.proto";
-import "Entities/ActionSimple.proto";
-import "Entities/ActionDetail.proto";
-import "Entities/RaceLimits.proto";
+
+import "Entities/Actions/CreateActionRequest.proto";
+import "Entities/Actions/CreateActionResponse.proto";
+import "Entities/Actions/UpdateActionRequest.proto";
+import "Entities/Actions/UpdateActionResponse.proto";
+import "Entities/Actions/GetRacesForActionRequest.proto";
+import "Entities/Actions/GetRacesForActionResponse.proto";
+import "Entities/Actions/GetActionEntrySettingsRequest.proto";
+import "Entities/Actions/GetActionEntrySettingsResponse.proto";
+import "Entities/Actions/GetAllActionsRequest.proto";
+import "Entities/Actions/GetAllActionsResponse.proto";
+import "Entities/Actions/GetActionRequest.proto";
+import "Entities/Actions/GetActionResponse.proto";
+import "Entities/Actions/GetSelectedActionsRequest.proto";
+import "Entities/Actions/GetSelectedActionsResponse.proto";
 
 service Actions {
-  rpc getAllActions (GetAllActionsRequest) returns (GetAllActionsResponse);
-  rpc getAllActionsDetails (GetAllActionsDetailsRequest) returns (GetAllActionsDetailsResponse);
-  rpc getAction    (GetActionRequest) returns (GetActionResponse);
-  rpc createAction (CreateActionRequest) returns (CreateActionResponse);
-  rpc updateAction (UpdateActionRequest) returns (UpdateActionResponse);
+  rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
+  rpc updateAction (updateaction.UpdateActionRequest) returns (updateaction.UpdateActionResponse);
+  rpc getRacesForAction (getracesforaction.GetRacesForActionRequest) returns (getracesforaction.GetRacesForActionResponse);
+  rpc getActionEntrySettings (getactionentrysettings.GetActionEntrySettingsRequest) returns (getactionentrysettings.GetActionEntrySettingsResponse);
+  rpc getAllActions (getallactions.GetAllActionsRequest) returns (getallactions.GetAllActionsResponse);
+  rpc getAction    (getaction.GetActionRequest) returns (getaction.GetActionResponse);
+  rpc getSelectedActions (getselectedactions.GetSelectedActionsRequest) returns (getselectedactions.GetSelectedActionsResponse);
+  
   rpc deleteAction (DeleteActionRequest) returns (DeleteActionResponse);
-  rpc getActionEntrySettings (GetActionEntrySettingsRequest) returns (GetActionEntrySettingsResponse);
-  rpc getSelectedActions (GetSelectedActionsRequest) returns (GetSelectedActionsResponse);
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
   rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);
-}
-
-message GetAllActionsRequest {
-
-}
-
-message GetAllActionsResponse {
-  repeated shared.ActionSimple Actions = 1;
-}
-
-message GetAllActionsDetailsRequest {
-  repeated shared.ActionDetail Actions = 1;
-}
-
-message GetAllActionsDetailsResponse {
-  repeated shared.ActionDetail Actions = 1;
-}
-
-message GetActionRequest {
-  string Id = 1;
-}
-
-message GetActionResponse {
-  shared.ActionDetail Action = 1;
-}
-
-message GetSelectedActionsRequest {
-  repeated string Ids = 1;
-}
-
-message GetSelectedActionsResponse {
-  repeated shared.ActionDetail Actions = 1;
-}
-
-message CreateActionRequest {
-  shared.ActionDetail Action = 1;
-}
-
-message CreateActionResponse {
-  string Id = 1;
-}
-
-message UpdateActionRequest {
-  shared.ActionDetail Action = 1;
-}
-
-message UpdateActionResponse {
-  string Id = 1;
 }
 
 message DeleteActionRequest {
@@ -76,30 +41,6 @@ message DeleteActionRequest {
 
 message DeleteActionResponse {
   
-}
-
-message GetActionEntrySettingsRequest {
-  string Id = 1;
-}
-
-message GetActionEntrySettingsResponse {
-  string Id = 1;
-  string Name = 2;
-  repeated RaceDto Races = 3;
-  repeated CategoryDto Categories = 4;
-}
-
-message RaceDto {
-  string Id = 1;
-  string Name = 2;
-  google.type.DateTime Start = 3;
-  shared.RaceLimits Limits = 4;
-}
-
-message CategoryDto {
-  string Id = 1;
-  string RaceId = 2;
-  string Name = 3;
 }
 
 message ImportRegistrationToActionRequest {

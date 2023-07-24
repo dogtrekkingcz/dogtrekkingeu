@@ -32,78 +32,63 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         _actionsService = actionsService;
     }
 
-    public async override Task<Protos.Actions.GetAllActionsResponse> getAllActions(Protos.Actions.GetAllActionsRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.GetAllActions.GetAllActionsResponse> getAllActions(Protos.Actions.GetAllActions.GetAllActionsRequest request, ServerCallContext context)
     {
         var getAllActionsRequest = _mapper.Map<GetAllActionsRequest>(request);
         
         var allActions = await _actionsService.GetAllActionsAsync(getAllActionsRequest, context.CancellationToken);
 
-        var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionSimple>>(allActions.Actions);
-
-        var result = new Protos.Actions.GetAllActionsResponse();
-        result.Actions.AddRange(actions);
+        var actions = _mapper.Map<RepeatedField<Protos.Actions.GetAllActions.Action>>(allActions.Actions);
+        
+        var result = new Protos.Actions.GetAllActions.GetAllActionsResponse
+        {
+            Actions = { actions }
+        };
 
         return result;
     }
 
-    public async override Task<Protos.Actions.GetSelectedActionsResponse> getSelectedActions(Protos.Actions.GetSelectedActionsRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.GetSelectedActions.GetSelectedActionsResponse> getSelectedActions(Protos.Actions.GetSelectedActions.GetSelectedActionsRequest request, ServerCallContext context)
     {
         var getSelectedActionsRequest = new GetSelectedActionsRequest { Ids = request.Ids.Select(id => Guid.Parse(id)).ToList() };
 
         var selectedActions = await _actionsService.GetSelectedActionsAsync(getSelectedActionsRequest, context.CancellationToken);
         
-        var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionDetail>>(selectedActions.Actions);
+        var actions = _mapper.Map<RepeatedField<Protos.Actions.GetSelectedActions.Action>>(selectedActions.Actions);
 
-        var result = new Protos.Actions.GetSelectedActionsResponse();
-        result.Actions.AddRange(actions);
+        var result = new Protos.Actions.GetSelectedActions.GetSelectedActionsResponse
+        {
+            Actions = { actions }
+        };
 
         return result;
     }
     
-    public async override Task<Protos.Actions.GetAllActionsDetailsResponse> getAllActionsDetails(Protos.Actions.GetAllActionsDetailsRequest request, ServerCallContext context)
-    {
-        var getAllActionsRequest = _mapper.Map<GetAllActionsWithDetailsRequest>(request);
-        
-        var allActions = await _actionsService.GetAllActionsWithDetailsAsync(getAllActionsRequest, context.CancellationToken);
-
-        var actions = _mapper.Map<RepeatedField<Protos.Shared.ActionDetail>>(allActions.Actions);
-
-        var result = new Protos.Actions.GetAllActionsDetailsResponse();
-        result.Actions.AddRange(actions);
-
-        return result;
-    }
-
-    public async override Task<Protos.Actions.GetActionResponse> getAction(Protos.Actions.GetActionRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.GetAction.GetActionResponse> getAction(Protos.Actions.GetAction.GetActionRequest request, ServerCallContext context)
     {
         var result = await _actionsService.GetActionAsync(Guid.Parse(request.Id), context.CancellationToken);
 
-        var response = new Protos.Actions.GetActionResponse
-        {
-            Action = _mapper.Map<Protos.Shared.ActionDetail>(result)
-        };
-
-        return response;
+        return _mapper.Map<Protos.Actions.GetAction.GetActionResponse>(result);
     }
 
-    public async override Task<Protos.Actions.CreateActionResponse> createAction(Protos.Actions.CreateActionRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.CreateAction.CreateActionResponse> createAction(Protos.Actions.CreateAction.CreateActionRequest request, ServerCallContext context)
     {
         var addActionRequest = _mapper.Map<CreateActionRequest>(request);
 
         var result = await _actionsService.CreateActionAsync(addActionRequest, context.CancellationToken);
 
-        var response = _mapper.Map<Protos.Actions.CreateActionResponse>(result);
+        var response = _mapper.Map<Protos.Actions.CreateAction.CreateActionResponse>(result);
 
         return response;
     }
 
-    public async override Task<Protos.Actions.UpdateActionResponse> updateAction(Protos.Actions.UpdateActionRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.UpdateAction.UpdateActionResponse> updateAction(Protos.Actions.UpdateAction.UpdateActionRequest request, ServerCallContext context)
     {
-        var updateActionRequest = _mapper.Map<UpdateActionRequest>(request.Action);
+        var updateActionRequest = _mapper.Map<UpdateActionRequest>(request);
         
         var result = await _actionsService.UpdateActionAsync(updateActionRequest, context.CancellationToken);
 
-        var response = _mapper.Map<Protos.Actions.UpdateActionResponse>(result);
+        var response = _mapper.Map<Protos.Actions.UpdateAction.UpdateActionResponse>(result);
 
         return response;
     }
@@ -115,11 +100,11 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         return new Protos.Actions.DeleteActionResponse();
     }
 
-    public async override Task<Protos.Actions.GetActionEntrySettingsResponse> getActionEntrySettings(Protos.Actions.GetActionEntrySettingsRequest request, ServerCallContext context)
+    public async override Task<Protos.Actions.GetActionEntrySettings.GetActionEntrySettingsResponse> getActionEntrySettings(Protos.Actions.GetActionEntrySettings.GetActionEntrySettingsRequest request, ServerCallContext context)
     {
         var actionEntrySettings = await _actionsService.GetActionEntrySettings(Guid.Parse(request.Id), context.CancellationToken);
 
-        var response = _mapper.Map<Protos.Actions.GetActionEntrySettingsResponse>(actionEntrySettings);
+        var response = _mapper.Map<Protos.Actions.GetActionEntrySettings.GetActionEntrySettingsResponse>(actionEntrySettings);
 
         return response;
     }

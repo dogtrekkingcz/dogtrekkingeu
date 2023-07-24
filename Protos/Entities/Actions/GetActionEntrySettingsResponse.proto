@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetActionEntrySettings";
+
+package getactionentrysettings;
+
+import "google/type/datetime.proto";
+
+message GetActionEntrySettingsResponse {
+  string Id = 1;
+  string Name = 2;
+  repeated RaceDto Races = 3;
+  repeated CategoryDto Categories = 4;
+}
+
+message RaceDto {
+  string Id = 1;
+  string Name = 2;
+  google.type.DateTime Start = 3;
+  RaceLimitsDto Limits = 4;
+}
+
+message CategoryDto {
+  string Id = 1;
+  string RaceId = 2;
+  string Name = 3;
+}
+
+message RaceLimitsDto {
+  int32 MinimalAgeOfTheDogInDayes = 1;
+  int32 MinimalAgeOfRacerInDayes = 2;
+  bool WithDogs = 3;
+}

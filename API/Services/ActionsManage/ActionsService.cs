@@ -1,8 +1,8 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.Entities;
 using SharedCode.JwtToken;
 using MapsterMapper;
+using SharedCode.Entities;
 using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
@@ -33,7 +33,8 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         public async Task<CreateActionResponse> CreateActionAsync(CreateActionRequest request, CancellationToken cancellationToken)
         {
             var addActionRequest = _mapper.Map<CreateActionInternalStorageRequest>(request);
-            addActionRequest.Id = Guid.NewGuid().ToString();
+            addActionRequest.Id = Guid.NewGuid();
+            addActionRequest.Created = DateTimeOffset.Now;
 
             foreach (var race in addActionRequest.Races)
             {
@@ -85,11 +86,11 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                 {
                     foreach (var racer in category.Racers)
                     {
-                        racer.RequestedPayments = new RequestedPaymentsDto
+                        racer.RequestedPayments = new GetActionInternalStorageResponse.RequestedPaymentsDto
                         {
-                            Items = new List<RequestedPaymentItem>
+                            Items = new List<GetActionInternalStorageResponse.RequestedPaymentItem>
                             {
-                                new RequestedPaymentItem
+                                new GetActionInternalStorageResponse.RequestedPaymentItem
                                 {
                                     Name = "RegistrationFee",
                                     Price = price
@@ -99,7 +100,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                         
                         foreach (var merch in racer.Merchandize)
                         {
-                            racer.RequestedPayments.Items.Add(new RequestedPaymentItem
+                            racer.RequestedPayments.Items.Add(new GetActionInternalStorageResponse.RequestedPaymentItem
                             {
                                 Name = merch.Name,
                                 Price = merch.Price * merch.Count
@@ -158,7 +159,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                             Id = r.Id,
                             Name = r.Name,
                             Start = r.Begin,
-                            Limits = new ActionSettingsDto.RaceLimits
+                            Limits = new GetActionEntrySettingsResponse.RaceLimits
                             {
                                 MinimalAgeOfRacerInDayes = r.Limits?.MinimalAgeOfRacerInDayes ?? 0,
                                 MinimalAgeOfTheDogInDayes = r.Limits?.MinimalAgeOfTheDogInDayes ?? 0
@@ -184,10 +185,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             
             var result = await _actionsRepositoryService.GetSelectedActionsAsync(getSelectedActionsRequest, cancellationToken);
 
-            return new GetSelectedActionsResponse
-            {
-                Actions = result.Actions
-            };
+            return _mapper.Map<GetSelectedActionsResponse>(result);
         }
 
         public async Task AcceptRegistrationAsync(Guid registrationId, CancellationToken cancellationToken)
@@ -196,15 +194,15 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
 
             var action = await _actionsRepositoryService.GetAsync(registration.ActionId, cancellationToken);
 
-            var race = action.Races.First(race => race.Id == registration.RaceId);
-
+            var actionUpdateRequest = _mapper.Map<UpdateActionInternalStorageRequest>(action);
+            var race = actionUpdateRequest.Races.First(race => race.Id == registration.RaceId);
             var category = race.Categories.First(category => category.Id == registration.CategoryId);
-
-            var racer = _mapper.Map<RacerDto>(registration);
+            
+            var racer = _mapper.Map<UpdateActionInternalStorageRequest.RacerDto>(registration);
             category.Racers.Add(racer);
 
             await _actionsRepositoryService.UpdateActionAsync(
-                _mapper.Map<UpdateActionInternalStorageRequest>(action),
+                actionUpdateRequest,
                 cancellationToken);
 
             var updateEntryRequest = _mapper.Map<UpdateEntryInternalStorageRequest>(registration);
@@ -223,11 +221,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         {
             var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
 
-            action.Races
+            var updateActionRequest = _mapper.Map<UpdateActionInternalStorageRequest>(action);
+            updateActionRequest.Races
                 .SelectMany(r => r.Categories)
                 .SelectMany(c => c.Racers)
                 .First(racer => racer.Id == request.Id)
-                .Payments.Add(new PaymentDto
+                .Payments.Add(new UpdateActionInternalStorageRequest.PaymentDto
                     {
                         Date = DateTimeOffset.Now,
                         Amount = request.Amount,
@@ -236,7 +235,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                         BankAccount = request.BankAccount
                     });
 
-            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+            await _actionsRepositoryService.UpdateActionAsync(updateActionRequest, cancellationToken);
         }
     }
 }

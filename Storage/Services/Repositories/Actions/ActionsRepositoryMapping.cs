@@ -1,6 +1,7 @@
 ﻿using SharedCode.Entities;
 using Mapster;
 using Storage.Entities.Actions;
+using Storage.Entities.Entries;
 using Storage.Models;
 
 namespace Storage.Services.Repositories.Actions
@@ -10,8 +11,88 @@ namespace Storage.Services.Repositories.Actions
         internal static TypeAdapterConfig AddActionRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.NoteDto, ActionRecord.NoteDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.PaymentDto, ActionRecord.PaymentDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RequestedPaymentItem, ActionRecord.RequestedPaymentItem>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RequestedPaymentsDto, ActionRecord.RequestedPaymentsDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.AddressDto, ActionRecord.AddressDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.CategoryDto, ActionRecord.CategoryDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.DogDto, ActionRecord.DogDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.LimitsDto, ActionRecord.LimitsDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RaceDto, ActionRecord.RaceDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RaceState, ActionRecord.RaceState>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.TermDto, ActionRecord.TermDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.VaccinationDto, ActionRecord.VaccinationDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.VaccinationType, ActionRecord.VaccinationType>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.ActionSaleDto, ActionRecord.ActionSaleDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.LatLngDto, ActionRecord.LatLngDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.MerchandizeItemDto, ActionRecord.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.PaymentDefinitionDto, ActionRecord.PaymentDefinitionDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.ActionSaleItemDto, ActionRecord.ActionSaleItemDto>();
 
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.NoteDto, ActionRecord.NoteDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.PaymentDto, ActionRecord.PaymentDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RequestedPaymentItem, ActionRecord.RequestedPaymentItem>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RequestedPaymentsDto, ActionRecord.RequestedPaymentsDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.AddressDto, ActionRecord.AddressDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.CategoryDto, ActionRecord.CategoryDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.DogDto, ActionRecord.DogDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.LimitsDto, ActionRecord.LimitsDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RaceDto, ActionRecord.RaceDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RaceState, ActionRecord.RaceState>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.TermDto, ActionRecord.TermDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.VaccinationDto, ActionRecord.VaccinationDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.VaccinationType, ActionRecord.VaccinationType>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.ActionSaleDto, ActionRecord.ActionSaleDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.LatLngDto, ActionRecord.LatLngDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.MerchandizeItemDto, ActionRecord.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.PaymentDefinitionDto, ActionRecord.PaymentDefinitionDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.ActionSaleItemDto, ActionRecord.ActionSaleItemDto>();
+
+            typeAdapterConfig.NewConfig<ActionRecord, GetAllActionsInternalStorageResponse.ActionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetAllActionsInternalStorageResponse.RacerDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetAllActionsInternalStorageResponse.NoteDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PaymentDto, GetAllActionsInternalStorageResponse.PaymentDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentItem, GetAllActionsInternalStorageResponse.RequestedPaymentItem>();
+            typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentsDto, GetAllActionsInternalStorageResponse.RequestedPaymentsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetAllActionsInternalStorageResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetAllActionsInternalStorageResponse.CategoryDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetAllActionsInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.LimitsDto, GetAllActionsInternalStorageResponse.LimitsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetAllActionsInternalStorageResponse.RaceDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetAllActionsInternalStorageResponse.RaceState>();
+            typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetAllActionsInternalStorageResponse.TermDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.VaccinationDto, GetAllActionsInternalStorageResponse.VaccinationDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.VaccinationType, GetAllActionsInternalStorageResponse.VaccinationType>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionSaleDto, GetAllActionsInternalStorageResponse.ActionSaleDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.LatLngDto, GetAllActionsInternalStorageResponse.LatLngDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.MerchandizeItemDto, GetAllActionsInternalStorageResponse.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PaymentDefinitionDto, GetAllActionsInternalStorageResponse.PaymentDefinitionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionSaleItemDto, GetAllActionsInternalStorageResponse.ActionSaleItemDto>();
+            
+            typeAdapterConfig.NewConfig<ActionRecord, GetSelectedActionsInternalStorageResponse.ActionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetSelectedActionsInternalStorageResponse.RacerDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetSelectedActionsInternalStorageResponse.NoteDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PaymentDto, GetSelectedActionsInternalStorageResponse.PaymentDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentItem, GetSelectedActionsInternalStorageResponse.RequestedPaymentItem>();
+            typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentsDto, GetSelectedActionsInternalStorageResponse.RequestedPaymentsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetSelectedActionsInternalStorageResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetSelectedActionsInternalStorageResponse.CategoryDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetSelectedActionsInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.LimitsDto, GetSelectedActionsInternalStorageResponse.LimitsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetSelectedActionsInternalStorageResponse.RaceDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetSelectedActionsInternalStorageResponse.RaceState>();
+            typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetSelectedActionsInternalStorageResponse.TermDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.VaccinationDto, GetSelectedActionsInternalStorageResponse.VaccinationDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.VaccinationType, GetSelectedActionsInternalStorageResponse.VaccinationType>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionSaleDto, GetSelectedActionsInternalStorageResponse.ActionSaleDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.LatLngDto, GetSelectedActionsInternalStorageResponse.LatLngDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.MerchandizeItemDto, GetSelectedActionsInternalStorageResponse.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PaymentDefinitionDto, GetSelectedActionsInternalStorageResponse.PaymentDefinitionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionSaleItemDto, GetSelectedActionsInternalStorageResponse.ActionSaleItemDto>();
 
             typeAdapterConfig.NewConfig<ActionRecord, CreateActionInternalStorageResponse>();
 
@@ -21,12 +102,36 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<GetActionInternalStorageRequest, ActionRecord>()
                 .MapWith(s => new ActionRecord { Id = s.Id.ToString() });
 
-            typeAdapterConfig.NewConfig<ActionRecord, ActionDto>()
-                .TwoWays();
+            typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>(); 
+            typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetActionInternalStorageResponse.RacerDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetActionInternalStorageResponse.NoteDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PaymentDto, GetActionInternalStorageResponse.PaymentDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentItem, GetActionInternalStorageResponse.RequestedPaymentItem>();
+            typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentsDto, GetActionInternalStorageResponse.RequestedPaymentsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetActionInternalStorageResponse.AddressDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetActionInternalStorageResponse.CategoryDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetActionInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.LimitsDto, GetActionInternalStorageResponse.LimitsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetActionInternalStorageResponse.RaceDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetActionInternalStorageResponse.RaceState>();
+            typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetActionInternalStorageResponse.TermDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.VaccinationDto, GetActionInternalStorageResponse.VaccinationDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.VaccinationType, GetActionInternalStorageResponse.VaccinationType>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionSaleDto, GetActionInternalStorageResponse.ActionSaleDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.LatLngDto, GetActionInternalStorageResponse.LatLngDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.MerchandizeItemDto, GetActionInternalStorageResponse.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PaymentDefinitionDto, GetActionInternalStorageResponse.PaymentDefinitionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionSaleItemDto, GetActionInternalStorageResponse.ActionSaleItemDto>();
 
-            typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>();
+            typeAdapterConfig.NewConfig<AddResultInternalStorageRequest, ActionRecord.RacerDto>();
 
-            typeAdapterConfig.NewConfig<AddResultInternalStorageRequest, RacerDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateActionInternalStorageRequest.RacerDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.AddressDto, UpdateActionInternalStorageRequest.AddressDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.DogDto, UpdateActionInternalStorageRequest.DogDto>();
 
             return typeAdapterConfig;
         }

@@ -1,6 +1,6 @@
 ﻿namespace SharedCode.Entities
 {
-    public sealed record RaceDto
+    public sealed record Race___Dto
     {
         public Guid Id { get; set; } = default(Guid);
         public string Name { get; set; } = string.Empty;
@@ -17,7 +17,7 @@
         
         public DateTimeOffset Begin = DateTimeOffset.Now;
         
-        public IList<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
+        public IList<Category___Dto> Categories { get; set; } = new List<Category___Dto>();
 
         public IList<PaymentDefinitionDto> Payments { get; set; } = new List<PaymentDefinitionDto>();
 

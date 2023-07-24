@@ -10,7 +10,7 @@
         Disqualified
     }
 
-    public record RacerDto
+    public record Racer___Dto
     {
         public Guid Id { get; set; } = Guid.Empty;
         

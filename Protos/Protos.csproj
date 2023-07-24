@@ -34,6 +34,132 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Entities\Actions\CreateActionRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\CreateActionResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetActionEntrySettingsRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetActionEntrySettingsResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetActionRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetActionResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetAllActionsRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetAllActionsResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetRacesForActionResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetRacesForActionRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetSelectedActionsRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetSelectedActionsResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\UpdateActionRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\UpdateActionResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
       <Protobuf Include="Entities\Entries\CreateEntryRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -44,6 +170,24 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
       <Protobuf Include="Entities\Entries\CreateEntryResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Entries\GetAllEntriesResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Entries\GetEntriesByActionResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>

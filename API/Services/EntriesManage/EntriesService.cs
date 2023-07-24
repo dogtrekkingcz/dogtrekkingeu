@@ -11,6 +11,7 @@ using SharedCode.JwtToken;
 using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
+using DateTime = Google.Type.DateTime;
 
 namespace DogsOnTrail.Actions.Services.EntriesManage
 {
@@ -40,6 +41,9 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
             Console.WriteLine($"Received createEntry request: '{request.Dump()}'");
             
             var createEntryInternalStorageRequest = _mapper.Map<CreateEntryInternalStorageRequest>(request);
+            createEntryInternalStorageRequest.Id = Guid.NewGuid();
+            createEntryInternalStorageRequest.Created = DateTimeOffset.Now;
+            
             var response = await _entriesRepositoryService.CreateEntryAsync(createEntryInternalStorageRequest, cancellationToken);
 
             var emailRequest = _mapper.Map<NewActionRegistrationEmailRequest>(request);
@@ -75,6 +79,9 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
             {
                 Email = actionDetail.ContactMail   
             };
+            emailRequest.Racer = _mapper.Map<NewActionRegistrationEmailRequest.RacerDto>(createEntryInternalStorageRequest);
+            emailRequest.Racer.Id = createEntryInternalStorageRequest.Id;
+            emailRequest.Racer.Created = createEntryInternalStorageRequest.Created;
 
             foreach (var payment in raceDetail.Payments)
             {

@@ -1,6 +1,6 @@
 ﻿namespace SharedCode.Entities
 {
-    public sealed record CategoryDto
+    public sealed record Category___Dto
     {
         public Guid Id { get; set; } = default(Guid);
 
@@ -8,6 +8,6 @@
 
         public string Description { get; set; } = string.Empty;
 
-        public IList<RacerDto> Racers { get; set; } = new List<RacerDto>();
+        public IList<Racer___Dto> Racers { get; set; } = new List<Racer___Dto>();
     }
 }

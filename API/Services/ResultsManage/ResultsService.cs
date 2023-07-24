@@ -26,13 +26,6 @@ namespace DogsOnTrail.Actions.Services.ResultsManage;
         return _mapper.Map<AddResultResponse>(response);
     }
 
-    public async Task<List<RaceDto>> GetRacesForAction(GetRacesForActionRequest request, CancellationToken cancellationToken)
-    {
-        var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
-
-        return action.Races.ToList();
-    }
-
     public async Task<AcceptResultResponse> AcceptResultAsync(AcceptResultRequest request, CancellationToken cancellationToken)
     {
         return await Task.FromResult(new AcceptResultResponse());

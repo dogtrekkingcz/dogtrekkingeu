@@ -71,32 +71,14 @@ namespace Storage.Services.Repositories.Actions
         {
             var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
 
-            var actions = new List<ActionDto>();
+            var actions = new List<GetAllActionsInternalStorageResponse.ActionDto>();
             foreach (var action in getAllActions
                 .Where(a => a.Id != null))
             {
-                actions.Add(_mapper.Map<ActionDto>(action));
+                actions.Add(_mapper.Map<GetAllActionsInternalStorageResponse.ActionDto>(action));
             }
 
             var response = new GetAllActionsInternalStorageResponse
-            {
-                Actions = actions
-            };
-            
-            return response;
-        }
-
-        public async Task<GetAllActionsWithDetailsInternalStorageResponse> GetAllActionsDetailsAsync(CancellationToken cancellationToken)
-        {
-            var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
-
-            var actions = new List<ActionDto>();
-            foreach (var action in getAllActions)
-            {
-                actions.Add(_mapper.Map<ActionDto>(action));
-            }
-
-            var response = new GetAllActionsWithDetailsInternalStorageResponse
             {
                 Actions = actions
             };
@@ -112,7 +94,7 @@ namespace Storage.Services.Repositories.Actions
 
             var category = race.Categories.First(category => category.Id == request.CategoryId);
             
-            category.Racers.Add(_mapper.Map<RacerDto>(request));
+            category.Racers.Add(_mapper.Map<ActionRecord.RacerDto>(request));
 
             await _actionsStorageService.UpdateAsync(action, cancellationToken);
 
@@ -127,10 +109,10 @@ namespace Storage.Services.Repositories.Actions
                     .ToList(), 
                 cancellationToken);
 
-            var actions = new List<ActionDto>();
+            var actions = new List<GetSelectedActionsInternalStorageResponse.ActionDto>();
             foreach (var action in getAllActions)
             {
-                actions.Add(_mapper.Map<ActionDto>(action));
+                actions.Add(_mapper.Map<GetSelectedActionsInternalStorageResponse.ActionDto>(action));
             }
 
             var response = new GetSelectedActionsInternalStorageResponse

@@ -21,10 +21,29 @@ internal static class EntriesServiceMapping
 
         typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByActionRequest, GetEntriesByActionRequest>()
             .Map(d => d.ActionId, s => s.ActionId);
+        
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse, Protos.Entries.GetEntriesByActionResponse>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Protos.Entries.GetEntriesByActionResponse_Entry>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationDto, Protos.Entries.GetEntriesByActionResponse_Vaccination>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Protos.Entries.GetEntriesByActionResponse_VaccinationType>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.DogDto, Protos.Entries.GetEntriesByActionResponse_Dog>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.MerchandizeItemDto, Protos.Entries.GetEntriesByActionResponse_MerchandizeItem>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.AddressDto, Protos.Entries.GetEntriesByActionResponse_Address>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.LatLngDto, Google.Type.LatLng>()
+            .Map(d => d.Latitude, s => s.GpsLatitude)
+            .Map(d => d.Longitude, s => s.GpsLongitude);
 
         typeAdapterConfig.NewConfig<Protos.Entries.GetAllEntriesRequest, GetAllEntriesRequest>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse, Protos.Entries.GetAllEntriesResponse>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.EntryDto, Protos.Entries.GetAllEntriesResponse_Entry>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.VaccinationDto, Protos.Entries.GetAllEntriesResponse_Vaccination>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.VaccinationType, Protos.Entries.GetAllEntriesResponse_VaccinationType>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.DogDto, Protos.Entries.GetAllEntriesResponse_Dog>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.MerchandizeItemDto, Protos.Entries.GetAllEntriesResponse_MerchandizeItem>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.AddressDto, Protos.Entries.GetAllEntriesResponse_Address>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.LatLngDto, Google.Type.LatLng>()
+            .Map(d => d.Latitude, s => s.GpsLatitude)
+            .Map(d => d.Longitude, s => s.GpsLongitude);
 
         typeAdapterConfig.NewConfig<Protos.Entries.DeleteEntryRequest, DeleteEntryRequest>();
 

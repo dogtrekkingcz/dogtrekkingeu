@@ -4,23 +4,12 @@ option csharp_namespace = "Protos.Results";
 
 package results;
 
-import "Entities/RaceDetail.proto";
 import "Entities/Results/AddResultRequest.proto";
 
 service Results {
   rpc addResult (AddResultRequest) returns (AddResultResponse);
-  
-  rpc getRacesForAction (GetRacesForActionRequest) returns (GetRacesForActionResponse);
 }
 
 message AddResultResponse {
 
-}
-
-message GetRacesForActionRequest {
-  string ActionId = 1;
-}
-
-message GetRacesForActionResponse {
-  repeated shared.RaceDetail Races = 1;
 }

@@ -30,14 +30,4 @@ internal class ResultsService : Protos.Results.Results.ResultsBase
 
         return new Protos.Results.AddResultResponse();
     }
-
-    public async override Task<Protos.Results.GetRacesForActionResponse> getRacesForAction(Protos.Results.GetRacesForActionRequest request, ServerCallContext context)
-    {
-        var racesResponse = await _resultsService.GetRacesForAction(new GetRacesForActionRequest { ActionId = Guid.Parse(request.ActionId) }, context.CancellationToken);
-
-        var result = new Protos.Results.GetRacesForActionResponse();
-        result.Races.AddRange(_mapper.Map<RepeatedField<Protos.Shared.RaceDetail>>(racesResponse));
-
-        return result;
-    }
 }

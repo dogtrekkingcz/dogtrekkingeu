@@ -12,6 +12,12 @@ internal static class EntriesMapping
 
         typeAdapterConfig.NewConfig<DogsOnTrailWebApiService.Entities.GetEntriesByActionRequest, GetEntriesByActionRequest>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse, DogsOnTrailWebApiService.Entities.GetEntriesByActionResponse>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, DogsOnTrailWebApiService.Entities.GetEntriesByActionResponse.EntryDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, DogsOnTrailWebApiService.Entities.GetEntriesByActionResponse.VaccinationDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, DogsOnTrailWebApiService.Entities.GetEntriesByActionResponse.VaccinationType>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, DogsOnTrailWebApiService.Entities.GetEntriesByActionResponse.DogDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.MerchandizeItemDto, DogsOnTrailWebApiService.Entities.GetEntriesByActionResponse.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.AddressDto, DogsOnTrailWebApiService.Entities.GetEntriesByActionResponse.AddressDto>();
 
         return typeAdapterConfig;
     }

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetRacesForAction";
+
+package getracesforaction;
+
+message GetRacesForActionRequest {
+  string ActionId = 1;
+}

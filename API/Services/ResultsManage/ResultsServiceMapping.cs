@@ -11,6 +11,7 @@ internal static class ResultsServiceMapping
     public static TypeAdapterConfig AddResultsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<AddResultRequest, AddResultInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<AddResultRequest.FinalState, AddResultInternalStorageRequest.FinalState>();
 
         typeAdapterConfig.NewConfig<AddResultInternalStorageResponse, AddResultResponse>();
         

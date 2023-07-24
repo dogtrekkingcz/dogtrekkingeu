@@ -2,7 +2,7 @@
 
 public sealed record CreateEntryInternalStorageRequest
 {
-    public string? Id { get; set; } = "";
+    public Guid Id { get; set; }
 
     public string UserProfileId { get; set; } = "";
     

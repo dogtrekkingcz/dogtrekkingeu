@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetRacesForAction";
+
+package getracesforaction;
+
+import "google/type/datetime.proto";
+import "google/type/latlng.proto";
+
+message GetRacesForActionResponse {
+  repeated Race Races = 1;
+}
+
+message Race {
+  string Id = 1;
+  string Name = 2;
+  double Distance = 3;
+  double Incline = 4;
+  google.type.DateTime EnteringFrom = 5;
+  google.type.DateTime EnteringTo = 6;
+  double MaxNumberOfCompetitors = 7;
+  google.type.DateTime Begin = 8;
+  RaceLimits Limits = 9;
+
+  repeated Category Categories = 10;
+  repeated PaymentDefinition Payments = 11;
+}
+
+message Category {
+  string Id = 1;
+
+  string Name = 2;
+
+  string Description = 3;
+
+  repeated Racer Racers = 4;
+}
+
+message PaymentDefinition {
+  string Id = 1;
+  google.type.DateTime From = 2;
+  google.type.DateTime  To = 3;
+  double Price = 4;
+  string Currency = 5;
+  string BankAccount = 6;
+}
+
+message RaceLimits {
+  int32 MinimalAgeOfTheDogInDayes = 1;
+  int32 MinimalAgeOfRacerInDayes = 2;
+  bool WithDogs = 3;
+}
+
+message Racer {
+  enum FinishState {
+    NotValid = 0;
+    DNS = 1;
+    DNF = 2;
+    DSQ = 3;
+  }
+
+  string Id = 1;
+  string CompetitorId = 2;
+  string FirstName = 3;
+  string LastName = 4;
+  string Phone = 5;
+  string Email = 6;
+  bool Payed = 7;
+  repeated Dog Dogs = 8;
+  google.type.DateTime Start = 9;
+  google.type.DateTime Finish = 10;
+  FinishState State = 11;
+  bool Accepted = 12;
+  repeated Note Notes = 13;
+  repeated Payment Payments = 14;
+  repeated MerchandizeItem Merchandize = 15;
+  RequestedPaymentsDto RequestedPayments = 16;
+  Address Address = 17;
+}
+
+message RequestedPaymentsDto {
+  double Sum = 1;
+  repeated RequestedPaymentItem Items = 2;
+}
+
+message RequestedPaymentItem {
+  string Name = 1;
+  double Price = 2;
+}
+
+message MerchandizeItem {
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  double Price = 4;
+  string Currency = 5;
+  string Variant = 6;
+  string Size = 7;
+  string Color = 8;
+  int32 Count = 9;
+  string Note = 10;
+}
+
+message Payment {
+  google.type.DateTime Date = 1;
+  double Amount = 2;
+  string Currency = 3;
+  string BankAccount = 4;
+  string Note = 5;
+}
+
+message Address {
+  string Country = 1;
+  string Region = 2;
+  string ZipCode = 3;
+  string City = 4;
+  string Street = 5;
+  google.type.LatLng Position = 6;
+}
+
+message Dog {
+  string Id = 1;
+  string UserId = 2;
+  string Contact = 3;
+  string Name = 4;
+  string Kennel = 5;
+  string Pedigree = 6;
+  string Chip = 7;
+  optional google.type.DateTime Birthday = 8;
+  optional google.type.DateTime Decease = 9;
+  string UriToPhoto = 10;
+
+  repeated Vaccination Vaccinations = 11;
+}
+
+message Vaccination {
+  enum VaccinationType {
+    Unspecified = 0;
+    Rabies = 1; // vzteklina
+    Psinka = 2;
+    Parvoviroza = 3;
+    HepatitidaContagiosaCanis = 4;
+    Leptospiroza = 5;
+    Parainfluenza = 6;
+    LymskaBorelioza = 7;
+    Babesioza = 8;
+    PlisnoveInfekce = 9;
+    Leishmanioza = 10;
+  }
+
+  optional google.type.DateTime Date = 1;
+  optional google.type.DateTime ValidUntil = 2;
+  VaccinationType Type = 3;
+  string Note = 4;
+  string UriToPhoto = 5;
+}
+
+message Note {
+  google.type.DateTime Time = 1;
+  string Text = 2;
+}

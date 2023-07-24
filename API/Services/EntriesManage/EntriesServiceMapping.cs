@@ -9,24 +9,46 @@ internal static class EntriesServiceMapping
 {
     public static TypeAdapterConfig AddEntriesMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse, GetEntriesByActionResponse>();
         typeAdapterConfig.NewConfig<GetEntriesByActionRequest, GetEntriesByActionInternalStorageRequest>();
-
-        typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>();
+        
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse, GetEntriesByActionResponse>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.EntryDto, GetEntriesByActionResponse.EntryDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.VaccinationType, GetEntriesByActionResponse.VaccinationType>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.VaccinationDto, GetEntriesByActionResponse.VaccinationDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.DogDto, GetEntriesByActionResponse.DogDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.MerchandizeItemDto, GetEntriesByActionResponse.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.AddressDto, GetEntriesByActionResponse.AddressDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.LatLngDto, GetEntriesByActionResponse.LatLngDto>();
+        
+        typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>()
+            .Ignore(d => d.Id)
+            .Ignore(d => d.Created);
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, CreateEntryInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, CreateEntryInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, CreateEntryInternalStorageRequest.DogDto>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.MerchandizeItemDto, CreateEntryInternalStorageRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.AddressDto, CreateEntryInternalStorageRequest.AddressDto>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.LatLngDto, CreateEntryInternalStorageRequest.LatLngDto>();
         
-        
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateEntryInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateEntryInternalStorageRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateEntryInternalStorageRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.DogDto, UpdateEntryInternalStorageRequest.DogDto>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.MerchandizeItemDto, UpdateEntryInternalStorageRequest.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.AddressDto, UpdateEntryInternalStorageRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.LatLngDto, UpdateEntryInternalStorageRequest.LatLngDto>();        
         
         typeAdapterConfig.NewConfig<CreateEntryInternalStorageResponse, CreateEntryResponse>();
 
         typeAdapterConfig.NewConfig<GetAllEntriesRequest, GetAllEntriesInternalStorageRequest>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse, GetAllEntriesResponse>();
-
-        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateEntryInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.EntryDto, GetAllEntriesResponse.EntryDto>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.VaccinationType, GetAllEntriesResponse.VaccinationType>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.VaccinationDto, GetAllEntriesResponse.VaccinationDto>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.DogDto, GetAllEntriesResponse.DogDto>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.MerchandizeItemDto, GetAllEntriesResponse.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.AddressDto, GetAllEntriesResponse.AddressDto>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.LatLngDto, GetAllEntriesResponse.LatLngDto>();
 
         typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
             .IgnoreNullValues(true)
@@ -34,41 +56,18 @@ internal static class EntriesServiceMapping
             .Ignore(d => d.Category)
             .Ignore(d => d.Race)
             .Ignore(d => d.Payments)
-            .Map(d => d.Racer, s => new NewActionRegistrationEmailRequest.RacerDto
-            {
-                Name = s.Name,
-                Surname = s.Surname,
-                Email = s.Email,
-                Dogs = s.Dogs
-                    .Select(dog => new NewActionRegistrationEmailRequest.DogDto
-                    {
-                        Name = dog.Name,
-                        Birthday = dog.Birthday,
-                        Chip = dog.Chip,
-                        Pedigree = dog.Pedigree,
-                        Vaccinations = dog.Vaccinations
-                            .Select(vacc => new NewActionRegistrationEmailRequest.VaccinationDto
-                            {
-                                Date = vacc.Date,
-                                Type = vacc.Type.ToString()
-                            })
-                            .ToList()
-                    })
-                    .ToList()
-            });
+            .Ignore(d => d.Racer);
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, NewActionRegistrationEmailRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, NewActionRegistrationEmailRequest.DogDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.MerchandizeItemDto, NewActionRegistrationEmailRequest.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.AddressDto, NewActionRegistrationEmailRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.LatLngDto, NewActionRegistrationEmailRequest.LatLngDto>();
+
+        typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest.RacerDto>()
+            .Ignore(d => d.Id)
+            .Ignore(d => d.Created);
         
-        typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, NewActionRegistrationEmailRequest.DogDto>()
-            .Map(d => d.Name, s => s.Name)
-            .Map(d => d.Birthday, s => s.Birthday)
-            .Map(d => d.Pedigree, s => s.Pedigree)
-            .Map(d => d.Chip, s => s.Chip)
-            .Map(d => d.Vaccinations, s => s.Vaccinations);
-
-        typeAdapterConfig
-            .NewConfig<SharedCode.Entities.DogDto.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>()
-            .Map(d => d.Type, s => s.Type.ToString())
-            .Map(d => d.Date, s => s.Date);
-
         return typeAdapterConfig;
     }
 }

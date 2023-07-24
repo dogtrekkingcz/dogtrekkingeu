@@ -76,6 +76,18 @@ public static class NewActionRegistrationReceivedEmailMapping
             .IgnoreNullValues(true)
             .TwoWays();
         
+        typeAdapterConfig.NewConfig<NewActionRegistrationEmailRequest.AddressDto, NewActionRegistrationEmailRequest.AddressDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+        
+        typeAdapterConfig.NewConfig<NewActionRegistrationEmailRequest.LatLngDto, NewActionRegistrationEmailRequest.LatLngDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+        
+        typeAdapterConfig.NewConfig<NewActionRegistrationEmailRequest.MerchandizeItemDto, NewActionRegistrationEmailRequest.MerchandizeItemDto>()
+            .IgnoreNullValues(true)
+            .TwoWays();
+        
         return typeAdapterConfig;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SharedCode.Entities
 {
-    public record ActionDto
+    public record Action___Dto
     {
         public string? Id { get; set; } = string.Empty;
 
@@ -14,7 +14,7 @@
 
         public AddressDto Address { get; set; } = new();
 
-        public List<RaceDto> Races { get; set; } = new List<RaceDto>();
+        public List<Race___Dto> Races { get; set; } = new List<Race___Dto>();
 
         public ActionSaleDto Sale { get; set; } = new();
 

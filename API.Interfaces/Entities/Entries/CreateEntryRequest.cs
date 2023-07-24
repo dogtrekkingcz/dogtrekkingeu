@@ -6,8 +6,6 @@ public sealed record CreateEntryRequest
 {
     public string LanguageCode { get; set; } = "en-US";
     
-    public string? Id { get; set; } = "";
-
     public string UserProfileId { get; set; } = "";
     
     public string CompetitorId { get; set; } = "";
@@ -34,8 +32,6 @@ public sealed record CreateEntryRequest
 
     public DateTimeOffset? Birthday { get; set; } = null;
     
-    public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
-
     public bool Accepted { get; set; } = false;
     
     public DateTimeOffset? AcceptedDate { get; set; } = null;
