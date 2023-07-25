@@ -122,8 +122,8 @@ internal static class ActionsServiceMapping
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
         typeAdapterConfig.NewConfig<CreateActionResponse, Protos.Actions.CreateAction.CreateActionResponse>();
-        
-        
+
+
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.UpdateActionRequest, UpdateActionRequest>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.ActionType, UpdateActionRequest.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RacerDto, UpdateActionRequest.RacerDto>();

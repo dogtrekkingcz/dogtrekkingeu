@@ -23,7 +23,7 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<CreateActionInternalStorageResponse> AddActionAsync(CreateActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            _logger.LogDebug("\'{AddActionAsyncName}\': {Request}", nameof(AddActionAsync), request);
+            Console.WriteLine($"{nameof(AddActionAsync)} - request: '{request?.Dump()}'");
             var addRequest = _mapper.Map<ActionRecord>(request);
             
             var addedActionRecord = await _actionsStorageService.AddAsync(addRequest, cancellationToken);
@@ -38,6 +38,7 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<UpdateActionInternalStorageResponse> UpdateActionAsync(UpdateActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
+            Console.WriteLine($"{nameof(UpdateActionAsync)} - request: '{request?.Dump()}'");
             var updateRequest = _mapper.Map<ActionRecord>(request);
             
             var result = await _actionsStorageService.UpdateAsync(updateRequest, cancellationToken);
@@ -88,6 +89,7 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<AddResultInternalStorageResponse> AddResultAsync(AddResultInternalStorageRequest request, CancellationToken cancellationToken)
         {
+            Console.WriteLine($"{nameof(AddResultAsync)} - request: '{request?.Dump()}'");
             var action = await _actionsStorageService.GetAsync(request.ActionId.ToString(), cancellationToken);
 
             var race = action.Races.First(race => race.Id == request.RaceId);

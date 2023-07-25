@@ -67,6 +67,8 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
     public async override Task<Protos.Actions.GetAction.GetActionResponse> getAction(Protos.Actions.GetAction.GetActionRequest request, ServerCallContext context)
     {
         var result = await _actionsService.GetActionAsync(Guid.Parse(request.Id), context.CancellationToken);
+        
+        Console.WriteLine($"grpc:getAction: {result?.Dump()}");
 
         return _mapper.Map<Protos.Actions.GetAction.GetActionResponse>(result);
     }

@@ -48,7 +48,6 @@ var typeAdapterConfig = new TypeAdapterConfig
 };
 
 typeAdapterConfig
-    .AddSharedMapping()
     .AddActionModelMapping()
     .AddUserProfileModelMapping()
     .AddEntryModelMapping()
