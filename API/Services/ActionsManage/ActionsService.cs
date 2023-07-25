@@ -1,8 +1,6 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.JwtToken;
 using MapsterMapper;
-using SharedCode.Entities;
 using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
@@ -15,19 +13,16 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         private readonly IActionsRepositoryService _actionsRepositoryService;
         private readonly IActionRightsRepositoryService _actionRightsRepositoryService;
         private readonly IEntriesRepositoryService _entriesRepositoryService;
-        private readonly IJwtTokenService _jwtTokenService;
 
         public ActionsService(IMapper mapper, 
             IActionsRepositoryService actionsRepositoryService, 
             IActionRightsRepositoryService actionRightsRepositoryService,
-            IEntriesRepositoryService entriesRepositoryService,
-            IJwtTokenService jwtTokenService)
+            IEntriesRepositoryService entriesRepositoryService)
         {
             _mapper = mapper;
             _actionsRepositoryService = actionsRepositoryService;
             _actionRightsRepositoryService = actionRightsRepositoryService;
             _entriesRepositoryService = entriesRepositoryService;
-            _jwtTokenService = jwtTokenService;
         }
 
         public async Task<CreateActionResponse> CreateActionAsync(CreateActionRequest request, CancellationToken cancellationToken)

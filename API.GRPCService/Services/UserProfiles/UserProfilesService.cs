@@ -1,8 +1,8 @@
+using API.GRPCService.Services.JwtToken;
 using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
-using SharedCode.JwtToken;
 
 namespace API.GRPCService.Services.UserProfiles;
 

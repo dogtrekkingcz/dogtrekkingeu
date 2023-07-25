@@ -2,16 +2,11 @@
 using DogsOnTrail.Interfaces.Actions.Entities.Entries;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Mails.Builders.Emails;
-using Mails.Builders.Emails.Admin;
 using Mails.Entities;
 using Mails.Services;
 using MapsterMapper;
-using MongoDB.Bson;
-using SharedCode.JwtToken;
-using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
-using DateTime = Google.Type.DateTime;
 
 namespace DogsOnTrail.Actions.Services.EntriesManage
 {

@@ -5,7 +5,7 @@ using DogsOnTrail.Actions.Services.ResultsManage;
 using DogsOnTrail.Actions.Services.Rights;
 using DogsOnTrail.Actions.Services.UserProfileManage;
 using Mails;
-using SharedCode.Options;
+using Mails.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +13,7 @@ namespace DogsOnTrail.Actions
 {
     public static class DIComposer
     {
-        public static IServiceCollection AddBaseLayer(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrailOptions options)
+        public static IServiceCollection AddApiLayer(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrail.Actions.Options.DogsOnTrailOptions options)
         {
             services
                 .AddActions(typeAdapterConfig, options)
@@ -22,7 +22,7 @@ namespace DogsOnTrail.Actions
                 .AddUserProfiles(typeAdapterConfig, options)
                 .AddDogs(typeAdapterConfig, options)
                 .AddResults(typeAdapterConfig, options)
-                .AddEmails(typeAdapterConfig, options);
+                .AddEmails(typeAdapterConfig, new DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString });
             
             return services;
         }

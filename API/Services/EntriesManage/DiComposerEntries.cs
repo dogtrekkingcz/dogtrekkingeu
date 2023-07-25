@@ -1,5 +1,5 @@
-﻿using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.Options;
+﻿using DogsOnTrail.Actions.Options;
+using DogsOnTrail.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,6 +1,5 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.JwtToken;
 using MapsterMapper;
 using Storage.Entities.UserProfiles;
 using Storage.Interfaces;

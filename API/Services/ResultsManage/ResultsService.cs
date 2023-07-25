@@ -1,6 +1,5 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
 using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.Entities;
 using MapsterMapper;
 using Storage.Entities.Actions;
 using Storage.Interfaces;

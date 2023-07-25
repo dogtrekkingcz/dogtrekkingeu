@@ -1,6 +1,5 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using Mapster;
-using SharedCode.Entities;
 using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 
@@ -184,13 +183,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.AddressDto, UpdateActionInternalStorageRequest.AddressDto>();
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
-
-        typeAdapterConfig.NewConfig<EntryDto.DogDto, DogDto>()
-            .Ignore(d => d.UserId)
-            .Ignore(d => d.Kennel)
-            .Ignore(d => d.Decease)
-            .Ignore(d => d.UriToPhoto)
-            .Ignore(d => d.Contact);
 
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse, GetRacesForActionResponse>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RacerDto, GetRacesForActionResponse.RacerDto>();

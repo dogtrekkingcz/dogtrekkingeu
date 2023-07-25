@@ -1,4 +1,6 @@
 using API.GRPCService.Extensions;
+using API.GRPCService.Interceptors;
+using API.GRPCService.Options;
 using API.GRPCService.Services.Actions;
 using API.GRPCService.Services.Authorization;
 using API.GRPCService.Services.Dogs;
@@ -7,8 +9,6 @@ using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
 using DogsOnTrail.Actions;
 using Mapster;
-using SharedCode;
-using SharedCode.Interceptors;
 using Storage;
 using Storage.Options;
 
@@ -17,15 +17,14 @@ var builder = WebApplication.CreateBuilder(args);
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 
 TypeAdapterConfig typeAdapterConfig = null;
-var options = new SharedCode.Options.DogsOnTrailOptions()
+var options = new DogsOnTrailOptions()
 {
     MongoDbConnectionString = MongoDbConnectionString
 };
 
 builder.Services
-    .AddDogsOnTrailShared(out typeAdapterConfig, options)
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
-    .AddBaseLayer(typeAdapterConfig, options)
+    .AddApiLayer(typeAdapterConfig, new DogsOnTrail.Actions.Options.DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
     .AddGrpc(options =>
     {
         options.Interceptors.Add<JwtTokenInterceptor>();

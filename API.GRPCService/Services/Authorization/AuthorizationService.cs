@@ -1,9 +1,9 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Rights;
+﻿using API.GRPCService.Services.JwtToken;
+using DogsOnTrail.Interfaces.Actions.Entities.Rights;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;
-using SharedCode.JwtToken;
 
 namespace API.GRPCService.Services.Authorization;
 
