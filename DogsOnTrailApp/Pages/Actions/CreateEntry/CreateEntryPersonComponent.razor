@@ -8,42 +8,42 @@
 <section>
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.Name"]</label>
-        <input type="text" @bind="@Model.Name" required />
+        <input type="text" @bind="@Model.Name" autocomplete="given-name" required />
     </div>
 
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.Surname"]</label>
-        <input type="text" @bind="@Model.Surname" required />
+        <input type="text" @bind="@Model.Surname" autocomplete="family-name" required />
     </div>
     
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.Email"]</label>
-        <input type="email" @bind="@Model.Email" required />
+        <input type="email" @bind="@Model.Email" autocomplete="email" required />
     </div>
     
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.Phone"]</label>
-        <input type="tel" @bind="@Model.Phone" required />
+        <input type="tel" @bind="@Model.Phone" autocomplete="tel-local" required />
     </div>
 
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.AddressStreet"]</label>
-        <input type="text" @bind="@Model.Address.Street" />
+        <input type="text" @bind="@Model.Address.Street" autocomplete="street-address" />
     </div>
     
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.AddressCity"]</label>
-        <input type="text" @bind="@Model.Address.City" />
+        <input type="text" @bind="@Model.Address.City" autocomplete="address-level2" />
     </div>
     
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.AddressZipCode"]</label>
-        <input type="text" @bind="@Model.Address.ZipCode" />
+        <input type="text" @bind="@Model.Address.ZipCode" autocomplete="postal-code" />
     </div>
 
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.Birthday"]</label>
-        <InputDateComponent @bind-Date="Model.Birthday"/>
+        <InputDateComponent @bind-Date="Model.Birthday" />
     </div>
 </section>
 

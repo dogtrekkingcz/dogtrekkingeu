@@ -101,7 +101,10 @@
         var createEntryRequest = Mapper.Map<Protos.Entries.CreateEntry.CreateEntryRequest>(Entry);
         createEntryRequest.LanguageCode = "cs-CZ";
         
-        await EntriesClient.createEntryAsync(createEntryRequest);
+        var response = await EntriesClient.createEntryAsync(createEntryRequest);
+        
+        if (string.IsNullOrWhiteSpace(response.Id) == false)
+            NavManager.NavigateTo($"/entries");
     }
 
     public void RaceChanged()

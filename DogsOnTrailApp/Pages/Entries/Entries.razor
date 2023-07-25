@@ -77,14 +77,15 @@ else
 
         StateHasChanged();
 
-        var ids = _entriesList.Select(entry => entry.ActionId.ToString()).ToList();
+        var ids = _entriesList.Select(entry => entry.ActionId.ToString()).Distinct().ToList();
         
         var selectedActions = await ActionsClient.getSelectedActionsAsync(new Protos.Actions.GetSelectedActions.GetSelectedActionsRequest
         {
             Ids = { ids }
         });
 
-        _actionsList = mapper.Map<List<ActionModel>>(selectedActions.Actions);
+        if (null != selectedActions?.Actions)
+            _actionsList = mapper.Map<List<ActionModel>>(selectedActions.Actions);
         
         StateHasChanged();
     }

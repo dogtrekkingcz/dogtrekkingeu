@@ -50,7 +50,7 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.AddressDto, GetAllEntriesResponse.AddressDto>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.LatLngDto, GetAllEntriesResponse.LatLngDto>();
 
-        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, NewActionRegistrationEmailRequest>()
+        typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
             .IgnoreNullValues(true)
             .Ignore(d => d.Action)
             .Ignore(d => d.Category)

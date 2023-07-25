@@ -70,7 +70,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         if (filterList[0].typeOfValue == typeof(Guid))
         {
             filter = Builders<T>.Filter
-                .Eq(filterList[0].key, (Guid) filterList[0].value); 
+                .Eq(filterList[0].key, ((Guid) filterList[0].value).ToString()); 
         }
         else if (filterList[0].typeOfValue == typeof(string))
         {
@@ -96,7 +96,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         foreach (var f in filterList.Skip(1))
         {
             if (f.typeOfValue == typeof(Guid))
-                filter &= (Builders<T>.Filter.Eq(f.key, (Guid) f.value));
+                filter &= (Builders<T>.Filter.Eq(f.key, ((Guid) f.value)).ToString());
             else if (f.typeOfValue == typeof(string))
                 filter &= (Builders<T>.Filter.Eq(f.key, (string) f.value));
             else if (f.typeOfValue == typeof(bool))
