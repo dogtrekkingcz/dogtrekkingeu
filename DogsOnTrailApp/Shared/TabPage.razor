@@ -1,9 +1,6 @@
 ﻿@if (Parent.ActivePage == this)
 {
     @ChildContent
-    
-    <input type="button" value="Previous" @onclick="@Previous" />
-    <input type="button" value="Previous" @onclick="@Next" />
 }
 
 @code {
@@ -23,15 +20,5 @@
 
         base.OnInitialized();
         Parent.AddPage(this);
-    }
-
-    public void Previous()
-    {
-        Parent.Previous();
-    }
-
-    public void Next()
-    {
-        Parent.Next();
     }
 }

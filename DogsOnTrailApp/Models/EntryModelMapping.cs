@@ -9,6 +9,7 @@ internal static class EntryModelMapping
     internal static TypeAdapterConfig AddEntryModelMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<Protos.Entries.GetAllEntries.Entry, EntryModel>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetAllEntries.EntryState, EntryModel.EntryState>();
         typeAdapterConfig.NewConfig<Protos.Entries.GetAllEntries.Vaccination, EntryModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.Entries.GetAllEntries.VaccinationType, EntryModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Entries.GetAllEntries.Dog, EntryModel.DogDto>();
@@ -27,6 +28,14 @@ internal static class EntryModelMapping
         typeAdapterConfig.NewConfig<EntryModel.LatLngDto, Google.Type.LatLng>()
             .Map(d => d.Latitude, s => s.GpsLatitude)
             .Map(d => d.Longitude, s => s.GpsLongitude);
+
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByAction.Entry, EntryModel>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByAction.EntryState, EntryModel.EntryState>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByAction.Vaccination, EntryModel.VaccinationDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByAction.VaccinationType, EntryModel.VaccinationType>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByAction.Dog, EntryModel.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByAction.MerchandizeItem, EntryModel.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByAction.Address, EntryModel.AddressDto>();
         
         return typeAdapterConfig;
     }

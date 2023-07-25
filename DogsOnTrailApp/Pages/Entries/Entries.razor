@@ -27,6 +27,7 @@ else
             <th>@localizer["Surname"], @localizer["Name"]</th>
             <th>Action - Race - Category</th>
             <th>Dogs</th>
+            <th>State</th>
             <th>@localizer["Actions"]</th>
         </tr>
         </thead>
@@ -47,6 +48,9 @@ else
                             <li>@dog.Chip - @dog.Birthday?.ToString("yyyy-MM-dd") - @dog.Pedigree - @dog.Name</li>
                         }
                     </ul>
+                </td>
+                <td>
+                    @entry.State.ToString()
                 </td>
                 <td>
                     <ActionDropDown Model="@entry">

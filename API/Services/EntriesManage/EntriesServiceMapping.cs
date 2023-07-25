@@ -32,6 +32,7 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<CreateEntryRequest.LatLngDto, CreateEntryInternalStorageRequest.LatLngDto>();
         
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateEntryInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.EntryState, UpdateEntryInternalStorageRequest.EntryState>();
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateEntryInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateEntryInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.DogDto, UpdateEntryInternalStorageRequest.DogDto>();
@@ -43,6 +44,7 @@ internal static class EntriesServiceMapping
 
         typeAdapterConfig.NewConfig<GetAllEntriesRequest, GetAllEntriesInternalStorageRequest>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse, GetAllEntriesResponse>();
+        typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.EntryState, GetAllEntriesResponse.EntryState>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.EntryDto, GetAllEntriesResponse.EntryDto>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.VaccinationType, GetAllEntriesResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.VaccinationDto, GetAllEntriesResponse.VaccinationDto>();

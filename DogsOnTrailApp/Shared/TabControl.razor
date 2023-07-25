@@ -38,16 +38,4 @@
     {
         ActivePage = page;
     }
-
-    public void Next()
-    {
-        if (ActivePageIdx < Pages.Count)
-            ActivatePage(Pages[++ActivePageIdx]);
-    }
-
-    public void Previous()
-    {
-        if (ActivePageIdx > 0)
-            ActivatePage(Pages[--ActivePageIdx]);
-    }
 }

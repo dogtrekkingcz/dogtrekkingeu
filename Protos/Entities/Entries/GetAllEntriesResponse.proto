@@ -31,6 +31,15 @@ message Entry {
   repeated MerchandizeItem Merchandize = 17;
   bool Accepted = 18;
   optional google.type.DateTime AcceptedDate = 19;
+  EntryState State = 20;
+}
+
+enum EntryState {
+  EntryState_Unspecified = 0;
+  Entered = 1;
+  Accepted = 2;
+  Paid = 3;
+  NotAccepted = 4;
 }
 
 message Address {
@@ -73,7 +82,7 @@ message Vaccination {
 }
 
 enum VaccinationType {
-  Unspecified = 0;
+  VaccinationType_Unspecified = 0;
   Rabies = 1; // vzteklina
   Psinka = 2;
   Parvoviroza = 3;

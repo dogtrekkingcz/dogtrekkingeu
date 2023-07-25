@@ -135,7 +135,7 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
 
     public async override Task<Protos.Actions.GetRacesForAction.GetRacesForActionResponse> getRacesForAction(Protos.Actions.GetRacesForAction.GetRacesForActionRequest request, ServerCallContext context)
     {
-        var races = _actionsService.GetRacesForActionAsync(_mapper.Map<GetRacesForActionRequest>(request), context.CancellationToken);
+        var races = await _actionsService.GetRacesForActionAsync(_mapper.Map<GetRacesForActionRequest>(request), context.CancellationToken);
 
         return _mapper.Map<Protos.Actions.GetRacesForAction.GetRacesForActionResponse>(races);
     }

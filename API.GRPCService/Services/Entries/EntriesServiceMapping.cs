@@ -21,6 +21,7 @@ internal static class EntriesServiceMapping
 
         typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByActionRequest, GetEntriesByActionRequest>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse, Protos.Entries.GetEntriesByAction.GetEntriesByActionResponse>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryState, Protos.Entries.GetEntriesByAction.EntryState>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Protos.Entries.GetEntriesByAction.Entry>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationDto, Protos.Entries.GetEntriesByAction.Vaccination>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Protos.Entries.GetEntriesByAction.VaccinationType>();
@@ -33,6 +34,7 @@ internal static class EntriesServiceMapping
 
         typeAdapterConfig.NewConfig<Protos.Entries.GetAllEntriesRequest, GetAllEntriesRequest>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse, Protos.Entries.GetAllEntries.GetAllEntriesResponse>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.EntryState, Protos.Entries.GetAllEntries.EntryState>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.EntryDto, Protos.Entries.GetAllEntries.Entry>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.VaccinationDto, Protos.Entries.GetAllEntries.Vaccination>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.VaccinationType, Protos.Entries.GetAllEntries.VaccinationType>();

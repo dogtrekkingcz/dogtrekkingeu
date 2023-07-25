@@ -10,6 +10,52 @@ namespace DogsOnTrailApp.Models;
 {
     internal static TypeAdapterConfig AddActionModelMapping(this TypeAdapterConfig typeAdapterConfig)
     {
+        typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.CreateAction.CreateActionRequest>();
+        typeAdapterConfig.NewConfig<ActionModel.ActionType, Protos.Actions.CreateAction.ActionType>();
+        typeAdapterConfig.NewConfig<ActionModel.RacerDto, Protos.Actions.CreateAction.RacerDto>();
+        typeAdapterConfig.NewConfig<ActionModel.NoteDto, Protos.Actions.CreateAction.NoteDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PaymentDto, Protos.Actions.CreateAction.PaymentDto>();
+        typeAdapterConfig.NewConfig<ActionModel.RequestedPaymentItem, Protos.Actions.CreateAction.RequestedPaymentItem>();
+        typeAdapterConfig.NewConfig<ActionModel.RequestedPaymentsDto, Protos.Actions.CreateAction.RequestedPaymentsDto>();
+        typeAdapterConfig.NewConfig<ActionModel.AddressDto, Protos.Actions.CreateAction.AddressDto>();
+        typeAdapterConfig.NewConfig<ActionModel.CategoryDto, Protos.Actions.CreateAction.CategoryDto>();
+        typeAdapterConfig.NewConfig<ActionModel.DogDto, Protos.Actions.CreateAction.DogDto>();
+        typeAdapterConfig.NewConfig<ActionModel.LimitsDto, Protos.Actions.CreateAction.LimitsDto>();
+        typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.CreateAction.RaceDto>();
+        typeAdapterConfig.NewConfig<ActionModel.RaceState, Protos.Actions.CreateAction.RaceState>();
+        typeAdapterConfig.NewConfig<ActionModel.TermDto, Protos.Actions.CreateAction.TermDto>();
+        typeAdapterConfig.NewConfig<ActionModel.VaccinationDto, Protos.Actions.CreateAction.VaccinationDto>();
+        typeAdapterConfig.NewConfig<ActionModel.VaccinationType, Protos.Actions.CreateAction.VaccinationType>();
+        typeAdapterConfig.NewConfig<ActionModel.ActionSaleDto, Protos.Actions.CreateAction.ActionSaleDto>();
+        typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.CreateAction.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.CreateAction.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<ActionModel.ActionSaleItemDto, Protos.Actions.CreateAction.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<ActionModel.LatLngDto, Google.Type.LatLng>()
+            .Map(d => d.Latitude, s => s.GpsLatitude)
+            .Map(d => d.Longitude, s => s.GpsLongitude);
+        
+        typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.UpdateAction.UpdateActionRequest>();
+        typeAdapterConfig.NewConfig<ActionModel.ActionType, Protos.Actions.UpdateAction.ActionType>();
+        typeAdapterConfig.NewConfig<ActionModel.RacerDto, Protos.Actions.UpdateAction.RacerDto>();
+        typeAdapterConfig.NewConfig<ActionModel.NoteDto, Protos.Actions.UpdateAction.NoteDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PaymentDto, Protos.Actions.UpdateAction.PaymentDto>();
+        typeAdapterConfig.NewConfig<ActionModel.RequestedPaymentItem, Protos.Actions.UpdateAction.RequestedPaymentItem>();
+        typeAdapterConfig.NewConfig<ActionModel.RequestedPaymentsDto, Protos.Actions.UpdateAction.RequestedPaymentsDto>();
+        typeAdapterConfig.NewConfig<ActionModel.AddressDto, Protos.Actions.UpdateAction.AddressDto>();
+        typeAdapterConfig.NewConfig<ActionModel.CategoryDto, Protos.Actions.UpdateAction.CategoryDto>();
+        typeAdapterConfig.NewConfig<ActionModel.DogDto, Protos.Actions.UpdateAction.DogDto>();
+        typeAdapterConfig.NewConfig<ActionModel.LimitsDto, Protos.Actions.UpdateAction.LimitsDto>();
+        typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.UpdateAction.RaceDto>();
+        typeAdapterConfig.NewConfig<ActionModel.RaceState, Protos.Actions.UpdateAction.RaceState>();
+        typeAdapterConfig.NewConfig<ActionModel.TermDto, Protos.Actions.UpdateAction.TermDto>();
+        typeAdapterConfig.NewConfig<ActionModel.VaccinationDto, Protos.Actions.UpdateAction.VaccinationDto>();
+        typeAdapterConfig.NewConfig<ActionModel.VaccinationType, Protos.Actions.UpdateAction.VaccinationType>();
+        typeAdapterConfig.NewConfig<ActionModel.ActionSaleDto, Protos.Actions.UpdateAction.ActionSaleDto>();
+        typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.UpdateAction.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.UpdateAction.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<ActionModel.ActionSaleItemDto, Protos.Actions.UpdateAction.ActionSaleItemDto>();
+        
+        
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionResponse, ActionModel>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RacerDto, ActionModel.RacerDto>();

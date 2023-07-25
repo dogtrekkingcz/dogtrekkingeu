@@ -16,6 +16,14 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.AddressDto, EntryRecord.AddressDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.LatLngDto, EntryRecord.LatLngDto>();
             
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest, EntryRecord>();
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.EntryState, EntryRecord.EntryState>();
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.VaccinationDto, EntryRecord.VaccinationDto>();
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.DogDto, EntryRecord.DogDto>();
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.MerchandizeItemDto, EntryRecord.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.AddressDto, EntryRecord.AddressDto>();
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.LatLngDto, EntryRecord.LatLngDto>();
+            
             typeAdapterConfig.NewConfig<EntryRecord, GetEntryInternalStorageResponse>();
             typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetEntryInternalStorageResponse.EntryState>();
             typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntryInternalStorageResponse.VaccinationDto>();

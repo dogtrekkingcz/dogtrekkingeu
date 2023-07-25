@@ -9,8 +9,6 @@ internal static class ActionsServiceMapping
 {
     internal static TypeAdapterConfig AddActionsServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<UpdateActionResponse, Protos.Actions.UpdateAction.UpdateActionResponse>();
-
         typeAdapterConfig.NewConfig<Protos.Actions.DeleteAction.DeleteActionRequest, DeleteActionRequest>();
 
         typeAdapterConfig.NewConfig<GetAllActionsResponse, RepeatedField<Protos.Shared.ActionSimple>>()
@@ -123,12 +121,34 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateActionRequest.LatLngDto>()
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
-
-        typeAdapterConfig.NewConfig<CreateActionResponse, Protos.Actions.CreateAction.CreateActionResponse>()
-            .MapWith(s => new Protos.Actions.CreateAction.CreateActionResponse
-            {
-                Id = s.Id
-            });
+        typeAdapterConfig.NewConfig<CreateActionResponse, Protos.Actions.CreateAction.CreateActionResponse>();
+        
+        
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.UpdateActionRequest, UpdateActionRequest>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.ActionType, UpdateActionRequest.ActionType>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RacerDto, UpdateActionRequest.RacerDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.NoteDto, UpdateActionRequest.NoteDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.PaymentDto, UpdateActionRequest.PaymentDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RequestedPaymentItem, UpdateActionRequest.RequestedPaymentItem>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RequestedPaymentsDto, UpdateActionRequest.RequestedPaymentsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.AddressDto, UpdateActionRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.CategoryDto, UpdateActionRequest.CategoryDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.DogDto, UpdateActionRequest.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.LimitsDto, UpdateActionRequest.LimitsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RaceDto, UpdateActionRequest.RaceDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RaceState, UpdateActionRequest.RaceState>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.TermDto, UpdateActionRequest.TermDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.VaccinationDto, UpdateActionRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.VaccinationType, UpdateActionRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.ActionSaleDto, UpdateActionRequest.ActionSaleDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.MerchandizeItemDto, UpdateActionRequest.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.PaymentDefinitionDto, UpdateActionRequest.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.ActionSaleItemDto, UpdateActionRequest.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, UpdateActionRequest.LatLngDto>()
+            .Map(d => d.GpsLatitude, s => s.Latitude)
+            .Map(d => d.GpsLongitude, s => s.Longitude);
+        typeAdapterConfig.NewConfig<UpdateActionResponse, Protos.Actions.UpdateAction.UpdateActionResponse>();
+        
 
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse, Protos.Actions.GetActionEntrySettings.GetActionEntrySettingsResponse>();
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.ActionType, Protos.Actions.GetActionEntrySettings.ActionType>();
