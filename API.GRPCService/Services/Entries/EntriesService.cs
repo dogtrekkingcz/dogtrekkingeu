@@ -22,13 +22,13 @@ internal class EntriesService : Protos.Entries.Entries.EntriesBase
         _entriesService = entriesService;
     }
 
-    public async override Task<Protos.Entries.CreateEntryResponse> createEntry(Protos.Entries.CreateEntryRequest request, ServerCallContext context)
+    public async override Task<Protos.Entries.CreateEntry.CreateEntryResponse> createEntry(Protos.Entries.CreateEntry.CreateEntryRequest request, ServerCallContext context)
     {
         var createEntryRequest = _mapper.Map<CreateEntryRequest>(request);
         
         var newEntry = await _entriesService.CreateEntryAsync(createEntryRequest, context.CancellationToken);
 
-        var response = _mapper.Map<Protos.Entries.CreateEntryResponse>(newEntry);
+        var response = _mapper.Map<Protos.Entries.CreateEntry.CreateEntryResponse>(newEntry);
 
         return response;
     }

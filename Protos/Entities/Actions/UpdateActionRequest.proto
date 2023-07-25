@@ -15,6 +15,13 @@ message UpdateActionRequest {
   AddressDto Address = 5;
   repeated RaceDto Races = 6;
   ActionSaleDto Sale = 7;
+  ActionType Type = 8;
+}
+
+enum ActionType {
+  Unspecified = 0;
+  Trip = 1;
+  Dogtrekking = 2;
 }
 
 message RaceDto {

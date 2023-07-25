@@ -237,5 +237,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
 
             await _actionsRepositoryService.UpdateActionAsync(updateActionRequest, cancellationToken);
         }
+
+        public async Task<GetRacesForActionResponse> GetRacesForActionAsync(GetRacesForActionRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+
+            return _mapper.Map<GetRacesForActionResponse>(action);
+        }
     }
 }

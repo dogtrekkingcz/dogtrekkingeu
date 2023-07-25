@@ -21,6 +21,13 @@ message Action {
   AddressDto Address = 7;
   repeated RaceDto Races = 8;
   ActionSaleDto Sale = 9;
+  ActionType Type = 10;
+}
+
+enum ActionType {
+  Unspecified = 0;
+  Trip = 1;
+  Dogtrekking = 2;
 }
 
 message RaceDto {

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Protos.Entries";
+option csharp_namespace = "Protos.Entries.CreateEntry";
 
 package entries;
 
@@ -14,20 +14,20 @@ message CreateEntryRequest {
   string Surname = 5;
   string Phone = 6;
   string Email = 7;
-  repeated CreateEntryRequest_Dog Dogs = 8;
+  repeated Dog Dogs = 8;
   repeated string Notes = 9;
   string ActionId = 10;
   string RaceId = 11;
   string CategoryId = 12;
-  CreateEntryRequest_Address Address = 13;
+  Address Address = 13;
   optional google.type.DateTime Birthday = 14;
   string LanguageCode = 15;
-  repeated CreateEntryRequest_MerchandizeItem Merchandize = 16;
+  repeated MerchandizeItem Merchandize = 16;
   bool Accepted = 17;
   optional google.type.DateTime AcceptedDate = 18;
 }
 
-message CreateEntryRequest_Address {
+message Address {
   string Country = 1;
   string Region = 2;
   string ZipCode = 3;
@@ -36,16 +36,16 @@ message CreateEntryRequest_Address {
   google.type.LatLng Position = 6;
 }
 
-message CreateEntryRequest_Dog {
-  string Id = 1;
+message Dog {
+  optional string Id = 1;
   string Name = 2;
   string Pedigree = 3;
   string Chip = 4;
   google.type.DateTime Birthday = 5;
-  repeated CreateEntryRequest_Vaccination Vaccinations = 6;
+  repeated Vaccination Vaccinations = 6;
 }
 
-message CreateEntryRequest_MerchandizeItem {
+message MerchandizeItem {
   string Id = 1;
   string Name = 2;
   string Description = 3;
@@ -58,15 +58,15 @@ message CreateEntryRequest_MerchandizeItem {
   string Note = 10;
 }
 
-message CreateEntryRequest_Vaccination {
+message Vaccination {
   optional google.type.DateTime Date = 1;
   optional google.type.DateTime ValidUntil = 2;
-  CreateEntryRequest_VaccinationType Type = 3;
+  VaccinationType Type = 3;
   string Note = 4;
   string UriToPhoto = 5;
 }
 
-enum CreateEntryRequest_VaccinationType {
+enum VaccinationType {
   Unspecified = 0;
   Rabies = 1; // vzteklina
   Psinka = 2;

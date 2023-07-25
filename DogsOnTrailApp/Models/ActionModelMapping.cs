@@ -11,6 +11,7 @@ namespace DogsOnTrailApp.Models;
     internal static TypeAdapterConfig AddActionModelMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionResponse, ActionModel>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RacerDto, ActionModel.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.NoteDto, ActionModel.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDto, ActionModel.PaymentDto>();
@@ -34,6 +35,7 @@ namespace DogsOnTrailApp.Models;
             .Map(d => d.GpsLongitude, s => s.Longitude);
         
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.Action, ActionModel>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RacerDto, ActionModel.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.NoteDto, ActionModel.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.PaymentDto, ActionModel.PaymentDto>();
@@ -54,6 +56,7 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.Action, ActionModel>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RacerDto, ActionModel.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.NoteDto, ActionModel.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PaymentDto, ActionModel.PaymentDto>();
@@ -72,9 +75,6 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.MerchandizeItemDto, ActionModel.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
-        
-
-
         
         return typeAdapterConfig;
     }

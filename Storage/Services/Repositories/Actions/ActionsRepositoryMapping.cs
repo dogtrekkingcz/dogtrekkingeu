@@ -11,6 +11,7 @@ namespace Storage.Services.Repositories.Actions
         internal static TypeAdapterConfig AddActionRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.ActionType, ActionRecord.ActionType>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.NoteDto, ActionRecord.NoteDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.PaymentDto, ActionRecord.PaymentDto>();
@@ -32,6 +33,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.ActionSaleItemDto, ActionRecord.ActionSaleItemDto>();
 
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.ActionType, ActionRecord.ActionType>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.NoteDto, ActionRecord.NoteDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.PaymentDto, ActionRecord.PaymentDto>();
@@ -53,6 +55,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.ActionSaleItemDto, ActionRecord.ActionSaleItemDto>();
 
             typeAdapterConfig.NewConfig<ActionRecord, GetAllActionsInternalStorageResponse.ActionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionType, GetAllActionsInternalStorageResponse.ActionType>();
             typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetAllActionsInternalStorageResponse.RacerDto>();
             typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetAllActionsInternalStorageResponse.NoteDto>();
             typeAdapterConfig.NewConfig<ActionRecord.PaymentDto, GetAllActionsInternalStorageResponse.PaymentDto>();
@@ -74,6 +77,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.ActionSaleItemDto, GetAllActionsInternalStorageResponse.ActionSaleItemDto>();
             
             typeAdapterConfig.NewConfig<ActionRecord, GetSelectedActionsInternalStorageResponse.ActionDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.ActionType, GetSelectedActionsInternalStorageResponse.ActionType>();
             typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetSelectedActionsInternalStorageResponse.RacerDto>();
             typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetSelectedActionsInternalStorageResponse.NoteDto>();
             typeAdapterConfig.NewConfig<ActionRecord.PaymentDto, GetSelectedActionsInternalStorageResponse.PaymentDto>();
@@ -103,6 +107,7 @@ namespace Storage.Services.Repositories.Actions
                 .MapWith(s => new ActionRecord { Id = s.Id.ToString() });
 
             typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>(); 
+            typeAdapterConfig.NewConfig<ActionRecord.ActionType, GetActionInternalStorageResponse.ActionType>();
             typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetActionInternalStorageResponse.RacerDto>();
             typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetActionInternalStorageResponse.NoteDto>();
             typeAdapterConfig.NewConfig<ActionRecord.PaymentDto, GetActionInternalStorageResponse.PaymentDto>();

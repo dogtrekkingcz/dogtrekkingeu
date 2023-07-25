@@ -18,10 +18,15 @@ internal static class EntryModelMapping
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
 
-        typeAdapterConfig.NewConfig<EntryModel, Protos.Entries.CreateEntryRequest>();
-        typeAdapterConfig.NewConfig<EntryModel.VaccinationDto, Protos.Entries.CreateEntryRequest_Vaccination>();
-        typeAdapterConfig.NewConfig<EntryModel.DogDto, Protos.Entries.CreateEntryRequest_Dog>();
-        typeAdapterConfig.NewConfig<EntryModel.VaccinationType, Protos.Entries.CreateEntryRequest_VaccinationType>();
+        typeAdapterConfig.NewConfig<EntryModel, Protos.Entries.CreateEntry.CreateEntryRequest>();
+        typeAdapterConfig.NewConfig<EntryModel.VaccinationDto, Protos.Entries.CreateEntry.Vaccination>();
+        typeAdapterConfig.NewConfig<EntryModel.DogDto, Protos.Entries.CreateEntry.Dog>();
+        typeAdapterConfig.NewConfig<EntryModel.VaccinationType, Protos.Entries.CreateEntry.VaccinationType>();
+        typeAdapterConfig.NewConfig<EntryModel.MerchandizeItemDto, Protos.Entries.CreateEntry.MerchandizeItem>();
+        typeAdapterConfig.NewConfig<EntryModel.AddressDto, Protos.Entries.CreateEntry.Address>();
+        typeAdapterConfig.NewConfig<EntryModel.LatLngDto, Google.Type.LatLng>()
+            .Map(d => d.Latitude, s => s.GpsLatitude)
+            .Map(d => d.Longitude, s => s.GpsLongitude);
         
         return typeAdapterConfig;
     }

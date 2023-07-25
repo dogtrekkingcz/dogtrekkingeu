@@ -4,6 +4,8 @@ namespace DogsOnTrail.Interfaces.Actions.Entities.Actions;
 
 public sealed record CreateActionRequest
 {
+    public ActionType Type { get; set; } = ActionType.Unspecified;
+    
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;
@@ -18,6 +20,13 @@ public sealed record CreateActionRequest
 
     public ActionSaleDto Sale { get; set; } = new();
 
+    public enum ActionType
+    {
+        Unspecified = 0,
+        Trip = 1,
+        Dogtrekking = 2
+    }
+    
     public sealed record RaceDto
     {
         public Guid Id { get; set; } = default(Guid);

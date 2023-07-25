@@ -3,6 +3,8 @@
     public sealed record GetActionDetailResponse
     {
         public Guid Id { get; set; }
+
+        public ActionType Type { get; set; } = ActionType.Unspecified;
         
         public string Name { get; set; } = string.Empty;
 
@@ -17,6 +19,13 @@
         public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 
         public ActionSaleDto Sale { get; set; } = new();
+        
+        public enum ActionType
+        {
+            Unspecified = 0,
+            Trip = 1,
+            Dogtrekking = 2
+        }
 
         public sealed record RaceDto
         {

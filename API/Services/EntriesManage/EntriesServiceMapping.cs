@@ -50,21 +50,21 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.AddressDto, GetAllEntriesResponse.AddressDto>();
         typeAdapterConfig.NewConfig<GetAllEntriesInternalStorageResponse.LatLngDto, GetAllEntriesResponse.LatLngDto>();
 
-        typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest>()
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, NewActionRegistrationEmailRequest>()
             .IgnoreNullValues(true)
             .Ignore(d => d.Action)
             .Ignore(d => d.Category)
             .Ignore(d => d.Race)
             .Ignore(d => d.Payments)
             .Ignore(d => d.Racer);
-        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, NewActionRegistrationEmailRequest.VaccinationType>();
-        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, NewActionRegistrationEmailRequest.DogDto>();
-        typeAdapterConfig.NewConfig<CreateEntryRequest.MerchandizeItemDto, NewActionRegistrationEmailRequest.MerchandizeItemDto>();
-        typeAdapterConfig.NewConfig<CreateEntryRequest.AddressDto, NewActionRegistrationEmailRequest.AddressDto>();
-        typeAdapterConfig.NewConfig<CreateEntryRequest.LatLngDto, NewActionRegistrationEmailRequest.LatLngDto>();
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.VaccinationType, NewActionRegistrationEmailRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.DogDto, NewActionRegistrationEmailRequest.DogDto>();
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.MerchandizeItemDto, NewActionRegistrationEmailRequest.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.AddressDto, NewActionRegistrationEmailRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.LatLngDto, NewActionRegistrationEmailRequest.LatLngDto>();
 
-        typeAdapterConfig.NewConfig<CreateEntryRequest, NewActionRegistrationEmailRequest.RacerDto>()
+        typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, NewActionRegistrationEmailRequest.RacerDto>()
             .Ignore(d => d.Id)
             .Ignore(d => d.Created);
         

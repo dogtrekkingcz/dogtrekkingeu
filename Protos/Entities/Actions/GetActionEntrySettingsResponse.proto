@@ -11,6 +11,13 @@ message GetActionEntrySettingsResponse {
   string Name = 2;
   repeated RaceDto Races = 3;
   repeated CategoryDto Categories = 4;
+  ActionType Type = 5;
+}
+
+enum ActionType {
+  Unspecified = 0;
+  Trip = 1;
+  Dogtrekking = 2;
 }
 
 message RaceDto {

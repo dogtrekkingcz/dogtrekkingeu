@@ -7,17 +7,17 @@ internal static class EntriesServiceMapping
 {
     internal static TypeAdapterConfig AddEntriesServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntryRequest, CreateEntryRequest>();
-        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntryRequest_Vaccination, CreateEntryRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntryRequest_VaccinationType, CreateEntryRequest.VaccinationType>();
-        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntryRequest_Dog, CreateEntryRequest.DogDto>();
-        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntryRequest_MerchandizeItem, CreateEntryRequest.MerchandizeItemDto>();
-        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntryRequest_Address, CreateEntryRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.CreateEntryRequest, CreateEntryRequest>();
+        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.Vaccination, CreateEntryRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.VaccinationType, CreateEntryRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.Dog, CreateEntryRequest.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.MerchandizeItem, CreateEntryRequest.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.Address, CreateEntryRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateEntryRequest.LatLngDto>()
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
         
-        typeAdapterConfig.NewConfig<CreateEntryResponse, Protos.Entries.CreateEntryResponse>();
+        typeAdapterConfig.NewConfig<CreateEntryResponse, Protos.Entries.CreateEntry.CreateEntryResponse>();
 
         typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByActionRequest, GetEntriesByActionRequest>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse, Protos.Entries.GetEntriesByAction.GetEntriesByActionResponse>();

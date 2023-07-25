@@ -98,7 +98,7 @@
 
     protected async Task SendAsync()
     {
-        var createEntryRequest = Mapper.Map<Protos.Entries.CreateEntryRequest>(Entry);
+        var createEntryRequest = Mapper.Map<Protos.Entries.CreateEntry.CreateEntryRequest>(Entry);
         createEntryRequest.LanguageCode = "cs-CZ";
         
         await EntriesClient.createEntryAsync(createEntryRequest);

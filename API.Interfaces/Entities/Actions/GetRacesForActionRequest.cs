@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Results;
+﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Actions;
 
 public record GetRacesForActionRequest
 {

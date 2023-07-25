@@ -1,5 +1,6 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities;
 using DogsOnTrail.Interfaces.Actions.Entities.Actions;
+using DogsOnTrail.Interfaces.Actions.Entities.Results;
 
 namespace DogsOnTrail.Interfaces.Actions.Services
 {
@@ -28,5 +29,7 @@ namespace DogsOnTrail.Interfaces.Actions.Services
         Task DenyRegistrationAsync(Guid registrationId, string reason, CancellationToken cancellationToken);
 
         Task AcceptPaymentAsync(AcceptPaymentRequest request, CancellationToken cancellationToken);
+
+        Task<GetRacesForActionResponse> GetRacesForActionAsync(GetRacesForActionRequest request, CancellationToken cancellationToken);
     }
 }

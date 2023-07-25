@@ -1,38 +1,8 @@
 ﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Actions;
 
-public sealed record GetSelectedActionsResponse
+public sealed record GetRacesForActionResponse
 {
-    public IList<ActionDto> Actions { get; init; } = new List<ActionDto>();
-
-    public sealed record ActionDto
-    {
-        public Guid Id { get; set; }
-        
-        public DateTimeOffset Created { get; set; }
-
-        public ActionType Type { get; set; } = ActionType.Unspecified;
-        
-        public string Name { get; set; } = string.Empty;
-
-        public string Description { get; set; } = string.Empty;
-
-        public string ContactMail { get; set; } = string.Empty;
-
-        public TermDto Term { get; set; } = new();
-
-        public AddressDto Address { get; set; } = new();
-
-        public List<RaceDto> Races { get; set; } = new List<RaceDto>();
-
-        public ActionSaleDto Sale { get; set; } = new();
-    }
-    
-    public enum ActionType
-    {
-        Unspecified = 0,
-        Trip = 1,
-        Dogtrekking = 2
-    }
+    public IList<RaceDto> Races { get; set; } = new List<RaceDto>();
     
     public sealed record RaceDto
     {
