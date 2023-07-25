@@ -1,7 +1,7 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Dogs;
+﻿using API.GRPCService.Extensions;
+using DogsOnTrail.Interfaces.Actions.Entities.Dogs;
 using Mapster;
 using SharedCode.Entities;
-using SharedCode.Extensions;
 
 namespace API.GRPCService.Services.Dogs;
 

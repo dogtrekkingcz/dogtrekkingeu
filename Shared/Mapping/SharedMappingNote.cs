@@ -11,8 +11,8 @@ namespace SharedCode.Mapping
             typeAdapterConfig.NewConfig<NoteDto, Protos.Shared.Note>()
                 .Map(d => d.Time, s => s.Time.ToGoogleDateTime());
 
-            typeAdapterConfig.NewConfig<Protos.Shared.Note, NoteDto>()
-                .Map(d => d.Time, s => s.Time.ToDateTimeOffset());
+            // typeAdapterConfig.NewConfig<Protos.Shared.Note, NoteDto>()
+            //     .Map(d => d.Time, s => s.Time.ToDateTimeOffset());
 
             typeAdapterConfig.NewConfig<NoteDto, NoteDto>();
 

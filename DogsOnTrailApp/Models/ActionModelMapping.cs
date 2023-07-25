@@ -1,8 +1,5 @@
-﻿using System.Globalization;
-using SharedCode.Entities;
-using Google.Protobuf.Collections;
+﻿using DogsOnTrailApp.Extensions;
 using Mapster;
-using SharedCode.Extensions;
 
 namespace DogsOnTrailApp.Models;
 
@@ -54,27 +51,43 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.UpdateAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.UpdateAction.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<ActionModel.ActionSaleItemDto, Protos.Actions.UpdateAction.ActionSaleItemDto>();
-        
-        
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionResponse, ActionModel>();
+
+
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionResponse, ActionModel>()
+            .Map(d => d.Created, s => s.Created.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionType, ActionModel.ActionType>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RacerDto, ActionModel.RacerDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.NoteDto, ActionModel.NoteDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDto, ActionModel.PaymentDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RacerDto, ActionModel.RacerDto>()
+            .Map(d => d.Finish, s => s.Finish.ToDateTimeOffset())
+            .Map(d => d.Start, s => s.Start.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.NoteDto, ActionModel.NoteDto>()
+            .Map(d => d.Time, s => s.Time.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDto, ActionModel.PaymentDto>()
+            .Map(d => d.Date, s => s.Date.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RequestedPaymentItem, ActionModel.RequestedPaymentItem>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RequestedPaymentsDto, ActionModel.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.AddressDto, ActionModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CategoryDto, ActionModel.CategoryDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.DogDto, ActionModel.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.DogDto, ActionModel.DogDto>()
+            .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset())
+            .Map(d => d.Decease, s => s.Decease.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.LimitsDto, ActionModel.LimitsDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RaceDto, ActionModel.RaceDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RaceDto, ActionModel.RaceDto>()
+            .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
+            .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset())
+            .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RaceState, ActionModel.RaceState>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.TermDto, ActionModel.TermDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.VaccinationDto, ActionModel.VaccinationDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.TermDto, ActionModel.TermDto>()
+            .Map(d => d.From, s => s.From.ToDateTimeOffset())
+            .Map(d => d.To, s => s.To.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.VaccinationDto, ActionModel.VaccinationDto>()
+            .Map(d => d.Date, s => s.Date.ToDateTimeOffset())
+            .Map(d => d.ValidUntil, s => s.ValidUntil.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.VaccinationType, ActionModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionSaleDto, ActionModel.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.MerchandizeItemDto, ActionModel.MerchandizeItemDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>()
+            .Map(d => d.From, s => s.From.ToDateTimeOffset())
+            .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, ActionModel.LatLngDto>()
             .Map(d => d.GpsLatitude, s => s.Latitude)
@@ -112,14 +125,19 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CategoryDto, ActionModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.DogDto, ActionModel.DogDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.LimitsDto, ActionModel.LimitsDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RaceDto, ActionModel.RaceDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RaceDto, ActionModel.RaceDto>()
+            .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset())
+            .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
+            .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RaceState, ActionModel.RaceState>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.TermDto, ActionModel.TermDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.VaccinationDto, ActionModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.VaccinationType, ActionModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleDto, ActionModel.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.MerchandizeItemDto, ActionModel.MerchandizeItemDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>()
+            .Map(d => d.From, s => s.From.ToDateTimeOffset())
+            .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
         
         return typeAdapterConfig;

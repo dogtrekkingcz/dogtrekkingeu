@@ -14,11 +14,11 @@ namespace SharedCode.Mapping
                 .Map(d => d.EnteringTo, s => s.EnteringTo.ToGoogleDateTime())
                 .Map(d => d.Begin, s => s.Begin.ToGoogleDateTime());
 
-            typeAdapterConfig.NewConfig<Protos.Shared.RaceDetail, Race___Dto>()
-                .IgnoreNullValues(true)
-                .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
-                .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset())
-                .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset());
+            // typeAdapterConfig.NewConfig<Protos.Shared.RaceDetail, Race___Dto>()
+            //     .IgnoreNullValues(true)
+            //     .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
+            //     .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset())
+            //     .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset());
 
             typeAdapterConfig.NewConfig<Protos.Shared.RaceSimple, Race___Dto>()
                 .IgnoreNullValues(true)
@@ -29,10 +29,10 @@ namespace SharedCode.Mapping
                 .Map(d => d.From, s => s.From.ToGoogleDateTime())
                 .Map(d => d.To, s => s.To.ToGoogleDateTime());
 
-            typeAdapterConfig.NewConfig<Protos.Shared.PaymentDefinition, Race___Dto.PaymentDefinitionDto>()
-                .IgnoreNullValues(true)
-                .Map(d => d.From, s => s.From.ToDateTimeOffset())
-                .Map(d => d.To, s => s.To.ToDateTimeOffset());
+            // typeAdapterConfig.NewConfig<Protos.Shared.PaymentDefinition, Race___Dto.PaymentDefinitionDto>()
+            //     .IgnoreNullValues(true)
+            //     .Map(d => d.From, s => s.From.ToDateTimeOffset())
+            //     .Map(d => d.To, s => s.To.ToDateTimeOffset());
 
             typeAdapterConfig.NewConfig<Race___Dto.LimitsDto, Protos.Shared.RaceLimits>()
                 .IgnoreNullValues(true);

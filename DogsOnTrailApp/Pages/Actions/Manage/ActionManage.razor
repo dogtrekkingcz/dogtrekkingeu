@@ -4,6 +4,7 @@
 @using MapsterMapper
 @using DogsOnTrailApp.Shared
 @using Protos.Actions.UpdateAction
+@using DogsOnTrailApp.Extensions
 
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
@@ -92,7 +93,10 @@ else
             };
             var actionResponse = await Client.getActionAsync(getActionRequest);
 
+            Console.WriteLine($"Response: {actionResponse?.Dump()}");
+            Console.WriteLine("================");
             Model = mapper.Map<ActionModel>(actionResponse);
+            Console.WriteLine($"Model: {Model?.Dump()}");
 
             RequiredAction = RequiredActionEnum.UpdateAction;
         }

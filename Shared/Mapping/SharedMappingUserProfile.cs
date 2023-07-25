@@ -8,11 +8,11 @@ namespace SharedCode.Mapping
     {
         public static TypeAdapterConfig AddSharedMappingUserProfile(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<UserProfileDto, Protos.Shared.UserProfile>()
-                .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime());
-
-            typeAdapterConfig.NewConfig<Protos.Shared.UserProfile, UserProfileDto>()
-                .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
+            // typeAdapterConfig.NewConfig<UserProfileDto, Protos.Shared.UserProfile>()
+            //     .Map(d => d.Birthday, s => s.Birthday.ToGoogleDateTime());
+            //
+            // typeAdapterConfig.NewConfig<Protos.Shared.UserProfile, UserProfileDto>()
+            //     .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
 
             typeAdapterConfig.NewConfig<UserProfileDto, UserProfileDto>();
 

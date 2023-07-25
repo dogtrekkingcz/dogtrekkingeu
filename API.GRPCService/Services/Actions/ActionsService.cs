@@ -70,7 +70,13 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         
         Console.WriteLine($"grpc:getAction: {result?.Dump()}");
 
-        return _mapper.Map<Protos.Actions.GetAction.GetActionResponse>(result);
+        var response = _mapper.Map<Protos.Actions.GetAction.GetActionResponse>(result);
+
+        Console.WriteLine("=====================");
+        Console.WriteLine($"'Grpc:getAction:Protos': {response?.Dump()}");
+        Console.WriteLine("=====================");
+        
+        return response;
     }
 
     public async override Task<Protos.Actions.CreateAction.CreateActionResponse> createAction(Protos.Actions.CreateAction.CreateActionRequest request, ServerCallContext context)

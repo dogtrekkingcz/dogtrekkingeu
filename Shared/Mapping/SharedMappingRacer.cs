@@ -13,10 +13,10 @@ namespace SharedCode.Mapping
                 .Map(d => d.Start, s => s.Start != null ? s.Start.Value.ToGoogleDateTime() : null)
                 .Map(d => d.Finish, s => s.Finish != null ? s.Finish.Value.ToGoogleDateTime() : null);
 
-            typeAdapterConfig.NewConfig<Protos.Shared.Racer, Racer___Dto>()
-                .IgnoreNullValues(true)
-                .Map(d => d.Start, s => (DateTimeOffset?)(s.Start != null ? s.Start.ToDateTimeOffset() : null))
-                .Map(d => d.Finish, s => (DateTimeOffset?)(s.Finish != null ? s.Finish.ToDateTimeOffset() : null));
+            // typeAdapterConfig.NewConfig<Protos.Shared.Racer, Racer___Dto>()
+            //     .IgnoreNullValues(true)
+            //     .Map(d => d.Start, s => (DateTimeOffset?)(s.Start != null ? s.Start.ToDateTimeOffset() : null))
+            //     .Map(d => d.Finish, s => (DateTimeOffset?)(s.Finish != null ? s.Finish.ToDateTimeOffset() : null));
 
             typeAdapterConfig.NewConfig<Protos.Shared.RequestedPaymentsDto, RequestedPaymentsDto>();
 

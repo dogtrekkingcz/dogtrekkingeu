@@ -5,17 +5,13 @@ using DogsOnTrailApp.Extensions;
 using DogsOnTrailApp.Models;
 using DogsOnTrailApp.Providers;
 using DogsOnTrailApp.Services;
-using SharedCode.Mapping;
 using Google.Protobuf.Collections;
-using Grpc.Core;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.AspNetCore.Components.Authorization;
 using Blazored.LocalStorage;
-using SharedCode.Extensions;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -47,27 +43,29 @@ var typeAdapterConfig = new TypeAdapterConfig
     }
 };
 
-typeAdapterConfig
-    .AddActionModelMapping()
-    .AddUserProfileModelMapping()
-    .AddEntryModelMapping()
-    .AddActionSettingsModelMapping()
-    .AddDogModelMapping();
 
+typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
+    .Map(d => d, s => s.ToDateTimeOffset());
 typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset>()
     .Map(d => d, s => s.ToDateTimeOffset());
 typeAdapterConfig.NewConfig<DateTimeOffset, Google.Type.DateTime>()
     .Map(d => d, s => s.ToGoogleDateTime());
 typeAdapterConfig.NewConfig<DateTimeOffset?, Google.Type.DateTime>()
-    .MapWith(s => s != null ? s.ToGoogleDateTime() : null);
-typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
-    .MapWith(s => s != null ? s.ToDateTimeOffset() : null);
+    .Map(d => d, s => s.ToGoogleDateTime());
+
 typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
 typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();
 typeAdapterConfig.NewConfig<Google.Type.DateTime, Google.Type.DateTime>();
 typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Duration, Google.Protobuf.WellKnownTypes.Duration>();
 typeAdapterConfig.NewConfig<Google.Type.TimeZone, Google.Type.TimeZone>();
 typeAdapterConfig.NewConfig<Google.Type.LatLng, Google.Type.LatLng>();
+
+typeAdapterConfig
+    .AddActionModelMapping()
+    .AddUserProfileModelMapping()
+    .AddEntryModelMapping()
+    .AddActionSettingsModelMapping()
+    .AddDogModelMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)

@@ -2,7 +2,7 @@
 {
     public static class GoogleDateTimeOffsetExtension
     {
-        public static DateTimeOffset? ToDateTimeOffset(this Google.Type.DateTime value)
+        public static DateTimeOffset? ToDatdddeTimeOffset(this Google.Type.DateTime value)
         {
             if (value == null)
                 return null;

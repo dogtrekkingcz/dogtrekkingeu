@@ -1,8 +1,5 @@
-﻿using System.Security.Authentication.ExtendedProtection;
-using SharedCode.Entities;
-using SharedCode.Extensions;
+﻿using DogsOnTrailApp.Extensions;
 using Mapster;
-using Protos.UserProfiles;
 
 namespace DogsOnTrailApp.Models;
 

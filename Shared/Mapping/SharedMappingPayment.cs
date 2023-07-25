@@ -12,9 +12,9 @@ namespace SharedCode.Mapping
                 .IgnoreNullValues(true)
                 .Map(d => d.Date, s => s.Date.ToGoogleDateTime());
 
-            typeAdapterConfig.NewConfig<Protos.Shared.Payment, PaymentDto>()
-                .IgnoreNullValues(true)
-                .Map(d => d.Date, s => (DateTimeOffset?) (s.Date != null ? s.Date.ToDateTimeOffset() : null));
+            // typeAdapterConfig.NewConfig<Protos.Shared.Payment, PaymentDto>()
+            //     .IgnoreNullValues(true)
+            //     .Map(d => d.Date, s => (DateTimeOffset?) (s.Date != null ? s.Date.ToDateTimeOffset() : null));
 
             typeAdapterConfig.NewConfig<PaymentDto, PaymentDto>();
             
