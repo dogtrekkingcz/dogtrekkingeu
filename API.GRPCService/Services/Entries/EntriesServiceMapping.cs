@@ -1,7 +1,7 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Entries;
 using Mapster;
 
-namespace DogsOnTrailGRPCService.Services.Entries;
+namespace API.GRPCService.Services.Entries;
 
 internal static class EntriesServiceMapping
 {
@@ -19,16 +19,14 @@ internal static class EntriesServiceMapping
         
         typeAdapterConfig.NewConfig<CreateEntryResponse, Protos.Entries.CreateEntryResponse>();
 
-        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByActionRequest, GetEntriesByActionRequest>()
-            .Map(d => d.ActionId, s => s.ActionId);
-        
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse, Protos.Entries.GetEntriesByActionResponse>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Protos.Entries.GetEntriesByActionResponse_Entry>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationDto, Protos.Entries.GetEntriesByActionResponse_Vaccination>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Protos.Entries.GetEntriesByActionResponse_VaccinationType>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.DogDto, Protos.Entries.GetEntriesByActionResponse_Dog>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.MerchandizeItemDto, Protos.Entries.GetEntriesByActionResponse_MerchandizeItem>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.AddressDto, Protos.Entries.GetEntriesByActionResponse_Address>();
+        typeAdapterConfig.NewConfig<Protos.Entries.GetEntriesByActionRequest, GetEntriesByActionRequest>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse, Protos.Entries.GetEntriesByAction.GetEntriesByActionResponse>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Protos.Entries.GetEntriesByAction.Entry>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationDto, Protos.Entries.GetEntriesByAction.Vaccination>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Protos.Entries.GetEntriesByAction.VaccinationType>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.DogDto, Protos.Entries.GetEntriesByAction.Dog>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.MerchandizeItemDto, Protos.Entries.GetEntriesByAction.MerchandizeItem>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.AddressDto, Protos.Entries.GetEntriesByAction.Address>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.LatLngDto, Google.Type.LatLng>()
             .Map(d => d.Latitude, s => s.GpsLatitude)
             .Map(d => d.Longitude, s => s.GpsLongitude);

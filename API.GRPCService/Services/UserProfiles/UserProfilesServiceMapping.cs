@@ -1,8 +1,8 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
-using SharedCode.Extensions;
 using Mapster;
+using SharedCode.Extensions;
 
-namespace DogsOnTrailGRPCService.Services.UserProfiles;
+namespace API.GRPCService.Services.UserProfiles;
 
 internal static class UserProfilesServiceMapping
 {

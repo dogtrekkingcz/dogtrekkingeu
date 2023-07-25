@@ -1,15 +1,9 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities;
-using DogsOnTrail.Interfaces.Actions.Entities.Actions;
-using DogsOnTrail.Interfaces.Actions.Entities.Rights;
-using SharedCode.Entities;
+﻿using DogsOnTrail.Interfaces.Actions.Entities.Rights;
 using Google.Protobuf.Collections;
 using Mapster;
 using Protos.Shared;
-using Storage.Entities.Actions;
-using DeleteActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.DeleteActionRequest;
-using UpdateActionResponse = DogsOnTrail.Interfaces.Actions.Entities.Actions.UpdateActionResponse;
 
-namespace DogsOnTrailGRPCService.Services.Authorization;
+namespace API.GRPCService.Services.Authorization;
 
 internal static class AuthorizationServiceMapping
 {

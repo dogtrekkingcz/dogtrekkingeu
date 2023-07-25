@@ -22,7 +22,7 @@ internal static class EntryModelMapping
         typeAdapterConfig.NewConfig<EntryModel.VaccinationDto, Protos.Entries.CreateEntryRequest_Vaccination>();
         typeAdapterConfig.NewConfig<EntryModel.DogDto, Protos.Entries.CreateEntryRequest_Dog>();
         typeAdapterConfig.NewConfig<EntryModel.VaccinationType, Protos.Entries.CreateEntryRequest_VaccinationType>();
-
+        
         return typeAdapterConfig;
     }
 }

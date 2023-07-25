@@ -1,7 +1,7 @@
-﻿using SharedCode.Entities;
-using Mediator;
+﻿using Mediator;
+using SharedCode.Entities;
 
-namespace DogsOnTrailWebApiService.Entities;
+namespace API.WebApiService.Entities;
 
 public sealed record CreateEntryRequest : EntryDto, IRequest<CreateEntryResponse>
 {

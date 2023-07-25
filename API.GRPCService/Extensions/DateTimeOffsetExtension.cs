@@ -1,6 +1,6 @@
 ﻿using DateTime = Google.Type.DateTime;
 
-namespace DogsOnTrailGRPCService.Extensions
+namespace API.GRPCService.Extensions
 {
     public static class DateTimeOffsetExtension
     {

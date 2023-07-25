@@ -1,8 +1,7 @@
-﻿using DogsOnTrailWebApiService.Entities;
+﻿using API.WebApiService.Entities;
 using Mediator;
-using System.Threading;
 
-namespace DogsOnTrailWebApiService.Validators
+namespace API.WebApiService.Validators
 {
     public sealed class CreateEntryValidator : IPipelineBehavior<CreateEntryRequest, CreateEntryResponse>
     {

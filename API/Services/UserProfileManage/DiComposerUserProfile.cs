@@ -1,10 +1,9 @@
-﻿using DogsOnTrail.Actions.Services.UserProfileManage;
-using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.Options;
+﻿using DogsOnTrail.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
+using SharedCode.Options;
 
-namespace DogsOnTrail.Actions.Services.ActionsManage;
+namespace DogsOnTrail.Actions.Services.UserProfileManage;
 
 internal static class DiComposerUserProfile
 {

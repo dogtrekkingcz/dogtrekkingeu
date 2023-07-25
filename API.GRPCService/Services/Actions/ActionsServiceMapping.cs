@@ -1,10 +1,9 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
-using SharedCode.Extensions;
 using Google.Protobuf.Collections;
 using Mapster;
 using SharedCode.Entities;
 
-namespace DogsOnTrailGRPCService.Services.Actions;
+namespace API.GRPCService.Services.Actions;
 
 internal static class ActionsServiceMapping
 {

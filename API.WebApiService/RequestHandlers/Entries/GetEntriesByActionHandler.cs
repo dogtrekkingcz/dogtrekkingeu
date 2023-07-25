@@ -1,9 +1,9 @@
-﻿using DogsOnTrail.Interfaces.Actions.Services;
-using DogsOnTrailWebApiService.Entities;
+﻿using API.WebApiService.Entities;
+using DogsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Mediator;
 
-namespace DogsOnTrailWebApiService.RequestHandlers.Entries
+namespace API.WebApiService.RequestHandlers.Entries
 {
     public sealed class GetEntriesByActionHandler : IRequestHandler<GetEntriesByActionRequest, GetEntriesByActionResponse>
     {

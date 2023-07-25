@@ -1,8 +1,8 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
-using DogsOnTrailWebApiService.Entities;
+﻿using API.WebApiService.Entities;
+using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using Mapster;
 
-namespace DogsOnTrailWebApiService.RequestHandlers.Actions;
+namespace API.WebApiService.RequestHandlers.Actions;
 
 internal static class ActionsMapping
 {

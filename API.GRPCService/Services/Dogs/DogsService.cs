@@ -3,7 +3,7 @@ using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
 
-namespace DogsOnTrailGRPCService.Services.Dogs;
+namespace API.GRPCService.Services.Dogs;
 
 internal class DogsService : Protos.Dogs.Dogs.DogsBase
 {

@@ -1,13 +1,9 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
-using DogsOnTrail.Interfaces.Actions.Services;
-using Google.Protobuf.Collections;
+﻿using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
-using Protos.Results;
 using AddResultRequest = DogsOnTrail.Interfaces.Actions.Entities.Results.AddResultRequest;
-using GetRacesForActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Results.GetRacesForActionRequest;
 
-namespace DogsOnTrailGRPCService.Services.Results;
+namespace API.GRPCService.Services.Results;
 
 internal class ResultsService : Protos.Results.Results.ResultsBase
 {

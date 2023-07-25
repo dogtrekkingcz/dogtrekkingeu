@@ -1,6 +1,6 @@
 ﻿using Mediator;
 
-namespace DogsOnTrailWebApiService.Entities
+namespace API.WebApiService.Entities
 {
     public sealed record ActionDetailRequest : IRequest<ActionDetailResponse>
     {

@@ -1,7 +1,6 @@
-﻿using SharedCode.Entities;
-using Mediator;
+﻿using Mediator;
 
-namespace DogsOnTrailWebApiService.Entities;
+namespace API.WebApiService.Entities;
 
 public sealed record GetEntriesByActionRequest : IRequest<GetEntriesByActionResponse>
 {

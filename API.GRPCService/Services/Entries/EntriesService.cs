@@ -7,7 +7,7 @@ using DeleteEntryRequest = DogsOnTrail.Interfaces.Actions.Entities.Entries.Delet
 using GetAllEntriesRequest = DogsOnTrail.Interfaces.Actions.Entities.Entries.GetAllEntriesRequest;
 using GetEntriesByActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest;
 
-namespace DogsOnTrailGRPCService.Services.Entries;
+namespace API.GRPCService.Services.Entries;
 
 internal class EntriesService : Protos.Entries.Entries.EntriesBase
 {
@@ -33,13 +33,13 @@ internal class EntriesService : Protos.Entries.Entries.EntriesBase
         return response;
     }
 
-    public async override Task<Protos.Entries.GetEntriesByActionResponse> getEntriesByAction(Protos.Entries.GetEntriesByActionRequest request, ServerCallContext context)
+    public async override Task<Protos.Entries.GetEntriesByAction.GetEntriesByActionResponse> getEntriesByAction(Protos.Entries.GetEntriesByActionRequest request, ServerCallContext context)
     {
         var getEntriesByActionRequest = _mapper.Map<GetEntriesByActionRequest>(request);
 
         var entries = await _entriesService.GetEntriesByActionAsync(getEntriesByActionRequest, context.CancellationToken);
 
-        var response = _mapper.Map<Protos.Entries.GetEntriesByActionResponse>(entries);
+        var response = _mapper.Map<Protos.Entries.GetEntriesByAction.GetEntriesByActionResponse>(entries);
 
         return response;
     }

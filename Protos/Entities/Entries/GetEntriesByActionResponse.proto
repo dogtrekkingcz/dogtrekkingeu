@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Protos.Entries";
+option csharp_namespace = "Protos.Entries.GetEntriesByAction";
 
 package entries.getentriesbyactionresponse;
 
@@ -8,30 +8,32 @@ import "google/type/datetime.proto";
 import "google/type/latlng.proto";
 
 message GetEntriesByActionResponse {
-  repeated GetEntriesByActionResponse_Entry Entries = 1;
+  repeated Entry Entries = 1;
 }
 
-message GetEntriesByActionResponse_Entry {
-  string UserProfileId = 2;
-  string CompetitorId = 3;
-  string Name = 4;
-  string Surname = 5;
-  string Phone = 6;
-  string Email = 7;
-  repeated GetEntriesByActionResponse_Dog Dogs = 8;
-  repeated string Notes = 9;
-  string ActionId = 10;
-  string RaceId = 11;
-  string CategoryId = 12;
-  GetEntriesByActionResponse_Address Address = 13;
-  optional google.type.DateTime Birthday = 14;
-  string LanguageCode = 15;
-  repeated GetEntriesByActionResponse_MerchandizeItem Merchandize = 16;
-  bool Accepted = 17;
-  optional google.type.DateTime AcceptedDate = 18;
+message Entry {
+  string Id = 1;
+  google.type.DateTime Created = 2;
+  string UserProfileId = 3;
+  string CompetitorId = 4;
+  string Name = 5;
+  string Surname = 6;
+  string Phone = 7;
+  string Email = 8;
+  repeated Dog Dogs = 9;
+  repeated string Notes = 10;
+  string ActionId = 11;
+  string RaceId = 12;
+  string CategoryId = 13;
+  Address Address = 14;
+  optional google.type.DateTime Birthday = 15;
+  string LanguageCode = 16;
+  repeated MerchandizeItem Merchandize = 17;
+  bool Accepted = 18;
+  optional google.type.DateTime AcceptedDate = 19;
 }
 
-message GetEntriesByActionResponse_Address {
+message Address {
   string Country = 1;
   string Region = 2;
   string ZipCode = 3;
@@ -40,16 +42,16 @@ message GetEntriesByActionResponse_Address {
   google.type.LatLng Position = 6;
 }
 
-message GetEntriesByActionResponse_Dog {
+message Dog {
   string Id = 1;
   string Name = 2;
   string Pedigree = 3;
   string Chip = 4;
   google.type.DateTime Birthday = 5;
-  repeated GetEntriesByActionResponse_Vaccination Vaccinations = 6;
+  repeated Vaccination Vaccinations = 6;
 }
 
-message GetEntriesByActionResponse_MerchandizeItem {
+message MerchandizeItem {
   string Id = 1;
   string Name = 2;
   string Description = 3;
@@ -62,15 +64,15 @@ message GetEntriesByActionResponse_MerchandizeItem {
   string Note = 10;
 }
 
-message GetEntriesByActionResponse_Vaccination {
+message Vaccination {
   optional google.type.DateTime Date = 1;
   optional google.type.DateTime ValidUntil = 2;
-  GetEntriesByActionResponse_VaccinationType Type = 3;
+  VaccinationType Type = 3;
   string Note = 4;
   string UriToPhoto = 5;
 }
 
-enum GetEntriesByActionResponse_VaccinationType {
+enum VaccinationType {
   Unspecified = 0;
   Rabies = 1; // vzteklina
   Psinka = 2;

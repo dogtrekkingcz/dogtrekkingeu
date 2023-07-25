@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrailGRPCService.Extensions;
+﻿namespace API.GRPCService.Extensions;
 
 public static class StringExtension
 {

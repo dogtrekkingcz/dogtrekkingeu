@@ -1,6 +1,6 @@
 ﻿using Storage.Seed;
 
-namespace DogsOnTrailGRPCService.Extensions
+namespace API.GRPCService.Extensions
 {
     public static class SeedDataExtension
     {

@@ -2,7 +2,7 @@
 using Mapster;
 using Storage.Entities.UserProfiles;
 
-namespace DogsOnTrail.Actions.Services.ActionsManage;
+namespace DogsOnTrail.Actions.Services.UserProfileManage;
 
 internal static class UserProfileMapping
 {

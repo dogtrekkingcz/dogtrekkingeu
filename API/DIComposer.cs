@@ -1,7 +1,9 @@
 ﻿using DogsOnTrail.Actions.Services.ActionsManage;
+using DogsOnTrail.Actions.Services.DogsManage;
 using DogsOnTrail.Actions.Services.EntriesManage;
 using DogsOnTrail.Actions.Services.ResultsManage;
 using DogsOnTrail.Actions.Services.Rights;
+using DogsOnTrail.Actions.Services.UserProfileManage;
 using Mails;
 using SharedCode.Options;
 using Mapster;

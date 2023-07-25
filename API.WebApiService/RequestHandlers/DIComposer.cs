@@ -1,13 +1,8 @@
-﻿using System.Runtime.CompilerServices;
-using SharedCode.Entities;
-using DogsOnTrailWebApiService.Entities;
-using DogsOnTrailWebApiService.RequestHandlers.Actions;
-using DogsOnTrailWebApiService.RequestHandlers.Entries;
-using Google.Protobuf.Collections;
+﻿using API.WebApiService.RequestHandlers.Actions;
+using API.WebApiService.RequestHandlers.Entries;
 using Mapster;
-using Mediator;
 
-namespace DogsOnTrailWebApiService.RequestHandlers
+namespace API.WebApiService.RequestHandlers
 {
     public static class DIComposerRequestHandlers
     {

@@ -1,10 +1,7 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
-using DogsOnTrailGRPCService.Extensions;
-using SharedCode.Entities;
-using SharedCode.Extensions;
 using Mapster;
 
-namespace DogsOnTrailGRPCService.Services.Results;
+namespace API.GRPCService.Services.Results;
 
 internal static class ResultsServiceMapping
 {

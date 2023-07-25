@@ -1,8 +1,8 @@
-﻿using DogsOnTrailWebApiService.Entities;
+﻿using API.WebApiService.Entities;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DogsOnTrailWebApiService.Controllers
+namespace API.WebApiService.Controllers
 {
     [Route("api/entries")]
     [ApiController]

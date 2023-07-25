@@ -1,6 +1,6 @@
+using API.GRPCService.Extensions;
 using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
-using DogsOnTrailGRPCService.Extensions;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;

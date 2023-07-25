@@ -1,11 +1,9 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Dogs;
-using DogsOnTrail.Interfaces.Actions.Entities.Entries;
+using Mapster;
 using SharedCode.Entities;
 using SharedCode.Extensions;
-using Mapster;
-using Protos.Shared;
 
-namespace DogsOnTrailGRPCService.Services.Dogs;
+namespace API.GRPCService.Services.Dogs;
 
 internal static class DogsServiceMapping
 {

@@ -1,10 +1,10 @@
 using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.JwtToken;
 using Grpc.Core;
 using MapsterMapper;
+using SharedCode.JwtToken;
 
-namespace DogsOnTrailGRPCService.Services.UserProfiles;
+namespace API.GRPCService.Services.UserProfiles;
 
 public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfilesBase
 {

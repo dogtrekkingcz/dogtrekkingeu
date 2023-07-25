@@ -1,10 +1,9 @@
-﻿using DogsOnTrail.Actions.Services.DogsManage;
-using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.Options;
+﻿using DogsOnTrail.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
+using SharedCode.Options;
 
-namespace DogsOnTrail.Actions.Services.EntriesManage;
+namespace DogsOnTrail.Actions.Services.DogsManage;
 
 internal static class DiComposerDogs
 {

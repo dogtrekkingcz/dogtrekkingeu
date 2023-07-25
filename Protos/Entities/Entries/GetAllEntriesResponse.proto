@@ -12,23 +12,25 @@ message GetAllEntriesResponse {
 }
 
 message Entry {
-  string UserProfileId = 2;
-  string CompetitorId = 3;
-  string Name = 4;
-  string Surname = 5;
-  string Phone = 6;
-  string Email = 7;
-  repeated Dog Dogs = 8;
-  repeated string Notes = 9;
-  string ActionId = 10;
-  string RaceId = 11;
-  string CategoryId = 12;
-  Address Address = 13;
-  optional google.type.DateTime Birthday = 14;
-  string LanguageCode = 15;
-  repeated MerchandizeItem Merchandize = 16;
-  bool Accepted = 17;
-  optional google.type.DateTime AcceptedDate = 18;
+  string Id = 1;
+  google.type.DateTime Created = 2;
+  string UserProfileId = 3;
+  string CompetitorId = 4;
+  string Name = 5;
+  string Surname = 6;
+  string Phone = 7;
+  string Email = 8;
+  repeated Dog Dogs = 9;
+  repeated string Notes = 10;
+  string ActionId = 11;
+  string RaceId = 12;
+  string CategoryId = 13;
+  Address Address = 14;
+  optional google.type.DateTime Birthday = 15;
+  string LanguageCode = 16;
+  repeated MerchandizeItem Merchandize = 17;
+  bool Accepted = 18;
+  optional google.type.DateTime AcceptedDate = 19;
 }
 
 message Address {

@@ -1,11 +1,11 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Rights;
 using DogsOnTrail.Interfaces.Actions.Services;
-using SharedCode.JwtToken;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;
+using SharedCode.JwtToken;
 
-namespace DogsOnTrailGRPCService.Services.Authorization;
+namespace API.GRPCService.Services.Authorization;
 
 internal class AuthorizationService : Protos.Authorization.Authorization.AuthorizationBase
 {

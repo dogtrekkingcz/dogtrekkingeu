@@ -1,7 +1,7 @@
-﻿using DogsOnTrailWebApiService.Entities;
+﻿using API.WebApiService.Entities;
 using Mediator;
 
-namespace DogsOnTrailWebApiService.Validators
+namespace API.WebApiService.Validators
 {
     public static class DIComposerValidators
     {
