@@ -4,6 +4,8 @@ public sealed record GetEntryInternalStorageResponse
 {
     public string? Id { get; set; } = "";
 
+    public EntryState State { get; set; } = EntryState.Unspecified;
+
     public string UserProfileId { get; set; } = "";
     
     public string CompetitorId { get; set; } = "";
@@ -39,6 +41,15 @@ public sealed record GetEntryInternalStorageResponse
     public string LanguageCode { get; set; } = "en-US";
 
     public List<MerchandizeItemDto> Merchandize { get; set; } = new();
+    
+    public enum EntryState
+    {
+        Unspecified = 0,
+        Entered = 1,
+        Accepted = 2,
+        Paid = 3,
+        NotAccepted = 4
+    }
     
     public sealed record AddressDto
     {

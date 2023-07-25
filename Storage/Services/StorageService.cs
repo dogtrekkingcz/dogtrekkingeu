@@ -107,8 +107,6 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
                 filter &= (Builders<T>.Filter.Eq(f.key, (double) f.value));
         }
 
-
-
         var document = await _collection
             .Find(filter)
             .ToListAsync(cancellationToken);

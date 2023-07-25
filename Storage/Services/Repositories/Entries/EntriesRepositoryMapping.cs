@@ -9,6 +9,7 @@ namespace Storage.Services.Repositories.Entries
         internal static TypeAdapterConfig AddEntriesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, EntryRecord>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.EntryState, EntryRecord.EntryState>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.VaccinationDto, EntryRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.DogDto, EntryRecord.DogDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.MerchandizeItemDto, EntryRecord.MerchandizeItemDto>();
@@ -16,6 +17,7 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.LatLngDto, EntryRecord.LatLngDto>();
             
             typeAdapterConfig.NewConfig<EntryRecord, GetEntryInternalStorageResponse>();
+            typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetEntryInternalStorageResponse.EntryState>();
             typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntryInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<EntryRecord.DogDto, GetEntryInternalStorageResponse.DogDto>();
             typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetEntryInternalStorageResponse.MerchandizeItemDto>();
@@ -23,6 +25,7 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<EntryRecord.LatLngDto, GetEntryInternalStorageResponse.LatLngDto>();
 
             typeAdapterConfig.NewConfig<EntryRecord, GetEntriesByActionInternalStorageResponse.EntryDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetEntriesByActionInternalStorageResponse.EntryState>();
             typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntriesByActionInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<EntryRecord.DogDto, GetEntriesByActionInternalStorageResponse.DogDto>();
             typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetEntriesByActionInternalStorageResponse.MerchandizeItemDto>();
@@ -30,6 +33,7 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<EntryRecord.LatLngDto, GetEntriesByActionInternalStorageResponse.LatLngDto>();
             
             typeAdapterConfig.NewConfig<EntryRecord, GetAllEntriesInternalStorageResponse.EntryDto>();
+            typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetAllEntriesInternalStorageResponse.EntryState>();
             typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetAllEntriesInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<EntryRecord.DogDto, GetAllEntriesInternalStorageResponse.DogDto>();
             typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetAllEntriesInternalStorageResponse.MerchandizeItemDto>();

@@ -19,10 +19,11 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.MerchandizeItemDto, GetEntriesByActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.AddressDto, GetEntriesByActionResponse.AddressDto>();
         typeAdapterConfig.NewConfig<GetEntriesByActionInternalStorageResponse.LatLngDto, GetEntriesByActionResponse.LatLngDto>();
-        
+
         typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>()
             .Ignore(d => d.Id)
-            .Ignore(d => d.Created);
+            .Ignore(d => d.Created)
+            .Ignore(d => d.State);
         typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, CreateEntryInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, CreateEntryInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.DogDto, CreateEntryInternalStorageRequest.DogDto>();

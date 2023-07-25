@@ -43,6 +43,7 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
             var createEntryInternalStorageRequest = _mapper.Map<CreateEntryInternalStorageRequest>(request);
             createEntryInternalStorageRequest.Id = Guid.NewGuid();
             createEntryInternalStorageRequest.Created = DateTimeOffset.Now;
+            createEntryInternalStorageRequest.State = CreateEntryInternalStorageRequest.EntryState.Entered;
             
             var response = await _entriesRepositoryService.CreateEntryAsync(createEntryInternalStorageRequest, cancellationToken);
 

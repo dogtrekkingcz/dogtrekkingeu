@@ -208,6 +208,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             var updateEntryRequest = _mapper.Map<UpdateEntryInternalStorageRequest>(registration);
             updateEntryRequest.Accepted = true;
             updateEntryRequest.AcceptedDate = DateTime.Now;
+            updateEntryRequest.State = UpdateEntryInternalStorageRequest.EntryState.Accepted;
 
             await _entriesRepositoryService.UpdateEntryAsync(updateEntryRequest, cancellationToken);
         }
@@ -236,6 +237,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                     });
 
             await _actionsRepositoryService.UpdateActionAsync(updateActionRequest, cancellationToken);
+
+            var registration = await _entriesRepositoryService.GetAsync(request.Id, cancellationToken);
+            var updateRegistrationRequest = _mapper.Map<UpdateEntryInternalStorageRequest>(registration);
+            updateRegistrationRequest.State = UpdateEntryInternalStorageRequest.EntryState.Paid;
+
+            await _entriesRepositoryService.UpdateEntryAsync(updateRegistrationRequest, cancellationToken);
         }
 
         public async Task<GetRacesForActionResponse> GetRacesForActionAsync(GetRacesForActionRequest request, CancellationToken cancellationToken)
