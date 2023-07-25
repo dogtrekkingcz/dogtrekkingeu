@@ -1,14 +1,12 @@
-﻿using SharedCode.Entities;
-using Storage.Entities.AuthorizationRoles;
+﻿using Storage.Entities.AuthorizationRoles;
 using Storage.Interfaces;
-using static SharedCode.Entities.AuthorizationRoleDto;
 
 namespace Storage.Seed
 {
     public class StorageSeedEngine
     {
         private readonly IAuthorizationRolesRepositoryService _authorizationRolesService;
-
+        
         public StorageSeedEngine(IAuthorizationRolesRepositoryService authorizationRolesService)
         {
             _authorizationRolesService = authorizationRolesService;
@@ -19,10 +17,10 @@ namespace Storage.Seed
             await _authorizationRolesService.AddAuthorizationRoleAsync(
                 new Entities.AuthorizationRoles.AddAuthorizationRoleRequest
                 {
-                    Id = AuthorizationRoleDto.RoleType.User.ToString(),
-                    Type = AuthorizationRoleDto.RoleType.User,
+                    Id = AddAuthorizationRoleRequest.RoleType.User.ToString(),
+                    Type = AddAuthorizationRoleRequest.RoleType.User,
                     Name = "User",
-                    Actions = new List<ActionType>
+                    Actions = new List<AddAuthorizationRoleRequest.ActionType>
                     {
                         
                     }
@@ -32,12 +30,14 @@ namespace Storage.Seed
             await _authorizationRolesService.AddAuthorizationRoleAsync(
                 new Entities.AuthorizationRoles.AddAuthorizationRoleRequest
                 {
-                    Id = AuthorizationRoleDto.RoleType.Owner.ToString(),
-                    Type = AuthorizationRoleDto.RoleType.Owner,
+                    Id = AddAuthorizationRoleRequest.RoleType.Owner.ToString(),
+                    Type = AddAuthorizationRoleRequest.RoleType.Owner,
                     Name = "Owner",
-                    Actions = new List<ActionType>
+                    Actions = new List<AddAuthorizationRoleRequest.ActionType>
                     {
-                        ActionType.Read, ActionType.Update, ActionType.Delete
+                        AddAuthorizationRoleRequest.ActionType.Read, 
+                        AddAuthorizationRoleRequest.ActionType.Update, 
+                        AddAuthorizationRoleRequest.ActionType.Delete
                     }
                 }, 
                 CancellationToken.None);

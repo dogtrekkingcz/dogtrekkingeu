@@ -1,6 +1,4 @@
-﻿using SharedCode.Entities;
-
-namespace Storage.Entities.Actions;
+﻿namespace Storage.Entities.Actions;
 
 public sealed record GetAllActionsInternalStorageResponse
 {

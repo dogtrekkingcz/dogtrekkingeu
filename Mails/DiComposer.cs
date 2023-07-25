@@ -1,8 +1,8 @@
 ﻿using Mails.Builders.Emails;
+using Mails.Options;
 using Mails.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using SharedCode.Options;
 
 namespace Mails;
 

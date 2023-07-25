@@ -1,5 +1,4 @@
-﻿using SharedCode.Entities;
-using Mapster;
+﻿using Mapster;
 using Storage.Entities.ActionRights;
 using Storage.Models;
 
@@ -16,24 +15,6 @@ namespace Storage.Services.Repositories.ActionRights
             typeAdapterConfig.NewConfig<GetAllRightsRequest, ActionRightsRecord>()
                 .MapWith(s => new ActionRightsRecord { UserId = s.UserId });
 
-            typeAdapterConfig.NewConfig<ActionRightsRecord, ActionRightsDto>()
-                .TwoWays();
-
-            typeAdapterConfig.NewConfig<IList<ActionRightsRecord>, GetAllRightsResponse>()
-                .MapWith(s => new GetAllRightsResponse
-                {
-                    Rights = s
-                        .Select(r => new ActionRightsDto
-                        {
-                            Id = r.Id, 
-                            Rights = r.Rights, 
-                            ActionId = r.ActionId, 
-                            UserId = r.UserId, 
-                            Roles = r.Roles
-                        })
-                        .ToList()
-                });
-            
             return typeAdapterConfig;
         }
     }

@@ -1,5 +1,4 @@
-﻿using SharedCode.Entities;
-using MapsterMapper;
+﻿using MapsterMapper;
 using MongoDB.Bson;
 using Storage.Entities.Dogs;
 using Storage.Interfaces;
@@ -70,12 +69,7 @@ namespace Storage.Services.Repositories.Dogs
         {
             var result = await _dogStorageService.GetAllAsync(cancellationToken);
 
-            var response = new GetAllDogsInternalStorageResponse();
-
-            foreach (var dog in result)
-            {
-                response.Dogs.Add(_mapper.Map<DogDto>(dog));
-            }
+            var response = _mapper.Map<GetAllDogsInternalStorageResponse>(result);
 
             return response;
         }

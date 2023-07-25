@@ -22,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\API.Interfaces\API.Interface.csproj" />
     <ProjectReference Include="..\API\API.csproj" />
-    <ProjectReference Include="..\Shared\SharedCode.csproj" />
     <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>
 

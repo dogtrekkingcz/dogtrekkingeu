@@ -1,5 +1,4 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
-using SharedCode.Entities;
 
 namespace DogsOnTrail.Interfaces.Actions.Services;
 

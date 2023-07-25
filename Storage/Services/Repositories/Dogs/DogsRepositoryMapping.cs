@@ -1,5 +1,4 @@
-﻿using SharedCode.Entities;
-using Mapster;
+﻿using Mapster;
 using Storage.Entities.Dogs;
 using Storage.Models;
 
@@ -11,14 +10,6 @@ namespace Storage.Services.Repositories.Dogs
         {
             typeAdapterConfig.NewConfig<AddDogInternalStorageRequest, DogRecord>()
                 .Ignore(d => d.Id);
-
-            typeAdapterConfig.NewConfig<DogRecord, DogDto>()
-                .IgnoreNullValues(true)
-                .TwoWays();
-
-            typeAdapterConfig.NewConfig<DogRecord.VaccinationDto, DogDto.VaccinationDto>()
-                .IgnoreNullValues(true)
-                .TwoWays();
 
             return typeAdapterConfig;
         }

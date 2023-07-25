@@ -17,7 +17,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\QrGenerator\QrGenerator.csproj" />
-      <ProjectReference Include="..\Shared\SharedCode.csproj" />
     </ItemGroup>
 
     <ItemGroup>

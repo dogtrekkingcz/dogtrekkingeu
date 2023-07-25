@@ -1,9 +1,27 @@
-﻿using SharedCode.Entities;
-
-namespace DogsOnTrail.Interfaces.Actions.Entities.Rights
+﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Rights;
+public sealed record GetAllRightsResponse
 {
-    public sealed record GetAllRightsResponse
+    public IReadOnlyList<ActionRightsDto> Rights { get; init; }
+    
+    public sealed record ActionRightsDto
     {
-        public IReadOnlyList<ActionRightsDto> Rights { get; init; }
+        public string? Id { get; set; } = Guid.Empty.ToString();
+
+        public string UserId { get; set; } = string.Empty;
+
+        public string ActionId { get; set; } = string.Empty;
+    
+        public RightsType Rights { get; set; }
+
+        public IList<string> Roles { get; set; } = new List<string>();
+
+        public enum RightsType
+        {
+            None = 0,
+            View = 1,
+            Edit = 2,
+            Delete = 3,
+            Admin = 4
+        };
     }
 }

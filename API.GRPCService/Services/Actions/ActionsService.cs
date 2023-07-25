@@ -4,10 +4,7 @@ using DogsOnTrail.Interfaces.Actions.Services;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using MapsterMapper;
-using Microsoft.AspNetCore.WebUtilities;
 using Protos.Actions;
-using SharedCode.JwtToken;
-using SharedCode.Testable;
 using AcceptPaymentRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
 using AcceptPaymentResponse = Protos.Actions.AcceptPaymentResponse;
 using CreateActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.CreateActionRequest;
@@ -17,17 +14,15 @@ using UpdateActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.Upda
 
 namespace API.GRPCService.Services.Actions;
 
-internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableService
+internal class ActionsService : Protos.Actions.Actions.ActionsBase
 {
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
-    private readonly IJwtTokenService _jwtTokenService;
     private readonly IActionsService _actionsService;
 
-    public ActionsService(ILogger<ActionsService> logger, IJwtTokenService jwtTokenService, IMapper mapper, IActionsService actionsService)
+    public ActionsService(ILogger<ActionsService> logger, IMapper mapper, IActionsService actionsService)
     {
         _logger = logger;
-        _jwtTokenService = jwtTokenService;
         _mapper = mapper;
         _actionsService = actionsService;
     }
@@ -146,15 +141,5 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase, ITestableSer
         var races = await _actionsService.GetRacesForActionAsync(_mapper.Map<GetRacesForActionRequest>(request), context.CancellationToken);
 
         return _mapper.Map<Protos.Actions.GetRacesForAction.GetRacesForActionResponse>(races);
-    }
-
-    public async Task<TestResult> TestMeAsync()
-    {
-        return new TestResult { Result = true };
-    }
-
-    public TestResult TestMe()
-    {
-        return new TestResult { Result = true };
     }
 }

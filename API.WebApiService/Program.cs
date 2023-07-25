@@ -1,7 +1,6 @@
+using API.WebApiService.Options;
 using API.WebApiService.RequestHandlers;
 using API.WebApiService.Validators;
-using DogsOnTrail.Actions;
-using SharedCode;
 using Mapster;
 using Storage;
 using Storage.Options;
@@ -17,15 +16,13 @@ string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionStrin
 Console.WriteLine(MongoDbConnectionString);
 
 TypeAdapterConfig typeAdapterConfig = null;
-var options = new SharedCode.Options.DogsOnTrailOptions()
+var options = new DogsOnTrailOptions()
 {
     MongoDbConnectionString = MongoDbConnectionString
 };
 
 builder.Services
-    .AddDogsOnTrailShared(out typeAdapterConfig, options)
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
-    .AddBaseLayer(typeAdapterConfig, options);
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig);
 
 typeAdapterConfig.AddMapping();
 

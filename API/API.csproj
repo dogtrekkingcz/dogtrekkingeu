@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\API.Interfaces\API.Interface.csproj" />
     <ProjectReference Include="..\Mails\Mails.csproj" />
-    <ProjectReference Include="..\Shared\SharedCode.csproj" />
     <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>
 

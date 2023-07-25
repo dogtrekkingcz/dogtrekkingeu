@@ -1,6 +1,4 @@
-﻿using SharedCode.Entities;
-
-namespace Storage.Models;
+﻿namespace Storage.Models;
 
 internal sealed record ActionRecord : IRecord
 {

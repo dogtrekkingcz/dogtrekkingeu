@@ -1,5 +1,4 @@
-﻿using SharedCode.Mapping;
-using Mapster;
+﻿using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Bson.Serialization;
@@ -64,7 +63,6 @@ public static class DiCompositor
             .Map(d => d, s => s.ToString());
         
         typeAdapterConfig
-            .AddSharedMapping()
             .AddActionRepositoryMapping()
             .AddActionRightsRepositoryMapping()
             .AddUserProfilesRepositoryMapping()

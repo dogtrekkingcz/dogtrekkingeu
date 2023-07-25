@@ -1,6 +1,4 @@
-﻿using SharedCode.Entities;
-
-namespace DogsOnTrail.Interfaces.Actions.Entities.Results;
+﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Results;
 
 public sealed record AddResultRequest
 {

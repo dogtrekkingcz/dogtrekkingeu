@@ -1,7 +1,6 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using Google.Protobuf.Collections;
 using Mapster;
-using SharedCode.Entities;
 
 namespace API.GRPCService.Services.Actions;
 
@@ -93,10 +92,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionResponse.LatLngDto, Google.Type.LatLng>()
             .Map(d => d.Latitude, s => s.GpsLatitude)
             .Map(d => d.Longitude, s => s.GpsLongitude);
-
-        typeAdapterConfig.NewConfig<RepeatedField<Protos.Shared.ActionRights>, IReadOnlyList<ActionRightsDto>>();
-
-        typeAdapterConfig.NewConfig<Protos.Shared.ActionRights, ActionRightsDto>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.CreateActionRequest, CreateActionRequest>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.ActionType, CreateActionRequest.ActionType>();

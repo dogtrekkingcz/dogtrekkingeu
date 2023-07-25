@@ -1,8 +1,6 @@
-﻿using SharedCode.Entities;
+﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Dogs;
 
-namespace DogsOnTrail.Interfaces.Actions.Entities.Dogs;
-
-public record CreateDogResponse
+public sealed record CreateDogResponse
 {
     public string Id { get; init; }
 }

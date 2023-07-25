@@ -23,7 +23,6 @@
       <ProjectReference Include="..\API.Interfaces\API.Interface.csproj" />
       <ProjectReference Include="..\API\API.csproj" />
       <ProjectReference Include="..\Protos\Protos.csproj" />
-      <ProjectReference Include="..\Shared\SharedCode.csproj" />
     </ItemGroup>
 
     <ItemGroup>
