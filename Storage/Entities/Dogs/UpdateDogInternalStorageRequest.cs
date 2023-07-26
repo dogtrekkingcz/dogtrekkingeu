@@ -1,6 +1,6 @@
 ﻿namespace Storage.Entities.Dogs
 {
-    public sealed record AddDogInternalStorageRequest
+    public sealed record UpdateDogInternalStorageRequest
     {
         public string? Id { get; set; }
 

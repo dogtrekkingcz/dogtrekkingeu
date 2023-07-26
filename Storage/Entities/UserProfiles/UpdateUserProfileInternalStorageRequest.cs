@@ -72,15 +72,15 @@ public sealed record UpdateUserProfileInternalStorageRequest
         public string UriToPhoto { get; set; } = string.Empty;
 
         public string Contact { get; set; } = string.Empty;
-    }
-    
-    public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>
-    {
-        new VaccinationDto
+
+        public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>
         {
-            Type = VaccinationType.Rabies
-        }
-    };
+            new VaccinationDto
+            {
+                Type = VaccinationType.Rabies
+            }
+        };
+    }
 
     public sealed record VaccinationDto
     {

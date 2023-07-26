@@ -1,6 +1,7 @@
 ﻿using MapsterMapper;
 using MongoDB.Bson;
 using Storage.Entities.Dogs;
+using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
 
@@ -17,8 +18,10 @@ namespace Storage.Services.Repositories.Dogs
             _dogStorageService = dogsStorageService;
         }
 
-        public async Task<AddDogInternalStorageResponse> AddDogAsync(AddDogInternalStorageRequest request, CancellationToken cancellationToken)
+        public async Task<AddDogInternalStorageResponse> AddDogAsync(CreateDogInternalStorageRequest request, CancellationToken cancellationToken)
         {
+            Console.WriteLine($"{nameof(AddDogAsync)}: '{request?.Dump()}'");
+            
             var addRequest = _mapper.Map<DogRecord>(request);
             
             var addedActionRecord = await _dogStorageService.AddAsync(addRequest, cancellationToken);
@@ -31,9 +34,9 @@ namespace Storage.Services.Repositories.Dogs
             return response;
         }
 
-        public async Task<UpdateDogResponse> UpdateDogAsync(UpdateDogRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateDogResponse> UpdateDogAsync(UpdateDogInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            Console.WriteLine(request.ToJson());
+            Console.WriteLine($"{nameof(UpdateDogAsync)}: '{request?.Dump()}'");
             
             var updateRequest = _mapper.Map<DogRecord>(request);
             
@@ -60,7 +63,7 @@ namespace Storage.Services.Repositories.Dogs
             if (result == null)
                 return null;
             
-            var response = _mapper.Map<GetDogsFilteredByChipInternalStorageResponse>(result.FirstOrDefault());
+            var response = _mapper.Map<GetDogsFilteredByChipInternalStorageResponse>(result);
 
             return response;
         }
