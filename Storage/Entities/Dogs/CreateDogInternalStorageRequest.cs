@@ -2,7 +2,7 @@
 {
     public sealed record CreateDogInternalStorageRequest
     {
-        public string? Id { get; set; }
+        public Guid Id { get; set; }
 
         public string UserId { get; set; } = string.Empty;
 

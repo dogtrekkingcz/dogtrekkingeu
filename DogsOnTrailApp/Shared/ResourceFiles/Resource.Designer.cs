@@ -789,6 +789,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add dog.
+        /// </summary>
+        internal static string Dogs_AddDog {
+            get {
+                return ResourceManager.GetString("Dogs.AddDog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chip number.
         /// </summary>
         internal static string Dogs_Chip {
@@ -821,6 +830,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Dogs_Pedigree {
             get {
                 return ResourceManager.GetString("Dogs.Pedigree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registered dogs.
+        /// </summary>
+        internal static string Dogs_Title {
+            get {
+                return ResourceManager.GetString("Dogs.Title", resourceCulture);
             }
         }
         

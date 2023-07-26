@@ -8,7 +8,7 @@
 @inject IMapper mapper
 @inject NavigationManager NavManager
 
-<h3>@localizer["Dogs"]</h3>
+<h3>@localizer["Dogs.Title"]</h3>
 
 <table>
     <thead>
@@ -19,7 +19,7 @@
             <th>@localizer["Dogs.Pedigree"]</th>
         </tr>
     </thead>
-    <tdata>
+    <tbody>
         @foreach (var dog in _dogs)
         {
             <tr>
@@ -29,7 +29,7 @@
                 <td>@dog.Pedigree</td>
             </tr>
         }
-    </tdata>
+    </tbody>
 </table>
 <button @onclick="@(() => AddDog())" class="btn btn-primary">@localizer["Dogs.AddDog"]</button>  
 
@@ -45,7 +45,9 @@
     {
         Protos.Dogs.GetAllDogs.GetAllDogsResponse response = await DogsClient.getAllDogsAsync(new Protos.Dogs.GetAllDogs.GetAllDogsRequest());
 
-        _dogs = mapper.Map<List<DogModel>>(response.Dogs);
+        _dogs = response.Dogs
+            .Select(dog => mapper.Map<DogModel>(dog))
+            .ToList();
     }
 
     protected void AddDog()

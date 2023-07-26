@@ -8,7 +8,8 @@ namespace Storage.Services.Repositories.Dogs
     {
         internal static TypeAdapterConfig AddDogsRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateDogInternalStorageRequest, DogRecord>();
+            typeAdapterConfig.NewConfig<CreateDogInternalStorageRequest, DogRecord>()
+                .Map(d => d.Id, s => s.Id.ToString());
             typeAdapterConfig.NewConfig<CreateDogInternalStorageRequest.VaccinationDto, DogRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<CreateDogInternalStorageRequest.VaccinationType, DogRecord.VaccinationType>();
             

@@ -11,7 +11,7 @@ public sealed class UserProfileService : IUserProfileService
 
     public UserProfileService(IMapper mapper)
     {
-        _mapper = _mapper;
+        _mapper = mapper;
     }
     
     public UserProfileModel Get()

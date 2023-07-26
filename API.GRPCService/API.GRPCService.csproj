@@ -29,7 +29,7 @@
       <Content Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Update="appsettings.Development.json">
+      <Content Update="appsettings.Debug.json">
         <DependentUpon>appsettings.json</DependentUpon>
       </Content>
       <Content Update="appsettings.Release.json">

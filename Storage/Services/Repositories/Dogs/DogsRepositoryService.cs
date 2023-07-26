@@ -72,7 +72,13 @@ namespace Storage.Services.Repositories.Dogs
         {
             var result = await _dogStorageService.GetAllAsync(cancellationToken);
 
-            var response = _mapper.Map<GetAllDogsInternalStorageResponse>(result);
+
+            var response = new GetAllDogsInternalStorageResponse
+            {
+                Dogs = result
+                    .Select(dog => _mapper.Map<GetAllDogsInternalStorageResponse.DogDto>(dog))
+                    .ToList()
+            };
 
             return response;
         }

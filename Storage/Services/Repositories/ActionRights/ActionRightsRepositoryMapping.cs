@@ -14,6 +14,7 @@ namespace Storage.Services.Repositories.ActionRights
 
             typeAdapterConfig.NewConfig<GetAllRightsInternalStorageRequest, ActionRightsRecord>()
                 .MapWith(s => new ActionRightsRecord { UserId = s.UserId });
+            typeAdapterConfig.NewConfig<ActionRightsRecord, GetAllRightsInternalStorageResponse.ActionRightsDto>();
 
             return typeAdapterConfig;
         }

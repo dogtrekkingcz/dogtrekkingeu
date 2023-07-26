@@ -48,7 +48,12 @@ namespace Storage.Services.Repositories.ActionRights
             if (result == null)
                 return null;
 
-            var response = _mapper.Map<GetAllRightsInternalStorageResponse>(result);
+            var response = new GetAllRightsInternalStorageResponse
+            {
+                Rights = result
+                    .Select(r => _mapper.Map<GetAllRightsInternalStorageResponse.ActionRightsDto>(r))
+                    .ToList()
+            };
 
             return response;
         }

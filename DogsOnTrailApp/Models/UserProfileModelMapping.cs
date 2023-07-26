@@ -14,6 +14,35 @@ internal static class UserProfileModelMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Dog, UserProfileModel.DogDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Vaccination, UserProfileModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.VaccinationType, UserProfileModel.VaccinationType>();
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, UserProfileModel.LatLngDto>()
+            .Map(d => d.GpsLatitude, s => s.Latitude)
+            .Map(d => d.GpsLongitude, s => s.Longitude);
+
+        typeAdapterConfig.NewConfig<UserProfileModel, UserProfileModel>();
+        typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, UserProfileModel.AddressDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.ContactDto, UserProfileModel.ContactDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.DogDto, UserProfileModel.DogDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.VaccinationDto, UserProfileModel.VaccinationDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.VaccinationType, UserProfileModel.VaccinationType>();
+        typeAdapterConfig.NewConfig<UserProfileModel.LatLngDto, UserProfileModel.LatLngDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.ActionRightsDto, UserProfileModel.ActionRightsDto>();
+        
+        typeAdapterConfig.NewConfig<UserProfileModel, Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest>();
+        typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, Protos.UserProfiles.CreateUserProfile.Address>();
+        typeAdapterConfig.NewConfig<UserProfileModel.ContactDto, Protos.UserProfiles.CreateUserProfile.Contact>();
+        typeAdapterConfig.NewConfig<UserProfileModel.DogDto, Protos.UserProfiles.CreateUserProfile.Dog>();
+        typeAdapterConfig.NewConfig<UserProfileModel.VaccinationDto, Protos.UserProfiles.CreateUserProfile.Vaccination>();
+        typeAdapterConfig.NewConfig<UserProfileModel.VaccinationType, Protos.UserProfiles.CreateUserProfile.VaccinationType>();
+        typeAdapterConfig.NewConfig<UserProfileModel.LatLngDto, Google.Type.LatLng>()
+            .Map(d => d.Latitude, s => s.GpsLatitude)
+            .Map(d => d.Longitude, s => s.GpsLongitude);
+        
+        typeAdapterConfig.NewConfig<UserProfileModel, Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileRequest>();
+        typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, Protos.UserProfiles.UpdateUserProfile.Address>();
+        typeAdapterConfig.NewConfig<UserProfileModel.ContactDto, Protos.UserProfiles.UpdateUserProfile.Contact>();
+        typeAdapterConfig.NewConfig<UserProfileModel.DogDto, Protos.UserProfiles.UpdateUserProfile.Dog>();
+        typeAdapterConfig.NewConfig<UserProfileModel.VaccinationDto, Protos.UserProfiles.UpdateUserProfile.Vaccination>();
+        typeAdapterConfig.NewConfig<UserProfileModel.VaccinationType, Protos.UserProfiles.UpdateUserProfile.VaccinationType>();
 
         return typeAdapterConfig;
     }

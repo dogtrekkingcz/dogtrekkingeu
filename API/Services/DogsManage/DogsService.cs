@@ -20,7 +20,11 @@ internal class DogsService : IDogsService
     
     public async Task<CreateDogResponse> CreateDogAsync(CreateDogRequest request, CancellationToken cancellationToken)
     {
-        var addDogRequest = _mapper.Map<CreateDogInternalStorageRequest>(request);
+        var addDogRequest = _mapper.Map<CreateDogInternalStorageRequest>(request)
+            with
+            {
+                Id = Guid.NewGuid()
+            };
         
         var result = await _dogsRepositoryService.AddDogAsync(addDogRequest, cancellationToken);
 

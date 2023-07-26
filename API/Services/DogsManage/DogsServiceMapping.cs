@@ -9,7 +9,8 @@ internal static class DogsServiceMapping
 {
     public static TypeAdapterConfig AddDogsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<CreateDogRequest, CreateDogInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<CreateDogRequest, CreateDogInternalStorageRequest>()
+            .Ignore(d => d.Id);
         typeAdapterConfig.NewConfig<CreateDogRequest.VaccinationDto, CreateDogInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<CreateDogRequest.VaccinationType, CreateDogInternalStorageRequest.VaccinationType>();
         
