@@ -11,9 +11,6 @@
 @using DogsOnTrailApp.Services
 @using MapsterMapper
 @using Protos.Actions
-@using SharedCode.Entities
-@using Microsoft.AspNetCore.Components.Authorization
-
 
 <h3>@Localizer["Action.Manage.Registrations"]</h3>
 
@@ -76,7 +73,7 @@ else
                                         .Rights?
                                         .FirstOrDefault(right => 
                                             right.ActionId == Action.Id.ToString() && 
-                                            right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())
+                                            right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
                                             ) != null)
                                     {
                                         <li><a class="dropdown-item" @onclick="@(async () => await ImportRegistrationToAction(entry))">@Localizer["Action.Manage.AcceptRegistration"]</a></li>
@@ -193,7 +190,7 @@ else
                                 <ul class="dropdown-menu">
                                     <AuthorizeView>
                                         <Authorized>
-                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id.ToString() && right.Roles.Contains(AuthorizationRoleDto.RoleType.Owner.ToString())) != null)
+                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id.ToString() && right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())) != null)
                                             {
                                                 <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Localizer["Action.Manage.AcceptPayment"]</a></li>
                                             }

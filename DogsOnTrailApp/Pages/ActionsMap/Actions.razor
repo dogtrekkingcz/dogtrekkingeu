@@ -1,11 +1,7 @@
 ﻿@page "/actions_map"
 @using DogsOnTrailApp.Models
 @using MapsterMapper
-@using System.Xml.Schema
-@using SharedCode.Entities
 @inject Protos.Actions.Actions.ActionsClient Client
-@inject AuthenticationStateProvider AuthStateProvider 
-@inject IModalService modal
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
 @inject NavigationManager NavManager

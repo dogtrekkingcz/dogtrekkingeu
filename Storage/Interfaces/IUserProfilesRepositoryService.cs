@@ -4,7 +4,7 @@ namespace Storage.Interfaces
 {
     public interface IUserProfilesRepositoryService : IRepositoryService
     {
-        public Task<AddUserProfileInternalStorageResponse> AddUserProfileAsync(AddUserProfileInternalStorageRequest request, CancellationToken cancellationToken);
+        public Task<CreateUserProfileInternalStorageResponse> AddUserProfileAsync(CreateUserProfileInternalStorageRequest request, CancellationToken cancellationToken);
 
         public Task<UpdateUserProfileInternalStorageResponse> UpdateUserProfileAsync(UpdateUserProfileInternalStorageRequest request, CancellationToken cancellationToken);
 

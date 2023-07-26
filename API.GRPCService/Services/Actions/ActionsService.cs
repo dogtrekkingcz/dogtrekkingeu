@@ -6,11 +6,6 @@ using Grpc.Core;
 using MapsterMapper;
 using Protos.Actions;
 using AcceptPaymentRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
-using AcceptPaymentResponse = Protos.Actions.AcceptPaymentResponse;
-using CreateActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.CreateActionRequest;
-using GetAllActionsRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.GetAllActionsRequest;
-using GetSelectedActionsRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.GetSelectedActionsRequest;
-using UpdateActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.UpdateActionRequest;
 
 namespace API.GRPCService.Services.Actions;
 
@@ -133,7 +128,7 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         await _actionsService.AcceptPaymentAsync(acceptPaymentRequest, context.CancellationToken);
 
-        return new AcceptPaymentResponse();
+        return new Protos.Actions.AcceptPaymentResponse();
     }
 
     public async override Task<Protos.Actions.GetRacesForAction.GetRacesForActionResponse> getRacesForAction(Protos.Actions.GetRacesForAction.GetRacesForActionRequest request, ServerCallContext context)

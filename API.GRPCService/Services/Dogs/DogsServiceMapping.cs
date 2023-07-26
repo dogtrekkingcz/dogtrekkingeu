@@ -8,21 +8,24 @@ internal static class DogsServiceMapping
 {
     internal static TypeAdapterConfig AddDogsServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Shared.Dog, CreateDogRequest>()
-            .IgnoreNullValues(true)
-            .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset())
-            .Map(d => d.Decease, s => s.Decease.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Dogs.CreateDog.CreateDogRequest, CreateDogRequest>();
+        typeAdapterConfig.NewConfig<Protos.Dogs.CreateDog.Vaccination, CreateDogRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<Protos.Dogs.CreateDog.VaccinationType, CreateDogRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<CreateDogResponse, Protos.Dogs.CreateDog.CreateDogResponse>();
 
-        typeAdapterConfig.NewConfig<Protos.Shared.Vaccination, CreateDogRequest.VaccinationDto>()
-            .IgnoreNullValues(true)
-            .Map(d => d.Date, s => s.Date.ToDateTimeOffset())
-            .Map(d => d.ValidUntil, s => s.ValidUntil.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Dogs.GetAllDogs.GetAllDogsRequest, GetAllDogsRequest>();
+        typeAdapterConfig.NewConfig<GetAllDogsResponse, Protos.Dogs.GetAllDogs.GetAllDogsResponse>();
+        typeAdapterConfig.NewConfig<GetAllDogsResponse.DogDto, Protos.Dogs.GetAllDogs.DogDto>();
+        typeAdapterConfig.NewConfig<GetAllDogsResponse.VaccinationDto, Protos.Dogs.GetAllDogs.Vaccination>();
+        typeAdapterConfig.NewConfig<GetAllDogsResponse.VaccinationType, Protos.Dogs.GetAllDogs.VaccinationType>();
         
-        typeAdapterConfig.NewConfig<CreateDogResponse, Protos.Dogs.CreateDogResponse>();
+        typeAdapterConfig.NewConfig<Protos.Dogs.GetDogsFilteredByChip.GetDogsFilteredByChipRequest, GetDogsFilteredByChipRequest>();
+        typeAdapterConfig.NewConfig<GetDogsFilteredByChipResponse, Protos.Dogs.GetDogsFilteredByChip.GetDogsFilteredByChipResponse>();
+        typeAdapterConfig.NewConfig<GetDogsFilteredByChipResponse.VaccinationDto, Protos.Dogs.GetDogsFilteredByChip.Vaccination>();
+        typeAdapterConfig.NewConfig<GetDogsFilteredByChipResponse.VaccinationType, Protos.Dogs.GetDogsFilteredByChip.VaccinationType>();
 
-        typeAdapterConfig.NewConfig<Protos.Dogs.GetAllDogsRequest, GetAllDogsRequest>();
-        
-        typeAdapterConfig.NewConfig<GetAllDogsResponse, Protos.Dogs.GetAllDogsResponse>();
+        typeAdapterConfig.NewConfig<Protos.Dogs.DeleteDog.DeleteDogRequest, DeleteDogRequest>();
+        typeAdapterConfig.NewConfig<DeleteDogResponse, Protos.Dogs.DeleteDog.DeleteDogResponse>();
         
         return typeAdapterConfig;
     }

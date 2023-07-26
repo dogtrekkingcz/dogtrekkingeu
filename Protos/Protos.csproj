@@ -25,7 +25,16 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\ActionSale.proto">
+      <Protobuf Include="Entities\ActionRights\GetActionRightsRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\ActionRights\GetActionRightsResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -178,6 +187,78 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Entities\Dogs\CreateDogRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Dogs\CreateDogResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Dogs\DeleteDogRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Dogs\DeleteDogResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Dogs\GetAllDogsRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Dogs\GetAllDogsResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Dogs\GetDogsFilteredByChipRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Dogs\GetDogsFilteredByChipResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
       <Protobuf Include="Entities\Entries\CreateEntryRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -214,51 +295,6 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Entry.proto">
-        <GrpcServices>Both</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Protobuf>
-      <Protobuf Include="Entities\MerchandizeItem.proto">
-        <GrpcServices>Both</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Protobuf>
-      <Protobuf Include="Entities\Payment.proto">
-        <GrpcServices>Both</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Protobuf>
-      <Protobuf Include="Entities\PaymentDefinition.proto">
-        <GrpcServices>Both</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Protobuf>
-      <Protobuf Include="Entities\RaceLimits.proto">
-        <GrpcServices>Both</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug\net7.0\</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Protobuf>
       <Protobuf Include="Entities\Results\AddResultRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -268,7 +304,52 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Vaccination.proto">
+      <Protobuf Include="Entities\UserProfiles\CreateUserProfileRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\UserProfiles\CreateUserProfileResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\UserProfiles\GetUserProfileRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\UserProfiles\GetUserProfileResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\UserProfiles\UpdateUserProfileRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\UserProfiles\UpdateUserProfileResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -305,65 +386,17 @@
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
       <None Remove="Entities\ActionDetail.proto" />
-      <Protobuf Include="Entities\ActionDetail.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\ActionRights.proto" />
-      <Protobuf Include="Entities\ActionRights.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\ActionSimple.proto" />
-      <Protobuf Include="Entities\ActionSimple.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\Address.proto" />
-      <Protobuf Include="Entities\Address.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\Category.proto" />
-      <Protobuf Include="Entities\Category.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\Contact.proto" />
-      <Protobuf Include="Entities\Contact.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\Dog.proto" />
-      <Protobuf Include="Entities\Dog.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\Note.proto" />
-      <Protobuf Include="Entities\Note.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\RaceDetail.proto" />
-      <Protobuf Include="Entities\RaceDetail.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\Racer.proto" />
-      <Protobuf Include="Entities\Racer.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\RaceSimple.proto" />
-      <Protobuf Include="Entities\RaceSimple.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Entities\UserProfile.proto" />
-      <Protobuf Include="Entities\UserProfile.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="google\type\calendar_period.proto" />
       <Protobuf Include="google\type\calendar_period.proto">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -450,7 +483,8 @@
         <Generator>MSBuild:Compile</Generator>
       </Protobuf>
       <None Remove="Authorization.proto" />
-      <Protobuf Include="Authorization.proto">
+      <None Remove="ActionRights.proto" />
+      <Protobuf Include="ActionRights.proto">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <Generator>MSBuild:Compile</Generator>
       </Protobuf>

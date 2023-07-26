@@ -10,23 +10,23 @@ namespace DogsOnTrail.Actions.Services.UserProfileManage
     {
         private readonly IMapper _mapper;
         private readonly IUserProfilesRepositoryService _userProfilesRepositoryService;
-        private readonly IJwtTokenService _jwtTokenService;
+        private readonly ICurrentUserIdService _currentUserIdService;
 
-        public UserProfileService(IMapper mapper, IUserProfilesRepositoryService userProfilesRepositoryService, IJwtTokenService jwtTokenService) 
+        public UserProfileService(IMapper mapper, IUserProfilesRepositoryService userProfilesRepositoryService, ICurrentUserIdService currentUserIdService) 
         { 
             _mapper = mapper;
             _userProfilesRepositoryService = userProfilesRepositoryService;
-            _jwtTokenService = jwtTokenService;
+            _currentUserIdService = currentUserIdService;
         }
 
         public async Task<CreateUserProfileResponse> CreateUserProfileAsync(CreateUserProfileRequest request, CancellationToken cancellationToken)
         {
-            var addUserProfileRequest = _mapper.Map<AddUserProfileInternalStorageRequest>(request) with
+            var createUserProfileRequest = _mapper.Map<CreateUserProfileInternalStorageRequest>(request) with
             {
-                UserId = _jwtTokenService.GetUserId()
+                UserId = _currentUserIdService.GetUserId()
             };
 
-            await _userProfilesRepositoryService.AddUserProfileAsync(addUserProfileRequest, cancellationToken);
+            await _userProfilesRepositoryService.AddUserProfileAsync(createUserProfileRequest, cancellationToken);
 
             return new CreateUserProfileResponse();
         }
@@ -35,7 +35,7 @@ namespace DogsOnTrail.Actions.Services.UserProfileManage
         {
             var getUserProfileRequest = _mapper.Map<GetUserProfileInternalStorageRequest>(request) with
             {
-                UserId = _jwtTokenService.GetUserId()
+                UserId = _currentUserIdService.GetUserId()
             };
 
             var result = await _userProfilesRepositoryService.GetUserProfileAsync(getUserProfileRequest, cancellationToken);

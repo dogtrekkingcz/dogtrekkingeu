@@ -1,14 +1,19 @@
 using API.GRPCService.Extensions;
 using API.GRPCService.Interceptors;
 using API.GRPCService.Options;
+using API.GRPCService.Services.ActionRights;
 using API.GRPCService.Services.Actions;
-using API.GRPCService.Services.Authorization;
 using API.GRPCService.Services.Dogs;
 using API.GRPCService.Services.Entries;
+using API.GRPCService.Services.JwtToken;
 using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
 using DogsOnTrail.Actions;
+using DogsOnTrail.Actions.Services.CurrentUserId;
+using DogsOnTrail.Interfaces.Actions.Services;
+using Google.Protobuf.Collections;
 using Mapster;
+using MapsterMapper;
 using Storage;
 using Storage.Options;
 
@@ -22,16 +27,45 @@ var options = new DogsOnTrailOptions()
     MongoDbConnectionString = MongoDbConnectionString
 };
 
+typeAdapterConfig = new TypeAdapterConfig
+{
+    RequireDestinationMemberSource = true,
+    RequireExplicitMapping = true,
+    Default =
+    {
+        Settings =
+        {
+            UseDestinationValues =
+            {
+                (member => member.SetterModifier == AccessModifier.None &&
+                           member.Type.IsGenericType &&
+                           member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>))
+            }
+        }
+    }
+};
+
+builder.Services
+    .AddSingleton(typeAdapterConfig)
+    .AddScoped<IMapper, ServiceMapper>()
+    .AddScoped<IJwtTokenService, JwtTokenService>()
+    .AddScoped<JwtTokenInterceptor>()
+    .AddLogging(config =>
+    {
+        config.AddConsole();
+    });
+
 builder.Services
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
     .AddApiLayer(typeAdapterConfig, new DogsOnTrail.Actions.Options.DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
+    .AddScoped<IJwtTokenService, JwtTokenService>()
     .AddGrpc(options =>
     {
         options.Interceptors.Add<JwtTokenInterceptor>();
     });
 
 typeAdapterConfig
-    .AddAuthorizationServiceMapping()
+    .AddActionRightsServiceMapping()
     .AddActionsServiceMapping()
     .AddUserProfilesServiceMapping()
     .AddEntriesServiceMapping()
@@ -85,7 +119,7 @@ app.UseEndpoints(endpoints =>
     {
         endpoints.MapGrpcService<ActionsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<UserProfilesService>().EnableGrpcWeb().RequireCors("AllowAll");
-        endpoints.MapGrpcService<AuthorizationService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<ActionRightsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<EntriesService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<DogsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<ResultsService>().EnableGrpcWeb().RequireCors("AllowAll");

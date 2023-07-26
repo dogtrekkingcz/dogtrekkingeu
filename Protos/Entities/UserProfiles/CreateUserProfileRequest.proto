@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.UserProfiles.CreateUserProfile";
+
+package createuserprofile;
+
+import "google/type/datetime.proto";
+import "google/type/latlng.proto";
+
+message CreateUserProfileRequest {
+  string Id = 1;
+  string UserId = 2;
+  string CompetitorId = 3;
+  string FirstName = 4;
+  string LastName = 5;
+  string Nickname = 6;
+  google.type.DateTime Birthday = 7;
+  Address Address = 8;
+  Contact Contact = 9;
+  repeated Dog Dogs = 10;
+}
+
+message Address {
+  string Country = 1;
+  string Region = 2;
+  string ZipCode = 3;
+  string City = 4;
+  string Street = 5;
+  google.type.LatLng Position = 6;
+}
+
+message Contact {
+  string PhoneNumber = 1;
+  string EmailAddress = 2;
+}
+
+message Dog {
+  string Id = 1;
+  string UserId = 2;
+  string Contact = 3;
+  string Name = 4;
+  string Kennel = 5;
+  string Pedigree = 6;
+  string Chip = 7;
+  optional google.type.DateTime Birthday = 8;
+  optional google.type.DateTime Decease = 9;
+  string UriToPhoto = 10;
+
+  repeated Vaccination Vaccinations = 11;
+}
+
+message Vaccination {
+  optional google.type.DateTime Date = 1;
+  optional google.type.DateTime ValidUntil = 2;
+  VaccinationType Type = 3;
+  string Note = 4;
+  string UriToPhoto = 5;
+}
+
+enum VaccinationType {
+  VaccinationType_Unspecified = 0;
+  Rabies = 1; // vzteklina
+  Psinka = 2;
+  Parvoviroza = 3;
+  HepatitidaContagiosaCanis = 4;
+  Leptospiroza = 5;
+  Parainfluenza = 6;
+  LymskaBorelioza = 7;
+  Babesioza = 8;
+  PlisnoveInfekce = 9;
+  Leishmanioza = 10;
+}

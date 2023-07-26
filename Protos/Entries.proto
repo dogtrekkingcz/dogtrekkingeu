@@ -4,7 +4,6 @@ option csharp_namespace = "Protos.Entries";
 
 package entries;
 
-import "Entities/Entry.proto";
 import "Entities/Entries/CreateEntryRequest.proto";
 import "Entities/Entries/CreateEntryResponse.proto";
 import "Entities/Entries/GetEntriesByActionResponse.proto";

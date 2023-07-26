@@ -15,7 +15,6 @@
           "Mapster": "7.3.0",
           "Mapster.DependencyInjection": "1.0.0",
           "Protos": "1.0.0",
-          "SharedCode": "1.0.0",
           "System.IdentityModel.Tokens.Jwt": "6.28.1"
         },
         "runtime": {
@@ -692,7 +691,6 @@
           "API.Interface": "1.0.0",
           "Mails": "1.0.0",
           "Newtonsoft.Json": "13.0.3",
-          "SharedCode": "1.0.0",
           "Storage": "1.0.0"
         },
         "runtime": {
@@ -700,9 +698,6 @@
         }
       },
       "API.Interface/1.0.0": {
-        "dependencies": {
-          "SharedCode": "1.0.0"
-        },
         "runtime": {
           "API.Interface.dll": {}
         }
@@ -715,8 +710,7 @@
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
           "NETCore.MailKit": "2.1.0",
-          "QrGenerator": "1.0.0",
-          "SharedCode": "1.0.0"
+          "QrGenerator": "1.0.0"
         },
         "runtime": {
           "Mails.dll": {}
@@ -743,21 +737,6 @@
           "QrGenerator.dll": {}
         }
       },
-      "SharedCode/1.0.0": {
-        "dependencies": {
-          "Mapster": "7.3.0",
-          "Mapster.DependencyInjection": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Logging": "7.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Logging.Console": "7.0.0",
-          "Protos": "1.0.0",
-          "System.IdentityModel.Tokens.Jwt": "6.28.1"
-        },
-        "runtime": {
-          "SharedCode.dll": {}
-        }
-      },
       "Storage/1.0.0": {
         "dependencies": {
           "Mapster": "7.3.0",
@@ -766,8 +745,7 @@
           "Microsoft.Extensions.Hosting": "7.0.0",
           "MongoDB.Bson": "2.18.0",
           "MongoDB.Driver": "2.18.0",
-          "Newtonsoft.Json": "13.0.3",
-          "SharedCode": "1.0.0"
+          "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "Storage.dll": {}
@@ -1418,11 +1396,6 @@
       "sha512": ""
     },
     "QrGenerator/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "SharedCode/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

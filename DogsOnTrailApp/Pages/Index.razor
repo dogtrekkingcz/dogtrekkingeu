@@ -2,12 +2,12 @@
 @using DogsOnTrailApp.Models;
 @using DogsOnTrailApp.Pages.UserProfiles;
 @using DogsOnTrailApp.Services
-@using SharedCode.Entities
 @using Protos.UserProfiles
 @using System.Security.Claims;
 @using MapsterMapper
+@using Protos.UserProfiles.GetUserProfile
 
-@inject Protos.Authorization.Authorization.AuthorizationClient AuthorizationClient
+@inject Protos.ActionRights.ActionRights.ActionRightsClient ActionRightsClient
 @inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
 @inject IUserProfileService UserProfileService
 @inject AuthenticationStateProvider AuthStateProvider
@@ -33,18 +33,18 @@
                         if (roles.Length > 0)
                             roles += ", ";
 
-                        Enum.TryParse(role, out AuthorizationRoleDto.RoleType roleType);
+                        Enum.TryParse(role, out UserProfileModel.ActionRightsDto.RoleType roleType);
                         switch (roleType)
                         {
-                            case AuthorizationRoleDto.RoleType.None:
+                            case UserProfileModel.ActionRightsDto.RoleType.None:
                                 roles += localizer["AuthorizationRoleType.None"];
                                 break;
                                 
-                            case AuthorizationRoleDto.RoleType.User:
+                            case UserProfileModel.ActionRightsDto.RoleType.User:
                                 roles += localizer["AuthorizationRoleType.User"];
                                 break;
                                 
-                            case AuthorizationRoleDto.RoleType.Owner:
+                            case UserProfileModel.ActionRightsDto.RoleType.Owner:
                                 roles += localizer["AuthorizationRoleType.Owner"];
                                 break;
                                     
@@ -101,7 +101,7 @@
             {
                 UserId = userId,
                 CompetitorId = Guid.Empty,
-                Contact = new ContactDto
+                Contact = new UserProfileModel.ContactDto
                 {
                     EmailAddress = emailClaim.Value
                 },
@@ -121,27 +121,30 @@
 
     private async Task<UserProfileModel> LoadUserDataAsync()
     {
-        Protos.UserProfiles.GetUserProfileResponse userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
+        var userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
 
-        if (userProfile == null || userProfile.UserProfile == null)
+        if (userProfile == null)
             return null;
 
-        UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(userProfile));
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
 
         // load all rights of current user
-        Protos.Authorization.GetAllRightsResponse rights = await AuthorizationClient.getAllRightsAsync(new Protos.Authorization.GetAllRightsRequest());
+        var getActionRightsResponse = await ActionRightsClient.getActionRightsAsync(
+            new Protos.ActionRights.GetActionRights.GetActionRightsRequest
+            {
+                Id = ""
+            });
 
-        var userRights = new List<ActionRightsDto>(rights.ActionRights.Count);
-        foreach (var right in rights.ActionRights)
+        var userRights = new List<UserProfileModel.ActionRightsDto>();
+        foreach (var right in getActionRightsResponse.Rights)
         {
-            userRights.Add(new ActionRightsDto
-                {
-                    Id = right.Id,
-                    ActionId = right.ActionId,
-                    UserId = right.UserId,
-                    Rights = (ActionRightsDto.RightsType)right.Rights,
-                    Roles = right.Roles
-                });
+            userRights.Add(new UserProfileModel.ActionRightsDto
+            {
+                Id = right.Id,
+                ActionId = right.ActionId,
+                UserId = right.UserId,
+                Roles = right.Roles
+            });
         }
 
         UserProfileService.SetRights(userRights);

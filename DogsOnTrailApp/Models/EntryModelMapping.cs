@@ -1,6 +1,4 @@
-﻿using SharedCode.Extensions;
-using Mapster;
-using SharedCode.Entities;
+﻿using Mapster;
 
 namespace DogsOnTrailApp.Models;
 

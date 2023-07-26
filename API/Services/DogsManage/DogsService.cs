@@ -36,23 +36,20 @@ internal class DogsService : IDogsService
         var response = new GetAllDogsResponse();
         foreach (var dog in result.Dogs)
         {
-            response.Dogs.Add(_mapper.Map<DogDto>(dog));
+            response.Dogs.Add(_mapper.Map<GetAllDogsResponse.DogDto>(dog));
         }
         
         return response;
     }
 
-    public async Task<GetDogResponse> GetDogAsync(GetDogRequest request, CancellationToken cancellationToken)
+    public async Task<GetDogsFilteredByChipResponse> GetDogsFilteredByChipAsync(GetDogsFilteredByChipRequest request, CancellationToken cancellationToken)
     {
         var result = await _dogsRepositoryService.GetDogsFilteredByChipAsync(new GetDogsFilteredByChipInternalStorageRequest { Chip = request.Chip }, cancellationToken);
 
-        var response = new GetDogResponse();
-        foreach (var dog in result.Dogs)
-        {
-            response.Dogs.Add(dog);
-        }
+        if ((result?.Dogs?.Count ?? 0) > 0)
+            return _mapper.Map<GetDogsFilteredByChipResponse>(result.Dogs.First());
 
-        return response;
+        return null;
     }
 
     public async Task<DeleteDogResponse> DeleteDogAsync(DeleteDogRequest request, CancellationToken cancellationToken)

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.ActionRights.GetActionRights";
+
+package getactionrights;
+
+message GetActionRightsResponse {
+  repeated ActionRight Rights = 1;
+}
+
+message ActionRight {
+  string Id = 1;
+  string UserId = 2;
+  string ActionId = 3;
+  RightsType Rights = 4;
+  repeated string Roles = 5;
+}
+
+enum RightsType
+{
+  RightsType_None = 0;
+  Admin = 1;
+}

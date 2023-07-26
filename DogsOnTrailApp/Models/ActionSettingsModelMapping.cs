@@ -1,7 +1,4 @@
 ﻿using Mapster;
-using SharedCode.Entities;
-using SharedCode.Extensions;
-using Action = Protos.Actions.GetAllActions.Action;
 
 namespace DogsOnTrailApp.Models;
 

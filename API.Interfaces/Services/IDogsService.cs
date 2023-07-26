@@ -10,5 +10,5 @@ public interface IDogsService
 
     Task<DeleteDogResponse> DeleteDogAsync(DeleteDogRequest request, CancellationToken cancellationToken);
 
-    Task<GetDogResponse> GetDogAsync(GetDogRequest request, CancellationToken cancellationToken);
+    Task<GetDogsFilteredByChipResponse> GetDogsFilteredByChipAsync(GetDogsFilteredByChipRequest request, CancellationToken cancellationToken);
 }

@@ -2,5 +2,6 @@
 {
     public sealed record GetUserProfileRequest
     {
+        public string UserId { get; set; }
     }
 }

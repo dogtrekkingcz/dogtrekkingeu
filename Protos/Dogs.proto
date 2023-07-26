@@ -4,46 +4,18 @@ option csharp_namespace = "Protos.Dogs";
 
 package dogs;
 
-import "Entities/Dog.proto";
+import "Entities/Dogs/GetAllDogsRequest.proto";
+import "Entities/Dogs/GetAllDogsResponse.proto";
+import "Entities/Dogs/CreateDogRequest.proto";
+import "Entities/Dogs/CreateDogResponse.proto";
+import "Entities/Dogs/GetDogsFilteredByChipRequest.proto";
+import "Entities/Dogs/GetDogsFilteredByChipResponse.proto";
+import "Entities/Dogs/DeleteDogRequest.proto";
+import "Entities/Dogs/DeleteDogResponse.proto";
 
 service Dogs {
-  rpc createDog (CreateDogRequest) returns (CreateDogResponse);
-  
-  rpc getAllDogs (GetAllDogsRequest) returns (GetAllDogsResponse);
-  
-  rpc getDogsFilteredByChip (GetDogsFilteredByChipRequest) returns (GetDogsFilteredByChipResponse);
-  
-  rpc deleteDog (DeleteDogRequest) returns (DeleteDogResponse);
-}
-
-message CreateDogRequest {
-  shared.Dog Dog = 1;
-}
-
-message CreateDogResponse {
-  string Id = 1;
-}
-
-message GetAllDogsRequest {
-  
-}
-
-message GetAllDogsResponse {
-  repeated shared.Dog Dogs = 1;
-}
-
-message DeleteDogRequest {
-  string Id = 1;
-}
-
-message DeleteDogResponse {
-  
-}
-
-message GetDogsFilteredByChipRequest {
-  string Chip = 1;
-}
-
-message GetDogsFilteredByChipResponse {
-  repeated shared.Dog dogs = 1;
+  rpc getAllDogs (getalldogs.GetAllDogsRequest) returns (getalldogs.GetAllDogsResponse);
+  rpc createDog (createdog.CreateDogRequest) returns (createdog.CreateDogResponse);
+  rpc getDogsFilteredByChip (getdogsfilteredbychip.GetDogsFilteredByChipRequest) returns (getdogsfilteredbychip.GetDogsFilteredByChipResponse);
+  rpc deleteDog (deletedog.DeleteDogRequest) returns (deletedog.DeleteDogResponse);
 }

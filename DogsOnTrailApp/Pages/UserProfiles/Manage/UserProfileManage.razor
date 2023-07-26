@@ -1,10 +1,10 @@
 ﻿@page "/userprofile/manage"
 @using DogsOnTrailApp.Models
 @using DogsOnTrailApp.Services
-@using SharedCode.Entities
 @using MapsterMapper
-@using Protos.Shared
 @using Protos.UserProfiles
+@using Protos.UserProfiles.GetUserProfile
+@using Protos.UserProfiles.UpdateUserProfile
 
 @inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
 @inject IStringLocalizer<Resource> localizer
@@ -143,27 +143,24 @@
     {
         var myUserProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
         
-        if (myUserProfile == null || myUserProfile.UserProfile == null)
+        if (myUserProfile == null)
             return;
         
-        UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(myUserProfile.UserProfile));
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(myUserProfile));
         
         UserProfile = UserProfileService.Get();
     }
 
     protected async Task SendAsync()
     {
-        await UserProfilesClient.updateUserProfileAsync(new UpdateUserProfileRequest
-        {
-            UserProfile = mapper.Map<UserProfile>(UserProfile)
-        });
+        await UserProfilesClient.updateUserProfileAsync(mapper.Map<UpdateUserProfileRequest>(UserProfile));
 
         var userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
         
-        if (userProfile == null || userProfile.UserProfile == null)
+        if (userProfile == null)
             return;
 
-        UserProfileService.SetUserProfile(mapper.Map<UserProfileDto>(userProfile.UserProfile));
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
 
         UserProfile = UserProfileService.Get();
     }

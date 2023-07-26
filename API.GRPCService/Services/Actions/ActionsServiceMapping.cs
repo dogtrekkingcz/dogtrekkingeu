@@ -10,10 +10,6 @@ internal static class ActionsServiceMapping
     {
         typeAdapterConfig.NewConfig<Protos.Actions.DeleteAction.DeleteActionRequest, DeleteActionRequest>();
 
-        typeAdapterConfig.NewConfig<GetAllActionsResponse, RepeatedField<Protos.Shared.ActionSimple>>()
-            .Map(d => d, s => s.Actions)
-            .Ignore(d => d.Capacity);
-
         typeAdapterConfig.NewConfig<GetAllActionsResponse.ActionDto, Protos.Actions.GetAllActions.Action>();
         
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.GetAllActionsRequest, GetAllActionsRequest>();

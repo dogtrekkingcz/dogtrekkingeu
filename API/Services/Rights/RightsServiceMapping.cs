@@ -7,7 +7,7 @@ internal static class RightsServiceMapping
 {
     public static TypeAdapterConfig AddRightsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Storage.Entities.ActionRights.GetAllRightsResponse, GetAllRightsResponse>();
+        typeAdapterConfig.NewConfig<Storage.Entities.ActionRights.GetAllRightsInternalStorageResponse, GetAllRightsResponse>();
 
         return typeAdapterConfig;
     }

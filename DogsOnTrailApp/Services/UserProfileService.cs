@@ -1,38 +1,35 @@
 ﻿using DogsOnTrailApp.Models;
-using SharedCode.Entities;
+using MapsterMapper;
 
 namespace DogsOnTrailApp.Services;
 
 public sealed class UserProfileService : IUserProfileService
 {
     private UserProfileModel _userProfileModel = new();
+
+    private readonly IMapper _mapper;
+
+    public UserProfileService(IMapper mapper)
+    {
+        _mapper = _mapper;
+    }
     
     public UserProfileModel Get()
     {
         return _userProfileModel;
     }
 
-    public void SetUserProfile(UserProfileDto userProfile)
+    public void SetUserProfile(UserProfileModel userProfileModel)
     {
         var rights = _userProfileModel.Rights;
-        
-        _userProfileModel = new UserProfileModel
-        {
-            Address = userProfile.Address,
-            UserId = userProfile.UserId,
-            Birthday = userProfile.Birthday,
-            Contact = userProfile.Contact,
-            Dogs = userProfile.Dogs,
-            Id = userProfile.Id,
-            Nickname = userProfile.Nickname,
-            CompetitorId = userProfile.CompetitorId,
-            FirstName = userProfile.FirstName,
-            LastName = userProfile.LastName,
-            Rights = rights
-        };
+        _userProfileModel = _mapper.Map<UserProfileModel>(userProfileModel)
+            with
+            {
+                Rights = rights
+            };
     }
     
-    public void SetRights(IList<ActionRightsDto> rights)
+    public void SetRights(IList<UserProfileModel.ActionRightsDto> rights)
     {
         _userProfileModel.Rights = rights;
     }

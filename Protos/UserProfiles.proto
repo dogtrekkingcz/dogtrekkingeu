@@ -4,35 +4,15 @@ option csharp_namespace = "Protos.UserProfiles";
 
 package userprofiles;
 
-import "Entities/UserProfile.proto";
-
+import "Entities/UserProfiles/CreateUserProfileRequest.proto";
+import "Entities/UserProfiles/CreateUserProfileResponse.proto";
+import "Entities/UserProfiles/GetUserProfileRequest.proto";
+import "Entities/UserProfiles/GetUserProfileResponse.proto";
+import "Entities/UserProfiles/UpdateUserProfileRequest.proto";
+import "Entities/UserProfiles/UpdateUserProfileResponse.proto";
 
 service UserProfiles {
-  rpc getUserProfile (GetUserProfileRequest) returns (GetUserProfileResponse);
-  rpc registerUserProfile (CreateUserProfileRequest) returns (CreateUserProfileResponse);
-  rpc updateUserProfile (UpdateUserProfileRequest) returns (UpdateUserProfileResponse);
-}
-
-message CreateUserProfileRequest {
-  shared.UserProfile UserProfile = 1;
-}
-
-message CreateUserProfileResponse {
-  
-}
-
-message UpdateUserProfileRequest {
-  shared.UserProfile UserProfile = 1;
-}
-
-message UpdateUserProfileResponse {
-
-}
-
-message GetUserProfileRequest {
-
-}
-
-message GetUserProfileResponse {
-  shared.UserProfile UserProfile = 1;
+  rpc registerUserProfile (createuserprofile.CreateUserProfileRequest) returns (createuserprofile.CreateUserProfileResponse);
+  rpc getUserProfile (getuserprofile.GetUserProfileRequest) returns (getuserprofile.GetUserProfileResponse);
+  rpc updateUserProfile (updateuserprofile.UpdateUserProfileRequest) returns (updateuserprofile.UpdateUserProfileResponse);
 }

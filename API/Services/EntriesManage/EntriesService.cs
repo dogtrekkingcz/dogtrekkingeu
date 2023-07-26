@@ -15,19 +15,19 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
         private readonly IMapper _mapper;
         private readonly IEntriesRepositoryService _entriesRepositoryService;
         private readonly IActionsRepositoryService _actionsRepositoryService;
-        private readonly IJwtTokenService _jwtTokenService;
+        private readonly ICurrentUserIdService _currentUserIdService;
         private readonly IMailSenderService _emailSenderService;
 
         public EntriesService(IMapper mapper, 
                                 IEntriesRepositoryService entriesRepositoryService,
                                 IActionsRepositoryService actionsRepositoryService,
-                                IJwtTokenService jwtTokenService, 
+                                ICurrentUserIdService currentUserIdService, 
                                 IMailSenderService emailSenderService)
         {
             _mapper = mapper;
             _entriesRepositoryService = entriesRepositoryService;
             _actionsRepositoryService = actionsRepositoryService;
-            _jwtTokenService = jwtTokenService;
+            _currentUserIdService = currentUserIdService;
             _emailSenderService = emailSenderService;
         }
 

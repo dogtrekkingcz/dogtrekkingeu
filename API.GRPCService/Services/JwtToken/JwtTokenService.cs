@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 
@@ -8,10 +9,12 @@ namespace API.GRPCService.Services.JwtToken
     {
         private string _userId = "";
         private readonly ILogger _logger;
+        private readonly ICurrentUserIdService _currentUserIdService;
 
-        public JwtTokenService(ILogger<JwtTokenService> logger)
+        public JwtTokenService(ILogger<JwtTokenService> logger, ICurrentUserIdService currentUserIdService)
         {
             _logger = logger;
+            _currentUserIdService = currentUserIdService;
         }
 
         public void Parse(ServerCallContext context)
@@ -42,6 +45,7 @@ namespace API.GRPCService.Services.JwtToken
                 { 
                     var securityToken = jsonToken as JwtSecurityToken;
                     _userId = securityToken?.Claims?.FirstOrDefault(c => c.Type == "sub")?.Value ?? "";
+                    _currentUserIdService.SetUserId(_userId);
 
                     _logger.LogInformation($"{securityToken?.Claims}");
                 }

@@ -1,6 +1,5 @@
 ﻿@using MapsterMapper
 @using DogsOnTrailApp.Models
-@using Google.Type
 
 @inject IMapper Mapper
 @inject IStringLocalizer<Resource> Localizer
@@ -66,37 +65,7 @@
 </div>
 
 @code {
-    [Parameter] public InputTimeModel Model { get; set; }
-
-    [Parameter]
-    public System.DateTime StartDate
-    {
-        get
-        {
-            if (_iYears.HasValue && _iMonths.HasValue && _iDays.HasValue)
-                return new System.DateTime(_iYears.Value, _iMonths.Value, _iDays.Value);
-            
-            return System.DateTime.Now;
-        }
-        set
-        {
-            _years = value.Year.ToString();
-            _months = value.Month.ToString();
-            _days = value.Day.ToString();
-            _hours = value.Hour.ToString();
-            _minutes = value.Minute.ToString();
-            _seconds = value.Second.ToString();
-            
-            _iYears = value.Year;
-            _iMonths = value.Month;
-            _iDays = value.Day;
-            _iHours = value.Hour;
-            _iMinutes = value.Minute;
-            _iSeconds = value.Second;
-            
-            Reload();
-        }
-    }
+    [Parameter] public DateTimeOffset? Date { get; set; }
 
     private string _years = "";
     private string _months = "";
@@ -119,16 +88,14 @@
     private ElementReference _refMinutesInput;
     private ElementReference _refSecondsInput;
     
+    [Parameter]
+    public EventCallback<DateTimeOffset?> DateChanged { get; set; }
+    
     private void ClearDate()
     {
-        Model.Value = null;
-
         _iYears = null;
         _iMonths = null;
         _iDays = null;
-        _iHours = null;
-        _iMinutes = null;
-        _iSeconds = null;
 
         Reload();
     }
@@ -138,19 +105,12 @@
         _years = _iYears?.ToString() ?? "";
         _months = _iMonths?.ToString() ?? "";
         _days = _iDays?.ToString() ?? "";
-        _hours = _iHours?.ToString() ?? "";
-        _minutes = _iMinutes?.ToString() ?? "";
-        _seconds = _iSeconds?.ToString() ?? "";
 
-        if (_iYears != null && _iMonths != null && _iDays != null && _iHours != null && _iMinutes != null && _iSeconds != null)
+        if (_iYears != null && _iMonths != null && _iDays != null)
         {
-            Model.IsValid = true;
-            Model.Value = new Google.Type.DateTime() { Year = _iYears.Value, Month = _iMonths.Value, Day = _iDays.Value, Hours = _iHours.Value, Minutes = _iMinutes.Value, Seconds = _iSeconds.Value };
-        }
-        else
-        {
-            Model.IsValid = false;
-            Model.Value = null;
+            Date = new DateTime(_iYears.Value, _iMonths.Value, _iDays.Value);
+            
+            DateChanged.InvokeAsync(Date);
         }
         
         StateHasChanged();
@@ -202,7 +162,7 @@
             _iDays = value;
 
         if (e.Value.ToString().Length == 2)
-            await _refHoursInput.FocusAsync();
+            await _refHoursInput.FocusAsync(); 
         
         Reload();
     }

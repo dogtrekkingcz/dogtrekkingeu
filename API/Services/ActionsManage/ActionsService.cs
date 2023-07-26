@@ -1,6 +1,7 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
+using Storage.Entities.ActionRights;
 using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
@@ -13,16 +14,19 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         private readonly IActionsRepositoryService _actionsRepositoryService;
         private readonly IActionRightsRepositoryService _actionRightsRepositoryService;
         private readonly IEntriesRepositoryService _entriesRepositoryService;
+        private readonly ICurrentUserIdService _currentUserIdService;
 
         public ActionsService(IMapper mapper, 
             IActionsRepositoryService actionsRepositoryService, 
             IActionRightsRepositoryService actionRightsRepositoryService,
-            IEntriesRepositoryService entriesRepositoryService)
+            IEntriesRepositoryService entriesRepositoryService,
+            ICurrentUserIdService currentUserIdService)
         {
             _mapper = mapper;
             _actionsRepositoryService = actionsRepositoryService;
             _actionRightsRepositoryService = actionRightsRepositoryService;
             _entriesRepositoryService = entriesRepositoryService;
+            _currentUserIdService = currentUserIdService;
         }
 
         public async Task<CreateActionResponse> CreateActionAsync(CreateActionRequest request, CancellationToken cancellationToken)
@@ -45,12 +49,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
 
             var result = await _actionsRepositoryService.AddActionAsync(addActionRequest, cancellationToken);
 
-            await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsRequest
+            await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsInternalStorageRequest
             {
                 Id = Guid.NewGuid().ToString(),
                 ActionId = result.Id,
-                UserId = _jwtTokenService.GetUserId(),
-                Roles = new List<string> { AuthorizationRoleDto.RoleType.Owner.ToString() }
+                UserId = _currentUserIdService.GetUserId(),
+                Roles = new List<string> { AddActionRightsInternalStorageRequest.RoleType.Owner.ToString() }
             }, cancellationToken);
 
             var response = _mapper.Map<CreateActionResponse>(result);

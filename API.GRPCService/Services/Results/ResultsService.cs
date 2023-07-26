@@ -1,7 +1,7 @@
-﻿using DogsOnTrail.Interfaces.Actions.Services;
+﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
+using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
-using AddResultRequest = DogsOnTrail.Interfaces.Actions.Entities.Results.AddResultRequest;
 
 namespace API.GRPCService.Services.Results;
 

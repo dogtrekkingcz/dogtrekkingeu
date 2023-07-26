@@ -43,7 +43,7 @@
 
     private async Task ReloadData()
     {
-        Protos.Dogs.GetAllDogsResponse response = await DogsClient.getAllDogsAsync(new Protos.Dogs.GetAllDogsRequest());
+        Protos.Dogs.GetAllDogs.GetAllDogsResponse response = await DogsClient.getAllDogsAsync(new Protos.Dogs.GetAllDogs.GetAllDogsRequest());
 
         _dogs = mapper.Map<List<DogModel>>(response.Dogs);
     }

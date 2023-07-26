@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.ActionRights";
+
+package actionrights;
+
+import "Entities/ActionRights/GetActionRightsRequest.proto";
+import "Entities/ActionRights/GetActionRightsResponse.proto";
+
+service ActionRights {
+  rpc getActionRights (getactionrights.GetActionRightsRequest) returns (getactionrights.GetActionRightsResponse);
+}

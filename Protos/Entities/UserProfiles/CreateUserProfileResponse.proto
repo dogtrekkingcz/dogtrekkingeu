@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.UserProfiles.CreateUserProfile";
+
+package createuserprofile;
+
+message CreateUserProfileResponse {
+  string Id = 1;
+}

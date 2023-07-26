@@ -20,13 +20,13 @@ namespace Storage.Services.Repositories.UserProfiles
             _userProfileStorageService = userProfileStorageService;
         }
 
-        public async Task<AddUserProfileInternalStorageResponse> AddUserProfileAsync(AddUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
+        public async Task<CreateUserProfileInternalStorageResponse> AddUserProfileAsync(CreateUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var addRequest = _mapper.Map<UserProfileRecord>(request);
             
             var addedUserProfileRecord = await _userProfileStorageService.AddAsync(addRequest, cancellationToken);
 
-            var response = _mapper.Map<AddUserProfileInternalStorageResponse>(addedUserProfileRecord);
+            var response = _mapper.Map<CreateUserProfileInternalStorageResponse>(addedUserProfileRecord);
 
             return response;
         }

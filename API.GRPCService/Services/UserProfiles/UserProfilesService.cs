@@ -21,38 +21,32 @@ public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfiles
         _userProfileService = userProfileService;
     }
     
-    public async override Task<Protos.UserProfiles.GetUserProfileResponse> getUserProfile(Protos.UserProfiles.GetUserProfileRequest request, ServerCallContext context)
+    public async override Task<Protos.UserProfiles.GetUserProfile.GetUserProfileResponse> getUserProfile(Protos.UserProfiles.GetUserProfile.GetUserProfileRequest request, ServerCallContext context)
     {
         var getUserProfileResponse = await _userProfileService.GetUserProfileAsync(new GetUserProfileRequest(), context.CancellationToken);
 
-        if (getUserProfileResponse == null)
-            return new Protos.UserProfiles.GetUserProfileResponse { UserProfile = null };
-
-        var response = new Protos.UserProfiles.GetUserProfileResponse
-        {
-            UserProfile = _mapper.Map<Protos.Shared.UserProfile>(getUserProfileResponse)
-        };
+        var response = _mapper.Map<Protos.UserProfiles.GetUserProfile.GetUserProfileResponse>(getUserProfileResponse);
 
         return response;
     }
 
-    public async override Task<Protos.UserProfiles.CreateUserProfileResponse> registerUserProfile(Protos.UserProfiles.CreateUserProfileRequest request, ServerCallContext context)
+    public async override Task<Protos.UserProfiles.CreateUserProfile.CreateUserProfileResponse> registerUserProfile(Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest request, ServerCallContext context)
     {
-        var addUserProfileRequest = _mapper.Map<CreateUserProfileRequest>(request.UserProfile);
+        var addUserProfileRequest = _mapper.Map<CreateUserProfileRequest>(request);
 
         var addUserProfileResponse = await _userProfileService.CreateUserProfileAsync(addUserProfileRequest, context.CancellationToken);
 
-        var response = _mapper.Map<Protos.UserProfiles.CreateUserProfileResponse>(addUserProfileResponse);
+        var response = _mapper.Map<Protos.UserProfiles.CreateUserProfile.CreateUserProfileResponse>(addUserProfileResponse);
 
         return response;
     }
     
-    public async override Task<Protos.UserProfiles.UpdateUserProfileResponse> updateUserProfile(Protos.UserProfiles.UpdateUserProfileRequest request, ServerCallContext context)
+    public async override Task<Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileResponse> updateUserProfile(Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileRequest request, ServerCallContext context)
     {
-        var updateUserProfileRequest = _mapper.Map<UpdateUserProfileRequest>(request.UserProfile);
+        var updateUserProfileRequest = _mapper.Map<UpdateUserProfileRequest>(request);
         var updateUserProfileResponse = await _userProfileService.UpdateUserProfileAsync(updateUserProfileRequest, context.CancellationToken);
 
-        var response = _mapper.Map<Protos.UserProfiles.UpdateUserProfileResponse>(updateUserProfileResponse);
+        var response = _mapper.Map<Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileResponse>(updateUserProfileResponse);
 
         return response;
     }

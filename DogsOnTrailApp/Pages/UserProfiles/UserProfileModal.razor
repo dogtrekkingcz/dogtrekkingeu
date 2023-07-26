@@ -1,6 +1,7 @@
 ﻿@using MapsterMapper
 @using DogsOnTrailApp.Models
-@using Protos.UserProfiles
+@using Protos.UserProfiles.CreateUserProfile
+@using Protos.UserProfiles.UpdateUserProfile
 @inject Protos.UserProfiles.UserProfiles.UserProfilesClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IStringLocalizer<Resource> localizer
@@ -61,19 +62,13 @@
     {
         if (RequiredAction == UserProfileRequiredAction.Register)
         {
-            var request = new CreateUserProfileRequest
-            {
-                UserProfile = mapper.Map<Protos.Shared.UserProfile>(Model)
-            };
+            var request = mapper.Map<CreateUserProfileRequest>(Model);
             
             await Client.registerUserProfileAsync(request);
         }
         else
         {
-            var request = new UpdateUserProfileRequest
-            {
-                UserProfile = mapper.Map<Protos.Shared.UserProfile>(Model)
-            };
+            var request = mapper.Map<UpdateUserProfileRequest>(Model);
             
             await Client.updateUserProfileAsync(request);
         }
