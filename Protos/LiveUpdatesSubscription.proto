@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Protos.LiveUpdatesSubscription";
+
+package liveupdatessubscription;
+
+import "Entities/LiveUpdatesSubscription/LiveUpdateSubscriptionRequest.proto";
+import "Entities/LiveUpdatesSubscription/LiveUpdateSubscriptionResponse.proto";
+
+service LiveUpdatesSubscription {
+  rpc subscribeForUpdates (liveupdatessubscription.LiveUpdateSubscriptionRequest) returns (stream liveupdatessubscription.LiveUpdateSubscriptionResponse);
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.LiveUpdatesSubscription";
+
+package liveupdatessubscription;
+
+import "google/type/datetime.proto";
+
+message LiveUpdatesSubscriptionRequest {
+  string UserId = 1;
+}
