@@ -53,6 +53,8 @@ public class LiveUpdatesSubscriptionGrpcService : Protos.LiveUpdatesSubscription
             {
                 await responseStream.WriteAsync(_mapper.Map<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>(item), context.CancellationToken);
             }
+            
+            _liveUpdateSubscriptionService.Repository[context.Peer].Clear();
 
             await Task.Delay(2000);
             
