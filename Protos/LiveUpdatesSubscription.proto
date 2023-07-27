@@ -4,9 +4,9 @@ option csharp_namespace = "Protos.LiveUpdatesSubscription";
 
 package liveupdatessubscription;
 
-import "Entities/LiveUpdatesSubscription/LiveUpdateSubscriptionRequest.proto";
-import "Entities/LiveUpdatesSubscription/LiveUpdateSubscriptionResponse.proto";
+import "Entities/LiveUpdatesSubscription/LiveUpdatesSubscriptionRequest.proto";
+import "Entities/LiveUpdatesSubscription/LiveUpdatesSubscriptionItem.proto";
 
 service LiveUpdatesSubscription {
-  rpc subscribeForUpdates (liveupdatessubscription.LiveUpdateSubscriptionRequest) returns (stream liveupdatessubscription.LiveUpdateSubscriptionResponse);
+  rpc subscribeForUpdates (liveupdatessubscription.LiveUpdatesSubscriptionRequest) returns (stream liveupdatessubscription.LiveUpdatesSubscriptionItem);
 }

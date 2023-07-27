@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.LiveUpdatesSubscription";
+
+package liveupdatessubscription;
+
+import "google/type/datetime.proto";
+
+message LiveUpdatesSubscriptionItem {
+  google.type.DateTime ServerTime = 1;
+  TypeOfMessage Type = 2;
+  string From = 3;
+  string Message = 4;
+}
+
+enum TypeOfMessage {
+  TypeOfMessage_NotSpecified = 0;
+  Chat = 1;
+  Info = 2;
+  Alert = 3;
+  Error = 4;
+  RequestForReloadApp = 5;
+  RequestForReloadPage = 6;
+}

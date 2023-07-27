@@ -8,4 +8,7 @@ import "google/type/datetime.proto";
 
 message LiveUpdatesSubscriptionRequest {
   string UserId = 1;
+  google.type.DateTime Created = 2;
+  string Section = 3;
+  string AdditionalInfo = 4;
 }

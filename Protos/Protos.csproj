@@ -295,6 +295,15 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Entities\LiveUpdatesSubscription\LiveUpdatesSubscriptionItem.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
       <Protobuf Include="Entities\LiveUpdatesSubscription\LiveUpdatesSubscriptionRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
