@@ -97,6 +97,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Console.WriteLine("Index loading ...");
+        
         var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
         {
             UserId = "",
@@ -110,6 +112,11 @@
             _notifications.Add(stream.ResponseStream.Current);
             
             await stream.ResponseStream.MoveNext(CancellationToken.None);
+        }
+
+        foreach (var notification in _notifications)
+        {
+            Console.WriteLine(notification.Message);
         }
     }
 
