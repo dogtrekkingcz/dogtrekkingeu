@@ -29,18 +29,15 @@ public class LiveUpdatesSubscriptionGrpcService : Protos.LiveUpdatesSubscription
             Peer = context.Peer 
         }, context.CancellationToken));
 
-        await _liveUpdateSubscriptionService.AddLiveUpdateSubscriptionAsync(new AddLiveUpdateSubscriptionRequest
+        var addLiveUpdateSubscriptionRequest = _mapper.Map<AddLiveUpdateSubscriptionRequest>(request) with
         {
-            Peer = context.Peer,
-            UserId = request.UserId,
-            Created = request.Created.ToDateTimeOffset() ?? DateTimeOffset.Now,
-            Section = request.Section,
-            AdditionalInfo = request.AdditionalInfo
-        }, context.CancellationToken);
+            Peer = context.Peer
+        };
+        await _liveUpdateSubscriptionService.AddLiveUpdateSubscriptionAsync(addLiveUpdateSubscriptionRequest, context.CancellationToken);
         
         try
         {
-            _liveUpdateSubscriptionService.Repository[""].CollectionChanged += (async (sender, args) =>
+            _liveUpdateSubscriptionService.Repository[context.Peer].CollectionChanged += (async (sender, args) =>
             {
                 if(args.Action == NotifyCollectionChangedAction.Add)
                 {

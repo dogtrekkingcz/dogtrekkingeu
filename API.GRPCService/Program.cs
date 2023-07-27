@@ -6,6 +6,7 @@ using API.GRPCService.Services.Actions;
 using API.GRPCService.Services.Dogs;
 using API.GRPCService.Services.Entries;
 using API.GRPCService.Services.JwtToken;
+using API.GRPCService.Services.LiveUpdatesSubscription;
 using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
 using DogsOnTrail.Actions;
@@ -70,7 +71,8 @@ typeAdapterConfig
     .AddUserProfilesServiceMapping()
     .AddEntriesServiceMapping()
     .AddDogsServiceMapping()
-    .AddResultsMapping();
+    .AddResultsMapping()
+    .AddLiveUpdatesSubscriptionMapping();
 
 typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
 typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();
@@ -123,6 +125,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapGrpcService<EntriesService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<DogsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<ResultsService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<LiveUpdatesSubscriptionGrpcService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 

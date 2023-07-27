@@ -1,5 +1,6 @@
 ﻿using DogsOnTrail.Actions.Extensions;
 using DogsOnTrail.Interfaces.Actions.Entities.Entries;
+using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Mails.Builders.Emails;
 using Mails.Entities;
@@ -17,18 +18,21 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
         private readonly IActionsRepositoryService _actionsRepositoryService;
         private readonly ICurrentUserIdService _currentUserIdService;
         private readonly IMailSenderService _emailSenderService;
+        private readonly ILiveUpdateSubscriptionService _liveUpdateSubscriptionService;
 
         public EntriesService(IMapper mapper, 
                                 IEntriesRepositoryService entriesRepositoryService,
                                 IActionsRepositoryService actionsRepositoryService,
                                 ICurrentUserIdService currentUserIdService, 
-                                IMailSenderService emailSenderService)
+                                IMailSenderService emailSenderService,
+                                ILiveUpdateSubscriptionService liveUpdateSubscriptionService)
         {
             _mapper = mapper;
             _entriesRepositoryService = entriesRepositoryService;
             _actionsRepositoryService = actionsRepositoryService;
             _currentUserIdService = currentUserIdService;
             _emailSenderService = emailSenderService;
+            _liveUpdateSubscriptionService = liveUpdateSubscriptionService;
         }
 
         public async Task<CreateEntryResponse> CreateEntryAsync(CreateEntryRequest request, CancellationToken cancellationToken)
@@ -100,6 +104,17 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
                 new LocalizeService(languageCode), emailRequest));
 
             await _emailSenderService.SendAsync(mailBuilders, cancellationToken);
+
+            foreach (var rep in _liveUpdateSubscriptionService.Repository)
+            {
+                rep.Value.Add(new LiveUpdateSubscriptionItem
+                {
+                    From = "Server",
+                    ServerTime = DateTimeOffset.Now,
+                    Message = "New entry recieved",
+                    Type = LiveUpdateSubscriptionItem.TypeOfMessage.Info
+                });
+            }
 
             return new CreateEntryResponse
             {

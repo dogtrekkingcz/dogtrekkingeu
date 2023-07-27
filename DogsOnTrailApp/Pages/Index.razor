@@ -4,9 +4,12 @@
 @using DogsOnTrailApp.Services
 @using Protos.UserProfiles
 @using System.Security.Claims;
+@using DogsOnTrailApp.Extensions
 @using MapsterMapper
+@using Protos.LiveUpdatesSubscription
 @using Protos.UserProfiles.GetUserProfile
 
+@inject Protos.LiveUpdatesSubscription.LiveUpdatesSubscription.LiveUpdatesSubscriptionClient LiveUpdatesSubscriptionClient
 @inject Protos.ActionRights.ActionRights.ActionRightsClient ActionRightsClient
 @inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
 @inject IUserProfileService UserProfileService
@@ -65,6 +68,7 @@
 
 @code {
     private AuthenticationState _authState = null;
+    private IList<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> _notifications = new List<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>();
 
     [CascadingParameter] protected Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
@@ -93,6 +97,20 @@
 
     protected override async Task OnInitializedAsync()
     {
+        var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
+        {
+            UserId = "",
+            Created = DateTimeOffset.Now.ToGoogleDateTime(),
+            Section = "Entries",
+            AdditionalInfo = "tralalala"
+        });
+        
+        while (stream.ResponseStream.Current != null)
+        {
+            _notifications.Add(stream.ResponseStream.Current);
+            
+            await stream.ResponseStream.MoveNext(CancellationToken.None);
+        }
     }
 
     private async Task RegisterUserAsync(string userId, Claim emailClaim, string firstName, string lastName)

@@ -2,6 +2,7 @@
 using DogsOnTrail.Actions.Services.CurrentUserId;
 using DogsOnTrail.Actions.Services.DogsManage;
 using DogsOnTrail.Actions.Services.EntriesManage;
+using DogsOnTrail.Actions.Services.LiveUpdateSubscription;
 using DogsOnTrail.Actions.Services.ResultsManage;
 using DogsOnTrail.Actions.Services.Rights;
 using DogsOnTrail.Actions.Services.UserProfileManage;
@@ -24,7 +25,8 @@ namespace DogsOnTrail.Actions
                 .AddDogs(typeAdapterConfig, options)
                 .AddResults(typeAdapterConfig, options)
                 .AddEmails(typeAdapterConfig, new DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
-                .AddCurrentUserId(typeAdapterConfig, options);
+                .AddCurrentUserId(typeAdapterConfig, options)
+                .AddLiveUpdatesSubscription(typeAdapterConfig, options);
             
             return services;
         }
