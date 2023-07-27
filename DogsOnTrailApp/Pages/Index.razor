@@ -5,6 +5,7 @@
 @using Protos.UserProfiles
 @using System.Security.Claims;
 @using DogsOnTrailApp.Extensions
+@using Grpc.Core
 @using MapsterMapper
 @using Protos.LiveUpdatesSubscription
 @using Protos.UserProfiles.GetUserProfile
@@ -98,7 +99,7 @@
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("Index loading ...");
-        
+
         var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
         {
             UserId = "",
@@ -107,17 +108,22 @@
             AdditionalInfo = "tralalala"
         });
         
-        while (stream.ResponseStream.Current != null)
-        {
-            _notifications.Add(stream.ResponseStream.Current);
-            
-            await stream.ResponseStream.MoveNext(CancellationToken.None);
-        }
+        await HandleIncomingNotificationsAsync(stream.ResponseStream);
+    }
+    
+    private async Task HandleIncomingNotificationsAsync(IAsyncStreamReader<LiveUpdatesSubscriptionItem> responseStream)
+    {
+        var cancellationTokenSource = new CancellationTokenSource();
 
-        foreach (var notification in _notifications)
+        await Task.Run(async () =>
         {
-            Console.WriteLine(notification.Message);
-        }
+            while (await responseStream.MoveNext<LiveUpdatesSubscriptionItem>())
+            {
+                var notification = responseStream.Current;
+                
+                Console.WriteLine($"{notification.ServerTime.ToDateTimeOffset()} | {notification.Message}");
+            }
+        });
     }
 
     private async Task RegisterUserAsync(string userId, Claim emailClaim, string firstName, string lastName)

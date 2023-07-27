@@ -21,7 +21,7 @@ public class LiveUpdatesSubscriptionGrpcService : Protos.LiveUpdatesSubscription
         _liveUpdateSubscriptionService = liveUpdateSubscriptionService;
     }
     
-    public async override Task<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> subscribeForUpdates(Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionRequest request, IServerStreamWriter<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> responseStream, ServerCallContext context)
+    public override async Task<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> subscribeForUpdates(Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionRequest request, IServerStreamWriter<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> responseStream, ServerCallContext context)
     {
         var peer = context.Peer; // keep peer information because it is not available after disconnection
         context.CancellationToken.Register(() => _liveUpdateSubscriptionService.UserCancelledSubscriptionAsync(new CancelLiveUpdateSubscriptionRequest
@@ -34,23 +34,38 @@ public class LiveUpdatesSubscriptionGrpcService : Protos.LiveUpdatesSubscription
             Peer = context.Peer
         };
         await _liveUpdateSubscriptionService.AddLiveUpdateSubscriptionAsync(addLiveUpdateSubscriptionRequest, context.CancellationToken);
-        
-        try
+        await responseStream.WriteAsync(new Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem
         {
-            _liveUpdateSubscriptionService.Repository[context.Peer].CollectionChanged += (async (sender, args) =>
+            Message = "welcome",
+            ServerTime = DateTimeOffset.Now.ToGoogleDateTime(),
+            Type = Protos.LiveUpdatesSubscription.TypeOfMessage.Info,
+            From = "Server"
+        }, context.CancellationToken);
+
+        var expectedLifetime = (request.Created.ToDateTimeOffset() ?? DateTimeOffset.Now).AddMinutes(5);
+        
+        //  && expectedLifetime < DateTimeOffset.Now
+        while (! context.CancellationToken.IsCancellationRequested)
+        {
+            await Task.Delay(2000); // Gotta look busy
+
+            foreach (var item in _liveUpdateSubscriptionService.Repository[context.Peer])
             {
-                if(args.Action == NotifyCollectionChangedAction.Add)
-                {
-                    foreach (var newItem in args.NewItems ?? new Collection())
-                    {
-                        await responseStream.WriteAsync(_mapper.Map<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>(newItem), context.CancellationToken);
-                    }
-                }
+                await responseStream.WriteAsync(_mapper.Map<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>(item), context.CancellationToken);
+            }
+
+            await Task.Delay(2000);
+            
+            _liveUpdateSubscriptionService.Repository[context.Peer].Add(new LiveUpdateSubscriptionItem
+            {
+                From = "Server",
+                Message = "test",
+                ServerTime = DateTimeOffset.Now,
+                Type = LiveUpdateSubscriptionItem.TypeOfMessage.Chat
             });
         }
-        catch (TaskCanceledException)
-        {
-        }
+        
+        Console.WriteLine("Cancellation of the live update was requested");
 
         return new Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem
         {

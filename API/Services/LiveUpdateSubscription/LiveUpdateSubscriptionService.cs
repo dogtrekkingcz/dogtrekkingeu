@@ -6,7 +6,7 @@ namespace DogsOnTrail.Actions.Services.LiveUpdateSubscription;
 
 public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
 {
-    public IDictionary<string, ObservableCollection<LiveUpdateSubscriptionItem>> Repository { get; set; } = new Dictionary<string, ObservableCollection<LiveUpdateSubscriptionItem>>();
+    public IDictionary<string, List<LiveUpdateSubscriptionItem>> Repository { get; set; } = new Dictionary<string, List<LiveUpdateSubscriptionItem>>();
     
     public async Task AddAsync(AddLiveUpdateSubscriptionRequest request, CancellationToken cancellationToken)
     {
@@ -20,7 +20,7 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
 
     public async Task AddLiveUpdateSubscriptionAsync(AddLiveUpdateSubscriptionRequest request, CancellationToken cancellationToken)
     {
-        Repository[request.Peer] = new ObservableCollection<LiveUpdateSubscriptionItem>();
+        Repository[request.Peer] = new List<LiveUpdateSubscriptionItem>();
         
         Repository[request.Peer].Add(new LiveUpdateSubscriptionItem
         {
