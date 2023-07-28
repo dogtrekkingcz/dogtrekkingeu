@@ -34,18 +34,10 @@ public class LiveUpdatesSubscriptionGrpcService : Protos.LiveUpdatesSubscription
             Peer = context.Peer
         };
         await _liveUpdateSubscriptionService.AddLiveUpdateSubscriptionAsync(addLiveUpdateSubscriptionRequest, context.CancellationToken);
-        await responseStream.WriteAsync(new Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem
-        {
-            Message = "welcome",
-            ServerTime = DateTimeOffset.Now.ToGoogleDateTime(),
-            Type = Protos.LiveUpdatesSubscription.TypeOfMessage.Info,
-            From = "Server"
-        }, context.CancellationToken);
 
         var expectedLifetime = (request.Created.ToDateTimeOffset() ?? DateTimeOffset.Now).AddMinutes(5);
-        
-        //  && expectedLifetime < DateTimeOffset.Now
-        while (! context.CancellationToken.IsCancellationRequested)
+
+        while ((context.CancellationToken.IsCancellationRequested == false) /* && (expectedLifetime < DateTimeOffset.Now)*/ )
         {
             await Task.Delay(2000); // Gotta look busy
 
@@ -55,16 +47,6 @@ public class LiveUpdatesSubscriptionGrpcService : Protos.LiveUpdatesSubscription
             }
             
             _liveUpdateSubscriptionService.Repository[context.Peer].Clear();
-
-            await Task.Delay(2000);
-            
-            _liveUpdateSubscriptionService.Repository[context.Peer].Add(new LiveUpdateSubscriptionItem
-            {
-                From = "Server",
-                Message = "test",
-                ServerTime = DateTimeOffset.Now,
-                Type = LiveUpdateSubscriptionItem.TypeOfMessage.Chat
-            });
         }
         
         Console.WriteLine("Cancellation of the live update was requested");

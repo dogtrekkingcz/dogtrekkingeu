@@ -61,7 +61,7 @@ namespace Storage.Services.Repositories.UserProfiles
 
             _logger.LogInformation($"'{nameof(GetUserProfileAsync)}': Response: '{result}'");
 
-            if (result == null)
+            if (result == null || result.Count == 0)
                 return null;
             
             var response = _mapper.Map<GetUserProfileInternalStorageResponse>(result.First());

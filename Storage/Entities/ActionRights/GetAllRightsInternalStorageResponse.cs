@@ -10,7 +10,7 @@
 
             public string UserId { get; set; } = string.Empty;
 
-            public string ActionId { get; set; } = string.Empty;
+            public Guid ActionId { get; set; } = Guid.Empty;
         
             public IList<string> Roles { get; set; } = new List<string>();
         }

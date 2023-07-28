@@ -27,7 +27,7 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
             From = "Server",
             ServerTime = DateTimeOffset.Now,
             Type = LiveUpdateSubscriptionItem.TypeOfMessage.Info,
-            Message = "Welcome"
+            Message = "Welcome to the live  updating of the server state"
         });
     }
 }

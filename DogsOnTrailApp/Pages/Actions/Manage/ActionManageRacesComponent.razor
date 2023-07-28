@@ -60,16 +60,17 @@
                                         <span>@payment.From.ToString("yyyy-MM-dd") - @payment.To.ToString("yyyy-MM-dd")</span><button type="button" @onclick="() => MakeEditablePayment(modelRace, payment)">Edit</button>
                                     }
                                     :
-                                    <input type="text" @bind="payment.Price" @onblur="(args) => StateHasChanged()" required/>
+                                    <input type="text" @bind="payment.Price" @onblur="(args) => StateHasChanged()" required />
                                     <select @bind="payment.Currency" @onblur="(args) => StateHasChanged()">
                                         <option value="Kč">Kč</option>
                                     </select>
+                                    <input type="text" @bind="payment.BankAccount" @onblur="(args) => StateHasChanged()" required />
                                 </li>
                             }
                             else
                             {
                                 <li>
-                                    <span>@payment.From.ToString("yyyy-MM-dd") - @payment.To.ToString("yyyy-MM-dd")</span>: <b>@payment.Price @payment.Currency</b>
+                                    <span>@payment.From.ToString("yyyy-MM-dd") - @payment.To.ToString("yyyy-MM-dd")</span>: <b>@payment.Price @payment.Currency => @payment.BankAccount</b>
                                 </li>                                
                             }
                         }

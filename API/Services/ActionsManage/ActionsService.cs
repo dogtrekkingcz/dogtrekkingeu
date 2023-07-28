@@ -1,4 +1,7 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
+﻿using DogsOnTrail.Actions.Attributes;
+using DogsOnTrail.Actions.Exceptions;
+using DogsOnTrail.Actions.Services.Authorization;
+using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Storage.Entities.ActionRights;
@@ -14,18 +17,21 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         private readonly IActionsRepositoryService _actionsRepositoryService;
         private readonly IActionRightsRepositoryService _actionRightsRepositoryService;
         private readonly IEntriesRepositoryService _entriesRepositoryService;
+        private readonly IAuthorizationService _authorizationService;
         private readonly ICurrentUserIdService _currentUserIdService;
 
         public ActionsService(IMapper mapper, 
             IActionsRepositoryService actionsRepositoryService, 
             IActionRightsRepositoryService actionRightsRepositoryService,
             IEntriesRepositoryService entriesRepositoryService,
-            ICurrentUserIdService currentUserIdService)
+            ICurrentUserIdService currentUserIdService,
+            IAuthorizationService authorizationService)
         {
             _mapper = mapper;
             _actionsRepositoryService = actionsRepositoryService;
             _actionRightsRepositoryService = actionRightsRepositoryService;
             _entriesRepositoryService = entriesRepositoryService;
+            _authorizationService = authorizationService;
             _currentUserIdService = currentUserIdService;
         }
 
@@ -54,7 +60,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                 Id = Guid.NewGuid().ToString(),
                 ActionId = result.Id,
                 UserId = _currentUserIdService.GetUserId(),
-                Roles = new List<string> { AddActionRightsInternalStorageRequest.RoleType.Owner.ToString() }
+                Roles = new List<string> { Constants.Roles.OwnerOfAction.Id }
             }, cancellationToken);
 
             var response = _mapper.Map<CreateActionResponse>(result);
@@ -62,8 +68,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(request.Id, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+
             var updateActionRequest = _mapper.Map<UpdateActionInternalStorageRequest>(request);
         
             var result = await _actionsRepositoryService.UpdateActionAsync(updateActionRequest, cancellationToken);

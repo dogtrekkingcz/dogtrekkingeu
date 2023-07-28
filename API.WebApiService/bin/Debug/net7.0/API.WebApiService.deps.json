@@ -778,6 +778,11 @@
           "API.Interface.dll": {}
         }
       },
+      "Constants/1.0.0": {
+        "runtime": {
+          "Constants.dll": {}
+        }
+      },
       "Mails/1.0.0": {
         "dependencies": {
           "Mapster": "7.3.0",
@@ -806,6 +811,7 @@
       },
       "Storage/1.0.0": {
         "dependencies": {
+          "Constants": "1.0.0",
           "Mapster": "7.3.0",
           "Mapster.DependencyInjection": "1.0.0",
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
@@ -1504,6 +1510,11 @@
       "sha512": ""
     },
     "API.Interface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Constants/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

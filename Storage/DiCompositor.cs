@@ -14,6 +14,7 @@ using Storage.Services.Repositories.Actions;
 using Storage.Services.Repositories.AuthorizationRoles;
 using Storage.Services.Repositories.Dogs;
 using Storage.Services.Repositories.Entries;
+using Storage.Services.Repositories.Migrations;
 using Storage.Services.Repositories.UserProfiles;
 
 namespace Storage;
@@ -28,6 +29,14 @@ public static class DiCompositor
 
         await initializationService.InitializeAsync(cancellationToken);
 
+
+        var migrationService = host.Services.GetService<IMigrationsService>();
+        if (migrationService == null)
+            throw new Exception($"When calling '{nameof(ConfigureStorageAsync)}' the '{nameof(IMigrationsService)}' is not registered");
+        
+        await migrationService.RunMigrationsAsync(host, cancellationToken);
+
+        
         return host;
     } 
     
@@ -41,33 +50,40 @@ public static class DiCompositor
 
             .AddSingleton<IStorageService<ActionRecord>, StorageService<ActionRecord>>()
             .AddScoped<IActionsRepositoryService, ActionsRepositoryService>()
-            
+
             .AddSingleton<IStorageService<ActionRightsRecord>, StorageService<ActionRightsRecord>>()
             .AddScoped<IActionRightsRepositoryService, ActionRightsRepositoryService>()
-            
+
             .AddSingleton<IStorageService<UserProfileRecord>, StorageService<UserProfileRecord>>()
             .AddScoped<IUserProfilesRepositoryService, UserProfilesRepositoryService>()
-            
+
             .AddSingleton<IStorageService<DogRecord>, StorageService<DogRecord>>()
             .AddScoped<IDogsRepositoryService, DogsRepositoryService>()
-            
+
             .AddSingleton<IStorageService<AuthorizationRoleRecord>, StorageService<AuthorizationRoleRecord>>()
             .AddScoped<IAuthorizationRolesRepositoryService, AuthorizationRolesRepositoryService>()
-            
+
             .AddSingleton<IStorageService<EntryRecord>, StorageService<EntryRecord>>()
-            .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>();
+            .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>()
+
+            .AddSingleton<IStorageService<MigrationRecord>, StorageService<MigrationRecord>>()
+            .AddScoped<IMigrationsRepositoryService, MigrationsRepositoryService>()
+
+            .AddScoped<IMigrationsService, MigrationsService>();
+        
 
         typeAdapterConfig.NewConfig<string, Guid>()
             .Map(d => d, s => s.ToGuid());
         typeAdapterConfig.NewConfig<Guid, string>()
             .Map(d => d, s => s.ToString());
-        
+
         typeAdapterConfig
             .AddActionRepositoryMapping()
             .AddActionRightsRepositoryMapping()
             .AddUserProfilesRepositoryMapping()
             .AddEntriesRepositoryMapping()
-            .AddDogsRepositoryMapping();
+            .AddDogsRepositoryMapping()
+            .AddMigrationsRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
         BsonClassMap.RegisterClassMap<UserProfileRecord>();
@@ -75,10 +91,11 @@ public static class DiCompositor
         BsonClassMap.RegisterClassMap<ActionRightsRecord>();
         BsonClassMap.RegisterClassMap<AuthorizationRoleRecord>();
         BsonClassMap.RegisterClassMap<DogRecord>();
+        BsonClassMap.RegisterClassMap<MigrationRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
 
-        var db = client.GetDatabase("DogsOnTrailDb");
+        var db = client.GetDatabase("PetsOnTrailDb");
 
         var listOfCollections = db.ListCollectionNames().ToList();
         
@@ -107,7 +124,12 @@ public static class DiCompositor
             db.CreateCollection("Entries");
         }
 
-        Console.WriteLine($"MongoDb.DogtrekkingEu.Collections with initialized collections: {db.ListCollectionNames()}");
+        if (listOfCollections.Contains("Migrations") == false)
+        {
+            db.CreateCollection("Migrations");
+        }
+
+        Console.WriteLine($"MongoDb.DogsOnTrail.Collections with initialized collections: {db.ListCollectionNames()}");
         
         serviceProvider.AddSingleton<IMongoCollection<ActionRecord>>(db.GetCollection<ActionRecord>("Actions"));
         serviceProvider.AddSingleton<IMongoCollection<UserProfileRecord>>(db.GetCollection<UserProfileRecord>("UserProfiles"));
@@ -115,6 +137,7 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IMongoCollection<ActionRightsRecord>>(db.GetCollection<ActionRightsRecord>("ActionRights"));
         serviceProvider.AddSingleton<IMongoCollection<AuthorizationRoleRecord>>(db.GetCollection<AuthorizationRoleRecord>("AuthorizationRoles"));
         serviceProvider.AddSingleton<IMongoCollection<EntryRecord>>(db.GetCollection<EntryRecord>("Entries"));
+        serviceProvider.AddSingleton<IMongoCollection<MigrationRecord>>(db.GetCollection<MigrationRecord>("Migrations"));
 
         return serviceProvider;
     }   
