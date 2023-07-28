@@ -71,9 +71,9 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken)
         {
-            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod("UpdateActionAsync"), request.Id, cancellationToken))
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(UpdateActionAsync)), request.Id, cancellationToken))
                 throw new NotAuthorizedForThisActionException();
-
+            
             var updateActionRequest = _mapper.Map<UpdateActionInternalStorageRequest>(request);
         
             var result = await _actionsRepositoryService.UpdateActionAsync(updateActionRequest, cancellationToken);

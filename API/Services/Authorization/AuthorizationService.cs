@@ -26,26 +26,20 @@ internal class AuthorizationService : IAuthorizationService
     {
         var requiredRoles = methodInfo.GetCustomAttributes(true)
             .OfType<RequiredRolesAttribute>()
-            .SelectMany(attr => attr.Roles).ToArray();
+            .SelectMany(attr => attr.Roles)
+            .ToArray();
         
-        Console.WriteLine($"Required roles for current action: '{requiredRoles?.Dump()}'");
-        
-        // TODO: fill it from db
-        List<string> userRoles = new();
-
         var getAllRightsInternalStorageResponse = await _actionRightsRepositoryService.GetAllRightsAsync(new GetAllRightsInternalStorageRequest
         {
             UserId = _currentUserIdService.GetUserId()
         }, cancellationToken);
 
-        userRoles = getAllRightsInternalStorageResponse.Rights
+        var userRoles = getAllRightsInternalStorageResponse.Rights
                         .Where(right => Guid.Empty == right.ActionId || (right.ActionId == actionId))
                         .SelectMany(right => right.Roles)
                         .ToList()
                     ?? new List<string>();
 
-        Console.WriteLine($"Found roles for current user: '{userRoles?.Dump()}'");
-        
         return userRoles.Intersect(requiredRoles).Any();
     }
 }
