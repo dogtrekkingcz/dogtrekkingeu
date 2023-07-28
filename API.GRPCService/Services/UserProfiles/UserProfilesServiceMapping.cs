@@ -27,6 +27,7 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateUserProfileRequest.LatLngDto>()
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
+        typeAdapterConfig.NewConfig<CreateUserProfileResponse, Protos.UserProfiles.CreateUserProfile.CreateUserProfileResponse>();
         
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileRequest, UpdateUserProfileRequest>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.VaccinationType, UpdateUserProfileRequest.VaccinationType>();

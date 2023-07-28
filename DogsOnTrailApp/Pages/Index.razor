@@ -163,7 +163,7 @@
     {
         var userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
 
-        if (userProfile == null)
+        if (userProfile == null || userProfile.Id == string.Empty)
             return null;
 
         UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(userProfile));

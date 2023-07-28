@@ -39,6 +39,11 @@ namespace DogsOnTrail.Actions.Services.UserProfileManage
             };
 
             var result = await _userProfilesRepositoryService.GetUserProfileAsync(getUserProfileRequest, cancellationToken);
+            if (result == null)
+                return new GetUserProfileResponse
+                {
+                    Id = null
+                };
 
             var response = _mapper.Map<GetUserProfileResponse>(result);
 
