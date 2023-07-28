@@ -38,6 +38,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Protos\Protos.csproj" />
+      <ProjectReference Include="..\Shared\Constants\Constants.csproj" />
     </ItemGroup>
 
     <ItemGroup>

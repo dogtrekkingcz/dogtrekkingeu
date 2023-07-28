@@ -3,6 +3,7 @@
 @using DogsOnTrailApp.Services;
 @using BootstrapBlazor.Components
 
+
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService ModalService
 @inject IStringLocalizer<Resource> Localizer
@@ -21,7 +22,7 @@
         
         <AuthorizeView>
             <Authorized>
-                @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Model.Id.ToString() && right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())) != null)
+                @if (CanManage())
                 {
                     <li><a class="dropdown-item" @onclick="@(async () => await ManageRegistrations(Model))">@Localizer["Action.Manage.Entries"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await ManagePayments(Model))">@Localizer["Action.Manage.Payments"]</a></li>
@@ -39,6 +40,25 @@
     
     protected override async Task OnInitializedAsync()
     {
+    }
+
+    private bool CanManage()
+    {
+        var rights = UserProfileService.Get()?.Rights;
+        if (rights == null)
+            return false;
+        
+        if (rights.SelectMany(right => right.Roles).Contains(global::Constants.Roles.InternalAdministrator.Id))
+            return true;
+
+        var actionRights = rights.FirstOrDefault(right => right.ActionId == Model.Id.ToString());
+        if (actionRights == null)
+            return false;
+
+        if (actionRights.Roles.Contains(global::Constants.Roles.OwnerOfAction.Id))
+            return true;
+
+        return false;
     }
     
     protected async Task ManageAction(ActionModel action)

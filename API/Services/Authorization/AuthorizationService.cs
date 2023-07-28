@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using DogsOnTrail.Actions.Attributes;
 using DogsOnTrail.Actions.Extensions;
 using DogsOnTrail.Interfaces.Actions.Services;
@@ -20,9 +22,9 @@ internal class AuthorizationService : IAuthorizationService
         _currentUserIdService = currentUserIdService;
     }
     
-    public async Task<bool> IsAuthorizedAsync(Guid actionId, CancellationToken cancellationToken, [CallerMemberName] string callerName = "")
+    public async Task<bool> IsAuthorizedAsync(MethodInfo methodInfo, Guid actionId, CancellationToken cancellationToken)
     {
-        var requiredRoles = GetType().GetMethod(callerName).GetCustomAttributes(true)
+        var requiredRoles = methodInfo.GetCustomAttributes(true)
             .OfType<RequiredRolesAttribute>()
             .SelectMany(attr => attr.Roles).ToArray();
         
@@ -37,8 +39,8 @@ internal class AuthorizationService : IAuthorizationService
         }, cancellationToken);
 
         userRoles = getAllRightsInternalStorageResponse.Rights
-                        .First(right => Guid.Empty == right.ActionId || (right.ActionId == actionId))?
-                        .Roles?
+                        .Where(right => Guid.Empty == right.ActionId || (right.ActionId == actionId))
+                        .SelectMany(right => right.Roles)
                         .ToList()
                     ?? new List<string>();
 
