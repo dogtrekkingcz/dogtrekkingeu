@@ -128,7 +128,7 @@
     private async Task DrawPositions(List<GpsLocation> locations)
     {
         await JsRuntime.InvokeVoidAsync(
-            "drawCircleAtPosition", 
+            "drawMarkAtPosition", 
             "theMapCanvas", 
             "images/maps/cr.png", 
             locations, 

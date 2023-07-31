@@ -80,6 +80,5 @@
     <ItemGroup>
       <Folder Include="Events" />
       <Folder Include="Pages\Actions\View" />
-      <Folder Include="wwwroot\js" />
     </ItemGroup>
 </Project>

@@ -22,8 +22,8 @@ public sealed record AddCheckpointItemRequest
 
     public sealed record LatLngDto
     {
-        double Latitude { get; set; } = Double.NaN;
+        public double Latitude { get; set; } = Double.NaN;
 
-        double Longitude { get; set; } = Double.NaN;
+        public double Longitude { get; set; } = Double.NaN;
     }
 }

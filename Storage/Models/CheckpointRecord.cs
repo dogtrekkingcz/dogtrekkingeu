@@ -24,8 +24,8 @@ internal sealed record CheckpointRecord : IRecord
     
     public sealed record LatLngDto
     {
-        double Latitude { get; set; } = Double.NaN;
+        public double Latitude { get; set; } = Double.NaN;
 
-        double Longitude { get; set; } = Double.NaN;
+        public double Longitude { get; set; } = Double.NaN;
     }
 }
