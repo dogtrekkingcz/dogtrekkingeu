@@ -12,10 +12,6 @@ public sealed record AddCheckpointItemRequest
     
     public DateTimeOffset CheckpointTime { get; set; }
     
-    public DateTimeOffset ServerTime { get; set; }
-    
-    public DateTimeOffset Created { get; set; }
-
     public string Data { get; set; }
     
     public LatLngDto Position { get; set; } = new LatLngDto();

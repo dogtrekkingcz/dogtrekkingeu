@@ -1,4 +1,8 @@
 ﻿@page "/Checkpoint"
+@using Google.Type
+@using DateTime = System.DateTime
+@using DogsOnTrailApp.Extensions
+@inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 
 @inject IJSRuntime JsRuntime
 
@@ -29,6 +33,21 @@
             var currentPosition = await JsRuntime.InvokeAsync<GeoLocationPosition>("getGpsLocation");
             
             Console.WriteLine(currentPosition);
+            
+            await CheckpointsClient.addCheckpointAsync(
+                new Protos.Checkpoints.AddCheckpoint.AddCheckpointRequest {
+                    Position = new LatLng
+                    {
+                        Latitude = currentPosition.latitude,
+                        Longitude = currentPosition.longitude
+                    },
+                    Name = "Test",
+                    Description = "Desc test",
+                    CheckpointTime = DateTimeOffset.Now.ToGoogleDateTime(),
+                    ActionId = Guid.Empty.ToString(),
+                    Data = "Testing data",
+                    CheckpointId = Guid.NewGuid().ToString()
+                });
         }
     }
 }

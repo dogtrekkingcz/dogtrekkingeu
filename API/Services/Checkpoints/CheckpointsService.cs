@@ -19,7 +19,12 @@ public class CheckpointsService : ICheckpointsService
     
     public async Task<AddCheckpointItemResponse> AddAsync(AddCheckpointItemRequest request, CancellationToken cancellationToken)
     {
-        var addInternalStorageRequest = _mapper.Map<AddCheckpointItemInternalStorageRequest>(request);
+        var addInternalStorageRequest = _mapper.Map<AddCheckpointItemInternalStorageRequest>(request) with
+        {
+            Id = Guid.NewGuid(),
+            ServerTime = DateTimeOffset.Now,
+            Created = DateTimeOffset.Now
+        };
 
         var response = await _checkpointsRepositoryService.AddAsync(addInternalStorageRequest, cancellationToken);
 

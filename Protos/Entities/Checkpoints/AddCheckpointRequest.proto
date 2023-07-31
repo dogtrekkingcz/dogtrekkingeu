@@ -8,14 +8,11 @@ import "google/type/datetime.proto";
 import "google/type/latlng.proto";
 
 message AddCheckpointRequest {
-  string Id = 1;
-  string ActionId = 2;
-  string CheckpointId = 3;
-  string Name = 4;
-  string Description = 5;
-  google.type.DateTime CheckpointTime = 6;
-  google.type.DateTime ServerTime = 7;
-  google.type.DateTime Created = 8;
-  string Data = 9;
-  google.type.LatLng Position = 10;
+  string ActionId = 1;
+  string CheckpointId = 2;
+  string Name = 3;
+  string Description = 4;
+  google.type.DateTime CheckpointTime = 5;
+  string Data = 6;
+  google.type.LatLng Position = 7;
 }
