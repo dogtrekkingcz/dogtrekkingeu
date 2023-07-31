@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Checkpoints.AddCheckpoint";
+
+package addcheckpoint;
+
+message AddCheckpointResponse {
+  string Id = 1;
+}

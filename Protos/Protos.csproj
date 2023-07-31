@@ -16,6 +16,15 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Checkpoints.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
       <Protobuf Include="Dogs.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -179,6 +188,42 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
       <Protobuf Include="Entities\Actions\UpdateActionResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Checkpoints\AddCheckpointRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Checkpoints\AddCheckpointResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Checkpoints\GetCheckpointsRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Checkpoints\GetCheckpointsResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>

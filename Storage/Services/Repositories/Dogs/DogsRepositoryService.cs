@@ -20,7 +20,7 @@ namespace Storage.Services.Repositories.Dogs
 
         public async Task<AddDogInternalStorageResponse> AddDogAsync(CreateDogInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"{nameof(AddDogAsync)}: '{request?.Dump()}'");
+            Console.WriteLine($"DogsRepositoryService::{nameof(AddDogAsync)}: '{request?.Dump()}'");
             
             var addRequest = _mapper.Map<DogRecord>(request);
             
@@ -71,7 +71,6 @@ namespace Storage.Services.Repositories.Dogs
         public async Task<GetAllDogsInternalStorageResponse> GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await _dogStorageService.GetAllAsync(cancellationToken);
-
 
             var response = new GetAllDogsInternalStorageResponse
             {

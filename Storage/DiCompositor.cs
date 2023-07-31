@@ -12,6 +12,7 @@ using Storage.Services;
 using Storage.Services.Repositories.ActionRights;
 using Storage.Services.Repositories.Actions;
 using Storage.Services.Repositories.AuthorizationRoles;
+using Storage.Services.Repositories.Checkpoints;
 using Storage.Services.Repositories.Dogs;
 using Storage.Services.Repositories.Entries;
 using Storage.Services.Repositories.Migrations;
@@ -66,9 +67,12 @@ public static class DiCompositor
             .AddSingleton<IStorageService<EntryRecord>, StorageService<EntryRecord>>()
             .AddScoped<IEntriesRepositoryService, EntriesRepositoryService>()
 
+            .AddSingleton<IStorageService<CheckpointRecord>, StorageService<CheckpointRecord>>()
+            .AddScoped<ICheckpointsRepositoryService, CheckpointsRepositoryService>()
+            
             .AddSingleton<IStorageService<MigrationRecord>, StorageService<MigrationRecord>>()
             .AddScoped<IMigrationsRepositoryService, MigrationsRepositoryService>()
-
+            
             .AddScoped<IMigrationsService, MigrationsService>();
         
 
@@ -83,6 +87,7 @@ public static class DiCompositor
             .AddUserProfilesRepositoryMapping()
             .AddEntriesRepositoryMapping()
             .AddDogsRepositoryMapping()
+            .AddCheckpointsRepositoryMapping()
             .AddMigrationsRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
@@ -91,6 +96,7 @@ public static class DiCompositor
         BsonClassMap.RegisterClassMap<ActionRightsRecord>();
         BsonClassMap.RegisterClassMap<AuthorizationRoleRecord>();
         BsonClassMap.RegisterClassMap<DogRecord>();
+        BsonClassMap.RegisterClassMap<CheckpointRecord>();
         BsonClassMap.RegisterClassMap<MigrationRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
@@ -110,6 +116,10 @@ public static class DiCompositor
         if (listOfCollections.Contains("Dogs") == false)
         {
             db.CreateCollection("Dogs");
+        }
+        if (listOfCollections.Contains("Checkpoints") == false)
+        {
+            db.CreateCollection("Checkpoints");
         }
         if (listOfCollections.Contains("ActionRights") == false)
         {
@@ -134,6 +144,7 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IMongoCollection<ActionRecord>>(db.GetCollection<ActionRecord>("Actions"));
         serviceProvider.AddSingleton<IMongoCollection<UserProfileRecord>>(db.GetCollection<UserProfileRecord>("UserProfiles"));
         serviceProvider.AddSingleton<IMongoCollection<DogRecord>>(db.GetCollection<DogRecord>("Dogs"));
+        serviceProvider.AddSingleton<IMongoCollection<CheckpointRecord>>(db.GetCollection<CheckpointRecord>("Checkpoints"));
         serviceProvider.AddSingleton<IMongoCollection<ActionRightsRecord>>(db.GetCollection<ActionRightsRecord>("ActionRights"));
         serviceProvider.AddSingleton<IMongoCollection<AuthorizationRoleRecord>>(db.GetCollection<AuthorizationRoleRecord>("AuthorizationRoles"));
         serviceProvider.AddSingleton<IMongoCollection<EntryRecord>>(db.GetCollection<EntryRecord>("Entries"));

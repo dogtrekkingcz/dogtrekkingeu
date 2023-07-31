@@ -19,6 +19,8 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
     
     public async Task<CreateEntryInternalStorageResponse> CreateEntryAsync(CreateEntryInternalStorageRequest request, CancellationToken cancellationToken)
     {
+        Console.WriteLine($"EntriesRepositoryService::{nameof(CreateEntryAsync)}: '{request?.Dump()}'");
+        
         var entryRecord = _mapper.Map<EntryRecord>(request);
         
         var createdEntry = await _entriesStorageService.AddAsync(entryRecord, cancellationToken);
@@ -28,8 +30,6 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 
     public async Task<GetEntriesByActionInternalStorageResponse> GetEntriesByActionAsync(GetEntriesByActionInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"{nameof(GetEntriesByActionAsync)} - request: '{request?.Dump()}'");
-        
         var entries = await _entriesStorageService.GetByFilterAsync(
             new List<(string, Type, object)>
             {
@@ -37,8 +37,6 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
                 ("Accepted", typeof(bool), request.IncludeAlreadyAccepted)
             },
             cancellationToken);
-        
-        Console.WriteLine($"{nameof(GetEntriesByActionAsync)} - response from storage: '{entries?.Dump()}'");
 
         var response = new GetEntriesByActionInternalStorageResponse
         {
@@ -62,6 +60,8 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 
     public async Task DeleteEntryAsync(DeleteEntryInternalStorageRequest request, CancellationToken cancellationToken)
     {
+        Console.WriteLine($"EntriesRepositoryService::{nameof(DeleteEntryAsync)}: '{request?.Dump()}'");
+        
         await _entriesStorageService.DeleteAsync(request.Id, cancellationToken);
     }
 
@@ -74,6 +74,8 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
 
     public async Task UpdateEntryAsync(UpdateEntryInternalStorageRequest request, CancellationToken cancellationToken)
     {
+        Console.WriteLine($"EntriesRepositoryService::{nameof(UpdateEntryAsync)}: '{request?.Dump()}'");
+        
         await _entriesStorageService.UpdateAsync(_mapper.Map<EntryRecord>(request), cancellationToken);
     }
 }

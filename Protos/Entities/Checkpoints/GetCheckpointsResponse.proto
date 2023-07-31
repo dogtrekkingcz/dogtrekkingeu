@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Checkpoints.GetCheckpoints";
+
+package getcheckpoints;
+
+import "google/type/datetime.proto";
+import "google/type/latlng.proto";
+
+message GetCheckpointsResponse {
+  repeated CheckpointItem Items = 1;
+}
+
+message CheckpointItem {
+  string Id = 1;
+  string ActionId = 2;
+  string CheckpointId = 3;
+  string Name = 4;
+  string Description = 5;
+  google.type.DateTime CheckpointTime = 6;
+  google.type.DateTime ServerTime = 7;
+  google.type.DateTime Created = 8;
+  string Data = 9;
+  google.type.LatLng Position = 10;
+}

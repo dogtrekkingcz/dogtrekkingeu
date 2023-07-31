@@ -60,35 +60,9 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
     public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, System.Type typeOfValue, object value)> filterList, CancellationToken cancellationToken)
     {
-        FilterDefinition<T> filter = null;
-        
-        if (filterList[0].typeOfValue == typeof(Guid))
-        {
-            filter = Builders<T>.Filter
-                .Eq(filterList[0].key, ((Guid) filterList[0].value).ToString()); 
-        }
-        else if (filterList[0].typeOfValue == typeof(string))
-        {
-            filter = Builders<T>.Filter
-                .Eq(filterList[0].key, (string) filterList[0].value);
-        }
-        else if (filterList[0].typeOfValue == typeof(bool))
-        {
-            filter = Builders<T>.Filter
-                .Eq(filterList[0].key, (bool) filterList[0].value);
-        }
-        else if (filterList[0].typeOfValue == typeof(int))
-        {
-            filter = Builders<T>.Filter
-                .Eq(filterList[0].key, (int) filterList[0].value);
-        }
-        else if (filterList[0].typeOfValue == typeof(double))
-        {
-            filter = Builders<T>.Filter
-                .Eq(filterList[0].key, (double) filterList[0].value);
-        }
-        
-        foreach (var f in filterList.Skip(1))
+        FilterDefinition<T> filter = Builders<T>.Filter.Empty;
+
+        foreach (var f in filterList)
         {
             if (f.typeOfValue == typeof(Guid))
                 filter &= (Builders<T>.Filter.Eq(f.key, ((Guid) f.value)).ToString());
@@ -111,15 +85,52 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
     public async Task<IReadOnlyList<T>> GetByFilterBeLikeAsync(IList<(string key, string likeValue)> filterList, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter
-            .Regex(filterList[0].key, new BsonRegularExpression($".*{filterList[0].likeValue}.*"));
+        var filter = Builders<T>.Filter.Empty;
 
-        foreach (var f in filterList.Skip(1))
+        foreach (var f in filterList)
         {
             filter &= (Builders<T>.Filter
                 .Regex(f.key, new BsonRegularExpression($".*{f.likeValue}.*")));
         }
 
+        var document = await _collection
+            .Find(filter)
+            .ToListAsync(cancellationToken);
+
+        return document;
+    }
+
+    public async Task<IReadOnlyList<T>> GetByTimeFilterAsync(IList<(string key, IStorageService<T>.FilterOptions option, DateTimeOffset value)> filterList, CancellationToken cancellationToken)
+    {
+
+        var filter = Builders<T>.Filter.Empty;
+        
+        foreach (var f in filterList)
+        {
+            switch (f.option)
+            {
+                case IStorageService<T>.FilterOptions.Equal: 
+                    filter &= (Builders<T>.Filter.Eq(f.key, f.value));
+                    break;
+                
+                case IStorageService<T>.FilterOptions.LessThan:
+                    filter &= (Builders<T>.Filter.Lt(f.key, f.value));
+                    break;
+                
+                case IStorageService<T>.FilterOptions.LessThanOrEqual:
+                    filter &= (Builders<T>.Filter.Lte(f.key, f.value));
+                    break;
+                
+                case IStorageService<T>.FilterOptions.MoreThan:
+                    filter &= (Builders<T>.Filter.Gt(f.key, f.value));
+                    break;
+                
+                case IStorageService<T>.FilterOptions.MoreThanOrEqual:
+                    filter &= (Builders<T>.Filter.Gte(f.key, f.value));
+                    break;
+            }
+        }
+            
         var document = await _collection
             .Find(filter)
             .ToListAsync(cancellationToken);

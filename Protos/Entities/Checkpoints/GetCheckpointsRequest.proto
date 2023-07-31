@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Checkpoints.GetCheckpoints";
+
+package getcheckpoints;
+
+import "google/type/datetime.proto";
+
+message GetCheckpointsRequest {
+  google.type.DateTime From = 1;
+}

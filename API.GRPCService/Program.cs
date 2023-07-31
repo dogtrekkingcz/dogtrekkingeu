@@ -3,6 +3,7 @@ using API.GRPCService.Interceptors;
 using API.GRPCService.Options;
 using API.GRPCService.Services.ActionRights;
 using API.GRPCService.Services.Actions;
+using API.GRPCService.Services.Checkpoints;
 using API.GRPCService.Services.Dogs;
 using API.GRPCService.Services.Entries;
 using API.GRPCService.Services.JwtToken;
@@ -17,6 +18,7 @@ using Mapster;
 using MapsterMapper;
 using Storage;
 using Storage.Options;
+using CheckpointsService = DogsOnTrail.Actions.Services.Checkpoints.CheckpointsService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,7 +74,8 @@ typeAdapterConfig
     .AddEntriesServiceMapping()
     .AddDogsServiceMapping()
     .AddResultsMapping()
-    .AddLiveUpdatesSubscriptionMapping();
+    .AddLiveUpdatesSubscriptionMapping()
+    .AddCheckpointsServiceMapping();
 
 typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
 typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();
@@ -126,6 +129,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapGrpcService<DogsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<ResultsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<LiveUpdatesSubscriptionGrpcService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<CheckpointsService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 

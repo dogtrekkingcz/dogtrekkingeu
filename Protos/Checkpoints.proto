@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Checkpoints";
+
+package checkpoints;
+
+import "Entities/Checkpoints/AddCheckpointRequest.proto";
+import "Entities/Checkpoints/AddCheckpointResponse.proto";
+import "Entities/Checkpoints/GetCheckpointsRequest.proto";
+import "Entities/Checkpoints/GetCheckpointsResponse.proto";
+
+service Checkpoints {
+  rpc addCheckpoint (addcheckpoint.AddCheckpointRequest) returns (addcheckpoint.AddCheckpointResponse);
+  
+  rpc getCheckpoints (getcheckpoints.GetCheckpointsRequest) returns (getcheckpoints.GetCheckpointsResponse);
+}
