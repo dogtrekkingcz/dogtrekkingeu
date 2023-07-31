@@ -8,6 +8,8 @@ public sealed record GetCheckpointItemsInternalStorageResponse
     {
         public Guid Id { get; set; }
         
+        public Guid UserId { get; set; }
+        
         public Guid ActionId { get; set; }
 
         public Guid CheckpointId { get; set; }

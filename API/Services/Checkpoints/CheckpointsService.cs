@@ -10,11 +10,13 @@ public class CheckpointsService : ICheckpointsService
 {
     private readonly IMapper _mapper;
     private readonly ICheckpointsRepositoryService _checkpointsRepositoryService;
+    private readonly ICurrentUserIdService _currentUserIdService;
     
-    public CheckpointsService(IMapper mapper, ICheckpointsRepositoryService checkpointsRepositoryService)
+    public CheckpointsService(IMapper mapper, ICurrentUserIdService currentUserIdService, ICheckpointsRepositoryService checkpointsRepositoryService)
     {
         _mapper = mapper;
         _checkpointsRepositoryService = checkpointsRepositoryService;
+        _currentUserIdService = currentUserIdService;
     }
     
     public async Task<AddCheckpointItemResponse> AddAsync(AddCheckpointItemRequest request, CancellationToken cancellationToken)
@@ -22,6 +24,7 @@ public class CheckpointsService : ICheckpointsService
         var addInternalStorageRequest = _mapper.Map<AddCheckpointItemInternalStorageRequest>(request) with
         {
             Id = Guid.NewGuid(),
+            UserId = _currentUserIdService.GetUserId(),
             ServerTime = DateTimeOffset.Now,
             Created = DateTimeOffset.Now
         };

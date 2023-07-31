@@ -15,6 +15,8 @@
     <div id="outputMessage">No QR code detected.</div>
     <div hidden><b>Data:</b> <span id="outputData"></span></div>
 </div>
+
+<button type="button" @onclick="() => SendCurrentPosition()">Send current position</button>
   
 @code {
     internal record GeoLocationPosition 
@@ -49,5 +51,25 @@
                     CheckpointId = Guid.NewGuid().ToString()
                 });
         }
+    }
+
+    private async Task SendCurrentPosition()
+    {
+        var currentPosition = await JsRuntime.InvokeAsync<GeoLocationPosition>("getGpsLocation");
+            
+        await CheckpointsClient.addCheckpointAsync(
+            new Protos.Checkpoints.AddCheckpoint.AddCheckpointRequest {
+                Position = new LatLng
+                {
+                    Latitude = currentPosition.latitude,
+                    Longitude = currentPosition.longitude
+                },
+                Name = "Test",
+                Description = "Desc test",
+                CheckpointTime = DateTimeOffset.Now.ToGoogleDateTime(),
+                ActionId = Guid.Empty.ToString(),
+                Data = "Testing data",
+                CheckpointId = Guid.NewGuid().ToString()
+            });
     }
 }

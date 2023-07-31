@@ -10,6 +10,7 @@ internal static class CheckpointsServiceMapping
     {
         typeAdapterConfig.NewConfig<AddCheckpointItemRequest, AddCheckpointItemInternalStorageRequest>()
             .Ignore(d => d.Id)
+            .Ignore(d => d.UserId)
             .Ignore(d => d.Created)
             .Ignore(d => d.ServerTime);
         typeAdapterConfig.NewConfig<AddCheckpointItemRequest.LatLngDto, AddCheckpointItemInternalStorageRequest.LatLngDto>();
