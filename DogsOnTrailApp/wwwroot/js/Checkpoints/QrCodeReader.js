@@ -29,7 +29,6 @@ window.readQrCode = async function () {
     var loadingMessage = document.getElementById("loadingMessage");
     var outputContainer = document.getElementById("output");
     var outputMessage = document.getElementById("outputMessage");
-    var outputData = document.getElementById("outputData");
 
     // Use facingMode: environment to attemt to get the front camera on phones
     navigator.mediaDevices
@@ -74,8 +73,6 @@ window.readQrCode = async function () {
                 qrReaderDrawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
                 qrReaderDrawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
                 outputMessage.hidden = true;
-                outputData.parentElement.hidden = false;
-                outputData.value = code.data;
                 
                 canvasElement.height = 0;
                 canvasElement.width = 0;
@@ -96,7 +93,6 @@ window.readQrCode = async function () {
             }
             else {
                 outputMessage.hidden = false;
-                outputData.parentElement.hidden = true;
             }
         }
 
