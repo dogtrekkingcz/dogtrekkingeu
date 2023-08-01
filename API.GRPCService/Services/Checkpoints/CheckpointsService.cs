@@ -1,11 +1,7 @@
-using API.GRPCService.Services.JwtToken;
 using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
-using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
-using Protos.UserProfiles.GetUserProfile;
-using GetUserProfileRequest = DogsOnTrail.Interfaces.Actions.Entities.UserProfile.GetUserProfileRequest;
 
 namespace API.GRPCService.Services.Checkpoints;
 

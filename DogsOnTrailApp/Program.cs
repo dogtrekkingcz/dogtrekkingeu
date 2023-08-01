@@ -1,3 +1,4 @@
+using BlazorBootstrap;
 using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using DogsOnTrailApp;
@@ -23,7 +24,7 @@ builder.Services.AddOidcAuthentication(options =>
     builder.Configuration.Bind("OIDC", options.ProviderOptions);
 });
 builder.Services.AddBlazoredModal();
-builder.Services.AddBootstrapBlazor();
+builder.Services.AddBlazorBootstrap();
 
 var typeAdapterConfig = new TypeAdapterConfig
 {
@@ -65,7 +66,8 @@ typeAdapterConfig
     .AddUserProfileModelMapping()
     .AddEntryModelMapping()
     .AddActionSettingsModelMapping()
-    .AddDogModelMapping();
+    .AddDogModelMapping()
+    .AddCheckpointModelMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)

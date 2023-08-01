@@ -1,75 +1,187 @@
 ﻿@page "/Checkpoint"
-@using Google.Type
-@using DateTime = System.DateTime
-@using DogsOnTrailApp.Extensions
-@inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 
+@using System.Text.Json.Nodes
+@using DogsOnTrailApp.Models
+@using MapsterMapper
+@inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
+@inject IStringLocalizer<Resource> Loc
+@inject IMapper Mapper
 @inject IJSRuntime JsRuntime
 
-<h3>Checkpoint</h3>
+<h3>@Loc["Checkpoint.Title"]</h3>
+<h5>@Loc["Checkpoint.Description"]</h5>
 
-<div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
-<canvas id="canvas" hidden></canvas>
-
-<div id="output" hidden>
-    <div id="outputMessage">No QR code detected.</div>
-    <div hidden><b>Data:</b> <span id="outputData"></span></div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <input type="text" value="@ToString(Model.CheckpointTime)" disabled />
+        </div>
+        <div class="col-2">
+            <Switch @bind-Value="ContinualGpsCoordinatesAcquiringIsOn" Label="@Loc["Checkpoint.GPS"]" />
+        </div>
+        <div class="col-4">
+            <input type="text" value="@ToGpsCoordsString(Model.Position)"/>
+        </div>
+    </div>
 </div>
 
-<button type="button" @onclick="() => SendCurrentPosition()">Send current position</button>
+<Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="ToggleCheckpointDetailsAsync">@Loc["Checkpoint.ShowDetails"]</Button>
+<Collapse @ref="checkpointDetails">
+    <Card>
+        <CardBody>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-6">
+                        <label>@Loc["Checkpoint.Name"]</label>
+                    </div>
+                    <div class="col-sm-12 col-6">
+                        <input type="text" @bind="Model.Name" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-6">
+                        <label>@Loc["Checkpoint.Description"]</label>
+                    </div>
+                    <div class="col-sm-12 col-6">
+                        <input type="text" @bind="Model.Description" />
+                    </div>
+                </div>
+            </div>
+        </CardBody>
+    </Card>
+</Collapse>
+
+<Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="ToggleQrReaderAsync">@Loc["Checkpoint.QrReader"]</Button>
+<Collapse @ref="qrReader">
+    <Card>
+        <CardBody>
+            <Switch @bind-Value="QrReaderIsOn" Label="@Loc["Checkpoint.QrReader"]" />
+
+            <div class="card card-body">
+                <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
+                <canvas id="canvas" hidden></canvas>
+
+                <div id="output" hidden>
+                    <div id="outputMessage">No QR code detected.</div>
+                    <div hidden><b>Data:</b> <span id="outputData"></span></div>
+                </div>
+            </div>
+        </CardBody>
+    </Card>
+</Collapse>
+
+<button type="button" @onclick="() => SendDataAsync()">Send data</button>
   
 @code {
-    internal record GeoLocationPosition 
-    {
-        public double latitude { get; set; }
-        public double longitude { get; set; }
-        public double accuracy { get; set; }
-    };
+    private CheckpointModel Model { get; set; } = new();
 
+    Collapse checkpointDetails = default!;
+    private async Task ToggleCheckpointDetailsAsync() => await checkpointDetails.ToggleAsync();
+
+    Collapse qrReader = default!;
+    private async Task ToggleQrReaderAsync() => await qrReader.ToggleAsync();
+    
+    private bool _continualGpsCoordinatesAcquiringIsOn = false;
+
+    private bool ContinualGpsCoordinatesAcquiringIsOn
+    {
+        get => _continualGpsCoordinatesAcquiringIsOn;
+        set
+        {
+            _continualGpsCoordinatesAcquiringIsOn = value;
+            if (_continualGpsCoordinatesAcquiringIsOn == true)
+            {
+                StartGpsCoordinatesGettingAsync();
+            }
+        }
+    }
+
+    private bool _qrReaderIsOn = false;
+    private bool QrReaderIsOn
+    {
+        get => _qrReaderIsOn;
+        set
+        {
+            _qrReaderIsOn = value;
+
+            if (_qrReaderIsOn == true)
+            {
+                StartQrReaderAsync();
+            }
+            else
+            {
+                StopQrReaderAsync();
+            }
+        }
+    }
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await JsRuntime.InvokeVoidAsync("createQrReader");
-            
-            var currentPosition = await JsRuntime.InvokeAsync<GeoLocationPosition>("getGpsLocation");
-            
-            Console.WriteLine(currentPosition);
-            
-            await CheckpointsClient.addCheckpointAsync(
-                new Protos.Checkpoints.AddCheckpoint.AddCheckpointRequest {
-                    Position = new LatLng
-                    {
-                        Latitude = currentPosition.latitude,
-                        Longitude = currentPosition.longitude
-                    },
-                    Name = "Test",
-                    Description = "Desc test",
-                    CheckpointTime = DateTimeOffset.Now.ToGoogleDateTime(),
-                    ActionId = Guid.Empty.ToString(),
-                    Data = "Testing data",
-                    CheckpointId = Guid.NewGuid().ToString()
-                });
+            StartCurrentTimeThread();
         }
     }
 
-    private async Task SendCurrentPosition()
+    private string ToString(DateTimeOffset dateTimeOffset)
     {
-        var currentPosition = await JsRuntime.InvokeAsync<GeoLocationPosition>("getGpsLocation");
-            
-        await CheckpointsClient.addCheckpointAsync(
-            new Protos.Checkpoints.AddCheckpoint.AddCheckpointRequest {
-                Position = new LatLng
+        return dateTimeOffset.ToString("dd HH:mm:ss");
+    }
+
+    private string ToGpsCoordsString(CheckpointModel.LatLngDto position)
+    {
+        return $"{Model.Position.Latitude}N, {Model.Position.Longitude}E";
+    }
+
+    private async Task SendDataAsync()
+    {
+        var request = Mapper.Map<Protos.Checkpoints.AddCheckpoint.AddCheckpointRequest>(Model);
+        
+        await CheckpointsClient.addCheckpointAsync(request);
+    }
+
+    private async Task StartQrReaderAsync()
+    {
+        await JsRuntime.InvokeVoidAsync("createQrReader");
+    }
+
+    private async Task StopQrReaderAsync()
+    {
+        await JsRuntime.InvokeVoidAsync("destroyQrReader");
+    }
+    
+    private async Task StartGpsCoordinatesGettingAsync()
+    {
+        await Task.Run(async () =>
+        {
+            while (ContinualGpsCoordinatesAcquiringIsOn)
+            {
+                var result = await JsRuntime.InvokeAsync<JsonArray>("getGpsLocation");
+
+                if (result != null && result.Count >= 2)
                 {
-                    Latitude = currentPosition.latitude,
-                    Longitude = currentPosition.longitude
-                },
-                Name = "Test",
-                Description = "Desc test",
-                CheckpointTime = DateTimeOffset.Now.ToGoogleDateTime(),
-                ActionId = Guid.Empty.ToString(),
-                Data = "Testing data",
-                CheckpointId = Guid.NewGuid().ToString()
-            });
+                    Model.Position.Latitude = double.Parse(result[0].ToString());
+                    Model.Position.Longitude = double.Parse(result[1].ToString());
+            
+                    StateHasChanged();
+                }
+
+                await Task.Delay(2000);
+            }
+        });
+    }
+
+    private async Task StartCurrentTimeThread()
+    {
+        await Task.Run(async () =>
+        {
+            while (true)
+            {
+                Model.CheckpointTime = DateTimeOffset.Now;
+                StateHasChanged();
+                
+                await Task.Delay(500);
+            }
+        });
     }
 }

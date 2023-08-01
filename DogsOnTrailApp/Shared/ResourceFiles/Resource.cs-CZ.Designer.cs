@@ -708,6 +708,42 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nástroj pro sbírání aktuální polohy a odesílání stavu závodníků na trati..
+        /// </summary>
+        internal static string Checkpoint_Description {
+            get {
+                return ResourceManager.GetString("Checkpoint.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPS.
+        /// </summary>
+        internal static string Checkpoint_GPS {
+            get {
+                return ResourceManager.GetString("Checkpoint.GPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QR čtečka.
+        /// </summary>
+        internal static string Checkpoint_QrReader {
+            get {
+                return ResourceManager.GetString("Checkpoint.QrReader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Živá kontrola.
+        /// </summary>
+        internal static string Checkpoint_Title {
+            get {
+                return ResourceManager.GetString("Checkpoint.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Smazat.
         /// </summary>
         internal static string Delete_action {

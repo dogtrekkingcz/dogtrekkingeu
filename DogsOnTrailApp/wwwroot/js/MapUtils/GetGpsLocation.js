@@ -1,5 +1,7 @@
 ﻿window.getGpsLocation = async function () {
-    navigator.geolocation.getCurrentPosition(function (location) {
-        return (location.coords);
+    const pos = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
     });
+    
+    return [pos.coords.longitude, pos.coords.latitude];
 }

@@ -10,11 +10,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazor.Bootstrap" Version="1.9.5" />
         <PackageReference Include="BlazorDateRangePicker" Version="4.3.0" />
         <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
         <PackageReference Include="Blazored.Modal" Version="7.1.0" />
         <PackageReference Include="bootstrap" Version="5.2.3" />
-        <PackageReference Include="BootstrapBlazor" Version="7.4.2" />
         <PackageReference Include="Google.Protobuf" Version="3.22.1" />
         <PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
         <PackageReference Include="Grpc.Net.Client.Web" Version="2.52.0" />
@@ -80,5 +80,10 @@
     <ItemGroup>
       <Folder Include="Events" />
       <Folder Include="Pages\Actions\View" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     </ItemGroup>
 </Project>

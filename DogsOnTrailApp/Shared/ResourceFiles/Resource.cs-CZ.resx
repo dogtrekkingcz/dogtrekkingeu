@@ -405,4 +405,16 @@
     <data name="Dogs.Title" xml:space="preserve">
         <value>Evidovaní psi</value>
     </data>
+    <data name="Checkpoint.GPS" xml:space="preserve">
+        <value>GPS</value>
+    </data>
+    <data name="Checkpoint.QrReader" xml:space="preserve">
+        <value>QR čtečka</value>
+    </data>
+    <data name="Checkpoint.Title" xml:space="preserve">
+        <value>Živá kontrola</value>
+    </data>
+    <data name="Checkpoint.Description" xml:space="preserve">
+        <value>Nástroj pro sbírání aktuální polohy a odesílání stavu závodníků na trati.</value>
+    </data>
 </root>

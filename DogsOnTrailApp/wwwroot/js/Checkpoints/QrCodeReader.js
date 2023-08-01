@@ -1,4 +1,13 @@
-﻿window.createQrReader = async function () {
+﻿window.destroyQrReader = async function () {
+    var videoEle = document.getElementsByTagName<HTMLVideoElement>("video");
+
+    if (videoEle != null) {
+        videoEle.pause();
+        videoEle.remove();
+    }
+}
+
+window.createQrReader = async function () {
     var video = document.createElement("video");
     var canvasElement = document.getElementById("canvas");
     var canvas = canvasElement.getContext("2d");
