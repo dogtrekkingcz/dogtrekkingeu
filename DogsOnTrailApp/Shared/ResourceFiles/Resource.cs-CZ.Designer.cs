@@ -60,6 +60,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kontrola/sdílení polohy.
+        /// </summary>
+        internal static string Action_Checkpoint {
+            get {
+                return ResourceManager.GetString("Action.Checkpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Přidat novou akci.
         /// </summary>
         internal static string Action_Create_AddNewAction {
@@ -317,6 +326,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Action_Manage_AcceptRegistration {
             get {
                 return ResourceManager.GetString("Action.Manage.AcceptRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spravovat příchozí průchody kontrolou.
+        /// </summary>
+        internal static string Action_Manage_Checkpoints {
+            get {
+                return ResourceManager.GetString("Action.Manage.Checkpoints", resourceCulture);
             }
         }
         

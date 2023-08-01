@@ -8,4 +8,5 @@ import "google/type/datetime.proto";
 
 message GetCheckpointsRequest {
   google.type.DateTime From = 1;
+  string ActionId = 2;
 }

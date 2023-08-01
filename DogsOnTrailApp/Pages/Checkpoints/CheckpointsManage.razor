@@ -1,0 +1,69 @@
+﻿@page "/checkpoints_manage/{ActionId?}"
+
+@using DogsOnTrailApp.Models
+@using MapsterMapper
+@using DogsOnTrailApp.Extensions
+@using Protos.Checkpoints.GetCheckpoints
+@inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
+@inject IStringLocalizer<Resource> Loc
+@inject IMapper Mapper
+
+<h3>@Loc["CheckpointsManage.Title"]</h3>
+<h5>@Loc["CheckpointsManage.Description"]</h5>
+
+@if (_checkpointsList  == null)
+{
+    <p>
+        <em>@Loc["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>@Loc["Actions.Term&AddressOfAction"]</th>
+            <th>@Loc["Actions.Name&DescriptionOfAction"]</th>
+            <th>@Loc["Actions.EnrolledRaces"]</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var action in _checkpointsList)
+        {
+            <tr>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+    
+@code {
+
+    [Parameter]
+    public Guid? ActionId { get; set; } = null;
+
+    private List<CheckpointModel> _checkpointsList { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // if (ActionId != null) {
+        //     var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
+        //     {
+        //         ActionId = ActionId.ToString()
+        //     });
+        //
+        //     _checkpointsList = Mapper.Map<List<CheckpointModel>>(response.Items);
+        // }
+        // else
+        {
+            var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
+            {
+                From = DateTimeOffset.Now.AddDays(-1).ToGoogleDateTime()
+            });
+            
+            _checkpointsList = Mapper.Map<List<CheckpointModel>>(response.Items);
+        }
+
+    }
+}

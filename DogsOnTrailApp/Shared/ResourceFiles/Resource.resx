@@ -423,4 +423,10 @@
     <data name="Menu.Checkpoint" xml:space="preserve">
         <value>Position sharing</value>
     </data>
+    <data name="Action.Checkpoint" xml:space="preserve">
+        <value>Checkpoint/position sharing</value>
+    </data>
+    <data name="Action.Manage.Checkpoints" xml:space="preserve">
+        <value>Manage recieved checkpoints passes</value>
+    </data>
 </root>

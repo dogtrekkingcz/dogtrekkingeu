@@ -17,6 +17,7 @@
     <ul class="dropdown-menu">
         <li><a class="dropdown-item" @onclick="@(async () => await CreateEntry(Model))">@Localizer["Action.CreateEntry"]</a></li>
         <li><a class="dropdown-item" @onclick="@(async () => await GoToResults(Model))">@Localizer["Action.Results"]</a></li>
+        <li><a class="dropdown-item" @onclick="@(async () => await GoToCheckpoint(Model))">@Localizer["Action.Checkpoint"]</a></li>
         
         <AuthorizeView>
             <Authorized>
@@ -24,6 +25,7 @@
                 {
                     <li><a class="dropdown-item" @onclick="@(async () => await ManageRegistrations(Model))">@Localizer["Action.Manage.Entries"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await ManagePayments(Model))">@Localizer["Action.Manage.Payments"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageCheckpoints(Model))">@Localizer["Action.Manage.Checkpoints"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@Localizer["Edit"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@Localizer["Delete"]</a></li>
                 }
@@ -94,5 +96,15 @@
     protected async Task GoToResults(ActionModel action)
     {
         NavManager.NavigateTo($"/results/{action.Id}");
+    }
+
+    protected async Task GoToCheckpoint(ActionModel action)
+    {
+        NavManager.NavigateTo($"/checkpoint/{action.Id}");
+    }
+    
+    protected async Task ManageCheckpoints(ActionModel action)
+    {
+        NavManager.NavigateTo($"/checkpoints_manage/{action.Id}");
     }
 }

@@ -423,4 +423,10 @@
     <data name="Menu.Checkpoint" xml:space="preserve">
         <value>Sdílení pozice</value>
     </data>
+    <data name="Action.Checkpoint" xml:space="preserve">
+        <value>Kontrola/sdílení polohy</value>
+    </data>
+    <data name="Action.Manage.Checkpoints" xml:space="preserve">
+        <value>Spravovat příchozí průchody kontrolou</value>
+    </data>
 </root>
