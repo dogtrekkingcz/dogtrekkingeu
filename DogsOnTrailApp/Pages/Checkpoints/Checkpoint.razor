@@ -173,7 +173,7 @@
                     Model.Data = "";
                     StateHasChanged();
 
-                    await Task.Run(async () => await JsRuntime.InvokeVoidAsync("readQrCode"));
+                    Task.Run(async () => await JsRuntime.InvokeVoidAsync("readQrCode"));
 
                     while (QrReaderIsOn && Model.Data == "")
                     {

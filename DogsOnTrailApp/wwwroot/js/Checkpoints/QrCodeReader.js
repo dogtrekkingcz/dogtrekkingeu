@@ -1,15 +1,30 @@
-﻿window.destroyQrReader = async function () {
-    var videoEle = document.getElementsByTagName<HTMLVideoElement>("video");
+﻿var video = null;
+var canvasElement = null;
 
-    if (videoEle != null) {
-        videoEle.pause();
-        videoEle.remove();
+window.destroyQrReader = async function () {
+    video.pause();
+    
+    video.srcObject.getTracks().forEach(function (track) {
+        track.stop();
+    });
+    
+    video.srcObject = null;
+    
+    
+    var canvasElement = document.getElementById("canvas");
+    
+    console.log(canvasElement);
+    
+    if (canvasElement != null) {
+        canvasElement.width = 0;
+        canvasElement.height = 0;
+        canvasElement.hidden = true;
     }
 }
 
 window.readQrCode = async function () {
-    var video = document.createElement("video");
-    var canvasElement = document.getElementById("canvas");
+    video = document.createElement("video");
+    canvasElement = document.getElementById("canvas");
     var canvas = canvasElement.getContext("2d");
     var loadingMessage = document.getElementById("loadingMessage");
     var outputContainer = document.getElementById("output");
@@ -64,8 +79,16 @@ window.readQrCode = async function () {
                 
                 canvasElement.height = 0;
                 canvasElement.width = 0;
+                
                 video.pause();
+                
+                video.srcObject.getTracks().forEach(function(track) {
+                    track.stop();
+                });
+                
                 video.remove();
+
+                canvasElement.hidden = true;
 
                 DotNet.invokeMethodAsync('DogsOnTrailApp', "QrCodeAcquiredAsync", code.data);
                 
