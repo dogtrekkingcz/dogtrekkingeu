@@ -4,9 +4,9 @@ public sealed record CheckpointModel
 {
     public string UserId { get; set; } = string.Empty;
 
-    public string ActionId { get; set; } = Guid.Empty.ToString();
+    public Guid ActionId { get; set; }
 
-    public string CheckpointId { get; set; } = Guid.Empty.ToString();
+    public Guid CheckpointId { get; set; }
 
     public string Name { get; set; } = string.Empty;
 

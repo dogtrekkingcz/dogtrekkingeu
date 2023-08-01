@@ -23,6 +23,7 @@ window.createQrReader = async function () {
             video.srcObject = stream;
             video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
             video.play();
+            
             requestAnimationFrame(qrReaderRequestAnimationFrameCb);
         });
 
@@ -60,6 +61,10 @@ window.createQrReader = async function () {
                 outputMessage.hidden = true;
                 outputData.parentElement.hidden = false;
                 outputData.innerText = code.data;
+                
+                video.remove();
+                
+                return code.data;
             }
             else {
                 outputMessage.hidden = false;

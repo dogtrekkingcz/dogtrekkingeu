@@ -11,14 +11,11 @@ using API.GRPCService.Services.LiveUpdatesSubscription;
 using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
 using DogsOnTrail.Actions;
-using DogsOnTrail.Actions.Services.CurrentUserId;
-using DogsOnTrail.Interfaces.Actions.Services;
 using Google.Protobuf.Collections;
 using Mapster;
 using MapsterMapper;
 using Storage;
 using Storage.Options;
-using CheckpointsService = DogsOnTrail.Actions.Services.Checkpoints.CheckpointsService;
 
 var builder = WebApplication.CreateBuilder(args);
 

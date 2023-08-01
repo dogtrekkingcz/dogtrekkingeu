@@ -417,4 +417,10 @@
     <data name="Checkpoint.Description" xml:space="preserve">
         <value>Tool for getting and sending the current position of the racers.</value>
     </data>
+    <data name="Menu.Pets" xml:space="preserve">
+        <value>Pets</value>
+    </data>
+    <data name="Menu.Checkpoint" xml:space="preserve">
+        <value>Position sharing</value>
+    </data>
 </root>

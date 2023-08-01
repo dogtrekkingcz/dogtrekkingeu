@@ -417,4 +417,10 @@
     <data name="Checkpoint.Description" xml:space="preserve">
         <value>Nástroj pro sbírání aktuální polohy a odesílání stavu závodníků na trati.</value>
     </data>
+    <data name="Menu.Pets" xml:space="preserve">
+        <value>Mazlíci</value>
+    </data>
+    <data name="Menu.Checkpoint" xml:space="preserve">
+        <value>Sdílení pozice</value>
+    </data>
 </root>

@@ -1,4 +1,4 @@
-﻿@page "/Checkpoint"
+﻿@page "/checkpoint/{ActionId?}/{CheckpointId?}"
 
 @using System.Text.Json.Nodes
 @using DogsOnTrailApp.Models
@@ -13,14 +13,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <input type="text" value="@ToString(Model.CheckpointTime)" disabled />
         </div>
-        <div class="col-2">
+        <div class="col-12">
             <Switch @bind-Value="ContinualGpsCoordinatesAcquiringIsOn" Label="@Loc["Checkpoint.GPS"]" />
         </div>
-        <div class="col-4">
-            <input type="text" value="@ToGpsCoordsString(Model.Position)"/>
+        <div class="col-12">
+            <input type="text" value="@ToGpsCoordsString(Model.Position)" />
+        </div>
+        <div class="col-12">
+            <input type="text" value="@Model.Data" />
         </div>
     </div>
 </div>
@@ -73,6 +76,33 @@
 <button type="button" @onclick="() => SendDataAsync()">Send data</button>
   
 @code {
+
+    [Parameter]
+    public Guid ActionId
+    {
+        get
+        {
+            return Model.ActionId; 
+        }
+        set
+        {
+            Model.ActionId = value;
+        }
+    }
+    
+    [Parameter]
+    public Guid CheckpointId 
+    {
+        get
+        {
+            return Model.CheckpointId;
+        }
+        set
+        {
+            Model.CheckpointId = value;
+        } 
+    }
+    
     private CheckpointModel Model { get; set; } = new();
 
     Collapse checkpointDetails = default!;
@@ -142,7 +172,13 @@
 
     private async Task StartQrReaderAsync()
     {
-        await JsRuntime.InvokeVoidAsync("createQrReader");
+        Model.Data = "";
+        StateHasChanged();
+        
+        Model.Data = await JsRuntime.InvokeAsync<string>("createQrReader");
+        QrReaderIsOn = false;
+        
+        StateHasChanged();
     }
 
     private async Task StopQrReaderAsync()

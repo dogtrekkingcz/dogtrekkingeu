@@ -1005,6 +1005,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Position sharing.
+        /// </summary>
+        internal static string Menu_Checkpoint {
+            get {
+                return ResourceManager.GetString("Menu.Checkpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dogs list.
         /// </summary>
         internal static string Menu_Dogs {
@@ -1028,6 +1037,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Menu_Home {
             get {
                 return ResourceManager.GetString("Menu.Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pets.
+        /// </summary>
+        internal static string Menu_Pets {
+            get {
+                return ResourceManager.GetString("Menu.Pets", resourceCulture);
             }
         }
         
