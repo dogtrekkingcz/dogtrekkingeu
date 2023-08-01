@@ -24,7 +24,7 @@
             <input type="text" value="@ToGpsCoordsString(Model.Position)" />
         </div>
         <div class="col-12">
-            <input type="text" id="outputData" value="@Model.Data" />
+            <input type="text" value="@Model.Data" />
         </div>
     </div>
 </div>
@@ -67,7 +67,7 @@
 
                 <div id="output" hidden>
                     <div id="outputMessage">No QR code detected.</div>
-                    <div hidden><b>Data:</b> <span id="outputData2"></span></div>
+                    <div hidden><b>Data:</b> <span id="outputData"></span></div>
                 </div>
             </div>
         </CardBody>
@@ -115,6 +115,20 @@
     private bool ContinualGpsCoordinatesAcquiringIsOn = false;
     private bool QrReaderIsOn = false;
     
+    private static Func<string, Task> UpdateQrCodeAsync;
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        
+        UpdateQrCodeAsync = UpdateModelWithNewQrCode;
+    }
+
+    private async Task UpdateModelWithNewQrCode(string qrCode)
+    {
+        Model.Data = qrCode;
+    }
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -123,6 +137,12 @@
             StartQrReader();
             StartCurrentTimeThread();
         }
+    }
+    
+    [JSInvokable]
+    public static async void QrCodeAcquiredAsync(string value)
+    {
+        await UpdateQrCodeAsync?.Invoke(value);
     }
 
     private string ToString(DateTimeOffset dateTimeOffset)
@@ -152,8 +172,8 @@
                 {
                     Model.Data = "";
                     StateHasChanged();
-        
-                    await JsRuntime.InvokeAsync<string>("readQrCode");
+
+                    await Task.Run(async () => await JsRuntime.InvokeVoidAsync("readQrCode"));
 
                     while (QrReaderIsOn && Model.Data == "")
                     {
@@ -161,6 +181,7 @@
                     }
 
                     QrReaderIsOn = false;
+                    StopQrReader();
                 }
 
                 await Task.Delay(2000);
@@ -170,7 +191,7 @@
 
     private void StopQrReader()
     {
-        Task.Run(async () => JsRuntime.InvokeVoidAsync("destroyQrReader"));
+        Task.Run(async () => await JsRuntime.InvokeVoidAsync("destroyQrReader"));
     }
     
     private void StartGpsCoordinatesGetting()

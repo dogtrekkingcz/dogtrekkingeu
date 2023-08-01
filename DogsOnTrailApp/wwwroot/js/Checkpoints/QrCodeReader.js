@@ -62,7 +62,14 @@ window.readQrCode = async function () {
                 outputData.parentElement.hidden = false;
                 outputData.value = code.data;
                 
+                canvasElement.height = 0;
+                canvasElement.width = 0;
+                video.pause();
                 video.remove();
+
+                DotNet.invokeMethodAsync('DogsOnTrailApp', "QrCodeAcquiredAsync", code.data);
+                
+                return;
             }
             else {
                 outputMessage.hidden = false;
