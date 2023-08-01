@@ -7,7 +7,7 @@
     }
 }
 
-window.createQrReader = async function () {
+window.readQrCode = async function () {
     var video = document.createElement("video");
     var canvasElement = document.getElementById("canvas");
     var canvas = canvasElement.getContext("2d");
@@ -60,11 +60,9 @@ window.createQrReader = async function () {
                 qrReaderDrawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
                 outputMessage.hidden = true;
                 outputData.parentElement.hidden = false;
-                outputData.innerText = code.data;
+                outputData.value = code.data;
                 
                 video.remove();
-                
-                return code.data;
             }
             else {
                 outputMessage.hidden = false;

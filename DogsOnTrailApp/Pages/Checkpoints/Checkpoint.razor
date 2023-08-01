@@ -3,6 +3,7 @@
 @using System.Text.Json.Nodes
 @using DogsOnTrailApp.Models
 @using MapsterMapper
+@using System.Globalization
 @inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 @inject IStringLocalizer<Resource> Loc
 @inject IMapper Mapper
@@ -23,7 +24,7 @@
             <input type="text" value="@ToGpsCoordsString(Model.Position)" />
         </div>
         <div class="col-12">
-            <input type="text" value="@Model.Data" />
+            <input type="text" id="outputData" value="@Model.Data" />
         </div>
     </div>
 </div>
@@ -66,7 +67,7 @@
 
                 <div id="output" hidden>
                     <div id="outputMessage">No QR code detected.</div>
-                    <div hidden><b>Data:</b> <span id="outputData"></span></div>
+                    <div hidden><b>Data:</b> <span id="outputData2"></span></div>
                 </div>
             </div>
         </CardBody>
@@ -111,44 +112,15 @@
     Collapse qrReader = default!;
     private async Task ToggleQrReaderAsync() => await qrReader.ToggleAsync();
     
-    private bool _continualGpsCoordinatesAcquiringIsOn = false;
-
-    private bool ContinualGpsCoordinatesAcquiringIsOn
-    {
-        get => _continualGpsCoordinatesAcquiringIsOn;
-        set
-        {
-            _continualGpsCoordinatesAcquiringIsOn = value;
-            if (_continualGpsCoordinatesAcquiringIsOn == true)
-            {
-                StartGpsCoordinatesGettingAsync();
-            }
-        }
-    }
-
-    private bool _qrReaderIsOn = false;
-    private bool QrReaderIsOn
-    {
-        get => _qrReaderIsOn;
-        set
-        {
-            _qrReaderIsOn = value;
-
-            if (_qrReaderIsOn == true)
-            {
-                StartQrReaderAsync();
-            }
-            else
-            {
-                StopQrReaderAsync();
-            }
-        }
-    }
+    private bool ContinualGpsCoordinatesAcquiringIsOn = false;
+    private bool QrReaderIsOn = false;
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            StartGpsCoordinatesGetting();
+            StartQrReader();
             StartCurrentTimeThread();
         }
     }
@@ -170,36 +142,23 @@
         await CheckpointsClient.addCheckpointAsync(request);
     }
 
-    private async Task StartQrReaderAsync()
+    private void StartQrReader()
     {
-        Model.Data = "";
-        StateHasChanged();
-        
-        Model.Data = await JsRuntime.InvokeAsync<string>("createQrReader");
-        QrReaderIsOn = false;
-        
-        StateHasChanged();
-    }
-
-    private async Task StopQrReaderAsync()
-    {
-        await JsRuntime.InvokeVoidAsync("destroyQrReader");
-    }
-    
-    private async Task StartGpsCoordinatesGettingAsync()
-    {
-        await Task.Run(async () =>
+        Task.Run(async () =>
         {
-            while (ContinualGpsCoordinatesAcquiringIsOn)
+            while (true)
             {
-                var result = await JsRuntime.InvokeAsync<JsonArray>("getGpsLocation");
-
-                if (result != null && result.Count >= 2)
+                if (QrReaderIsOn)
                 {
-                    Model.Position.Latitude = double.Parse(result[0].ToString());
-                    Model.Position.Longitude = double.Parse(result[1].ToString());
-            
+                    Model.Data = "";
                     StateHasChanged();
+        
+                    await JsRuntime.InvokeAsync<string>("readQrCode");
+
+                    while (QrReaderIsOn && Model.Data == "")
+                    {
+                        await Task.Delay(200);
+                    }
                 }
 
                 await Task.Delay(2000);
@@ -207,9 +166,38 @@
         });
     }
 
-    private async Task StartCurrentTimeThread()
+    private void StopQrReader()
     {
-        await Task.Run(async () =>
+        Task.Run(async () => JsRuntime.InvokeVoidAsync("destroyQrReader"));
+    }
+    
+    private void StartGpsCoordinatesGetting()
+    {
+        Task.Run(async () =>
+        {
+            while (true) 
+            {
+                if (ContinualGpsCoordinatesAcquiringIsOn)
+                {
+                    var result = await JsRuntime.InvokeAsync<JsonArray>("getGpsLocation");
+
+                    if (result != null && result.Count >= 2)
+                    {
+                        Model.Position.Latitude = double.Parse(result[0].ToString(), CultureInfo.InvariantCulture);
+                        Model.Position.Longitude = double.Parse(result[1].ToString(), CultureInfo.InvariantCulture);
+                
+                        StateHasChanged();
+                    }
+                }
+                
+                await Task.Delay(2000);
+            }
+        });
+    }
+
+    private void StartCurrentTimeThread()
+    {
+        Task.Run(async () =>
         {
             while (true)
             {
