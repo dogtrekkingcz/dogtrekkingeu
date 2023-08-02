@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
 using DogsOnTrail.Interfaces.Actions.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DogsOnTrail.Actions.Services.LiveUpdateSubscription;
 
@@ -8,11 +9,11 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
 {
     public IDictionary<string, LiveUpdateSubscriptionData> Repository { get; set; } = new Dictionary<string, LiveUpdateSubscriptionData>();
 
-    private readonly ICurrentUserIdService _currentUserIdService;
-
-    public LiveUpdateSubscriptionService(ICurrentUserIdService currentUserIdService)
+    private readonly IServiceProvider _serviceProvider;
+    
+    public LiveUpdateSubscriptionService(IServiceProvider serviceProvider)
     {
-        _currentUserIdService = currentUserIdService;
+        _serviceProvider = serviceProvider;
     }
     
     public async Task SendAsync(SendLiveUpdateRequest request, CancellationToken cancellationToken)
@@ -54,12 +55,14 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
 
     public async Task AddLiveUpdateSubscriptionAsync(AddLiveUpdateSubscriptionRequest request, CancellationToken cancellationToken)
     {
+        var currentUserIdService = _serviceProvider.CreateScope().ServiceProvider.GetRequiredService<ICurrentUserIdService>();
+        
         Repository[request.Peer] = new LiveUpdateSubscriptionData
         {
             Settings = new LiveUpdateSubscriptionData.LiveUpdateSubscriptionSettingsDto
             {
                 Section = request.Section,
-                User = _currentUserIdService.GetUserId(),
+                User = currentUserIdService.GetUserId(),
                 Subscribed = DateTimeOffset.Now
             },
             Items = new List<LiveUpdateSubscriptionData.LiveUpdateSubscriptionItemDto>()
@@ -70,7 +73,7 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
             From = "Server",
             ServerTime = DateTimeOffset.Now,
             Section = request.Section,
-            User = _currentUserIdService.GetUserId(),
+            User = currentUserIdService.GetUserId(),
             Type = LiveUpdateSubscriptionData.TypeOfMessage.Info,
             Message = "Welcome to the live  updating of the server state"
         });
