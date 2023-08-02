@@ -5,8 +5,13 @@ option csharp_namespace = "Protos.Checkpoints.GetCheckpoints";
 package getcheckpoints;
 
 import "google/type/datetime.proto";
+import "google/type/latlng.proto";
 
 message GetCheckpointsRequest {
   google.type.DateTime From = 1;
   string ActionId = 2;
+  string CheckpointId = 3;
+  string UserId = 4;
+  google.type.LatLng Position = 5;
+  double PositionDistanceInMeters = 6;
 }

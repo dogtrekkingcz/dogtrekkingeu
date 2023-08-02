@@ -105,16 +105,14 @@ namespace DogsOnTrail.Actions.Services.EntriesManage
 
             await _emailSenderService.SendAsync(mailBuilders, cancellationToken);
 
-            foreach (var rep in _liveUpdateSubscriptionService.Repository)
+            await _liveUpdateSubscriptionService.SendAsync(new SendLiveUpdateRequest
             {
-                rep.Value.Add(new LiveUpdateSubscriptionItem
-                {
-                    From = "Server",
-                    ServerTime = DateTimeOffset.Now,
-                    Message = "New entry recieved",
-                    Type = LiveUpdateSubscriptionItem.TypeOfMessage.Info
-                });
-            }
+                FromUser = _currentUserIdService.GetUserId(),
+                ToUser = _currentUserIdService.GetUserId(),
+                Message = "New entry recieved",
+                FromSection = Constants.LiveUpdateSections.Entries,
+                ToSection = Constants.LiveUpdateSections.Entries
+            }, cancellationToken);
 
             return new CreateEntryResponse
             {

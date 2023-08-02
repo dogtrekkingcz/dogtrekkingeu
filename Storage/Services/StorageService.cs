@@ -42,8 +42,6 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
     public async Task<T> GetAsync(string id, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"StorageService:GetAsync({id}");
-        
         var filter = Builders<T>.Filter.Eq("_id", id);
 
         var document = await _collection
@@ -136,6 +134,15 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
             .ToListAsync(cancellationToken);
 
         return document;
+    }
+
+    public async Task<IReadOnlyList<T>> GetByCustomFilterAsync(BsonDocument filter, CancellationToken cancellationToken)
+    {
+        var documents = await _collection
+            .Find(filter)
+            .ToListAsync(cancellationToken);
+
+        return documents;
     }
     
     public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken)

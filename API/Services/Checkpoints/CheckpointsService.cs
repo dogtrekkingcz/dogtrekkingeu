@@ -1,4 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
+﻿using DogsOnTrail.Actions.Extensions;
+using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
+using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
 using DogsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Storage.Entities.Checkpoints;
@@ -11,12 +13,18 @@ public class CheckpointsService : ICheckpointsService
     private readonly IMapper _mapper;
     private readonly ICheckpointsRepositoryService _checkpointsRepositoryService;
     private readonly ICurrentUserIdService _currentUserIdService;
+    private readonly ILiveUpdateSubscriptionService _liveUpdateSubscriptionService;
     
-    public CheckpointsService(IMapper mapper, ICurrentUserIdService currentUserIdService, ICheckpointsRepositoryService checkpointsRepositoryService)
+    public CheckpointsService(
+        IMapper mapper, 
+        ICurrentUserIdService currentUserIdService, 
+        ICheckpointsRepositoryService checkpointsRepositoryService,
+        ILiveUpdateSubscriptionService liveUpdateSubscriptionService)
     {
         _mapper = mapper;
         _checkpointsRepositoryService = checkpointsRepositoryService;
         _currentUserIdService = currentUserIdService;
+        _liveUpdateSubscriptionService = liveUpdateSubscriptionService;
     }
     
     public async Task<AddCheckpointItemResponse> AddAsync(AddCheckpointItemRequest request, CancellationToken cancellationToken)
@@ -31,6 +39,15 @@ public class CheckpointsService : ICheckpointsService
 
         var response = await _checkpointsRepositoryService.AddAsync(addInternalStorageRequest, cancellationToken);
 
+        await _liveUpdateSubscriptionService.SendAsync(new SendLiveUpdateRequest
+        {
+            FromSection = Constants.LiveUpdateSections.Checkpoints,
+            ToSection = Constants.LiveUpdateSections.Checkpoints,
+            FromUser = _currentUserIdService.GetUserId(),
+            Data = request.Dump(),
+            Message = $"[Checkpoint] [{request.Name}] - {request.Data}"
+        }, cancellationToken);
+        
         return _mapper.Map<AddCheckpointItemResponse>(response);
     }
 

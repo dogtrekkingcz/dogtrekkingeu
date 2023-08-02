@@ -8,8 +8,8 @@ internal static class LiveUpdatesSubscriptionServiceMapping
 {
     internal static TypeAdapterConfig AddLiveUpdatesSubscriptionMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<LiveUpdateSubscriptionItem, Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>();
-        typeAdapterConfig.NewConfig<LiveUpdateSubscriptionItem.TypeOfMessage, Protos.LiveUpdatesSubscription.TypeOfMessage>();
+        typeAdapterConfig.NewConfig<LiveUpdateSubscriptionData.LiveUpdateSubscriptionItemDto, Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>();
+        typeAdapterConfig.NewConfig<LiveUpdateSubscriptionData.TypeOfMessage, Protos.LiveUpdatesSubscription.TypeOfMessage>();
         
         typeAdapterConfig.NewConfig<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionRequest, AddLiveUpdateSubscriptionRequest>();
         

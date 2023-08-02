@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using MongoDB.Bson;
 using Storage.Entities.Checkpoints;
 using Storage.Entities.Dogs;
 using Storage.Extensions;
@@ -33,10 +34,28 @@ internal class CheckpointsRepositoryService : ICheckpointsRepositoryService
 
     public async Task<GetCheckpointItemsInternalStorageResponse> GetAsync(GetCheckpointItemsInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        var filter = new List<(string, IStorageService<CheckpointRecord>.FilterOptions options, DateTimeOffset value)>();
-        filter.Add((nameof(CheckpointRecord.CheckpointTime), IStorageService<CheckpointRecord>.FilterOptions.MoreThanOrEqual, request.From));
+        BsonDocument filter = new BsonDocument();
 
-        var filteredRecords = await _checkpointService.GetByTimeFilterAsync(filter, cancellationToken);
+        if (request.ActionId != null)
+            filter.Add(nameof(CheckpointRecord.ActionId), request.ActionId.ToString());
+
+        if (request.CheckpointId != null)
+            filter.Add(nameof(CheckpointRecord.CheckpointId), request.CheckpointId.ToString());
+
+        if (request.UserId != null)
+            filter.Add(nameof(CheckpointRecord.UserId), request.UserId);
+        
+        // TODO: create logic for filtering by position and distance
+        // TODO: create logic for filtering by time
+         
+        // if (request.Position != null && request.PositionDistanceInMeters != null)
+        //     filter.Add(nameof(CheckpointRecord.Position.Latitude), )
+        //
+    //     filter.Add(nameof(CheckpointRecord.CheckpointTime), new BsonDocument("$gte", request.From));
+    // }
+    //     );
+        
+        var filteredRecords = await _checkpointService.GetByCustomFilterAsync(filter, cancellationToken);
 
         return new GetCheckpointItemsInternalStorageResponse
         {

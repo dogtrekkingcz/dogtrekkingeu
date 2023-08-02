@@ -1,16 +1,37 @@
 ﻿namespace DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
 
-public sealed record LiveUpdateSubscriptionItem
+public sealed record LiveUpdateSubscriptionData
 {
-    public DateTimeOffset ServerTime { get; set; }
+    public LiveUpdateSubscriptionSettingsDto Settings { get; set; } = new();
     
-    public TypeOfMessage Type { get; set; }
-    
-    public string From { get; set; }
+    public List<LiveUpdateSubscriptionItemDto> Items { get; set; } = new();
 
-    public string Message { get; set; }
+    public sealed record LiveUpdateSubscriptionSettingsDto
+    {
+        public string? User { get; set; }
+        
+        public string? Section { get; set; }
+        
+        public DateTimeOffset Subscribed { get; set; } = DateTimeOffset.Now;
+    }
     
-    public enum TypeOfMessage {
+    public sealed record LiveUpdateSubscriptionItemDto
+    {
+        public DateTimeOffset ServerTime { get; set; }
+
+        public TypeOfMessage Type { get; set; }
+
+        public string? Section { get; set; }
+
+        public string? User { get; set; }
+
+        public string From { get; set; }
+
+        public string Message { get; set; }
+    }
+    
+    public enum TypeOfMessage
+    {
         TypeOfMessage_NotSpecified = 0,
         Chat = 1,
         Info = 2,

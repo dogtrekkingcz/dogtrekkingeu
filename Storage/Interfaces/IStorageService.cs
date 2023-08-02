@@ -1,4 +1,5 @@
-﻿using Storage.Models;
+﻿using MongoDB.Bson;
+using Storage.Models;
 
 namespace Storage.Interfaces;
 
@@ -17,6 +18,8 @@ internal interface IStorageService<T> where T: IRecord
     public Task<IReadOnlyList<T>> GetByFilterBeLikeAsync(IList<(string key, string likeValue)> filterList, CancellationToken cancellationToken);
 
     public Task<IReadOnlyList<T>> GetByTimeFilterAsync(IList<(string key, FilterOptions option, DateTimeOffset value)> filter, CancellationToken cancellationToken);
+
+    public Task<IReadOnlyList<T>> GetByCustomFilterAsync(BsonDocument filter, CancellationToken cancellationToken);
 
     public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken);
 

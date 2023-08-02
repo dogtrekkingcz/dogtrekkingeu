@@ -41,12 +41,12 @@ public class LiveUpdatesSubscriptionGrpcService : Protos.LiveUpdatesSubscription
         {
             await Task.Delay(2000); // Gotta look busy
 
-            foreach (var item in _liveUpdateSubscriptionService.Repository[context.Peer])
+            foreach (var item in _liveUpdateSubscriptionService.Repository[context.Peer].Items)
             {
                 await responseStream.WriteAsync(_mapper.Map<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>(item), context.CancellationToken);
             }
             
-            _liveUpdateSubscriptionService.Repository[context.Peer].Clear();
+            _liveUpdateSubscriptionService.Repository[context.Peer].Items.Clear();
         }
         
         Console.WriteLine("Cancellation of the live update was requested");

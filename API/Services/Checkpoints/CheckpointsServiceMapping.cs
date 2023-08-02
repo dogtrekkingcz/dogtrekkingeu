@@ -17,6 +17,7 @@ internal static class CheckpointsServiceMapping
         typeAdapterConfig.NewConfig<AddCheckpointItemInternalStorageResponse, AddCheckpointItemResponse>();
 
         typeAdapterConfig.NewConfig<GetCheckpointItemsRequest, GetCheckpointItemsInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<GetCheckpointItemsRequest.LatLngDto, GetCheckpointItemsInternalStorageRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<GetCheckpointItemsInternalStorageResponse, GetCheckpointItemsResponse>();
         typeAdapterConfig.NewConfig<GetCheckpointItemsInternalStorageResponse.CheckpointItemDto, GetCheckpointItemsResponse.CheckpointItemDto>();
         typeAdapterConfig.NewConfig<GetCheckpointItemsInternalStorageResponse.LatLngDto, GetCheckpointItemsResponse.LatLngDto>();

@@ -43,27 +43,40 @@ else
     [Parameter]
     public Guid? ActionId { get; set; } = null;
 
+    [Parameter]
+    public Guid? CheckpointId { get; set; } = null;
+
+    [Parameter]
+    public Guid? UserId { get; set; } = null;
+
+    [Parameter]
+    public double? Lat { get; set; } = null;
+
+    [Parameter]
+    public double? Lng { get; set; } = null;
+
+    [Parameter]
+    public double? DistanceFromPosition { get; set; } = null;
+
+    
     private List<CheckpointModel> _checkpointsList { get; set; } = null;
 
     protected override async Task OnInitializedAsync()
     {
-        // if (ActionId != null) {
-        //     var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
-        //     {
-        //         ActionId = ActionId.ToString()
-        //     });
-        //
-        //     _checkpointsList = Mapper.Map<List<CheckpointModel>>(response.Items);
-        // }
-        // else
+        var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
         {
-            var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
+            From = DateTimeOffset.Now.AddDays(-1).ToGoogleDateTime(),
+            ActionId = ActionId?.ToString(),
+            CheckpointId = CheckpointId?.ToString(),
+            UserId = UserId?.ToString(),
+            Position = (Lat != null && Lng != null) ? new Google.Type.LatLng
             {
-                From = DateTimeOffset.Now.AddDays(-1).ToGoogleDateTime()
-            });
-            
-            _checkpointsList = Mapper.Map<List<CheckpointModel>>(response.Items);
-        }
-
+                Latitude = Lat ?? double.NaN,
+                Longitude = Lng ?? double.NaN
+            } : null,
+            PositionDistanceInMeters = DistanceFromPosition ?? double.NaN
+        });
+        
+        _checkpointsList = Mapper.Map<List<CheckpointModel>>(response.Items);
     }
 }
