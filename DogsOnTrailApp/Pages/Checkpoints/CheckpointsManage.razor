@@ -22,16 +22,24 @@ else
     <table>
         <thead>
         <tr>
-            <th>@Loc["Actions.Term&AddressOfAction"]</th>
-            <th>@Loc["Actions.Name&DescriptionOfAction"]</th>
-            <th>@Loc["Actions.EnrolledRaces"]</th>
-            <th>Actions</th>
+            <th>@Loc["Checkpoint.DateTime"]</th>
+            <th>@Loc["Checkpoint.Position"]</th>
+            <th>@Loc["Checkpoint.Name"]</th>
+            <th>@Loc["Checkpoint.Data"]</th>
+            <th>@Loc["Checkpoint.Action"]</th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var action in _checkpointsList)
+        @foreach (var checkpoint in _checkpointsList)
         {
+            var positionInString = $"{checkpoint.Position.Latitude}E, {checkpoint.Position.Longitude}E";
+            
             <tr>
+                <td>@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@positionInString</td>
+                <td>@checkpoint.Name</td>
+                <td>@checkpoint.Data</td>
+                <td>@checkpoint.ActionId.ToString()</td>
             </tr>
         }
         </tbody>

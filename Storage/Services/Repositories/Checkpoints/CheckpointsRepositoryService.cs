@@ -54,9 +54,13 @@ internal class CheckpointsRepositoryService : ICheckpointsRepositoryService
     //     filter.Add(nameof(CheckpointRecord.CheckpointTime), new BsonDocument("$gte", request.From));
     // }
     //     );
-        
+        Console.WriteLine($"CheckpointsRepository::{nameof(GetAsync)}: '{request?.Dump()}'");
+        Console.WriteLine($"CheckpointsRepository::{nameof(GetAsync)}: applied filter '{filter?.Dump()}'");
+    
         var filteredRecords = await _checkpointService.GetByCustomFilterAsync(filter, cancellationToken);
 
+        Console.WriteLine($"CheckpointsRepository::{nameof(GetAsync)}: response: '{filteredRecords?.Dump()}'");
+        
         return new GetCheckpointItemsInternalStorageResponse
         {
             Items = filteredRecords

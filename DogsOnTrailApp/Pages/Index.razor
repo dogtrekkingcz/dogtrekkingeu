@@ -27,7 +27,7 @@
         Jsi přihlášen jako @context.User.Identity?.Name!, UserID: @UserProfileService.Get().UserId<br />
         <hr />
         @{
-            var checkpointsLink = $"/checkpoints_manage///{UserProfileService.Get().UserId}";
+            var checkpointsLink = $"/checkpoints_manage/%20/%20/{UserProfileService.Get().UserId}";
         }
         <a href="@checkpointsLink">Moje nahlaseny polohy</a>
         <hr />

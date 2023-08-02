@@ -145,11 +145,15 @@
 
     private async Task SendDataAsync()
     {
+        if (Model.CheckpointTime == default)
+            Model.CheckpointTime = DateTimeOffset.Now;
+        
         var request = Mapper.Map<Protos.Checkpoints.AddCheckpoint.AddCheckpointRequest>(Model);
         
         await CheckpointsClient.addCheckpointAsync(request);
 
         Model.Data = "";
+        Model.CheckpointTime = default;
     }
 
     private void StartQrReader()

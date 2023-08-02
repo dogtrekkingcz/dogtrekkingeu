@@ -20,9 +20,11 @@ namespace Storage.Services.Repositories.Checkpoints
                 .Map(d => d.Id, s => s.Id.ToGuid());
 
             typeAdapterConfig.NewConfig<CheckpointRecord, GetCheckpointItemsInternalStorageResponse.CheckpointItemDto>()
+                .IgnoreNullValues(true)
                 .Map(d => d.Id, s => s.Id.ToGuid())
                 .Map(d => d.ActionId, s => s.ActionId.ToGuid())
-                .Map(d => d.CheckpointId, s => s.CheckpointId.ToGuid());
+                .Map(d => d.CheckpointId, s => s.CheckpointId.ToGuid())
+                .Map(d => d.UserId, s => s.UserId.ToGuid());
             typeAdapterConfig.NewConfig<CheckpointRecord.LatLngDto, GetCheckpointItemsInternalStorageResponse.LatLngDto>();
             
             return typeAdapterConfig;
