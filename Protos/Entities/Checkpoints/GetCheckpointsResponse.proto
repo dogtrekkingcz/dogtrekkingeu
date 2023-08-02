@@ -13,13 +13,16 @@ message GetCheckpointsResponse {
 
 message CheckpointItem {
   string Id = 1;
-  string ActionId = 2;
-  string CheckpointId = 3;
-  string Name = 4;
-  string Description = 5;
-  google.type.DateTime CheckpointTime = 6;
-  google.type.DateTime ServerTime = 7;
-  google.type.DateTime Created = 8;
-  string Data = 9;
-  google.type.LatLng Position = 10;
+  string UserId = 2;
+  string ActionId = 3;
+  string CheckpointId = 4;
+  string Name = 5;
+  string Description = 6;
+  google.type.DateTime CheckpointTime = 7;
+  google.type.DateTime ServerTime = 8;
+  google.type.DateTime Created = 9;
+  string Data = 10;
+  google.type.LatLng Position = 11;
 }
+
+

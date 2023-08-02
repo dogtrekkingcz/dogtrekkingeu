@@ -1,4 +1,4 @@
-﻿@page "/checkpoints_manage/{ActionId?}"
+﻿@page "/checkpoints_manage/{ActionId?}/{CheckpointId?}/{UserId?}"
 
 @using DogsOnTrailApp.Models
 @using MapsterMapper
@@ -66,9 +66,9 @@ else
         var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
         {
             From = DateTimeOffset.Now.AddDays(-1).ToGoogleDateTime(),
-            ActionId = ActionId,
-            CheckpointId = CheckpointId,
-            UserId = UserId,
+            ActionId = string.IsNullOrWhiteSpace(ActionId) ? Guid.Empty.ToString() : ActionId,
+            CheckpointId = string.IsNullOrWhiteSpace(CheckpointId) ? Guid.Empty.ToString() : CheckpointId,
+            UserId = string.IsNullOrWhiteSpace(UserId) ? string.Empty : UserId,
             Position = (Lat != null && Lng != null) ? new Google.Type.LatLng
             {
                 Latitude = Lat ?? double.NaN,

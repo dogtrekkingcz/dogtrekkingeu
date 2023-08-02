@@ -10,6 +10,9 @@ internal static class CheckpointModelMapping
             .IgnoreNullValues(true);
         typeAdapterConfig.NewConfig<CheckpointModel.LatLngDto, Google.Type.LatLng>();
 
+        typeAdapterConfig.NewConfig<Protos.Checkpoints.GetCheckpoints.CheckpointItem, CheckpointModel>();
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, CheckpointModel.LatLngDto>();
+
         return typeAdapterConfig;
     }
 }

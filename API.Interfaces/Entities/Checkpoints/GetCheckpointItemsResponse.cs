@@ -8,7 +8,7 @@ public sealed record GetCheckpointItemsResponse
     {
         public Guid Id { get; set; } = Guid.Empty;
 
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
 
         public Guid ActionId { get; set; } = Guid.Empty;
 
