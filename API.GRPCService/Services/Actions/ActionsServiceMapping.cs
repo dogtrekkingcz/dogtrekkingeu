@@ -51,6 +51,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.CategoryDto, Protos.Actions.GetSelectedActions.CategoryDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.DogDto, Protos.Actions.GetSelectedActions.DogDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.LimitsDto, Protos.Actions.GetSelectedActions.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsResponse.CheckpointDto, Protos.Actions.GetSelectedActions.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.RaceDto, Protos.Actions.GetSelectedActions.RaceDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.RaceState, Protos.Actions.GetSelectedActions.RaceState>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.TermDto, Protos.Actions.GetSelectedActions.TermDto>();
@@ -76,6 +77,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionResponse.CategoryDto, Protos.Actions.GetAction.CategoryDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.DogDto, Protos.Actions.GetAction.DogDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.LimitsDto, Protos.Actions.GetAction.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.CheckpointDto, Protos.Actions.GetAction.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.RaceDto, Protos.Actions.GetAction.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.RaceState, Protos.Actions.GetAction.RaceState>();
         typeAdapterConfig.NewConfig<GetActionResponse.TermDto, Protos.Actions.GetAction.TermDto>();
@@ -100,6 +102,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.CategoryDto, CreateActionRequest.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.DogDto, CreateActionRequest.DogDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.LimitsDto, CreateActionRequest.LimitsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.CheckpointDto, CreateActionRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.RaceDto, CreateActionRequest.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.RaceState, CreateActionRequest.RaceState>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.TermDto, CreateActionRequest.TermDto>();
@@ -126,6 +129,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.CategoryDto, UpdateActionRequest.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.DogDto, UpdateActionRequest.DogDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.LimitsDto, UpdateActionRequest.LimitsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.CheckpointDto, UpdateActionRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RaceDto, UpdateActionRequest.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RaceState, UpdateActionRequest.RaceState>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.TermDto, UpdateActionRequest.TermDto>();

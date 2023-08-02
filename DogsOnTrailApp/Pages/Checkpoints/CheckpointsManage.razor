@@ -3,8 +3,10 @@
 @using DogsOnTrailApp.Models
 @using MapsterMapper
 @using DogsOnTrailApp.Extensions
+@using Protos.Actions.GetSelectedActions
 @using Protos.Checkpoints.GetCheckpoints
 @inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
 @inject IStringLocalizer<Resource> Loc
 @inject IMapper Mapper
 
@@ -27,19 +29,28 @@ else
             <th>@Loc["Checkpoint.Name"]</th>
             <th>@Loc["Checkpoint.Data"]</th>
             <th>@Loc["Checkpoint.Action"]</th>
+            <th>@Loc["Checkpoint.Checkpoint"]</th>
+            <th>@Loc["Checkpoint.User"]</th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var checkpoint in _checkpointsList)
+        @foreach (var checkpoint in _checkpointsList
+            .OrderByDescending(c => c.CheckpointTime))
         {
             var positionInString = $"{checkpoint.Position.Latitude}E, {checkpoint.Position.Longitude}E";
+            var actionName = ResolveAction(checkpoint.ActionId);
+            var checkpointName = ResolveCheckpoint(checkpoint.ActionId, checkpoint.CheckpointId);
+            var userName = ResolveUser(checkpoint.UserId);
+            var data = ResolveData(checkpoint.ActionId, checkpoint.Data);
             
             <tr>
                 <td>@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
                 <td>@positionInString</td>
                 <td>@checkpoint.Name</td>
-                <td>@checkpoint.Data</td>
-                <td>@checkpoint.ActionId.ToString()</td>
+                <td>@data</td>
+                <td>@actionName</td>
+                <td>@checkpointName</td>
+                <td>@userName</td>
             </tr>
         }
         </tbody>
@@ -66,6 +77,7 @@ else
     [Parameter]
     public double? DistanceFromPosition { get; set; } = double.NaN;
 
+    private List<ActionModel> _usedActions = new List<ActionModel>();
     
     private List<CheckpointModel> _checkpointsList { get; set; } = null;
 
@@ -86,5 +98,41 @@ else
         });
         
         _checkpointsList = Mapper.Map<List<CheckpointModel>>(response.Items);
+
+        var actionList = _checkpointsList
+            .Where(checkpoint => checkpoint.ActionId != Guid.Empty)
+            .Select(checkpoint => checkpoint.ActionId.ToString())
+            .ToList();
+
+        var selectedActions = await ActionsClient.getSelectedActionsAsync(new GetSelectedActionsRequest
+        {
+            Ids = { actionList }
+        });
+
+        _usedActions = Mapper.Map<List<ActionModel>>(selectedActions);
+    }
+
+    private string ResolveAction(Guid actionId)
+    {
+        return _usedActions
+            .FirstOrDefault(ua => ua.Id == actionId)?.Name 
+               ?? actionId.ToString();
+    }
+
+    private string ResolveCheckpoint(Guid actionId, Guid checkpointId)
+    {
+        return _usedActions
+            .FirstOrDefault(ua => ua.Id == actionId)?.Checkpoints?.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId)?.Name
+            ?? checkpointId.ToString();
+    }
+
+    private string ResolveUser(Guid userId)
+    {
+        return userId.ToString();
+    }
+
+    private string ResolveData(Guid actionId, string data)
+    {
+        return data;
     }
 }

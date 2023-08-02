@@ -20,6 +20,8 @@ public record ActionModel
 
     public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 
+    public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
+
     public ActionSaleDto Sale { get; set; } = new();
 
     public enum ActionType
@@ -27,6 +29,15 @@ public record ActionModel
         Unspecified = 0,
         Trip = 1,
         Dogtrekking = 2
+    }
+
+    public sealed record CheckpointDto
+    {
+        public Guid Id { get; set; } = default(Guid);
+
+        public string Name { get; set; } = string.Empty;
+
+        public CheckpointModel.LatLngDto Position { get; set; } = new();
     }
     
     public sealed record RaceDto

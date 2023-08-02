@@ -14,14 +14,21 @@ message CreateActionRequest {
   string ContactMail = 4;
   TermDto Term = 5;
   AddressDto Address = 6;
-  repeated RaceDto Races = 7;
-  ActionSaleDto Sale = 8;
+  repeated CheckpointDto Checkpoints = 7; 
+  repeated RaceDto Races = 8;
+  ActionSaleDto Sale = 9;
 }
 
 enum ActionType {
   Unspecified = 0;
   Trip = 1;
   Dogtrekking = 2;
+}
+
+message CheckpointDto {
+  string Id = 1;
+  string Name = 2;
+  google.type.LatLng Position = 3;
 }
 
 message RaceDto {

@@ -34,8 +34,6 @@ internal static class ActionsServiceMapping
         
 
         typeAdapterConfig.NewConfig<GetSelectedActionsRequest, GetSelectedActionsInternalStorageRequest>();
-        
-        
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse, GetSelectedActionsResponse>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionType, GetSelectedActionsResponse.ActionType>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionDto, GetSelectedActionsResponse.ActionDto>();
@@ -48,6 +46,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.CategoryDto, GetSelectedActionsResponse.CategoryDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.DogDto, GetSelectedActionsResponse.DogDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.LimitsDto, GetSelectedActionsResponse.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.CheckpointDto, GetSelectedActionsResponse.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.RaceDto, GetSelectedActionsResponse.RaceDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.RaceState, GetSelectedActionsResponse.RaceState>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.TermDto, GetSelectedActionsResponse.TermDto>();
@@ -73,6 +72,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<CreateActionRequest.CategoryDto, CreateActionInternalStorageRequest.CategoryDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.DogDto, CreateActionInternalStorageRequest.DogDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.LimitsDto, CreateActionInternalStorageRequest.LimitsDto>();
+        typeAdapterConfig.NewConfig<CreateActionRequest.CheckpointDto, CreateActionInternalStorageRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.RaceDto, CreateActionInternalStorageRequest.RaceDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.RaceState, CreateActionInternalStorageRequest.RaceState>();
         typeAdapterConfig.NewConfig<CreateActionRequest.TermDto, CreateActionInternalStorageRequest.TermDto>();
@@ -105,6 +105,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.CategoryDto, GetActionResponse.CategoryDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.DogDto, GetActionResponse.DogDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LimitsDto, GetActionResponse.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.CheckpointDto, GetActionResponse.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceDto, GetActionResponse.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceState, GetActionResponse.RaceState>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.TermDto, GetActionResponse.TermDto>();
@@ -127,6 +128,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<UpdateActionRequest.CategoryDto, UpdateActionInternalStorageRequest.CategoryDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.DogDto, UpdateActionInternalStorageRequest.DogDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.LimitsDto, UpdateActionInternalStorageRequest.LimitsDto>();
+        typeAdapterConfig.NewConfig<UpdateActionRequest.CheckpointDto, UpdateActionInternalStorageRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.RaceDto, UpdateActionInternalStorageRequest.RaceDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.RaceState, UpdateActionInternalStorageRequest.RaceState>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.TermDto, UpdateActionInternalStorageRequest.TermDto>();
@@ -151,6 +153,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.CategoryDto, UpdateActionInternalStorageRequest.CategoryDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.DogDto, UpdateActionInternalStorageRequest.DogDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LimitsDto, UpdateActionInternalStorageRequest.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.CheckpointDto, UpdateActionInternalStorageRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceDto, UpdateActionInternalStorageRequest.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceState, UpdateActionInternalStorageRequest.RaceState>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.TermDto, UpdateActionInternalStorageRequest.TermDto>();

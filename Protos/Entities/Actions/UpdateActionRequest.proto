@@ -15,15 +15,22 @@ message UpdateActionRequest {
   string ContactMail = 5;
   TermDto Term = 6;
   AddressDto Address = 7;
-  repeated RaceDto Races = 8;
-  ActionSaleDto Sale = 9;
-  ActionType Type = 10;
+  repeated CheckpointDto Checkpoints = 8;
+  repeated RaceDto Races = 9;
+  ActionSaleDto Sale = 10;
+  ActionType Type = 11;
 }
 
 enum ActionType {
   Unspecified = 0;
   Trip = 1;
   Dogtrekking = 2;
+}
+
+message CheckpointDto {
+  string Id = 1;
+  string Name = 2;
+  google.type.LatLng Position = 3;
 }
 
 message RaceDto {

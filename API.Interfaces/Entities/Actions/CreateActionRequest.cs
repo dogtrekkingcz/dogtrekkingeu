@@ -14,6 +14,8 @@ public sealed record CreateActionRequest
 
     public AddressDto Address { get; set; } = new();
 
+    public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
+
     public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 
     public ActionSaleDto Sale { get; set; } = new();
@@ -23,6 +25,15 @@ public sealed record CreateActionRequest
         Unspecified = 0,
         Trip = 1,
         Dogtrekking = 2
+    }
+    
+    public sealed record CheckpointDto
+    {
+        public Guid Id { get; set; } = default(Guid);
+
+        public string Name { get; set; } = string.Empty;
+
+        public LatLngDto Position { get; set; } = new();
     }
     
     public sealed record RaceDto

@@ -18,6 +18,7 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.CategoryDto, Protos.Actions.CreateAction.CategoryDto>();
         typeAdapterConfig.NewConfig<ActionModel.DogDto, Protos.Actions.CreateAction.DogDto>();
         typeAdapterConfig.NewConfig<ActionModel.LimitsDto, Protos.Actions.CreateAction.LimitsDto>();
+        typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.CreateAction.CheckpointDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.CreateAction.RaceDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceState, Protos.Actions.CreateAction.RaceState>();
         typeAdapterConfig.NewConfig<ActionModel.TermDto, Protos.Actions.CreateAction.TermDto>();
@@ -42,6 +43,7 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.CategoryDto, Protos.Actions.UpdateAction.CategoryDto>();
         typeAdapterConfig.NewConfig<ActionModel.DogDto, Protos.Actions.UpdateAction.DogDto>();
         typeAdapterConfig.NewConfig<ActionModel.LimitsDto, Protos.Actions.UpdateAction.LimitsDto>();
+        typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.UpdateAction.CheckpointDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.UpdateAction.RaceDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceState, Protos.Actions.UpdateAction.RaceState>();
         typeAdapterConfig.NewConfig<ActionModel.TermDto, Protos.Actions.UpdateAction.TermDto>();
@@ -71,6 +73,7 @@ namespace DogsOnTrailApp.Models;
             .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset())
             .Map(d => d.Decease, s => s.Decease.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.LimitsDto, ActionModel.LimitsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CheckpointDto, ActionModel.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RaceDto, ActionModel.RaceDto>()
             .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
             .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset())
@@ -125,6 +128,7 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CategoryDto, ActionModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.DogDto, ActionModel.DogDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.LimitsDto, ActionModel.LimitsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CheckpointDto, ActionModel.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RaceDto, ActionModel.RaceDto>()
             .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset())
             .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
