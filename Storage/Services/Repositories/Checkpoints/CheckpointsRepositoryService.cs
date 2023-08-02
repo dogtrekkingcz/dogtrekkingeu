@@ -36,13 +36,13 @@ internal class CheckpointsRepositoryService : ICheckpointsRepositoryService
     {
         BsonDocument filter = new BsonDocument();
 
-        if (request.ActionId != null)
+        if (request.ActionId != null && request.ActionId != Guid.Empty)
             filter.Add(nameof(CheckpointRecord.ActionId), request.ActionId.ToString());
 
-        if (request.CheckpointId != null)
+        if (request.CheckpointId != null && request.CheckpointId != Guid.Empty)
             filter.Add(nameof(CheckpointRecord.CheckpointId), request.CheckpointId.ToString());
 
-        if (request.UserId != null)
+        if (string.IsNullOrWhiteSpace(request.UserId) == false)
             filter.Add(nameof(CheckpointRecord.UserId), request.UserId);
         
         // TODO: create logic for filtering by position and distance

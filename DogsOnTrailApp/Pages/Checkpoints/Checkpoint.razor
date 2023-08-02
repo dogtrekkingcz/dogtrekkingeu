@@ -4,6 +4,7 @@
 @using DogsOnTrailApp.Models
 @using MapsterMapper
 @using System.Globalization
+@using DogsOnTrailApp.Extensions
 @inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 @inject IStringLocalizer<Resource> Loc
 @inject IMapper Mapper
@@ -14,17 +15,15 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12 col-4">
             <input type="text" value="@ToString(Model.CheckpointTime)" disabled />
         </div>
-        <div class="col-12">
+        <div class="col-sm-12 col-4">
             <Switch @bind-Value="ContinualGpsCoordinatesAcquiringIsOn" Label="@Loc["Checkpoint.GPS"]" />
+            <input type="text" value="@ToGpsCoordsString(Model.Position)" disabled />
         </div>
-        <div class="col-12">
-            <input type="text" value="@ToGpsCoordsString(Model.Position)" />
-        </div>
-        <div class="col-12">
-            <input type="text" value="@Model.Data" />
+        <div class="col-sm-12 col-4">
+            <input type="text" @bind="@Model.Data" />
         </div>
     </div>
 </div>
@@ -60,6 +59,7 @@
     <Card>
         <CardBody>
             <Switch @bind-Value="QrReaderIsOn" Label="@Loc["Checkpoint.QrReader"]" />
+            <Switch @bind-Value="AutoSend" Label="@Loc["Checkpoint.AutoSend"]" />
 
             <div class="card card-body">
                 <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
@@ -73,35 +73,15 @@
     </Card>
 </Collapse>
 
-<button type="button" @onclick="() => SendDataAsync()">Send data</button>
+<button type="button" @onclick="SendDataAsync">Send data</button>
   
 @code {
 
     [Parameter]
-    public Guid ActionId
-    {
-        get
-        {
-            return Model.ActionId; 
-        }
-        set
-        {
-            Model.ActionId = value;
-        }
-    }
+    public string ActionId { get; set; }
     
     [Parameter]
-    public Guid CheckpointId 
-    {
-        get
-        {
-            return Model.CheckpointId;
-        }
-        set
-        {
-            Model.CheckpointId = value;
-        } 
-    }
+    public string CheckpointId { get; set; }
     
     private CheckpointModel Model { get; set; } = new();
 
@@ -113,12 +93,20 @@
     
     private bool ContinualGpsCoordinatesAcquiringIsOn = false;
     private bool QrReaderIsOn = false;
+
+    private bool AutoSend = false;
     
     private static Func<string, Task> UpdateQrCodeAsync;
     
     protected override void OnInitialized()
     {
         base.OnInitialized();
+     
+        if (string.IsNullOrWhiteSpace(ActionId) == false)
+            Model.ActionId = ActionId.ToGuid();
+
+        if (string.IsNullOrWhiteSpace(CheckpointId) == false)
+            Model.CheckpointId = CheckpointId.ToGuid();
         
         UpdateQrCodeAsync = UpdateModelWithNewQrCode;
     }
@@ -126,6 +114,7 @@
     private async Task UpdateModelWithNewQrCode(string qrCode)
     {
         Model.Data = qrCode;
+        Model.CheckpointTime = DateTimeOffset.Now;
     }
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -159,6 +148,8 @@
         var request = Mapper.Map<Protos.Checkpoints.AddCheckpoint.AddCheckpointRequest>(Model);
         
         await CheckpointsClient.addCheckpointAsync(request);
+
+        Model.Data = "";
     }
 
     private void StartQrReader()
@@ -180,17 +171,18 @@
                     }
 
                     QrReaderIsOn = false;
-                    StopQrReader();
+                    await JsRuntime.InvokeVoidAsync("destroyQrReader");
+                    
+                    if (Model.Data != "" && AutoSend)
+                    {
+                        QrReaderIsOn = true;
+                        await SendDataAsync();
+                    }
                 }
 
                 await Task.Delay(2000);
             }
         });
-    }
-
-    private void StopQrReader()
-    {
-        Task.Run(async () => await JsRuntime.InvokeVoidAsync("destroyQrReader"));
     }
     
     private void StartGpsCoordinatesGetting()

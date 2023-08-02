@@ -41,22 +41,22 @@ else
 @code {
 
     [Parameter]
-    public Guid? ActionId { get; set; } = null;
+    public string ActionId { get; set; } = Guid.Empty.ToString();
 
     [Parameter]
-    public Guid? CheckpointId { get; set; } = null;
+    public string CheckpointId { get; set; } = Guid.Empty.ToString();
 
     [Parameter]
-    public Guid? UserId { get; set; } = null;
+    public string UserId { get; set; } = string.Empty;
 
     [Parameter]
-    public double? Lat { get; set; } = null;
+    public double? Lat { get; set; } = double.NaN;
 
     [Parameter]
-    public double? Lng { get; set; } = null;
+    public double? Lng { get; set; } = double.NaN;
 
     [Parameter]
-    public double? DistanceFromPosition { get; set; } = null;
+    public double? DistanceFromPosition { get; set; } = double.NaN;
 
     
     private List<CheckpointModel> _checkpointsList { get; set; } = null;
@@ -66,9 +66,9 @@ else
         var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
         {
             From = DateTimeOffset.Now.AddDays(-1).ToGoogleDateTime(),
-            ActionId = ActionId?.ToString(),
-            CheckpointId = CheckpointId?.ToString(),
-            UserId = UserId?.ToString(),
+            ActionId = ActionId,
+            CheckpointId = CheckpointId,
+            UserId = UserId,
             Position = (Lat != null && Lng != null) ? new Google.Type.LatLng
             {
                 Latitude = Lat ?? double.NaN,
