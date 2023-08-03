@@ -1,0 +1,118 @@
+﻿@page "/action/{ActionId}/create_entry"
+@using PetsOnTrailApp.Shared
+@using PetsOnTrailApp.Models
+@using PetsOnTrailApp.Services
+@using MapsterMapper
+@using Protos.Actions
+@using Protos.Actions.GetActionEntrySettings
+@using Protos.Entries
+@inject Protos.Entries.Entries.EntriesClient EntriesClient
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper Mapper
+@inject NavigationManager NavManager
+@inject IUserProfileService UserProfileService
+
+<h1>@localizer["Action.CreateEntry.For.Action"]</h1>
+
+<CascadingValue Value="this">
+    <EditForm Model="Entry" OnValidSubmit="SendAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+                
+        <CreateEntryPersonComponent Model="Entry"></CreateEntryPersonComponent>
+
+        <hr />
+    
+        <CreateEntryRaceCategoryComponent
+            ActionSettings="ActionSettings"
+            Model="Entry">
+        </CreateEntryRaceCategoryComponent>
+
+        <hr />
+    
+        @if (Entry.RaceId != null && Entry.RaceId != Guid.Empty)
+        {
+            if (ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits.WithDogs == true)
+            {
+                <CreateEntryDogsComponent
+                    RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits"
+                    Race="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)"
+                    Dogs="@Entry.Dogs">
+                </CreateEntryDogsComponent>
+            }
+        }
+
+        @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
+        @*     <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent> *@
+
+        <hr/>
+
+        <button class="btn btn--radius-2 btn--red" type="submit" onClick="register()">@localizer["Action.CreateEntry.Submit"]</button>
+    </EditForm>
+</CascadingValue>
+
+@code {
+
+    [Parameter]
+    public EntryModel Entry { get; set; } = new();
+
+    [Parameter]
+    public string ActionId { get; set; } = Guid.Empty.ToString();
+
+    private bool SubmitEnabled { get; set; } = false;
+    
+
+    public ActionSettingsModel ActionSettings = new ActionSettingsModel();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var actionSettings = await ActionsClient.getActionEntrySettingsAsync(new GetActionEntrySettingsRequest { Id = ActionId });
+
+        ActionSettings = Mapper.Map<ActionSettingsModel>(actionSettings);
+
+        Entry.ActionId = Guid.Parse(actionSettings.Id);
+
+        if (string.IsNullOrEmpty(UserProfileService.Get().Id) == false)
+        {
+            Entry.Name = UserProfileService.Get().FirstName;
+            Entry.Surname = UserProfileService.Get().LastName;
+            Entry.Email = UserProfileService.Get().Contact.EmailAddress;
+            Entry.Phone = UserProfileService.Get().Contact.PhoneNumber;
+            Entry.UserProfileId = UserProfileService.Get().Id ?? Guid.Empty.ToString();
+            Entry.CompetitorId = UserProfileService.Get().CompetitorId.ToString();
+            Entry.Dogs = UserProfileService.Get().Pets
+                .Where(dog => dog.Decease == null)
+                .Select(dog => new EntryModel.DogDto
+                {
+                    Id = dog.Id,
+                    Name = dog.Name,
+                    Birthday = dog.Birthday,
+                    Chip = dog.Chip,
+                    Pedigree = dog.Pedigree
+                })
+                .ToList();
+        }
+    }
+
+    protected async Task SendAsync()
+    {
+        var createEntryRequest = Mapper.Map<Protos.Entries.CreateEntry.CreateEntryRequest>(Entry);
+        createEntryRequest.LanguageCode = "cs-CZ";
+        
+        var response = await EntriesClient.createEntryAsync(createEntryRequest);
+        
+        if (string.IsNullOrWhiteSpace(response.Id) == false)
+            NavManager.NavigateTo($"/entries");
+    }
+
+    public void RaceChanged()
+    {
+        StateHasChanged();
+    }
+
+    public void CategoryChanged()
+    {
+        StateHasChanged();
+    }
+}

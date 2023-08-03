@@ -1,0 +1,115 @@
+﻿@using Microsoft.AspNetCore.Components
+@using PetsOnTrailApp.Models
+@inject IStringLocalizer<Resource> localizer
+
+<h3>@localizer["Dog.Manage.Add"]</h3>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Id"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText readonly="true" @bind-Value="@Model.Id"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Chip"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Chip"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Name"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Name"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Kennel"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Kennel"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Pedigree"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Pedigree"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Contact"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.Contact"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Owner"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <InputText @bind-Value="@Model.UserId"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label>@localizer["Dog.Manage.Birthday"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                @* <InputText @bind-Value="@DogModel.Birthday"/> *@
+            </div>
+        </div>
+    </div>
+
+    @if (DisplayDecease)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@localizer["Dog.Manage.Decease"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    @* <InputText @bind-Value="@DogModel.Decease"/> *@
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@code {
+
+    [Parameter]
+    public PetModel Model { get; set; } = new PetModel
+    {
+        Birthday = DateTimeOffset.Now,
+        Decease = DateTime.Now.AddDays(5)
+    };
+
+    [Parameter]
+    public bool DisplayDecease { get; set; } = false;
+
+}

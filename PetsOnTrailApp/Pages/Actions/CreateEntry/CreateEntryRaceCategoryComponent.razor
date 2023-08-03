@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Components
+@using PetsOnTrailApp.Models
+@using Protos.Actions
+@inject IStringLocalizer<Resource> localizer
+
+<section>
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Race.Selection"]</label>
+        <select @onchange="RaceSelected">
+            <option value="0" selected="selected">@localizer["Action.CreateEntry.Race.SelectRace"]</option>
+            
+            @foreach (var race in @ActionSettings.Races)
+            {
+                <option value="@race.Id">@race.Name</option>
+            }
+        </select>
+    </div>
+    
+    <div class="nice-form-group">
+        <label>@localizer["Action.CreateEntry.Category.Selection"]</label>
+        <select @onchange="CategorySelected">
+            <option value="0">@localizer["Action.CreateEntry.Category.SelectCategory"]</option>
+            
+            @foreach (var category in _categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+</section>
+
+@code {
+    [CascadingParameter]
+    private CreateEntry Parent { get; set; }
+    
+    [Parameter]
+    public EntryModel Model { get; set; }
+    
+    [Parameter]
+    public ActionSettingsModel ActionSettings { get; set; }
+
+    private List<ActionSettingsModel.CategoryDto> _categories = new List<ActionSettingsModel.CategoryDto>();
+
+    protected void RaceSelected(ChangeEventArgs e)
+    {
+        Model.RaceId = Guid.Parse(e.Value.ToString()); 
+        
+        _categories = ActionSettings.Categories
+            .Where(ctg => ctg.RaceId == Model.RaceId)
+            .ToList();
+
+        Parent.RaceChanged();
+    }
+    
+    protected void CategorySelected(ChangeEventArgs e)
+    {
+        Model.CategoryId = Guid.Parse(e.Value.ToString());
+        
+        Parent.CategoryChanged();
+    }
+}

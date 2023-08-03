@@ -1,0 +1,169 @@
+﻿@page "/checkpoints_manage/{ActionId?}/{CheckpointId?}/{UserId?}"
+
+@using PetsOnTrailApp.Models
+@using MapsterMapper
+@using PetsOnTrailApp.Extensions
+@using Protos.Actions.GetSelectedActions
+@using Protos.Checkpoints.GetCheckpoints
+@using Protos.UserProfiles.GetSelectedSurnameName
+
+@inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
+@inject IStringLocalizer<Resource> Loc
+@inject IMapper Mapper
+
+<h3>@Loc["CheckpointsManage.Title"]</h3>
+<h5>@Loc["CheckpointsManage.Description"]</h5>
+
+@if (_checkpointsList  == null)
+{
+    <p>
+        <em>@Loc["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>@Loc["Checkpoint.DateTime"]</th>
+            <th>@Loc["Checkpoint.Position"]</th>
+            <th>@Loc["Checkpoint.Name"]</th>
+            <th>@Loc["Checkpoint.Data"]</th>
+            <th>@Loc["Checkpoint.Action"]</th>
+            <th>@Loc["Checkpoint.Checkpoint"]</th>
+            <th>@Loc["Checkpoint.User"]</th>
+            <th>@Loc["Checkpoint.Note"]</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var checkpoint in _checkpointsList
+            .OrderByDescending(c => c.CheckpointTime))
+        {
+            var positionInString = $"{checkpoint.Position.Latitude}N, {checkpoint.Position.Longitude}E";
+            var actionName = ResolveAction(checkpoint.ActionId);
+            var checkpointName = ResolveCheckpoint(checkpoint.ActionId, checkpoint.CheckpointId);
+            var userName = ResolveUser(checkpoint.UserId);
+            var data = ResolveData(checkpoint.ActionId, checkpoint.Data);
+            
+            <tr>
+                <td>@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@positionInString</td>
+                <td>@checkpoint.Name</td>
+                <td>@data</td>
+                <td>@actionName</td>
+                <td>@checkpointName</td>
+                <td>@userName</td>
+                <td>@checkpoint.Note</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+    
+@code {
+
+    [Parameter]
+    public string ActionId { get; set; } = Guid.Empty.ToString();
+
+    [Parameter]
+    public string CheckpointId { get; set; } = Guid.Empty.ToString();
+
+    [Parameter]
+    public string UserId { get; set; } = string.Empty;
+
+    [Parameter]
+    public double? Lat { get; set; } = double.NaN;
+
+    [Parameter]
+    public double? Lng { get; set; } = double.NaN;
+
+    [Parameter]
+    public double? DistanceFromPosition { get; set; } = double.NaN;
+
+    private List<ActionModel> _usedActions = new List<ActionModel>();
+    
+    private List<CheckpointModel> _checkpointsList { get; set; } = null;
+
+    private List<(string Id, string Name, string Surname, string Nickname)> _usedUserProfiles { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
+        {
+            From = DateTimeOffset.Now.AddDays(-1).ToGoogleDateTime(),
+            ActionId = string.IsNullOrWhiteSpace(ActionId) ? Guid.Empty.ToString() : ActionId,
+            CheckpointId = string.IsNullOrWhiteSpace(CheckpointId) ? Guid.Empty.ToString() : CheckpointId,
+            UserId = string.IsNullOrWhiteSpace(UserId) ? string.Empty : UserId,
+            Position = (Lat != null && Lng != null) ? new Google.Type.LatLng
+            {
+                Latitude = Lat ?? double.NaN,
+                Longitude = Lng ?? double.NaN
+            } : null,
+            PositionDistanceInMeters = DistanceFromPosition ?? double.NaN
+        });
+        
+        _checkpointsList = Mapper.Map<List<CheckpointModel>>(response.Items);
+
+        var actionList = _checkpointsList
+            .Where(checkpoint => checkpoint.ActionId != Guid.Empty)
+            .Select(checkpoint => checkpoint.ActionId.ToString())
+            .Distinct()
+            .ToList();
+
+        var selectedActions = await ActionsClient.getSelectedActionsAsync(new GetSelectedActionsRequest
+        {
+            Ids = { actionList }
+        });
+
+        _usedActions = selectedActions.Actions.Select(sa => Mapper.Map<ActionModel>(sa)).ToList();
+        
+        StateHasChanged();
+
+        var usersList = _checkpointsList
+            .Where(checkpoint => string.IsNullOrWhiteSpace(checkpoint.UserId) == false)
+            .Select(checkpoint => checkpoint.UserId)
+            .Distinct()
+            .ToList();
+
+        var selectedUserProfiles = await UserProfilesClient.getSelectedSurnameNameAsync(new GetSelectedSurnameNameRequest
+        {
+            Ids = { usersList }
+        });
+
+        _usedUserProfiles = selectedUserProfiles.Items.Select(up => (Id: up.Id, Name: up.Name, Surname: up.Surname, Nickname: up.Nickname)).ToList();
+        
+        StateHasChanged();
+    }
+
+    private string ResolveAction(Guid actionId)
+    {
+        return _usedActions
+            .FirstOrDefault(ua => ua.Id == actionId)?.Name 
+               ?? (actionId != Guid.Empty ? actionId.ToString() : "");
+    }
+
+    private string ResolveCheckpoint(Guid actionId, Guid checkpointId)
+    {
+        return _usedActions
+            .FirstOrDefault(ua => ua.Id == actionId)?.Checkpoints?.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId)?.Name
+            ?? (checkpointId != Guid.Empty ? checkpointId.ToString() : "");
+    }
+
+    private string ResolveUser(string userId)
+    {
+        var identifiedUser = _usedUserProfiles?
+            .FirstOrDefault(up => up.Id == userId);
+
+        if (identifiedUser == null)
+            return userId;
+
+        return $"{identifiedUser.Value.Surname}, {identifiedUser.Value.Name} ({identifiedUser.Value.Nickname})";
+    }
+
+    private string ResolveData(Guid actionId, string data)
+    {
+        return data;
+    }
+}

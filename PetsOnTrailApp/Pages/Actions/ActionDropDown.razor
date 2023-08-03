@@ -1,0 +1,110 @@
+﻿@using PetsOnTrailApp.Models
+@using PetsOnTrailApp.Pages.Actions.Manage
+@using PetsOnTrailApp.Services;
+
+@inject AuthenticationStateProvider AuthStateProvider 
+@inject IModalService ModalService
+@inject IStringLocalizer<Resource> Localizer
+@inject NavigationManager NavManager
+@inject IUserProfileService UserProfileService
+
+
+<div class="dropdown dropstart">
+  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <div class="three-dots"></div>
+  </a>
+
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" @onclick="@(async () => await CreateEntry(Model))">@Localizer["Action.CreateEntry"]</a></li>
+        <li><a class="dropdown-item" @onclick="@(async () => await GoToResults(Model))">@Localizer["Action.Results"]</a></li>
+        <li><a class="dropdown-item" @onclick="@(async () => await GoToCheckpoint(Model))">@Localizer["Action.Checkpoint"]</a></li>
+        
+        <AuthorizeView>
+            <Authorized>
+                @if (CanManage())
+                {
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageRegistrations(Model))">@Localizer["Action.Manage.Entries"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManagePayments(Model))">@Localizer["Action.Manage.Payments"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageCheckpoints(Model))">@Localizer["Action.Manage.Checkpoints"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await ManageAction(Model))">@Localizer["Edit"]</a></li>
+                    <li><a class="dropdown-item" @onclick="@(async () => await DeleteAction(Model))">@Localizer["Delete"]</a></li>
+                }
+            </Authorized>
+        </AuthorizeView>
+    </ul>
+</div>
+
+@code {
+    [Parameter] public ActionModel Model { get; set; }
+    [Parameter] public EventCallback<ActionModel> OnItemChanged { get; set; } 
+    
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    private bool CanManage()
+    {
+        var rights = UserProfileService.Get()?.Rights;
+        if (rights == null)
+            return false;
+        
+        if (rights.SelectMany(right => right.Roles).Contains(global::Constants.Roles.InternalAdministrator.Id))
+            return true;
+
+        var actionRights = rights.FirstOrDefault(right => right.ActionId == Model.Id.ToString());
+        if (actionRights == null)
+            return false;
+
+        if (actionRights.Roles.Contains(global::Constants.Roles.OwnerOfAction.Id))
+            return true;
+
+        return false;
+    }
+    
+    protected async Task ManageAction(ActionModel action)
+    {
+        NavManager.NavigateTo($"/action_manage/{action.Id}");
+    }
+
+    protected async Task ManageRegistrations(ActionModel action)
+    {
+        NavManager.NavigateTo($"/action_manage/{action.Id}/registrations");
+    }
+
+    protected async Task ManagePayments(ActionModel action)
+    {
+        NavManager.NavigateTo($"/action_manage/{action.Id}/payments");
+    }
+    
+    protected async Task DeleteAction(ActionModel action)
+    {
+        var parameters = new ModalParameters()
+            .Add(nameof(ActionManage.Model), action)
+            .Add(nameof(ActionManage.RequiredAction), RequiredActionEnum.DeleteAction);
+        
+        var messageForm = ModalService.Show<ActionManage>(Localizer["Delete action"], parameters);
+        var result = await messageForm.Result;
+        
+        await OnItemChanged.InvokeAsync(action);
+    }
+
+    protected async Task CreateEntry(ActionModel action)
+    {
+        NavManager.NavigateTo($"/action/{action.Id}/create_entry");
+    }
+
+    protected async Task GoToResults(ActionModel action)
+    {
+        NavManager.NavigateTo($"/results/{action.Id}");
+    }
+
+    protected async Task GoToCheckpoint(ActionModel action)
+    {
+        NavManager.NavigateTo($"/checkpoint/{action.Id}");
+    }
+    
+    protected async Task ManageCheckpoints(ActionModel action)
+    {
+        NavManager.NavigateTo($"/checkpoints_manage/{action.Id}");
+    }
+}

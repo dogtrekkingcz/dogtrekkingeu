@@ -1,0 +1,83 @@
+﻿@using MapsterMapper
+@using PetsOnTrailApp.Models
+@using Protos.UserProfiles.CreateUserProfile
+@using Protos.UserProfiles.UpdateUserProfile
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient Client
+@inject AuthenticationStateProvider AuthStateProvider 
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+
+<div>
+    <EditForm Model="@Model" OnValidSubmit="SubmitForm">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@Model.FirstName"></InputText>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@Model.LastName"></InputText>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@Model.Contact.EmailAddress"></InputText>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    @{
+                        var registrationButtonText = localizer["Register user"];
+                        if (RequiredAction == UserProfileRequiredAction.Update)
+                            registrationButtonText = localizer["Update user"];
+                    }
+                    <button type="submit">@registrationButtonText</button>
+                </div>
+                <div class="col">
+                    <button @onclick="Cancel">@localizer["Cancel"]</button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    [Parameter]
+    public UserProfileModel Model { get; set; }
+
+    [Parameter] 
+    public UserProfileRequiredAction RequiredAction { get; set; }
+
+    private AuthenticationState _authState = null;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+    }
+    
+    private async Task SubmitForm()
+    {
+        if (RequiredAction == UserProfileRequiredAction.Register)
+        {
+            var request = mapper.Map<CreateUserProfileRequest>(Model);
+            
+            await Client.registerUserProfileAsync(request);
+        }
+        else
+        {
+            var request = mapper.Map<UpdateUserProfileRequest>(Model);
+            
+            await Client.updateUserProfileAsync(request);
+        }
+        
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
+    }
+
+    private async Task Cancel()
+    {
+        await BlazoredModal.CloseAsync(ModalResult.Cancel());
+    }
+}

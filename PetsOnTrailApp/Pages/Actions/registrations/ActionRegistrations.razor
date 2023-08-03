@@ -1,0 +1,284 @@
+﻿@page "/action_manage/{Id}/registrations"
+
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
+@inject Protos.Entries.Entries.EntriesClient EntriesClient
+@inject IStringLocalizer<Resource> Localizer
+@inject NavigationManager NavManager
+@inject IMapper Mapper
+@inject IUserProfileService UserProfileService
+
+@using PetsOnTrailApp.Models
+@using PetsOnTrailApp.Services
+@using MapsterMapper
+@using Protos.Actions
+
+<h3>@Localizer["Action.Manage.Registrations"]</h3>
+
+@if (Action == null)
+{
+    <p>
+        <em>@Localizer["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <h4>@Localizer["Action.Manage.RegistrationToAccept"]</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@Localizer["Surname"], @Localizer["Name"]</th>
+            <th>@Localizer["Race"]</th>
+            <th>@Localizer["Category"]</th>
+            <th>@Localizer["Dogs"]</th>
+            <th>@Localizer["Payments"]</th>
+            <th>@Localizer["Actions"]</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var entry in Registrations)
+        {
+            var race = Action.Races.First(race => race.Id == entry.RaceId);
+            var category = race.Categories.First(category => category.Id == entry.CategoryId);
+            
+            <tr class="to-be-imported">
+                <td>
+                    @entry.Surname, @entry.Name
+                </td>
+                <td>
+                    @race.Name
+                </td>
+                <td>
+                    @category.Name
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var dog in entry.Dogs)
+                        {
+                            <li>@dog.Chip - @dog.Birthday?.ToString("yyyy-MM-dd") - @dog.Pedigree - @dog.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <div class="dropdown dropstart">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="three-dots"></div>
+                        </a>
+                    
+                        <ul class="dropdown-menu">
+                            <AuthorizeView>
+                                <Authorized>
+                                    @if (UserProfileService.Get()?
+                                        .Rights?
+                                        .FirstOrDefault(right => 
+                                            right.ActionId == Action.Id.ToString() && 
+                                            right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
+                                            ) != null)
+                                    {
+                                        <li><a class="dropdown-item" @onclick="@(async () => await ImportRegistrationToAction(entry))">@Localizer["Action.Manage.AcceptRegistration"]</a></li>
+                                    }
+                                </Authorized>
+                            </AuthorizeView>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <hr />
+    
+    <h4>@Localizer["Admin.Manage.Registrations"]</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@Localizer["Surname"], @Localizer["Name"]</th>
+            <th>@Localizer["Race"]</th>
+            <th>@Localizer["Category"]</th>
+            <th>@Localizer["Dogs"]</th>
+            <th>@Localizer["Payments"]</th>
+            <th>@Localizer["Actions"]</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        @foreach (var race in Action.Races)
+        {
+            var startingPrice = race.Payments
+                .FirstOrDefault(paymentDef => paymentDef.From <= DateTimeOffset.Now && paymentDef.To > DateTimeOffset.Now)?
+                .Price ?? 0.0;
+            
+            @foreach (var category in race.Categories)
+            {
+                foreach (var racer in category.Racers)
+                {
+                    racer.RequestedPayments.Items.Add(new ActionModel.RequestedPaymentItem
+                    {
+                        Name = "RegistrationFee",
+                        Price = startingPrice
+                    });
+                    
+                    <tr>
+                        <td>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        @racer.LastName, @racer.FirstName
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        @racer.Address.ZipCode, @racer.Address.City, @racer.Address.Street
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        @racer.Email    
+                                    </div>
+                                    <div class="col-6">
+                                        @racer.Phone
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @race.Name
+                        </td>
+                        <td>
+                            @category.Name
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach (var dog in racer.Dogs)
+                                {
+                                    <li>@dog.Chip - @dog.Birthday?.ToString("yyyy-MM-dd") - @dog.Pedigree - @dog.Name</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul>
+                                            @foreach (var payment in racer.Payments)
+                                            {
+                                                <li>@payment.Date.ToString("yyyy-MM-dd HH:mm") - @payment.Amount @payment.Currency</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul>
+                                            @foreach (var rq in racer.RequestedPayments.Items)
+                                            {
+                                                <li>@rq.Name - @rq.Price</li>
+                                            }
+                                        </ul>
+                                        <hr />
+                                        @racer.RequestedPayments.Items.Sum(it => it.Price)
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dropdown dropstart">
+                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="three-dots"></div>
+                                </a>
+                            
+                                <ul class="dropdown-menu">
+                                    <AuthorizeView>
+                                        <Authorized>
+                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id.ToString() && right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())) != null)
+                                            {
+                                                <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Localizer["Action.Manage.AcceptPayment"]</a></li>
+                                            }
+                                        </Authorized>
+                                    </AuthorizeView>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        </tbody>
+    </table>
+    
+    <button type="button" @onclick="async () => SaveChangesAsync()">@Localizer["General.Save"]</button>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private ActionModel Action { get; set; } = null;
+    private List<EntryModel> Registrations { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse);
+        
+        // ---
+        
+        var response = await EntriesClient.getEntriesByActionAsync(new Protos.Entries.GetEntriesByActionRequest
+        {
+            ActionId = Id
+        });
+
+        Registrations = Mapper.Map<List<EntryModel>>(response.Entries);
+    }
+
+    private async Task ImportRegistrationToAction(EntryModel entry)
+    {
+        await ActionsClient.importRegistrationToActionAsync(new Protos.Actions.ImportRegistrationToActionRequest
+        {
+            EntryId = entry.Id.ToString(),
+            ActionId = entry.ActionId.ToString()
+        });
+        
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse);
+        
+        StateHasChanged();
+    }
+
+    private async Task AcceptPayment(ActionModel.RacerDto racer)
+    {
+        await ActionsClient.acceptPaymentAsync(new AcceptPaymentRequest
+        {
+            Id = racer.Id.ToString(),
+            ActionId = Action.Id.ToString(),
+            Amount = racer.RequestedPayments.Sum,
+            Note = "",
+            Currency = "Kč",
+            BankAccount = ""
+        });
+        
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse);
+        
+        StateHasChanged();
+    }
+    
+    private async Task SaveChangesAsync()
+    {
+        var request = Mapper.Map<Protos.Actions.UpdateAction.UpdateActionRequest>(Action);
+        
+        await ActionsClient.updateActionAsync(request);
+    }
+}

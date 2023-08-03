@@ -1,0 +1,295 @@
+﻿@using Microsoft.AspNetCore.Components
+@using PetsOnTrailApp.Models
+@using System.Collections.ObjectModel
+@using BlazorDateRangePicker
+
+@inject IModalService modal
+@inject IStringLocalizer<Resource> localizer
+
+<h3>@localizer["Action races"]</h3>
+
+<section>
+    <table>
+        <thead>
+            <th>@localizer["Actions.Races.Name"]</th>
+            <th>@localizer["Actions.Races.Categories"]</th>
+            <th>@localizer["Actions.Races.Payments"]</th>
+            <th>@localizer["Actions.Races.Limits"]</th>
+            <th>@localizer["Actions"]</th>
+        </thead>
+        <tbody>
+
+        @foreach (var modelRace in Model.Races)
+        {
+            <tr>
+                <td>
+                    @if (modelRace == EditableItem)
+                    {
+                        <input type="text" @bind="modelRace.Name" @onblur="(args) => StateHasChanged()" required />
+                    }
+                    else
+                    {
+                        @modelRace.Name
+                    }
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var ctg in modelRace.Categories)
+                        {
+                            <li>@ctg.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var payment in modelRace.Payments)
+                        {
+                            if (modelRace == EditableItem)
+                            {
+                                <li>
+                                    @if (payment == EditablePayment) 
+                                    {
+                                        <DateRangePicker
+                                            MinDate="DateTimeOffset.Now"
+                                            MaxDate="DateTimeOffset.Now.AddYears(1)"
+                                            @bind-StartDate="TmpEditablePaymentFrom"
+                                            @bind-EndDate="TmpEditablePaymentTo" />
+                                    }
+                                    else
+                                    {
+                                        <span>@payment.From.ToString("yyyy-MM-dd") - @payment.To.ToString("yyyy-MM-dd")</span><button type="button" @onclick="() => MakeEditablePayment(modelRace, payment)">Edit</button>
+                                    }
+                                    :
+                                    <input type="text" @bind="payment.Price" @onblur="(args) => StateHasChanged()" required />
+                                    <select @bind="payment.Currency" @onblur="(args) => StateHasChanged()">
+                                        <option value="Kč">Kč</option>
+                                    </select>
+                                    <input type="text" @bind="payment.BankAccount" @onblur="(args) => StateHasChanged()" required />
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <span>@payment.From.ToString("yyyy-MM-dd") - @payment.To.ToString("yyyy-MM-dd")</span>: <b>@payment.Price @payment.Currency => @payment.BankAccount</b>
+                                </li>                                
+                            }
+                        }
+                        
+                        @if (modelRace == EditableItem) 
+                        {
+                            <li>
+                                <DateRangePicker
+                                    MinDate="DateTimeOffset.Now"
+                                    MaxDate="DateTimeOffset.Now.AddYears(1)"
+                                    @bind-StartDate="TmpPaymentFrom"
+                                    @bind-EndDate="TmpPaymentTo" />
+                                
+                                <input type="number" @bind="TmpPaymentPrice" placeholder="Currency" />
+                                <input type="number" @bind="TmpPaymentBankAccount" placeholder="Bank account" />
+                                <input type="text" @bind="TmpPaymentCurrency" placeholder="Currency" />
+
+                                <button type="button" @onclick="@(() => AddPayment(modelRace))">Add</button>
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfDogForRace"]: @(modelRace.Limits.MinimalAgeOfTheDogInDayes / 30)</li>
+                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfRacerForRace"]: @(modelRace.Limits.MinimalAgeOfRacerInDayes / 365)</li>
+                        <li>@localizer["Actions.Races.Limits.WithDogs"]: @(modelRace.Limits.WithDogs)</li>
+                    </ul>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-secondary" @onclick="(args) => MakeEditable(modelRace)">Edit</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    <hr />
+    <button type="button" @onclick="@(() => FillOfficialDtRaceTemplate())">@localizer["Actions.Races.FillOfficialDogTrekkingRace"]</button> 
+    <button type="button" @onclick="@(() => FillOfficialDmRaceTemplate())">@localizer["Actions.Races.FillOfficialDogMarathonRace"]</button> 
+    <button type="button" @onclick="@(() => FillShortRaceTemplate())">@localizer["Actions.Races.FillShortRace"]</button> 
+</section>
+
+
+@code {
+    [Parameter]
+    public ActionModel Model { get; set; }
+
+    private ActionModel.RaceDto EditableItem { get; set; } = null;
+    private ActionModel.PaymentDefinitionDto EditablePayment { get; set; } = null;
+    private string Tmp { get; set; } = string.Empty;
+    
+    private DateTimeOffset _tmpPaymentFrom = DateTimeOffset.Now;
+    private DateTimeOffset _tmpPaymentTo = DateTimeOffset.Now;
+
+    private DateTimeOffset? TmpPaymentFrom
+    {
+        get { return _tmpPaymentFrom; }
+        set { _tmpPaymentFrom = value.Value; }
+    }
+
+    private DateTimeOffset? TmpPaymentTo
+    {
+        get { return _tmpPaymentTo; }
+        set { _tmpPaymentTo = value.Value; }
+    }
+
+    private DateTimeOffset? TmpEditablePaymentFrom
+    {
+        get { return EditablePayment.From; }
+        set { EditablePayment.From = value.Value; }
+    }
+    
+    private DateTimeOffset? TmpEditablePaymentTo
+    {
+        get { return EditablePayment.To; }
+        set { EditablePayment.To = value.Value; }
+    }
+    
+    private double TmpPaymentPrice { get; set; } = 0.0;
+    private string TmpPaymentBankAccount { get; set; } = string.Empty;
+    private string TmpPaymentCurrency { get; set; } = "Kč";
+
+    protected override async Task OnInitializedAsync()
+    {
+        TmpPaymentFrom = DateTimeOffset.Now;
+        TmpPaymentTo = Model.Term.To;
+    }
+
+    private void FillOfficialDtRaceTemplate()
+    {
+        Model.Races ??= new List<ActionModel.RaceDto>();
+
+        Model.Races.Add(new ActionModel.RaceDto
+        {
+            Name = "DogTrekking",
+            Begin = Model.Term.From.AddDays(1),
+            MaxNumberOfCompetitors = int.MaxValue,
+            EnteringFrom = DateTimeOffset.Now,
+            EnteringTo = Model.Term.To,
+            Categories = new List<ActionModel.CategoryDto>
+            {
+                { new ActionModel.CategoryDto { Name = "DTW1" } },
+                { new ActionModel.CategoryDto() { Name = "DTM1" } },
+                { new ActionModel.CategoryDto { Name = "DTW2" } },
+                { new ActionModel.CategoryDto { Name = "DTM2" } }
+            },
+            Limits = new ActionModel.LimitsDto
+            {
+                MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
+                MinimalAgeOfRacerInDayes = 15 * 12 * 30 // 15 years
+            },
+            Payments = new List<ActionModel.PaymentDefinitionDto>
+            {
+                new ActionModel.PaymentDefinitionDto
+                {
+                    Currency = "Czk",
+                    From = DateTimeOffset.Now,
+                    To = DateTimeOffset.MaxValue,
+                    Price = 500
+                }
+            }
+        });
+    }
+
+    private void FillOfficialDmRaceTemplate()
+    {
+        Model.Races ??= new List<ActionModel.RaceDto>();
+        
+        Model.Races.Add(new ActionModel.RaceDto
+        {
+            Name = "DogMarathon",
+            Begin = Model.Term.From.AddDays(2),
+            MaxNumberOfCompetitors = int.MaxValue,
+            EnteringFrom = DateTimeOffset.Now,
+            EnteringTo = Model.Term.To,
+            Categories = new List<ActionModel.CategoryDto>
+            {
+                { new ActionModel.CategoryDto { Name = "DMW1" }},
+                { new ActionModel.CategoryDto { Name = "DMM1" }},
+                { new ActionModel.CategoryDto { Name = "DMW2" }},
+                { new ActionModel.CategoryDto { Name = "DMM2" }}
+            },
+            Limits = new ActionModel.LimitsDto
+            {
+                MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
+                MinimalAgeOfRacerInDayes = 15 * 12 * 30 // 15 years
+            },
+            Payments = new List<ActionModel.PaymentDefinitionDto>
+            {
+                new ActionModel.PaymentDefinitionDto
+                {
+                    Currency = "Czk",
+                    From = DateTimeOffset.Now,
+                    To = DateTimeOffset.MaxValue,
+                    Price = 400
+                }
+            }
+        });
+    }
+
+    private void FillShortRaceTemplate()
+    {
+        Model.Races ??= new List<ActionModel.RaceDto>();
+       
+        Model.Races.Add(new ActionModel.RaceDto
+        {
+            Name = "Short",
+            Begin = Model.Term.From.AddDays(2),
+            MaxNumberOfCompetitors = int.MaxValue,
+            EnteringFrom = DateTimeOffset.Now,
+            EnteringTo = Model.Term.To,
+            Categories = new List<ActionModel.CategoryDto>
+            {
+                { new ActionModel.CategoryDto { Name = "Short" }}
+            },
+            Limits = new ActionModel.LimitsDto
+            {
+                MinimalAgeOfTheDogInDayes = 0,
+                MinimalAgeOfRacerInDayes = 0
+            },
+            Payments = new List<ActionModel.PaymentDefinitionDto>
+            {
+                new ActionModel.PaymentDefinitionDto
+                {
+                    Currency = "Czk",
+                    From = DateTimeOffset.Now,
+                    To = DateTimeOffset.MaxValue,
+                    Price = 300
+                }
+            }
+        });
+    }
+
+    private void AddPayment(ActionModel.RaceDto race)
+    {
+        race.Payments.Add(new ActionModel.PaymentDefinitionDto
+        {
+            From = _tmpPaymentFrom,
+            To = _tmpPaymentTo,
+            Price = TmpPaymentPrice,
+            BankAccount = TmpPaymentBankAccount,
+            Currency = TmpPaymentCurrency
+        });
+
+        TmpPaymentFrom = TmpPaymentTo;
+        TmpPaymentTo = Model.Term.To;
+    }
+    
+    private void MakeEditable(ActionModel.RaceDto raceItem)
+    {
+        EditableItem = raceItem;
+        
+        StateHasChanged();
+    }
+
+    private void MakeEditablePayment(ActionModel.RaceDto modelRace, ActionModel.PaymentDefinitionDto payment)
+    {
+        EditableItem = modelRace;
+        EditablePayment = payment;
+    }
+}

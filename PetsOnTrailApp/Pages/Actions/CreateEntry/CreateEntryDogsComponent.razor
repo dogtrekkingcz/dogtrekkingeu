@@ -1,0 +1,118 @@
+﻿@using PetsOnTrailApp.Models
+@using PetsOnTrailApp.Shared
+@inject IStringLocalizer<Resource> localizer
+
+<h3>CreateEntryDogsComponent</h3>
+
+<section>
+    <table>
+        <thead>
+        <tr>
+            <th>@localizer["Action.CreateEntry.Dogs.Chip"]</th>
+            <th>@localizer["Action.CreateEntry.Dogs.Pedigree"]</th>
+            <th>@localizer["Action.CreateEntry.Dogs.Name"]</th>
+            <th>@localizer["Action.CreateEntry.Dogs.Age"]</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var dog in Dogs)
+        {
+            var age = Race.Start - (dog.Birthday ?? DateTimeOffset.Now);
+            var ageInYears = (Math.Floor(age.TotalDays / 365));
+            var isValid = RaceLimits.MinimalAgeOfTheDogInDayes <= age.TotalDays;
+            var message = "";
+
+            if (!isValid)
+            {
+                message = string.Format("{0} ({1}: '{2} / {3}')", 
+                    localizer["Messages.Limits.Failed.MinimalAgeOfDogForRace"], 
+                    localizer["Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs"], 
+                    RaceLimits.MinimalAgeOfTheDogInDayes,
+                    Math.Floor(age.TotalDays));
+            }
+                
+            <tr>
+                <td>@dog.Chip</td>
+                <td>@dog.Pedigree</td>
+                <td>@dog.Name</td>
+                <td>@ageInYears @message</td>
+            </tr>
+        }
+        </tbody>
+        <hr />
+        
+    </table>
+</section>
+<section>
+    <EditForm Model="NewDog" OnValidSubmit="AddNewDog">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@localizer["Action.CreateEntry.Dogs.Chip"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@NewDog.Chip"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@localizer["Action.CreateEntry.Dogs.Pedigree"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@NewDog.Pedigree"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@localizer["Action.CreateEntry.Dogs.Name"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@NewDog.Name"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@localizer["Action.CreateEntry.Dogs.Birthday"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputDateComponent @bind-Date="@NewDog.Birthday"></InputDateComponent>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@localizer["Action.CreateEntry.Dogs.Vaccinations.AgainstRabies"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputDateComponent @bind-Date="@NewDog.Vaccinations.First(vac => vac.Type == EntryModel.VaccinationType.Rabies).Date"></InputDateComponent>
+                </div>
+            </div>
+        </div>
+        
+        <hr />
+        <input type="submit" class="btn btn-primary" value="@localizer["Action.CreateEntry.Dogs.AddNewDog"]" />
+    </EditForm>
+</section>
+
+@code {
+
+    [Parameter]
+    public List<EntryModel.DogDto> Dogs { get; set; } = new();
+    
+    [Parameter]
+    public ActionSettingsModel.RaceDto Race { get; set; }
+    
+    [Parameter]
+    public ActionSettingsModel.RaceLimits RaceLimits { get; set; }
+
+    private EntryModel.DogDto NewDog { get; set; } = new();
+    
+    private DateTimeOffset NewDogBirthday { get; set; }
+    private DateTimeOffset NewDogVaccinationDate { get; set; }
+
+    private void AddNewDog()
+    {
+        Dogs.Add(NewDog);
+
+        NewDog = new();
+    }
+}

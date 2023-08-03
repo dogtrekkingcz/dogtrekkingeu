@@ -1,0 +1,168 @@
+﻿@page "/userprofile/manage"
+@using PetsOnTrailApp.Models
+@using PetsOnTrailApp.Services
+@using MapsterMapper
+@using Protos.UserProfiles
+@using Protos.UserProfiles.GetUserProfile
+@using Protos.UserProfiles.UpdateUserProfile
+
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
+@inject IStringLocalizer<Resource> Loc
+@inject IMapper mapper
+@inject IUserProfileService UserProfileService
+
+<h1>@Loc["UserProfile.Manage"]</h1>
+
+<EditForm Model="UserProfile" OnValidSubmit="SendAsync">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Name"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.FirstName"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Surname"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.LastName"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Nickname"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.Nickname"/>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Email"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.Contact.EmailAddress"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Phone"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.Contact.PhoneNumber"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Street"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.Address.Street"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Region"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.Address.Region"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.City"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.Address.City"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <label>@Loc["UserProfile.Manage.Country"]</label>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <InputText @bind-Value="@UserProfile.Address.Country"/>
+                </div>
+            </div>
+            <hr />
+
+            <h5>@Loc["UserProfile.MyPets"]</h5>
+            <table>
+                <thead>
+                <tr>
+                    <th>@Loc["UserProfile.MyPets.Name"]</th>
+                    <th>@Loc["UserProfile.MyPets.Chip"]</th>
+                    <th>@Loc["UserProfile.MyPets.Age"]</th>
+                    <th>@Loc["UserProfile.MyPets.Vaccinations"]</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var pet in UserProfile.Pets)
+                {
+                    var ageDays = (DateTimeOffset.Now - pet.Birthday)?.TotalDays ?? 0;
+                    var ageYears = Math.Floor(ageDays / 365);
+                    ageDays -= ageYears * 365;
+
+                    var ageMonths = Math.Floor(ageDays / 30);
+                    ageDays -= ageMonths * 30;
+
+                    var age = $"{ageYears}{Loc["years"]}, {ageMonths}{Loc["months"]}, {ageDays}{Loc["days"]}";
+                    
+                    <tr>
+                        <td>@pet.Name</td>
+                        <td>@pet.Chip</td>
+                        <td>@age</td>
+                        <td>
+                            <ul>
+                            @foreach (var vacc in pet.Vaccinations)
+                            {
+                                <li>@vacc.Date?.ToString("yyyy-MM-dd"): @vacc.Type.ToString()</li>
+                            }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <hr />
+    <input type="submit" class="btn btn-primary" value="@Loc["UserProfile.Manage.Submit"]" />
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public UserProfileModel UserProfile { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var myUserProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
+        
+        if (myUserProfile == null)
+            return;
+        
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(myUserProfile));
+        
+        UserProfile = UserProfileService.Get();
+    }
+
+    protected async Task SendAsync()
+    {
+        await UserProfilesClient.updateUserProfileAsync(mapper.Map<UpdateUserProfileRequest>(UserProfile));
+
+        var userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
+        
+        if (userProfile == null)
+            return;
+
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
+
+        UserProfile = UserProfileService.Get();
+    }
+}

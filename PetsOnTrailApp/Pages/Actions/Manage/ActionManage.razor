@@ -1,0 +1,171 @@
+﻿@page "/action_manage/{Id}"
+
+@using PetsOnTrailApp.Models
+@using MapsterMapper
+@using PetsOnTrailApp.Shared
+@using Protos.Actions.UpdateAction
+@using PetsOnTrailApp.Extensions
+
+@inject Protos.Actions.Actions.ActionsClient Client
+@inject AuthenticationStateProvider AuthStateProvider 
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+@inject NavigationManager NavManager
+
+@if (Model == null)
+{
+    <p>
+        <em>@localizer["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <div>
+        <EditForm Model="@Model" OnValidSubmit="SubmitForm">
+            @if (RequiredAction != RequiredActionEnum.DeleteAction)
+            {
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+            }
+        
+            <TabControl>
+                <TabPage Text="@localizer["Action.Manage.General"]">
+                    <ActionManageMainInfoComponent Model="Model"></ActionManageMainInfoComponent>
+                </TabPage>
+                <TabPage Text="@localizer["Action.Manage.Location"]">
+                    <ActionManageLocationComponent Model="Model"></ActionManageLocationComponent>
+                </TabPage>
+                <TabPage Text="@localizer["Action.Manage.Races"]">
+                    <ActionManageRacesComponent Model="Model"></ActionManageRacesComponent>
+                </TabPage>
+                <TabPage Text="@localizer["Action.Manage.DefineAccompanyingSale"]">
+                    <ActionManageSaleComponent Model="Model"></ActionManageSaleComponent>
+                </TabPage>
+            </TabControl>
+        
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        @if (RequiredAction == RequiredActionEnum.DeleteAction)
+                        {
+                            <button @onclick="@DeleteAction">@GetActionButtonText()</button>
+                        }
+                        else
+                        {
+                            <button type="submit">@GetActionButtonText()</button>
+                        }
+                    </div>
+                    <div class="col">
+                        <button @onclick="Cancel">@localizer["Cancel"]</button>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    [Parameter] public RequiredActionEnum RequiredAction { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter] public ActionModel Model { get; set; }
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    private string ActionButtonText { get; set; }
+
+    [Parameter]
+    public EventCallback<ActionModel> OnItemChanged { get; set; }
+
+    private AuthenticationState _authState = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
+
+        if (string.IsNullOrEmpty(Id) == false && Id != "0") {
+            var getActionRequest = new Protos.Actions.GetAction.GetActionRequest
+            {
+                Id = Id
+            };
+            var actionResponse = await Client.getActionAsync(getActionRequest);
+
+            Console.WriteLine($"Response: {actionResponse?.Dump()}");
+            Console.WriteLine("================");
+            Model = mapper.Map<ActionModel>(actionResponse);
+            Console.WriteLine($"Model: {Model?.Dump()}");
+
+            RequiredAction = RequiredActionEnum.UpdateAction;
+        }
+        else
+        {
+            RequiredAction = RequiredActionEnum.AddAction;
+            Model = new();
+        }
+    }
+
+    
+
+    private string GetActionButtonText()
+    {
+        switch (RequiredAction)
+        {
+            case RequiredActionEnum.AddAction: 
+                return localizer["Action.Create.AddNewAction"]; 
+                
+            case RequiredActionEnum.UpdateAction: 
+                return localizer["Action.Update.UpdateAction"];
+                
+            case RequiredActionEnum.DeleteAction:
+                return localizer["Action.Delete.DeleteAction"];
+        }
+
+        return "";
+    }
+    
+    private async Task SubmitForm()
+    {
+        if (RequiredAction == RequiredActionEnum.AddAction || Model.Id == Guid.Empty)
+            await CreateNewAction();
+        else if (RequiredAction == RequiredActionEnum.UpdateAction)
+            await UpdateAction();
+        
+        NavManager.NavigateTo("/actions");
+    }
+
+    private async Task Cancel() => NavManager.NavigateTo("/actions");
+    
+    private async Task CreateNewAction()
+    {
+        var createActionRequest = mapper.Map<Protos.Actions.CreateAction.CreateActionRequest>(Model);
+        
+        var result = await Client.createActionAsync(createActionRequest);
+
+        if (string.IsNullOrEmpty(result.Id) == false)
+        {
+            await OnItemChanged.InvokeAsync(Model);
+        }
+    }
+
+    private async Task UpdateAction()
+    {
+        var updateActionRequest = mapper.Map<Protos.Actions.UpdateAction.UpdateActionRequest>(Model);
+
+        var result = await Client.updateActionAsync(updateActionRequest);
+        
+        NavManager.NavigateTo("/actions");
+    }
+
+    private async Task DeleteAction()
+    {
+        var deleteActionRequest = new Protos.Actions.DeleteAction.DeleteActionRequest
+        {
+            Id = Model.Id.ToString()
+        };
+
+        var result = await Client.deleteActionAsync(deleteActionRequest);
+
+        NavManager.NavigateTo("/actions");
+    }
+}

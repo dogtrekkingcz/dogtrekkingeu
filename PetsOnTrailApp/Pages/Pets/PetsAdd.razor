@@ -1,0 +1,26 @@
+﻿@page "/petsadd"
+
+@using PetsOnTrailApp.Shared
+@using PetsOnTrailApp.Models
+@using MapsterMapper
+@using Protos.Pets.CreatePet
+
+@inject Protos.Pets.Pets.PetsClient _petsClient
+@inject IMapper _mapper;
+@inject NavigationManager _navManager
+@inject IStringLocalizer<Resource> _localizer
+
+<h3>Pets add</h3>
+<DogComponent DogModel="NewDogModel" DisplayDecease="true"></DogComponent>
+<button @onclick="@(async () => await SubmitAsync())" class="btn btn-primary">@_localizer["Dogs.AddDog.Submit"]</button>
+
+@code {
+    public PetModel NewPetModel = new();
+
+    protected async Task SubmitAsync()
+    {
+        await _petsClient.createPetAsync(_mapper.Map<CreatePetRequest>(NewPetModel));
+        
+        _navManager.NavigateTo("/pets");
+    }
+}

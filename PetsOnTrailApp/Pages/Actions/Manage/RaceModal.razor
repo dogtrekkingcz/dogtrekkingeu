@@ -1,0 +1,48 @@
+﻿@page "/RaceModal"
+@using PetsOnTrailApp.Models
+
+@inject IStringLocalizer<Resource> localizer
+
+<h3>RaceModal</h3>
+
+<div class="container">
+    <EditForm Model="@Model" OnValidSubmit="SubmitForm">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">@localizer["Name"]</div>
+            <div class="col-xs-12 col-md-6"><InputText @bind-Value="@RaceModel.Name"></InputText></div>
+        </div>
+    
+        <div class="row">
+            <div class="col-xs-12">@localizer["Categories"]</div>
+            <div class="col-xs-12">
+                <table>
+                    <thead>
+                        <th>@localizer["Name"]</th>
+                    </thead>
+                    <tbody>
+                    @foreach (var ctg in RaceModel.Categories)
+                    {
+                        <tr>
+                            <td>@ctg.Name</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public ActionModel Model { get; set; }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    
+    public ActionModel.RaceDto RaceModel { get; set; }
+
+    private async Task SubmitForm()
+    {
+        Model.Races.Add(RaceModel);
+        
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
+    }
+}

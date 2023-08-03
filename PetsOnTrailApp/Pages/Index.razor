@@ -1,0 +1,158 @@
+﻿@page "/"
+@using PetsOnTrailApp.Models;
+@using PetsOnTrailApp.Pages.UserProfiles;
+@using PetsOnTrailApp.Services
+@using Protos.UserProfiles
+@using System.Security.Claims;
+@using PetsOnTrailApp.Extensions
+@using Grpc.Core
+@using MapsterMapper
+@using Protos.LiveUpdatesSubscription
+@using Protos.UserProfiles.GetUserProfile
+
+@inject Protos.LiveUpdatesSubscription.LiveUpdatesSubscription.LiveUpdatesSubscriptionClient LiveUpdatesSubscriptionClient
+@inject Protos.ActionRights.ActionRights.ActionRightsClient ActionRightsClient
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
+@inject IUserProfileService UserProfileService
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IModalService modal
+@inject IStringLocalizer<Resource> Loc
+@inject IMapper mapper
+
+
+<PageTitle>Index</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        Jsi přihlášen jako @context.User.Identity?.Name!, UserID: @UserProfileService.Get().UserId
+        <hr />
+        
+        <ul>
+            @{
+                var checkpointsLink = $"/checkpoints_manage/%20/%20/{UserProfileService.Get().UserId}";
+            }
+            <li><a href="@checkpointsLink">@Loc["Home.ManageMyPositions"]</a></li>
+            <li><a href="/userprofile/manage">@Loc["Home.ManageMyProfile"]</a></li>
+        </ul>
+    </Authorized>
+    <NotAuthorized>
+        @Loc["Home.YouAreNotLoggedIn"]
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private AuthenticationState _authState = null;
+    private IList<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> _notifications = new List<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>();
+
+    [CascadingParameter] protected Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
+        {
+            UserId = "",
+            Created = DateTimeOffset.Now.ToGoogleDateTime(),
+            Section = "Entries",
+            AdditionalInfo = "tralalala"
+        });
+        
+        var user = (await AuthenticationStateTask).User;
+        
+        if (user.Identity.IsAuthenticated)
+        {
+            var claims = user.Claims;
+
+            var userId = claims.FirstOrDefault(claim => claim.Type == "sub")?.Value ?? "";
+            var firstName = claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
+            var lastName = claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
+            var emailClaim = claims.FirstOrDefault(claim => claim.Type == "email");
+
+            var loggedUser = await LoadUserDataAsync();
+            
+            if (loggedUser == null || string.IsNullOrEmpty(loggedUser.Id))
+            {
+                await RegisterUserAsync(userId, emailClaim, firstName, lastName);
+            }
+
+            
+            loggedUser = await LoadUserDataAsync();
+        }
+        
+        HandleIncomingNotificationsAsync(stream.ResponseStream);
+    }
+    
+    private async Task HandleIncomingNotificationsAsync(IAsyncStreamReader<LiveUpdatesSubscriptionItem> responseStream)
+    {
+        var cancellationTokenSource = new CancellationTokenSource();
+
+        await Task.Run(async () =>
+        {
+            while (await responseStream.MoveNext<LiveUpdatesSubscriptionItem>())
+            {
+                var notification = responseStream.Current;
+            }
+        });
+    }
+
+    private async Task RegisterUserAsync(string userId, Claim emailClaim, string firstName, string lastName)
+    {
+        var model = new UserProfileModel
+            {
+                UserId = userId,
+                CompetitorId = Guid.Empty,
+                Contact = new UserProfileModel.ContactDto
+                {
+                    EmailAddress = emailClaim.Value
+                },
+                FirstName = firstName,
+                LastName = lastName,
+                Nickname = "",
+                Birthday = DateTime.Now
+            };
+
+        var parameters = new ModalParameters()
+            .Add(nameof(UserProfileModal.Model), model)
+            .Add(nameof(UserProfileModal.RequiredAction), UserProfileRequiredAction.Register);
+
+        var messageForm = modal.Show<UserProfileModal>("Registering user", parameters);
+        var result = await messageForm.Result;
+    }
+
+    private async Task<UserProfileModel> LoadUserDataAsync()
+    {
+        var userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
+
+        if (userProfile == null || userProfile.Id == string.Empty)
+            return null;
+
+        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
+
+        // load all rights of current user
+        var getActionRightsResponse = await ActionRightsClient.getActionRightsAsync(
+            new Protos.ActionRights.GetActionRights.GetActionRightsRequest
+            {
+                Id = ""
+            });
+
+        var userRights = new List<UserProfileModel.ActionRightsDto>();
+        foreach (var right in getActionRightsResponse.Rights)
+        {
+            userRights.Add(new UserProfileModel.ActionRightsDto
+            {
+                Id = right.Id,
+                ActionId = right.ActionId,
+                UserId = right.UserId,
+                Roles = right.Roles
+            });
+        }
+
+        UserProfileService.SetRights(userRights);
+
+        return UserProfileService.Get();
+    }
+}

@@ -1,0 +1,96 @@
+﻿@using PetsOnTrailApp.Models
+@using MapsterMapper
+@using Protos.Results
+@using PetsOnTrailApp.Shared
+
+@inject IStringLocalizer<Resource> Localizer
+@inject IMapper Mapper
+@inject Protos.Results.Results.ResultsClient ResultsClient
+
+<h3>@Category.Name</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>@Localizer["#"]</th>
+        <th>@Localizer["Surname"]</th>
+        <th>@Localizer["Name"]</th>
+        <th>@Localizer["Start"]</th>
+        <th>@Localizer["Finish"]</th>
+        <th>@Localizer["Time"]</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var racer in Category.Racers
+        .OrderBy(r =>
+        {
+            var totalTime = r.Finish.HasValue && r.Start.HasValue ? r.Finish.Value - r.Start.Value : TimeSpan.MaxValue;
+            return (long) totalTime.TotalSeconds;
+        }))
+    {
+        var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
+        string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int) totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
+
+        <tr>
+            <td>
+                <div class="col-12">?</div>
+            </td>
+            <td>
+                <div class="col-12">@racer.LastName</div>
+            </td>
+            <td>
+                <div class="col-12">@racer.FirstName</div>
+            </td>
+            <td>
+                <div class="col-12">@racer.Start?.ToString("dd HH:mm:ss")</div>
+            </td>
+            <td>
+                <div class="col-12">@racer.Finish?.ToString("dd HH:mm:ss")</div>
+            </td>
+            <td>
+                <div class="col-12">@time</div>
+            </td>
+        </tr>
+    }
+    
+        <tr data-racer-id="@NewRacer.Id">
+            <td>?</td>
+            <td><InputText @bind-Value="@NewRacer.FirstName"/></td>
+            <td><InputText @bind-Value="@NewRacer.LastName"/></td>
+            <td><InputDateTimeComponent Model="@NewRacer.Start" StartDate="DateTime.Today" /></td>
+            <td><InputDateTimeComponent Model="@NewRacer.Finish" StartDate="DateTime.Today" /></td>
+            <td><InputTimeCalcComponent Model="@WholeTimeProxy" /></td>
+            <button @onclick="@(async () => await AddRacerAsync())" class="btn btn-primary">@Localizer["Results.AddResult.Submit"]</button>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+    [Parameter] public string ActionId { get; set; }
+    [Parameter] public ActionModel.RaceDto Race { get; set; }
+    [Parameter] public ActionModel.CategoryDto Category { get; set; }
+    
+    private ActionModel.RacerDto NewRacer { get; set; } = new();
+    private InputTimeSpanModel WholeTimeProxy = new();
+
+    private async Task AddRacerAsync()
+    {
+        if (WholeTimeProxy.IsValid)
+        {
+            NewRacer.Start = Race.Begin;
+            NewRacer.Finish = Race.Begin.AddSeconds(WholeTimeProxy.Value.Seconds);
+        }
+
+        await ResultsClient.addResultAsync(new AddResultRequest {
+            ActionId = ActionId,
+            RaceId = Race.Id.ToString(),
+            CategoryId = Category.Id.ToString()
+        });
+        
+        Category.Racers.Add(Mapper.Map<ActionModel.RacerDto>(NewRacer));
+
+        NewRacer = new();
+
+        StateHasChanged();
+    }
+}
