@@ -15,4 +15,5 @@ message AddCheckpointRequest {
   google.type.DateTime CheckpointTime = 5;
   string Data = 6;
   google.type.LatLng Position = 7;
+  string Note = 8;
 }

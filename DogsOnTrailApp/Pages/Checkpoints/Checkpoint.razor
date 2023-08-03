@@ -15,15 +15,20 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-4">
-            <input type="text" value="@ToString(Model.CheckpointTime)" disabled />
+        <div class="col-4">
+            <input type="text" value="@ToString(Model.CheckpointTime)" disabled placeholder="@Loc["Checkpoint.Time"]" />
         </div>
-        <div class="col-sm-12 col-4">
+        <div class="col-4">
             <Switch @bind-Value="ContinualGpsCoordinatesAcquiringIsOn" Label="@Loc["Checkpoint.GPS"]" />
-            <input type="text" value="@ToGpsCoordsString(Model.Position)" disabled />
+            <input type="text" value="@ToGpsCoordsString(Model.Position)" disabled placeholder="@Loc["Checkpoint.Position"]" />
         </div>
-        <div class="col-sm-12 col-4">
-            <input type="text" @bind="@Model.Data" />
+        <div class="col-4">
+            <input type="text" @bind="@Model.Data" placeholder="@Loc["Checkpoint.Data"]" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <input type="text" style="width: 100%;" @bind="@Model.Note" placeholder="@Loc["Checkpoint.Note"]" />
         </div>
     </div>
 </div>

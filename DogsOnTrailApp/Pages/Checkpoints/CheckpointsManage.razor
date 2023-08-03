@@ -34,6 +34,7 @@ else
             <th>@Loc["Checkpoint.Action"]</th>
             <th>@Loc["Checkpoint.Checkpoint"]</th>
             <th>@Loc["Checkpoint.User"]</th>
+            <th>@Loc["Checkpoint.Note"]</th>
         </tr>
         </thead>
         <tbody>
@@ -54,6 +55,7 @@ else
                 <td>@actionName</td>
                 <td>@checkpointName</td>
                 <td>@userName</td>
+                <td>@checkpoint.Note</td>
             </tr>
         }
         </tbody>
@@ -131,20 +133,22 @@ else
         });
 
         _usedUserProfiles = selectedUserProfiles.Items.Select(up => (Id: up.Id, Name: up.Name, Surname: up.Surname, Nickname: up.Nickname)).ToList();
+        
+        StateHasChanged();
     }
 
     private string ResolveAction(Guid actionId)
     {
         return _usedActions
             .FirstOrDefault(ua => ua.Id == actionId)?.Name 
-               ?? actionId.ToString();
+               ?? (actionId != Guid.Empty ? actionId.ToString() : "");
     }
 
     private string ResolveCheckpoint(Guid actionId, Guid checkpointId)
     {
         return _usedActions
             .FirstOrDefault(ua => ua.Id == actionId)?.Checkpoints?.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId)?.Name
-            ?? checkpointId.ToString();
+            ?? (checkpointId != Guid.Empty ? checkpointId.ToString() : "");
     }
 
     private string ResolveUser(string userId)

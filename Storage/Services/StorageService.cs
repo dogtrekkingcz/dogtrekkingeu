@@ -72,6 +72,18 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
     {
         return await GetSelectedListAsync(ids.Select(id => id.ToString()).ToList(), cancellationToken);
     }
+
+    public async Task<IReadOnlyList<T>> GetSelectedListAsync(string key, IList<string> ids, CancellationToken cancellationToken)
+    {
+        FilterDefinition<T> filter = Builders<T>.Filter
+            .In(key, ids.Select(id => id));
+        
+        var document = await _collection
+            .Find(filter)
+            .ToListAsync(cancellationToken);
+
+        return document;
+    }
     
     public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, System.Type typeOfValue, object value)> filterList, CancellationToken cancellationToken)
     {

@@ -23,6 +23,8 @@ public sealed record AddCheckpointItemInternalStorageRequest
     public string Data { get; set; }
 
     public LatLngDto Position { get; set; } = new LatLngDto();
+    
+    public string Note { get; set; }
 
     public sealed record LatLngDto
     {

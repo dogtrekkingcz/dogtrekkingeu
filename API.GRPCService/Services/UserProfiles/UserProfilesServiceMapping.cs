@@ -39,6 +39,8 @@ internal static class UserProfilesServiceMapping
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
         
+        typeAdapterConfig.NewConfig<GetSelectedSurnameNameResponse.SelectedSurnameNameDto, Protos.UserProfiles.GetSelectedSurnameName.SelectedSurnameName>();
+        
         return typeAdapterConfig;
     }
 }

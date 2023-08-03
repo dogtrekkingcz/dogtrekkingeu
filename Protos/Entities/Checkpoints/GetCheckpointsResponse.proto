@@ -23,6 +23,7 @@ message CheckpointItem {
   google.type.DateTime Created = 9;
   string Data = 10;
   google.type.LatLng Position = 11;
+  string Note = 12;
 }
 
 

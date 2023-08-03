@@ -21,6 +21,8 @@ public sealed record CheckpointModel
     public string Data { get; set; } = string.Empty;
 
     public LatLngDto Position { get; set; } = new();
+
+    public string Note { get; set; } = string.Empty;
     
     public sealed record LatLngDto
     {
