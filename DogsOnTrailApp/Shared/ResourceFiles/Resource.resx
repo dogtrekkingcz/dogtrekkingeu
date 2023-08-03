@@ -432,4 +432,46 @@
     <data name="LostPets.Title" xml:space="preserve">
         <value>Lost pets</value>
     </data>
+    <data name="Checkpoint.DateTime" xml:space="preserve">
+        <value>Date &amp; time</value>
+    </data>
+    <data name="Checkpoint.Position" xml:space="preserve">
+        <value>Position</value>
+    </data>
+    <data name="Checkpoint.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Checkpoint.Data" xml:space="preserve">
+        <value>Data</value>
+    </data>
+    <data name="Checkpoint.Action" xml:space="preserve">
+        <value> Action</value>
+    </data>
+    <data name="Checkpoint.Checkpoint" xml:space="preserve">
+        <value>Checkpoint</value>
+    </data>
+    <data name="Checkpoint.User" xml:space="preserve">
+        <value>User</value>
+    </data>
+    <data name="Checkpoint.Note" xml:space="preserve">
+        <value>Note</value>
+    </data>
+    <data name="Checkpoint.Time" xml:space="preserve">
+        <value>Time</value>
+    </data>
+    <data name="Checkpoint.ShowDetails" xml:space="preserve">
+        <value>Show details</value>
+    </data>
+    <data name="Checkpoint.AutoSend" xml:space="preserve">
+        <value>Auto-send</value>
+    </data>
+    <data name="Checkpoint.UnableToStartCameraForQrCodeReading" xml:space="preserve">
+        <value>🎥 Unable to access video stream (please make sure you have a webcam enabled)</value>
+    </data>
+    <data name="Checkpoint.NoQRDetected" xml:space="preserve">
+        <value>No QR code detected.</value>
+    </data>
+    <data name="Checkpoint.SendData" xml:space="preserve">
+        <value>Send data</value>
+    </data>
 </root>

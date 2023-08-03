@@ -726,6 +726,51 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  Action.
+        /// </summary>
+        internal static string Checkpoint_Action {
+            get {
+                return ResourceManager.GetString("Checkpoint.Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-send.
+        /// </summary>
+        internal static string Checkpoint_AutoSend {
+            get {
+                return ResourceManager.GetString("Checkpoint.AutoSend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checkpoint.
+        /// </summary>
+        internal static string Checkpoint_Checkpoint {
+            get {
+                return ResourceManager.GetString("Checkpoint.Checkpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        internal static string Checkpoint_Data {
+            get {
+                return ResourceManager.GetString("Checkpoint.Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date &amp; time.
+        /// </summary>
+        internal static string Checkpoint_DateTime {
+            get {
+                return ResourceManager.GetString("Checkpoint.DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tool for getting and sending the current position of the racers..
         /// </summary>
         internal static string Checkpoint_Description {
@@ -744,6 +789,42 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Checkpoint_Name {
+            get {
+                return ResourceManager.GetString("Checkpoint.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No QR code detected..
+        /// </summary>
+        internal static string Checkpoint_NoQRDetected {
+            get {
+                return ResourceManager.GetString("Checkpoint.NoQRDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        internal static string Checkpoint_Note {
+            get {
+                return ResourceManager.GetString("Checkpoint.Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position.
+        /// </summary>
+        internal static string Checkpoint_Position {
+            get {
+                return ResourceManager.GetString("Checkpoint.Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to QR Reader.
         /// </summary>
         internal static string Checkpoint_QrReader {
@@ -753,11 +834,56 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send data.
+        /// </summary>
+        internal static string Checkpoint_SendData {
+            get {
+                return ResourceManager.GetString("Checkpoint.SendData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show details.
+        /// </summary>
+        internal static string Checkpoint_ShowDetails {
+            get {
+                return ResourceManager.GetString("Checkpoint.ShowDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string Checkpoint_Time {
+            get {
+                return ResourceManager.GetString("Checkpoint.Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checkpoint.
         /// </summary>
         internal static string Checkpoint_Title {
             get {
                 return ResourceManager.GetString("Checkpoint.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🎥 Unable to access video stream (please make sure you have a webcam enabled).
+        /// </summary>
+        internal static string Checkpoint_UnableToStartCameraForQrCodeReading {
+            get {
+                return ResourceManager.GetString("Checkpoint.UnableToStartCameraForQrCodeReading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        internal static string Checkpoint_User {
+            get {
+                return ResourceManager.GetString("Checkpoint.User", resourceCulture);
             }
         }
         

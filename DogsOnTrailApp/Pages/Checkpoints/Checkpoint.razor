@@ -67,18 +67,18 @@
             <Switch @bind-Value="AutoSend" Label="@Loc["Checkpoint.AutoSend"]" />
 
             <div class="card card-body">
-                <div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
+                <div id="loadingMessage">@Loc["Checkpoint.UnableToStartCameraForQrCodeReading"]</div>
                 <canvas id="canvas" hidden></canvas>
 
                 <div id="output" hidden>
-                    <div id="outputMessage">No QR code detected.</div>
+                    <div id="outputMessage">@Loc["Checkpoint.NoQRDetected"]</div>
                 </div>
             </div>
         </CardBody>
     </Card>
 </Collapse>
 
-<button type="button" @onclick="SendDataAsync">Send data</button>
+<button type="button" @onclick="SendDataAsync">@Loc["Checkpoint.SendData"]</button>
   
 @code {
 

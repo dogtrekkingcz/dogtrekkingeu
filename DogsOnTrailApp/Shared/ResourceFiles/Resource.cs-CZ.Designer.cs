@@ -726,6 +726,51 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Akce.
+        /// </summary>
+        internal static string Checkpoint_Action {
+            get {
+                return ResourceManager.GetString("Checkpoint.Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Autoposílání.
+        /// </summary>
+        internal static string Checkpoint_AutoSend {
+            get {
+                return ResourceManager.GetString("Checkpoint.AutoSend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontrola.
+        /// </summary>
+        internal static string Checkpoint_Checkpoint {
+            get {
+                return ResourceManager.GetString("Checkpoint.Checkpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        internal static string Checkpoint_Data {
+            get {
+                return ResourceManager.GetString("Checkpoint.Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum a čas.
+        /// </summary>
+        internal static string Checkpoint_DateTime {
+            get {
+                return ResourceManager.GetString("Checkpoint.DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nástroj pro sbírání aktuální polohy a odesílání stavu závodníků na trati..
         /// </summary>
         internal static string Checkpoint_Description {
@@ -744,6 +789,42 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Název.
+        /// </summary>
+        internal static string Checkpoint_Name {
+            get {
+                return ResourceManager.GetString("Checkpoint.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Žádný QR kód nebyl detekován.
+        /// </summary>
+        internal static string Checkpoint_NoQRDetected {
+            get {
+                return ResourceManager.GetString("Checkpoint.NoQRDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poznámka.
+        /// </summary>
+        internal static string Checkpoint_Note {
+            get {
+                return ResourceManager.GetString("Checkpoint.Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozice.
+        /// </summary>
+        internal static string Checkpoint_Position {
+            get {
+                return ResourceManager.GetString("Checkpoint.Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to QR čtečka.
         /// </summary>
         internal static string Checkpoint_QrReader {
@@ -753,11 +834,56 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Odeslat data.
+        /// </summary>
+        internal static string Checkpoint_SendData {
+            get {
+                return ResourceManager.GetString("Checkpoint.SendData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zobraz detaily.
+        /// </summary>
+        internal static string Checkpoint_ShowDetails {
+            get {
+                return ResourceManager.GetString("Checkpoint.ShowDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Čas.
+        /// </summary>
+        internal static string Checkpoint_Time {
+            get {
+                return ResourceManager.GetString("Checkpoint.Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Živá kontrola.
         /// </summary>
         internal static string Checkpoint_Title {
             get {
                 return ResourceManager.GetString("Checkpoint.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🎥 Není možné zpřístupnit video stream. Ujistěte se, že máte kameru pro tento web povolenou..
+        /// </summary>
+        internal static string Checkpoint_UnableToStartCameraForQrCodeReading {
+            get {
+                return ResourceManager.GetString("Checkpoint.UnableToStartCameraForQrCodeReading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uživatel.
+        /// </summary>
+        internal static string Checkpoint_User {
+            get {
+                return ResourceManager.GetString("Checkpoint.User", resourceCulture);
             }
         }
         

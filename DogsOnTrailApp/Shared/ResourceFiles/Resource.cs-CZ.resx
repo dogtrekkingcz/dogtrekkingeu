@@ -432,4 +432,46 @@
     <data name="LostPets.Title" xml:space="preserve">
         <value>Zaběhnutí mazlíci</value>
     </data>
+    <data name="Checkpoint.DateTime" xml:space="preserve">
+        <value>Datum a čas</value>
+    </data>
+    <data name="Checkpoint.Position" xml:space="preserve">
+        <value>Pozice</value>
+    </data>
+    <data name="Checkpoint.Name" xml:space="preserve">
+        <value>Název</value>
+    </data>
+    <data name="Checkpoint.Data" xml:space="preserve">
+        <value>Data</value>
+    </data>
+    <data name="Checkpoint.Action" xml:space="preserve">
+        <value>Akce</value>
+    </data>
+    <data name="Checkpoint.Checkpoint" xml:space="preserve">
+        <value>Kontrola</value>
+    </data>
+    <data name="Checkpoint.User" xml:space="preserve">
+        <value>Uživatel</value>
+    </data>
+    <data name="Checkpoint.Note" xml:space="preserve">
+        <value>Poznámka</value>
+    </data>
+    <data name="Checkpoint.Time" xml:space="preserve">
+        <value>Čas</value>
+    </data>
+    <data name="Checkpoint.ShowDetails" xml:space="preserve">
+        <value>Zobraz detaily</value>
+    </data>
+    <data name="Checkpoint.AutoSend" xml:space="preserve">
+        <value>Autoposílání</value>
+    </data>
+    <data name="Checkpoint.UnableToStartCameraForQrCodeReading" xml:space="preserve">
+        <value>🎥 Není možné zpřístupnit video stream. Ujistěte se, že máte kameru pro tento web povolenou.</value>
+    </data>
+    <data name="Checkpoint.NoQRDetected" xml:space="preserve">
+        <value>Žádný QR kód nebyl detekován</value>
+    </data>
+    <data name="Checkpoint.SendData" xml:space="preserve">
+        <value>Odeslat data</value>
+    </data>
 </root>
