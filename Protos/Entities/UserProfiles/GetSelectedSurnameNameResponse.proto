@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.UserProfiles.GetSelectedSurnameName";
+
+package getselectedsurnamename;
+
+message GetSelectedSurnameNameResponse {
+  repeated SelectedSurnameName Items = 1;
+}
+
+message SelectedSurnameName {
+  string Id = 1;
+  string Name = 2;
+  string Surname = 3;
+  string Nickname = 4;
+}

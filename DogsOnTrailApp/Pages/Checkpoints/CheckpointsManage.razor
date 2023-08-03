@@ -5,8 +5,11 @@
 @using DogsOnTrailApp.Extensions
 @using Protos.Actions.GetSelectedActions
 @using Protos.Checkpoints.GetCheckpoints
+@using Protos.UserProfiles.GetSelectedSurnameName
+
 @inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 @inject Protos.Actions.Actions.ActionsClient ActionsClient
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
 @inject IStringLocalizer<Resource> Loc
 @inject IMapper Mapper
 
@@ -81,6 +84,8 @@ else
     
     private List<CheckpointModel> _checkpointsList { get; set; } = null;
 
+    private List<(string Id, string Name, string Surname, string Nickname)> _usedUserProfiles { get; set; } = null;
+
     protected override async Task OnInitializedAsync()
     {
         var response = await CheckpointsClient.getCheckpointsAsync(new GetCheckpointsRequest
@@ -102,6 +107,7 @@ else
         var actionList = _checkpointsList
             .Where(checkpoint => checkpoint.ActionId != Guid.Empty)
             .Select(checkpoint => checkpoint.ActionId.ToString())
+            .Distinct()
             .ToList();
 
         var selectedActions = await ActionsClient.getSelectedActionsAsync(new GetSelectedActionsRequest
@@ -109,7 +115,22 @@ else
             Ids = { actionList }
         });
 
-        _usedActions = Mapper.Map<List<ActionModel>>(selectedActions);
+        _usedActions = selectedActions.Actions.Select(sa => Mapper.Map<ActionModel>(sa)).ToList();
+        
+        StateHasChanged();
+
+        var usersList = _checkpointsList
+            .Where(checkpoint => string.IsNullOrWhiteSpace(checkpoint.UserId) == false)
+            .Select(checkpoint => checkpoint.UserId)
+            .Distinct()
+            .ToList();
+
+        var selectedUserProfiles = await UserProfilesClient.getSelectedSurnameNameAsync(new GetSelectedSurnameNameRequest
+        {
+            Ids = { usersList }
+        });
+
+        _usedUserProfiles = selectedUserProfiles.Items.Select(up => (Id: up.Id, Name: up.Name, Surname: up.Surname, Nickname: up.Nickname)).ToList();
     }
 
     private string ResolveAction(Guid actionId)
@@ -126,9 +147,15 @@ else
             ?? checkpointId.ToString();
     }
 
-    private string ResolveUser(Guid userId)
+    private string ResolveUser(string userId)
     {
-        return userId.ToString();
+        var identifiedUser = _usedUserProfiles?
+            .FirstOrDefault(up => up.Id == userId);
+
+        if (identifiedUser == null)
+            return userId;
+
+        return $"{identifiedUser.Value.Surname}, {identifiedUser.Value.Name} ({identifiedUser.Value.Nickname})";
     }
 
     private string ResolveData(Guid actionId, string data)

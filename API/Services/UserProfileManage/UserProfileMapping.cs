@@ -35,6 +35,11 @@ internal static class UserProfileMapping
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.LatLngDto, CreateUserProfileInternalStorageRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageResponse, CreateUserProfileResponse>();
 
+        typeAdapterConfig.NewConfig<GetSelectedUserProfilesInternalStorageResponse.UserProfileDto, GetSelectedSurnameNameResponse.SelectedSurnameNameDto>()
+            .Map(d => d.Id, s => s.Id)
+            .Map(d => d.Name, s => s.FirstName)
+            .Map(d => d.Surname, s => s.LastName)
+            .Map(d => d.Nickname, s => s.Nickname);
 
         return typeAdapterConfig;
     }

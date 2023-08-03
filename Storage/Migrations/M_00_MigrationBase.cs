@@ -7,7 +7,7 @@ internal abstract class M_00_MigrationBase : IMigration
     protected readonly IActionRightsRepositoryService ActionRightsRepositoryService;
     protected readonly IActionsRepositoryService ActionsRepositoryService;
     protected readonly IAuthorizationRolesRepositoryService AuthorizationRolesRepositoryService;
-    protected readonly IDogsRepositoryService DogsRepositoryService;
+    protected readonly IPetsRepositoryService DogsRepositoryService;
     protected readonly IEntriesRepositoryService EntriesRepositoryService;
     protected readonly IUserProfilesRepositoryService UserProfilesRepositoryService;
 
@@ -20,7 +20,7 @@ internal abstract class M_00_MigrationBase : IMigration
         IActionRightsRepositoryService actionRightsRepositoryService,
         IActionsRepositoryService actionsRepositoryService,
         IAuthorizationRolesRepositoryService authorizationRolesRepositoryService,
-        IDogsRepositoryService dogsRepositoryService,
+        IPetsRepositoryService petsRepositoryService,
         IEntriesRepositoryService entriesRepositoryService,
         IUserProfilesRepositoryService userProfilesRepositoryService
         )
@@ -28,7 +28,7 @@ internal abstract class M_00_MigrationBase : IMigration
         ActionRightsRepositoryService = actionRightsRepositoryService;
         ActionsRepositoryService = actionsRepositoryService;
         AuthorizationRolesRepositoryService = authorizationRolesRepositoryService;
-        DogsRepositoryService = dogsRepositoryService;
+        DogsRepositoryService = petsRepositoryService;
         EntriesRepositoryService = entriesRepositoryService;
         UserProfilesRepositoryService = userProfilesRepositoryService;
     }

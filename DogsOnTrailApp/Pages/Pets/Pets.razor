@@ -1,0 +1,58 @@
+﻿@page "/pets"
+
+@using MapsterMapper
+@using DogsOnTrailApp.Models
+
+@inject Protos.Pets.Pets.PetsClient PetsClient
+@inject IStringLocalizer<Resource> localizer
+@inject IMapper mapper
+@inject NavigationManager NavManager
+
+<h3>@localizer["LostPets.Title"]</h3>
+<h5>@localizer["LostPets.Description"]</h5>
+
+<table>
+    <thead>
+        <tr>
+            <th>@localizer["Pets.Chip"]</th>
+            <th>@localizer["Pets.Type"]</th>
+            <th>@localizer["Pets.Name"]</th>
+            <th>@localizer["Pets.Pedigree"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pet in _pets)
+        {
+            <tr>
+                <td>@pet.Chip</td>
+                <td>@pet</td>
+                <td>@pet.Name</td>
+                <td>@pet.Pedigree</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button @onclick="@(() => AddPet())" class="btn btn-primary">@localizer["Pets.AddPet"]</button>  
+
+@code {
+    private IList<PetModel> _pets { get; set; } = new List<PetModel>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadData();
+    }
+
+    private async Task ReloadData()
+    {
+        Protos.Pets.GetAllPets.GetAllPetsResponse response = await PetsClient.getAllPetsAsync(new Protos.Pets.GetAllPets.GetAllPetsRequest());
+
+        _pets = response.Pets
+            .Select(pet => mapper.Map<PetModel>(pet))
+            .ToList();
+    }
+
+    protected void AddPet()
+    {
+        NavManager.NavigateTo($"/petsadd");
+    }
+}

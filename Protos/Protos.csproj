@@ -25,7 +25,25 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Dogs.proto">
+      <Protobuf Include="Entities\UserProfiles\GetSelectedSurnameNameRequest.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\UserProfiles\GetSelectedSurnameNameResponse.proto">
+        <GrpcServices>Both</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Pets.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -232,7 +250,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\CreateDogRequest.proto">
+      <Protobuf Include="Entities\Pets\CreatePetRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -241,7 +259,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\CreateDogResponse.proto">
+      <Protobuf Include="Entities\Pets\CreatePetResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -250,7 +268,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\DeleteDogRequest.proto">
+      <Protobuf Include="Entities\Pets\DeletePetRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -259,7 +277,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\DeleteDogResponse.proto">
+      <Protobuf Include="Entities\Pets\DeletePetResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -268,7 +286,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\GetAllDogsRequest.proto">
+      <Protobuf Include="Entities\Pets\GetAllPetsRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -277,7 +295,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\GetAllDogsResponse.proto">
+      <Protobuf Include="Entities\Pets\GetAllPetsResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -286,7 +304,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\GetDogsFilteredByChipRequest.proto">
+      <Protobuf Include="Entities\Pets\GetPetsFilteredByChipRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>
@@ -295,7 +313,7 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
-      <Protobuf Include="Entities\Dogs\GetDogsFilteredByChipResponse.proto">
+      <Protobuf Include="Entities\Pets\GetPetsFilteredByChipResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>

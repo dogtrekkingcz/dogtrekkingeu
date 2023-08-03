@@ -11,5 +11,7 @@ namespace Storage.Interfaces
         public Task<GetUserProfileInternalStorageResponse> GetUserProfileAsync(GetUserProfileInternalStorageRequest request, CancellationToken cancellationToken);
         
         public Task DeleteUserProfileAsync(DeleteUserProfileInternalStorageRequest request, CancellationToken cancellationToken);
+
+        public Task<GetSelectedUserProfilesInternalStorageResponse> GetSelectedUserProfiles(GetSelectedUserProfilesInternalStorageRequest request, CancellationToken cancellationToken);
     }
 }

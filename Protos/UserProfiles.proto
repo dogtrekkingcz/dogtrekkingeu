@@ -10,9 +10,12 @@ import "Entities/UserProfiles/GetUserProfileRequest.proto";
 import "Entities/UserProfiles/GetUserProfileResponse.proto";
 import "Entities/UserProfiles/UpdateUserProfileRequest.proto";
 import "Entities/UserProfiles/UpdateUserProfileResponse.proto";
+import "Entities/UserProfiles/GetSelectedSurnameNameRequest.proto";
+import "Entities/UserProfiles/GetSelectedSurnameNameResponse.proto";
 
 service UserProfiles {
   rpc registerUserProfile (createuserprofile.CreateUserProfileRequest) returns (createuserprofile.CreateUserProfileResponse);
   rpc getUserProfile (getuserprofile.GetUserProfileRequest) returns (getuserprofile.GetUserProfileResponse);
   rpc updateUserProfile (updateuserprofile.UpdateUserProfileRequest) returns (updateuserprofile.UpdateUserProfileResponse);
+  rpc getSelectedSurnameName (getselectedsurnamename.GetSelectedSurnameNameRequest) returns (getselectedsurnamename.GetSelectedSurnameNameResponse);
 }

@@ -104,14 +104,12 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<GetSelectedActionsInternalStorageResponse> GetSelectedActionsAsync(GetSelectedActionsInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var getAllActions = await _actionsStorageService.GetByFilterAsync(
-                request.Ids
-                    .Select(id => ( id: "_id", typeOfValue: typeof(Guid), key: (object) id ))
-                    .ToList(), 
-                cancellationToken);
+            Console.WriteLine($"{nameof(GetSelectedActionsAsync)} - request: '{request?.Dump()}'");
+            
+            var selectedActions = await _actionsStorageService.GetSelectedListAsync(request.Ids, cancellationToken);
 
             var actions = new List<GetSelectedActionsInternalStorageResponse.ActionDto>();
-            foreach (var action in getAllActions)
+            foreach (var action in selectedActions)
             {
                 actions.Add(_mapper.Map<GetSelectedActionsInternalStorageResponse.ActionDto>(action));
             }
@@ -120,6 +118,8 @@ namespace Storage.Services.Repositories.Actions
             {
                 Actions = actions
             };
+            
+            Console.WriteLine($"{nameof(GetSelectedActionsAsync)} - response: '{response?.Dump()}'");
             
             return response;
         }

@@ -1005,6 +1005,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaběhnutí mazlíci.
+        /// </summary>
+        internal static string LostPets_Title {
+            get {
+                return ResourceManager.GetString("LostPets.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Akce.
         /// </summary>
         internal static string Menu_Actions {

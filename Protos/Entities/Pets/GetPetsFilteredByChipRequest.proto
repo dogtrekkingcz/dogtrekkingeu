@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets.GetPetsFilteredByChip";
+
+package getpetsfilteredbychip;
+
+message GetPetsFilteredByChipRequest {
+  string Chip = 1;
+}

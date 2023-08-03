@@ -1,7 +1,6 @@
 ﻿using MapsterMapper;
 using MongoDB.Bson;
 using Storage.Entities.Checkpoints;
-using Storage.Entities.Dogs;
 using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;

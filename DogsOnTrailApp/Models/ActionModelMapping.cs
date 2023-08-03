@@ -31,6 +31,7 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.LatLngDto, Google.Type.LatLng>()
             .Map(d => d.Latitude, s => s.GpsLatitude)
             .Map(d => d.Longitude, s => s.GpsLongitude);
+        typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.CreateAction.CheckpointDto>();
         
         typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.UpdateAction.UpdateActionRequest>();
         typeAdapterConfig.NewConfig<ActionModel.ActionType, Protos.Actions.UpdateAction.ActionType>();
@@ -53,7 +54,7 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.UpdateAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.UpdateAction.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<ActionModel.ActionSaleItemDto, Protos.Actions.UpdateAction.ActionSaleItemDto>();
-
+        typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.UpdateAction.CheckpointDto>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionResponse, ActionModel>()
             .Map(d => d.Created, s => s.Created.ToDateTimeOffset());
@@ -95,8 +96,10 @@ namespace DogsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Google.Type.LatLng, ActionModel.LatLngDto>()
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
-        
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.Action, ActionModel>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CheckpointDto, ActionModel.CheckpointDto>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.Action, ActionModel>()
+            .Ignore(d => d.Checkpoints);
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RacerDto, ActionModel.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.NoteDto, ActionModel.NoteDto>();
@@ -143,6 +146,7 @@ namespace DogsOnTrailApp.Models;
             .Map(d => d.From, s => s.From.ToDateTimeOffset())
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CheckpointDto, ActionModel.CheckpointDto>();
         
         return typeAdapterConfig;
     }

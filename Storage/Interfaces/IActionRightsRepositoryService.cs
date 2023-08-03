@@ -1,5 +1,4 @@
 ﻿using Storage.Entities.ActionRights;
-using Storage.Entities.Dogs;
 
 namespace Storage.Interfaces
 {

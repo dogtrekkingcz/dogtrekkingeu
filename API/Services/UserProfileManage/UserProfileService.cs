@@ -58,5 +58,19 @@ namespace DogsOnTrail.Actions.Services.UserProfileManage
 
             return new UpdateUserProfileResponse();
         }
+
+        public async Task<GetSelectedSurnameNameResponse> GetSelectedSurnameNameAsync(GetSelectedSurnameNameRequest request, CancellationToken cancellationToken)
+        {
+            var selectedUsers = await _userProfilesRepositoryService.GetSelectedUserProfiles(new GetSelectedUserProfilesInternalStorageRequest { Ids = request.Ids }, cancellationToken);
+
+            var response = new GetSelectedSurnameNameResponse
+            {
+                Items = selectedUsers.Items
+                    .Select(su => _mapper.Map<GetSelectedSurnameNameResponse.SelectedSurnameNameDto>(su))
+                    .ToList()
+            };
+
+            return response;
+        }
     }
 }

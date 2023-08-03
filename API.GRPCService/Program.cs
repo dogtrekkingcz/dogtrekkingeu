@@ -4,10 +4,10 @@ using API.GRPCService.Options;
 using API.GRPCService.Services.ActionRights;
 using API.GRPCService.Services.Actions;
 using API.GRPCService.Services.Checkpoints;
-using API.GRPCService.Services.Dogs;
 using API.GRPCService.Services.Entries;
 using API.GRPCService.Services.JwtToken;
 using API.GRPCService.Services.LiveUpdatesSubscription;
+using API.GRPCService.Services.Pets;
 using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
 using DogsOnTrail.Actions;
@@ -69,7 +69,7 @@ typeAdapterConfig
     .AddActionsServiceMapping()
     .AddUserProfilesServiceMapping()
     .AddEntriesServiceMapping()
-    .AddDogsServiceMapping()
+    .AddPetsServiceMapping()
     .AddResultsMapping()
     .AddLiveUpdatesSubscriptionMapping()
     .AddCheckpointsServiceMapping();
@@ -123,7 +123,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapGrpcService<UserProfilesService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<ActionRightsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<EntriesService>().EnableGrpcWeb().RequireCors("AllowAll");
-        endpoints.MapGrpcService<DogsService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<PetsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<ResultsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<LiveUpdatesSubscriptionGrpcService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<CheckpointsService>().EnableGrpcWeb().RequireCors("AllowAll");

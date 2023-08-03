@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets";
+
+package pets;
+
+import "Entities/Pets/GetAllPetsRequest.proto";
+import "Entities/Pets/GetAllPetsResponse.proto";
+import "Entities/Pets/CreatePetRequest.proto";
+import "Entities/Pets/CreatePetResponse.proto";
+import "Entities/Pets/GetPetsFilteredByChipRequest.proto";
+import "Entities/Pets/GetPetsFilteredByChipResponse.proto";
+import "Entities/Pets/DeletePetRequest.proto";
+import "Entities/Pets/DeletePetResponse.proto";
+
+service Pets {
+  rpc getAllPets (getallpets.GetAllPetsRequest) returns (getallpets.GetAllPetsResponse);
+  rpc createPet (createpet.CreatePetRequest) returns (createpet.CreatePetResponse);
+  rpc getPetsFilteredByChip (getpetsfilteredbychip.GetPetsFilteredByChipRequest) returns (getpetsfilteredbychip.GetPetsFilteredByChipResponse);
+  rpc deletePet (deletepet.DeletePetRequest) returns (deletepet.DeletePetResponse);
+}

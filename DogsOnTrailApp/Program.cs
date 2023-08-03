@@ -66,7 +66,7 @@ typeAdapterConfig
     .AddUserProfileModelMapping()
     .AddEntryModelMapping()
     .AddActionSettingsModelMapping()
-    .AddDogModelMapping()
+    .AddPetModelMapping()
     .AddCheckpointModelMapping();
 
 builder.Services
@@ -95,7 +95,7 @@ builder.Services
     .AddAuthorizedGrpcClient<Protos.Actions.Actions.ActionsClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Entries.Entries.EntriesClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.ActionRights.ActionRights.ActionRightsClient>(builder.Configuration["GrpcServerUri"])
-    .AddAuthorizedGrpcClient<Protos.Dogs.Dogs.DogsClient>(builder.Configuration["GrpcServerUri"])
+    .AddAuthorizedGrpcClient<Protos.Pets.Pets.PetsClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Results.Results.ResultsClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.LiveUpdatesSubscription.LiveUpdatesSubscription.LiveUpdatesSubscriptionClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcClient<Protos.Checkpoints.Checkpoints.CheckpointsClient>(builder.Configuration["GrpcServerUri"]);

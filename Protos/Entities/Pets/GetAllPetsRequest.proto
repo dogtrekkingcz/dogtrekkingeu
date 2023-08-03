@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets.GetAllPets";
+
+package getallpets;
+
+message GetAllPetsRequest {
+
+}

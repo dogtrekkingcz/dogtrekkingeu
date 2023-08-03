@@ -23,6 +23,10 @@ internal interface IStorageService<T> where T: IRecord
 
     public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken);
 
+    public Task<IReadOnlyList<T>> GetSelectedListAsync(IList<string> ids, CancellationToken cancellationToken);
+    
+    public Task<IReadOnlyList<T>> GetSelectedListAsync(IList<Guid> ids, CancellationToken cancellationToken);
+
     public enum FilterOptions
     {
         Equal = 0,

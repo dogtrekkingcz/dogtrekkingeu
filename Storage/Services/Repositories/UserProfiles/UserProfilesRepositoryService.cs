@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using Storage.Entities.UserProfiles;
+using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
 
@@ -65,6 +66,19 @@ namespace Storage.Services.Repositories.UserProfiles
                 return null;
             
             var response = _mapper.Map<GetUserProfileInternalStorageResponse>(result.First());
+
+            return response;
+        }
+
+        public async Task<GetSelectedUserProfilesInternalStorageResponse> GetSelectedUserProfiles(GetSelectedUserProfilesInternalStorageRequest request, CancellationToken cancellationToken)
+        {
+            var selectedUsers = await _userProfileStorageService.GetSelectedListAsync(request.Ids, cancellationToken);
+
+            var response = new GetSelectedUserProfilesInternalStorageResponse
+            {
+                Items = selectedUsers.Select(su =>
+                    _mapper.Map<GetSelectedUserProfilesInternalStorageResponse.UserProfileDto>(su)).ToList()
+            };
 
             return response;
         }

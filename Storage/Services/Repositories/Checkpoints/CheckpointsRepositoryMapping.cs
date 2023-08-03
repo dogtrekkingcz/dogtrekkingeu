@@ -1,6 +1,5 @@
 ﻿using Mapster;
 using Storage.Entities.Checkpoints;
-using Storage.Entities.Dogs;
 using Storage.Extensions;
 using Storage.Models;
 

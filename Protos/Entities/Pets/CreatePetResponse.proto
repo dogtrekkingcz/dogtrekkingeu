@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets.CreatePet";
+
+package createpet;
+
+message CreatePetResponse {
+  string Id = 1;
+}

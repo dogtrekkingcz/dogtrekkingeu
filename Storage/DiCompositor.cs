@@ -13,7 +13,7 @@ using Storage.Services.Repositories.ActionRights;
 using Storage.Services.Repositories.Actions;
 using Storage.Services.Repositories.AuthorizationRoles;
 using Storage.Services.Repositories.Checkpoints;
-using Storage.Services.Repositories.Dogs;
+using Storage.Services.Repositories.Pets;
 using Storage.Services.Repositories.Entries;
 using Storage.Services.Repositories.Migrations;
 using Storage.Services.Repositories.UserProfiles;
@@ -58,8 +58,8 @@ public static class DiCompositor
             .AddSingleton<IStorageService<UserProfileRecord>, StorageService<UserProfileRecord>>()
             .AddScoped<IUserProfilesRepositoryService, UserProfilesRepositoryService>()
 
-            .AddSingleton<IStorageService<DogRecord>, StorageService<DogRecord>>()
-            .AddScoped<IDogsRepositoryService, DogsRepositoryService>()
+            .AddSingleton<IStorageService<PetRecord>, StorageService<PetRecord>>()
+            .AddScoped<IPetsRepositoryService, PetsRepositoryService>()
 
             .AddSingleton<IStorageService<AuthorizationRoleRecord>, StorageService<AuthorizationRoleRecord>>()
             .AddScoped<IAuthorizationRolesRepositoryService, AuthorizationRolesRepositoryService>()
@@ -86,7 +86,7 @@ public static class DiCompositor
             .AddActionRightsRepositoryMapping()
             .AddUserProfilesRepositoryMapping()
             .AddEntriesRepositoryMapping()
-            .AddDogsRepositoryMapping()
+            .AddPetsRepositoryMapping()
             .AddCheckpointsRepositoryMapping()
             .AddMigrationsRepositoryMapping();
 
@@ -95,7 +95,7 @@ public static class DiCompositor
         BsonClassMap.RegisterClassMap<EntryRecord>();
         BsonClassMap.RegisterClassMap<ActionRightsRecord>();
         BsonClassMap.RegisterClassMap<AuthorizationRoleRecord>();
-        BsonClassMap.RegisterClassMap<DogRecord>();
+        BsonClassMap.RegisterClassMap<PetRecord>();
         BsonClassMap.RegisterClassMap<CheckpointRecord>();
         BsonClassMap.RegisterClassMap<MigrationRecord>();
 
@@ -113,9 +113,9 @@ public static class DiCompositor
         {
             db.CreateCollection("UserProfiles");
         }
-        if (listOfCollections.Contains("Dogs") == false)
+        if (listOfCollections.Contains("Pets") == false)
         {
-            db.CreateCollection("Dogs");
+            db.CreateCollection("Pets");
         }
         if (listOfCollections.Contains("Checkpoints") == false)
         {
@@ -139,11 +139,11 @@ public static class DiCompositor
             db.CreateCollection("Migrations");
         }
 
-        Console.WriteLine($"MongoDb.DogsOnTrail.Collections with initialized collections: {db.ListCollectionNames()}");
+        Console.WriteLine($"MongoDb.PetsOnTrail.Collections with initialized collections: {db.ListCollectionNames()}");
         
         serviceProvider.AddSingleton<IMongoCollection<ActionRecord>>(db.GetCollection<ActionRecord>("Actions"));
         serviceProvider.AddSingleton<IMongoCollection<UserProfileRecord>>(db.GetCollection<UserProfileRecord>("UserProfiles"));
-        serviceProvider.AddSingleton<IMongoCollection<DogRecord>>(db.GetCollection<DogRecord>("Dogs"));
+        serviceProvider.AddSingleton<IMongoCollection<PetRecord>>(db.GetCollection<PetRecord>("Pets"));
         serviceProvider.AddSingleton<IMongoCollection<CheckpointRecord>>(db.GetCollection<CheckpointRecord>("Checkpoints"));
         serviceProvider.AddSingleton<IMongoCollection<ActionRightsRecord>>(db.GetCollection<ActionRightsRecord>("ActionRights"));
         serviceProvider.AddSingleton<IMongoCollection<AuthorizationRoleRecord>>(db.GetCollection<AuthorizationRoleRecord>("AuthorizationRoles"));

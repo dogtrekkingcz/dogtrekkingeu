@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-option csharp_namespace = "Protos.Dogs.DeleteDog";
-
-package deletedog;
-
-message DeleteDogRequest {
-  string Id = 1;
-}

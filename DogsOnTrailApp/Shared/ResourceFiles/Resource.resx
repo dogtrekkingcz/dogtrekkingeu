@@ -429,4 +429,7 @@
     <data name="Action.Manage.Checkpoints" xml:space="preserve">
         <value>Manage recieved checkpoints passes</value>
     </data>
+    <data name="LostPets.Title" xml:space="preserve">
+        <value>Lost pets</value>
+    </data>
 </root>

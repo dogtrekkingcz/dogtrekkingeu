@@ -26,7 +26,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
     public async Task<T> UpdateAsync(T request, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("_id", request.Id);
+        var filter = Builders<T>.Filter.Eq(x => x.Id, request.Id);
         
         await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
 
@@ -35,14 +35,14 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
     public async Task DeleteAsync(string id, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("_id", id);
+        var filter = Builders<T>.Filter.Eq(x => x.Id, id);
         
         await _collection.DeleteOneAsync(filter, cancellationToken: cancellationToken);
     }
 
     public async Task<T> GetAsync(string id, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Eq("_id", id);
+        var filter = Builders<T>.Filter.Eq(x => x.Id, id);
 
         var document = await _collection
             .Find(filter)
@@ -56,6 +56,23 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return document;
     }
 
+    public async Task<IReadOnlyList<T>> GetSelectedListAsync(IList<string> ids, CancellationToken cancellationToken)
+    {
+        FilterDefinition<T> filter = Builders<T>.Filter
+            .In(x => x.Id, ids.Select(id => id));
+        
+        var document = await _collection
+            .Find(filter)
+            .ToListAsync(cancellationToken);
+
+        return document;
+    }
+    
+    public async Task<IReadOnlyList<T>> GetSelectedListAsync(IList<Guid> ids, CancellationToken cancellationToken)
+    {
+        return await GetSelectedListAsync(ids.Select(id => id.ToString()).ToList(), cancellationToken);
+    }
+    
     public async Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, System.Type typeOfValue, object value)> filterList, CancellationToken cancellationToken)
     {
         FilterDefinition<T> filter = Builders<T>.Filter.Empty;
@@ -63,7 +80,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         foreach (var f in filterList)
         {
             if (f.typeOfValue == typeof(Guid))
-                filter &= (Builders<T>.Filter.Eq(f.key, ((Guid) f.value)).ToString());
+                filter &= (Builders<T>.Filter.Eq(f.key, (((Guid) f.value)).ToString()));
             else if (f.typeOfValue == typeof(string))
                 filter &= (Builders<T>.Filter.Eq(f.key, (string) f.value));
             else if (f.typeOfValue == typeof(bool))
