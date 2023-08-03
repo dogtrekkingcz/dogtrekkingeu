@@ -41,7 +41,7 @@ else
         @foreach (var checkpoint in _checkpointsList
             .OrderByDescending(c => c.CheckpointTime))
         {
-            var positionInString = $"{checkpoint.Position.Latitude}E, {checkpoint.Position.Longitude}E";
+            var positionInString = $"{checkpoint.Position.Latitude}N, {checkpoint.Position.Longitude}E";
             var actionName = ResolveAction(checkpoint.ActionId);
             var checkpointName = ResolveCheckpoint(checkpoint.ActionId, checkpoint.CheckpointId);
             var userName = ResolveUser(checkpoint.UserId);

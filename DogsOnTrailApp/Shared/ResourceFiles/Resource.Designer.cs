@@ -888,6 +888,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        internal static string days {
+            get {
+                return ResourceManager.GetString("days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete action.
         /// </summary>
         internal static string Delete_action {
@@ -1050,6 +1059,33 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage my positions.
+        /// </summary>
+        internal static string Home_ManageMyPositions {
+            get {
+                return ResourceManager.GetString("Home.ManageMyPositions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage my profile.
+        /// </summary>
+        internal static string Home_ManageMyProfile {
+            get {
+                return ResourceManager.GetString("Home.ManageMyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not logged in.
+        /// </summary>
+        internal static string Home_YouAreNotLoggedIn {
+            get {
+                return ResourceManager.GetString("Home.YouAreNotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to X.
         /// </summary>
         internal static string InputTime_ClearTime {
@@ -1127,6 +1163,24 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string Loading____ {
             get {
                 return ResourceManager.GetString("Loading ...", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        internal static string Log_in {
+            get {
+                return ResourceManager.GetString("Log in", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log out.
+        /// </summary>
+        internal static string Log_out {
+            get {
+                return ResourceManager.GetString("Log out", resourceCulture);
             }
         }
         
@@ -1221,11 +1275,83 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to months.
+        /// </summary>
+        internal static string months {
+            get {
+                return ResourceManager.GetString("months", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Name_of_action {
             get {
                 return ResourceManager.GetString("Name of action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add pet.
+        /// </summary>
+        internal static string Pets_AddPet {
+            get {
+                return ResourceManager.GetString("Pets.AddPet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chip.
+        /// </summary>
+        internal static string Pets_Chip {
+            get {
+                return ResourceManager.GetString("Pets.Chip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can enter your pets here. Just only you will be able to see them. But in case that the pet will be found anywhere - the founder can find the pet by its chip number and can contact you.
+        /// </summary>
+        internal static string Pets_Description {
+            get {
+                return ResourceManager.GetString("Pets.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Pets_Name {
+            get {
+                return ResourceManager.GetString("Pets.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pedigree.
+        /// </summary>
+        internal static string Pets_Pedigree {
+            get {
+                return ResourceManager.GetString("Pets.Pedigree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evidence of pets.
+        /// </summary>
+        internal static string Pets_Title {
+            get {
+                return ResourceManager.GetString("Pets.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type of pet.
+        /// </summary>
+        internal static string Pets_Type {
+            get {
+                return ResourceManager.GetString("Pets.Type", resourceCulture);
             }
         }
         
@@ -1338,6 +1464,15 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile management.
+        /// </summary>
+        internal static string UserProfile_Manage {
+            get {
+                return ResourceManager.GetString("UserProfile.Manage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         internal static string UserProfile_Manage_City {
@@ -1424,6 +1559,60 @@ namespace DogsOnTrailApp.Shared.ResourceFiles {
         internal static string UserProfile_Manage_Surname {
             get {
                 return ResourceManager.GetString("UserProfile.Manage.Surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My pets.
+        /// </summary>
+        internal static string UserProfile_MyPets {
+            get {
+                return ResourceManager.GetString("UserProfile.MyPets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        internal static string UserProfile_MyPets_Age {
+            get {
+                return ResourceManager.GetString("UserProfile.MyPets.Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chip.
+        /// </summary>
+        internal static string UserProfile_MyPets_Chip {
+            get {
+                return ResourceManager.GetString("UserProfile.MyPets.Chip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string UserProfile_MyPets_Name {
+            get {
+                return ResourceManager.GetString("UserProfile.MyPets.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vaccinations.
+        /// </summary>
+        internal static string UserProfile_MyPets_Vaccinations {
+            get {
+                return ResourceManager.GetString("UserProfile.MyPets.Vaccinations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to years.
+        /// </summary>
+        internal static string years {
+            get {
+                return ResourceManager.GetString("years", resourceCulture);
             }
         }
     }

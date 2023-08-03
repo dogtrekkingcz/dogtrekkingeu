@@ -1,4 +1,5 @@
 ﻿namespace DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
+
 public sealed record GetUserProfileResponse
 {
     public string? Id { get; set; } = string.Empty;
@@ -19,7 +20,7 @@ public sealed record GetUserProfileResponse
 
     public ContactDto Contact { get; set; } = new();
 
-    public List<DogDto> Dogs { get; set; } = new List<DogDto>();
+    public List<PetDto> Pets { get; set; } = new List<PetDto>();
     
     public sealed record AddressDto
     {
@@ -50,7 +51,7 @@ public sealed record GetUserProfileResponse
         public string EmailAddress { get; set; } = string.Empty;
     }
     
-    public record DogDto
+    public record PetDto
     {
         public string? Id { get; set; }
 

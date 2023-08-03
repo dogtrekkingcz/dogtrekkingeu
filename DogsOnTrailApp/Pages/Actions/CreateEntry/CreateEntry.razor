@@ -81,7 +81,7 @@
             Entry.Phone = UserProfileService.Get().Contact.PhoneNumber;
             Entry.UserProfileId = UserProfileService.Get().Id ?? Guid.Empty.ToString();
             Entry.CompetitorId = UserProfileService.Get().CompetitorId.ToString();
-            Entry.Dogs = UserProfileService.Get().Dogs
+            Entry.Dogs = UserProfileService.Get().Pets
                 .Where(dog => dog.Decease == null)
                 .Select(dog => new EntryModel.DogDto
                 {

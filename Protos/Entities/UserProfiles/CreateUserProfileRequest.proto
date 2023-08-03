@@ -17,7 +17,7 @@ message CreateUserProfileRequest {
   google.type.DateTime Birthday = 7;
   Address Address = 8;
   Contact Contact = 9;
-  repeated Dog Dogs = 10;
+  repeated Pet Pets = 10;
 }
 
 message Address {
@@ -34,7 +34,7 @@ message Contact {
   string EmailAddress = 2;
 }
 
-message Dog {
+message Pet {
   string Id = 1;
   string UserId = 2;
   string Contact = 3;

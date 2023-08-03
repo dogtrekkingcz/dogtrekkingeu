@@ -474,4 +474,67 @@
     <data name="Checkpoint.SendData" xml:space="preserve">
         <value>Odeslat data</value>
     </data>
+    <data name="Home.YouAreNotLoggedIn" xml:space="preserve">
+        <value>Nejsi přihlášen</value>
+    </data>
+    <data name="Home.ManageMyProfile" xml:space="preserve">
+        <value>Upravit můj profil</value>
+    </data>
+    <data name="Home.ManageMyPositions" xml:space="preserve">
+        <value>Upravit mé pozice</value>
+    </data>
+    <data name="UserProfile.Manage" xml:space="preserve">
+        <value>Úprava profilu</value>
+    </data>
+    <data name="years" xml:space="preserve">
+        <value>roků</value>
+    </data>
+    <data name="months" xml:space="preserve">
+        <value>měsíců</value>
+    </data>
+    <data name="days" xml:space="preserve">
+        <value>dní</value>
+    </data>
+    <data name="UserProfile.MyPets" xml:space="preserve">
+        <value>Mí mazlíci</value>
+    </data>
+    <data name="UserProfile.MyPets.Name" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="UserProfile.MyPets.Chip" xml:space="preserve">
+        <value>Čip</value>
+    </data>
+    <data name="UserProfile.MyPets.Age" xml:space="preserve">
+        <value>Věk</value>
+    </data>
+    <data name="UserProfile.MyPets.Vaccinations" xml:space="preserve">
+        <value>Očkování</value>
+    </data>
+    <data name="Log out" xml:space="preserve">
+        <value>Odhlásit</value>
+    </data>
+    <data name="Log in" xml:space="preserve">
+        <value>Přihlásit</value>
+    </data>
+    <data name="Pets.Title" xml:space="preserve">
+        <value>Evidence mazlíků</value>
+    </data>
+    <data name="Pets.Description" xml:space="preserve">
+        <value>Můžeš zde zaevidovat své mazlíky. Uvidíš zde pouze své mazlíky, popř. mazlíky, které se hledají. Pokud někdo najde Tvého mazlíka - bude moci zde dohledat majitele a kontaktovat ho.</value>
+    </data>
+    <data name="Pets.Chip" xml:space="preserve">
+        <value>Čip</value>
+    </data>
+    <data name="Pets.Type" xml:space="preserve">
+        <value>Druh</value>
+    </data>
+    <data name="Pets.Name" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Pets.Pedigree" xml:space="preserve">
+        <value>Plemeno</value>
+    </data>
+    <data name="Pets.AddPet" xml:space="preserve">
+        <value>Přidat mazlíka</value>
+    </data>
 </root>

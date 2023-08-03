@@ -10,34 +10,23 @@
 
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthStateProvider
-@inject IModalService modal
-@inject IMapper mapper
-
-@inject Protos.ActionRights.ActionRights.ActionRightsClient ActionRightsClient
-@inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
-@inject IUserProfileService UserProfileService
+@inject IStringLocalizer<Resource> Loc
 
 <AuthorizeView>
     <Authorized>
-        Hello, <a @onclick="@(async () => await UpdateUserAsync())">@_nameOfLoggedUser</a>
-        <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
+        <button class="nav-link btn btn-link" @onclick="BeginLogOut">@Loc["Log out"]</button>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/login">Log in</a>
+        <a href="authentication/login">@Loc["Log in"]</a>
     </NotAuthorized>
 </AuthorizeView>
 
 @code{
     private AuthenticationState _authState = null;
-    private string _nameOfLoggedUser = "";
     private UserProfileModel Model = null;
 
     protected override async Task OnInitializedAsync()
     {
-//        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
-
-//        _nameOfLoggedUser = _authState.User.Claims.FirstOrDefault(claim => claim.Type == "name")?.Value ?? "Unknown";
-        _nameOfLoggedUser = UserProfileService.Get().FirstName;
     }
 
     private async Task UpdateUserAsync()

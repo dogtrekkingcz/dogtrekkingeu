@@ -16,7 +16,7 @@
 @inject IUserProfileService UserProfileService
 @inject AuthenticationStateProvider AuthStateProvider
 @inject IModalService modal
-@inject IStringLocalizer<Resource> localizer
+@inject IStringLocalizer<Resource> Loc
 @inject IMapper mapper
 
 
@@ -24,51 +24,19 @@
 
 <AuthorizeView>
     <Authorized>
-        Jsi přihlášen jako @context.User.Identity?.Name!, UserID: @UserProfileService.Get().UserId<br />
+        Jsi přihlášen jako @context.User.Identity?.Name!, UserID: @UserProfileService.Get().UserId
         <hr />
-        @{
-            var checkpointsLink = $"/checkpoints_manage/%20/%20/{UserProfileService.Get().UserId}";
-        }
-        <a href="@checkpointsLink">Moje nahlaseny polohy</a>
-        <hr />
-        Práva:
+        
         <ul>
             @{
-                foreach (var right in UserProfileService.Get().Rights)
-                {
-                    var roles = "";
-                    foreach (var role in right.Roles)
-                    {
-                        if (roles.Length > 0)
-                            roles += ", ";
-
-                        Enum.TryParse(role, out UserProfileModel.ActionRightsDto.RoleType roleType);
-                        switch (roleType)
-                        {
-                            case UserProfileModel.ActionRightsDto.RoleType.None:
-                                roles += localizer["AuthorizationRoleType.None"];
-                                break;
-                                
-                            case UserProfileModel.ActionRightsDto.RoleType.User:
-                                roles += localizer["AuthorizationRoleType.User"];
-                                break;
-                                
-                            case UserProfileModel.ActionRightsDto.RoleType.Owner:
-                                roles += localizer["AuthorizationRoleType.Owner"];
-                                break;
-                                    
-                            default:
-                                break;
-                        }
-                    }
-                    
-                    <li>@right.Id - @string.Join(",", roles) - @right.ActionId</li>
-                }
+                var checkpointsLink = $"/checkpoints_manage/%20/%20/{UserProfileService.Get().UserId}";
             }
+            <li><a href="@checkpointsLink">@Loc["Home.ManageMyPositions"]</a></li>
+            <li><a href="/userprofile/manage">@Loc["Home.ManageMyProfile"]</a></li>
         </ul>
     </Authorized>
     <NotAuthorized>
-        Nejsi přihlášen
+        @Loc["Home.YouAreNotLoggedIn"]
     </NotAuthorized>
 </AuthorizeView>
 
@@ -85,8 +53,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine("Index loading ...");
-
         var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
         {
             UserId = "",
@@ -99,8 +65,6 @@
         
         if (user.Identity.IsAuthenticated)
         {
-            Console.WriteLine("Ok, user is authenticated ");
-            
             var claims = user.Claims;
 
             var userId = claims.FirstOrDefault(claim => claim.Type == "sub")?.Value ?? "";
@@ -112,14 +76,11 @@
             
             if (loggedUser == null || string.IsNullOrEmpty(loggedUser.Id))
             {
-                Console.WriteLine("Registering user ... ");
                 await RegisterUserAsync(userId, emailClaim, firstName, lastName);
             }
 
             
             loggedUser = await LoadUserDataAsync();
-            
-            Console.WriteLine(loggedUser.Dump());
         }
         
         HandleIncomingNotificationsAsync(stream.ResponseStream);
@@ -134,8 +95,6 @@
             while (await responseStream.MoveNext<LiveUpdatesSubscriptionItem>())
             {
                 var notification = responseStream.Current;
-                
-                Console.WriteLine($"{notification.ServerTime.ToDateTimeOffset()} | {notification.Message}");
             }
         });
     }

@@ -14,7 +14,7 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.ContactDto, UserProfileRecord.ContactDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.VaccinationDto, UserProfileRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.LatLngDto, UserProfileRecord.LatLngDto>();
-            typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.DogDto, UserProfileRecord.DogDto>();
+            typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.PetDto, UserProfileRecord.PetDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord, CreateUserProfileInternalStorageResponse>();
             
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest, UserProfileRecord>();
@@ -23,7 +23,7 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.ContactDto, UserProfileRecord.ContactDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.VaccinationDto, UserProfileRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.LatLngDto, UserProfileRecord.LatLngDto>();
-            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.DogDto, UserProfileRecord.DogDto>();
+            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.PetDto, UserProfileRecord.PetDto>();
 
             typeAdapterConfig.NewConfig<UserProfileRecord, GetUserProfileInternalStorageResponse>();
             typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationType, GetUserProfileInternalStorageResponse.VaccinationType>();
@@ -31,7 +31,7 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord.ContactDto, GetUserProfileInternalStorageResponse.ContactDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationDto, GetUserProfileInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.LatLngDto, GetUserProfileInternalStorageResponse.LatLngDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.DogDto, GetUserProfileInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<UserProfileRecord.PetDto, GetUserProfileInternalStorageResponse.PetDto>();
             
             typeAdapterConfig.NewConfig<UserProfileRecord, GetSelectedUserProfilesInternalStorageResponse.UserProfileDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationType, GetSelectedUserProfilesInternalStorageResponse.VaccinationType>();
@@ -39,7 +39,7 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord.ContactDto, GetSelectedUserProfilesInternalStorageResponse.ContactDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationDto, GetSelectedUserProfilesInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.LatLngDto, GetSelectedUserProfilesInternalStorageResponse.LatLngDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.DogDto, GetSelectedUserProfilesInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<UserProfileRecord.PetDto, GetSelectedUserProfilesInternalStorageResponse.PetDto>();
             
             return typeAdapterConfig;
         }

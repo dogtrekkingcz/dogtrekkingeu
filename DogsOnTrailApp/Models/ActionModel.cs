@@ -28,7 +28,8 @@ public record ActionModel
     {
         Unspecified = 0,
         Trip = 1,
-        Dogtrekking = 2
+        Dogtrekking = 2,
+        HorseMountainTrail = 3
     }
 
     public sealed record CheckpointDto

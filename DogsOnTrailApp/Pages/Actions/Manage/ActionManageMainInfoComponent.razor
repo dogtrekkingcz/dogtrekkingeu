@@ -10,6 +10,18 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6">
+                <label for="type">@localizer["ActionsManage.TypeOfAction"]</label>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <select @bind="Model.Type">
+                    <option value="@ActionModel.ActionType.Trip">@localizer["ActionsManage.ActionType.Trip"]</option>
+                    <option value="@ActionModel.ActionType.Dogtrekking">@localizer["ActionsManage.ActionType.Dogtrekking"]</option>
+                    <option value="@ActionModel.ActionType.HorseMountainTrail">@localizer["ActionsManage.ActionType.HorseMountainTrail"]</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
                 <label for="term">@localizer["Term of action"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
@@ -38,7 +50,7 @@
                 <InputText @bind-Value="@Model.Description"/>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <label for="mail_contact">@localizer["Actions.Manage.MailContact"]</label>

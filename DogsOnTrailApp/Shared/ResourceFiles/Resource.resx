@@ -474,4 +474,67 @@
     <data name="Checkpoint.SendData" xml:space="preserve">
         <value>Send data</value>
     </data>
+    <data name="Home.YouAreNotLoggedIn" xml:space="preserve">
+        <value>You are not logged in</value>
+    </data>
+    <data name="Home.ManageMyProfile" xml:space="preserve">
+        <value>Manage my profile</value>
+    </data>
+    <data name="Home.ManageMyPositions" xml:space="preserve">
+        <value>Manage my positions</value>
+    </data>
+    <data name="UserProfile.Manage" xml:space="preserve">
+        <value>Profile management</value>
+    </data>
+    <data name="years" xml:space="preserve">
+        <value>years</value>
+    </data>
+    <data name="months" xml:space="preserve">
+        <value>months</value>
+    </data>
+    <data name="days" xml:space="preserve">
+        <value>days</value>
+    </data>
+    <data name="UserProfile.MyPets" xml:space="preserve">
+        <value>My pets</value>
+    </data>
+    <data name="UserProfile.MyPets.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="UserProfile.MyPets.Chip" xml:space="preserve">
+        <value>Chip</value>
+    </data>
+    <data name="UserProfile.MyPets.Age" xml:space="preserve">
+        <value>Age</value>
+    </data>
+    <data name="UserProfile.MyPets.Vaccinations" xml:space="preserve">
+        <value>Vaccinations</value>
+    </data>
+    <data name="Log out" xml:space="preserve">
+        <value>Log out</value>
+    </data>
+    <data name="Log in" xml:space="preserve">
+        <value>Log in</value>
+    </data>
+    <data name="Pets.Title" xml:space="preserve">
+        <value>Evidence of pets</value>
+    </data>
+    <data name="Pets.Description" xml:space="preserve">
+        <value>You can enter your pets here. Just only you will be able to see them. But in case that the pet will be found anywhere - the founder can find the pet by its chip number and can contact you</value>
+    </data>
+    <data name="Pets.Chip" xml:space="preserve">
+        <value>Chip</value>
+    </data>
+    <data name="Pets.Type" xml:space="preserve">
+        <value>Type of pet</value>
+    </data>
+    <data name="Pets.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Pets.Pedigree" xml:space="preserve">
+        <value>Pedigree</value>
+    </data>
+    <data name="Pets.AddPet" xml:space="preserve">
+        <value>Add pet</value>
+    </data>
 </root>

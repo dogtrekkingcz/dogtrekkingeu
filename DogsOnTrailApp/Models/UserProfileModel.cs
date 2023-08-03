@@ -22,7 +22,7 @@ public sealed record UserProfileModel
 
     public ContactDto Contact { get; set; } = new();
 
-    public List<DogDto> Dogs { get; set; } = new List<DogDto>();
+    public List<PetDto> Pets { get; set; } = new List<PetDto>();
     
     public sealed record AddressDto
     {
@@ -53,7 +53,7 @@ public sealed record UserProfileModel
         public string EmailAddress { get; set; } = string.Empty;
     }
 
-    public record DogDto
+    public record PetDto
     {
         public string? Id { get; set; }
 
