@@ -102,6 +102,7 @@
     private bool AutoSend = false;
     
     private static Func<string, Task> UpdateQrCodeAsync;
+    private static Func<double, double, Task> UpdateGpsPositionAsync;
     
     protected override void OnInitialized()
     {
@@ -114,12 +115,19 @@
             Model.CheckpointId = CheckpointId.ToGuid();
         
         UpdateQrCodeAsync = UpdateModelWithNewQrCode;
+        UpdateGpsPositionAsync = UpdateModelWithNewGpsPosition;
     }
 
     private async Task UpdateModelWithNewQrCode(string qrCode)
     {
         Model.Data = qrCode;
         Model.CheckpointTime = DateTimeOffset.Now;
+    }
+
+    private async Task UpdateModelWithNewGpsPosition(double latitude, double longitude)
+    {
+        Model.Position.Latitude = latitude;
+        Model.Position.Longitude = longitude;
     }
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -136,6 +144,12 @@
     public static async void QrCodeAcquiredAsync(string value)
     {
         await UpdateQrCodeAsync?.Invoke(value);
+    }
+
+    [JSInvokable]
+    public static async void GpsPositionChangedAsync(double latitude, double longitude)
+    {
+        await UpdateGpsPositionAsync?.Invoke(latitude, longitude);
     }
 
     private string ToString(DateTimeOffset dateTimeOffset)
@@ -202,15 +216,12 @@
             {
                 if (ContinualGpsCoordinatesAcquiringIsOn)
                 {
-                    var result = await JsRuntime.InvokeAsync<JsonArray>("getGpsLocation");
+                    await JsRuntime.InvokeVoidAsync("startWatchPosition");
 
-                    if (result != null && result.Count >= 2)
-                    {
-                        Model.Position.Latitude = double.Parse(result[0].ToString(), CultureInfo.InvariantCulture);
-                        Model.Position.Longitude = double.Parse(result[1].ToString(), CultureInfo.InvariantCulture);
-                
-                        StateHasChanged();
-                    }
+                    while (ContinualGpsCoordinatesAcquiringIsOn == true)
+                        await Task.Delay(200);
+
+                    await JsRuntime.InvokeVoidAsync("stopWatchPosition");
                 }
                 
                 await Task.Delay(2000);

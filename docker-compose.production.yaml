@@ -12,7 +12,7 @@ services:
       - backend
 
   petsontrail_grpc:
-    container_name: DogsOnTrail.gRPC
+    container_name: petsontrail.gRPC
     build:
       context: .
       dockerfile: API.GRPCService/Dockerfile
@@ -30,7 +30,7 @@ services:
       - frontend
       
   petsontrail_webapi:
-    container_name: DogsOnTrail.WebApi
+    container_name: petsontrail.WebApi
     build:
       context: .
       dockerfile: API.WebApiService/Dockerfile
@@ -48,10 +48,10 @@ services:
       - backend
       
   petsontrail_app: 
-    container_name: DogsOnTrail.App
+    container_name: petsontrail.App
     build:
       context: .
-      dockerfile: DogsOnTrailApp/Dockerfile
+      dockerfile: petsontrailApp/Dockerfile
     ports:
       - 443:443
       - 80:80
@@ -60,15 +60,15 @@ services:
       - backend
     volumes:
       - /petsontrail_data/certbot/conf/live/petsontrail.eu:/etc/nginx/ssl/live/petsontrail.eu:ro
-      - /petsontrail_data/DogsOnTrail.App/appsettings.json:/usr/share/nginx/html/appsettings.json
+      - /petsontrail_data/petsontrail.App/appsettings.json:/usr/share/nginx/html/appsettings.json
       
   dtdata_db:
     image: mongo:latest
-    container_name: DogsOnTrail.DB
+    container_name: petsontrail.DB
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: DogsOnTrailDb
+      MONGO_INITDB_DATABASE: petsontrailDb
     ports:
       - 27017:27017
     volumes:
@@ -79,7 +79,7 @@ services:
    
   postgres:
     image: postgres
-    container_name: DogsOnTrail.KeyCloakDB
+    container_name: petsontrail.KeyCloakDB
     environment:
       POSTGRES_DB: keycl0ak
       POSTGRES_USER: keycl0ak
@@ -94,7 +94,7 @@ services:
 
   keycloak:
     image: jboss/keycloak
-    container_name: DogsOnTrail.KeyCloak
+    container_name: petsontrail.KeyCloak
     command: 
       - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:

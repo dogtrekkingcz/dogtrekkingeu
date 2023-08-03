@@ -46,10 +46,11 @@ else
             var checkpointName = ResolveCheckpoint(checkpoint.ActionId, checkpoint.CheckpointId);
             var userName = ResolveUser(checkpoint.UserId);
             var data = ResolveData(checkpoint.ActionId, checkpoint.Data);
+            var linkToMapyCz = string.Format("https://en.mapy.cz/zakladni?x={0}&y={1}&z=12&source=coor&id={0}%2C{1}&ds=1", checkpoint.Position.Longitude, checkpoint.Position.Latitude);
             
             <tr>
                 <td>@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                <td>@positionInString</td>
+                <td>@positionInString<br /><a href="@linkToMapyCz">Mapy.CZ</a></td>
                 <td>@checkpoint.Name</td>
                 <td>@data</td>
                 <td>@actionName</td>

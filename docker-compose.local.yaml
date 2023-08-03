@@ -12,8 +12,8 @@ services:
   # dotnet dev-certs https --clean
   # dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p cert_password
   # dotnet dev-certs https --trust
-  dogsontrail_grpc:
-    image: dogsontrail_server_grpc
+  petsontrail_grpc:
+    image: petsontrail_server_grpc
     build:
       context: .
       dockerfile: API.GRPCService/Dockerfile
@@ -28,8 +28,8 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
       
-  dogsontrail_webapi:
-    image: dogsontrail_server_api
+  petsontrail_webapi:
+    image: petsontrail_server_api
     build:
       context: .
       dockerfile: API.WebApiService/Dockerfile
@@ -44,11 +44,11 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
       
-  dogsontrail_app: 
-    image: dogsontrail_client_app
+  petsontrail_app: 
+    image: petsontrail_client_app
     build:
       context: .
-      dockerfile: DogsOnTrailApp/Dockerfile
+      dockerfile: petsontrailApp/Dockerfile
     ports:
       - 1443:443
       - 1080:80
@@ -59,11 +59,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: DogsOnTrailDb
+      MONGO_INITDB_DATABASE: petsontrailDb
     ports:
       - 27017:27017
     volumes:
-      - data_dogsontrail_db:/data/db
+      - data_petsontrail_db:/data/db
     restart: always
    
   postgres:
@@ -114,7 +114,7 @@ services:
   #    - data_mq:/var/lib/rabbitmq
       
 volumes:
-  data_dogsontrail_db:
+  data_petsontrail_db:
   data_mq:
   postgres_data:
       driver: local
