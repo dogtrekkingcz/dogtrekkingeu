@@ -1,0 +1,180 @@
+﻿@page "/action_manage/{Id}/payments"
+
+@inject Protos.Actions.Actions.ActionsClient ActionsClient
+@inject IStringLocalizer<Resource> Loc
+@inject NavigationManager NavManager
+@inject IMapper Mapper
+@inject IUserProfileService UserProfileService
+
+@using PetsOnTrailApp.Models
+@using PetsOnTrailApp.Services
+@using MapsterMapper
+@using Protos.Actions
+
+<h3>@Loc["Action.Manage.Payments"]</h3>
+
+@if (Action == null)
+{
+    <p>
+        <em>@Loc["Loading ..."]</em>
+    </p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <input type="string" style="width: 100%" @bind="VariableNumber" placeholder="@Loc["Action.Manage.Payments.VariableNumber"]" />
+            </div>
+            <div class="col-5">
+                <input type="string" style="width: 100%" @bind="Payment" placeholder="@Loc["Action.Manage.Payments.Payment"]" />
+            </div>
+            <div class="col-2">
+                <button type="button" onclick="AddPaymentByVariableNumber">@Loc["Action.Manage.Payments.AddPaymentByVariableNumber"]</button>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@Loc["Surname"], @Loc["Name"]</th>
+            <th>@Loc["Action.Manage.Payments.Requested"]</th>
+            <th>@Loc["Action.Manage.Payments.Received"]</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var race in Action.Races)
+        {
+            var startingPrice = race.Payments
+                .FirstOrDefault(paymentDef => paymentDef.From <= DateTimeOffset.Now && paymentDef.To > DateTimeOffset.Now)?
+                .Price ?? 0.0;
+            
+            @foreach (var category in race.Categories)
+            {
+                foreach (var racer in category.Racers)
+                {
+                    racer.RequestedPayments.Items.Add(new ActionModel.RequestedPaymentItem
+                    {
+                        Name = "RegistrationFee",
+                        Price = startingPrice
+                    });
+                    
+                    <tr>
+                        <td>
+                            @racer.LastName, @racer.FirstName
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach (var rq in racer.RequestedPayments.Items)
+                                {
+                                    <li>@rq.Name - @rq.Price</li>
+                                }
+                            </ul>
+                            <hr />
+                            <b>@racer.RequestedPayments.Items.Sum(it => it.Price)</b>
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach (var payment in racer.Payments)
+                                {
+                                    <li>@payment.Date.ToString("yyyy-MM-dd HH:mm") - @payment.Amount @payment.Currency</li>
+                                }
+                            </ul>
+                            <hr />
+                            <b>@racer.Payments.Sum(it => it.Amount)</b> / @racer.RequestedPayments.Items.Sum(it => it.Price)
+                        </td>
+                        <td>
+                            <div class="dropdown dropstart">
+                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="three-dots"></div>
+                                </a>
+                            
+                                <ul class="dropdown-menu">
+                                    <AuthorizeView>
+                                        <Authorized>
+                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id.ToString() && right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())) != null)
+                                            {
+                                                <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Loc["Action.Manage.AcceptPayment"]</a></li>
+                                            }
+                                        </Authorized>
+                                    </AuthorizeView>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        </tbody>
+    </table>
+    
+    <button type="button" @onclick="async () => SaveChangesAsync()">@Localizer["General.Save"]</button>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private ActionModel Action { get; set; } = null;
+
+    private string VariableNumber { get; set; } = string.Empty;
+    private string Payment { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse);
+    }
+
+    private async Task AcceptPayment(ActionModel.RacerDto racer)
+    {
+        if (racer == null)
+            return;
+        
+        double amount = double.NaN;
+        if (double.TryParse(Payment, out amount) == false)
+            return;
+        
+        await ActionsClient.acceptPaymentAsync(new AcceptPaymentRequest
+        {
+            Id = racer.Id.ToString(),
+            ActionId = Action.Id.ToString(),
+            Amount = amount,
+            Note = "",
+            Currency = "Kč",
+            BankAccount = ""
+        });
+        
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse);
+        
+        StateHasChanged();
+    }
+
+    private async Task AddPaymentByVariableNumber()
+    {
+        var racer = Action.Races
+            .SelectMany(race => race.Categories)
+            .SelectMany(ctg => ctg.Racers)
+            .FirstOrDefault(racer => racer.RequestedPayments.VariableNumber == VariableNumber);
+
+        await AcceptPayment(racer);
+    }
+    
+    private async Task SaveChangesAsync()
+    {
+        var request = Mapper.Map<Protos.Actions.UpdateAction.UpdateActionRequest>(Action);
+        
+        await ActionsClient.updateActionAsync(request);
+    }
+}

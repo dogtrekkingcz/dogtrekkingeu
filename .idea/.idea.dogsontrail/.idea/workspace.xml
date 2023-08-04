@@ -22,15 +22,9 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="">
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="renaming to petsontrail; updating getting the GPS coords with high accuracy">
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Payments/ActionPayments.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.dogsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.dogsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/MapUtils/GetGpsLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/MapUtils/GetGpsLocation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.local.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.local.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.production.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.production.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +51,8 @@
     <setting file="file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Manage/ActionManageLocationComponent.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Manage/ActionManageMainInfoComponent.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Manage/ActionManageRacesComponent.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Pets/Pets.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PetsOnTrailApp/Pages/UserProfiles/Manage/UserProfileManage.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PetsOnTrailApp/Shared/LoginDisplay.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -205,14 +201,7 @@
       <workItem from="1690524242449" duration="44910000" />
       <workItem from="1690815170160" duration="13519000" />
       <workItem from="1690877677643" duration="63644000" />
-      <workItem from="1691064499560" duration="8375000" />
-    </task>
-    <task id="LOCAL-00065" summary="small fixies with filtering by GUIDs, additional autocomplete for personnal profile">
-      <created>1690270928641</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1690270928641</updated>
+      <workItem from="1691064499560" duration="12910000" />
     </task>
     <task id="LOCAL-00066" summary="Mappings fixies during debugging">
       <created>1690273203787</created>
@@ -550,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691070158051</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="renaming to petsontrail; updating getting the GPS coords with high accuracy">
+      <created>1691097719614</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1691097719614</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +567,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="production deploy fixies" />
     <MESSAGE value="correct name of mongodb db" />
     <MESSAGE value="updating dogs to pets" />
     <MESSAGE value="fixies with adding checkpoint test data" />
@@ -596,7 +591,8 @@
     <MESSAGE value="translations of the checkpoints" />
     <MESSAGE value="FE updates, translations.." />
     <MESSAGE value="Renaming to PetsOnTrail" />
-    <option name="LAST_COMMIT_MESSAGE" value="Renaming to PetsOnTrail" />
+    <MESSAGE value="renaming to petsontrail; updating getting the GPS coords with high accuracy" />
+    <option name="LAST_COMMIT_MESSAGE" value="renaming to petsontrail; updating getting the GPS coords with high accuracy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -708,7 +704,7 @@
               <option value="-1" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="77" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
