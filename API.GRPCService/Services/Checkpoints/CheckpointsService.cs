@@ -1,3 +1,4 @@
+using API.GRPCService.Extensions;
 using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
@@ -32,6 +33,8 @@ public class CheckpointsService : Protos.Checkpoints.Checkpoints.CheckpointsBase
         var apiRequest = _mapper.Map<GetCheckpointItemsRequest>(request);
 
         var response = await _checkpointsService.GetAsync(apiRequest, context.CancellationToken);
+
+        Console.WriteLine(response?.Dump());
         
         return _mapper.Map<Protos.Checkpoints.GetCheckpoints.GetCheckpointsResponse>(response);
     }

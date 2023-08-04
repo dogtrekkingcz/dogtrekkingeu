@@ -22,7 +22,9 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="checkpoints note -&gt; null value ignoring" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="note to string.Empty">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,6 +45,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Services/Checkpoints/CheckpointsServiceMapping.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/API.Interfaces/Entities/Checkpoints/GetCheckpointItemsResponse.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/CheckpointModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QrGenerator/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
@@ -191,14 +194,7 @@
       <workItem from="1690877677643" duration="63644000" />
       <workItem from="1691064499560" duration="4894000" />
       <workItem from="1691134782434" duration="6646000" />
-      <workItem from="1691164076586" duration="697000" />
-    </task>
-    <task id="LOCAL-00068" summary="temporary commit">
-      <created>1690285024425</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1690285024425</updated>
+      <workItem from="1691164076586" duration="1505000" />
     </task>
     <task id="LOCAL-00069" summary="fixing of the mapping of the FE app - Google DateTime to DateTimeOffset">
       <created>1690292481994</created>
@@ -536,7 +532,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691164243377</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="note to string.Empty">
+      <created>1691165238558</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1691165238558</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +560,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fixies with adding checkpoint test data" />
     <MESSAGE value="added userid to every checkpoint data" />
     <MESSAGE value="Checkpoints updates" />
     <MESSAGE value="checkpoints &amp; navbar updatings" />
@@ -582,7 +584,8 @@
     <MESSAGE value="any unknown idea files" />
     <MESSAGE value="Note could be nulled and -&gt; ignored" />
     <MESSAGE value="checkpoints note -&gt; null value ignoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkpoints note -&gt; null value ignoring" />
+    <MESSAGE value="note to string.Empty" />
+    <option name="LAST_COMMIT_MESSAGE" value="note to string.Empty" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
