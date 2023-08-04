@@ -27,13 +27,25 @@ else
     <table>
         <thead>
         <tr>
-            <th>@Loc["Checkpoint.DateTime"]</th>
-            <th>@Loc["Checkpoint.Position"]</th>
-            <th>@Loc["Checkpoint.Name"]</th>
+            <th>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-4">@Loc["Checkpoint.DateTime"]</div>
+                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Position"]</div>
+                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Name"]</div>
+                    </div>
+                </div>
+            </th>
             <th>@Loc["Checkpoint.Data"]</th>
-            <th>@Loc["Checkpoint.Action"]</th>
-            <th>@Loc["Checkpoint.Checkpoint"]</th>
-            <th>@Loc["Checkpoint.User"]</th>
+            <th>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Action"]</div>
+                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Checkpoint"]</div>
+                        <div class="col-xs-12 col-4">@Loc["Checkpoint.User"]</div>
+                    </div>
+                </div>
+            </th>
             <th>@Loc["Checkpoint.Note"]</th>
         </tr>
         </thead>
@@ -49,13 +61,25 @@ else
             var linkToMapyCz = string.Format("https://en.mapy.cz/zakladni?x={0}&y={1}&z=12&source=coor&id={0}%2C{1}&ds=1", checkpoint.Position.Longitude, checkpoint.Position.Latitude);
             
             <tr>
-                <td>@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                <td>@positionInString<br /><a href="@linkToMapyCz">Mapy.CZ</a></td>
-                <td>@checkpoint.Name</td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-4">@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                            <div class="col-xs-12 col-4">@positionInString - <a href="@linkToMapyCz">Mapy.CZ</a></div>
+                            <div class="col-xs-12 col-4">@checkpoint.Name</div>
+                        </div>
+                    </div>
+                </td>
                 <td>@data</td>
-                <td>@actionName</td>
-                <td>@checkpointName</td>
-                <td>@userName</td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-4">@actionName</div>
+                            <div class="col-xs-12 col-4">@checkpointName</div>
+                            <div class="col-xs-12 col-4">@userName</div>
+                        </div>
+                    </div>
+                </td>
                 <td>@checkpoint.Note</td>
             </tr>
         }
