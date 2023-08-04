@@ -22,36 +22,8 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="FE updates, translations..">
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/CreateActionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/CreateActionRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionDetailResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionDetailResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsWithDetailsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsWithDetailsResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedActionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedActionsResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/bin/Debug/net7.0/API.Interface.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Manage/ActionManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Manage/ActionManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Payments/ActionPayments.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Payments/ActionPayments.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Index.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/UserProfiles/Manage/UserProfileManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/UserProfiles/Manage/UserProfileManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Services/IUserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Services/IUserProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Services/UserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Services/UserProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/CreateActionRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/CreateActionRequest.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedActionsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedActionsResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/CreateActionInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/CreateActionInternalStorageRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +45,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QrGenerator/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/ActionRightsDto.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/DogDto.cs" root0="FORCE_HIGHLIGHTING" />
@@ -218,21 +191,7 @@
       <workItem from="1690815170160" duration="13519000" />
       <workItem from="1690877677643" duration="63644000" />
       <workItem from="1691064499560" duration="4894000" />
-      <workItem from="1691134782434" duration="4588000" />
-    </task>
-    <task id="LOCAL-00064" summary="Added ActionType to support multiple pets-actions">
-      <created>1690267399955</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1690267399955</updated>
-    </task>
-    <task id="LOCAL-00065" summary="small fixies with filtering by GUIDs, additional autocomplete for personnal profile">
-      <created>1690270928641</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1690270928641</updated>
+      <workItem from="1691134782434" duration="6646000" />
     </task>
     <task id="LOCAL-00066" summary="Mappings fixies during debugging">
       <created>1690273203787</created>
@@ -563,7 +522,21 @@
       <option name="project" value="LOCAL" />
       <updated>1691069497563</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="enhanced FE validation of the user rights">
+      <created>1691140296692</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1691140296692</updated>
+    </task>
+    <task id="LOCAL-00114" summary="any unknown idea files">
+      <created>1691140332790</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1691140332790</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,8 +557,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="adding gps location, cleaning JS code on FE" />
-    <MESSAGE value="production deploy fixies" />
     <MESSAGE value="correct name of mongodb db" />
     <MESSAGE value="updating dogs to pets" />
     <MESSAGE value="fixies with adding checkpoint test data" />
@@ -609,7 +580,9 @@
     <MESSAGE value="fixes to make the checkpoints registration fully functional" />
     <MESSAGE value="translations of the checkpoints" />
     <MESSAGE value="FE updates, translations.." />
-    <option name="LAST_COMMIT_MESSAGE" value="FE updates, translations.." />
+    <MESSAGE value="enhanced FE validation of the user rights" />
+    <MESSAGE value="any unknown idea files" />
+    <option name="LAST_COMMIT_MESSAGE" value="any unknown idea files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
