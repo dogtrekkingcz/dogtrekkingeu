@@ -21,7 +21,7 @@
         
         <AuthorizeView>
             <Authorized>
-                @if (CanManage())
+                @if (_canManage)
                 {
                     <li><a class="dropdown-item" @onclick="@(async () => await ManageRegistrations(Model))">@Localizer["Action.Manage.Entries"]</a></li>
                     <li><a class="dropdown-item" @onclick="@(async () => await ManagePayments(Model))">@Localizer["Action.Manage.Payments"]</a></li>
@@ -36,15 +36,18 @@
 
 @code {
     [Parameter] public ActionModel Model { get; set; }
-    [Parameter] public EventCallback<ActionModel> OnItemChanged { get; set; } 
+    [Parameter] public EventCallback<ActionModel> OnItemChanged { get; set; }
+
+    private bool _canManage { get; set; } = false; 
     
     protected override async Task OnInitializedAsync()
     {
+        _canManage = await CanManage();
     }
 
-    private bool CanManage()
+    private async Task<bool> CanManage()
     {
-        var rights = UserProfileService.Get()?.Rights;
+        var rights = (await UserProfileService.GetAsync())?.Rights;
         if (rights == null)
             return false;
         

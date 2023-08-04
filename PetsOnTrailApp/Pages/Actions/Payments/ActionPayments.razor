@@ -94,7 +94,7 @@ else
                                 <ul class="dropdown-menu">
                                     <AuthorizeView>
                                         <Authorized>
-                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id.ToString() && right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())) != null)
+                                            @if (_canAcceptPayment)
                                             {
                                                 <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Loc["Action.Manage.AcceptPayment"]</a></li>
                                             }
@@ -110,7 +110,7 @@ else
         </tbody>
     </table>
     
-    <button type="button" @onclick="async () => SaveChangesAsync()">@Localizer["General.Save"]</button>
+    <button type="button" @onclick="async () => SaveChangesAsync()">@Loc["General.Save"]</button>
 }
 
 @code {
@@ -122,6 +122,8 @@ else
     private string VariableNumber { get; set; } = string.Empty;
     private string Payment { get; set; } = string.Empty;
 
+    private bool _canAcceptPayment { get; set; } = false;
+
     protected override async Task OnInitializedAsync()
     {
         var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
@@ -130,6 +132,13 @@ else
         });
 
         Action = Mapper.Map<ActionModel>(actionResponse);
+
+        _canAcceptPayment = (await UserProfileService.GetAsync())?
+            .Rights?
+            .FirstOrDefault(right =>
+                right.ActionId == Action.Id.ToString() &&
+                right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
+                ) != null;
     }
 
     private async Task AcceptPayment(ActionModel.RacerDto racer)

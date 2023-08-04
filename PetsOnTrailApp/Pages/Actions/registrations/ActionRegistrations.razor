@@ -69,12 +69,7 @@ else
                         <ul class="dropdown-menu">
                             <AuthorizeView>
                                 <Authorized>
-                                    @if (UserProfileService.Get()?
-                                        .Rights?
-                                        .FirstOrDefault(right => 
-                                            right.ActionId == Action.Id.ToString() && 
-                                            right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
-                                            ) != null)
+                                    @if (_canAcceptRegistrations)
                                     {
                                         <li><a class="dropdown-item" @onclick="@(async () => await ImportRegistrationToAction(entry))">@Localizer["Action.Manage.AcceptRegistration"]</a></li>
                                     }
@@ -190,7 +185,7 @@ else
                                 <ul class="dropdown-menu">
                                     <AuthorizeView>
                                         <Authorized>
-                                            @if (UserProfileService.Get()?.Rights?.FirstOrDefault(right => right.ActionId == Action.Id.ToString() && right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())) != null)
+                                            @if (_canAcceptPayments)
                                             {
                                                 <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Localizer["Action.Manage.AcceptPayment"]</a></li>
                                             }
@@ -216,6 +211,9 @@ else
     private ActionModel Action { get; set; } = null;
     private List<EntryModel> Registrations { get; set; } = new();
 
+    private bool _canAcceptRegistrations { get; set; } = false;
+    private bool _canAcceptPayments { get; set; } = false;
+
     protected override async Task OnInitializedAsync()
     {
         var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
@@ -233,6 +231,20 @@ else
         });
 
         Registrations = Mapper.Map<List<EntryModel>>(response.Entries);
+
+        _canAcceptRegistrations = (await UserProfileService.GetAsync())?
+            .Rights?
+            .FirstOrDefault(right =>
+                right.ActionId == Action.Id.ToString() &&
+                right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
+            ) != null;
+
+        _canAcceptPayments = (await UserProfileService.GetAsync())?
+            .Rights?
+            .FirstOrDefault(right =>
+                right.ActionId == Action.Id.ToString() &&
+                right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
+            ) != null;
     }
 
     private async Task ImportRegistrationToAction(EntryModel entry)

@@ -142,27 +142,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var myUserProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
-        
-        if (myUserProfile == null)
-            return;
-        
-        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(myUserProfile));
-        
-        UserProfile = UserProfileService.Get();
+        UserProfile = await UserProfileService.GetAsync();
     }
 
     protected async Task SendAsync()
     {
         await UserProfilesClient.updateUserProfileAsync(mapper.Map<UpdateUserProfileRequest>(UserProfile));
-
-        var userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
         
-        if (userProfile == null)
-            return;
-
-        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
-
-        UserProfile = UserProfileService.Get();
+        UserProfileService.Invalidate();
     }
 }

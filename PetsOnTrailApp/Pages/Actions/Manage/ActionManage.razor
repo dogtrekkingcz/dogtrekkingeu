@@ -5,12 +5,17 @@
 @using PetsOnTrailApp.Shared
 @using Protos.Actions.UpdateAction
 @using PetsOnTrailApp.Extensions
+@using PetsOnTrailApp.Services
 
 @inject Protos.Actions.Actions.ActionsClient Client
+@inject Protos.ActionRights.ActionRights.ActionRightsClient ActionRightsClient
+@inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
+@inject IUserProfileService UserProfileService
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
 @inject NavigationManager NavManager
+
 
 @if (Model == null)
 {
@@ -130,6 +135,8 @@ else
             await CreateNewAction();
         else if (RequiredAction == RequiredActionEnum.UpdateAction)
             await UpdateAction();
+        
+        UserProfileService.Invalidate();
         
         NavManager.NavigateTo("/actions");
     }

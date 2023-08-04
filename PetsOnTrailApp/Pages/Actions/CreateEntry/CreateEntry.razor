@@ -73,15 +73,17 @@
 
         Entry.ActionId = Guid.Parse(actionSettings.Id);
 
-        if (string.IsNullOrEmpty(UserProfileService.Get().Id) == false)
+        var userProfile = await UserProfileService.GetAsync();
+        if (userProfile != null)
         {
-            Entry.Name = UserProfileService.Get().FirstName;
-            Entry.Surname = UserProfileService.Get().LastName;
-            Entry.Email = UserProfileService.Get().Contact.EmailAddress;
-            Entry.Phone = UserProfileService.Get().Contact.PhoneNumber;
-            Entry.UserProfileId = UserProfileService.Get().Id ?? Guid.Empty.ToString();
-            Entry.CompetitorId = UserProfileService.Get().CompetitorId.ToString();
-            Entry.Dogs = UserProfileService.Get().Pets
+            // TODO: enhance it !
+            Entry.Name = userProfile.FirstName;
+            Entry.Surname = userProfile.LastName;
+            Entry.Email = userProfile.Contact.EmailAddress;
+            Entry.Phone = userProfile.Contact.PhoneNumber;
+            Entry.UserProfileId = userProfile.Id ?? Guid.Empty.ToString();
+            Entry.CompetitorId = userProfile.CompetitorId.ToString();
+            Entry.Dogs = userProfile.Pets
                 .Where(dog => dog.Decease == null)
                 .Select(dog => new EntryModel.DogDto
                 {

@@ -196,6 +196,8 @@ public sealed record GetSelectedActionsInternalStorageResponse
     
         public sealed record RequestedPaymentsDto
         {
+            public string VariableNumber { get; set; } = string.Empty;
+            
             public double Sum => Items.Sum(item => item.Price);
     
             public List<RequestedPaymentItem> Items { get; set; } = new();

@@ -125,8 +125,9 @@ enum VaccinationType {
 }
 
 message RequestedPaymentsDto {
-  double Sum = 1;
-  repeated RequestedPaymentItem Items = 2;
+  string VariableNumber = 1;
+  double Sum = 2;
+  repeated RequestedPaymentItem Items = 3;
 }
 
 message RequestedPaymentItem {

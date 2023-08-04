@@ -4,9 +4,7 @@ namespace PetsOnTrailApp.Services;
 
 public interface IUserProfileService
 {
-    UserProfileModel Get();
+    Task<UserProfileModel> GetAsync();
 
-    void SetUserProfile(UserProfileModel userProfile);
-    
-    void SetRights(IList<UserProfileModel.ActionRightsDto> rights);
+    void Invalidate();
 }

@@ -24,14 +24,10 @@
 
 <AuthorizeView>
     <Authorized>
-        Jsi přihlášen jako @context.User.Identity?.Name!, UserID: @UserProfileService.Get().UserId
         <hr />
         
         <ul>
-            @{
-                var checkpointsLink = $"/checkpoints_manage/%20/%20/{UserProfileService.Get().UserId}";
-            }
-            <li><a href="@checkpointsLink">@Loc["Home.ManageMyPositions"]</a></li>
+            <li><a href="@_checkpointsLink">@Loc["Home.ManageMyPositions"]</a></li>
             <li><a href="/userprofile/manage">@Loc["Home.ManageMyProfile"]</a></li>
         </ul>
     </Authorized>
@@ -45,6 +41,9 @@
     private IList<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> _notifications = new List<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>();
 
     [CascadingParameter] protected Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
+    private string _userId { get; set; }
+    private string _checkpointsLink { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -53,6 +52,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        _userId = (await UserProfileService.GetAsync())?.UserId ?? "";
+        _checkpointsLink = $"/checkpoints_manage/%20/%20/{_userId}";
+        
         var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
         {
             UserId = "",
@@ -78,7 +80,6 @@
             {
                 await RegisterUserAsync(userId, emailClaim, firstName, lastName);
             }
-
             
             loggedUser = await LoadUserDataAsync();
         }
@@ -125,34 +126,6 @@
 
     private async Task<UserProfileModel> LoadUserDataAsync()
     {
-        var userProfile = await UserProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
-
-        if (userProfile == null || userProfile.Id == string.Empty)
-            return null;
-
-        UserProfileService.SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
-
-        // load all rights of current user
-        var getActionRightsResponse = await ActionRightsClient.getActionRightsAsync(
-            new Protos.ActionRights.GetActionRights.GetActionRightsRequest
-            {
-                Id = ""
-            });
-
-        var userRights = new List<UserProfileModel.ActionRightsDto>();
-        foreach (var right in getActionRightsResponse.Rights)
-        {
-            userRights.Add(new UserProfileModel.ActionRightsDto
-            {
-                Id = right.Id,
-                ActionId = right.ActionId,
-                UserId = right.UserId,
-                Roles = right.Roles
-            });
-        }
-
-        UserProfileService.SetRights(userRights);
-
-        return UserProfileService.Get();
+        return await UserProfileService.GetAsync();
     }
 }
