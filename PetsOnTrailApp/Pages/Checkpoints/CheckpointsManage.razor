@@ -6,6 +6,7 @@
 @using Protos.Actions.GetSelectedActions
 @using Protos.Checkpoints.GetCheckpoints
 @using Protos.UserProfiles.GetSelectedSurnameName
+@using System.Globalization
 
 @inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 @inject Protos.Actions.Actions.ActionsClient ActionsClient
@@ -15,6 +16,17 @@
 
 <h3>@Loc["CheckpointsManage.Title"]</h3>
 <h5>@Loc["CheckpointsManage.Description"]</h5>
+
+<Switch @bind-Value="ShowDateTime" Label="@Loc["CheckpointManage.Show.DateTime"]" />
+<Switch @bind-Value="ShowPosition" Label="@Loc["CheckpointManage.Show.Position"]" />
+<Switch @bind-Value="ShowMapyCzLink" Label="@Loc["CheckpointManage.Show.MapyCzLink"]" />
+<Switch @bind-Value="ShowName" Label="@Loc["CheckpointManage.Show.Name"]" />
+<Switch @bind-Value="ShowData" Label="@Loc["CheckpointManage.Show.Data"]" />
+<Switch @bind-Value="ShowResolvedData" Label="@Loc["CheckpointManage.Show.ResolvedData"]" />
+<Switch @bind-Value="ShowAction" Label="@Loc["CheckpointManage.Show.Action"]" />
+<Switch @bind-Value="ShowCheckpoint" Label="@Loc["CheckpointManage.Show.Checkpoint"]" />
+<Switch @bind-Value="ShowUser" Label="@Loc["CheckpointManage.Show.User"]" />
+<Switch @bind-Value="ShowNote" Label="@Loc["CheckpointManage.Show.Note"]" />
 
 @if (_checkpointsList  == null)
 {
@@ -26,30 +38,60 @@ else
 {
     <table>
         <thead>
-        <tr>
-            <th>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-4">@Loc["Checkpoint.DateTime"]</div>
-                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Position"]</div>
-                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Name"]</div>
-                    </div>
-                </div>
-            </th>
-            <th>@Loc["Checkpoint.Data"]</th>
-            <th>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Action"]</div>
-                        <div class="col-xs-12 col-4">@Loc["Checkpoint.Checkpoint"]</div>
-                        <div class="col-xs-12 col-4">@Loc["Checkpoint.User"]</div>
-                    </div>
-                </div>
-            </th>
-            <th>@Loc["Checkpoint.Note"]</th>
-        </tr>
+            <tr>
+                @if (ShowDateTime == true)
+                {
+                    <th>@Loc["Checkpoint.DateTime"]</th>
+                }
+                
+                @if (ShowPosition == true)
+                {
+                    <th>@Loc["Checkpoint.Position"]</th>
+                }
+                
+                @if (ShowMapyCzLink == true)
+                {
+                    <th>@Loc["Checkpoint.MapyCzLink"]</th>
+                }
+                
+                @if (ShowName == true)
+                {
+                    <th>@Loc["Checkpoint.Name"]</th>
+                }
+                
+                @if (ShowData == true)
+                {
+                    <th>@Loc["Checkpoint.Data"]</th>
+                }
+                
+                @if (ShowResolvedData == true)
+                {
+                    <th>@Loc["Checkpoint.ResolvedData"]</th>
+                }
+                
+                @if (ShowAction == true)
+                {
+                    <th>@Loc["Checkpoint.Action"]</th>
+                }
+                
+                @if (ShowCheckpoint == true)
+                {
+                    <th>@Loc["Checkpoint.Checkpoint"]</th>
+                }
+                
+                @if (ShowUser == true)
+                {
+                    <th>@Loc["Checkpoint.User"]</th>
+                }
+                
+                @if (ShowNote == true)
+                {
+                    <th>@Loc["Checkpoint.Note"]</th>
+                }
+            </tr>
         </thead>
         <tbody>
+    
         @foreach (var checkpoint in _checkpointsList
             .OrderByDescending(c => c.CheckpointTime))
         {
@@ -57,32 +99,62 @@ else
             var actionName = ResolveAction(checkpoint.ActionId);
             var checkpointName = ResolveCheckpoint(checkpoint.ActionId, checkpoint.CheckpointId);
             var userName = ResolveUser(checkpoint.UserId);
-            var data = ResolveData(checkpoint.ActionId, checkpoint.Data);
-            var linkToMapyCz = string.Format("https://en.mapy.cz/zakladni?x={0}&y={1}&z=12&source=coor&id={0}%2C{1}&ds=1", checkpoint.Position.Longitude, checkpoint.Position.Latitude);
-            
+            var resolvedData = ResolveData(checkpoint.ActionId, checkpoint.Data);
+            var linkToMapyCz = string.Format(CultureInfo.InvariantCulture, "https://en.mapy.cz/zakladni?x={0}&y={1}&z=12&source=coor&id={0}%2C{1}&ds=1", checkpoint.Position.Longitude, checkpoint.Position.Latitude);
+
             <tr>
-                <td>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-4">@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
-                            <div class="col-xs-12 col-4">@positionInString - <a href="@linkToMapyCz">Mapy.CZ</a></div>
-                            <div class="col-xs-12 col-4">@checkpoint.Name</div>
-                        </div>
-                    </div>
-                </td>
-                <td>@data</td>
-                <td>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-4">@actionName</div>
-                            <div class="col-xs-12 col-4">@checkpointName</div>
-                            <div class="col-xs-12 col-4">@userName</div>
-                        </div>
-                    </div>
-                </td>
-                <td>@checkpoint.Note</td>
+                @if (ShowDateTime == true)
+                {
+                    <td>@checkpoint.CheckpointTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                }
+                
+                @if (ShowPosition == true)
+                {
+                    <td>@positionInString</td>
+                }
+                
+                @if (ShowMapyCzLink == true)
+                {
+                    <td><a href="@linkToMapyCz">Mapy.CZ</a></td>
+                }
+                
+                @if (ShowName == true)
+                {
+                    <td>@checkpoint.Name</td>
+                }
+                
+                @if (ShowData == true)
+                {
+                    <td>@checkpoint.Data</td>
+                }
+                
+                @if (ShowResolvedData == true)
+                {
+                    <td>@resolvedData</td>
+                }
+                
+                @if (ShowAction == true)
+                {
+                    <td>@actionName</td>
+                }
+                
+                @if (ShowCheckpoint == true)
+                {
+                    <td>@checkpointName</td>
+                }
+                
+                @if (ShowUser == true)
+                {
+                    <td>@userName</td>
+                }
+                
+                @if (ShowNote == true)
+                {
+                    <td>@checkpoint.Note</td>
+                }
             </tr>
         }
+        
         </tbody>
     </table>
 }
@@ -106,6 +178,18 @@ else
 
     [Parameter]
     public double? DistanceFromPosition { get; set; } = double.NaN;
+
+
+    private bool ShowDateTime { get; set; } = true;
+    private bool ShowPosition { get; set; } = true;
+    private bool ShowMapyCzLink { get; set; } = false;
+    private bool ShowName { get; set; } = false;
+    private bool ShowData { get; set; } = false;
+    private bool ShowResolvedData { get; set; } = false;
+    private bool ShowAction { get; set; } = false;
+    private bool ShowCheckpoint { get; set; } = false;
+    private bool ShowUser { get; set; } = false;
+    private bool ShowNote { get; set; } = true;
 
     private List<ActionModel> _usedActions = new List<ActionModel>();
     

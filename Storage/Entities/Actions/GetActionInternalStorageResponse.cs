@@ -120,6 +120,17 @@ public sealed record GetActionInternalStorageResponse
         public List<MerchandizeItemDto> Merchandize { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();
+
+        public List<PassedCheckpointDto> PassedCheckpoints { get; set; } = new();
+    }
+    
+    public sealed record PassedCheckpointDto
+    {
+        public Guid Id { get; set; }
+        
+        public DateTimeOffset Passed { get; set; }
+
+        public LatLngDto Position { get; set; } = new();
     }
     
     public class NoteDto

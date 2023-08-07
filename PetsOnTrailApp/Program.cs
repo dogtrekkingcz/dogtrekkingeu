@@ -67,7 +67,9 @@ typeAdapterConfig
     .AddEntryModelMapping()
     .AddActionSettingsModelMapping()
     .AddPetModelMapping()
-    .AddCheckpointModelMapping();
+    .AddCheckpointModelMapping()
+    .AddActionResultsModelMapping()
+    .AddResultsModelMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)

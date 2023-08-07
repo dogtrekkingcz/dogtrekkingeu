@@ -22,6 +22,8 @@ import "Entities/Actions/GetSelectedActionsRequest.proto";
 import "Entities/Actions/GetSelectedActionsResponse.proto";
 import "Entities/Actions/DeleteActionRequest.proto";
 import "Entities/Actions/DeleteActionResponse.proto";
+import "Entities/Actions/GetResultsForActionRequest.proto";
+import "Entities/Actions/GetResultsForActionResponse.proto";
 
 service Actions {
   rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
@@ -32,6 +34,7 @@ service Actions {
   rpc getAction    (getaction.GetActionRequest) returns (getaction.GetActionResponse);
   rpc getSelectedActions (getselectedactions.GetSelectedActionsRequest) returns (getselectedactions.GetSelectedActionsResponse);
   rpc deleteAction (deleteaction.DeleteActionRequest) returns (deleteaction.DeleteActionResponse);
+  rpc getResultsForAction (getresultsforaction.GetResultsForActionRequest) returns (getresultsforaction.GetResultsForActionResponse);
   
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
   rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);

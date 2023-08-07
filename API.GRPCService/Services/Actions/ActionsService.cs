@@ -137,4 +137,14 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         return _mapper.Map<Protos.Actions.GetRacesForAction.GetRacesForActionResponse>(races);
     }
+
+    public async override Task<Protos.Actions.GetResultsForAction.GetResultsForActionResponse> getResultsForAction(Protos.Actions.GetResultsForAction.GetResultsForActionRequest request, ServerCallContext context)
+    {
+        var actionResults = await _actionsService.GetResultsForActionAsync(new GetResultsForActionRequest
+        {
+            ActionId = request.ActionId.ToGuid()
+        }, context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.GetResultsForAction.GetResultsForActionResponse>(actionResults);
+    }
 }

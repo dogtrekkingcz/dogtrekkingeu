@@ -83,7 +83,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<CreateActionRequest.MerchandizeItemDto, CreateActionInternalStorageRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.PaymentDefinitionDto, CreateActionInternalStorageRequest.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.ActionSaleItemDto, CreateActionInternalStorageRequest.ActionSaleItemDto>();
-        
+        typeAdapterConfig.NewConfig<CreateActionRequest.PassedCheckpointDto, CreateActionInternalStorageRequest.PassedCheckpointDto>();
 
         typeAdapterConfig.NewConfig<CreateActionInternalStorageResponse, CreateActionResponse>();
 
@@ -139,6 +139,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<UpdateActionRequest.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.PaymentDefinitionDto, UpdateActionInternalStorageRequest.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.ActionSaleItemDto, UpdateActionInternalStorageRequest.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<UpdateActionRequest.PassedCheckpointDto, UpdateActionInternalStorageRequest.PassedCheckpointDto>();
 
         typeAdapterConfig.NewConfig<UpdateActionInternalStorageResponse, UpdateActionResponse>();
 
@@ -207,6 +208,15 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.MerchandizeItemDto, GetRacesForActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PaymentDefinitionDto, GetRacesForActionResponse.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleItemDto, GetRacesForActionResponse.ActionSaleItemDto>();
+
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse, GetResultsForActionResponse>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceDto, GetResultsForActionResponse.RaceResultsDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.CategoryDto, GetResultsForActionResponse.CategoryResultsDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceState, GetResultsForActionResponse.RaceState>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RacerDto, GetResultsForActionResponse.RacerResultDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PassedCheckpointDto, GetResultsForActionResponse.PassedCheckpointDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.DogDto, GetResultsForActionResponse.PetDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LatLngDto, GetResultsForActionResponse.LatLngDto>();
         
         return typeAdapterConfig;
     }

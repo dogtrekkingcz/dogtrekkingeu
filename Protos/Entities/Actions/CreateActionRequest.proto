@@ -79,6 +79,13 @@ message RacerDto {
   RequestedPaymentsDto RequestedPayments = 15;
   repeated MerchandizeItemDto Merchandize = 16;
   AddressDto Address = 17;
+  repeated PassedCheckpointDto PassedCheckpoints = 18;
+}
+
+message PassedCheckpointDto {
+  string Id = 1;
+  google.type.DateTime Passed = 2;
+  google.type.LatLng Position = 3;
 }
 
 message NoteDto {

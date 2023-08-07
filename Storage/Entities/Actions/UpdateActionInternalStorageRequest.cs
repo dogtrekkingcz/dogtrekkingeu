@@ -119,6 +119,17 @@ public sealed record UpdateActionInternalStorageRequest
         public List<MerchandizeItemDto> Merchandize { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();
+
+        public List<PassedCheckpointDto> PassedCheckpoints { get; set; } = new();
+    }
+    
+    public sealed record PassedCheckpointDto
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        
+        public DateTimeOffset Passed { get; set; } = DateTimeOffset.Now;
+
+        public LatLngDto Position { get; set; } = new();
     }
     
     public class NoteDto

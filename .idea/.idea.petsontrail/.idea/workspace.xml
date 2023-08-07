@@ -22,10 +22,20 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="updated production docker compose to be PetsOnTrail too">
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetResultsForActionRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetResultsForActionResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModelMapping.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetResultsForActionRequest.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetResultsForActionResponse.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/MapUtils/GetGpsLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/MapUtils/GetGpsLocation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Actions.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Actions.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/bin/Debug/net7.0/SharedCode.deps.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/Debug/net7.0/SharedCode.csproj.CopyComplete" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,18 +59,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d1c7906533aea419fa4023145539c219e40eacbde752ddcc6e58d14df8925/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Services/Checkpoints/CheckpointsService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Services/Checkpoints/CheckpointsServiceMapping.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/dogsontrail/API.Interfaces/Entities/Checkpoints/GetCheckpointItemsResponse.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/CheckpointModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QrGenerator/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/ActionRightsDto.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/DogDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/RacerDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Mapping/SharedMappingEntry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Mapping/SharedMappingRacer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/dogsontrail/Storage/Models/CheckpointRecord.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -202,13 +207,7 @@
       <workItem from="1691064499560" duration="4894000" />
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
-    </task>
-    <task id="LOCAL-00071" summary="removing shared code, applying SOLID">
-      <created>1690302064341</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1690302064341</updated>
+      <workItem from="1691393772120" duration="297000" />
     </task>
     <task id="LOCAL-00072" summary="Removed the dependency to shared code library and finally compilable">
       <created>1690361802878</created>
@@ -546,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691177999541</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="fixed starting getting gps location">
+      <created>1691385089581</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1691385089581</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -567,7 +573,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="checkpoints &amp; navbar updatings" />
     <MESSAGE value="cleaning" />
     <MESSAGE value="fixed sidebar &amp; checkpoint qr loader" />
     <MESSAGE value="passing data from JS to blazor - the acquired qr code" />
@@ -592,7 +597,8 @@
     <MESSAGE value="note to string.Empty" />
     <MESSAGE value="formatting of the checkpoints data list" />
     <MESSAGE value="updated production docker compose to be PetsOnTrail too" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated production docker compose to be PetsOnTrail too" />
+    <MESSAGE value="fixed starting getting gps location" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed starting getting gps location" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -660,20 +666,6 @@
           <line>10</line>
           <properties documentPath="C:\projects\_private\dogsontrail\DogsOnTrailApp\Extensions\GoogleDateTimeExtensions.cs" initialLine="10" containingFunctionPresentation="method 'ToDateTimeOffset'" />
           <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Index.razor</url>
-          <line>76</line>
-          <properties documentPath="C:\projects\_private\dogsontrail\PetsOnTrailApp\Pages\Index.razor" initialLine="74" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor</url>

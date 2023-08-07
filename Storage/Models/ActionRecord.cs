@@ -121,6 +121,17 @@ internal sealed record ActionRecord : IRecord
         public List<MerchandizeItemDto> Merchandize { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();
+        
+        public List<PassedCheckpointDto> PassedCheckpoints { get; set; } = new();
+    }
+    
+    public sealed record PassedCheckpointDto
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        
+        public DateTimeOffset Passed { get; set; } = DateTimeOffset.Now;
+
+        public LatLngDto Position { get; set; } = new();
     }
     
     public class NoteDto
@@ -290,9 +301,9 @@ internal sealed record ActionRecord : IRecord
     
     public sealed record LatLngDto
     {
-        public double GpsLatitude { get; set; } = 0.0;
+        public double GpsLatitude { get; set; } = double.NaN;
 
-        public double GpsLongitude { get; set; } = 0.0;
+        public double GpsLongitude { get; set; } = double.NaN;
     }
     
     public sealed record ActionSaleDto

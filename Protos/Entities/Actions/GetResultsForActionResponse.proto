@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetResultsForAction";
+
+package getresultsforaction;
+
+import "google/type/datetime.proto";
+import "google/type/latlng.proto";
+
+message GetResultsForActionResponse {
+  repeated RaceResultsDto Races = 1;
+}
+
+message RaceResultsDto {
+  string Id = 1;
+  string Name = 2;
+  double Distance = 3;
+  double Incline = 4;
+  repeated CategoryResultsDto Categories = 9;
+}
+
+message CategoryResultsDto {
+  string Id = 1;
+  string Name = 2;
+  repeated RacerResultsDto Racers = 4;
+}
+
+enum RaceState {
+  NotSpecified = 0;
+  NotStarted = 1;
+  Started = 2;
+  Finished = 3;
+  DidNotFinished = 4;
+  Disqualified = 5;
+}
+
+message RacerResultsDto {
+  string Id = 1;
+  string CompetitorId = 2;
+  string FirstName = 3;
+  string LastName = 4;
+  repeated PetDto Pets = 5;
+  google.type.DateTime Start = 6;
+  google.type.DateTime Finish = 7;
+  RaceState State = 8;
+  repeated PassedCheckpointDto PassedCheckpoints = 9;
+}
+
+message PassedCheckpointDto {
+  string Id = 1;
+  google.type.DateTime Passed = 2;
+  google.type.LatLng Position = 3;
+}
+
+message PetDto {
+  string Id = 1;
+  string Name = 2;
+  string Kennel = 3;
+  string Pedigree = 4;
+  google.type.DateTime Birthday = 5;
+  string UriToPhoto = 6;
+}

@@ -61,6 +61,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.MerchandizeItemDto, Protos.Actions.GetSelectedActions.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.PaymentDefinitionDto, Protos.Actions.GetSelectedActions.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.ActionSaleItemDto, Protos.Actions.GetSelectedActions.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsResponse.PassedCheckpointDto, Protos.Actions.GetSelectedActions.PassedCheckpointDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.LatLngDto, Google.Type.LatLng>()
             .Map(d => d.Latitude, s => s.GpsLatitude)
             .Map(d => d.Longitude, s => s.GpsLongitude);
@@ -112,6 +113,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.MerchandizeItemDto, CreateActionRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.PaymentDefinitionDto, CreateActionRequest.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.ActionSaleItemDto, CreateActionRequest.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.PassedCheckpointDto, CreateActionRequest.PassedCheckpointDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateActionRequest.LatLngDto>()
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
@@ -139,6 +141,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.MerchandizeItemDto, UpdateActionRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.PaymentDefinitionDto, UpdateActionRequest.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.ActionSaleItemDto, UpdateActionRequest.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.PassedCheckpointDto, UpdateActionRequest.PassedCheckpointDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, UpdateActionRequest.LatLngDto>()
             .Map(d => d.GpsLatitude, s => s.Latitude)
             .Map(d => d.GpsLongitude, s => s.Longitude);
@@ -174,6 +177,17 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.LatLngDto, Google.Type.LatLng>()
             .Map(d => d.Latitude, s => s.GpsLatitude)
             .Map(d => d.Longitude, s => s.GpsLongitude);
+        
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse, Protos.Actions.GetResultsForAction.GetResultsForActionResponse>();
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse.RaceResultsDto, Protos.Actions.GetResultsForAction.RaceResultsDto>();
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse.RaceState, Protos.Actions.GetResultsForAction.RaceState>();
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse.PassedCheckpointDto, Protos.Actions.GetResultsForAction.PassedCheckpointDto>();
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse.LatLngDto, Google.Type.LatLng>()
+            .Map(d => d.Longitude, s => s.Longitude)
+            .Map(d => d.Latitude, s => s.Latitude);
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse.CategoryResultsDto, Protos.Actions.GetResultsForAction.CategoryResultsDto>();
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse.PetDto, Protos.Actions.GetResultsForAction.PetDto>();
+        typeAdapterConfig.NewConfig<GetResultsForActionResponse.RacerResultDto, Protos.Actions.GetResultsForAction.RacerResultsDto>();
 
         return typeAdapterConfig;
     }
