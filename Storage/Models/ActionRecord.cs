@@ -100,7 +100,7 @@ internal sealed record ActionRecord : IRecord
 
         public string Email { get; set; } = string.Empty;
 
-        public List<DogDto> Dogs { get; set; } = new List<DogDto>();
+        public List<PetDto> Pets { get; set; } = new List<PetDto>();
 
         public DateTimeOffset? Start { get; set; } = null;
 
@@ -141,7 +141,7 @@ internal sealed record ActionRecord : IRecord
         public string Text { get; set; } = string.Empty;
     }
     
-    public record DogDto
+    public record PetDto
     {
         public string? Id { get; set; }
 

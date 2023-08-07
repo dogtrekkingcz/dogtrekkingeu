@@ -38,7 +38,7 @@
                 <CreateEntryDogsComponent
                     RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits"
                     Race="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)"
-                    Dogs="@Entry.Dogs">
+                    Dogs="@Entry.Pets">
                 </CreateEntryDogsComponent>
             }
         }
@@ -83,15 +83,15 @@
             Entry.Phone = userProfile.Contact.PhoneNumber;
             Entry.UserProfileId = userProfile.Id ?? Guid.Empty.ToString();
             Entry.CompetitorId = userProfile.CompetitorId.ToString();
-            Entry.Dogs = userProfile.Pets
-                .Where(dog => dog.Decease == null)
-                .Select(dog => new EntryModel.DogDto
+            Entry.Pets = userProfile.Pets
+                .Where(pet => pet.Decease == null)
+                .Select(pet => new EntryModel.PetDto
                 {
-                    Id = dog.Id,
-                    Name = dog.Name,
-                    Birthday = dog.Birthday,
-                    Chip = dog.Chip,
-                    Pedigree = dog.Pedigree
+                    Id = pet.Id,
+                    Name = pet.Name,
+                    Birthday = pet.Birthday,
+                    Chip = pet.Chip,
+                    Pedigree = pet.Pedigree
                 })
                 .ToList();
         }

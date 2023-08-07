@@ -17,7 +17,7 @@ internal static class EntriesMapping
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Entities.GetEntriesByActionResponse.EntryDto>();
         typeAdapterConfig.NewConfig<DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationDto, Entities.GetEntriesByActionResponse.VaccinationDto>();
         typeAdapterConfig.NewConfig<DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationType, Entities.GetEntriesByActionResponse.VaccinationType>();
-        typeAdapterConfig.NewConfig<DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.DogDto, Entities.GetEntriesByActionResponse.DogDto>();
+        typeAdapterConfig.NewConfig<DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.PetDto, Entities.GetEntriesByActionResponse.PetDto>();
         typeAdapterConfig.NewConfig<DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.MerchandizeItemDto, Entities.GetEntriesByActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.AddressDto, Entities.GetEntriesByActionResponse.AddressDto>();
 

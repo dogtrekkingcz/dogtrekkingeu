@@ -15,9 +15,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var dog in Dogs)
+        @foreach (var pet in Pets)
         {
-            var age = Race.Start - (dog.Birthday ?? DateTimeOffset.Now);
+            var age = Race.Start - (pet.Birthday ?? DateTimeOffset.Now);
             var ageInYears = (Math.Floor(age.TotalDays / 365));
             var isValid = RaceLimits.MinimalAgeOfTheDogInDayes <= age.TotalDays;
             var message = "";
@@ -32,9 +32,9 @@
             }
                 
             <tr>
-                <td>@dog.Chip</td>
-                <td>@dog.Pedigree</td>
-                <td>@dog.Name</td>
+                <td>@pet.Chip</td>
+                <td>@pet.Pedigree</td>
+                <td>@pet.Name</td>
                 <td>@ageInYears @message</td>
             </tr>
         }
@@ -44,14 +44,14 @@
     </table>
 </section>
 <section>
-    <EditForm Model="NewDog" OnValidSubmit="AddNewDog">
+    <EditForm Model="NewPet" OnValidSubmit="AddNewPet">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <label>@localizer["Action.CreateEntry.Dogs.Chip"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputText @bind-Value="@NewDog.Chip"/>
+                    <InputText @bind-Value="@NewPet.Chip"/>
                 </div>
             </div>
             <div class="row">
@@ -59,7 +59,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Pedigree"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputText @bind-Value="@NewDog.Pedigree"/>
+                    <InputText @bind-Value="@NewPet.Pedigree"/>
                 </div>
             </div>
             <div class="row">
@@ -67,7 +67,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Name"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputText @bind-Value="@NewDog.Name"/>
+                    <InputText @bind-Value="@NewPet.Name"/>
                 </div>
             </div>
             <div class="row">
@@ -75,7 +75,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Birthday"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent @bind-Date="@NewDog.Birthday"></InputDateComponent>
+                    <InputDateComponent @bind-Date="@NewPet.Birthday"></InputDateComponent>
                 </div>
             </div>
             <div class="row">
@@ -83,7 +83,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Vaccinations.AgainstRabies"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent @bind-Date="@NewDog.Vaccinations.First(vac => vac.Type == EntryModel.VaccinationType.Rabies).Date"></InputDateComponent>
+                    <InputDateComponent @bind-Date="@NewPet.Vaccinations.First(vac => vac.Type == EntryModel.VaccinationType.Rabies).Date"></InputDateComponent>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
 @code {
 
     [Parameter]
-    public List<EntryModel.DogDto> Dogs { get; set; } = new();
+    public List<EntryModel.PetDto> Pets { get; set; } = new();
     
     [Parameter]
     public ActionSettingsModel.RaceDto Race { get; set; }
@@ -104,15 +104,15 @@
     [Parameter]
     public ActionSettingsModel.RaceLimits RaceLimits { get; set; }
 
-    private EntryModel.DogDto NewDog { get; set; } = new();
+    private EntryModel.PetDto NewPet { get; set; } = new();
     
     private DateTimeOffset NewDogBirthday { get; set; }
     private DateTimeOffset NewDogVaccinationDate { get; set; }
 
-    private void AddNewDog()
+    private void AddNewPet()
     {
-        Dogs.Add(NewDog);
+        Pets.Add(NewPet);
 
-        NewDog = new();
+        NewPet = new();
     }
 }

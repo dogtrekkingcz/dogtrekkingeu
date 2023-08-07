@@ -95,7 +95,10 @@ namespace Storage.Services.Repositories.Actions
 
             var category = race.Categories.First(category => category.Id == request.CategoryId);
             
-            category.Racers.Add(_mapper.Map<ActionRecord.RacerDto>(request));
+            category.Racers.Add(_mapper.Map<ActionRecord.RacerDto>(request) with
+            {
+                PassedCheckpoints = new List<ActionRecord.PassedCheckpointDto>()
+            });
 
             await _actionsStorageService.UpdateAsync(action, cancellationToken);
 

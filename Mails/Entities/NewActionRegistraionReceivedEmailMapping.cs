@@ -36,7 +36,7 @@ public static class NewActionRegistrationReceivedEmailMapping
             .TwoWays();
 
         typeAdapterConfig
-            .NewConfig<NewActionRegistrationEmailRequest.DogDto, NewActionRegistrationEmailRequest.DogDto>()
+            .NewConfig<NewActionRegistrationEmailRequest.PetDto, NewActionRegistrationEmailRequest.PetDto>()
             .IgnoreNullValues(true)
             .TwoWays();
 

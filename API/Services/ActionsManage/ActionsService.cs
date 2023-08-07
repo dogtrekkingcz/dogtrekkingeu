@@ -206,8 +206,11 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             var actionUpdateRequest = _mapper.Map<UpdateActionInternalStorageRequest>(action);
             var race = actionUpdateRequest.Races.First(race => race.Id == registration.RaceId);
             var category = race.Categories.First(category => category.Id == registration.CategoryId);
-            
-            var racer = _mapper.Map<UpdateActionInternalStorageRequest.RacerDto>(registration);
+
+            var racer = _mapper.Map<UpdateActionInternalStorageRequest.RacerDto>(registration) with
+            {
+                PassedCheckpoints = new List<UpdateActionInternalStorageRequest.PassedCheckpointDto>()
+            };
             category.Racers.Add(racer);
 
             await _actionsRepositoryService.UpdateActionAsync(

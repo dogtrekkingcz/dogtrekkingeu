@@ -10,7 +10,7 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.CreateEntryRequest, CreateEntryRequest>();
         typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.Vaccination, CreateEntryRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.VaccinationType, CreateEntryRequest.VaccinationType>();
-        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.Dog, CreateEntryRequest.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.Pet, CreateEntryRequest.PetDto>();
         typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.MerchandizeItem, CreateEntryRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Entries.CreateEntry.Address, CreateEntryRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateEntryRequest.LatLngDto>()
@@ -25,7 +25,7 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Protos.Entries.GetEntriesByAction.Entry>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationDto, Protos.Entries.GetEntriesByAction.Vaccination>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Protos.Entries.GetEntriesByAction.VaccinationType>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.DogDto, Protos.Entries.GetEntriesByAction.Dog>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.PetDto, Protos.Entries.GetEntriesByAction.Pet>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.MerchandizeItemDto, Protos.Entries.GetEntriesByAction.MerchandizeItem>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.AddressDto, Protos.Entries.GetEntriesByAction.Address>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.LatLngDto, Google.Type.LatLng>()
@@ -38,7 +38,7 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.EntryDto, Protos.Entries.GetAllEntries.Entry>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.VaccinationDto, Protos.Entries.GetAllEntries.Vaccination>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.VaccinationType, Protos.Entries.GetAllEntries.VaccinationType>();
-        typeAdapterConfig.NewConfig<GetAllEntriesResponse.DogDto, Protos.Entries.GetAllEntries.Dog>();
+        typeAdapterConfig.NewConfig<GetAllEntriesResponse.PetDto, Protos.Entries.GetAllEntries.Pet>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.MerchandizeItemDto, Protos.Entries.GetAllEntries.MerchandizeItem>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.AddressDto, Protos.Entries.GetAllEntries.Address>();
         typeAdapterConfig.NewConfig<GetAllEntriesResponse.LatLngDto, Google.Type.LatLng>()

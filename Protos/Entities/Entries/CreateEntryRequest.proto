@@ -14,7 +14,7 @@ message CreateEntryRequest {
   string Surname = 5;
   string Phone = 6;
   string Email = 7;
-  repeated Dog Dogs = 8;
+  repeated Pet Pets = 8;
   repeated string Notes = 9;
   string ActionId = 10;
   string RaceId = 11;
@@ -36,7 +36,7 @@ message Address {
   google.type.LatLng Position = 6;
 }
 
-message Dog {
+message Pet {
   optional string Id = 1;
   string Name = 2;
   string Pedigree = 3;

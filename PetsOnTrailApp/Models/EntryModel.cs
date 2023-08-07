@@ -26,7 +26,7 @@ public sealed record EntryModel
     [EmailAddress]
     public string Email { get; set; } = "";
 
-    public List<DogDto> Dogs { get; set; } = new List<DogDto>();
+    public List<PetDto> Pets { get; set; } = new List<PetDto>();
 
     public List<string> Notes { get; set; } = new List<string>();
 
@@ -76,12 +76,12 @@ public sealed record EntryModel
 
     public sealed record LatLngDto
     {
-        public double GpsLatitude { get; set; } = 0.0;
+        public double Latitude { get; set; } = double.NaN;
 
-        public double GpsLongitude { get; set; } = 0.0;
+        public double Longitude { get; set; } = double.NaN;
     }
     
-    public record DogDto
+    public record PetDto
     {
         public string Id { get; set; } = string.Empty;
         

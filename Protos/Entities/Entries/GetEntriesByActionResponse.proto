@@ -20,7 +20,7 @@ message Entry {
   string Surname = 6;
   string Phone = 7;
   string Email = 8;
-  repeated Dog Dogs = 9;
+  repeated Pet Pets = 9;
   repeated string Notes = 10;
   string ActionId = 11;
   string RaceId = 12;
@@ -52,7 +52,7 @@ message Address {
   google.type.LatLng Position = 6;
 }
 
-message Dog {
+message Pet {
   string Id = 1;
   string Name = 2;
   string Pedigree = 3;

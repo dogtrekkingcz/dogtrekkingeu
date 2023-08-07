@@ -39,7 +39,7 @@ public sealed class NewActionRegistrationReceivedEmailBuilder : IEmailBuilder
                                 <th>{_localize["NewActionRegistration.Emails.Dogs.Name"]}</th>
                             </thead>
                             <tbody>
-                                {GenerateListOfDogs()}
+                                {GenerateListOfPets()}
                             </tbody>
                         </table>
                     </td>
@@ -58,18 +58,18 @@ public sealed class NewActionRegistrationReceivedEmailBuilder : IEmailBuilder
         _request = request;
     }
 
-    private string GenerateListOfDogs()
+    private string GenerateListOfPets()
     {
         string ret = "";
 
-        foreach (var dog in _request.Racer.Dogs)
+        foreach (var pet in _request.Racer.Pets)
         {
             ret += $@"
                 <tr>
-                    <td>{dog.Chip}</td>
-                    <td>{dog.Pedigree}</td>
-                    <td>{dog.Birthday:yyyy-MM-dd}</td>
-                    <td>{dog.Name}</td>
+                    <td>{pet.Chip}</td>
+                    <td>{pet.Pedigree}</td>
+                    <td>{pet.Birthday:yyyy-MM-dd}</td>
+                    <td>{pet.Name}</td>
                 </tr>
             ";
         }

@@ -23,7 +23,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsResponse.RequestedPaymentsDto, Protos.Actions.GetAllActions.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.AddressDto, Protos.Actions.GetAllActions.AddressDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.CategoryDto, Protos.Actions.GetAllActions.CategoryDto>();
-        typeAdapterConfig.NewConfig<GetAllActionsResponse.DogDto, Protos.Actions.GetAllActions.DogDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsResponse.PetDto, Protos.Actions.GetAllActions.PetDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.LimitsDto, Protos.Actions.GetAllActions.LimitsDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.RaceDto, Protos.Actions.GetAllActions.RaceDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.RaceState, Protos.Actions.GetAllActions.RaceState>();
@@ -49,7 +49,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.RequestedPaymentsDto, Protos.Actions.GetSelectedActions.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.AddressDto, Protos.Actions.GetSelectedActions.AddressDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.CategoryDto, Protos.Actions.GetSelectedActions.CategoryDto>();
-        typeAdapterConfig.NewConfig<GetSelectedActionsResponse.DogDto, Protos.Actions.GetSelectedActions.DogDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsResponse.PetDto, Protos.Actions.GetSelectedActions.PetDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.LimitsDto, Protos.Actions.GetSelectedActions.LimitsDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.CheckpointDto, Protos.Actions.GetSelectedActions.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.RaceDto, Protos.Actions.GetSelectedActions.RaceDto>();
@@ -76,7 +76,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionResponse.RequestedPaymentsDto, Protos.Actions.GetAction.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.AddressDto, Protos.Actions.GetAction.AddressDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.CategoryDto, Protos.Actions.GetAction.CategoryDto>();
-        typeAdapterConfig.NewConfig<GetActionResponse.DogDto, Protos.Actions.GetAction.DogDto>();
+        typeAdapterConfig.NewConfig<GetActionResponse.PetDto, Protos.Actions.GetAction.PetDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.LimitsDto, Protos.Actions.GetAction.LimitsDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.CheckpointDto, Protos.Actions.GetAction.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.RaceDto, Protos.Actions.GetAction.RaceDto>();
@@ -101,7 +101,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.RequestedPaymentsDto, CreateActionRequest.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.AddressDto, CreateActionRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.CategoryDto, CreateActionRequest.CategoryDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.DogDto, CreateActionRequest.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.PetDto, CreateActionRequest.PetDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.LimitsDto, CreateActionRequest.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.CheckpointDto, CreateActionRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.RaceDto, CreateActionRequest.RaceDto>();
@@ -129,7 +129,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RequestedPaymentsDto, UpdateActionRequest.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.AddressDto, UpdateActionRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.CategoryDto, UpdateActionRequest.CategoryDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.DogDto, UpdateActionRequest.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.PetDto, UpdateActionRequest.PetDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.LimitsDto, UpdateActionRequest.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.CheckpointDto, UpdateActionRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RaceDto, UpdateActionRequest.RaceDto>();
@@ -163,7 +163,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.RequestedPaymentsDto, Protos.Actions.GetRacesForAction.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.AddressDto, Protos.Actions.GetRacesForAction.AddressDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.CategoryDto, Protos.Actions.GetRacesForAction.CategoryDto>();
-        typeAdapterConfig.NewConfig<GetRacesForActionResponse.DogDto, Protos.Actions.GetRacesForAction.DogDto>();
+        typeAdapterConfig.NewConfig<GetRacesForActionResponse.PetDto, Protos.Actions.GetRacesForAction.PetDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.LimitsDto, Protos.Actions.GetRacesForAction.LimitsDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.RaceDto, Protos.Actions.GetRacesForAction.RaceDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.RaceState, Protos.Actions.GetRacesForAction.RaceState>();

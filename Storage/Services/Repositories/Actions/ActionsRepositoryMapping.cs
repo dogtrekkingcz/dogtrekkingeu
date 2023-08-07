@@ -18,7 +18,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RequestedPaymentsDto, ActionRecord.RequestedPaymentsDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.AddressDto, ActionRecord.AddressDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.CategoryDto, ActionRecord.CategoryDto>();
-            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.DogDto, ActionRecord.DogDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.PetDto, ActionRecord.PetDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.LimitsDto, ActionRecord.LimitsDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.CheckpointDto, ActionRecord.CheckpointDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RaceDto, ActionRecord.RaceDto>();
@@ -42,7 +42,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RequestedPaymentsDto, ActionRecord.RequestedPaymentsDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.AddressDto, ActionRecord.AddressDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.CategoryDto, ActionRecord.CategoryDto>();
-            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.DogDto, ActionRecord.DogDto>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.PetDto, ActionRecord.PetDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.LimitsDto, ActionRecord.LimitsDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.CheckpointDto, ActionRecord.CheckpointDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RaceDto, ActionRecord.RaceDto>();
@@ -66,7 +66,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentsDto, GetAllActionsInternalStorageResponse.RequestedPaymentsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetAllActionsInternalStorageResponse.AddressDto>();
             typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetAllActionsInternalStorageResponse.CategoryDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetAllActionsInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PetDto, GetAllActionsInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<ActionRecord.LimitsDto, GetAllActionsInternalStorageResponse.LimitsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetAllActionsInternalStorageResponse.RaceDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetAllActionsInternalStorageResponse.RaceState>();
@@ -88,7 +88,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentsDto, GetSelectedActionsInternalStorageResponse.RequestedPaymentsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetSelectedActionsInternalStorageResponse.AddressDto>();
             typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetSelectedActionsInternalStorageResponse.CategoryDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetSelectedActionsInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PetDto, GetSelectedActionsInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<ActionRecord.LimitsDto, GetSelectedActionsInternalStorageResponse.LimitsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.CheckpointDto, GetSelectedActionsInternalStorageResponse.CheckpointDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetSelectedActionsInternalStorageResponse.RaceDto>();
@@ -120,7 +120,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.RequestedPaymentsDto, GetActionInternalStorageResponse.RequestedPaymentsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.AddressDto, GetActionInternalStorageResponse.AddressDto>();
             typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetActionInternalStorageResponse.CategoryDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.DogDto, GetActionInternalStorageResponse.DogDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PetDto, GetActionInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<ActionRecord.LimitsDto, GetActionInternalStorageResponse.LimitsDto>();
             typeAdapterConfig.NewConfig<ActionRecord.CheckpointDto, GetActionInternalStorageResponse.CheckpointDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetActionInternalStorageResponse.RaceDto>();
@@ -143,7 +143,8 @@ namespace Storage.Services.Repositories.Actions
                 .Ignore(d => d.RequestedPayments)
                 .Ignore(d => d.Merchandize)
                 .Ignore(d => d.Address)
-                .Ignore(d => d.Dogs)
+                .Ignore(d => d.Pets)
+                .Ignore(d => d.PassedCheckpoints)
                 .Map(d => d.FirstName, s => s.Name)
                 .Map(d => d.LastName, s => s.Surname)
                 .Map(d => d.Accepted, s => true)
@@ -155,7 +156,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.AddressDto, UpdateActionInternalStorageRequest.AddressDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
-            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.DogDto, UpdateActionInternalStorageRequest.DogDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>();
 
             return typeAdapterConfig;
         }

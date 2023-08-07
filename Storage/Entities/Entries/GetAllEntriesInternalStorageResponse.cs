@@ -22,7 +22,7 @@ public sealed record GetAllEntriesInternalStorageResponse
 
         public string Email { get; set; } = "";
 
-        public List<DogDto> Dogs { get; set; } = new List<DogDto>();
+        public List<PetDto> Pets { get; set; } = new List<PetDto>();
 
         public List<string> Notes { get; set; } = new List<string>();
 
@@ -78,7 +78,7 @@ public sealed record GetAllEntriesInternalStorageResponse
         public double GpsLongitude { get; set; } = 0.0;
     }
     
-    public record DogDto
+    public record PetDto
     {
         public string? Id { get; set; }
         
@@ -90,14 +90,7 @@ public sealed record GetAllEntriesInternalStorageResponse
 
         public DateTimeOffset? Birthday { get; set; } = null;
 
-        public List<VaccinationDto> Vaccinations { get; set; } =
-            new List<VaccinationDto>
-            {
-                new VaccinationDto
-                {
-                    Type = VaccinationType.Rabies
-                }
-            };
+        public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>();
     }
     
     public sealed record VaccinationDto

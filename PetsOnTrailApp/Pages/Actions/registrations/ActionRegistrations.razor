@@ -52,9 +52,9 @@ else
                 </td>
                 <td>
                     <ul>
-                        @foreach (var dog in entry.Dogs)
+                        @foreach (var pet in entry.Pets)
                         {
-                            <li>@dog.Chip - @dog.Birthday?.ToString("yyyy-MM-dd") - @dog.Pedigree - @dog.Name</li>
+                            <li>@pet.Chip - @pet.Birthday?.ToString("yyyy-MM-dd") - @pet.Pedigree - @pet.Name</li>
                         }
                     </ul>
                 </td>
@@ -146,9 +146,9 @@ else
                         </td>
                         <td>
                             <ul>
-                                @foreach (var dog in racer.Dogs)
+                                @foreach (var pet in racer.Pets)
                                 {
-                                    <li>@dog.Chip - @dog.Birthday?.ToString("yyyy-MM-dd") - @dog.Pedigree - @dog.Name</li>
+                                    <li>@pet.Chip - @pet.Birthday?.ToString("yyyy-MM-dd") - @pet.Pedigree - @pet.Name</li>
                                 }
                             </ul>
                         </td>

@@ -104,7 +104,7 @@ public sealed record GetSelectedActionsResponse
 
         public string Email { get; set; } = string.Empty;
 
-        public List<DogDto> Dogs { get; set; } = new List<DogDto>();
+        public List<PetDto> Pets { get; set; } = new List<PetDto>();
 
         public DateTimeOffset? Start { get; set; } = null;
 
@@ -125,6 +125,17 @@ public sealed record GetSelectedActionsResponse
         public List<MerchandizeItemDto> Merchandize { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();
+        
+        public List<PassedCheckpointDto> PassedCheckpoints { get; set; } = new();
+    }
+    
+    public sealed record PassedCheckpointDto
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        
+        public DateTimeOffset Passed { get; set; } = DateTimeOffset.Now;
+
+        public LatLngDto Position { get; set; } = new();
     }
     
     public class NoteDto
@@ -134,7 +145,7 @@ public sealed record GetSelectedActionsResponse
         public string Text { get; set; } = string.Empty;
     }
     
-    public record DogDto
+    public record PetDto
     {
         public string? Id { get; set; }
 

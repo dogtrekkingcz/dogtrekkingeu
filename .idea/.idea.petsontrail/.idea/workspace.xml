@@ -22,20 +22,62 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetResultsForActionRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetResultsForActionResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModelMapping.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetResultsForActionRequest.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetResultsForActionResponse.proto" afterDir="false" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="adding checkpoints (possible mapping problems in this commit)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Actions.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Actions.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/bin/Debug/net7.0/SharedCode.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/obj/Debug/net7.0/SharedCode.csproj.CopyComplete" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Entries/EntriesServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Entries/EntriesServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/CreateActionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/CreateActionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetRacesForActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetRacesForActionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedActionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedActionsResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/CreateEntryRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/CreateEntryRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetAllEntriesResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetAllEntriesResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetEntriesByActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetEntriesByActionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.WebApiService/Entities/GetEntriesByActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/Entities/GetEntriesByActionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.WebApiService/RequestHandlers/Entries/EntriesMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/RequestHandlers/Entries/EntriesMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/ref/API.WebApiService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/ref/API.WebApiService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/refint/API.WebApiService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/refint/API.WebApiService.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/EntriesManage/EntriesServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/EntriesManage/EntriesServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Builders/Emails/Admin/NewActionRegistrationReceivedEmailBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Builders/Emails/Admin/NewActionRegistrationReceivedEmailBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Builders/Emails/Participant/NewActionRegistrationReceivedEmailBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Builders/Emails/Participant/NewActionRegistrationReceivedEmailBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Entities/NewActionRegistraionReceivedEmailMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Entities/NewActionRegistraionReceivedEmailMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Entities/NewActionRegistrationEmailRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Entities/NewActionRegistrationEmailRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/EntryModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/EntryModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/EntryModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/EntryModelMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryDogsComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryDogsComponent.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Entries/Entries.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Entries/Entries.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/CreateActionRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/CreateActionRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetRacesForActionResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetRacesForActionResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedActionsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedActionsResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Entries/CreateEntryRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Entries/CreateEntryRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Entries/GetAllEntriesResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Entries/GetAllEntriesResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Entries/GetEntriesByActionResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Entries/GetEntriesByActionResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/CreateActionInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/CreateActionInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Entries/CreateEntryInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Entries/CreateEntryInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Entries/GetAllEntriesInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Entries/GetAllEntriesInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Entries/GetEntriesByActionInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Entries/GetEntriesByActionInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Entries/GetEntryInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Entries/GetEntryInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Entries/UpdateEntryInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Entries/UpdateEntryInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Models/EntryRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Models/EntryRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Entries/EntriesRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Entries/EntriesRepositoryMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +108,7 @@
     <setting file="file://$PROJECT_DIR$/Shared/Entities/RacerDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Mapping/SharedMappingEntry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Mapping/SharedMappingRacer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/Storage/Models/ActionRecord.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -207,14 +250,7 @@
       <workItem from="1691064499560" duration="4894000" />
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
-      <workItem from="1691393772120" duration="297000" />
-    </task>
-    <task id="LOCAL-00072" summary="Removed the dependency to shared code library and finally compilable">
-      <created>1690361802878</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1690361802878</updated>
+      <workItem from="1691393772120" duration="11260000" />
     </task>
     <task id="LOCAL-00073" summary="added part of the missing mappings, can be started again">
       <created>1690364609266</created>
@@ -552,7 +588,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691385089581</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="adding checkpoints (possible mapping problems in this commit)">
+      <created>1691399128158</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1691399128158</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +616,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="cleaning" />
     <MESSAGE value="fixed sidebar &amp; checkpoint qr loader" />
     <MESSAGE value="passing data from JS to blazor - the acquired qr code" />
     <MESSAGE value="fixed starting and stopping the media stream" />
@@ -598,7 +640,8 @@
     <MESSAGE value="formatting of the checkpoints data list" />
     <MESSAGE value="updated production docker compose to be PetsOnTrail too" />
     <MESSAGE value="fixed starting getting gps location" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed starting getting gps location" />
+    <MESSAGE value="adding checkpoints (possible mapping problems in this commit)" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding checkpoints (possible mapping problems in this commit)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

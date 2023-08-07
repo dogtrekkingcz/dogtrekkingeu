@@ -74,7 +74,7 @@ message RacerDto {
   string LastName = 4;
   string Phone = 5;
   string Email = 6;
-  repeated DogDto Dogs = 7;
+  repeated PetDto Pets = 7;
   google.type.DateTime Start = 8;
   google.type.DateTime Finish = 9;
   RaceState State = 10;
@@ -85,6 +85,13 @@ message RacerDto {
   RequestedPaymentsDto RequestedPayments = 15;
   repeated MerchandizeItemDto Merchandize = 16;
   AddressDto Address = 17;
+  repeated PassedCheckpointDto PassedCheckpoints = 18;
+}
+
+message PassedCheckpointDto {
+  string Id = 1;
+  google.type.DateTime Passed = 2;
+  google.type.LatLng Position = 3;
 }
 
 message NoteDto {
@@ -92,7 +99,7 @@ message NoteDto {
   string Text = 2;
 }
 
-message DogDto {
+message PetDto {
   string Id = 1;
   string UserId = 2;
   string Name = 3;

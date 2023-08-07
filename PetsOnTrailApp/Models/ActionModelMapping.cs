@@ -16,7 +16,7 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.RequestedPaymentsDto, Protos.Actions.CreateAction.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<ActionModel.AddressDto, Protos.Actions.CreateAction.AddressDto>();
         typeAdapterConfig.NewConfig<ActionModel.CategoryDto, Protos.Actions.CreateAction.CategoryDto>();
-        typeAdapterConfig.NewConfig<ActionModel.DogDto, Protos.Actions.CreateAction.DogDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PetDto, Protos.Actions.CreateAction.PetDto>();
         typeAdapterConfig.NewConfig<ActionModel.LimitsDto, Protos.Actions.CreateAction.LimitsDto>();
         typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.CreateAction.CheckpointDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.CreateAction.RaceDto>();
@@ -42,7 +42,7 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.RequestedPaymentsDto, Protos.Actions.UpdateAction.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<ActionModel.AddressDto, Protos.Actions.UpdateAction.AddressDto>();
         typeAdapterConfig.NewConfig<ActionModel.CategoryDto, Protos.Actions.UpdateAction.CategoryDto>();
-        typeAdapterConfig.NewConfig<ActionModel.DogDto, Protos.Actions.UpdateAction.DogDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PetDto, Protos.Actions.UpdateAction.PetDto>();
         typeAdapterConfig.NewConfig<ActionModel.LimitsDto, Protos.Actions.UpdateAction.LimitsDto>();
         typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.UpdateAction.CheckpointDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.UpdateAction.RaceDto>();
@@ -70,7 +70,7 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RequestedPaymentsDto, ActionModel.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.AddressDto, ActionModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CategoryDto, ActionModel.CategoryDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.DogDto, ActionModel.DogDto>()
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PetDto, ActionModel.PetDto>()
             .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset())
             .Map(d => d.Decease, s => s.Decease.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.LimitsDto, ActionModel.LimitsDto>();
@@ -108,7 +108,7 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RequestedPaymentsDto, ActionModel.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.AddressDto, ActionModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.CategoryDto, ActionModel.CategoryDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.DogDto, ActionModel.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.PetDto, ActionModel.PetDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.LimitsDto, ActionModel.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RaceDto, ActionModel.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RaceState, ActionModel.RaceState>();
@@ -129,7 +129,7 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RequestedPaymentsDto, ActionModel.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.AddressDto, ActionModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CategoryDto, ActionModel.CategoryDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.DogDto, ActionModel.DogDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PetDto, ActionModel.PetDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.LimitsDto, ActionModel.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CheckpointDto, ActionModel.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RaceDto, ActionModel.RaceDto>()

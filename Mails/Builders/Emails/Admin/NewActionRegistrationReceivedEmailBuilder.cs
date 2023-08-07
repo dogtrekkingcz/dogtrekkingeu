@@ -95,14 +95,14 @@ public sealed class NewActionRegistrationReceivedEmailBuilder : IEmailBuilder
     {
         string ret = "";
 
-        foreach (var dog in _request.Racer.Dogs)
+        foreach (var pet in _request.Racer.Pets)
         {
             ret += $@"
                 <tr>
-                    <td>{dog.Chip}</td>
-                    <td>{dog.Pedigree}</td>
-                    <td>{dog.Birthday:yyyy-MM-dd}</td>
-                    <td>{dog.Name}</td>
+                    <td>{pet.Chip}</td>
+                    <td>{pet.Pedigree}</td>
+                    <td>{pet.Birthday:yyyy-MM-dd}</td>
+                    <td>{pet.Name}</td>
                 </tr>
             ";
         }
