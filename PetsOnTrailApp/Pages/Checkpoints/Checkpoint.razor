@@ -219,7 +219,9 @@
                     await JsRuntime.InvokeVoidAsync("startWatchPosition");
 
                     while (ContinualGpsCoordinatesAcquiringIsOn == true)
+                    {
                         await Task.Delay(200);
+                    }
 
                     await JsRuntime.InvokeVoidAsync("stopWatchPosition");
                 }

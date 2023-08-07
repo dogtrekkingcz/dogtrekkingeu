@@ -15,7 +15,7 @@ watchPositionOptions = {
 };
 
 function watchPositionSuccess(pos) {
-    DotNet.invokeMethodAsync('PetsOnTrailApp', "GpsPositionChanged", pos.coords.latitude, pos.coords.longitude);
+    DotNet.invokeMethodAsync('PetsOnTrailApp', "GpsPositionChangedAsync", pos.coords.latitude, pos.coords.longitude);
 }
 
 function watchPositionError(err) {
@@ -23,9 +23,13 @@ function watchPositionError(err) {
 }
 
 window.stopWatchPosition = async function () {
-    navigator.geolocation.clearWatch(watchPositionId);
+    new Promise((resolve, reject) => {
+        navigator.geolocation.clearWatch(watchPositionId);
+    });
 }
 
 window.startWatchPosition = async function () {
-    watchPositionId = navigator.geolocation.watchPositionSuccess(watchPositionSuccess, watchPositionError, watchPositionOptions);    
+    new Promise((resolve, reject) => {
+        watchPositionId = navigator.geolocation.watchPosition(watchPositionSuccess, watchPositionError, watchPositionOptions);
+    });
 }

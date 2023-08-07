@@ -22,8 +22,10 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="note to string.Empty">
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="updated production docker compose to be PetsOnTrail too">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/MapUtils/GetGpsLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/MapUtils/GetGpsLocation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,9 +43,13 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2a627223904b427ba8eca237f3e49e93b1d8b0/70/6391225e/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2afb4baa91344f5b9296e22ecc72a1ba1de00/cf/4e33eefc/QRCodeGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/33db9b74c7f255e0cbd13c4dcead7877cbbd5a71f1f7e51ac45b686fea2ae7/ServerCallContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/43f3bb8b6b7cb281b070e466b5f7d37dd10f9d7e4bdc25e43b3e8b2394d3fe/UnaryServerMethodInvoker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8aeca8dfcec95a81b42a28e5c138e1c321e89def3fed605511172a8beaec/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d1c7906533aea419fa4023145539c219e40eacbde752ddcc6e58d14df8925/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Services/Checkpoints/CheckpointsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Services/Checkpoints/CheckpointsServiceMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API.Interfaces/Entities/Checkpoints/GetCheckpointItemsResponse.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
@@ -54,6 +60,7 @@
     <setting file="file://$PROJECT_DIR$/Shared/Entities/RacerDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Mapping/SharedMappingEntry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Mapping/SharedMappingRacer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/Storage/Models/CheckpointRecord.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -195,20 +202,6 @@
       <workItem from="1691064499560" duration="4894000" />
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
-    </task>
-    <task id="LOCAL-00069" summary="fixing of the mapping of the FE app - Google DateTime to DateTimeOffset">
-      <created>1690292481994</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1690292481994</updated>
-    </task>
-    <task id="LOCAL-00070" summary="removing shared code, applying SOLID">
-      <created>1690300646664</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1690300646664</updated>
     </task>
     <task id="LOCAL-00071" summary="removing shared code, applying SOLID">
       <created>1690302064341</created>
@@ -539,7 +532,21 @@
       <option name="project" value="LOCAL" />
       <updated>1691165238558</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="formatting of the checkpoints data list">
+      <created>1691169084806</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1691169084806</updated>
+    </task>
+    <task id="LOCAL-00119" summary="updated production docker compose to be PetsOnTrail too">
+      <created>1691177999541</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1691177999541</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -560,8 +567,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="added userid to every checkpoint data" />
-    <MESSAGE value="Checkpoints updates" />
     <MESSAGE value="checkpoints &amp; navbar updatings" />
     <MESSAGE value="cleaning" />
     <MESSAGE value="fixed sidebar &amp; checkpoint qr loader" />
@@ -585,7 +590,9 @@
     <MESSAGE value="Note could be nulled and -&gt; ignored" />
     <MESSAGE value="checkpoints note -&gt; null value ignoring" />
     <MESSAGE value="note to string.Empty" />
-    <option name="LAST_COMMIT_MESSAGE" value="note to string.Empty" />
+    <MESSAGE value="formatting of the checkpoints data list" />
+    <MESSAGE value="updated production docker compose to be PetsOnTrail too" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated production docker compose to be PetsOnTrail too" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -684,6 +691,11 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#DogsOnTrail.Interfaces.Actions.Entities.Checkpoints.GetCheckpointItemsResponse" memberName="Items" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="LaunchSettings">
         <watch expression="NewDog" />
