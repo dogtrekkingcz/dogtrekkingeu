@@ -218,9 +218,11 @@ internal sealed record ActionRecord : IRecord
 
     public sealed record RequestedPaymentItem
     {
-        public string Name { get; set; }
-        
-        public double Price { get; set; }
+        public string Name { get; set; } = string.Empty;
+
+        public double Price { get; set; } = double.NaN;
+
+        public string Currency { get; set; } = string.Empty;
     }
 
     public record PaymentDto

@@ -26,11 +26,11 @@ else
     <table class="table">
         <thead>
         <tr>
-            <th>@Localizer["Surname"], @Localizer["Name"]</th>
-            <th>@Localizer["Race"]</th>
-            <th>@Localizer["Category"]</th>
-            <th>@Localizer["Dogs"]</th>
-            <th>@Localizer["Actions"]</th>
+            <th>@Localizer["Action.Manage.Surname"], @Localizer["Action.Manage.Name"]</th>
+            <th>@Localizer["Action.Manage.Race"]</th>
+            <th>@Localizer["Action.Manage.Category"]</th>
+            <th>@Localizer["Action.Manage.Pets"]</th>
+            <th>@Localizer["Action.Manage.Actions"]</th>
         </tr>
         </thead>
         <tbody>
@@ -82,16 +82,16 @@ else
     
     <hr />
     
-    <h4>@Localizer["Admin.Manage.Registrations"]</h4>
+    <h4>@Localizer["Action.Manage.Registrations"]</h4>
     <table class="table">
         <thead>
         <tr>
-            <th>@Localizer["Surname"], @Localizer["Name"]</th>
-            <th>@Localizer["Race"]</th>
-            <th>@Localizer["Category"]</th>
-            <th>@Localizer["Dogs"]</th>
-            <th>@Localizer["Payments"]</th>
-            <th>@Localizer["Actions"]</th>
+            <th>@Localizer["Action.Manage.Surname"], @Localizer["Action.Manage.Name"]</th>
+            <th>@Localizer["Action.Manage.Race"]</th>
+            <th>@Localizer["Action.Manage.Category"]</th>
+            <th>@Localizer["Action.Manage.Pets"]</th>
+            <th>@Localizer["Action.Manage.Payments"]</th>
+            <th>@Localizer["Action.Manage.Actions"]</th>
         </tr>
         </thead>
         <tbody>
@@ -106,6 +106,8 @@ else
             {
                 foreach (var racer in category.Racers)
                 {
+                    racer.RequestedPayments.Items.Clear();
+                    
                     racer.RequestedPayments.Items.Add(new ActionModel.RequestedPaymentItem
                     {
                         Name = "RegistrationFee",

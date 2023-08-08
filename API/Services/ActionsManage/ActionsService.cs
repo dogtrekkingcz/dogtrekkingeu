@@ -216,13 +216,29 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             var race = actionUpdateRequest.Races.First(race => race.Id == registration.RaceId);
             var category = race.Categories.First(category => category.Id == registration.CategoryId);
 
+            var requestedPayments = new List<UpdateActionInternalStorageRequest.RequestedPaymentItem>();
+            foreach (var merch in registration.Merchandize)
+            {
+                requestedPayments.Add(new UpdateActionInternalStorageRequest.RequestedPaymentItem
+                {
+                    Name = merch.Name,
+                    Price = merch.Price,
+                    Currency = merch.Currency
+                });
+            }
+            
             var racer = _mapper.Map<UpdateActionInternalStorageRequest.RacerDto>(registration) with
             {
                 PassedCheckpoints = new List<UpdateActionInternalStorageRequest.PassedCheckpointDto>(),
                 AcceptedDate = DateTime.Now,
                 Accepted = true,
                 PayedDate = null,
-                Payed = false
+                Payed = false,
+                RequestedPayments = new UpdateActionInternalStorageRequest.RequestedPaymentsDto
+                {
+                    VariableNumber = registration.Phone.Substring(registration.Phone.Length - 9, 9),
+                    Items = requestedPayments
+                }
             };
             category.Racers.Add(racer);
 

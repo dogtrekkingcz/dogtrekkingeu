@@ -110,6 +110,7 @@ message RequestedPaymentsDto {
 message RequestedPaymentItem {
   string Name = 1;
   double Price = 2;
+  string Currency = 3;
 }
 
 message PaymentDto {

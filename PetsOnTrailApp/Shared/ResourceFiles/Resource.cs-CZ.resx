@@ -387,7 +387,7 @@
     <data name="Menu.ActionsMap" xml:space="preserve">
         <value>Mapa akcí</value>
     </data>
-    <data name="Action.Manage.Payments" xml:space="preserve">
+    <data name="Action.Manage.ManagePayments" xml:space="preserve">
         <value>Spravovat platby</value>
     </data>
     <data name="Action.Manage.Entries" xml:space="preserve">
@@ -536,5 +536,38 @@
     </data>
     <data name="Pets.AddPet" xml:space="preserve">
         <value>Přidat mazlíka</value>
+    </data>
+    <data name="Action.Manage.RegistrationToAccept" xml:space="preserve">
+        <value>Schvalování registrací</value>
+    </data>
+    <data name="Admin.Manage.Registrations" xml:space="preserve">
+        <value>Schválené registrace</value>
+    </data>
+    <data name="Action.Manage.Registrations" xml:space="preserve">
+        <value>Registrace</value>
+    </data>
+    <data name="Action.Manage.Surname" xml:space="preserve">
+        <value>Příjmení</value>
+    </data>
+    <data name="Action.Manage.Name" xml:space="preserve">
+        <value>Jméno</value>
+    </data>
+    <data name="Action.Manage.Race" xml:space="preserve">
+        <value>Závod</value>
+    </data>
+    <data name="Action.Manage.Category" xml:space="preserve">
+        <value>Kategorie</value>
+    </data>
+    <data name="Action.Manage.Pets" xml:space="preserve">
+        <value>Mazlíci</value>
+    </data>
+    <data name="Action.Manage.Payments" xml:space="preserve">
+        <value>Platby</value>
+    </data>
+    <data name="Action.Manage.Actions" xml:space="preserve">
+        <value>Akce</value>
+    </data>
+    <data name="Action.Manage.AcceptPayment" xml:space="preserve">
+        <value>Schválit plnou platbu</value>
     </data>
 </root>

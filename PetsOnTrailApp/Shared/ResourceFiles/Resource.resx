@@ -387,7 +387,7 @@
     <data name="Menu.ActionsMap" xml:space="preserve">
         <value>Actions Map</value>
     </data>
-    <data name="Action.Manage.Payments" xml:space="preserve">
+    <data name="Action.Manage.ManagePayments" xml:space="preserve">
         <value>Manage payments</value>
     </data>
     <data name="Action.Manage.Entries" xml:space="preserve">
@@ -536,5 +536,38 @@
     </data>
     <data name="Pets.AddPet" xml:space="preserve">
         <value>Add pet</value>
+    </data>
+    <data name="Action.Manage.RegistrationToAccept" xml:space="preserve">
+        <value>Registration to accept</value>
+    </data>
+    <data name="Admin.Manage.Registrations" xml:space="preserve">
+        <value>Accepted registrations</value>
+    </data>
+    <data name="Action.Manage.Registrations" xml:space="preserve">
+        <value>Registrations</value>
+    </data>
+    <data name="Action.Manage.Surname" xml:space="preserve">
+        <value>Surname</value>
+    </data>
+    <data name="Action.Manage.Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Action.Manage.Race" xml:space="preserve">
+        <value>Race</value>
+    </data>
+    <data name="Action.Manage.Category" xml:space="preserve">
+        <value>Category</value>
+    </data>
+    <data name="Action.Manage.Pets" xml:space="preserve">
+        <value>Pets</value>
+    </data>
+    <data name="Action.Manage.Payments" xml:space="preserve">
+        <value>Payments</value>
+    </data>
+    <data name="Action.Manage.Actions" xml:space="preserve">
+        <value>Actions</value>
+    </data>
+    <data name="Action.Manage.AcceptPayment" xml:space="preserve">
+        <value>Accept full payment</value>
     </data>
 </root>

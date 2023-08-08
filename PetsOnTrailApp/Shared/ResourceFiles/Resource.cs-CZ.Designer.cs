@@ -321,11 +321,38 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Schválit plnou platbu.
+        /// </summary>
+        internal static string Action_Manage_AcceptPayment {
+            get {
+                return ResourceManager.GetString("Action.Manage.AcceptPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Schválit přihlášku.
         /// </summary>
         internal static string Action_Manage_AcceptRegistration {
             get {
                 return ResourceManager.GetString("Action.Manage.AcceptRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Akce.
+        /// </summary>
+        internal static string Action_Manage_Actions {
+            get {
+                return ResourceManager.GetString("Action.Manage.Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategorie.
+        /// </summary>
+        internal static string Action_Manage_Category {
+            get {
+                return ResourceManager.GetString("Action.Manage.Category", resourceCulture);
             }
         }
         
@@ -377,9 +404,45 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         /// <summary>
         ///   Looks up a localized string similar to Spravovat platby.
         /// </summary>
+        internal static string Action_Manage_ManagePayments {
+            get {
+                return ResourceManager.GetString("Action.Manage.ManagePayments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jméno.
+        /// </summary>
+        internal static string Action_Manage_Name {
+            get {
+                return ResourceManager.GetString("Action.Manage.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platby.
+        /// </summary>
         internal static string Action_Manage_Payments {
             get {
                 return ResourceManager.GetString("Action.Manage.Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mazlíci.
+        /// </summary>
+        internal static string Action_Manage_Pets {
+            get {
+                return ResourceManager.GetString("Action.Manage.Pets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Závod.
+        /// </summary>
+        internal static string Action_Manage_Race {
+            get {
+                return ResourceManager.GetString("Action.Manage.Race", resourceCulture);
             }
         }
         
@@ -389,6 +452,33 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         internal static string Action_Manage_Races {
             get {
                 return ResourceManager.GetString("Action.Manage.Races", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registrace.
+        /// </summary>
+        internal static string Action_Manage_Registrations {
+            get {
+                return ResourceManager.GetString("Action.Manage.Registrations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schvalování registrací.
+        /// </summary>
+        internal static string Action_Manage_RegistrationToAccept {
+            get {
+                return ResourceManager.GetString("Action.Manage.RegistrationToAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Příjmení.
+        /// </summary>
+        internal static string Action_Manage_Surname {
+            get {
+                return ResourceManager.GetString("Action.Manage.Surname", resourceCulture);
             }
         }
         
@@ -686,6 +776,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         internal static string Add_Update_action {
             get {
                 return ResourceManager.GetString("Add/Update action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schválené registrace.
+        /// </summary>
+        internal static string Admin_Manage_Registrations {
+            get {
+                return ResourceManager.GetString("Admin.Manage.Registrations", resourceCulture);
             }
         }
         
