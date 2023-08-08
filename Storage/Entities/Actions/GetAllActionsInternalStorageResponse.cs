@@ -85,6 +85,8 @@ public sealed record GetAllActionsInternalStorageResponse
         
         public string CompetitorId { get; set; } = string.Empty;
 
+        public string CheckpointData { get; set; } = string.Empty;
+
         public string FirstName { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;

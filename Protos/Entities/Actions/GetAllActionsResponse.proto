@@ -63,21 +63,29 @@ enum RaceState {
 message RacerDto {
   string Id = 1;
   string CompetitorId = 2;
-  string FirstName = 3;
-  string LastName = 4;
-  string Phone = 5;
-  string Email = 6;
-  repeated PetDto Pets = 7;
-  google.type.DateTime Start = 8;
-  google.type.DateTime Finish = 9;
-  RaceState State = 10;
-  bool Accepted = 11;
-  bool Payed = 12;
-  repeated PaymentDto Payments = 13;
-  repeated NoteDto Notes = 14;
-  RequestedPaymentsDto RequestedPayments = 15;
-  repeated MerchandizeItemDto Merchandize = 16;
-  AddressDto Address = 17;
+  string CheckpointData = 3;
+  string FirstName = 4;
+  string LastName = 5;
+  string Phone = 6;
+  string Email = 7;
+  repeated PetDto Pets = 8;
+  google.type.DateTime Start = 9;
+  google.type.DateTime Finish = 10;
+  RaceState State = 11;
+  bool Accepted = 12;
+  bool Payed = 13;
+  repeated PaymentDto Payments = 14;
+  repeated NoteDto Notes = 15;
+  RequestedPaymentsDto RequestedPayments = 16;
+  repeated MerchandizeItemDto Merchandize = 17;
+  AddressDto Address = 18;
+  repeated PassedCheckpointDto PassedCheckpoints = 19;
+}
+
+message PassedCheckpointDto {
+  string Id = 1;
+  google.type.DateTime Passed = 2;
+  google.type.LatLng Position = 3;
 }
 
 message NoteDto {

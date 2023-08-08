@@ -232,19 +232,23 @@ else
 
         Registrations = Mapper.Map<List<EntryModel>>(response.Entries);
 
-        _canAcceptRegistrations = (await UserProfileService.GetAsync())?
-            .Rights?
-            .FirstOrDefault(right =>
-                right.ActionId == Action.Id.ToString() &&
-                right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
-            ) != null;
+        var rights = (await UserProfileService.GetAsync())?
+            .Rights;
 
-        _canAcceptPayments = (await UserProfileService.GetAsync())?
-            .Rights?
-            .FirstOrDefault(right =>
-                right.ActionId == Action.Id.ToString() &&
-                right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
-            ) != null;
+        if ((rights?
+                .SelectMany(right => right.Roles)
+                .Any(role => role == global::Constants.Roles.InternalAdministrator.Id) ?? false) ||
+            (rights
+                .FirstOrDefault(right => right.ActionId == Action.Id.ToString())?.Roles?
+                .Any(role => role == global::Constants.Roles.OwnerOfAction.Id) ?? false))
+        {
+            _canAcceptPayments = true;
+            _canAcceptRegistrations = true;
+        }
+        else
+        {
+            ; // TODO
+        }
     }
 
     private async Task ImportRegistrationToAction(EntryModel entry)
