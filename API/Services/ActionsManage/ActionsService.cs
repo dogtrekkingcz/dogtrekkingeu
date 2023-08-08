@@ -218,7 +218,11 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
 
             var racer = _mapper.Map<UpdateActionInternalStorageRequest.RacerDto>(registration) with
             {
-                PassedCheckpoints = new List<UpdateActionInternalStorageRequest.PassedCheckpointDto>()
+                PassedCheckpoints = new List<UpdateActionInternalStorageRequest.PassedCheckpointDto>(),
+                AcceptedDate = DateTime.Now,
+                Accepted = true,
+                PayedDate = null,
+                Payed = false
             };
             category.Racers.Add(racer);
 
@@ -261,11 +265,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
 
             var updateActionRequest = _mapper.Map<UpdateActionInternalStorageRequest>(action);
-            updateActionRequest.Races
+            
+            var updateRacer = updateActionRequest.Races
                 .SelectMany(r => r.Categories)
                 .SelectMany(c => c.Racers)
-                .First(racer => racer.Id == request.Id)
-                .Payments.Add(new UpdateActionInternalStorageRequest.PaymentDto
+                .First(racer => racer.Id == request.Id); 
+            updateRacer.Payments.Add(new UpdateActionInternalStorageRequest.PaymentDto
                     {
                         Date = DateTimeOffset.Now,
                         Amount = request.Amount,
@@ -273,6 +278,8 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                         Note = request.Note,
                         BankAccount = request.BankAccount
                     });
+            updateRacer.Payed = true;
+            updateRacer.PayedDate = DateTimeOffset.Now;
 
             await _actionsRepositoryService.UpdateActionAsync(updateActionRequest, cancellationToken);
 

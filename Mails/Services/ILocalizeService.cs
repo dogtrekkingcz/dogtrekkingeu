@@ -2,7 +2,7 @@
 
 public interface ILocalizeService
 {
-    Dictionary<string, string> Get();
+    string Get(string key);
 
     public enum LanguageCode
     {

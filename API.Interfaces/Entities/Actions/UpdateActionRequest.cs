@@ -111,7 +111,11 @@ public sealed record UpdateActionRequest
 
         public bool Accepted { get; set; } = false;
 
+        public DateTimeOffset? AcceptedDate { get; set; } = null;
+
         public bool Payed { get; set; } = false;
+
+        public DateTimeOffset? PayedDate { get; set; } = null;
 
         public List<PaymentDto> Payments { get; set; } = new();
 

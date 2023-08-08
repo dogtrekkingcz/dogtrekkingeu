@@ -30,7 +30,6 @@ else
             <th>@Localizer["Race"]</th>
             <th>@Localizer["Category"]</th>
             <th>@Localizer["Dogs"]</th>
-            <th>@Localizer["Payments"]</th>
             <th>@Localizer["Actions"]</th>
         </tr>
         </thead>
@@ -59,8 +58,6 @@ else
                     </ul>
                 </td>
                 <td>
-                </td>
-                <td>
                     <div class="dropdown dropstart">
                         <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="three-dots"></div>
@@ -69,7 +66,7 @@ else
                         <ul class="dropdown-menu">
                             <AuthorizeView>
                                 <Authorized>
-                                    @if (_canAcceptRegistrations)
+                                    @if (CanAcceptRegistrations)
                                     {
                                         <li><a class="dropdown-item" @onclick="@(async () => await ImportRegistrationToAction(entry))">@Localizer["Action.Manage.AcceptRegistration"]</a></li>
                                     }
@@ -185,7 +182,7 @@ else
                                 <ul class="dropdown-menu">
                                     <AuthorizeView>
                                         <Authorized>
-                                            @if (_canAcceptPayments)
+                                            @if (CanAcceptPayments)
                                             {
                                                 <li><a class="dropdown-item" @onclick="@(async () => await AcceptPayment(racer))">@Localizer["Action.Manage.AcceptPayment"]</a></li>
                                             }
@@ -211,26 +208,12 @@ else
     private ActionModel Action { get; set; } = null;
     private List<EntryModel> Registrations { get; set; } = new();
 
-    private bool _canAcceptRegistrations { get; set; } = false;
-    private bool _canAcceptPayments { get; set; } = false;
+    private bool CanAcceptRegistrations { get; set; } = false;
+    private bool CanAcceptPayments { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
-        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
-        {
-            Id = Id
-        });
-
-        Action = Mapper.Map<ActionModel>(actionResponse);
-        
-        // ---
-        
-        var response = await EntriesClient.getEntriesByActionAsync(new Protos.Entries.GetEntriesByActionRequest
-        {
-            ActionId = Id
-        });
-
-        Registrations = Mapper.Map<List<EntryModel>>(response.Entries);
+        await ReloadAsync();
 
         var rights = (await UserProfileService.GetAsync())?
             .Rights;
@@ -242,13 +225,32 @@ else
                 .FirstOrDefault(right => right.ActionId == Action.Id.ToString())?.Roles?
                 .Any(role => role == global::Constants.Roles.OwnerOfAction.Id) ?? false))
         {
-            _canAcceptPayments = true;
-            _canAcceptRegistrations = true;
+            CanAcceptPayments = true;
+            CanAcceptRegistrations = true;
         }
         else
         {
             ; // TODO
         }
+    }
+
+    private async Task ReloadAsync()
+    {
+        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
+        {
+            Id = Id
+        });
+
+        Action = Mapper.Map<ActionModel>(actionResponse);
+        
+    // ---
+        
+        var response = await EntriesClient.getEntriesByActionAsync(new Protos.Entries.GetEntriesByActionRequest
+        {
+            ActionId = Id
+        });
+
+        Registrations = Mapper.Map<List<EntryModel>>(response.Entries.Where(entry => entry.Accepted == false));
     }
 
     private async Task ImportRegistrationToAction(EntryModel entry)
@@ -258,13 +260,8 @@ else
             EntryId = entry.Id.ToString(),
             ActionId = entry.ActionId.ToString()
         });
-        
-        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
-        {
-            Id = Id
-        });
 
-        Action = Mapper.Map<ActionModel>(actionResponse);
+        await ReloadAsync();
         
         StateHasChanged();
     }
@@ -280,13 +277,8 @@ else
             Currency = "Kč",
             BankAccount = ""
         });
-        
-        var actionResponse = await ActionsClient.getActionAsync(new Protos.Actions.GetAction.GetActionRequest
-        {
-            Id = Id
-        });
 
-        Action = Mapper.Map<ActionModel>(actionResponse);
+        await ReloadAsync();
         
         StateHasChanged();
     }

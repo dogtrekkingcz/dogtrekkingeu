@@ -179,6 +179,8 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.State)
             .Ignore(d => d.PassedCheckpoints)
             .Ignore(d => d.CheckpointData)
+            .Ignore(d => d.PayedDate)
+            .Ignore(d => d.AcceptedDate)
             .Map(d => d.FirstName, s => s.Name)
             .Map(d => d.LastName, s => s.Surname);
             

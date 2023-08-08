@@ -22,17 +22,25 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="adding CheckpointData to Racer for racer resolution by qr code on the checkpoit">
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionResponse.cs" afterDir="false" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="authorization of the administering action payments/registrations">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/ref/API.WebApiService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/ref/API.WebApiService.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/refint/API.WebApiService.dll" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/refint/API.WebApiService.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryDogsComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryPetsComponent.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Builders/Emails/Admin/NewActionRegistrationPaymentReceivedEmailBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Builders/Emails/Admin/NewActionRegistrationPaymentReceivedEmailBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Builders/Emails/Admin/NewActionRegistrationReceivedEmailBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Builders/Emails/Admin/NewActionRegistrationReceivedEmailBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Builders/Emails/Participant/NewActionRegistrationPaymentReceivedEmailBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Builders/Emails/Participant/NewActionRegistrationPaymentReceivedEmailBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Builders/Emails/Participant/NewActionRegistrationReceivedEmailBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Builders/Emails/Participant/NewActionRegistrationReceivedEmailBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Services/ILocalizeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Services/ILocalizeService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mails/Services/LocalizeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Services/LocalizeService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +65,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QrGenerator/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/ActionRightsDto.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/DogDto.cs" root0="FORCE_HIGHLIGHTING" />
@@ -205,14 +214,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="13594000" />
-    </task>
-    <task id="LOCAL-00075" summary="Works again">
-      <created>1690375448024</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1690375448024</updated>
+      <workItem from="1691476083216" duration="19879000" />
     </task>
     <task id="LOCAL-00076" summary="adding live updates subscription grpc">
       <created>1690379953776</created>
@@ -550,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691486949823</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="authorization of the administering action payments/registrations">
+      <created>1691490647900</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1691490647900</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +580,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fixed starting and stopping the media stream" />
     <MESSAGE value="removed outputData -&gt; is set by dotnet value interceptor" />
     <MESSAGE value="removed the html element for outputData too" />
     <MESSAGE value="action checkpoints management prepared" />
@@ -596,7 +604,8 @@
     <MESSAGE value="adding checkpoints (possible mapping problems in this commit)" />
     <MESSAGE value="renaming, dogs-&gt;pets, adding mapping for checkpoints ..." />
     <MESSAGE value="adding CheckpointData to Racer for racer resolution by qr code on the checkpoit" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding CheckpointData to Racer for racer resolution by qr code on the checkpoit" />
+    <MESSAGE value="authorization of the administering action payments/registrations" />
+    <option name="LAST_COMMIT_MESSAGE" value="authorization of the administering action payments/registrations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -665,34 +674,6 @@
           <properties documentPath="C:\projects\_private\dogsontrail\DogsOnTrailApp\Extensions\GoogleDateTimeExtensions.cs" initialLine="10" containingFunctionPresentation="method 'ToDateTimeOffset'" />
           <option name="timeStamp" value="76" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor</url>
-          <line>237</line>
-          <properties documentPath="C:\projects\_private\dogsontrail\PetsOnTrailApp\Pages\Actions\registrations\ActionRegistrations.razor" initialLine="234" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor</url>
-          <line>234</line>
-          <properties documentPath="C:\projects\_private\dogsontrail\PetsOnTrailApp\Pages\Actions\registrations\ActionRegistrations.razor" initialLine="234" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -722,6 +703,7 @@
         <watch expression="identifiedUser" />
         <watch expression="rights" />
         <watch expression="_canAcceptRegistrations" />
+        <watch expression="_canAcceptPayments" />
       </configuration>
     </watches-manager>
   </component>

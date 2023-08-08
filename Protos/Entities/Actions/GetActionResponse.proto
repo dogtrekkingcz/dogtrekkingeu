@@ -76,13 +76,15 @@ message RacerDto {
   google.type.DateTime Finish = 10;
   RaceState State = 11;
   bool Accepted = 12;
-  bool Payed = 13;
-  repeated PaymentDto Payments = 14;
-  repeated NoteDto Notes = 15;
-  RequestedPaymentsDto RequestedPayments = 16;
-  repeated MerchandizeItemDto Merchandize = 17;
-  AddressDto Address = 18;
-  repeated PassedCheckpointDto PassedCheckpoints = 19;
+  google.type.DateTime AcceptedDate = 13;
+  bool Payed = 14;
+  google.type.DateTime PayedDate = 15;
+  repeated PaymentDto Payments = 16;
+  repeated NoteDto Notes = 17;
+  RequestedPaymentsDto RequestedPayments = 18;
+  repeated MerchandizeItemDto Merchandize = 19;
+  AddressDto Address = 20;
+  repeated PassedCheckpointDto PassedCheckpoints = 21;
 }
 
 message PassedCheckpointDto {

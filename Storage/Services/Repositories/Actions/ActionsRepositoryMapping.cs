@@ -11,7 +11,9 @@ namespace Storage.Services.Repositories.Actions
         {
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.ActionType, ActionRecord.ActionType>();
-            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>()
+                .Ignore(d => d.PayedDate)
+                .Ignore(d => d.AcceptedDate);
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.NoteDto, ActionRecord.NoteDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.PaymentDto, ActionRecord.PaymentDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RequestedPaymentItem, ActionRecord.RequestedPaymentItem>();
@@ -146,9 +148,11 @@ namespace Storage.Services.Repositories.Actions
                 .Ignore(d => d.Pets)
                 .Ignore(d => d.PassedCheckpoints)
                 .Ignore(d => d.CheckpointData)
+                .Ignore(d => d.PayedDate)
                 .Map(d => d.FirstName, s => s.Name)
                 .Map(d => d.LastName, s => s.Surname)
                 .Map(d => d.Accepted, s => true)
+                .Map(d => d.AcceptedDate, s => DateTime.Now)
                 .Map(d => d.Payed, s => false);
 
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateActionInternalStorageRequest.RacerDto>();

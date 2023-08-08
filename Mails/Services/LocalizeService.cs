@@ -12,9 +12,12 @@ public class LocalizeService : ILocalizeService
         _languageCode = languageCode;
     }
     
-    public Dictionary<string, string> Get()
+    public string Get(string key)
     {
-        return _vocabularies[_languageCode];
+        if (_vocabularies[_languageCode].ContainsKey(key) == false)
+            return key;
+        
+        return _vocabularies[_languageCode][key];
     }
 
     private void Load()
@@ -34,6 +37,7 @@ public class LocalizeService : ILocalizeService
             "Nyní bude následovat akceptování přihlášky administrátory akce, prosím vyčkejte na potvrzující email";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.ReceivedInformations"] = "Poskytnuté informace o příhlášce";
         _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistration.Emails.InCaseOfUrgencyWriteUsAnEmailTo"] = "V případě potřeby nás kontaktujte na mail: ";
+        _vocabularies[ILocalizeService.LanguageCode.Czech]["NewActionRegistrationPayment.Emails.NewRegistrationPaymentReceived"] = "Přijata platba";
 
         _vocabularies[ILocalizeService.LanguageCode.English] = new Dictionary<string, string>();
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.NameSurname"] = "Name, surname";
@@ -50,5 +54,6 @@ public class LocalizeService : ILocalizeService
             "Now the administrator of the action needs to accept your registration, please wait for the acceptation email";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.ReceivedInformations"] = "Received information";
         _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistration.Emails.InCaseOfUrgencyWriteUsAnEmailTo"] = "In case of urgency - contact us at mail: ";
+        _vocabularies[ILocalizeService.LanguageCode.English]["NewActionRegistrationPayment.Emails.NewRegistrationPaymentReceived"] = "Payment received";
     }
 }
