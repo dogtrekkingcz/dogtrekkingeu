@@ -1,5 +1,6 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Entries;
 using Mails.Entities;
+using Mails.Entities.RegistrationToActionReceived;
 using Mapster;
 using Storage.Entities.Entries;
 

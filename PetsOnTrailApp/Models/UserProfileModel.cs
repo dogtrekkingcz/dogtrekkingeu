@@ -41,9 +41,9 @@ public sealed record UserProfileModel
     
     public sealed record LatLngDto
     {
-        public double GpsLatitude { get; set; } = 0.0;
+        public double Latitude { get; set; } = 0.0;
 
-        public double GpsLongitude { get; set; } = 0.0;
+        public double Longitude { get; set; } = 0.0;
     }
     
     public sealed record ContactDto

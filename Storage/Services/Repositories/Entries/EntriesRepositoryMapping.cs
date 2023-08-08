@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Storage.Entities.Entries;
+using Storage.Extensions;
 using Storage.Models;
 
 namespace Storage.Services.Repositories.Entries
@@ -23,8 +24,9 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.MerchandizeItemDto, EntryRecord.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.AddressDto, EntryRecord.AddressDto>();
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.LatLngDto, EntryRecord.LatLngDto>();
-            
-            typeAdapterConfig.NewConfig<EntryRecord, GetEntryInternalStorageResponse>();
+
+            typeAdapterConfig.NewConfig<EntryRecord, GetEntryInternalStorageResponse>()
+                .Map(d => d.Id, s => s.Id.ToGuid());
             typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetEntryInternalStorageResponse.EntryState>();
             typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntryInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<EntryRecord.PetDto, GetEntryInternalStorageResponse.PetDto>();

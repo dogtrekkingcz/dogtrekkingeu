@@ -3,6 +3,9 @@ using DogsOnTrail.Actions.Exceptions;
 using DogsOnTrail.Actions.Services.Authorization;
 using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
+using Mails.Builders.Emails;
+using Mails.Entities.PaymentOfRegistrationReceived;
+using Mails.Services;
 using MapsterMapper;
 using Storage.Entities.ActionRights;
 using Storage.Entities.Actions;
@@ -19,13 +22,17 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         private readonly IEntriesRepositoryService _entriesRepositoryService;
         private readonly IAuthorizationService _authorizationService;
         private readonly ICurrentUserIdService _currentUserIdService;
+        private readonly ICheckpointsRepositoryService _checkpointsRepositoryService;
+        private readonly IMailSenderService _emailSenderService;
 
         public ActionsService(IMapper mapper, 
             IActionsRepositoryService actionsRepositoryService, 
             IActionRightsRepositoryService actionRightsRepositoryService,
             IEntriesRepositoryService entriesRepositoryService,
             ICurrentUserIdService currentUserIdService,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            ICheckpointsRepositoryService checkpointsRepositoryService,
+            IMailSenderService mailSenderService)
         {
             _mapper = mapper;
             _actionsRepositoryService = actionsRepositoryService;
@@ -33,6 +40,8 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             _entriesRepositoryService = entriesRepositoryService;
             _authorizationService = authorizationService;
             _currentUserIdService = currentUserIdService;
+            _checkpointsRepositoryService = checkpointsRepositoryService;
+            _emailSenderService = mailSenderService;
         }
 
         public async Task<CreateActionResponse> CreateActionAsync(CreateActionRequest request, CancellationToken cancellationToken)
@@ -225,6 +234,23 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             await _entriesRepositoryService.UpdateEntryAsync(updateEntryRequest, cancellationToken);
         }
 
+        public async Task AcceptCheckpointAsync(AcceptCheckpointRequest request, CancellationToken cancellationToken)
+        {
+            var checkpoint = await _checkpointsRepositoryService.GetAsync(request.Id, cancellationToken);
+
+            var action = await _actionsRepositoryService.GetAsync(checkpoint.ActionId, cancellationToken);
+
+            var racer = action.Races
+                .SelectMany(race => race.Categories
+                    .SelectMany(ctg => ctg.Racers))
+                .FirstOrDefault(racer => racer.CheckpointData == checkpoint.Data);
+
+            if (racer != null)
+            {
+                racer.PassedCheckpoints.Add(_mapper.Map<GetActionInternalStorageResponse.PassedCheckpointDto>(checkpoint));
+            }
+        }
+
         public async Task DenyRegistrationAsync(Guid registrationId, string reason, CancellationToken cancellationToken)
         {
             
@@ -255,6 +281,56 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             updateRegistrationRequest.State = UpdateEntryInternalStorageRequest.EntryState.Paid;
 
             await _entriesRepositoryService.UpdateEntryAsync(updateRegistrationRequest, cancellationToken);
+
+
+            var racer = action.Races.SelectMany(r => r.Categories.SelectMany(ctg => ctg.Racers))
+                .FirstOrDefault(racer => racer.Id == registration.Id);
+            NewActionRegistrationPaymentEmailRequest emailRequest = new()
+            {
+                Racer = new NewActionRegistrationPaymentEmailRequest.RacerDto
+                {
+                    LanguageCode = registration.LanguageCode,
+                    Id = registration.Id,
+                    Name = registration.Name,
+                    Surname = registration.Surname,
+                    CompetitorId = registration.CompetitorId,
+                    UserProfileId = registration.UserProfileId,
+                    Created = registration.Created
+                },
+                Amount = request.Amount,
+                Currency = request.Currency,
+                Action = new NewActionRegistrationPaymentEmailRequest.ActionDto
+                {
+                    Email = action.ContactMail,
+                    Name = action.Name
+                },
+                ReceivedPayments = racer.Payments.Select(payment => new  NewActionRegistrationPaymentEmailRequest.ReceivedPaymentDto
+                {
+                    Received = payment.Date,
+                    Amount = payment.Amount,
+                    Currency = payment.Currency
+                })
+                    .ToList(),
+                Payments = new Dictionary<NewActionRegistrationPaymentEmailRequest.TermDto, NewActionRegistrationPaymentEmailRequest.PaymentDto>()
+            };
+
+            ILocalizeService.LanguageCode languageCode;
+            switch (registration.LanguageCode)
+            {
+                case "en-US": languageCode = ILocalizeService.LanguageCode.English; break;
+                case "cs-CZ": languageCode = ILocalizeService.LanguageCode.Czech; break;
+                
+                default: languageCode = ILocalizeService.LanguageCode.English; break;
+            }
+            
+            List<IEmailBuilder> mailBuilders = new();
+            
+            mailBuilders.Add(new Mails.Builders.Emails.Admin.NewActionRegistrationPaymentReceivedEmailBuilder(
+                new LocalizeService(languageCode), emailRequest));
+            mailBuilders.Add(new Mails.Builders.Emails.Participant.NewActionRegistrationPaymentReceivedEmailBuilder(
+                new LocalizeService(languageCode), emailRequest));
+
+            await _emailSenderService.SendAsync(mailBuilders, cancellationToken);
         }
 
         public async Task<GetRacesForActionResponse> GetRacesForActionAsync(GetRacesForActionRequest request, CancellationToken cancellationToken)

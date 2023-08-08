@@ -1,4 +1,5 @@
 ﻿using Mails.Entities;
+using Mails.Entities.RegistrationToActionReceived;
 using Mapster;
 
 namespace Mails.Builders.Emails;

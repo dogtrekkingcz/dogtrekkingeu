@@ -13,9 +13,7 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<GetUserProfileResponse.ContactDto, Protos.UserProfiles.GetUserProfile.Contact>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.PetDto, Protos.UserProfiles.GetUserProfile.Pet>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.VaccinationDto, Protos.UserProfiles.GetUserProfile.Vaccination>();
-        typeAdapterConfig.NewConfig<GetUserProfileResponse.LatLngDto, Google.Type.LatLng>()
-            .Map(d => d.Latitude, s => s.GpsLatitude)
-            .Map(d => d.Longitude, s => s.GpsLongitude);
+        typeAdapterConfig.NewConfig<GetUserProfileResponse.LatLngDto, Google.Type.LatLng>();
 
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest, CreateUserProfileRequest>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.VaccinationType, CreateUserProfileRequest.VaccinationType>();
@@ -23,9 +21,7 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Contact, CreateUserProfileRequest.ContactDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Pet, CreateUserProfileRequest.PetDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Vaccination, CreateUserProfileRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateUserProfileRequest.LatLngDto>()
-            .Map(d => d.GpsLatitude, s => s.Latitude)
-            .Map(d => d.GpsLongitude, s => s.Longitude);
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateUserProfileRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileResponse, Protos.UserProfiles.CreateUserProfile.CreateUserProfileResponse>();
         
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileRequest, UpdateUserProfileRequest>();
@@ -34,9 +30,7 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Contact, UpdateUserProfileRequest.ContactDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Pet, UpdateUserProfileRequest.PetDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Vaccination, UpdateUserProfileRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<Google.Type.LatLng, UpdateUserProfileRequest.LatLngDto>()
-            .Map(d => d.GpsLatitude, s => s.Latitude)
-            .Map(d => d.GpsLongitude, s => s.Longitude);
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, UpdateUserProfileRequest.LatLngDto>();
         
         typeAdapterConfig.NewConfig<GetSelectedSurnameNameResponse.SelectedSurnameNameDto, Protos.UserProfiles.GetSelectedSurnameName.SelectedSurnameName>();
         

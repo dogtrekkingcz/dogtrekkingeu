@@ -98,9 +98,9 @@
     {
         foreach (var action in _actionList)
         {
-            var position = action.Address?.Position ?? new ActionModel.LatLngDto { GpsLatitude = -1, GpsLongitude = -1 }; 
+            var position = action.Address?.Position ?? new ActionModel.LatLngDto { Latitude = double.NaN, Longitude = double.NaN }; 
             
-            if (position is { GpsLatitude: >= 0.0, GpsLongitude: >= 0.0 })
+            if (position is not { Latitude: double.NaN, Longitude: double.NaN })
             {
                 
             }

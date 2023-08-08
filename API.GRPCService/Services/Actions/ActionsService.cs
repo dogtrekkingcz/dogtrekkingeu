@@ -2,6 +2,7 @@ using API.GRPCService.Extensions;
 using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Google.Protobuf.Collections;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Actions;
@@ -146,5 +147,12 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
         }, context.CancellationToken);
 
         return _mapper.Map<Protos.Actions.GetResultsForAction.GetResultsForActionResponse>(actionResults);
+    }
+
+    public async override Task<Empty> acceptCheckpoint(Protos.Actions.AcceptCheckpoint.AcceptCheckpointRequest request, ServerCallContext context)
+    {
+        await _actionsService.AcceptCheckpointAsync(_mapper.Map<AcceptCheckpointRequest>(request), context.CancellationToken);
+
+        return new Empty();
     }
 }

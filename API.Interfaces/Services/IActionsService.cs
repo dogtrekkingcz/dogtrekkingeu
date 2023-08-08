@@ -30,6 +30,8 @@ namespace DogsOnTrail.Interfaces.Actions.Services
 
         Task AcceptPaymentAsync(AcceptPaymentRequest request, CancellationToken cancellationToken);
 
+        Task AcceptCheckpointAsync(AcceptCheckpointRequest request, CancellationToken cancellationToken);
+
         Task<GetRacesForActionResponse> GetRacesForActionAsync(GetRacesForActionRequest request, CancellationToken cancellationToken);
 
         Task<GetResultsForActionResponse> GetResultsForActionAsync(GetResultsForActionRequest request, CancellationToken cancellationToken);

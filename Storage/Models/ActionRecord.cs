@@ -92,6 +92,8 @@ internal sealed record ActionRecord : IRecord
         
         public string CompetitorId { get; set; } = string.Empty;
 
+        public string CheckpointData { get; set; } = string.Empty;
+
         public string FirstName { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;
@@ -301,9 +303,9 @@ internal sealed record ActionRecord : IRecord
     
     public sealed record LatLngDto
     {
-        public double GpsLatitude { get; set; } = double.NaN;
+        public double Latitude { get; set; } = double.NaN;
 
-        public double GpsLongitude { get; set; } = double.NaN;
+        public double Longitude { get; set; } = double.NaN;
     }
     
     public sealed record ActionSaleDto

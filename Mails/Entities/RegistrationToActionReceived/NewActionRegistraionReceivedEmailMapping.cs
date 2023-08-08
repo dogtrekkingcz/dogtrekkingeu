@@ -1,6 +1,6 @@
 ﻿using Mapster;
 
-namespace Mails.Entities;
+namespace Mails.Entities.RegistrationToActionReceived;
 
 public static class NewActionRegistrationReceivedEmailMapping
 {

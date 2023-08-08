@@ -14,9 +14,7 @@ internal static class UserProfileModelMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Pet, UserProfileModel.PetDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Vaccination, UserProfileModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.VaccinationType, UserProfileModel.VaccinationType>();
-        typeAdapterConfig.NewConfig<Google.Type.LatLng, UserProfileModel.LatLngDto>()
-            .Map(d => d.GpsLatitude, s => s.Latitude)
-            .Map(d => d.GpsLongitude, s => s.Longitude);
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, UserProfileModel.LatLngDto>();
 
         typeAdapterConfig.NewConfig<UserProfileModel, UserProfileModel>();
         typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, UserProfileModel.AddressDto>();
@@ -33,9 +31,7 @@ internal static class UserProfileModelMapping
         typeAdapterConfig.NewConfig<UserProfileModel.PetDto, Protos.UserProfiles.CreateUserProfile.Pet>();
         typeAdapterConfig.NewConfig<UserProfileModel.VaccinationDto, Protos.UserProfiles.CreateUserProfile.Vaccination>();
         typeAdapterConfig.NewConfig<UserProfileModel.VaccinationType, Protos.UserProfiles.CreateUserProfile.VaccinationType>();
-        typeAdapterConfig.NewConfig<UserProfileModel.LatLngDto, Google.Type.LatLng>()
-            .Map(d => d.Latitude, s => s.GpsLatitude)
-            .Map(d => d.Longitude, s => s.GpsLongitude);
+        typeAdapterConfig.NewConfig<UserProfileModel.LatLngDto, Google.Type.LatLng>();
         
         typeAdapterConfig.NewConfig<UserProfileModel, Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileRequest>();
         typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, Protos.UserProfiles.UpdateUserProfile.Address>();

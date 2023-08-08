@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.AcceptCheckpoint";
+
+package acceptcheckpoint;
+
+message AcceptCheckpointRequest {
+  string Id = 1;
+}

@@ -4,6 +4,7 @@ using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Mails.Builders.Emails;
 using Mails.Entities;
+using Mails.Entities.RegistrationToActionReceived;
 using Mails.Services;
 using MapsterMapper;
 using Storage.Entities.Entries;

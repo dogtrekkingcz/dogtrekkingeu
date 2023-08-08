@@ -1,6 +1,7 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using Mapster;
 using Storage.Entities.Actions;
+using Storage.Entities.Checkpoints;
 using Storage.Entities.Entries;
 
 namespace DogsOnTrail.Actions.Services.ActionsManage;
@@ -64,7 +65,8 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.Id)
             .Ignore(d => d.Created);
         typeAdapterConfig.NewConfig<CreateActionRequest.ActionType, CreateActionInternalStorageRequest.ActionType>();
-        typeAdapterConfig.NewConfig<CreateActionRequest.RacerDto, CreateActionInternalStorageRequest.RacerDto>();
+        typeAdapterConfig.NewConfig<CreateActionRequest.RacerDto, CreateActionInternalStorageRequest.RacerDto>()
+            .Ignore(d => d.CheckpointData);
         typeAdapterConfig.NewConfig<CreateActionRequest.NoteDto, CreateActionInternalStorageRequest.NoteDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.PaymentDto, CreateActionInternalStorageRequest.PaymentDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.RequestedPaymentItem, CreateActionInternalStorageRequest.RequestedPaymentItem>();
@@ -176,6 +178,7 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.RequestedPayments)
             .Ignore(d => d.State)
             .Ignore(d => d.PassedCheckpoints)
+            .Ignore(d => d.CheckpointData)
             .Map(d => d.FirstName, s => s.Name)
             .Map(d => d.LastName, s => s.Surname);
             
@@ -219,9 +222,11 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RacerDto, GetResultsForActionResponse.RacerResultDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PassedCheckpointDto, GetResultsForActionResponse.PassedCheckpointDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PetDto, GetResultsForActionResponse.PetDto>();
-        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LatLngDto, GetResultsForActionResponse.LatLngDto>()
-            .Map(d => d.Latitude, s => s.GpsLatitude)
-            .Map(d => d.Longitude, s => s.GpsLongitude);
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LatLngDto, GetResultsForActionResponse.LatLngDto>();
+
+        typeAdapterConfig.NewConfig<GetCheckpointItemInternalStorageResponse, GetActionInternalStorageResponse.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.CheckpointTime);
+        typeAdapterConfig.NewConfig<GetCheckpointItemInternalStorageResponse.LatLngDto, GetActionInternalStorageResponse.LatLngDto>();
         
         return typeAdapterConfig;
     }

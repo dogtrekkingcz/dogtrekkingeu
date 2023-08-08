@@ -89,6 +89,8 @@ public sealed record UpdateActionInternalStorageRequest
         public Guid Id { get; set; } = Guid.Empty;
         
         public string CompetitorId { get; set; } = string.Empty;
+        
+        public string CheckpointData { get; set; } = string.Empty;
 
         public string FirstName { get; set; } = string.Empty;
 
@@ -299,9 +301,9 @@ public sealed record UpdateActionInternalStorageRequest
     
     public sealed record LatLngDto
     {
-        public double GpsLatitude { get; set; } = 0.0;
+        public double Latitude { get; set; } = 0.0;
 
-        public double GpsLongitude { get; set; } = 0.0;
+        public double Longitude { get; set; } = 0.0;
     }
     
     public sealed record ActionSaleDto

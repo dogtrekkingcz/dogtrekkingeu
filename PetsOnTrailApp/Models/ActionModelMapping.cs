@@ -28,9 +28,7 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.CreateAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.CreateAction.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<ActionModel.ActionSaleItemDto, Protos.Actions.CreateAction.ActionSaleItemDto>();
-        typeAdapterConfig.NewConfig<ActionModel.LatLngDto, Google.Type.LatLng>()
-            .Map(d => d.Latitude, s => s.GpsLatitude)
-            .Map(d => d.Longitude, s => s.GpsLongitude);
+        typeAdapterConfig.NewConfig<ActionModel.LatLngDto, Google.Type.LatLng>();
         typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.CreateAction.CheckpointDto>();
         
         typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.UpdateAction.UpdateActionRequest>();
@@ -93,9 +91,7 @@ namespace PetsOnTrailApp.Models;
             .Map(d => d.From, s => s.From.ToDateTimeOffset())
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
-        typeAdapterConfig.NewConfig<Google.Type.LatLng, ActionModel.LatLngDto>()
-            .Map(d => d.GpsLatitude, s => s.Latitude)
-            .Map(d => d.GpsLongitude, s => s.Longitude);
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, ActionModel.LatLngDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CheckpointDto, ActionModel.CheckpointDto>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.Action, ActionModel>()

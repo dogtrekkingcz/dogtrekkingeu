@@ -1,5 +1,6 @@
 ﻿using Mails.Builders.Emails;
 using Mails.Entities;
+using Mails.Entities.RegistrationToActionReceived;
 using Mails.Services;
 using Microsoft.AspNetCore.Http;
 

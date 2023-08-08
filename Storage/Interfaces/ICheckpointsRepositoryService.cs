@@ -7,5 +7,7 @@ namespace Storage.Interfaces
         Task<AddCheckpointItemInternalStorageResponse> AddAsync(AddCheckpointItemInternalStorageRequest request, CancellationToken cancellationToken);
 
         Task<GetCheckpointItemsInternalStorageResponse> GetAsync(GetCheckpointItemsInternalStorageRequest request, CancellationToken cancellationToken);
+        
+        Task<GetCheckpointItemInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken);
     }
 }

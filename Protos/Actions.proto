@@ -5,6 +5,7 @@ option csharp_namespace = "Protos.Actions";
 package actions;
 
 import "google/type/datetime.proto";
+import "google/protobuf/empty.proto";
 
 import "Entities/Actions/CreateActionRequest.proto";
 import "Entities/Actions/CreateActionResponse.proto";
@@ -24,6 +25,7 @@ import "Entities/Actions/DeleteActionRequest.proto";
 import "Entities/Actions/DeleteActionResponse.proto";
 import "Entities/Actions/GetResultsForActionRequest.proto";
 import "Entities/Actions/GetResultsForActionResponse.proto";
+import "Entities/Actions/AcceptCheckpointRequest.proto";
 
 service Actions {
   rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
@@ -35,6 +37,7 @@ service Actions {
   rpc getSelectedActions (getselectedactions.GetSelectedActionsRequest) returns (getselectedactions.GetSelectedActionsResponse);
   rpc deleteAction (deleteaction.DeleteActionRequest) returns (deleteaction.DeleteActionResponse);
   rpc getResultsForAction (getresultsforaction.GetResultsForActionRequest) returns (getresultsforaction.GetResultsForActionResponse);
+  rpc acceptCheckpoint (acceptcheckpoint.AcceptCheckpointRequest) returns (google.protobuf.Empty);
   
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
   rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);
