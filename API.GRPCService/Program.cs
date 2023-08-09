@@ -12,6 +12,7 @@ using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
 using DogsOnTrail.Actions;
 using Google.Protobuf.Collections;
+using Import;
 using Mapster;
 using MapsterMapper;
 using Storage;
@@ -58,6 +59,7 @@ builder.Services
 builder.Services
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
     .AddApiLayer(typeAdapterConfig, new DogsOnTrail.Actions.Options.DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
+    .AddImport(typeAdapterConfig)
     .AddScoped<IJwtTokenService, JwtTokenService>()
     .AddGrpc(options =>
     {
@@ -131,6 +133,9 @@ app.UseEndpoints(endpoints =>
 );
 
 
-app.Run();
-
 await app.SeedDataAsync();
+
+await app.RunAsync();
+
+
+

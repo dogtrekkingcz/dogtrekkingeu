@@ -22,6 +22,7 @@
     <ItemGroup>
       <ProjectReference Include="..\API.Interfaces\API.Interface.csproj" />
       <ProjectReference Include="..\API\API.csproj" />
+      <ProjectReference Include="..\Import\Import.csproj" />
       <ProjectReference Include="..\Protos\Protos.csproj" />
     </ItemGroup>
 

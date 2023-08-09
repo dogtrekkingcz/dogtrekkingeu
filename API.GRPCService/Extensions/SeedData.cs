@@ -1,4 +1,5 @@
-﻿using Storage.Seed;
+﻿using Import.DogtrekkingCz;
+using Storage.Seed;
 
 namespace API.GRPCService.Extensions
 {
@@ -6,10 +7,16 @@ namespace API.GRPCService.Extensions
     {
         public static async Task<IApplicationBuilder> SeedDataAsync(this IApplicationBuilder builder)
         {
-            var storageSeed = builder.ApplicationServices.GetRequiredService<StorageSeedEngine>();
-            if (storageSeed != null) 
+            // var storageSeed = builder.ApplicationServices.GetService<StorageSeedEngine>();
+            // if (storageSeed != null) 
+            // {
+            //     await storageSeed.SeedAsync();
+            // }
+
+            var importSeed = builder.ApplicationServices.GetService<IDogtrekkingCzService>();
+            if (importSeed != null)
             {
-                await storageSeed.SeedAsync();
+                await importSeed.RunImportAsync(builder.ApplicationServices, "");
             }
 
             return builder;

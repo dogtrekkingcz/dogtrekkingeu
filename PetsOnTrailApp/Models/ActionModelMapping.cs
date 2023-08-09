@@ -143,6 +143,10 @@ namespace PetsOnTrailApp.Models;
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CheckpointDto, ActionModel.CheckpointDto>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.GetRacesForAction.RaceDto, ActionModel.RaceDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetRacesForAction.CategoryDto, ActionModel.CategoryDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetRacesForAction.RacerDto, ActionModel.RacerDto>();
         
         return typeAdapterConfig;
     }

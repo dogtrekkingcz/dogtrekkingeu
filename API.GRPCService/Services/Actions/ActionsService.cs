@@ -7,6 +7,7 @@ using Grpc.Core;
 using MapsterMapper;
 using Protos.Actions;
 using AcceptPaymentRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
+using Action = Protos.Actions.GetAllActions.Action;
 
 namespace API.GRPCService.Services.Actions;
 
@@ -29,7 +30,12 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
         
         var allActions = await _actionsService.GetAllActionsAsync(getAllActionsRequest, context.CancellationToken);
 
-        var actions = _mapper.Map<RepeatedField<Protos.Actions.GetAllActions.Action>>(allActions.Actions);
+        var actions = new List<Protos.Actions.GetAllActions.Action>();
+        foreach (var action in allActions.Actions)
+        {
+            Console.WriteLine($"Mapping action: {action.Dump()}");
+            actions.Add(_mapper.Map<Protos.Actions.GetAllActions.Action>(action));
+        }
         
         var result = new Protos.Actions.GetAllActions.GetAllActionsResponse
         {
