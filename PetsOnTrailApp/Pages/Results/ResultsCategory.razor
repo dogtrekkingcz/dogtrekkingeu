@@ -52,45 +52,11 @@
             </td>
         </tr>
     }
-    
-        <tr data-racer-id="@NewRacer.Id">
-            <td>?</td>
-            <td><InputText @bind-Value="@NewRacer.FirstName"/></td>
-            <td><InputText @bind-Value="@NewRacer.LastName"/></td>
-            <td><InputDateTimeComponent Model="@NewRacer.Start" StartDate="DateTime.Today" /></td>
-            <td><InputDateTimeComponent Model="@NewRacer.Finish" StartDate="DateTime.Today" /></td>
-            <td><InputTimeCalcComponent Model="@WholeTimeProxy" /></td>
-            <button @onclick="@(async () => await AddRacerAsync())" class="btn btn-primary">@Localizer["Results.AddResult.Submit"]</button>
-        </tr>
     </tbody>
 </table>
 
 @code {
     [Parameter] public string ActionId { get; set; }
-    [Parameter] public ActionModel.RaceDto Race { get; set; }
-    [Parameter] public ActionModel.CategoryDto Category { get; set; }
-    
-    private ActionModel.RacerDto NewRacer { get; set; } = new();
-    private InputTimeSpanModel WholeTimeProxy = new();
-
-    private async Task AddRacerAsync()
-    {
-        if (WholeTimeProxy.IsValid)
-        {
-            NewRacer.Start = Race.Begin;
-            NewRacer.Finish = Race.Begin.AddSeconds(WholeTimeProxy.Value.Seconds);
-        }
-
-        await ResultsClient.addResultAsync(new AddResultRequest {
-            ActionId = ActionId,
-            RaceId = Race.Id.ToString(),
-            CategoryId = Category.Id.ToString()
-        });
-        
-        Category.Racers.Add(Mapper.Map<ActionModel.RacerDto>(NewRacer));
-
-        NewRacer = new();
-
-        StateHasChanged();
-    }
+    [Parameter] public ActionResultsModel.RaceResultsDto Race { get; set; }
+    [Parameter] public ActionResultsModel.CategoryResultsDto Category { get; set; }
 }

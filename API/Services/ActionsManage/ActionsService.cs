@@ -1,5 +1,6 @@
 ﻿using DogsOnTrail.Actions.Attributes;
 using DogsOnTrail.Actions.Exceptions;
+using DogsOnTrail.Actions.Extensions;
 using DogsOnTrail.Actions.Services.Authorization;
 using DogsOnTrail.Interfaces.Actions.Entities.Actions;
 using DogsOnTrail.Interfaces.Actions.Services;
@@ -367,6 +368,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         {
             var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
 
+            Console.WriteLine($"{nameof(GetResultsForActionAsync)}: {action.Dump()}");
             return _mapper.Map<GetResultsForActionResponse>(action);
         }
     }
