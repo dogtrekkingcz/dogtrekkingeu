@@ -570,4 +570,7 @@
     <data name="Action.Manage.AcceptPayment" xml:space="preserve">
         <value>Schválit plnou platbu</value>
     </data>
+    <data name="Results" xml:space="preserve">
+        <value>Výsledky</value>
+    </data>
 </root>

@@ -1464,6 +1464,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Results.
+        /// </summary>
+        internal static string Results {
+            get {
+                return ResourceManager.GetString("Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         internal static string Results_AddResult_Submit {

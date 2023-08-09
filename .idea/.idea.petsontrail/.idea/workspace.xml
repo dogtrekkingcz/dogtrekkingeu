@@ -22,12 +22,14 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="importing data from dogtrekking.cz">
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="building results for imported data (and fixing the issues around it)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetResultsForActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetResultsForActionResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/Results.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/Results.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +54,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d1c7906533aea419fa4023145539c219e40eacbde752ddcc6e58d14df8925/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Import/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
@@ -208,14 +211,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="48052000" />
-    </task>
-    <task id="LOCAL-00079" summary="implementation of the live updates">
-      <created>1690447118501</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1690447118501</updated>
+      <workItem from="1691476083216" duration="48713000" />
     </task>
     <task id="LOCAL-00080" summary="removed blazor-modal &amp; added debug messages for live updates settings">
       <created>1690451023572</created>
@@ -553,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691588101352</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="building results for imported data (and fixing the issues around it)">
+      <created>1691589553387</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1691589553388</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,7 +577,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="checkpoints updating and sending notifications" />
     <MESSAGE value="getting current user from liveupdatesubscription singleton requires to create scope" />
     <MESSAGE value="checkpoints management" />
     <MESSAGE value="checkpoints management missing userid fix" />
@@ -599,7 +601,8 @@
     <MESSAGE value="." />
     <MESSAGE value="translations, missing mapping &amp; missing members" />
     <MESSAGE value="importing data from dogtrekking.cz" />
-    <option name="LAST_COMMIT_MESSAGE" value="importing data from dogtrekking.cz" />
+    <MESSAGE value="building results for imported data (and fixing the issues around it)" />
+    <option name="LAST_COMMIT_MESSAGE" value="building results for imported data (and fixing the issues around it)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

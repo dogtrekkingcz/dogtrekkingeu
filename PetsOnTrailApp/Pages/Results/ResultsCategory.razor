@@ -13,11 +13,9 @@
     <thead>
     <tr>
         <th>@Localizer["#"]</th>
-        <th>@Localizer["Surname"]</th>
-        <th>@Localizer["Name"]</th>
-        <th>@Localizer["Start"]</th>
-        <th>@Localizer["Finish"]</th>
-        <th>@Localizer["Time"]</th>
+        <th>@Localizer["Results.SurnameName"]</th>
+        <th>@Localizer["Results.StartFinish"]</th>
+        <th>@Localizer["Results.Time"]</th>
     </tr>
     </thead>
     <tbody>
@@ -36,16 +34,10 @@
                 <div class="col-12">?</div>
             </td>
             <td>
-                <div class="col-12">@racer.LastName</div>
+                <div class="col-12">@racer.LastName, @racer.FirstName</div>
             </td>
             <td>
-                <div class="col-12">@racer.FirstName</div>
-            </td>
-            <td>
-                <div class="col-12">@racer.Start?.ToString("dd HH:mm:ss")</div>
-            </td>
-            <td>
-                <div class="col-12">@racer.Finish?.ToString("dd HH:mm:ss")</div>
+                <div class="col-12">@racer.Start?.ToString("dd HH:mm:ss") - @racer.Finish?.ToString("dd HH:mm:ss")</div>
             </td>
             <td>
                 <div class="col-12">@time</div>

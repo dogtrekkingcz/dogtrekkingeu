@@ -570,4 +570,7 @@
     <data name="Action.Manage.AcceptPayment" xml:space="preserve">
         <value>Accept full payment</value>
     </data>
+    <data name="Results" xml:space="preserve">
+        <value>Results</value>
+    </data>
 </root>
