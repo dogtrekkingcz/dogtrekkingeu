@@ -573,4 +573,16 @@
     <data name="Results" xml:space="preserve">
         <value>Výsledky</value>
     </data>
+    <data name="Results.Start" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="Results.Finish" xml:space="preserve">
+        <value>Cíl</value>
+    </data>
+    <data name="Results.SurnameName" xml:space="preserve">
+        <value>Příjmení, jméno</value>
+    </data>
+    <data name="Results.Time" xml:space="preserve">
+        <value>Časy</value>
+    </data>
 </root>

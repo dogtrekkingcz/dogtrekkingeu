@@ -573,4 +573,16 @@
     <data name="Results" xml:space="preserve">
         <value>Results</value>
     </data>
+    <data name="Results.Start" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="Results.Finish" xml:space="preserve">
+        <value>Finish</value>
+    </data>
+    <data name="Results.SurnameName" xml:space="preserve">
+        <value>Surname, name</value>
+    </data>
+    <data name="Results.Time" xml:space="preserve">
+        <value>Time</value>
+    </data>
 </root>

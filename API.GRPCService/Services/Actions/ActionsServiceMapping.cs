@@ -178,6 +178,24 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetResultsForActionResponse.RacerResultDto, Protos.Actions.GetResultsForAction.RacerResultsDto>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.AcceptCheckpoint.AcceptCheckpointRequest, AcceptCheckpointRequest>();
+        
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse, Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.ActionDto, Protos.Actions.GetPublicActionsList.ActionDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.ActionType, Protos.Actions.GetPublicActionsList.ActionType>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.RacerDto, Protos.Actions.GetPublicActionsList.RacerDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.AddressDto, Protos.Actions.GetPublicActionsList.AddressDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.CategoryDto, Protos.Actions.GetPublicActionsList.CategoryDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.PetDto, Protos.Actions.GetPublicActionsList.PetDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.LimitsDto, Protos.Actions.GetPublicActionsList.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.RaceDto, Protos.Actions.GetPublicActionsList.RaceDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.RaceState, Protos.Actions.GetPublicActionsList.RaceState>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.TermDto, Protos.Actions.GetPublicActionsList.TermDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.ActionSaleDto, Protos.Actions.GetPublicActionsList.ActionSaleDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.PaymentDefinitionDto, Protos.Actions.GetPublicActionsList.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.ActionSaleItemDto, Protos.Actions.GetPublicActionsList.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.PassedCheckpointDto, Protos.Actions.GetPublicActionsList.PassedCheckpointDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.CheckpointDto, Protos.Actions.GetPublicActionsList.CheckpointDto>();
+        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.LatLngDto, Google.Type.LatLng>();
 
         return typeAdapterConfig;
     }

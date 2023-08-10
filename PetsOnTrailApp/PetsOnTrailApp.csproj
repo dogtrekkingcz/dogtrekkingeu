@@ -87,5 +87,14 @@
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
       <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
+      <_ContentIncludedByDefault Remove="Pages\Results\Results.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Results\ResultsAdd.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Results\ResultsCategory.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Actions\Results\Results.razor" />
+      <AdditionalFiles Include="Pages\Actions\Results\ResultsAdd.razor" />
+      <AdditionalFiles Include="Pages\Actions\Results\ResultsCategory.razor" />
     </ItemGroup>
 </Project>

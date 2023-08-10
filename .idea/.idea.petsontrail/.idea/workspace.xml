@@ -22,11 +22,31 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="">
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="update of the seeding">
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionsListRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionsListResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetPublicActionsListResponse.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Extensions/SeedData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Extensions/SeedData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Import/DogtrekkingCz/DogtrekkingCzService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Import/DogtrekkingCz/DogtrekkingCzService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Actions.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Actions.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/Results.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Results/Results.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsAdd.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Results/ResultsAdd.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Results/ResultsCategory.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Actions.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Actions.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +71,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d1c7906533aea419fa4023145539c219e40eacbde752ddcc6e58d14df8925/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Extensions/SeedData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/Import/DogtrekkingCz/DogtrekkingCzService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Import/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
@@ -209,21 +231,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="53043000" />
-    </task>
-    <task id="LOCAL-00081" summary="fighting with cancelation token after first reading from client">
-      <created>1690459756252</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1690459756252</updated>
-    </task>
-    <task id="LOCAL-00082" summary="cleaning notification queue after sending">
-      <created>1690460271348</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1690460271348</updated>
+      <workItem from="1691476083216" duration="60933000" />
     </task>
     <task id="LOCAL-00083" summary="final implementation of the authorizations to the actions">
       <created>1690537323106</created>
@@ -554,7 +562,21 @@
       <option name="project" value="LOCAL" />
       <updated>1691591047825</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="results UI updates">
+      <created>1691649813879</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1691649813879</updated>
+    </task>
+    <task id="LOCAL-00131" summary="update of the seeding">
+      <created>1691650589850</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1691650589850</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,8 +597,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="checkpoints management" />
-    <MESSAGE value="checkpoints management missing userid fix" />
     <MESSAGE value="checkpoint management &amp; mappings &amp; showing them" />
     <MESSAGE value="added checkpoint definition to actions" />
     <MESSAGE value="several things due to looking for relevant information in the lists..." />
@@ -600,7 +620,9 @@
     <MESSAGE value="importing data from dogtrekking.cz" />
     <MESSAGE value="building results for imported data (and fixing the issues around it)" />
     <MESSAGE value="results adapting" />
-    <option name="LAST_COMMIT_MESSAGE" value="results adapting" />
+    <MESSAGE value="results UI updates" />
+    <MESSAGE value="update of the seeding" />
+    <option name="LAST_COMMIT_MESSAGE" value="update of the seeding" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

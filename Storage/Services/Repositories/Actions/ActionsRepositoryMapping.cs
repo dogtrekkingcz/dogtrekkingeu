@@ -70,6 +70,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.CategoryDto, GetAllActionsInternalStorageResponse.CategoryDto>();
             typeAdapterConfig.NewConfig<ActionRecord.PetDto, GetAllActionsInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<ActionRecord.LimitsDto, GetAllActionsInternalStorageResponse.LimitsDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.CheckpointDto, GetAllActionsInternalStorageResponse.CheckpointDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetAllActionsInternalStorageResponse.RaceDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetAllActionsInternalStorageResponse.RaceState>();
             typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetAllActionsInternalStorageResponse.TermDto>();
@@ -80,6 +81,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.MerchandizeItemDto, GetAllActionsInternalStorageResponse.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<ActionRecord.PaymentDefinitionDto, GetAllActionsInternalStorageResponse.PaymentDefinitionDto>();
             typeAdapterConfig.NewConfig<ActionRecord.ActionSaleItemDto, GetAllActionsInternalStorageResponse.ActionSaleItemDto>();
+            typeAdapterConfig.NewConfig<ActionRecord.PassedCheckpointDto, GetAllActionsInternalStorageResponse.PassedCheckpointDto>();
             
             typeAdapterConfig.NewConfig<ActionRecord, GetSelectedActionsInternalStorageResponse.ActionDto>();
             typeAdapterConfig.NewConfig<ActionRecord.ActionType, GetSelectedActionsInternalStorageResponse.ActionType>();

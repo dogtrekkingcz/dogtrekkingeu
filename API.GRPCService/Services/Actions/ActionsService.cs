@@ -161,4 +161,11 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         return new Empty();
     }
+    
+    public async override Task<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse> getPublicActionsList(Empty request, ServerCallContext context)
+    {
+        var actions = await _actionsService.GetPublicActionsListAsync(new GetPublicActionsListRequest(), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse>(actions);
+    }
 }

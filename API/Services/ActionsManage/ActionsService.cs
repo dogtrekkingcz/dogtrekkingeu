@@ -371,5 +371,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             Console.WriteLine($"{nameof(GetResultsForActionAsync)}: {action.Dump()}");
             return _mapper.Map<GetResultsForActionResponse>(action);
         }
+
+        public async Task<GetPublicActionsListResponse> GetPublicActionsListAsync(GetPublicActionsListRequest request, CancellationToken cancellationToken)
+        {
+            var actions = await _actionsRepositoryService.GetAllActionsAsync(cancellationToken);
+
+            return _mapper.Map<GetPublicActionsListResponse>(actions);
+        }
     }
 }

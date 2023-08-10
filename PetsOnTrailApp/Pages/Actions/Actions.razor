@@ -1,6 +1,7 @@
 ﻿@page "/actions"
 @using PetsOnTrailApp.Models
 @using MapsterMapper
+@using Google.Protobuf.WellKnownTypes
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject AuthenticationStateProvider AuthStateProvider 
 @inject IModalService modal
@@ -128,7 +129,7 @@ else
 
     private async Task ReloadData()
     {
-        Protos.Actions.GetAllActions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActions.GetAllActionsRequest());
+        Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await Client.getPublicActionsListAsync(new Empty());
 
         _actionList = mapper.Map<List<ActionModel>>(response.Actions);
                 

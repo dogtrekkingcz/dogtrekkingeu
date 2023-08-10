@@ -1482,6 +1482,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        internal static string Results_Finish {
+            get {
+                return ResourceManager.GetString("Results.Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add result.
         /// </summary>
         internal static string Results_Manage_Add {
@@ -1532,6 +1541,33 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         internal static string Results_Manage_Add_Start {
             get {
                 return ResourceManager.GetString("Results.Manage.Add.Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Results_Start {
+            get {
+                return ResourceManager.GetString("Results.Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname, name.
+        /// </summary>
+        internal static string Results_SurnameName {
+            get {
+                return ResourceManager.GetString("Results.SurnameName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string Results_Time {
+            get {
+                return ResourceManager.GetString("Results.Time", resourceCulture);
             }
         }
         
