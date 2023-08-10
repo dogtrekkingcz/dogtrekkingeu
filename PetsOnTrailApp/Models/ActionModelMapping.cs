@@ -136,19 +136,22 @@ namespace PetsOnTrailApp.Models;
             .Ignore(d => d.Contact)
             .Ignore(d => d.Vaccinations);
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.LimitsDto, ActionModel.LimitsDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.CheckpointDto, ActionModel.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RaceDto, ActionModel.RaceDto>()
             .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset())
             .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
             .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RaceState, ActionModel.RaceState>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.TermDto, ActionModel.TermDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.TermDto, ActionModel.TermDto>()
+            .Map(d => d.From, s => s.From.ToDateTimeOffset())
+            .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionSaleDto, ActionModel.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>()
             .Map(d => d.From, s => s.From.ToDateTimeOffset())
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.CheckpointDto, ActionModel.CheckpointDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.PassedCheckpointDto, ActionModel.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToDateTimeOffset());
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.Action, ActionModel>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionType, ActionModel.ActionType>();
@@ -176,7 +179,6 @@ namespace PetsOnTrailApp.Models;
             .Map(d => d.From, s => s.From.ToDateTimeOffset())
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.CheckpointDto, ActionModel.CheckpointDto>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetRacesForAction.RaceDto, ActionModel.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetRacesForAction.CategoryDto, ActionModel.CategoryDto>();

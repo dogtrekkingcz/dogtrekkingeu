@@ -22,9 +22,7 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="using public data in the list of actions only">
-      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
-    </list>
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="added required authorization to almost all of the API.Actions methods" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +47,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Extensions/SeedData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/Import/DogtrekkingCz/DogtrekkingCzService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Import/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
@@ -209,14 +208,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="61388000" />
-    </task>
-    <task id="LOCAL-00084" summary="forgotten files for actions &amp; roles constants">
-      <created>1690540969970</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1690540969970</updated>
+      <workItem from="1691476083216" duration="61779000" />
     </task>
     <task id="LOCAL-00085" summary="fixing the loading of the current user roles">
       <created>1690545228042</created>
@@ -554,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691662208212</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="added required authorization to almost all of the API.Actions methods">
+      <created>1691662693321</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1691662693321</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,7 +574,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="added checkpoint definition to actions" />
     <MESSAGE value="several things due to looking for relevant information in the lists..." />
     <MESSAGE value="fixes to make the checkpoints registration fully functional" />
     <MESSAGE value="translations of the checkpoints" />
@@ -600,7 +598,8 @@
     <MESSAGE value="results UI updates" />
     <MESSAGE value="update of the seeding" />
     <MESSAGE value="using public data in the list of actions only" />
-    <option name="LAST_COMMIT_MESSAGE" value="using public data in the list of actions only" />
+    <MESSAGE value="added required authorization to almost all of the API.Actions methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="added required authorization to almost all of the API.Actions methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
