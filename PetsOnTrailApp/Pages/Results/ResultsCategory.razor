@@ -14,7 +14,6 @@
     <tr>
         <th>@Localizer["#"]</th>
         <th>@Localizer["Results.SurnameName"]</th>
-        <th>@Localizer["Results.StartFinish"]</th>
         <th>@Localizer["Results.Time"]</th>
     </tr>
     </thead>
@@ -34,13 +33,33 @@
                 <div class="col-12">?</div>
             </td>
             <td>
-                <div class="col-12">@racer.LastName, @racer.FirstName</div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            @racer.LastName, @racer.FirstName
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul>
+                                @foreach (var pet in racer.Pets)
+                                {
+                                    <li>@pet.Name [@pet.Pedigree]</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </td>
             <td>
-                <div class="col-12">@racer.Start?.ToString("dd HH:mm:ss") - @racer.Finish?.ToString("dd HH:mm:ss")</div>
-            </td>
-            <td>
-                <div class="col-12">@time</div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">@Localizer["Results.Start"]: @racer.Start?.ToString("dd HH:mm:ss")</div>
+                        <div class="col-12">@Localizer["Results.Finish"]: @racer.Finish?.ToString("dd HH:mm:ss")</div>
+                        <hr />
+                        <div class="col-12"><b>@time</b></div>
+                    </div>
+                </div>
             </td>
         </tr>
     }

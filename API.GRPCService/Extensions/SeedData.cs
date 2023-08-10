@@ -16,7 +16,7 @@ namespace API.GRPCService.Extensions
             var importSeed = builder.ApplicationServices.GetService<IDogtrekkingCzService>();
             if (importSeed != null)
             {
-                await importSeed.RunImportAsync(builder.ApplicationServices, "");
+                await importSeed.RunImportAsync(builder.ApplicationServices, "https://rest.dogtrekking.cz/migration");
             }
 
             return builder;

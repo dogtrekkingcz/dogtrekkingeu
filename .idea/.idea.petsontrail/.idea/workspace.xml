@@ -22,14 +22,11 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="building results for imported data (and fixing the issues around it)">
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionResultsModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Extensions/SeedData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Extensions/SeedData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Import/DogtrekkingCz/DogtrekkingCzService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Import/DogtrekkingCz/DogtrekkingCzService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +56,7 @@
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionResultsModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/QrGenerator/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Shared/Entities/ActionRightsDto.cs" root0="SKIP_HIGHLIGHTING" />
@@ -211,14 +209,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="48713000" />
-    </task>
-    <task id="LOCAL-00080" summary="removed blazor-modal &amp; added debug messages for live updates settings">
-      <created>1690451023572</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1690451023572</updated>
+      <workItem from="1691476083216" duration="53043000" />
     </task>
     <task id="LOCAL-00081" summary="fighting with cancelation token after first reading from client">
       <created>1690459756252</created>
@@ -556,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691589553388</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="results adapting">
+      <created>1691591047825</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1691591047825</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -577,7 +575,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="getting current user from liveupdatesubscription singleton requires to create scope" />
     <MESSAGE value="checkpoints management" />
     <MESSAGE value="checkpoints management missing userid fix" />
     <MESSAGE value="checkpoint management &amp; mappings &amp; showing them" />
@@ -602,7 +599,8 @@
     <MESSAGE value="translations, missing mapping &amp; missing members" />
     <MESSAGE value="importing data from dogtrekking.cz" />
     <MESSAGE value="building results for imported data (and fixing the issues around it)" />
-    <option name="LAST_COMMIT_MESSAGE" value="building results for imported data (and fixing the issues around it)" />
+    <MESSAGE value="results adapting" />
+    <option name="LAST_COMMIT_MESSAGE" value="results adapting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
