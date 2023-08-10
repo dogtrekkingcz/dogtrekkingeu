@@ -93,8 +93,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
         
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task<GetActionDetailResponse> GetActionDetailAsync(Guid id, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetActionDetailAsync)), id, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+            
             var actionDetail = await _actionsRepositoryService.GetAsync(id, cancellationToken);
 
             foreach (var race in actionDetail.Races)
@@ -132,8 +136,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return _mapper.Map<GetActionDetailResponse>(actionDetail);
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id)]
         public async Task<GetAllActionsResponse> GetAllActionsAsync(GetAllActionsRequest request, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetAllActionsAsync)), Guid.Empty, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+            
             var allActions = await _actionsRepositoryService.GetAllActionsAsync(cancellationToken);
 
             var response = _mapper.Map<GetAllActionsResponse>(allActions);
@@ -141,8 +149,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id)]
         public async Task<GetAllActionsWithDetailsResponse> GetAllActionsWithDetailsAsync(GetAllActionsWithDetailsRequest request, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetAllActionsWithDetailsAsync)), Guid.Empty, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+            
             var allActions = await _actionsRepositoryService.GetAllActionsAsync(cancellationToken);
 
             var response = _mapper.Map<GetAllActionsWithDetailsResponse>(allActions.Actions);
@@ -150,8 +162,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task<GetActionResponse> GetActionAsync(Guid id, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetActionAsync)), id, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+            
             var result = await _actionsRepositoryService.GetAsync(id, cancellationToken);
 
             var response = _mapper.Map<GetActionResponse>(result);
@@ -159,8 +175,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task DeleteActionAsync(Guid id, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(DeleteActionAsync)), id, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+            
             await _actionsRepositoryService.DeleteActionAsync(id, cancellationToken);
         }
 
@@ -198,8 +218,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id)]
         public async Task<GetSelectedActionsResponse> GetSelectedActionsAsync(GetSelectedActionsRequest request, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetSelectedActionsAsync)), Guid.Empty, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+            
             var getSelectedActionsRequest = _mapper.Map<GetSelectedActionsInternalStorageRequest>(request);
             
             var result = await _actionsRepositoryService.GetSelectedActionsAsync(getSelectedActionsRequest, cancellationToken);
@@ -207,9 +231,13 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             return _mapper.Map<GetSelectedActionsResponse>(result);
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task AcceptRegistrationAsync(Guid registrationId, CancellationToken cancellationToken)
         {
             var registration = await _entriesRepositoryService.GetAsync(registrationId, cancellationToken);
+            
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(AcceptRegistrationAsync)), registration.ActionId, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
 
             var action = await _actionsRepositoryService.GetAsync(registration.ActionId, cancellationToken);
 
@@ -255,9 +283,13 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             await _entriesRepositoryService.UpdateEntryAsync(updateEntryRequest, cancellationToken);
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task AcceptCheckpointAsync(AcceptCheckpointRequest request, CancellationToken cancellationToken)
         {
             var checkpoint = await _checkpointsRepositoryService.GetAsync(request.Id, cancellationToken);
+            
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(AcceptCheckpointAsync)), checkpoint.ActionId, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
 
             var action = await _actionsRepositoryService.GetAsync(checkpoint.ActionId, cancellationToken);
 
@@ -277,8 +309,12 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
             
         }
 
+        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
         public async Task AcceptPaymentAsync(AcceptPaymentRequest request, CancellationToken cancellationToken)
         {
+            if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(AcceptPaymentAsync)), request.ActionId, cancellationToken))
+                throw new NotAuthorizedForThisActionException();
+            
             var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
 
             var updateActionRequest = _mapper.Map<UpdateActionInternalStorageRequest>(action);

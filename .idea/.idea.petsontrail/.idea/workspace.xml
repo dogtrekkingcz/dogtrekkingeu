@@ -22,31 +22,8 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="update of the seeding">
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionsListRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionsListResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetPublicActionsListResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" afterDir="false" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="using public data in the list of actions only">
       <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Actions.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Actions.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/Results.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Results/Results.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsAdd.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Results/ResultsAdd.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Results/ResultsCategory.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Actions/Results/ResultsCategory.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.cs-CZ.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Shared/ResourceFiles/Resource.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Actions.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Actions.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Actions/ActionsRepositoryMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +54,7 @@
     <setting file="file://$PROJECT_DIR$/Import/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionResultsModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -231,14 +209,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="60933000" />
-    </task>
-    <task id="LOCAL-00083" summary="final implementation of the authorizations to the actions">
-      <created>1690537323106</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1690537323106</updated>
+      <workItem from="1691476083216" duration="61388000" />
     </task>
     <task id="LOCAL-00084" summary="forgotten files for actions &amp; roles constants">
       <created>1690540969970</created>
@@ -576,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691650589850</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="using public data in the list of actions only">
+      <created>1691662208212</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1691662208212</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +575,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="checkpoint management &amp; mappings &amp; showing them" />
     <MESSAGE value="added checkpoint definition to actions" />
     <MESSAGE value="several things due to looking for relevant information in the lists..." />
     <MESSAGE value="fixes to make the checkpoints registration fully functional" />
@@ -622,7 +599,8 @@
     <MESSAGE value="results adapting" />
     <MESSAGE value="results UI updates" />
     <MESSAGE value="update of the seeding" />
-    <option name="LAST_COMMIT_MESSAGE" value="update of the seeding" />
+    <MESSAGE value="using public data in the list of actions only" />
+    <option name="LAST_COMMIT_MESSAGE" value="using public data in the list of actions only" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
