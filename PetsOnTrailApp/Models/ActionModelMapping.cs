@@ -29,7 +29,8 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.CreateAction.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<ActionModel.ActionSaleItemDto, Protos.Actions.CreateAction.ActionSaleItemDto>();
         typeAdapterConfig.NewConfig<ActionModel.LatLngDto, Google.Type.LatLng>();
-        typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.CreateAction.CheckpointDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PassedCheckpointDto, Protos.Actions.CreateAction.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToGoogleDateTime());
         
         typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.UpdateAction.UpdateActionRequest>();
         typeAdapterConfig.NewConfig<ActionModel.ActionType, Protos.Actions.UpdateAction.ActionType>();
@@ -52,7 +53,8 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.UpdateAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.UpdateAction.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<ActionModel.ActionSaleItemDto, Protos.Actions.UpdateAction.ActionSaleItemDto>();
-        typeAdapterConfig.NewConfig<ActionModel.CheckpointDto, Protos.Actions.UpdateAction.CheckpointDto>();
+        typeAdapterConfig.NewConfig<ActionModel.PassedCheckpointDto, Protos.Actions.UpdateAction.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToGoogleDateTime());
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionResponse, ActionModel>()
             .Map(d => d.Created, s => s.Created.ToDateTimeOffset());
@@ -92,7 +94,8 @@ namespace PetsOnTrailApp.Models;
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, ActionModel.LatLngDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CheckpointDto, ActionModel.CheckpointDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PassedCheckpointDto, ActionModel.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToDateTimeOffset());
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.Action, ActionModel>()
             .Ignore(d => d.Checkpoints);
@@ -115,6 +118,8 @@ namespace PetsOnTrailApp.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.MerchandizeItemDto, ActionModel.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.PassedCheckpointDto, ActionModel.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToDateTimeOffset());
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionDto, ActionModel>()
             .Ignore(d => d.Created);
@@ -179,6 +184,8 @@ namespace PetsOnTrailApp.Models;
             .Map(d => d.From, s => s.From.ToDateTimeOffset())
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleItemDto, ActionModel.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PassedCheckpointDto, ActionModel.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToDateTimeOffset());
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetRacesForAction.RaceDto, ActionModel.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetRacesForAction.CategoryDto, ActionModel.CategoryDto>();
