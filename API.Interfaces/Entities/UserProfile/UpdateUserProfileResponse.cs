@@ -2,5 +2,6 @@
 {
     public sealed record UpdateUserProfileResponse
     {
+        public Guid Id { get; set; }
     }
 }
