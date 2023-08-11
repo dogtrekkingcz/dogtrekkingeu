@@ -22,23 +22,15 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="passed checkpoints job">
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedPublicActionsListRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedPublicActionsListResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedPublicActionsListRequest.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedPublicActionsListResponse.proto" afterDir="false" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="getting the rights-only action data and its consequences to work again">
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/icon-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/Checkpoints/Camera.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/service-worker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/service-worker.published.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/UserProfiles/UserProfilesServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/UserProfiles/UserProfilesServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/ActionsMap/Actions.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/ActionsMap/Actions.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Actions.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Actions.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +42,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JSON File" />
       </list>
     </option>
   </component>
@@ -71,6 +64,7 @@
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
@@ -227,14 +221,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="68504000" />
-    </task>
-    <task id="LOCAL-00087" summary="Adding checkpoints">
-      <created>1690792676557</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1690792676557</updated>
+      <workItem from="1691476083216" duration="74070000" />
     </task>
     <task id="LOCAL-00088" summary="adding gps location, cleaning JS code on FE">
       <created>1690800441925</created>
@@ -572,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691663528423</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="getting the rights-only action data and its consequences to work again">
+      <created>1691741985039</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1691741985039</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="translations of the checkpoints" />
     <MESSAGE value="FE updates, translations.." />
     <MESSAGE value="enhanced FE validation of the user rights" />
     <MESSAGE value="any unknown idea files" />
@@ -618,7 +611,8 @@
     <MESSAGE value="added required authorization to almost all of the API.Actions methods" />
     <MESSAGE value="added missing passed checkpoint entity to FE model" />
     <MESSAGE value="passed checkpoints job" />
-    <option name="LAST_COMMIT_MESSAGE" value="passed checkpoints job" />
+    <MESSAGE value="getting the rights-only action data and its consequences to work again" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting the rights-only action data and its consequences to work again" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
