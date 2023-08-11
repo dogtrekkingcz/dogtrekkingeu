@@ -31,6 +31,7 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Pet, UpdateUserProfileRequest.PetDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Vaccination, UpdateUserProfileRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, UpdateUserProfileRequest.LatLngDto>();
+        typeAdapterConfig.NewConfig<UpdateUserProfileResponse, Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileResponse>();
         
         typeAdapterConfig.NewConfig<GetSelectedSurnameNameResponse.SelectedSurnameNameDto, Protos.UserProfiles.GetSelectedSurnameName.SelectedSurnameName>();
         

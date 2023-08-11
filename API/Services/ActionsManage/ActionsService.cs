@@ -414,5 +414,15 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
 
             return _mapper.Map<GetPublicActionsListResponse>(actions);
         }
+
+        public async Task<GetSelectedPublicActionsListResponse> GetSelectedPublicActionsListAsync(GetSelectedPublicActionsListRequest request, CancellationToken cancellationToken)
+        {
+            var actions = await _actionsRepositoryService.GetSelectedActionsAsync(new GetSelectedActionsInternalStorageRequest
+            {
+                Ids = request.Ids
+            }, cancellationToken);
+            
+            return _mapper.Map<GetSelectedPublicActionsListResponse>(actions);
+        }
     }
 }

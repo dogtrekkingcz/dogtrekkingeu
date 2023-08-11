@@ -168,4 +168,16 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         return _mapper.Map<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse>(actions);
     }
+    
+    public async override Task<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse> getSelectedPublicActionsList(Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest request, ServerCallContext context)
+    {
+        var actions = await _actionsService.GetSelectedPublicActionsListAsync(new GetSelectedPublicActionsListRequest
+        {
+            Ids = request.Ids
+                .Select(id => id.ToGuid())
+                .ToList()
+        }, context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse>(actions);
+    }
 }

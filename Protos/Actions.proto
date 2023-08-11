@@ -27,6 +27,8 @@ import "Entities/Actions/GetResultsForActionRequest.proto";
 import "Entities/Actions/GetResultsForActionResponse.proto";
 import "Entities/Actions/AcceptCheckpointRequest.proto";
 import "Entities/Actions/GetPublicActionsListResponse.proto";
+import "Entities/Actions/GetSelectedPublicActionsListRequest.proto";
+import "Entities/Actions/GetSelectedPublicActionsListResponse.proto";
 
 service Actions {
   rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
@@ -40,6 +42,7 @@ service Actions {
   rpc getResultsForAction (getresultsforaction.GetResultsForActionRequest) returns (getresultsforaction.GetResultsForActionResponse);
   rpc acceptCheckpoint (acceptcheckpoint.AcceptCheckpointRequest) returns (google.protobuf.Empty);
   rpc getPublicActionsList (google.protobuf.Empty) returns (getpublicactionslist.GetPublicActionsListResponse);
+  rpc getSelectedPublicActionsList (getselectedpublicactionslist.GetSelectedPublicActionsListRequest) returns (getselectedpublicactionslist.GetSelectedPublicActionsListResponse);
   
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
   rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);

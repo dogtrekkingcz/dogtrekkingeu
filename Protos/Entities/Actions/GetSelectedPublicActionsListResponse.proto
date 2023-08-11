@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetSelectedPublicActionsList";
+
+package getselectedpublicactionslist;
+
+import "google/type/datetime.proto";
+import "google/type/latlng.proto";
+
+message GetSelectedPublicActionsListResponse {
+  repeated ActionDto Actions = 1;
+}
+
+message ActionDto {
+  string Id = 1;
+  ActionType Type = 2;
+  string Name = 3;
+  string Description = 4;
+  string ContactMail = 5;
+  TermDto Term = 6;
+  AddressDto Address = 7;
+  repeated CheckpointDto Checkpoints = 8;
+  repeated RaceDto Races = 9;
+  ActionSaleDto Sale = 10;
+}
+
+enum ActionType {
+  ActionType_Unspecified = 0;
+  Trip = 1;
+  Dogtrekking = 2;
+}
+
+message CheckpointDto {
+  string Id = 1;
+  string Name = 2;
+  google.type.LatLng Position = 3;
+}
+
+message RaceDto {
+  string Id = 1;
+  string Name = 2;
+  double Distance = 3;
+  double Incline = 4;
+  google.type.DateTime EnteringFrom = 5;
+  google.type.DateTime EnteringTo = 6;
+  int32 MaxNumberOfCompetitors = 7;
+  google.type.DateTime Begin = 8;
+  repeated CategoryDto Categories = 9;
+  repeated PaymentDefinitionDto Payments = 10;
+  LimitsDto Limits = 11;
+}
+
+message CategoryDto {
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  repeated RacerDto Racers = 4;
+}
+
+enum RaceState {
+  RaceState_NotValid = 0;
+  NotStarted = 1;
+  Started = 2;
+  Finished = 3;
+  DidNotFinished = 4;
+  Disqualified = 5;
+}
+
+message RacerDto {
+  string Id = 1;
+  string CompetitorId = 2;
+  string CheckpointData = 3;
+  string FirstName = 4;
+  string LastName = 5;
+  repeated PetDto Pets = 6;
+  google.type.DateTime Start = 7;
+  google.type.DateTime Finish = 8;
+  RaceState State = 9;
+  repeated PassedCheckpointDto PassedCheckpoints = 10;
+}
+
+message PassedCheckpointDto {
+  string Id = 1;
+  google.type.DateTime Passed = 2;
+  google.type.LatLng Position = 3;
+}
+
+message  PetDto {
+  string Id = 1;
+  string UserId = 2;
+  string Name = 3;
+  string Kennel = 4;
+  string Pedigree = 5;
+  string Chip = 6;
+  google.type.DateTime Birthday = 7;
+  string UriToPhoto = 8;
+}
+
+message PaymentDefinitionDto {
+  string Id = 1;
+  string BankAccount = 2;
+  google.type.DateTime From = 3;
+  google.type.DateTime To = 4;
+  double Price = 5;
+  string Currency = 6;
+}
+
+message LimitsDto {
+  int32 MinimalAgeOfRacerInDayes = 1;
+  int32 MinimalAgeOfTheDogInDayes = 2;
+  bool WithDogs = 3;
+}
+
+message TermDto {
+  google.type.DateTime From = 1;
+  google.type.DateTime To = 2;
+}
+
+message AddressDto {
+  string Country = 1;
+  string Region = 2;
+  string ZipCode = 3;
+  string City = 4;
+  string Street = 5;
+  google.type.LatLng Position = 6;
+}
+
+message ActionSaleDto {
+  repeated ActionSaleItemDto Items = 1;
+}
+
+message ActionSaleItemDto {
+  string Id = 1;
+  string Name = 2;
+  string Description = 3;
+  double Price = 4;
+  string Currency = 5;
+  repeated string Variants = 6;
+  repeated string Sizes = 7;
+  repeated string Colors = 8;
+}

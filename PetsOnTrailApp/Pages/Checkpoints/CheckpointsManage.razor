@@ -221,7 +221,7 @@ else
             .Distinct()
             .ToList();
 
-        var selectedActions = await ActionsClient.getSelectedActionsAsync(new GetSelectedActionsRequest
+        var selectedActions = await ActionsClient.getSelectedPublicActionsListAsync(new Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest
         {
             Ids = { actionList }
         });

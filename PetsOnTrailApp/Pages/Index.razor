@@ -53,7 +53,7 @@
     protected override async Task OnInitializedAsync()
     {
         _userId = (await UserProfileService.GetAsync())?.UserId ?? "";
-        _checkpointsLink = $"/checkpoints_manage/%20/%20/{_userId}";
+        _checkpointsLink = $"/checkpoints_manage/{Guid.Empty}/{Guid.Empty}/{_userId}";
         
         var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
         {

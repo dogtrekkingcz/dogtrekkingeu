@@ -22,7 +22,24 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="added required authorization to almost all of the API.Actions methods" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="passed checkpoints job">
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedPublicActionsListRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedPublicActionsListResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedPublicActionsListRequest.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedPublicActionsListResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Actions/ActionsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/UserProfiles/UserProfilesServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/UserProfiles/UserProfilesServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Models/ActionModelMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/ActionsMap/Actions.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/ActionsMap/Actions.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Actions.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Actions.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,6 +70,8 @@
     <setting file="file://$PROJECT_DIR$/Import/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mails/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/PetsOnTrailApp/Models/ActionResultsModel.cs" root0="SKIP_HIGHLIGHTING" />
@@ -208,21 +227,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="61779000" />
-    </task>
-    <task id="LOCAL-00085" summary="fixing the loading of the current user roles">
-      <created>1690545228042</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1690545228042</updated>
-    </task>
-    <task id="LOCAL-00086" summary="working authorization">
-      <created>1690549382981</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1690549382981</updated>
+      <workItem from="1691476083216" duration="68504000" />
     </task>
     <task id="LOCAL-00087" summary="Adding checkpoints">
       <created>1690792676557</created>
@@ -553,7 +558,21 @@
       <option name="project" value="LOCAL" />
       <updated>1691662693321</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary="added missing passed checkpoint entity to FE model">
+      <created>1691663412178</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1691663412178</updated>
+    </task>
+    <task id="LOCAL-00135" summary="passed checkpoints job">
+      <created>1691663528423</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1691663528423</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,8 +593,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="several things due to looking for relevant information in the lists..." />
-    <MESSAGE value="fixes to make the checkpoints registration fully functional" />
     <MESSAGE value="translations of the checkpoints" />
     <MESSAGE value="FE updates, translations.." />
     <MESSAGE value="enhanced FE validation of the user rights" />
@@ -599,7 +616,9 @@
     <MESSAGE value="update of the seeding" />
     <MESSAGE value="using public data in the list of actions only" />
     <MESSAGE value="added required authorization to almost all of the API.Actions methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="added required authorization to almost all of the API.Actions methods" />
+    <MESSAGE value="added missing passed checkpoint entity to FE model" />
+    <MESSAGE value="passed checkpoints job" />
+    <option name="LAST_COMMIT_MESSAGE" value="passed checkpoints job" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

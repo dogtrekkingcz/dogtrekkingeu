@@ -248,6 +248,24 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.ActionSaleItemDto, GetPublicActionsListResponse.ActionSaleItemDto>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.PassedCheckpointDto, GetPublicActionsListResponse.PassedCheckpointDto>();
         
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse, GetSelectedPublicActionsListResponse>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionType, GetSelectedPublicActionsListResponse.ActionType>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionDto, GetSelectedPublicActionsListResponse.ActionDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.RacerDto, GetSelectedPublicActionsListResponse.RacerDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.AddressDto, GetSelectedPublicActionsListResponse.AddressDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.CategoryDto, GetSelectedPublicActionsListResponse.CategoryDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.PetDto, GetSelectedPublicActionsListResponse.PetDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.LimitsDto, GetSelectedPublicActionsListResponse.LimitsDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.CheckpointDto, GetSelectedPublicActionsListResponse.CheckpointDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.RaceDto, GetSelectedPublicActionsListResponse.RaceDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.RaceState, GetSelectedPublicActionsListResponse.RaceState>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.TermDto, GetSelectedPublicActionsListResponse.TermDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionSaleDto, GetSelectedPublicActionsListResponse.ActionSaleDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.LatLngDto, GetSelectedPublicActionsListResponse.LatLngDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.PaymentDefinitionDto, GetSelectedPublicActionsListResponse.PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionSaleItemDto, GetSelectedPublicActionsListResponse.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.PassedCheckpointDto, GetSelectedPublicActionsListResponse.PassedCheckpointDto>();
+        
         return typeAdapterConfig;
     }
 }

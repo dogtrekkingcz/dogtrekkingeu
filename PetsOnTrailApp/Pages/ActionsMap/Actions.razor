@@ -1,6 +1,7 @@
 ﻿@page "/actions_map"
 @using PetsOnTrailApp.Models
 @using MapsterMapper
+@using Google.Protobuf.WellKnownTypes
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject IStringLocalizer<Resource> localizer
 @inject IMapper mapper
@@ -87,7 +88,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Protos.Actions.GetAllActions.GetAllActionsResponse response = await Client.getAllActionsAsync(new Protos.Actions.GetAllActions.GetAllActionsRequest());
+        Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await Client.getPublicActionsListAsync(new Empty());
 
         _actionList = mapper.Map<List<ActionModel>>(response.Actions);
 
@@ -96,31 +97,36 @@
 
     private async Task RedrawPositions()
     {
+        List<GpsLocation> locationsToDraw = new List<GpsLocation>();
+        
         foreach (var action in _actionList)
         {
             var position = action.Address?.Position ?? new ActionModel.LatLngDto { Latitude = double.NaN, Longitude = double.NaN }; 
             
             if (position is not { Latitude: double.NaN, Longitude: double.NaN })
             {
-                
+                locationsToDraw.Add(new GpsLocation
+                {
+                    Latitude = position.Latitude,
+                    Longitude = position.Longitude,
+                    Text = action.Name
+                });
             }
         }
 
-        List<GpsLocation> locationsToDraw = new List<GpsLocation>();
-        
-        locationsToDraw.Add(new GpsLocation
-        {
-            Latitude = 49.4432275,
-            Longitude = 17.9490989,
-            Text = "Praha"
-        });
-        
-        locationsToDraw.Add(new GpsLocation
-        {
-            Latitude = 50.0875761,
-            Longitude = 14.4370422,
-            Text = "Krplov"
-        });
+        // locationsToDraw.Add(new GpsLocation
+        // {
+        //     Latitude = 49.4432275,
+        //     Longitude = 17.9490989,
+        //     Text = "Praha"
+        // });
+        //
+        // locationsToDraw.Add(new GpsLocation
+        // {
+        //     Latitude = 50.0875761,
+        //     Longitude = 14.4370422,
+        //     Text = "Krplov"
+        // });
 
         await DrawPositions(locationsToDraw);
     } 

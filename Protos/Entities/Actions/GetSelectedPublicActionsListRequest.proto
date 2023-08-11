@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetSelectedPublicActionsList";
+
+package getselectedpublicactionslist;
+
+message GetSelectedPublicActionsListRequest {
+  repeated string Ids = 1;
+}

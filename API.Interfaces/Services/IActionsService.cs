@@ -37,5 +37,7 @@ namespace DogsOnTrail.Interfaces.Actions.Services
         Task<GetResultsForActionResponse> GetResultsForActionAsync(GetResultsForActionRequest request, CancellationToken cancellationToken);
 
         Task<GetPublicActionsListResponse> GetPublicActionsListAsync(GetPublicActionsListRequest request, CancellationToken cancellationToken);
+        
+        Task<GetSelectedPublicActionsListResponse> GetSelectedPublicActionsListAsync(GetSelectedPublicActionsListRequest request, CancellationToken cancellationToken);
     }
 }
