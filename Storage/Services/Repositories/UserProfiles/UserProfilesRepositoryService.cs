@@ -42,10 +42,7 @@ namespace Storage.Services.Repositories.UserProfiles
             
             _logger.LogInformation($"'{nameof(UpdateUserProfileAsync)}': Response: '{result.Dump()}'");
 
-            return new UpdateUserProfileInternalStorageResponse
-            {
-                
-            };
+            return _mapper.Map<UpdateUserProfileInternalStorageResponse>(result);
         }
 
         public async Task DeleteUserProfileAsync(DeleteUserProfileInternalStorageRequest request, CancellationToken cancellationToken)

@@ -2,5 +2,5 @@
 
 public sealed record UpdateUserProfileInternalStorageResponse
 {
-    
+    public Guid Id { get; set; }
 }

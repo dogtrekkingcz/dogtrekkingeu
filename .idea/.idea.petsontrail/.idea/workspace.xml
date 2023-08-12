@@ -22,15 +22,11 @@
     <projectFile pubXmlPath="PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml">PetsOnTrailApp/PetsOnTrailApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="getting the rights-only action data and its consequences to work again">
-      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/icon-512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/js/Checkpoints/Camera.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/service-worker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/service-worker.published.js" afterDir="false" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="added id to updateuserprofileresponse">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/PetsOnTrailApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/PetsOnTrailApp/wwwroot/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/UserProfiles/UpdateUserProfileInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/UserProfiles/UpdateUserProfileInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/UserProfiles/UserProfilesRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/UserProfiles/UserProfilesRepositoryMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/UserProfiles/UserProfilesRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/UserProfiles/UserProfilesRepositoryService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +53,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d95c46561897415a809b9638d4448e3b11f8a9912934daac96748d2bea94a72/IStringLocalizerOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API.GRPCService/Extensions/SeedData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/API.Interfaces/Entities/UserProfile/UpdateUserProfileResponse.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/dogsontrail/Import/DogtrekkingCz/DogtrekkingCzService.cs" root0="SKIP_HIGHLIGHTING" />
@@ -221,28 +218,7 @@
       <workItem from="1691134782434" duration="6646000" />
       <workItem from="1691164076586" duration="1505000" />
       <workItem from="1691393772120" duration="13484000" />
-      <workItem from="1691476083216" duration="74070000" />
-    </task>
-    <task id="LOCAL-00088" summary="adding gps location, cleaning JS code on FE">
-      <created>1690800441925</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1690800441925</updated>
-    </task>
-    <task id="LOCAL-00089" summary="production deploy fixies">
-      <created>1690806048303</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1690806048303</updated>
-    </task>
-    <task id="LOCAL-00090" summary="correct name of mongodb db">
-      <created>1690808114924</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1690808114924</updated>
+      <workItem from="1691476083216" duration="78809000" />
     </task>
     <task id="LOCAL-00091" summary="updating dogs to pets">
       <created>1690810124639</created>
@@ -566,7 +542,28 @@
       <option name="project" value="LOCAL" />
       <updated>1691741985039</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="making the FE app installable">
+      <created>1691759701214</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1691759701214</updated>
+    </task>
+    <task id="LOCAL-00138" summary="updated manifest for correct PWA intstalled name">
+      <created>1691760078955</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1691760078955</updated>
+    </task>
+    <task id="LOCAL-00139" summary="added id to updateuserprofileresponse">
+      <created>1691786762303</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1691786762303</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,9 +584,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="FE updates, translations.." />
-    <MESSAGE value="enhanced FE validation of the user rights" />
-    <MESSAGE value="any unknown idea files" />
     <MESSAGE value="Note could be nulled and -&gt; ignored" />
     <MESSAGE value="checkpoints note -&gt; null value ignoring" />
     <MESSAGE value="note to string.Empty" />
@@ -612,7 +606,10 @@
     <MESSAGE value="added missing passed checkpoint entity to FE model" />
     <MESSAGE value="passed checkpoints job" />
     <MESSAGE value="getting the rights-only action data and its consequences to work again" />
-    <option name="LAST_COMMIT_MESSAGE" value="getting the rights-only action data and its consequences to work again" />
+    <MESSAGE value="making the FE app installable" />
+    <MESSAGE value="updated manifest for correct PWA intstalled name" />
+    <MESSAGE value="added id to updateuserprofileresponse" />
+    <option name="LAST_COMMIT_MESSAGE" value="added id to updateuserprofileresponse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

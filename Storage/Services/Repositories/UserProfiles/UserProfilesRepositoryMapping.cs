@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Storage.Entities.UserProfiles;
+using Storage.Extensions;
 using Storage.Models;
 
 namespace Storage.Services.Repositories.UserProfiles
@@ -24,6 +25,8 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.VaccinationDto, UserProfileRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.LatLngDto, UserProfileRecord.LatLngDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.PetDto, UserProfileRecord.PetDto>();
+            typeAdapterConfig.NewConfig<UserProfileRecord, UpdateUserProfileInternalStorageResponse>()
+                .Map(d => d.Id, s => s.Id.ToGuid());
 
             typeAdapterConfig.NewConfig<UserProfileRecord, GetUserProfileInternalStorageResponse>();
             typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationType, GetUserProfileInternalStorageResponse.VaccinationType>();
