@@ -25,6 +25,10 @@ public class MainActivity : MauiAppCompatActivity
 		ServiceHelper.OnStartRequest += StartForegroundServiceHandler;
 		ServiceHelper.OnStopRequest += StopForegroundServiceHandler;
 	}
+	
+	protected override void OnSaveInstanceState(Bundle outState) {
+		//No call for super(). Bug on API Level > 11.
+	}
 
 	private void StartForegroundServiceHandler()
 	{

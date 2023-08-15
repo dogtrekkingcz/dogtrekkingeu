@@ -32,7 +32,7 @@ public class PositionService : Service
         CreateNotificationChannel();
 
         var notificationIntent = new Intent(this, typeof(MainActivity));
-        var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, 0);
+        var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.Immutable);
 
         var notification = new NotificationCompat.Builder(this, ServiceChannelId)
             .SetContentTitle("PetsOnTrail Tracking")
