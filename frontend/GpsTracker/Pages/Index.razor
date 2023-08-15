@@ -1,0 +1,63 @@
+﻿@page "/"
+@using GpsTracker.Services
+@using GpsTracker.Services.Storage
+@using MapsterMapper
+
+@inject IGpsPositionService GpsPositionService;
+@inject PositionHistoryService PositionHistoryService;
+@inject IMapper Mapper;
+
+<h1>PetsOnTrail Position Tracker</h1>
+Current position is: @CurrentPosition
+
+<button @onclick="@(async () => await StartGpsTrackerServiceAsync())">Start gps tracker service</button>
+<button @onclick="@(async () => await StopGpsTrackerServiceAsync())">Stop gps tracker service</button>
+
+<div class="container">
+@foreach (var pos in History.OrderByDescending(h => h.Time))
+{
+    <div class="row">
+        <div class="col-4">@pos.Time.ToString("dd HH:mm:ss")</div>
+        <div class="col-8">@pos.Latitude N, @pos.Longitude E</div>
+    </div>
+}
+</div>
+
+@code {
+    private string CurrentPosition { get; set; } = string.Empty;
+
+    private List<PositionHistoryService.PositionDto> History { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        GpsPositionService.OnChange += OnChangeHandler;
+        ServiceHelper.OnLocationChanged += OnLocationChangeHandler;
+        History = await PositionHistoryService.GetItemsAsync();
+    }
+
+    private async Task StartGpsTrackerServiceAsync()
+    {
+        ServiceHelper.Start();
+    }
+
+    private async void OnChangeHandler()
+    {
+        CurrentPosition = $"{GpsPositionService.CurrentPosition.Latitude}N, {GpsPositionService.CurrentPosition.Longitude}E";
+        History = await PositionHistoryService.GetItemsAsync();
+        
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void OnLocationChangeHandler(Location location)
+    {
+        CurrentPosition = $"{location.Latitude}N, {location.Longitude}E";
+        History = await PositionHistoryService.GetItemsAsync();
+        
+        await InvokeAsync(StateHasChanged);
+    }
+    
+    private async Task StopGpsTrackerServiceAsync()
+    {
+        ServiceHelper.Stop();
+    }
+}

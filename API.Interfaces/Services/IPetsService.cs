@@ -1,6 +1,6 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Pets;
 
-namespace PetsOnTrail.Interfaces.Actions.Services;
+namespace DogsOnTrail.Interfaces.Actions.Services;
 
 public interface IPetsService
 {

@@ -2,7 +2,6 @@
 using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
-using PetsOnTrail.Interfaces.Actions.Services;
 
 namespace API.GRPCService.Services.Pets;
 

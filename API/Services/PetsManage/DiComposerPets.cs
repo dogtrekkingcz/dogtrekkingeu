@@ -2,7 +2,6 @@
 using DogsOnTrail.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using PetsOnTrail.Interfaces.Actions.Services;
 
 namespace DogsOnTrail.Actions.Services.PetsManage;
 
