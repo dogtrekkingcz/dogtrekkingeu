@@ -10,8 +10,8 @@ public class WebBrowserAuthenticator : IdentityModel.OidcClient.Browser.IBrowser
         try
         {
             WebAuthenticatorResult result = await WebAuthenticator.Default.AuthenticateAsync(
-                new Uri("http://10.0.2.2:8080/auth/realms/dogtrekking.cz"), // new Uri(options.StartUrl),
-                new Uri("myapp://callback"));
+                new Uri(options.StartUrl),
+                new Uri(options.EndUrl));
 
             var url = new RequestUrl(options.EndUrl)
                 .Create(new Parameters(result.Properties));

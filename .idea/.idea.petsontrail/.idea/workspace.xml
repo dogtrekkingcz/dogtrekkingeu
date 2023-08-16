@@ -37,20 +37,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="added sending the current position to the server, added preparation for authentication">
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/Auth0Client.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/Auth0ClientOptions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/WebAuthenticationCallbackActivity.cs" afterDir="false" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="implementation of the authentication">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MainPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/MacCatalyst/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/MacCatalyst/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/iOS/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/iOS/Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/_Imports.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +83,7 @@
     <setting file="mock://C:/projects/_private/dogsontrail/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Providers/AuthStateProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/dogsontrail/frontend/GpsTracker/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../obsolete-cz.dogtrekking/cz.dogtrekking.rest/Controllers/ActionsController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../obsolete-cz.dogtrekking/cz.dogtrekking.rest/Models/FullActionModel.cs" root0="SKIP_HIGHLIGHTING" />
@@ -345,7 +336,7 @@
       <workItem from="1691992989608" duration="2899000" />
       <workItem from="1691995948179" duration="31363000" />
       <workItem from="1692081404946" duration="3708000" />
-      <workItem from="1692085263550" duration="48545000" />
+      <workItem from="1692085263550" duration="49769000" />
     </task>
     <task id="LOCAL-00092" summary="fixies with adding checkpoint test data">
       <created>1690815615407</created>
@@ -690,7 +681,7 @@
       <option name="project" value="LOCAL" />
       <updated>1691813565881</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -711,7 +702,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="adding checkpoints (possible mapping problems in this commit)" />
     <MESSAGE value="renaming, dogs-&gt;pets, adding mapping for checkpoints ..." />
     <MESSAGE value="adding CheckpointData to Racer for racer resolution by qr code on the checkpoit" />
     <MESSAGE value="authorization of the administering action payments/registrations" />
@@ -736,7 +726,8 @@
     <MESSAGE value="cleaning and preparing the GpsTracker mobile app with the gps position tracking foreground service" />
     <MESSAGE value="fixies with tracking app" />
     <MESSAGE value="added sending the current position to the server, added preparation for authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sending the current position to the server, added preparation for authentication" />
+    <MESSAGE value="implementation of the authentication" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementation of the authentication" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -832,10 +823,10 @@
               <option value="341" />
             </startOffsets>
             <endOffsets>
-              <option value="570" />
+              <option value="507" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="125" />
+          <option name="timeStamp" value="126" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
