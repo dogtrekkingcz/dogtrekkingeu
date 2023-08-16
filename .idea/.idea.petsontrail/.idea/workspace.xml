@@ -37,32 +37,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="fixies with tracking app">
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Providers/AppTokenProvider.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Providers/AuthStateProvider.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Shared/LoginComponent.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Shared/LogoutComponent.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="added sending the current position to the server, added preparation for authentication">
+      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/Auth0Client.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/Auth0ClientOptions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/WebAuthenticationCallbackActivity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.WebApiService/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.local.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.local.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.production.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.production.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MainPage.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Dockerfile.local" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Dockerfile.local" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Dockerfile.production" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Dockerfile.production" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Extensions/ClientRegistrationExtension.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Extensions/AuthorizedGrpcClientExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Extensions/AuthorizedGrpcClientExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Providers/AppTokenProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Providers/AppTokenProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Providers/ITokenProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Providers/ITokenProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/MacCatalyst/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/MacCatalyst/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/iOS/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/iOS/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/_Imports.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +77,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a0739294addc4134b3baeba287dc8f83ff9db8/6a/52955f16/Service.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2531577d3fffcbeb9c402dfd786580b07ce6bde12637567fcb256dbb69482f3/GrpcWebEndpointConventionBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/613cc84566ed975887f6bb51e660dc2f33e1d6179a787ace2f1fc1824e5be3f/Java.Lang.IRunnable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/64fbc18e569b59a7b9e0f03a1594b730953f721c63533890f990b0ae5f19ebea/OidcClientOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/804da3e713437eb645a2917136867ceb43c45f711717ff96b3a9cd4a1482fa99/IAccessTokenProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8842d257a9289fdf62e32a4765774f55b9291f2efb49380a3a3762adc493299/Android.App.Service.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -356,7 +345,7 @@
       <workItem from="1691992989608" duration="2899000" />
       <workItem from="1691995948179" duration="31363000" />
       <workItem from="1692081404946" duration="3708000" />
-      <workItem from="1692085263550" duration="37523000" />
+      <workItem from="1692085263550" duration="48545000" />
     </task>
     <task id="LOCAL-00092" summary="fixies with adding checkpoint test data">
       <created>1690815615407</created>
@@ -701,7 +690,7 @@
       <option name="project" value="LOCAL" />
       <updated>1691813565881</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -722,7 +711,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fixed starting getting gps location" />
     <MESSAGE value="adding checkpoints (possible mapping problems in this commit)" />
     <MESSAGE value="renaming, dogs-&gt;pets, adding mapping for checkpoints ..." />
     <MESSAGE value="adding CheckpointData to Racer for racer resolution by qr code on the checkpoit" />
@@ -747,7 +735,8 @@
     <MESSAGE value="added maui app - gps tracker" />
     <MESSAGE value="cleaning and preparing the GpsTracker mobile app with the gps position tracking foreground service" />
     <MESSAGE value="fixies with tracking app" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixies with tracking app" />
+    <MESSAGE value="added sending the current position to the server, added preparation for authentication" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sending the current position to the server, added preparation for authentication" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -823,19 +812,6 @@
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs</url>
-          <line>60</line>
-          <properties documentPath="C:\projects\_private\dogsontrail\frontend\GpsTracker\Services\Storage\PositionHistoryService.cs" initialLine="60" containingFunctionPresentation="Method 'SaveItemAsync'">
-            <startOffsets>
-              <option value="1457" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1558" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Providers/AuthStateProvider.cs</url>
           <line>31</line>
           <properties documentPath="C:\projects\_private\dogsontrail\frontend\GpsTracker\Providers\AuthStateProvider.cs" initialLine="31" containingFunctionPresentation="Local function 'LogInAsyncCore'">
@@ -847,6 +823,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs</url>
+          <line>11</line>
+          <properties documentPath="C:\projects\_private\dogsontrail\frontend\GpsTracker\Auth0\WebBrowserAuthenticator.cs" initialLine="11" containingFunctionPresentation="Method 'InvokeAsync'">
+            <startOffsets>
+              <option value="341" />
+            </startOffsets>
+            <endOffsets>
+              <option value="570" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="125" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

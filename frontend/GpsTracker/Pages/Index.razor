@@ -2,10 +2,12 @@
 @using GpsTracker.Services
 @using GpsTracker.Services.Storage
 @using MapsterMapper
+@using GpsTracker.Auth0
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
 @inject IMapper Mapper;
+@inject Auth0Client AuthClient;
 
 <h1>PetsOnTrail Position Tracker</h1>
 Current position is: @CurrentPosition
@@ -14,13 +16,24 @@ Current position is: @CurrentPosition
 <button @onclick="@(async () => await StopGpsTrackerServiceAsync())">Stop gps tracker service</button>
 
 <div class="container">
-@foreach (var pos in History.OrderByDescending(h => h.Time))
-{
-    <div class="row">
-        <div class="col-4">@pos.Time.ToString("dd HH:mm:ss")</div>
-        <div class="col-8">@pos.Latitude N, @pos.Longitude E</div>
-    </div>
-}
+    <button type="button" @onclick="async () => await LoginClickedAsync()">Login</button>
+</div>
+<div class="container">
+    @{
+        int counter = 20;
+    }
+    @foreach (var pos in History.OrderByDescending(h => h.Time))
+    {
+        if (counter == 0)
+            break;
+
+        counter--;
+        
+        <div class="row">
+            <div class="col-4">@pos.Time.ToString("dd HH:mm:ss")</div>
+            <div class="col-8">@pos.Latitude N, @pos.Longitude E</div>
+        </div>
+    }
 </div>
 
 @code {
@@ -59,5 +72,19 @@ Current position is: @CurrentPosition
     private async Task StopGpsTrackerServiceAsync()
     {
         ServiceHelper.Stop();
+    }
+
+    private async Task LoginClickedAsync()
+    {
+        var loginResult = await AuthClient.LoginAsync();
+
+        if (!loginResult.IsError)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }

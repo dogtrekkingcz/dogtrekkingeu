@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using SharedLib.Extensions;
 using SharedLib.Providers;
 using AppTokenProvider = GpsTracker.Providers.AppTokenProvider;
+using GpsTracker.Auth0;
 
 namespace GpsTracker;
 
@@ -90,7 +91,24 @@ public static class MauiProgram
         // authentication
         builder.Services.AddAuthorizationCore();
         builder.Services.TryAddScoped<AuthenticationStateProvider, ExternalAuthStateProvider>();
-        builder.Services.AddSingleton<AuthService>();
+        
+        builder.Services.AddSingleton<MainPage>();
+
+        var scopes = builder.Configuration
+            .GetSection("OIDC")
+            .GetSection("DefaultScopes")
+            .GetChildren()
+            .Select(scope => scope.Value.ToString());
+
+        var scope = String.Join(" ", scopes);
+        
+        builder.Services.AddSingleton(new Auth0Client(new()
+        {
+            Authority = builder.Configuration.GetSection("OIDC").GetSection("Authority").Value,
+            ClientId = builder.Configuration.GetSection("OIDC").GetSection("ClientId").Value,
+            Scope = scope,
+            RedirectUri = "myapp://callback"
+        }));
         
         var host = builder.Build();
 
