@@ -37,11 +37,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="implementation of the authentication">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" beforeDir="false" />
-    </list>
+    <list default="true" id="a8f6a6a6-fddd-446a-96a3-ccc3dafdd7e4" name="Changes" comment="updated to be petsontrail.eu instead of the dogtrekking.cz keycloak profile" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -336,7 +332,7 @@
       <workItem from="1691992989608" duration="2899000" />
       <workItem from="1691995948179" duration="31363000" />
       <workItem from="1692081404946" duration="3708000" />
-      <workItem from="1692085263550" duration="49769000" />
+      <workItem from="1692085263550" duration="50162000" />
     </task>
     <task id="LOCAL-00092" summary="fixies with adding checkpoint test data">
       <created>1690815615407</created>
@@ -681,7 +677,7 @@
       <option name="project" value="LOCAL" />
       <updated>1691813565881</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -702,7 +698,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="renaming, dogs-&gt;pets, adding mapping for checkpoints ..." />
     <MESSAGE value="adding CheckpointData to Racer for racer resolution by qr code on the checkpoit" />
     <MESSAGE value="authorization of the administering action payments/registrations" />
     <MESSAGE value="." />
@@ -727,7 +722,8 @@
     <MESSAGE value="fixies with tracking app" />
     <MESSAGE value="added sending the current position to the server, added preparation for authentication" />
     <MESSAGE value="implementation of the authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementation of the authentication" />
+    <MESSAGE value="updated to be petsontrail.eu instead of the dogtrekking.cz keycloak profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated to be petsontrail.eu instead of the dogtrekking.cz keycloak profile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
