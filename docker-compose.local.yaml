@@ -48,7 +48,7 @@ services:
     image: petsontrail_client_app
     build:
       context: .
-      dockerfile: petsontrailApp/Dockerfile
+      dockerfile: frontend/PetsOnTrailApp/Dockerfile
     ports:
       - 1443:443
       - 1080:80

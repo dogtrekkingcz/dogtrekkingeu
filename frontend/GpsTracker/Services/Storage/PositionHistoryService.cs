@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Google.Type;
+using Protos.Checkpoints.AddCheckpoint;
+using SharedLib.Extensions;
 using SQLite;
 
 namespace GpsTracker.Services.Storage;
@@ -46,11 +49,33 @@ public class PositionHistoryService
     public async Task<int> SaveItemAsync(PositionDto item)
     {
         await Init();
+
+        var ret = 0;
         
         if (item.Id != 0)
-            return await Database.UpdateAsync(item);
+            ret = await Database.UpdateAsync(item);
         else
-            return await Database.InsertAsync(item);
+            ret = await Database.InsertAsync(item);
+
+
+        var checkpointsClient = ServiceHelper.GetService<Protos.Checkpoints.Checkpoints.CheckpointsClient>();
+        await checkpointsClient.addCheckpointAsync(new AddCheckpointRequest
+        {
+            Data = "",
+            Position = new LatLng
+            {
+                Latitude = item.Latitude,
+                Longitude = item.Longitude
+            },
+            ActionId = item.ActionId.ToString(),
+            Description = string.Empty,
+            Name = string.Empty,
+            Note = string.Empty,
+            CheckpointId = Guid.Empty.ToString(),
+            CheckpointTime = item.Time.ToGoogleDateTime()
+        });
+        
+        return ret;
     }
 
     public async Task<int> DeleteItemAsync(PositionDto item)

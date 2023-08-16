@@ -1,0 +1,14 @@
+@using GpsTracker.Providers
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<button @onclick="Login">Log in</button>
+
+@code
+{
+    public async Task Login()
+    {
+        await ((ExternalAuthStateProvider)AuthenticationStateProvider)
+            .LogInAsync();
+    }
+}

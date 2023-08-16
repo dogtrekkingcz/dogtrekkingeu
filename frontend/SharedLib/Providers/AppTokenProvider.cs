@@ -26,4 +26,9 @@ public class AppTokenProvider : ITokenProvider
 
         return _token;
     }
+
+    public void Set(string token)
+    {
+        ;
+    }
 }

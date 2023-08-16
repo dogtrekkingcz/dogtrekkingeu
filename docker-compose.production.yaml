@@ -51,7 +51,7 @@ services:
     container_name: PetsOnTrail.App
     build:
       context: .
-      dockerfile: PetsOnTrailApp/Dockerfile
+      dockerfile: frontend/PetsOnTrailApp/Dockerfile
     ports:
       - 443:443
       - 80:80
