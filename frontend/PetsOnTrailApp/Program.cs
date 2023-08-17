@@ -44,7 +44,7 @@ typeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
-    .AddScoped<IUserProfileService, UserProfileService>()
+    .AddSingleton<IUserProfileService, UserProfileService>()
     .AddBlazoredLocalStorage()
     .AddScoped<TokenStorage>()
     .AddScoped<ITokenProvider, AppTokenProvider>();

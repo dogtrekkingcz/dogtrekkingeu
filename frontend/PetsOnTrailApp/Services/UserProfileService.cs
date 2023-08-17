@@ -8,33 +8,44 @@ public sealed class UserProfileService : IUserProfileService
 {
     private UserProfileModel _userProfileModel = new();
 
-    private readonly IMapper _mapper;
     private readonly Protos.ActionRights.ActionRights.ActionRightsClient _actionRightsClient;
     private readonly Protos.UserProfiles.UserProfiles.UserProfilesClient _userProfilesClient;
+    private readonly IServiceProvider _serviceProvider;
 
     private DateTimeOffset? IsValidTime { get; set; } = null;
 
+    private bool IsRunning { get; set; } = false;
+
     public UserProfileService(
-        IMapper mapper, 
         Protos.ActionRights.ActionRights.ActionRightsClient actionRightsClient, 
-        Protos.UserProfiles.UserProfiles.UserProfilesClient userProfilesClient)
+        Protos.UserProfiles.UserProfiles.UserProfilesClient userProfilesClient,
+        IServiceProvider serviceProvider)
     {
-        _mapper = mapper;
         _actionRightsClient = actionRightsClient;
         _userProfilesClient = userProfilesClient;
+        _serviceProvider = serviceProvider;
     }
     
     public async Task<UserProfileModel> GetAsync()
     {
+        while (IsRunning)
+            await Task.Delay(100);
+        
         if (IsValidTime != null && IsValidTime > DateTimeOffset.Now.AddMinutes(-5))
             return _userProfileModel;
+
+        IsRunning = true;
         
         var userProfile = await _userProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
 
         if (userProfile == null || userProfile.Id == string.Empty)
             return null;
 
-        SetUserProfile(_mapper.Map<UserProfileModel>(userProfile));
+        using (var scope = _serviceProvider.CreateScope())
+        {
+            var mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+            SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
+        }
         
         var getActionRightsResponse = await _actionRightsClient.getActionRightsAsync(
             new Protos.ActionRights.GetActionRights.GetActionRightsRequest
@@ -58,6 +69,8 @@ public sealed class UserProfileService : IUserProfileService
         
         IsValidTime = DateTimeOffset.Now;
 
+        IsRunning = false;
+
         return _userProfileModel;
     }
 
@@ -70,11 +83,16 @@ public sealed class UserProfileService : IUserProfileService
     {
         var rights = _userProfileModel.Rights;
         
-        _userProfileModel = _mapper.Map<UserProfileModel>(userProfileModel)
-            with
-            {
-                Rights = rights
-            };
+        using (var scope = _serviceProvider.CreateScope())
+        {
+            var mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+            
+            _userProfileModel = mapper.Map<UserProfileModel>(userProfileModel)
+                with
+                {
+                    Rights = rights
+                };
+        }
     }
     
     public void SetRights(IList<UserProfileModel.ActionRightsDto> rights)
