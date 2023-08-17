@@ -44,7 +44,8 @@ builder.Services
     .AddScoped<IMapper, ServiceMapper>()
     .AddScoped<IUserProfileService, UserProfileService>()
     .AddBlazoredLocalStorage()
-    .AddScoped<TokenStorage>();
+    .AddScoped<TokenStorage>()
+    .AddScoped<ITokenProvider, AppTokenProvider>();
 
 builder.Services.AddSingleton(services =>
 {
