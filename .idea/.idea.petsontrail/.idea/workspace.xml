@@ -21,29 +21,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="removing testing empty project">
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="forgot to add the shared ITokenProvider implementation">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/API.GRPCService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/API.GRPCService.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/API.Interface.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/API.Interface.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.WebApiService/API.WebApiService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/API.WebApiService.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API/API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Import/Import.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Import/Import.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mails/Mails.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Mails.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QrGenerator/QrGenerator.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/QrGenerator/QrGenerator.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/Constants/Constants.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Constants/Constants.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Storage.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Storage.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/PetsOnTrailApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/PetsOnTrailApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/wwwroot/service-worker.published.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/wwwroot/service-worker.published.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/SharedLib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/SharedLib.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/petsontrail.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/petsontrail.sln.DotSettings.user" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -62,26 +50,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "rider.run.widget.enabled.cache": "false",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\kotesovec\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
+      "C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
+      "C:\\Users\\kotesovec\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.PetsOnTrailApp: https">
     <configuration name="PetsOnTrailApp: localhost" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish publish_profile="localhost.pubxml" pubxml_path="$PROJECT_DIR$/frontend/PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml" uuid_high="1184149982973216629" uuid_low="-8205027464861651867" />
@@ -292,7 +281,7 @@
       <workItem from="1692255181411" duration="2188000" />
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
-      <workItem from="1692259632257" duration="307000" />
+      <workItem from="1692259632257" duration="2554000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -302,7 +291,23 @@
       <option name="project" value="LOCAL" />
       <updated>1692255337576</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Moving back to dotnet 7.0 for all but maui apps">
+      <option name="closed" value="true" />
+      <created>1692260144830</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1692260144830</updated>
+    </task>
+    <task id="LOCAL-00003" summary="forgot to add the shared ITokenProvider implementation">
+      <option name="closed" value="true" />
+      <created>1692261066758</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1692261066758</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +316,8 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="VcsManagerConfiguration">
     <MESSAGE value="removing testing empty project" />
-    <option name="LAST_COMMIT_MESSAGE" value="removing testing empty project" />
+    <MESSAGE value="Moving back to dotnet 7.0 for all but maui apps" />
+    <MESSAGE value="forgot to add the shared ITokenProvider implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="forgot to add the shared ITokenProvider implementation" />
   </component>
 </project>

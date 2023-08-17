@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components.Web;
 using PetsOnTrailApp;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
-using PetsOnTrailApp.Providers;
 using PetsOnTrailApp.Services;
 using Google.Protobuf.Collections;
 using Grpc.Net.Client;
@@ -14,6 +13,9 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Blazored.LocalStorage;
 using SharedLib.Extensions;
+using SharedLib.Providers;
+using AppTokenProvider = PetsOnTrailApp.Providers.AppTokenProvider;
+using TokenStorage = PetsOnTrailApp.Providers.TokenStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -58,8 +60,6 @@ builder.Services.AddSingleton(services =>
     
     return channel;
 });
-
-builder.Services.AddScoped<ITokenProvider, AppTokenProvider>();
 
 builder.Services
     .AddAuthorizedGrpcOverWebClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])
