@@ -17,6 +17,7 @@ Current position is: @CurrentPosition
 
 <div class="container">
     <button type="button" @onclick="async () => await LoginClickedAsync()">Login</button>
+    State: @LoggedIn
 </div>
 <div class="container">
     @{
@@ -38,6 +39,7 @@ Current position is: @CurrentPosition
 
 @code {
     private string CurrentPosition { get; set; } = string.Empty;
+    private string LoggedIn = "Not logged in";
 
     private List<PositionHistoryService.PositionDto> History { get; set; } = new();
 
@@ -80,7 +82,9 @@ Current position is: @CurrentPosition
 
         if (!loginResult.IsError)
         {
+            LoggedIn = "Logged in";
             
+            StateHasChanged();
         }
         else
         {
