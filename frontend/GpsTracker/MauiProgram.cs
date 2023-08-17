@@ -70,7 +70,7 @@ public static class MauiProgram
             .AddSingleton<WeatherForecastService>()
             .AddSingleton<IGpsPositionService, GpsPositionService>()
             .AddSingleton<PositionHistoryService>()
-            .AddScoped<ITokenProvider, AppTokenProvider>();
+            .AddSingleton<ITokenProvider, AppTokenProvider>();
         
         builder.Services
             .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])
@@ -97,14 +97,15 @@ public static class MauiProgram
             .Select(scope => scope.Value.ToString());
 
         var scope = String.Join(" ", scopes);
-        
-        builder.Services.AddSingleton(new Auth0Client(new()
+
+        builder.Services.AddSingleton<Auth0ClientOptions>(x => new Auth0ClientOptions
         {
             Authority = builder.Configuration.GetSection("OIDC").GetSection("Authority").Value,
             ClientId = builder.Configuration.GetSection("OIDC").GetSection("ClientId").Value,
             Scope = scope,
             RedirectUri = "myapp://callback"
-        }));
+        });
+        builder.Services.AddSingleton<Auth0Client>();
         
         var host = builder.Build();
 
