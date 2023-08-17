@@ -21,10 +21,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="moving back to .net 7.0 in the dockerfiles">
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="fe userprofileservice should be singleton change">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Services/UserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Services/UserProfileService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +34,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Providers/AppTokenProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Services/UserProfileService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -74,7 +76,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.PetsOnTrailApp: https">
+  <component name="RunManager" selected="Xamarin.Android.GpsTracker">
     <configuration name="PetsOnTrailApp: localhost" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish publish_profile="localhost.pubxml" pubxml_path="$PROJECT_DIR$/frontend/PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml" uuid_high="1184149982973216629" uuid_low="-8205027464861651867" />
       <method v="2" />
@@ -284,7 +286,7 @@
       <workItem from="1692255181411" duration="2188000" />
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
-      <workItem from="1692259632257" duration="6857000" />
+      <workItem from="1692259632257" duration="8978000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -326,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692264355256</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fe userprofileservice should be singleton change">
+      <option name="closed" value="true" />
+      <created>1692267862705</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1692267862705</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,6 +348,53 @@
     <MESSAGE value="Moving back to dotnet 7.0 for all but maui apps" />
     <MESSAGE value="forgot to add the shared ITokenProvider implementation" />
     <MESSAGE value="moving back to .net 7.0 in the dockerfiles" />
-    <option name="LAST_COMMIT_MESSAGE" value="moving back to .net 7.0 in the dockerfiles" />
+    <MESSAGE value="fe userprofileservice should be singleton change" />
+    <option name="LAST_COMMIT_MESSAGE" value="fe userprofileservice should be singleton change" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Shared/LoginComponent.razor</url>
+          <line>10</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Shared\LoginComponent.razor" initialLine="10" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Providers/AuthStateProvider.cs</url>
+          <line>30</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Providers\AuthStateProvider.cs" initialLine="30" containingFunctionPresentation="Local function 'LogInAsyncCore'">
+            <startOffsets>
+              <option value="897" />
+            </startOffsets>
+            <endOffsets>
+              <option value="947" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Providers/AuthStateProvider.cs</url>
+          <line>28</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Providers\AuthStateProvider.cs" initialLine="28" containingFunctionPresentation="Method 'LogInAsync'">
+            <startOffsets>
+              <option value="826" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1096" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

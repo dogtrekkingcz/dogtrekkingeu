@@ -1,15 +1,19 @@
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using IdentityModel.Client;
+using SharedLib.Providers;
 
 namespace GpsTracker.Auth0;
 
 public class Auth0Client
 {
     private readonly OidcClient oidcClient;
+    private readonly ITokenProvider _tokenProvider;
 
-    public Auth0Client(Auth0ClientOptions options)
+    public Auth0Client(Auth0ClientOptions options, ITokenProvider tokenProvider)
     {
+        _tokenProvider = tokenProvider;
+        
         oidcClient = new OidcClient(new OidcClientOptions
         {
             Authority = options.Authority,
@@ -41,7 +45,12 @@ public class Auth0Client
 
     public async Task<LoginResult> LoginAsync()
     {
-        return await oidcClient.LoginAsync();
+        var result = await oidcClient.LoginAsync();
+
+        if (result.IsError == false)
+            _tokenProvider.Set(result.AccessToken);
+        
+        return result;
     }
 
     public async Task<BrowserResult> LogoutAsync()

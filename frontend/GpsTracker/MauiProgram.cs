@@ -70,11 +70,7 @@ public static class MauiProgram
             .AddSingleton<WeatherForecastService>()
             .AddSingleton<IGpsPositionService, GpsPositionService>()
             .AddSingleton<PositionHistoryService>()
-            .AddScoped<ITokenProvider, AppTokenProvider>()
-            .AddOidcAuthentication(options =>
-            {
-                builder.Configuration.Bind("OIDC", options.ProviderOptions);
-            });
+            .AddScoped<ITokenProvider, AppTokenProvider>();
         
         builder.Services
             .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])

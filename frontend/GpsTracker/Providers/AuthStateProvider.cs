@@ -25,16 +25,16 @@ public class ExternalAuthStateProvider : AuthenticationStateProvider
         NotifyAuthenticationStateChanged(loginTask);
 
         return loginTask;
-
-        async Task<AuthenticationState> LogInAsyncCore()
-        {
-            var user = await LoginWithExternalProviderAsync();
-            currentUser = user;
+    }
+    
+    async Task<AuthenticationState> LogInAsyncCore()
+    {
+        var user = await LoginWithExternalProviderAsync();
+        currentUser = user;
             
-            _tokenProvider.Set("");
+        _tokenProvider.Set("");
 
-            return new AuthenticationState(currentUser);
-        }
+        return new AuthenticationState(currentUser);
     }
 
     private Task<ClaimsPrincipal> LoginWithExternalProviderAsync()
