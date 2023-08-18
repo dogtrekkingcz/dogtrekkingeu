@@ -72,6 +72,7 @@ public static class MauiProgram
         
         // return builder.Build();
         
+        
         // authentication
         builder.Services.AddAuthorizationCore();
         builder.Services.TryAddScoped<AuthenticationStateProvider, ExternalAuthStateProvider>();
