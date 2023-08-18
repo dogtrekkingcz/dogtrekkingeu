@@ -1,11 +1,11 @@
 ﻿@page "/action/{ActionId}/create_entry"
 @using PetsOnTrailApp.Shared
-@using PetsOnTrailApp.Models
 @using PetsOnTrailApp.Services
 @using MapsterMapper
 @using Protos.Actions
 @using Protos.Actions.GetActionEntrySettings
 @using Protos.Entries
+@using SharedLib.Models
 @inject Protos.Entries.Entries.EntriesClient EntriesClient
 @inject Protos.Actions.Actions.ActionsClient ActionsClient
 @inject IStringLocalizer<Resource> localizer

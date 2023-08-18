@@ -1,35 +1,27 @@
 ﻿@page "/actions"
 @using MapsterMapper
-@using Google.Protobuf.WellKnownTypes
 @using SharedLib.Models
-@inject Protos.Actions.Actions.ActionsClient Client
-@inject AuthenticationStateProvider AuthStateProvider 
-@inject IModalService modal
-@inject IStringLocalizer<Resource> localizer
-@inject IMapper mapper
-@inject NavigationManager NavManager
+@using Google.Protobuf.WellKnownTypes
 
-<h1>@localizer["Actions"]</h1>
+@inject Protos.Actions.Actions.ActionsClient ActionsClientService;
+@inject IMapper Mapper;
+
+<h1>Actions</h1>
 
 @if (_actionList  == null)
 {
     <p>
-        <em>@localizer["Loading ..."]</em>
+        <em>Loading ...</em>
     </p>
 }
 else
 {
-    <InputSelect @bind-Value="SortingOptionsValue">
-        <option value="@SortingOptions.ApprovedWithLockedTermByDate">@localizer["Actions.ApprovedAndTermLockedByDate"]</option>
-        <option value="@SortingOptions.ApprovedByDate">@localizer["Actions.ApprovedByDate"]</option>
-        <option value="@SortingOptions.AllByDate">@localizer["Actions.AllByDate"]</option>
-    </InputSelect>
-    <table class="table">
+<table class="table">
         <thead>
         <tr>
-            <th>@localizer["Actions.Term&AddressOfAction"]</th>
-            <th>@localizer["Actions.Name&DescriptionOfAction"]</th>
-            <th>@localizer["Actions.EnrolledRaces"]</th>
+            <th>Term & Address</th>
+            <th>Name & Description</th>
+            <th>Enrolled Races</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -89,18 +81,11 @@ else
         }
         </tbody>
     </table>
-
-    <AuthorizeView>
-        <Authorized>
-            <button @onclick="@(async () => await PrepareToAddAction())" class="btn btn-primary">@localizer["Actions.AddAction"]</button>            
-        </Authorized>
-    </AuthorizeView>
 }
 
 @code {
     private List<ActionModel> _actionList = null;
-    private AuthenticationState _authState = null;
-
+    
     private SortingOptions _sortingOptionsValue = SortingOptions.ApprovedWithLockedTermByDate;
     private SortingOptions SortingOptionsValue
     {
@@ -117,21 +102,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _authState = await AuthStateProvider.GetAuthenticationStateAsync();
-
         await ReloadData();
     }
-
-    protected async Task PrepareToAddAction()
-    {
-        NavManager.NavigateTo($"/action_manage/0");
-    }
-
+    
     private async Task ReloadData()
     {
-        Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await Client.getPublicActionsListAsync(new Empty());
+        Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await ActionsClientService.getPublicActionsListAsync(new Empty());
 
-        _actionList = mapper.Map<List<ActionModel>>(response.Actions);
+        _actionList = Mapper.Map<List<ActionModel>>(response.Actions);
                 
         SortActions();
     }
@@ -149,13 +127,13 @@ else
                 _actionList = _actionList
                     .OrderByDescending(action => action.Term?.From)
                     .ToList();
-                    break;
+                break;
                 
             case SortingOptions.ApprovedByDate:
-                    _actionList = _actionList
+                _actionList = _actionList
                     .OrderByDescending(action => action.Term?.From)
-                        .ToList();
-                    break;
+                    .ToList();
+                break;
         }
         
         StateHasChanged();

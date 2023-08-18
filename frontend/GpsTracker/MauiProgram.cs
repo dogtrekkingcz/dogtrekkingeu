@@ -48,21 +48,8 @@ public static class MauiProgram
 
         // 8:53:58
         
-        TypeAdapterConfig typeAdapterConfig = new TypeAdapterConfig
-            {
-                RequireDestinationMemberSource = true,
-                RequireExplicitMapping = true,
-                Default =
-                {
-                    Settings =
-                    {
-                        UseDestinationValues =
-                        {
-                        }
-                    }
-                }
-            }
-            .AddMapping();
+        var typeAdapterConfig = SharedLib.Mapping.CreateFrontendMapping();
+        typeAdapterConfig.AddMapping();
 
         builder.Services
             .AddSingleton(typeAdapterConfig)

@@ -8,7 +8,20 @@ using GpsTracker.Services.Storage;
 
 namespace GpsTracker.Platforms.Android.Services;
 
-[Service(ForegroundServiceType = ForegroundService.TypeLocation)]
+// https://learn.microsoft.com/en-us/xamarin/android/app-fundamentals/services/out-of-process-services#create-a-service-that-runs-in-a-separate-process
+
+// TODO - check after any months ...
+// Currently there is an issue with Xamarin.Android where the service
+// will crash on startup when attempting to run it in it's own process. 
+// See https://bugzilla.xamarin.com/show_bug.cgi?id=51940
+// [Service(
+//     Name = "eu.petsontrail.gpstracker",
+//     ForegroundServiceType = ForegroundService.TypeLocation, 
+//     Exported = true, 
+//     Process = ":positionservice_process")]
+[Service(
+    Name = "eu.petsontrail.gpstracker",
+    ForegroundServiceType = ForegroundService.TypeLocation)]
 public class PositionService : Service
 {
     public const string ServiceChannelId = "ForegroundServiceChannel";

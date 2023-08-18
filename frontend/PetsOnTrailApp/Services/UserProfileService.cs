@@ -1,6 +1,6 @@
-﻿using PetsOnTrailApp.Models;
-using MapsterMapper;
+﻿using MapsterMapper;
 using Protos.UserProfiles.GetUserProfile;
+using SharedLib.Models;
 
 namespace PetsOnTrailApp.Services;
 

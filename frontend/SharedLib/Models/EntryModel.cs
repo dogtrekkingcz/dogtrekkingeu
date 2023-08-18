@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PetsOnTrailApp.Models;
+namespace SharedLib.Models;
 
 public sealed record EntryModel
 {

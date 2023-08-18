@@ -1,4 +1,4 @@
-﻿namespace PetsOnTrailApp.Models;
+﻿namespace SharedLib.Models;
 
 public enum AddNewResult_FinalState
 {

@@ -1,7 +1,6 @@
 ﻿using Mapster;
-using Protos.UserProfiles;
 
-namespace PetsOnTrailApp.Models;
+namespace SharedLib.Models;
 
 internal static class UserProfileModelMapping
 {

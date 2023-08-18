@@ -2,6 +2,7 @@ using System;
 using Google.Protobuf.Collections;
 using Mapster;
 using SharedLib.Extensions;
+using SharedLib.Models;
 
 namespace SharedLib;
 
@@ -43,6 +44,16 @@ public static class Mapping
         typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Duration, Google.Protobuf.WellKnownTypes.Duration>();
         typeAdapterConfig.NewConfig<Google.Type.TimeZone, Google.Type.TimeZone>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, Google.Type.LatLng>();
+        
+        typeAdapterConfig
+            .AddActionModelMapping()
+            .AddUserProfileModelMapping()
+            .AddEntryModelMapping()
+            .AddActionSettingsModelMapping()
+            .AddPetModelMapping()
+            .AddCheckpointModelMapping()
+            .AddActionResultsModelMapping()
+            .AddResultsModelMapping();
 
         return typeAdapterConfig;
     }

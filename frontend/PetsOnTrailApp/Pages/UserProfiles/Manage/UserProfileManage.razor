@@ -1,10 +1,10 @@
 ﻿@page "/userprofile/manage"
-@using PetsOnTrailApp.Models
 @using PetsOnTrailApp.Services
 @using MapsterMapper
 @using Protos.UserProfiles
 @using Protos.UserProfiles.GetUserProfile
 @using Protos.UserProfiles.UpdateUserProfile
+@using SharedLib.Models
 
 @inject Protos.UserProfiles.UserProfiles.UserProfilesClient UserProfilesClient
 @inject IStringLocalizer<Resource> Loc

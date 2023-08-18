@@ -1,11 +1,10 @@
 ﻿@page "/action_manage/{Id}"
-
-@using PetsOnTrailApp.Models
 @using MapsterMapper
 @using PetsOnTrailApp.Shared
 @using Protos.Actions.UpdateAction
 @using PetsOnTrailApp.Extensions
 @using PetsOnTrailApp.Services
+@using SharedLib.Models
 
 @inject Protos.Actions.Actions.ActionsClient Client
 @inject Protos.ActionRights.ActionRights.ActionRightsClient ActionRightsClient

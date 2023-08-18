@@ -3,7 +3,6 @@ using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using PetsOnTrailApp;
 using PetsOnTrailApp.Extensions;
-using PetsOnTrailApp.Models;
 using PetsOnTrailApp.Services;
 using Google.Protobuf.Collections;
 using Grpc.Net.Client;
@@ -30,16 +29,6 @@ builder.Services.AddBlazoredModal();
 builder.Services.AddBlazorBootstrap();
 
 var typeAdapterConfig = SharedLib.Mapping.CreateFrontendMapping();
-
-typeAdapterConfig
-    .AddActionModelMapping()
-    .AddUserProfileModelMapping()
-    .AddEntryModelMapping()
-    .AddActionSettingsModelMapping()
-    .AddPetModelMapping()
-    .AddCheckpointModelMapping()
-    .AddActionResultsModelMapping()
-    .AddResultsModelMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)

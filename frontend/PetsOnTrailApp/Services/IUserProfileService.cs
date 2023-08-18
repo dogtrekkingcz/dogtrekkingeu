@@ -1,4 +1,4 @@
-﻿using PetsOnTrailApp.Models;
+﻿using SharedLib.Models;
 
 namespace PetsOnTrailApp.Services;
 

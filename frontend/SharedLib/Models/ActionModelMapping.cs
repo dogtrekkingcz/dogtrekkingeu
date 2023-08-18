@@ -1,7 +1,7 @@
 ﻿using Mapster;
 using SharedLib.Extensions;
 
-namespace PetsOnTrailApp.Models;
+namespace SharedLib.Models;
 
  internal static class ActionModelMapping
 {

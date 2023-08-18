@@ -1,6 +1,4 @@
 ﻿@page "/checkpoints_manage/{ActionId?}/{CheckpointId?}/{UserId?}"
-
-@using PetsOnTrailApp.Models
 @using MapsterMapper
 @using PetsOnTrailApp.Extensions
 @using Protos.Actions.GetSelectedActions
@@ -8,6 +6,7 @@
 @using Protos.UserProfiles.GetSelectedSurnameName
 @using System.Globalization
 @using SharedLib.Extensions
+@using SharedLib.Models
 
 @inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 @inject Protos.Actions.Actions.ActionsClient ActionsClient

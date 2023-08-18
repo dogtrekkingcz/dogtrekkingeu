@@ -1,5 +1,4 @@
 ﻿@page "/"
-@using PetsOnTrailApp.Models;
 @using PetsOnTrailApp.Pages.UserProfiles;
 @using PetsOnTrailApp.Services
 @using Protos.UserProfiles
@@ -10,6 +9,7 @@
 @using Protos.LiveUpdatesSubscription
 @using Protos.UserProfiles.GetUserProfile
 @using SharedLib.Extensions
+@using SharedLib.Models
 
 @inject Protos.LiveUpdatesSubscription.LiveUpdatesSubscription.LiveUpdatesSubscriptionClient LiveUpdatesSubscriptionClient
 @inject Protos.ActionRights.ActionRights.ActionRightsClient ActionRightsClient

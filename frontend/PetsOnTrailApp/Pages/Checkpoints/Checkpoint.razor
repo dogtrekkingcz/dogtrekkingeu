@@ -1,10 +1,10 @@
 ﻿@page "/checkpoint/{ActionId?}/{CheckpointId?}"
 
 @using System.Text.Json.Nodes
-@using PetsOnTrailApp.Models
 @using MapsterMapper
 @using System.Globalization
 @using PetsOnTrailApp.Extensions
+@using SharedLib.Models
 @inject Protos.Checkpoints.Checkpoints.CheckpointsClient CheckpointsClient
 @inject IStringLocalizer<Resource> Loc
 @inject IMapper Mapper

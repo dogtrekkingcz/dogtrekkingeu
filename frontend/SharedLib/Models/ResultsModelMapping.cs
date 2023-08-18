@@ -1,6 +1,6 @@
 ﻿using Mapster;
 
-namespace PetsOnTrailApp.Models;
+namespace SharedLib.Models;
 
 internal static class ResultsModelMapping
 {
