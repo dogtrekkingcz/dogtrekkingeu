@@ -26,67 +26,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="any debug text - if is logged in or not">
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Actions.razor" afterDir="false" />
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="reusing the models &amp; mappings for all frontends clients">
+      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/wwwroot/css/table.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Shared/NavMenu.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ActionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ActionModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ActionResultsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionResultsModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ActionResultsModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionResultsModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ActionSettingsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionSettingsModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ActionSettingsModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionSettingsModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/AddNewResult_FinalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/AddNewResult_FinalState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/CheckpointModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/CheckpointModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/CheckpointModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/CheckpointModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/EntryModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/EntryModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/EntryModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/EntryModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/InputTimeModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/InputTimeModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/InputTimeSpanModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/InputTimeSpanModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/PetModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/PetModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ResultModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ResultModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/ResultsModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ResultsModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/UserProfileModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/UserProfileModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Models/UserProfileModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/UserProfileModelMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Actions.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Actions.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryPersonComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryPersonComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryPetsComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryPetsComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryRaceCategoryComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntryRaceCategoryComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageLocationComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageLocationComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageMainInfoComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageMainInfoComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageRacesComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageRacesComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageSaleComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/ActionManageSaleComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/RaceModal.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Manage/RaceModal.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Payments/ActionPayments.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Payments/ActionPayments.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Results/Results.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Results/Results.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Results/ResultsAdd.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Results/ResultsAdd.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Results/ResultsCategory.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/Results/ResultsCategory.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/registrations/ActionRegistrations.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/ActionsMap/Actions.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/ActionsMap/Actions.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Checkpoints/Checkpoint.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Checkpoints/CheckpointsManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Entries/Entries.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Entries/Entries.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Index.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Pets/Pets.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Pets/Pets.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Pets/PetsAdd.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Pets/PetsAdd.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/UserProfiles/Manage/UserProfileManage.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/UserProfiles/Manage/UserProfileManage.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/UserProfiles/UserProfileModal.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/UserProfiles/UserProfileModal.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Services/IUserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Services/IUserProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Services/UserProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Services/UserProfileService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/DogComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/DogComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/InputDateComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/InputDateComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/InputDateTimeComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/InputDateTimeComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/InputTimeCalcComponent.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/InputTimeCalcComponent.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/LoginDisplay.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Shared/LoginDisplay.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Mapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Mapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/SharedLib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/SharedLib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Shared/MainLayout.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/wwwroot/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +45,7 @@
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/MauiProgram.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Providers/AppTokenProvider.cs" root0="SKIP_HIGHLIGHTING" />
@@ -351,7 +299,7 @@
       <workItem from="1692255181411" duration="2188000" />
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
-      <workItem from="1692259632257" duration="20669000" />
+      <workItem from="1692259632257" duration="23553000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -425,7 +373,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692271555144</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="reusing the models &amp; mappings for all frontends clients">
+      <option name="closed" value="true" />
+      <created>1692359399617</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1692359399617</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +397,8 @@
     <MESSAGE value="almost working authentication for gpstracker app" />
     <MESSAGE value="fixed token provider to be singleton in case of gpstracker" />
     <MESSAGE value="any debug text - if is logged in or not" />
-    <option name="LAST_COMMIT_MESSAGE" value="any debug text - if is logged in or not" />
+    <MESSAGE value="reusing the models &amp; mappings for all frontends clients" />
+    <option name="LAST_COMMIT_MESSAGE" value="reusing the models &amp; mappings for all frontends clients" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

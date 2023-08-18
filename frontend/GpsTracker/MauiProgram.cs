@@ -51,6 +51,7 @@ public static class MauiProgram
         var typeAdapterConfig = SharedLib.Mapping.CreateFrontendMapping();
         typeAdapterConfig.AddMapping();
 
+        builder.Services.AddBlazorBootstrap();
         builder.Services
             .AddSingleton(typeAdapterConfig)
             .AddScoped<IMapper, ServiceMapper>()
