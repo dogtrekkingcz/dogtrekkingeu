@@ -12,8 +12,40 @@
 <h1>PetsOnTrail GPS Tracker</h1>
 
 <div class="container">
-    <button type="button" @onclick="async () => await LoginClickedAsync()">Login</button>
-    State: @LoggedIn
+    <div class="row">
+        <div class="col-8">
+            <label>Login:</label>
+        </div>
+        <div class="col-4">
+            <button type="button" @onclick="async () => await LoginClickedAsync()">Login</button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            State: @LoggedIn
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <label>Number of seconds between acquiring position</label>
+        </div>
+        <div class="col-4">
+            <input type="number" @bind="@ServiceHelper.NumberOfSecsBetweenAcquiringPosition" placeholder="Number of seconds between acquiring position"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <label>Number of seconds between uploading data</label>
+        </div>
+        <div class="col-4">
+            <input type="number" @bind="@ServiceHelper.NumberOfSecsBetweenUploadingData" placeholder="Number of seconds between uploading data"/>
+        </div>
+    </div>
+
+
 </div>
 
 @code {

@@ -14,6 +14,7 @@ public class PositionHistoryService
 
     public PositionHistoryService()
     {
+        ServiceHelper.OnLocationChanged += OnPositionChangedHandler;
     }
 
     async Task Init()
@@ -46,6 +47,20 @@ public class PositionHistoryService
         return await Database.Table<PositionDto>().Where(i => i.Id == id).FirstOrDefaultAsync();
     }
 
+    private async void OnPositionChangedHandler(Location location)
+    {
+        await SaveItemAsync(new PositionHistoryService.PositionDto()
+        {
+            Latitude = location.Latitude,
+            Longitude = location.Longitude,
+            Altitude = location.Altitude ?? double.NaN,
+            Accuracy = location.Accuracy ?? double.NaN,
+            Time = location.Timestamp,
+            Id = 0,
+            ActionId = Guid.Parse(ServiceHelper.CurrentSelectedActionId)
+        });
+    }
+    
     public async Task<int> SaveItemAsync(PositionDto item)
     {
         await Init();
@@ -58,23 +73,27 @@ public class PositionHistoryService
             ret = await Database.InsertAsync(item);
 
 
-        var checkpointsClient = ServiceHelper.GetService<Protos.Checkpoints.Checkpoints.CheckpointsClient>();
-        await checkpointsClient.addCheckpointAsync(new AddCheckpointRequest
+        NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+        if (accessType == NetworkAccess.Internet)
         {
-            Data = "",
-            Position = new LatLng
+            var checkpointsClient = ServiceHelper.GetService<Protos.Checkpoints.Checkpoints.CheckpointsClient>();
+            await checkpointsClient.addCheckpointAsync(new AddCheckpointRequest
             {
-                Latitude = item.Latitude,
-                Longitude = item.Longitude
-            },
-            ActionId = item.ActionId.ToString(),
-            Description = string.Empty,
-            Name = string.Empty,
-            Note = string.Empty,
-            CheckpointId = Guid.Empty.ToString(),
-            CheckpointTime = item.Time.ToGoogleDateTime()
-        });
-        
+                Data = "",
+                Position = new LatLng
+                {
+                    Latitude = item.Latitude,
+                    Longitude = item.Longitude
+                },
+                ActionId = item.ActionId.ToString(),
+                Description = string.Empty,
+                Name = string.Empty,
+                Note = string.Empty,
+                CheckpointId = Guid.Empty.ToString(),
+                CheckpointTime = item.Time.ToGoogleDateTime()
+            });
+        }
+
         return ret;
     }
 

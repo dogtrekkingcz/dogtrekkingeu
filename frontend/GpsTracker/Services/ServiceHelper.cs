@@ -15,6 +15,11 @@ public static class ServiceHelper {
     public static bool ShouldItRun = false;
 
     public static string CurrentSelectedActionId { get; set; } = Guid.Empty.ToString();
+    
+    public static DateTimeOffset LatestPositionTime = DateTimeOffset.MinValue;
+    public static int NumberOfSecsBetweenAcquiringPosition = 10;
+    public static DateTimeOffset LatestUploadTime = DateTimeOffset.MinValue;
+    public static int NumberOfSecsBetweenUploadingData = 10;
 
     public static void Start()
     {

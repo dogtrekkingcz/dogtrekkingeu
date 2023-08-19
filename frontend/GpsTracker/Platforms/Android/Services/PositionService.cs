@@ -60,29 +60,21 @@ public class PositionService : Service
         {
             while (ServiceHelper.ShouldItRun)
             {
+                while (ServiceHelper.ShouldItRun && (ServiceHelper.LatestPositionTime < DateTimeOffset.Now.AddSeconds((-1) * ServiceHelper.NumberOfSecsBetweenAcquiringPosition)))
+                    await Task.Delay(200);
+
                 var location = await GetCurrentLocation();
                 
-                await _positionHistoryService.SaveItemAsync(new PositionHistoryService.PositionDto()
-                {
-                    Latitude = location.Latitude,
-                    Longitude = location.Longitude,
-                    Altitude = location.Altitude ?? double.NaN,
-                    Accuracy = location.Accuracy ?? double.NaN,
-                    Time = location.Timestamp,
-                    Id = 0,
-                    ActionId = Guid.Parse(ServiceHelper.CurrentSelectedActionId)
-                });
-
                 try
                 {
                     ServiceHelper.LocationChanged(location);
+                    
+                    ServiceHelper.LatestPositionTime = DateTimeOffset.Now;
                 }
                 catch (Exception ex)
                 {
                     ;
                 }
-                
-                
                 
                 await Task.Delay(1000);
             }
