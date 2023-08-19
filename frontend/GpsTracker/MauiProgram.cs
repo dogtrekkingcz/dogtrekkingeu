@@ -18,6 +18,7 @@ using SharedLib.Extensions;
 using SharedLib.Providers;
 using AppTokenProvider = GpsTracker.Providers.AppTokenProvider;
 using GpsTracker.Auth0;
+using GpsTracker.Services.Network;
 
 namespace GpsTracker;
 
@@ -58,7 +59,8 @@ public static class MauiProgram
             .AddSingleton<WeatherForecastService>()
             .AddSingleton<IGpsPositionService, GpsPositionService>()
             .AddSingleton<PositionHistoryService>()
-            .AddSingleton<ITokenProvider, AppTokenProvider>();
+            .AddSingleton<ITokenProvider, AppTokenProvider>()
+            .AddSingleton<ServerUploadService>();
         
         builder.Services
             .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])
@@ -97,6 +99,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<Auth0Client>();
         
         var host = builder.Build();
+
+        host.Services.GetRequiredService<ServerUploadService>().Start();
 
         return host;
     }

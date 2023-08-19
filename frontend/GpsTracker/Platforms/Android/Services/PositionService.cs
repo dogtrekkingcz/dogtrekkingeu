@@ -27,12 +27,13 @@ public class PositionService : Service
     public const string ServiceChannelId = "ForegroundServiceChannel";
     private NotificationManager _notificationManager;
     private CancellationTokenSource _cancelTokenSource;
-    private PositionHistoryService _positionHistoryService = new();
+    private PositionHistoryService _positionHistoryService;
 
     public override void OnCreate()
     {
         base.OnCreate();
         _notificationManager = (NotificationManager)GetSystemService(NotificationService);
+        _positionHistoryService = ServiceHelper.GetService<PositionHistoryService>();
     }
 
     public override IBinder OnBind(Intent intent)
@@ -60,7 +61,7 @@ public class PositionService : Service
         {
             while (ServiceHelper.ShouldItRun)
             {
-                while (ServiceHelper.ShouldItRun && (ServiceHelper.LatestPositionTime < DateTimeOffset.Now.AddSeconds((-1) * ServiceHelper.NumberOfSecsBetweenAcquiringPosition)))
+                while (ServiceHelper.ShouldItRun && (ServiceHelper.LatestPositionTime > DateTimeOffset.Now.AddSeconds((-1) * ServiceHelper.NumberOfSecsBetweenAcquiringPosition)))
                     await Task.Delay(200);
 
                 var location = await GetCurrentLocation();

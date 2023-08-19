@@ -23,6 +23,7 @@ public class PositionHistoryService
             return;
 
         Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+
         var result = await Database.CreateTableAsync<PositionDto>();
     }
     
@@ -106,6 +107,8 @@ public class PositionHistoryService
 
     public sealed record PositionDto
     {
+        [PrimaryKey, AutoIncrement]
+        [Column("Id")]
         public Int64 Id { get; set; } = 0;
 
         public Guid ActionId { get; set; } = Guid.Empty;

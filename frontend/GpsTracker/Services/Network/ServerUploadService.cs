@@ -12,10 +12,13 @@ public class ServerUploadService
     public ServerUploadService(PositionHistoryService positionHistoryService)
     {
         _positionHistoryService = positionHistoryService;
+    }
 
+    public void Start()
+    {
         Task.Run(async () =>
         {
-            while (ServiceHelper.ShouldItRun)
+            while (true) 
             {
                 await CheckAndUploadNotSynchronizedEntriesAsync();
 
@@ -55,6 +58,8 @@ public class ServerUploadService
 
                 await _positionHistoryService.SaveItemAsync(item);
             }
+            
+            ServiceHelper.LatestUploadTime = DateTimeOffset.Now;
         }
     }
     

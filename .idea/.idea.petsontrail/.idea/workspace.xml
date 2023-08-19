@@ -26,13 +26,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="selecting current action to track trail">
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs" afterDir="false" />
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="settings for acquiring data &amp; uploading data">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -301,7 +299,7 @@
       <workItem from="1692255181411" duration="2188000" />
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
-      <workItem from="1692259632257" duration="30827000" />
+      <workItem from="1692259632257" duration="37067000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -407,7 +405,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692426983915</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="settings for acquiring data &amp; uploading data">
+      <option name="closed" value="true" />
+      <created>1692435616868</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1692435616868</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,7 +432,8 @@
     <MESSAGE value="reusing the models &amp; mappings for all frontends clients" />
     <MESSAGE value="adding css to maui project" />
     <MESSAGE value="selecting current action to track trail" />
-    <option name="LAST_COMMIT_MESSAGE" value="selecting current action to track trail" />
+    <MESSAGE value="settings for acquiring data &amp; uploading data" />
+    <option name="LAST_COMMIT_MESSAGE" value="settings for acquiring data &amp; uploading data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -470,6 +477,45 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs</url>
+          <line>35</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Network\ServerUploadService.cs" initialLine="35" containingFunctionPresentation="Method 'CheckAndUploadNotSynchronizedEntriesAsync'">
+            <startOffsets>
+              <option value="1012" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1113" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs</url>
+          <line>71</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Storage\PositionHistoryService.cs" initialLine="70" containingFunctionPresentation="Method 'SaveItemAsync'">
+            <startOffsets>
+              <option value="1917" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1956" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs</url>
+          <line>26</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Storage\PositionHistoryService.cs" initialLine="26" containingFunctionPresentation="Method 'Init'">
+            <startOffsets>
+              <option value="592" />
+            </startOffsets>
+            <endOffsets>
+              <option value="652" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
