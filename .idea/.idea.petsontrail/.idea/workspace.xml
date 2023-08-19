@@ -26,14 +26,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="reusing the models &amp; mappings for all frontends clients">
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/wwwroot/css/table.css" afterDir="false" />
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding css to maui project">
+      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/GpsTracker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Shared/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Shared/MainLayout.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/wwwroot/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/obj/Debug/net8.0-android/adb.props" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +42,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/MauiProgram.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/MauiProgram.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Shared/MainLayout.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
@@ -299,7 +300,7 @@
       <workItem from="1692255181411" duration="2188000" />
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
-      <workItem from="1692259632257" duration="23553000" />
+      <workItem from="1692259632257" duration="27200000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -381,7 +382,23 @@
       <option name="project" value="LOCAL" />
       <updated>1692359399617</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="adding css to maui project">
+      <option name="closed" value="true" />
+      <created>1692365238918</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1692365238918</updated>
+    </task>
+    <task id="LOCAL-00012" summary="adding css to maui project">
+      <option name="closed" value="true" />
+      <created>1692365278039</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1692365278039</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +415,8 @@
     <MESSAGE value="fixed token provider to be singleton in case of gpstracker" />
     <MESSAGE value="any debug text - if is logged in or not" />
     <MESSAGE value="reusing the models &amp; mappings for all frontends clients" />
-    <option name="LAST_COMMIT_MESSAGE" value="reusing the models &amp; mappings for all frontends clients" />
+    <MESSAGE value="adding css to maui project" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding css to maui project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

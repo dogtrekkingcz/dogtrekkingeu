@@ -70,7 +70,7 @@ public class PositionService : Service
                     Accuracy = location.Accuracy ?? double.NaN,
                     Time = location.Timestamp,
                     Id = 0,
-                    ActionId = Guid.Empty
+                    ActionId = Guid.Parse(ServiceHelper.CurrentSelectedActionId)
                 });
 
                 try

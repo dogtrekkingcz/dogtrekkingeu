@@ -1,0 +1,102 @@
+﻿@page "/tracking"
+@using GpsTracker.Services
+@using GpsTracker.Services.Storage
+@using MapsterMapper
+@using GpsTracker.Auth0
+@using SharedLib.Models
+@using Google.Protobuf.WellKnownTypes
+
+@inject IGpsPositionService GpsPositionService;
+@inject PositionHistoryService PositionHistoryService;
+@inject IMapper Mapper;
+@inject Auth0Client AuthClient;
+@inject Protos.Actions.Actions.ActionsClient ActionsClientService;
+
+Current position is: @CurrentPosition
+
+<select @bind="SelectedActionId">
+    <option value="0">--== Select action ==--</option>
+    @foreach (var action in Actions
+        .Where(a => a.Term.From <= DateTimeOffset.Now && a.Term.To >= DateTimeOffset.Now))
+    {
+        <option value="@action.Id.ToString()">@action.Name</option>
+    }
+</select>
+
+<button @onclick="@(async () => await StartGpsTrackerServiceAsync())">Start gps tracker service</button>
+<button @onclick="@(async () => await StopGpsTrackerServiceAsync())">Stop gps tracker service</button>
+
+<div class="container">
+    @{
+        int counter = 20;
+    }
+    @foreach (var pos in History.OrderByDescending(h => h.Time))
+    {
+        if (counter == 0)
+            break;
+
+        counter--;
+        
+        <div class="row">
+            <div class="col-4">@pos.Time.ToString("dd HH:mm:ss")</div>
+            <div class="col-8">@pos.Latitude N, @pos.Longitude E</div>
+        </div>
+    }
+</div>
+
+@code {
+    List<ActionModel> Actions { get; set; } = new(); 
+    
+    private string CurrentPosition { get; set; } = string.Empty;
+
+    private List<PositionHistoryService.PositionDto> History { get; set; } = new();
+
+    private string SelectedActionId
+    {
+        get { return ServiceHelper.CurrentSelectedActionId; }
+        set { ServiceHelper.CurrentSelectedActionId = value; }
+    }
+
+
+    private async Task ReloadData()
+    {
+        Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await ActionsClientService.getPublicActionsListAsync(new Empty());
+
+        Actions = Mapper.Map<List<ActionModel>>(response.Actions);
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        GpsPositionService.OnChange += OnChangeHandler;
+        ServiceHelper.OnLocationChanged += OnLocationChangeHandler;
+        History = await PositionHistoryService.GetItemsAsync();
+        
+        await ReloadData();
+    }
+
+    private async Task StartGpsTrackerServiceAsync()
+    {
+        ServiceHelper.Start();
+    }
+
+    private async void OnChangeHandler()
+    {
+        CurrentPosition = $"{GpsPositionService.CurrentPosition.Latitude}N, {GpsPositionService.CurrentPosition.Longitude}E";
+        History = await PositionHistoryService.GetItemsAsync();
+        
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void OnLocationChangeHandler(Location location)
+    {
+        CurrentPosition = $"{location.Latitude}N, {location.Longitude}E";
+        History = await PositionHistoryService.GetItemsAsync();
+        
+        await InvokeAsync(StateHasChanged);
+    }
+    
+    private async Task StopGpsTrackerServiceAsync()
+    {
+        ServiceHelper.Stop();
+    }
+}

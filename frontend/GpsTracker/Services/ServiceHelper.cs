@@ -14,6 +14,8 @@ public static class ServiceHelper {
 
     public static bool ShouldItRun = false;
 
+    public static string CurrentSelectedActionId { get; set; } = Guid.Empty.ToString();
+
     public static void Start()
     {
         ShouldItRun = true;
