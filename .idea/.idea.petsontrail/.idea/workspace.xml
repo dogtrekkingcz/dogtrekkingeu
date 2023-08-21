@@ -26,30 +26,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="Adding activities storage &amp; api">
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/GetMyActivitiesRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/GetMyActivitiesResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/GetMyActivitiesRequest.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/GetMyActivitiesResponse.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Activities/GetActivitiesByUserIdInternalStorageResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModel.cs" afterDir="false" />
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="getting activities storage &amp; api">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IActivitiesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IActivitiesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/Activities/ActivitiesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/Activities/ActivitiesService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Services/Activities/ActivitiesServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/Activities/ActivitiesServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Activities.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Activities.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointRequest.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Interfaces/IActivitiesRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Interfaces/IActivitiesRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,7 +290,7 @@
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
       <workItem from="1692259632257" duration="47677000" />
-      <workItem from="1692609498738" duration="4466000" />
+      <workItem from="1692609498738" duration="5531000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -440,7 +420,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692609469404</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="getting activities storage &amp; api">
+      <option name="closed" value="true" />
+      <created>1692614452622</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1692614452622</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -461,7 +449,8 @@
     <MESSAGE value="selecting current action to track trail" />
     <MESSAGE value="settings for acquiring data &amp; uploading data" />
     <MESSAGE value="Adding activities storage &amp; api" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding activities storage &amp; api" />
+    <MESSAGE value="getting activities storage &amp; api" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting activities storage &amp; api" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

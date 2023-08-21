@@ -2,8 +2,6 @@
 
 public sealed record CreateActivityRequest
 {
-    public string UserId { get; set; } = string.Empty;
-
     public Guid ActionId { get; set; } = Guid.Empty;
 
     public Guid RaceId { get; set; } = Guid.Empty;
