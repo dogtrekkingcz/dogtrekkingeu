@@ -50,4 +50,11 @@ internal class ActivitiesService : IActivitiesService
 
         return _mapper.Map<AddPointResponse>(response);
     }
+
+    public async Task<GetMyActivitiesResponse> GetMyActivitiesAsync(GetMyActivitiesRequest request, CancellationToken cancellationToken)
+    {
+        var activities = await _activitiesRepositoryService.GetActivitiesByUserId(_currentUserIdService.GetUserId(), cancellationToken);
+
+        return _mapper.Map<GetMyActivitiesResponse>(activities);
+    }
 }

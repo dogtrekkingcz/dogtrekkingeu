@@ -1,5 +1,6 @@
 using Google.Type;
 using GpsTracker.Services.Storage;
+using Protos.Activities.AddPoint;
 using Protos.Checkpoints.AddCheckpoint;
 using SharedLib.Extensions;
 
@@ -33,25 +34,21 @@ public class ServerUploadService
         
         if (accessType == NetworkAccess.Internet && ServiceHelper.LatestUploadTime < DateTimeOffset.Now.AddSeconds((-1) * ServiceHelper.NumberOfSecsBetweenUploadingData))
         {
-            var checkpointsClient = ServiceHelper.GetService<Protos.Checkpoints.Checkpoints.CheckpointsClient>();
+            var activitiesClient = ServiceHelper.GetService<Protos.Activities.Activities.ActivitiesClient>();
             var notUploadedData = await _positionHistoryService.GetItemsNotSynchronizedAsync();
             
             foreach (var item in notUploadedData) 
             {
-                await checkpointsClient.addCheckpointAsync(new AddCheckpointRequest
+                await activitiesClient.addPointAsync(new AddPointRequest
                 {
-                    Data = "",
-                    Position = new LatLng
-                    {
-                        Latitude = item.Latitude,
-                        Longitude = item.Longitude
-                    },
-                    ActionId = item.ActionId.ToString(),
-                    Description = string.Empty,
-                    Name = string.Empty,
-                    Note = string.Empty,
-                    CheckpointId = Guid.Empty.ToString(),
-                    CheckpointTime = item.Time.ToGoogleDateTime()
+                    ActivityId = item.ActivityId.ToString(),
+                    Time = item.Time.ToGoogleDateTime(),
+                    Longitude = item.Longitude,
+                    Accuracy = item.Accuracy,
+                    Altitude = item.Altitude,
+                    Note = item.Note,
+                    Latitude = item.Latitude,
+                    Course = item.Course
                 });
                 
                 item.TimeOfSynchronizationWithServer = DateTimeOffset.Now;
@@ -66,6 +63,8 @@ public class ServerUploadService
     public sealed record PositionDto
     {
         public Int64 Id { get; set; } = 0;
+
+        public Guid ActivityId { get; set; } = Guid.Empty;
 
         public Guid ActionId { get; set; } = Guid.Empty;
         

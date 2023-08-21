@@ -11,8 +11,17 @@
 @inject IMapper Mapper;
 @inject Auth0Client AuthClient;
 @inject Protos.Actions.Actions.ActionsClient ActionsClientService;
+@inject Protos.Activities.Activities.ActivitiesClient ActivitiesClientService;
 
 Current position is: @CurrentPosition
+
+<select @bind="ServiceHelper.CurrentSelectedActivityId">
+    <option value="@Guid.Empty.ToString()">--== Create new activity ==--</option>
+    @foreach (var activity in Activities)
+    {
+        <option value="@activity.Id.ToString()">@activity.Name</option>
+    }
+</select>
 
 <select @bind="SelectedActionId">
     <option value="0">--== Select action ==--</option>
@@ -45,7 +54,8 @@ Current position is: @CurrentPosition
 </div>
 
 @code {
-    List<ActionModel> Actions { get; set; } = new(); 
+    List<ActionModel> Actions { get; set; } = new();
+    List<ActivityModel> Activities { get; set; } = new();
     
     private string CurrentPosition { get; set; } = string.Empty;
 
@@ -61,8 +71,10 @@ Current position is: @CurrentPosition
     private async Task ReloadData()
     {
         Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await ActionsClientService.getPublicActionsListAsync(new Empty());
-
         Actions = Mapper.Map<List<ActionModel>>(response.Actions);
+
+        Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Empty());
+        Activities = Mapper.Map<List<ActivityModel>>(myActivities.Activities);
     }
     
     protected override async Task OnInitializedAsync()

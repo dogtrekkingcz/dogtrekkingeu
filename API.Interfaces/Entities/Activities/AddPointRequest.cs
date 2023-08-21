@@ -2,7 +2,7 @@
 
 public sealed record AddPointRequest
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid ActivityId { get; set; } = Guid.Empty;
         
     public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
             

@@ -20,6 +20,8 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<AddPointRequest, AddPointInternalStorageRequest>()
             .Ignore(d => d.Id);
         typeAdapterConfig.NewConfig<AddPointInternalStorageResponse, AddPointResponse>();
+
+        typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse, GetMyActivitiesResponse>();
         
         return typeAdapterConfig;
     }

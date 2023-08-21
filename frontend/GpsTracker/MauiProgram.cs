@@ -61,12 +61,14 @@ public static class MauiProgram
             .AddSingleton<PositionHistoryService>()
             .AddSingleton<ITokenProvider, AppTokenProvider>()
             .AddSingleton<ServerUploadService>();
-        
+
         builder.Services
-            .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(builder.Configuration["GrpcServerUri"])
+            .AddAuthorizedGrpcClient<Protos.UserProfiles.UserProfiles.UserProfilesClient>(
+                builder.Configuration["GrpcServerUri"])
             .AddAuthorizedGrpcClient<Protos.Actions.Actions.ActionsClient>(builder.Configuration["GrpcServerUri"])
             .AddAuthorizedGrpcClient<Protos.Entries.Entries.EntriesClient>(builder.Configuration["GrpcServerUri"])
-            .AddAuthorizedGrpcClient<Protos.ActionRights.ActionRights.ActionRightsClient>(builder.Configuration["GrpcServerUri"])
+            .AddAuthorizedGrpcClient<Protos.ActionRights.ActionRights.ActionRightsClient>(
+                builder.Configuration["GrpcServerUri"])
             .AddAuthorizedGrpcClient<Protos.Pets.Pets.PetsClient>(builder.Configuration["GrpcServerUri"])
             .AddAuthorizedGrpcClient<Protos.Results.Results.ResultsClient>(builder.Configuration["GrpcServerUri"])
             .AddAuthorizedGrpcClient<Protos.LiveUpdatesSubscription.LiveUpdatesSubscription.LiveUpdatesSubscriptionClient>(builder.Configuration["GrpcServerUri"])

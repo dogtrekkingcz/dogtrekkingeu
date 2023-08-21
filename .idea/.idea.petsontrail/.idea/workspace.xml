@@ -26,38 +26,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="settings for acquiring data &amp; uploading data">
-      <change afterPath="$PROJECT_DIR$/API.GRPCService/Services/Activities/ActivitiesService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.GRPCService/Services/Activities/ActivitiesServiceMapping.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Services/IActivitiesService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/Services/Activities/ActivitiesService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/Services/Activities/ActivitiesServiceMapping.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API/Services/Activities/DiComposerActivities.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Activities.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointRequest.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointResponse.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/CreateActivityRequest.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/CreateActivityResponse.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Activities/AddPointInternalStorageRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Activities/AddPointInternalStorageResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Activities/CreateActivityInternalStorageRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Activities/CreateActivityInternalStorageResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Interfaces/IActivitiesRepositoryService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Models/ActivityRecord.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryMapping.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryService.cs" afterDir="false" />
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="Adding activities storage &amp; api">
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/GetMyActivitiesRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/GetMyActivitiesResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/GetMyActivitiesRequest.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Activities/GetMyActivitiesResponse.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Storage/Entities/Activities/GetActivitiesByUserIdInternalStorageResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/API.GRPCService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/API.GRPCService.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/API.Interface.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/API.Interface.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API/API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/DIComposer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/DIComposer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IActivitiesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IActivitiesService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/Activities/ActivitiesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/Activities/ActivitiesService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/Activities/ActivitiesServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/Activities/ActivitiesServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Activities.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Activities.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointRequest.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/DiCompositor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/DiCompositor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Storage.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Storage.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Interfaces/IActivitiesRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Interfaces/IActivitiesRepositoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Activities/ActivitiesRepositoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/ServiceHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,17 +58,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/MauiProgram.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/MauiProgram.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/MauiProgram.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Shared/MainLayout.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Pages/Actions/ActionDropDown.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Providers/AppTokenProvider.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/PetsOnTrailApp/Services/UserProfileService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -95,27 +78,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rider.run.widget.enabled.cache": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rider.run.widget.enabled.cache&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
-      "C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
-      "C:\\Users\\kotesovec\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\kotesovec\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\kotesovec\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Xamarin.Android.GpsTracker">
     <configuration name="PetsOnTrailApp: localhost" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish publish_profile="localhost.pubxml" pubxml_path="$PROJECT_DIR$/frontend/PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml" uuid_high="1184149982973216629" uuid_low="-8205027464861651867" />
@@ -326,7 +309,8 @@
       <workItem from="1692255181411" duration="2188000" />
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
-      <workItem from="1692259632257" duration="47317000" />
+      <workItem from="1692259632257" duration="47677000" />
+      <workItem from="1692609498738" duration="4466000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -448,7 +432,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692445113145</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Adding activities storage &amp; api">
+      <option name="closed" value="true" />
+      <created>1692609469404</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1692609469404</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,7 +460,8 @@
     <MESSAGE value="adding css to maui project" />
     <MESSAGE value="selecting current action to track trail" />
     <MESSAGE value="settings for acquiring data &amp; uploading data" />
-    <option name="LAST_COMMIT_MESSAGE" value="settings for acquiring data &amp; uploading data" />
+    <MESSAGE value="Adding activities storage &amp; api" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding activities storage &amp; api" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -515,29 +508,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs</url>
-          <line>35</line>
+          <line>36</line>
           <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Network\ServerUploadService.cs" initialLine="35" containingFunctionPresentation="Method 'CheckAndUploadNotSynchronizedEntriesAsync'">
             <startOffsets>
-              <option value="1012" />
+              <option value="1046" />
             </startOffsets>
             <endOffsets>
-              <option value="1113" />
+              <option value="1143" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs</url>
-          <line>71</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Storage\PositionHistoryService.cs" initialLine="70" containingFunctionPresentation="Method 'SaveItemAsync'">
-            <startOffsets>
-              <option value="1917" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1956" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs</url>

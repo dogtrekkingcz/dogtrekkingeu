@@ -14,6 +14,8 @@ namespace Storage.Services.Repositories.Activities
             
             typeAdapterConfig.NewConfig<AddPointInternalStorageRequest, ActivityRecord.PositionDto>();
             typeAdapterConfig.NewConfig<ActivityRecord.PositionDto, AddPointInternalStorageResponse>();
+
+            typeAdapterConfig.NewConfig<ActivityRecord, GetActivitiesByUserIdInternalStorageResponse.ActivityDto>();
             
             return typeAdapterConfig;
         }

@@ -8,5 +8,7 @@ namespace Storage.Interfaces
         Task<CreateActivityInternalStorageResponse> CreateActivityAsync(CreateActivityInternalStorageRequest internalStorageRequest, CancellationToken cancellationToken);
 
         Task<AddPointInternalStorageResponse> AddPointAsync(AddPointInternalStorageRequest request, CancellationToken cancellationToken);
+
+        Task<GetActivitiesByUserIdInternalStorageResponse> GetActivitiesByUserId(string userId, CancellationToken cancellationToken);
     }
 }

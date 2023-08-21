@@ -1,7 +1,9 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Activities;
+﻿namespace SharedLib.Models;
 
-public sealed record CreateActivityRequest
+public sealed record ActivityModel
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
+
     public string UserId { get; set; } = string.Empty;
 
     public Guid ActionId { get; set; } = Guid.Empty;

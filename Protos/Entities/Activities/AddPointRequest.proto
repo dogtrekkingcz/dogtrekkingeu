@@ -7,11 +7,12 @@ package addpoint;
 import "google/type/datetime.proto";
 
 message AddPointRequest {
-  google.type.DateTime Time = 1;
-  double Latitude = 2;
-  double Longitude = 3;
-  double Altitude = 4;
-  double Accuracy = 5;
-  double Course = 6;
-  string Note = 7;
+  string ActivityId = 1;
+  google.type.DateTime Time = 2;
+  double Latitude = 3;
+  double Longitude = 4;
+  double Altitude = 5;
+  double Accuracy = 6;
+  double Course = 7;
+  string Note = 8;
 }

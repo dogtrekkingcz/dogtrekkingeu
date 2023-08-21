@@ -58,7 +58,10 @@ public class PositionHistoryService
             Accuracy = location.Accuracy ?? double.NaN,
             Time = location.Timestamp,
             Id = 0,
-            ActionId = Guid.Parse(ServiceHelper.CurrentSelectedActionId)
+            ActionId = Guid.Parse(ServiceHelper.CurrentSelectedActionId),
+            Note = ServiceHelper.CurrentNote,
+            Course = location.Course ?? double.NaN,
+            ActivityId = Guid.Parse(ServiceHelper.CurrentSelectedActivityId)
         });
     }
     
@@ -72,28 +75,6 @@ public class PositionHistoryService
             ret = await Database.UpdateAsync(item);
         else
             ret = await Database.InsertAsync(item);
-
-
-        NetworkAccess accessType = Connectivity.Current.NetworkAccess;
-        if (accessType == NetworkAccess.Internet)
-        {
-            var checkpointsClient = ServiceHelper.GetService<Protos.Checkpoints.Checkpoints.CheckpointsClient>();
-            await checkpointsClient.addCheckpointAsync(new AddCheckpointRequest
-            {
-                Data = "",
-                Position = new LatLng
-                {
-                    Latitude = item.Latitude,
-                    Longitude = item.Longitude
-                },
-                ActionId = item.ActionId.ToString(),
-                Description = string.Empty,
-                Name = string.Empty,
-                Note = string.Empty,
-                CheckpointId = Guid.Empty.ToString(),
-                CheckpointTime = item.Time.ToGoogleDateTime()
-            });
-        }
 
         return ret;
     }
@@ -111,6 +92,8 @@ public class PositionHistoryService
         [Column("Id")]
         public Int64 Id { get; set; } = 0;
 
+        public Guid ActivityId { get; set; } = Guid.Empty;
+
         public Guid ActionId { get; set; } = Guid.Empty;
         
         public DateTimeOffset? TimeOfSynchronizationWithServer { get; set; } = null;
@@ -122,6 +105,10 @@ public class PositionHistoryService
         public double Altitude { get; set; } = double.NaN;
 
         public double Accuracy { get; set; } = double.NaN;
+
+        public double Course { get; set; } = double.NaN;
+
+        public string Note { get; set; } = string.Empty;
 
         public DateTimeOffset Time { get; set; } = DateTimeOffset.MinValue;
     }

@@ -51,7 +51,7 @@ public class PositionService : Service
         var notification = new NotificationCompat.Builder(this, ServiceChannelId)
             .SetContentTitle("PetsOnTrail Tracking")
             .SetContentText("Is running")
-            .SetSmallIcon(Resource.Mipmap.appicon_foreground)
+            .SetSmallIcon(Resource.Drawable.abc_btn_check_material_anim)
             .SetContentIntent(pendingIntent)
             .Build();
 

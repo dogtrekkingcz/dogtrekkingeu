@@ -15,6 +15,8 @@ public static class ServiceHelper {
     public static bool ShouldItRun = false;
 
     public static string CurrentSelectedActionId { get; set; } = Guid.Empty.ToString();
+    public static string CurrentSelectedActivityId { get; set; } = Guid.Empty.ToString();
+    public static string CurrentNote { get; set; } = string.Empty;
     
     public static DateTimeOffset LatestPositionTime = DateTimeOffset.MinValue;
     public static int NumberOfSecsBetweenAcquiringPosition = 10;

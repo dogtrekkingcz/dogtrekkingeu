@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Activities.GetMyActivities";
+
+package getmyactivities;
+
+import "google/type/datetime.proto";
+
+message GetMyActivitiesResponse {
+  repeated ActivityDto Activities = 1;
+}
+
+message ActivityDto {
+  string Id = 1;
+  string ActionId = 2;
+  string RaceId = 3;
+  string CategoryId = 4;
+  string Name = 5;
+  string Description = 6;
+  google.type.DateTime Start = 7;
+  optional google.type.DateTime End = 8;
+  bool IsPublic = 9;
+}
