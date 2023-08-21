@@ -44,7 +44,7 @@ public static class Mapping
         typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Duration, Google.Protobuf.WellKnownTypes.Duration>();
         typeAdapterConfig.NewConfig<Google.Type.TimeZone, Google.Type.TimeZone>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, Google.Type.LatLng>();
-        
+
         typeAdapterConfig
             .AddActionModelMapping()
             .AddUserProfileModelMapping()
@@ -53,7 +53,8 @@ public static class Mapping
             .AddPetModelMapping()
             .AddCheckpointModelMapping()
             .AddActionResultsModelMapping()
-            .AddResultsModelMapping();
+            .AddResultsModelMapping()
+            .AddActivityModelMapping();
 
         return typeAdapterConfig;
     }

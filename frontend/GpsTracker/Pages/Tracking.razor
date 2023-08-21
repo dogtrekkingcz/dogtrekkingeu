@@ -75,7 +75,6 @@ Current position is: @CurrentPosition
         set { ServiceHelper.CurrentSelectedActionId = value; }
     }
 
-
     private async Task ReloadData()
     {
         Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await ActionsClientService.getPublicActionsListAsync(new Empty());

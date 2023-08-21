@@ -26,10 +26,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="getting activities storage &amp; api">
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="creating new activity from android app">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/Activities/ActivitiesServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/Activities/ActivitiesServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Tracking.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -290,7 +290,8 @@
       <workItem from="1692258042572" duration="662000" />
       <workItem from="1692259420579" duration="193000" />
       <workItem from="1692259632257" duration="47677000" />
-      <workItem from="1692609498738" duration="5531000" />
+      <workItem from="1692609498738" duration="7565000" />
+      <workItem from="1692617743126" duration="1569000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -428,7 +429,23 @@
       <option name="project" value="LOCAL" />
       <updated>1692614452622</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="getting activities storage &amp; api">
+      <option name="closed" value="true" />
+      <created>1692615236285</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1692615236285</updated>
+    </task>
+    <task id="LOCAL-00019" summary="creating new activity from android app">
+      <option name="closed" value="true" />
+      <created>1692619292445</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1692619292445</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +467,8 @@
     <MESSAGE value="settings for acquiring data &amp; uploading data" />
     <MESSAGE value="Adding activities storage &amp; api" />
     <MESSAGE value="getting activities storage &amp; api" />
-    <option name="LAST_COMMIT_MESSAGE" value="getting activities storage &amp; api" />
+    <MESSAGE value="creating new activity from android app" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating new activity from android app" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -496,30 +514,18 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Network/ServerUploadService.cs</url>
-          <line>36</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Network\ServerUploadService.cs" initialLine="35" containingFunctionPresentation="Method 'CheckAndUploadNotSynchronizedEntriesAsync'">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
+          <line>79</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="72" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
             <startOffsets>
-              <option value="1046" />
+              <option value="-1" />
             </startOffsets>
             <endOffsets>
-              <option value="1143" />
+              <option value="-1" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs</url>
-          <line>26</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Storage\PositionHistoryService.cs" initialLine="26" containingFunctionPresentation="Method 'Init'">
-            <startOffsets>
-              <option value="592" />
-            </startOffsets>
-            <endOffsets>
-              <option value="652" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="26" />
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
