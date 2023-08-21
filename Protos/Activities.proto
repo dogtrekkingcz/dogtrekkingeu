@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Activities";
+
+package activities;
+
+import "Entities/Activities/CreateActivityRequest.proto";
+import "Entities/Activities/CreateActivityResponse.proto";
+import "Entities/Activities/AddPointRequest.proto";
+import "Entities/Activities/AddPointResponse.proto";
+
+service Activities {
+  rpc createActivity (createactivity.CreateActivityRequest) returns (createactivity.CreateActivityResponse);
+  
+  rpc addPoint (addpoint.AddPointRequest) returns (addpoint.AddPointResponse);
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Activities.CreateActivity";
+
+package createactivity;
+
+message CreateActivityResponse {
+  string Id = 1;
+}

@@ -3,6 +3,7 @@ using API.GRPCService.Interceptors;
 using API.GRPCService.Options;
 using API.GRPCService.Services.ActionRights;
 using API.GRPCService.Services.Actions;
+using API.GRPCService.Services.Activities;
 using API.GRPCService.Services.Checkpoints;
 using API.GRPCService.Services.Entries;
 using API.GRPCService.Services.JwtToken;
@@ -74,7 +75,8 @@ typeAdapterConfig
     .AddPetsServiceMapping()
     .AddResultsMapping()
     .AddLiveUpdatesSubscriptionMapping()
-    .AddCheckpointsServiceMapping();
+    .AddCheckpointsServiceMapping()
+    .AddCActivitiesServiceMapping();
 
 typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
 typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();
@@ -129,6 +131,7 @@ app.UseEndpoints(endpoints =>
         endpoints.MapGrpcService<ResultsService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<LiveUpdatesSubscriptionGrpcService>().EnableGrpcWeb().RequireCors("AllowAll");
         endpoints.MapGrpcService<CheckpointsService>().EnableGrpcWeb().RequireCors("AllowAll");
+        endpoints.MapGrpcService<ActivitiesService>().EnableGrpcWeb().RequireCors("AllowAll");
     }
 );
 

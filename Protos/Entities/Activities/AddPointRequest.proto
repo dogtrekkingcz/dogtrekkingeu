@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Activities.AddPoint";
+
+package addpoint;
+
+import "google/type/datetime.proto";
+
+message AddPointRequest {
+  google.type.DateTime Time = 1;
+  double Latitude = 2;
+  double Longitude = 3;
+  double Altitude = 4;
+  double Accuracy = 5;
+  double Course = 6;
+  string Note = 7;
+}

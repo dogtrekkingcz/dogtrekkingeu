@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Activities.AddPoint";
+
+package addpoint;
+
+message AddPointResponse {
+  string Id = 1;
+}

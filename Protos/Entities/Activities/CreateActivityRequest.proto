@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Activities.CreateActivity";
+
+package createactivity;
+
+import "google/type/datetime.proto";
+
+message CreateActivityRequest {
+  string ActionId = 1;
+  string RaceId = 2;
+  string CategoryId = 3;
+  string Name = 4;
+  string Description = 5;
+  google.type.DateTime Start = 6;
+  optional google.type.DateTime End = 7;
+  bool IsPublic = 8;
+  repeated PositionDto Positions = 9;
+}
+
+message PositionDto {
+  string Id = 1;
+  google.type.DateTime Time = 2;
+  double Latitude = 3;
+  double Longitude = 4;
+  double Altitude = 5;
+  double Accuracy = 6;
+  double Course = 7;
+  string Note = 8;
+}

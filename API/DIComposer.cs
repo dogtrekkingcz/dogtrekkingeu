@@ -1,4 +1,5 @@
 ﻿using DogsOnTrail.Actions.Services.ActionsManage;
+using DogsOnTrail.Actions.Services.Activities;
 using DogsOnTrail.Actions.Services.Authorization;
 using DogsOnTrail.Actions.Services.Checkpoints;
 using DogsOnTrail.Actions.Services.CurrentUserId;
@@ -29,7 +30,8 @@ namespace DogsOnTrail.Actions
                 .AddEmails(typeAdapterConfig, new DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
                 .AddCurrentUserId(typeAdapterConfig, options)
                 .AddLiveUpdatesSubscription(typeAdapterConfig, options)
-                .AddCheckpoints(typeAdapterConfig, options);
+                .AddCheckpoints(typeAdapterConfig, options)
+                .AddActivities(typeAdapterConfig, options);
 
             services.AddScoped<IAuthorizationService, AuthorizationService>();
             

@@ -11,6 +11,7 @@ using Storage.Seed;
 using Storage.Services;
 using Storage.Services.Repositories.ActionRights;
 using Storage.Services.Repositories.Actions;
+using Storage.Services.Repositories.Activities;
 using Storage.Services.Repositories.AuthorizationRoles;
 using Storage.Services.Repositories.Checkpoints;
 using Storage.Services.Repositories.Pets;
@@ -70,6 +71,9 @@ public static class DiCompositor
             .AddSingleton<IStorageService<CheckpointRecord>, StorageService<CheckpointRecord>>()
             .AddScoped<ICheckpointsRepositoryService, CheckpointsRepositoryService>()
             
+            .AddSingleton<IStorageService<ActivityRecord>, StorageService<ActivityRecord>>()
+            .AddScoped<IActivitiesRepositoryService, ActivitiesRepositoryService>()
+            
             .AddSingleton<IStorageService<MigrationRecord>, StorageService<MigrationRecord>>()
             .AddScoped<IMigrationsRepositoryService, MigrationsRepositoryService>()
             
@@ -88,6 +92,7 @@ public static class DiCompositor
             .AddEntriesRepositoryMapping()
             .AddPetsRepositoryMapping()
             .AddCheckpointsRepositoryMapping()
+            .AddActivitiesRepositoryMapping()
             .AddMigrationsRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
@@ -97,6 +102,7 @@ public static class DiCompositor
         BsonClassMap.RegisterClassMap<AuthorizationRoleRecord>();
         BsonClassMap.RegisterClassMap<PetRecord>();
         BsonClassMap.RegisterClassMap<CheckpointRecord>();
+        BsonClassMap.RegisterClassMap<ActivityRecord>();
         BsonClassMap.RegisterClassMap<MigrationRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
@@ -133,6 +139,10 @@ public static class DiCompositor
         {
             db.CreateCollection("Entries");
         }
+        if (listOfCollections.Contains("Activities") == false)
+        {
+            db.CreateCollection("Activities");
+        }
 
         if (listOfCollections.Contains("Migrations") == false)
         {
@@ -148,6 +158,7 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IMongoCollection<ActionRightsRecord>>(db.GetCollection<ActionRightsRecord>("ActionRights"));
         serviceProvider.AddSingleton<IMongoCollection<AuthorizationRoleRecord>>(db.GetCollection<AuthorizationRoleRecord>("AuthorizationRoles"));
         serviceProvider.AddSingleton<IMongoCollection<EntryRecord>>(db.GetCollection<EntryRecord>("Entries"));
+        serviceProvider.AddSingleton<IMongoCollection<ActivityRecord>>(db.GetCollection<ActivityRecord>("Activities"));
         serviceProvider.AddSingleton<IMongoCollection<MigrationRecord>>(db.GetCollection<MigrationRecord>("Migrations"));
 
         return serviceProvider;
