@@ -5,6 +5,7 @@
 @using GpsTracker.Auth0
 @using SharedLib.Models
 @using Google.Protobuf.WellKnownTypes
+@using Protos.Activities.CreateActivity
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
@@ -22,6 +23,12 @@ Current position is: @CurrentPosition
         <option value="@activity.Id.ToString()">@activity.Name</option>
     }
 </select>
+
+@if (ServiceHelper.CurrentSelectedActivityId == Guid.Empty.ToString())
+{
+    <input type="text" @bind="ActivityName" />
+    <button type="button" @onclick="async () => await CreateNewActivityAsync()">Create new activity</button>
+}
 
 <select @bind="SelectedActionId">
     <option value="0">--== Select action ==--</option>
@@ -56,6 +63,7 @@ Current position is: @CurrentPosition
 @code {
     List<ActionModel> Actions { get; set; } = new();
     List<ActivityModel> Activities { get; set; } = new();
+    private string ActivityName { get; set; } = string.Empty;
     
     private string CurrentPosition { get; set; } = string.Empty;
 
@@ -111,4 +119,17 @@ Current position is: @CurrentPosition
     {
         ServiceHelper.Stop();
     }
+
+    private async Task CreateNewActivityAsync()
+    {
+        var newActivity = await ActivitiesClientService.createActivityAsync(new CreateActivityRequest
+        {
+            Name = ActivityName
+        });
+
+        ServiceHelper.CurrentSelectedActivityId = newActivity.Id;
+
+        await InvokeAsync(StateHasChanged);
+    }
+    
 }
