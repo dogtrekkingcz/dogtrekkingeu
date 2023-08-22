@@ -7,6 +7,7 @@
 @using Google.Protobuf.WellKnownTypes
 @using Protos.Activities.CreateActivity
 @using SharedLib.Extensions
+@using Google.Protobuf.Collections
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
@@ -155,7 +156,16 @@
     {
         var newActivity = await ActivitiesClientService.createActivityAsync(new CreateActivityRequest
         {
-            Name = ActivityName
+            Name = ActivityName,
+            ActionId = SelectedActionId,
+            RaceId = Guid.Empty.ToString(),
+            CategoryId = Guid.Empty.ToString(),
+            Description = string.Empty,
+            Start = DateTimeOffset.Now.ToGoogleDateTime(),
+            End = null,
+            PetIds = { },
+            IsPublic = true,
+            Positions = { }
         });
 
         ServiceHelper.CurrentSelectedActivityId = newActivity.Id;
