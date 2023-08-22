@@ -19,5 +19,6 @@ message ActivityDto {
   string Description = 6;
   google.type.DateTime Start = 7;
   optional google.type.DateTime End = 8;
-  bool IsPublic = 9;
+  repeated string PetIds = 9;
+  bool IsPublic = 10;
 }
