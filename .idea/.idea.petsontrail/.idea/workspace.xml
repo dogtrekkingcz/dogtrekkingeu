@@ -26,9 +26,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="creating new activity from android app">
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="activity model mapping added">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/CreateActionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/CreateActionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionDetailResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionDetailResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionEntrySettingsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionEntrySettingsResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetActionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetAllActionsResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionsListResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetPublicActionsListResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedActionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedActionsResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedPublicActionsListResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/GetSelectedPublicActionsListResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Actions/UpdateActionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/AddPointRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/CreateActivityRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/GetMyActivitiesResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Activities/GetMyActivitiesResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/CreateActionRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/CreateActionRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionEntrySettingsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionEntrySettingsResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetActionResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetAllActionsResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetPublicActionsListResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetPublicActionsListResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedActionsResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedActionsResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedPublicActionsListResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/GetSelectedPublicActionsListResponse.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Actions/UpdateActionRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Activities/AddPointRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Activities/CreateActivityRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Activities/CreateActivityRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/CreateActionInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/CreateActionInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetActionInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetAllActionsInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/GetSelectedActionsInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/UpdateActionInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Activities/AddPointInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Activities/AddPointInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Activities/CreateActivityInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Activities/CreateActivityInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Activities/GetActivitiesByUserIdInternalStorageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Activities/GetActivitiesByUserIdInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Models/ActionRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Models/ActivityRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Models/ActivityRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/MauiProgram.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActionModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +327,7 @@
       <workItem from="1692259420579" duration="193000" />
       <workItem from="1692259632257" duration="47677000" />
       <workItem from="1692609498738" duration="7565000" />
-      <workItem from="1692617743126" duration="1569000" />
+      <workItem from="1692617743126" duration="7791000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -445,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692619292445</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="activity model mapping added">
+      <option name="closed" value="true" />
+      <created>1692619890029</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1692619890029</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -468,7 +512,8 @@
     <MESSAGE value="Adding activities storage &amp; api" />
     <MESSAGE value="getting activities storage &amp; api" />
     <MESSAGE value="creating new activity from android app" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating new activity from android app" />
+    <MESSAGE value="activity model mapping added" />
+    <option name="LAST_COMMIT_MESSAGE" value="activity model mapping added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -526,6 +571,20 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
+          <line>88</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="88" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

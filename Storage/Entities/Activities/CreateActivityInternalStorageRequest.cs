@@ -21,6 +21,8 @@ public sealed record CreateActivityInternalStorageRequest
     public DateTimeOffset? End { get; set; } = null;
 
     public bool IsPublic { get; set; } = true;
+    
+    public List<Guid> PetIds { get; set; } = new();
 
     public IEnumerable<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
 
@@ -41,5 +43,7 @@ public sealed record CreateActivityInternalStorageRequest
         public double Course { get; set; } = double.NaN;
 
         public string Note { get; set; } = string.Empty;
+        
+        public List<string> PhotoUris { get; set; } = new();
     }
 }

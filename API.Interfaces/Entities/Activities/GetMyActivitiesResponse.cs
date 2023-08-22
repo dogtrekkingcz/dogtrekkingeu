@@ -22,6 +22,8 @@ public sealed record GetMyActivitiesResponse
         
         public DateTimeOffset? End { get; set; } = null;
         
+        public List<Guid> PetIds { get; set; } = new();
+        
         public bool IsPublic { get; set; } = true;
     }
 }

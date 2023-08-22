@@ -27,4 +27,5 @@ message PositionDto {
   double Accuracy = 6;
   double Course = 7;
   string Note = 8;
+  repeated string PhotoUris = 9;
 }

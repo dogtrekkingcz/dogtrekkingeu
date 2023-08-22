@@ -22,7 +22,11 @@
 
         public bool IsPublic { get; set; } = true;
 
+        public List<string> PetIds { get; set; } = new();
+
         public List<PositionDto> Positions { get; set; } = new();
+        
+        
 
         public sealed record PositionDto
         {
@@ -41,6 +45,8 @@
             public double Course { get; set; } = double.NaN;
 
             public string Note { get; set; } = string.Empty;
+            
+            public List<string> PhotoUris { get; set; } = new();
         }
     }
 }

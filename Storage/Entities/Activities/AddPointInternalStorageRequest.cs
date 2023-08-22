@@ -19,4 +19,6 @@ public sealed record AddPointInternalStorageRequest
     public double Course { get; set; } = double.NaN;
 
     public string Note { get; set; } = string.Empty;
+    
+    public List<string> PhotoUris { get; set; } = new();
 }
