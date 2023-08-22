@@ -80,7 +80,7 @@ Current position is: @CurrentPosition
         Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await ActionsClientService.getPublicActionsListAsync(new Empty());
         Actions = Mapper.Map<List<ActionModel>>(response.Actions);
 
-        Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Empty());
+        Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
         Activities = Mapper.Map<List<ActivityModel>>(myActivities.Activities);
     }
     

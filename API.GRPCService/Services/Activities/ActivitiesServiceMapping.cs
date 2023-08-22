@@ -14,7 +14,11 @@ internal static class ActivitiesServiceMapping
 
         typeAdapterConfig.NewConfig<Protos.Activities.AddPoint.AddPointRequest, AddPointRequest>();
         typeAdapterConfig.NewConfig<AddPointResponse, Protos.Activities.AddPoint.AddPointResponse>();
-            
+
+        typeAdapterConfig.NewConfig<Protos.Activities.GetMyActivities.GetMyActivitiesRequest, GetMyActivitiesRequest>();
+        typeAdapterConfig.NewConfig<GetMyActivitiesResponse, Protos.Activities.GetMyActivities.GetMyActivitiesResponse>();
+        typeAdapterConfig.NewConfig<GetMyActivitiesResponse.ActivityDto, Protos.Activities.GetMyActivities.ActivityDto>();
+
         return typeAdapterConfig;
     }
 }

@@ -1,7 +1,4 @@
-using API.GRPCService.Extensions;
-using API.GRPCService.Services.Checkpoints;
 using DogsOnTrail.Interfaces.Actions.Entities.Activities;
-using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
@@ -38,5 +35,13 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
 
         return _mapper.Map<Protos.Activities.AddPoint.AddPointResponse>(response);
     }
-    
+
+    public async override Task<Protos.Activities.GetMyActivities.GetMyActivitiesResponse> getMyActivities(Protos.Activities.GetMyActivities.GetMyActivitiesRequest request, ServerCallContext context)
+    {
+        var apiRequest = _mapper.Map<GetMyActivitiesRequest>(request);
+
+        var result = await _activitiesService.GetMyActivitiesAsync(apiRequest, context.CancellationToken);
+
+        return _mapper.Map<Protos.Activities.GetMyActivities.GetMyActivitiesResponse>(result);
+    }
 }
