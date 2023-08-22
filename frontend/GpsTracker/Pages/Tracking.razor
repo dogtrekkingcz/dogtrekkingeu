@@ -6,6 +6,7 @@
 @using SharedLib.Models
 @using Google.Protobuf.WellKnownTypes
 @using Protos.Activities.CreateActivity
+@using SharedLib.Extensions
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
@@ -14,50 +15,71 @@
 @inject Protos.Actions.Actions.ActionsClient ActionsClientService;
 @inject Protos.Activities.Activities.ActivitiesClient ActivitiesClientService;
 
-Current position is: @CurrentPosition
-
-<select @bind="ServiceHelper.CurrentSelectedActivityId">
-    <option value="@Guid.Empty.ToString()">--== Create new activity ==--</option>
-    @foreach (var activity in Activities)
-    {
-        <option value="@activity.Id.ToString()">@activity.Name</option>
-    }
-</select>
-
-@if (ServiceHelper.CurrentSelectedActivityId == Guid.Empty.ToString())
+@if (ServiceHelper.IsLoggedIn == false)
 {
-    <input type="text" @bind="ActivityName" />
-    <button type="button" @onclick="async () => await CreateNewActivityAsync()">Create new activity</button>
+    <h1>Not logged in. Log in using this: <a href="/">link</a>.</h1>
 }
 
-<select @bind="SelectedActionId">
-    <option value="0">--== Select action ==--</option>
-    @foreach (var action in Actions
-        .Where(a => a.Term.From <= DateTimeOffset.Now && a.Term.To >= DateTimeOffset.Now))
-    {
-        <option value="@action.Id.ToString()">@action.Name</option>
-    }
-</select>
-
-<button @onclick="@(async () => await StartGpsTrackerServiceAsync())">Start gps tracker service</button>
-<button @onclick="@(async () => await StopGpsTrackerServiceAsync())">Stop gps tracker service</button>
-
 <div class="container">
-    @{
-        int counter = 20;
-    }
-    @foreach (var pos in History.OrderByDescending(h => h.Time))
+    <div class="row">
+        <div class="col-sm-12 col-4">Aktivita:</div>
+        <div class="col-sm-12 col-8">
+            <select @bind="ServiceHelper.CurrentSelectedActivityId">
+                <option value="@Guid.Empty.ToString()">--== Create new activity ==--</option>
+                @foreach (var activity in Activities)
+                {
+                    <option value="@activity.Id.ToString()">@activity.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    
+    @if (ServiceHelper.CurrentSelectedActivityId == Guid.Empty.ToString())
     {
-        if (counter == 0)
-            break;
-
-        counter--;
-        
         <div class="row">
-            <div class="col-4">@pos.Time.ToString("dd HH:mm:ss")</div>
-            <div class="col-8">@pos.Latitude N, @pos.Longitude E</div>
+            <div class="col-sm-12 col-4">Název aktivity:</div>
+            <div class="col-sm-12 col-8">
+                <input type="text" @bind="ActivityName" />
+                <button type="button" @onclick="async () => await CreateNewActivityAsync()">Create new activity</button>
+            </div>
         </div>
     }
+    
+    <div class="row">
+        <div class="col-sm-12 col-4">Patří do akce:</div>
+        <div class="col-sm-12 col-8">
+            <select @bind="SelectedActionId">
+                <option value="0">--== Select action ==--</option>
+                @foreach (var action in Actions
+                    .Where(a => a.Term.From <= DateTimeOffset.Now && a.Term.To >= DateTimeOffset.Now))
+                {
+                    <option value="@action.Id.ToString()">@action.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-4">
+            <button @onclick="@(async () => await StartGpsTrackerServiceAsync())">Start/Pokračovat</button>
+        </div>
+        <div class="col-4">
+            <button @onclick="@(async () => await StopGpsTrackerServiceAsync())">Ukončení/pauznutí aktivity</button>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            @CurrentSpeed
+        </div>
+        <div class="col-6">
+            @CurrentDistance
+        </div>
+    </div>
 </div>
 
 @code {
@@ -66,6 +88,11 @@ Current position is: @CurrentPosition
     private string ActivityName { get; set; } = string.Empty;
     
     private string CurrentPosition { get; set; } = string.Empty;
+
+    private Location CurrentLocation { get; set; } = new();
+    
+    private double CurrentDistance { get; set; } = double.NaN;
+    private double CurrentSpeed { get; set; } = double.NaN;
 
     private List<PositionHistoryService.PositionDto> History { get; set; } = new();
 
@@ -81,7 +108,7 @@ Current position is: @CurrentPosition
         Actions = Mapper.Map<List<ActionModel>>(response.Actions);
 
         Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
-        Activities = Mapper.Map<List<ActivityModel>>(myActivities.Activities);
+        Activities = Mapper.Map<List<ActivityModel>>(myActivities);
     }
     
     protected override async Task OnInitializedAsync()
@@ -101,15 +128,20 @@ Current position is: @CurrentPosition
     private async void OnChangeHandler()
     {
         CurrentPosition = $"{GpsPositionService.CurrentPosition.Latitude}N, {GpsPositionService.CurrentPosition.Longitude}E";
-        History = await PositionHistoryService.GetItemsAsync();
         
         await InvokeAsync(StateHasChanged);
     }
 
     private async void OnLocationChangeHandler(Location location)
     {
+        var oldLocation = CurrentLocation;
+        CurrentLocation = location;
+
+        var distanceAndSpeed = GetDistanceAndSpeed(oldLocation, CurrentLocation);
+        CurrentDistance = distanceAndSpeed.distance;
+        CurrentSpeed = distanceAndSpeed.speed;
+        
         CurrentPosition = $"{location.Latitude}N, {location.Longitude}E";
-        History = await PositionHistoryService.GetItemsAsync();
         
         await InvokeAsync(StateHasChanged);
     }
@@ -127,8 +159,49 @@ Current position is: @CurrentPosition
         });
 
         ServiceHelper.CurrentSelectedActivityId = newActivity.Id;
+        await PositionHistoryService.CleanHistoryAsync();
 
         await InvokeAsync(StateHasChanged);
     }
     
+    private (double distance, double speed) GetDistanceAndSpeed(Location pos1, Location pos2)
+    {
+        // Convert degrees to radians
+        var lat1 = pos1.Latitude * Math.PI / 180.0;
+        var lon1 = pos1.Longitude * Math.PI / 180.0;
+        var lat2 = pos2.Latitude * Math.PI / 180.0;
+        var lon2 = pos2.Longitude * Math.PI / 180.0;
+    
+        // radius of earth in metres
+        const double r = 6378100;
+    
+        // P
+        double rho1 = r * System.Math.Cos(lat1);
+        double z1 = r * System.Math.Sin(lat1);
+        double x1 = rho1 * System.Math.Cos(lon1);
+        double y1 = rho1 * System.Math.Sin(lon1);
+    
+        // Q
+        double rho2 = r * System.Math.Cos(lat2);
+        double z2 = r * System.Math.Sin(lat2);
+        double x2 = rho2 * System.Math.Cos(lon2);
+        double y2 = rho2 * System.Math.Sin(lon2);
+    
+        // Dot product
+        double dot = (x1 * x2 + y1 * y2 + z1 * z2);
+        double cos_theta = dot / (r * r);
+        double theta = System.Math.Acos(cos_theta);
+        
+        // Distance in Metres
+        var distance = r * theta;
+        var speed = 0.0;
+
+        // timestamp is in milliseconds
+        var timeDiff = (pos1.Timestamp - pos2.Timestamp) / 1000;
+        
+        double speed_mps = distance / timeDiff.TotalMilliseconds;
+        double speed_kph = (speed_mps * 3600.0) / 1000.0;
+        
+        return (distance, speed);
+    }
 }

@@ -1,3 +1,4 @@
+using GpsTracker.Services;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using IdentityModel.Client;
@@ -48,7 +49,10 @@ public class Auth0Client
         var result = await oidcClient.LoginAsync();
 
         if (result.IsError == false)
+        {
             _tokenProvider.Set(result.AccessToken);
+            ServiceHelper.IsLoggedIn = true;
+        }
         
         return result;
     }

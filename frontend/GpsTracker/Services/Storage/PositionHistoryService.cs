@@ -26,6 +26,13 @@ public class PositionHistoryService
 
         var result = await Database.CreateTableAsync<PositionDto>();
     }
+
+    public async Task CleanHistoryAsync()
+    {
+        await Init();
+
+        await Database.DeleteAllAsync<PositionDto>();
+    }
     
     public async Task<List<PositionDto>> GetItemsAsync()
     {

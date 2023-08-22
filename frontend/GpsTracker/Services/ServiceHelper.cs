@@ -23,6 +23,8 @@ public static class ServiceHelper {
     public static DateTimeOffset LatestUploadTime = DateTimeOffset.MinValue;
     public static int NumberOfSecsBetweenUploadingData = 10;
 
+    public static bool IsLoggedIn { get; set; } = false;
+
     public static void Start()
     {
         ShouldItRun = true;
