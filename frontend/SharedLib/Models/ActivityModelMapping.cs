@@ -9,8 +9,10 @@ namespace SharedLib.Models;
 {
     internal static TypeAdapterConfig AddActivityModelMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Activities.GetMyActivities.ActivityDto, ActivityModel>();
-
+        typeAdapterConfig.NewConfig<Protos.Activities.GetMyActivities.ActivityDto, ActivityModel>()
+            .Ignore(d => d.Positions)
+            .Ignore(d => d.UserId);
+        
         return typeAdapterConfig;
     }
 }

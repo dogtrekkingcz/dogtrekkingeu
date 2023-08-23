@@ -8,6 +8,7 @@
 @using Protos.Activities.CreateActivity
 @using SharedLib.Extensions
 @using Google.Protobuf.Collections
+@using Protos.Activities.GetMyActivities
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
@@ -110,8 +111,8 @@
 
         Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
 
-        Activities = new List<ActivityModel>(myActivities.Activities.Count);
-        foreach (var activity in myActivities.Activities)
+        Activities = new List<ActivityModel>(myActivities?.Activities?.Count ?? 0);
+        foreach (var activity in myActivities?.Activities ?? new RepeatedField<ActivityDto>())
         {
             Activities.Add(Mapper.Map<ActivityModel>(activity));
         }

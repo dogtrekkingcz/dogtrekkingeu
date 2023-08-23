@@ -30,5 +30,13 @@ public class WebBrowserAuthenticator : IdentityModel.OidcClient.Browser.IBrowser
                 ErrorDescription = "Login canceled by the user."
             };
         }
+        catch (Exception ex)
+        {
+            return new BrowserResult()
+            {
+                ResultType = BrowserResultType.UnknownError,
+                ErrorDescription = "Unknown error"
+            };
+        }
     }
 }
