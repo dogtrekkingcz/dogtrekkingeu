@@ -30,7 +30,7 @@ public record NewActionRegistrationPaymentEmailRequest
         
         public string LanguageCode { get; set; } = "en-US";
 
-        public string UserProfileId { get; set; } = "";
+        public string UserId { get; set; } = "";
 
         public string CompetitorId { get; set; } = "";
 

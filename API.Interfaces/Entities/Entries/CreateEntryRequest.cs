@@ -4,8 +4,6 @@ public sealed record CreateEntryRequest
 {
     public string LanguageCode { get; set; } = "en-US";
     
-    public string UserProfileId { get; set; } = "";
-    
     public string CompetitorId { get; set; } = "";
 
     public string Name { get; set; } = "";

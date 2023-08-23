@@ -14,7 +14,7 @@ message GetEntriesByActionResponse {
 message Entry {
   string Id = 1;
   google.type.DateTime Created = 2;
-  string UserProfileId = 3;
+  string UserId = 3;
   string CompetitorId = 4;
   string Name = 5;
   string Surname = 6;

@@ -8,7 +8,6 @@ import "google/type/datetime.proto";
 import "google/type/latlng.proto";
 
 message CreateEntryRequest {
-  string UserProfileId = 2;
   string CompetitorId = 3;
   string Name = 4;
   string Surname = 5;

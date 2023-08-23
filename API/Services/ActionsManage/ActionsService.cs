@@ -355,7 +355,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                     Name = registration.Name,
                     Surname = registration.Surname,
                     CompetitorId = registration.CompetitorId,
-                    UserProfileId = registration.UserId,
+                    UserId = registration.UserId,
                     Created = registration.Created
                 },
                 Amount = request.Amount,

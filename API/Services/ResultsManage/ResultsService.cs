@@ -24,6 +24,7 @@ namespace DogsOnTrail.Actions.Services.ResultsManage;
         var addResultRequest = _mapper.Map<AddResultInternalStorageRequest>(request)
             with
             {
+                Id = Guid.NewGuid(),
                 UserId = _currentUserIdService.GetUserId()
             };
         var response = await _actionsRepositoryService.AddResultAsync(addResultRequest, cancellationToken);
