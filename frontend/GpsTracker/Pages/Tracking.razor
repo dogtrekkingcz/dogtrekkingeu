@@ -167,6 +167,11 @@
             IsPublic = true,
             Positions = { }
         });
+        
+        Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
+        Activities = Mapper.Map<List<ActivityModel>>(myActivities);
+        
+        await InvokeAsync(StateHasChanged);
 
         ServiceHelper.CurrentSelectedActivityId = newActivity.Id;
         await PositionHistoryService.CleanHistoryAsync();

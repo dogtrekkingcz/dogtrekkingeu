@@ -4,6 +4,8 @@ internal sealed record ActionRecord : IRecord
 {
     public string? Id { get; set; }
     
+    public string? UserId { get; set; }
+    
     public ActionType Type { get; set; }
     
     public DateTimeOffset Created { get; set; }

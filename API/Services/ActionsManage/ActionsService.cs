@@ -49,6 +49,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
         {
             var addActionRequest = _mapper.Map<CreateActionInternalStorageRequest>(request);
             addActionRequest.Id = Guid.NewGuid();
+            addActionRequest.UserId = _currentUserIdService.GetUserId();
             addActionRequest.Created = DateTimeOffset.Now;
 
             foreach (var race in addActionRequest.Races)
@@ -354,7 +355,7 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
                     Name = registration.Name,
                     Surname = registration.Surname,
                     CompetitorId = registration.CompetitorId,
-                    UserProfileId = registration.UserProfileId,
+                    UserProfileId = registration.UserId,
                     Created = registration.Created
                 },
                 Amount = request.Amount,

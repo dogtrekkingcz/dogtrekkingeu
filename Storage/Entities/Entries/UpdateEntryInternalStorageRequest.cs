@@ -6,7 +6,7 @@ public record UpdateEntryInternalStorageRequest
 
     public EntryState State { get; set; } = EntryState.Unspecified;
 
-    public string UserProfileId { get; set; } = "";
+    public string UserId { get; set; } = "";
     
     public string CompetitorId { get; set; } = "";
 

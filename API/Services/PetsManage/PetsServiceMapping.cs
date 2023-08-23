@@ -9,7 +9,8 @@ internal static class PetsServiceMapping
     public static TypeAdapterConfig AddPetsMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<CreatePetRequest, CreatePetInternalStorageRequest>()
-            .Ignore(d => d.Id);
+            .Ignore(d => d.Id)
+            .Ignore(d => d.UserId);
         typeAdapterConfig.NewConfig<CreatePetRequest.VaccinationDto, CreatePetInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<CreatePetRequest.VaccinationType, CreatePetInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<CreatePetRequest.PetType, CreatePetInternalStorageRequest.PetType>();

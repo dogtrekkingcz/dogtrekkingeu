@@ -63,7 +63,8 @@ internal static class ActionsServiceMapping
 
         typeAdapterConfig.NewConfig<CreateActionRequest, CreateActionInternalStorageRequest>()
             .Ignore(d => d.Id)
-            .Ignore(d => d.Created);
+            .Ignore(d => d.Created)
+            .Ignore(d => d.UserId);
         typeAdapterConfig.NewConfig<CreateActionRequest.ActionType, CreateActionInternalStorageRequest.ActionType>();
         typeAdapterConfig.NewConfig<CreateActionRequest.RacerDto, CreateActionInternalStorageRequest.RacerDto>()
             .Ignore(d => d.CheckpointData);
@@ -120,7 +121,8 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PaymentDefinitionDto, GetActionResponse.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleItemDto, GetActionResponse.ActionSaleItemDto>();
 
-        typeAdapterConfig.NewConfig<UpdateActionRequest, UpdateActionInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<UpdateActionRequest, UpdateActionInternalStorageRequest>()
+            .Ignore(d => d.UserId);
         typeAdapterConfig.NewConfig<UpdateActionRequest.ActionType, UpdateActionInternalStorageRequest.ActionType>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.RacerDto, UpdateActionInternalStorageRequest.RacerDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.NoteDto, UpdateActionInternalStorageRequest.NoteDto>();

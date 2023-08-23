@@ -9,12 +9,14 @@ namespace DogsOnTrail.Actions.Services.PetsManage;
 internal class PetsService : IPetsService
 {
     private readonly IMapper _mapper;
-    private readonly IPetsRepositoryService _PetsRepositoryService;
+    private readonly IPetsRepositoryService _petsRepositoryService;
+    private readonly ICurrentUserIdService _currentUserIdService;
     
-    public PetsService(IMapper mapper, IPetsRepositoryService PetsRepositoryService)
+    public PetsService(IMapper mapper, IPetsRepositoryService petsRepositoryService, ICurrentUserIdService currentUserIdService)
     {
         _mapper = mapper;
-        _PetsRepositoryService = PetsRepositoryService;
+        _petsRepositoryService = petsRepositoryService;
+        _currentUserIdService = currentUserIdService;
     }
     
     public async Task<CreatePetResponse> CreatePetAsync(CreatePetRequest request, CancellationToken cancellationToken)
@@ -22,10 +24,11 @@ internal class PetsService : IPetsService
         var addPetRequest = _mapper.Map<CreatePetInternalStorageRequest>(request)
             with
             {
-                Id = Guid.NewGuid()
+                Id = Guid.NewGuid(),
+                UserId = _currentUserIdService.GetUserId()
             };
         
-        var result = await _PetsRepositoryService.AddPetAsync(addPetRequest, cancellationToken);
+        var result = await _petsRepositoryService.AddPetAsync(addPetRequest, cancellationToken);
 
         var response = _mapper.Map<CreatePetResponse>(result);
 
@@ -34,7 +37,7 @@ internal class PetsService : IPetsService
 
     public async Task<GetAllPetsResponse> GetAllPetsAsync(GetAllPetsRequest request, CancellationToken cancellationToken)
     {
-        var result = await _PetsRepositoryService.GetAllAsync(cancellationToken);
+        var result = await _petsRepositoryService.GetAllAsync(cancellationToken);
 
         var response = new GetAllPetsResponse();
         foreach (var Pet in result.Pets)
@@ -47,7 +50,7 @@ internal class PetsService : IPetsService
 
     public async Task<GetPetsFilteredByChipResponse> GetPetsFilteredByChipAsync(GetPetsFilteredByChipRequest request, CancellationToken cancellationToken)
     {
-        var result = await _PetsRepositoryService.GetPetsFilteredByChipAsync(new GetPetsFilteredByChipInternalStorageRequest { Chip = request.Chip }, cancellationToken);
+        var result = await _petsRepositoryService.GetPetsFilteredByChipAsync(new GetPetsFilteredByChipInternalStorageRequest { Chip = request.Chip }, cancellationToken);
 
         if ((result?.Pets?.Count ?? 0) > 0)
             return _mapper.Map<GetPetsFilteredByChipResponse>(result.Pets.First());
@@ -57,7 +60,7 @@ internal class PetsService : IPetsService
 
     public async Task<DeletePetResponse> DeletePetAsync(DeletePetRequest request, CancellationToken cancellationToken)
     {
-        await _PetsRepositoryService.DeletePetAsync(new DeletePetInternalStorageRequest { Id = request.Id }, cancellationToken);
+        await _petsRepositoryService.DeletePetAsync(new DeletePetInternalStorageRequest { Id = request.Id }, cancellationToken);
 
         return new DeletePetResponse();
     }

@@ -24,6 +24,7 @@ internal static class EntriesServiceMapping
         typeAdapterConfig.NewConfig<CreateEntryRequest, CreateEntryInternalStorageRequest>()
             .Ignore(d => d.Id)
             .Ignore(d => d.Created)
+            .Ignore(d => d.UserId)
             .Ignore(d => d.State);
         typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, CreateEntryInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, CreateEntryInternalStorageRequest.VaccinationDto>();

@@ -2,6 +2,10 @@
 
 public record AddResultInternalStorageRequest
 {
+    public string Id { get; set; }
+    
+    public string UserId { get; set; }
+    
     public Guid ActionId { get; set; } = Guid.Empty;
 
     public Guid RaceId { get; set; } = Guid.Empty;

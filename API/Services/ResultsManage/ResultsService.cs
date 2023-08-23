@@ -10,16 +10,22 @@ namespace DogsOnTrail.Actions.Services.ResultsManage;
 {
     private readonly IMapper _mapper;
     private readonly IActionsRepositoryService _actionsRepositoryService;
+    private readonly ICurrentUserIdService _currentUserIdService;
 
-    public ResultsService(IMapper mapper, IActionsRepositoryService actionsRepositoryService)
+    public ResultsService(IMapper mapper, IActionsRepositoryService actionsRepositoryService, ICurrentUserIdService currentUserIdService)
     {
         _mapper = mapper;
         _actionsRepositoryService = actionsRepositoryService;
+        _currentUserIdService = currentUserIdService;
     }
     
     public async Task<AddResultResponse> AddResultAsync(AddResultRequest request, CancellationToken cancellationToken)
     {
-        var addResultRequest = _mapper.Map<AddResultInternalStorageRequest>(request);
+        var addResultRequest = _mapper.Map<AddResultInternalStorageRequest>(request)
+            with
+            {
+                UserId = _currentUserIdService.GetUserId()
+            };
         var response = await _actionsRepositoryService.AddResultAsync(addResultRequest, cancellationToken);
 
         return _mapper.Map<AddResultResponse>(response);

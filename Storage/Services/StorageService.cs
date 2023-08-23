@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Operations;
 using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
@@ -106,8 +107,19 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         var document = await _collection
             .Find(filter)
             .ToListAsync(cancellationToken);
-
+        
         return document;
+    }
+
+    public async Task<IReadOnlyList<T>> GetByUserId(string userId, CancellationToken cancellationToken)
+    {
+        var filter = Builders<T>.Filter.Where(e => e.UserId != null && e.UserId == userId);
+        
+        var documents = await _collection
+            .Find(filter)
+            .ToListAsync(cancellationToken);
+
+        return documents;
     }
 
     public async Task<IReadOnlyList<T>> GetByFilterBeLikeAsync(IList<(string key, string likeValue)> filterList, CancellationToken cancellationToken)
