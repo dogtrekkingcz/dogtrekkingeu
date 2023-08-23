@@ -26,23 +26,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="all record has to have the UserId filled in. + additional filtering by UserId">
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="mapping fixies">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/CreateEntryRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/CreateEntryRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetAllEntriesResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetAllEntriesResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetEntriesByActionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Entries/GetEntriesByActionResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.WebApiService/Entities/CreateEntryRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.WebApiService/Entities/CreateEntryRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ActionsManage/ActionsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/ResultsManage/ResultsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ResultsManage/ResultsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/ResultsManage/ResultsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/ResultsManage/ResultsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mails/Entities/PaymentOfRegistrationReceived/NewActionRegistrationPaymentEmailRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Entities/PaymentOfRegistrationReceived/NewActionRegistrationPaymentEmailRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mails/Entities/RegistrationToActionReceived/NewActionRegistrationEmailRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mails/Entities/RegistrationToActionReceived/NewActionRegistrationEmailRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Entries/CreateEntryRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Entries/CreateEntryRequest.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Entries/GetAllEntriesResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Entries/GetAllEntriesResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Entries/GetEntriesByActionResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Entries/GetEntriesByActionResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Actions/AddResultInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Actions/AddResultInternalStorageRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/PetsOnTrailApp/Pages/Actions/CreateEntry/CreateEntry.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/EntryModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/EntryModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModelMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +40,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/613cc84566ed975887f6bb51e660dc2f33e1d6179a787ace2f1fc1824e5be3f/Java.Lang.IRunnable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/Storage/Models/ActionRecord.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/Storage/Models/ActionRecord.cs" root0="SKIP_HIGHLIGHTING" />
@@ -102,7 +90,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.API.GRPCService: http">
+  <component name="RunManager" selected="Xamarin.Android.GpsTracker">
     <configuration name="PetsOnTrailApp: localhost" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish publish_profile="localhost.pubxml" pubxml_path="$PROJECT_DIR$/frontend/PetsOnTrailApp/Properties/PublishProfiles/localhost.pubxml" uuid_high="1184149982973216629" uuid_low="-8205027464861651867" />
       <method v="2" />
@@ -314,7 +302,7 @@
       <workItem from="1692259420579" duration="193000" />
       <workItem from="1692259632257" duration="47677000" />
       <workItem from="1692609498738" duration="7565000" />
-      <workItem from="1692617743126" duration="30803000" />
+      <workItem from="1692617743126" duration="32400000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -548,7 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692776464901</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="mapping fixies">
+      <option name="closed" value="true" />
+      <created>1692780442155</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1692780442155</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -578,7 +574,8 @@
     <MESSAGE value="mappings" />
     <MESSAGE value="trackking updates" />
     <MESSAGE value="all record has to have the UserId filled in. + additional filtering by UserId" />
-    <option name="LAST_COMMIT_MESSAGE" value="all record has to have the UserId filled in. + additional filtering by UserId" />
+    <MESSAGE value="mapping fixies" />
+    <option name="LAST_COMMIT_MESSAGE" value="mapping fixies" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -622,20 +619,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>111</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="111" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

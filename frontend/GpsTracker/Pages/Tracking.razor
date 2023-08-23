@@ -109,7 +109,12 @@
         Actions = Mapper.Map<List<ActionModel>>(response.Actions);
 
         Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
-        Activities = Mapper.Map<List<ActivityModel>>(myActivities);
+
+        Activities = new List<ActivityModel>(myActivities.Activities.Count);
+        foreach (var activity in myActivities.Activities)
+        {
+            Activities.Add(Mapper.Map<ActivityModel>(activity));
+        }
     }
     
     protected override async Task OnInitializedAsync()
