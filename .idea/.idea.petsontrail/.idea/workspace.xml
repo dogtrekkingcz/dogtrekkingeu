@@ -28,9 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="mapping fixies">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/ActivityModelMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +42,7 @@
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/WebAuthenticationCallbackActivity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/SharedLib/Models/ActivityModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -296,7 +295,7 @@
       <workItem from="1692259632257" duration="47677000" />
       <workItem from="1692609498738" duration="7565000" />
       <workItem from="1692617743126" duration="33943000" />
-      <workItem from="1692783806290" duration="5661000" />
+      <workItem from="1692783806290" duration="12494000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -546,7 +545,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692782067729</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="mapping fixies">
+      <option name="closed" value="true" />
+      <created>1692790509334</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1692790509334</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,20 +630,6 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>113</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="112" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Auth0/WebBrowserAuthenticator.cs</url>
           <line>26</line>
           <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Auth0\WebBrowserAuthenticator.cs" initialLine="26" containingFunctionPresentation="Method 'InvokeAsync'">
@@ -661,6 +654,48 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
+          <line>108</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="108" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
+          <line>174</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="174" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
+          <line>29</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="29" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

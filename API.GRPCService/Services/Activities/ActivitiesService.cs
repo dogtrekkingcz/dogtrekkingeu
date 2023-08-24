@@ -2,6 +2,8 @@ using DogsOnTrail.Interfaces.Actions.Entities.Activities;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
+using Protos.Activities.GetMyActivities;
+using GetMyActivitiesRequest = DogsOnTrail.Interfaces.Actions.Entities.Activities.GetMyActivitiesRequest;
 
 namespace API.GRPCService.Services.Activities;
 
@@ -42,6 +44,14 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
 
         var result = await _activitiesService.GetMyActivitiesAsync(apiRequest, context.CancellationToken);
 
-        return _mapper.Map<Protos.Activities.GetMyActivities.GetMyActivitiesResponse>(result);
+        return new Protos.Activities.GetMyActivities.GetMyActivitiesResponse
+        {
+            Activities =
+            {
+                result.Activities
+                    .Select(activity => _mapper.Map<Protos.Activities.GetMyActivities.ActivityDto>(activity))
+                    .ToList()
+            }
+        };
     }
 }

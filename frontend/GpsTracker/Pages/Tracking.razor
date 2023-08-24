@@ -109,13 +109,7 @@
         Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse response = await ActionsClientService.getPublicActionsListAsync(new Empty());
         Actions = Mapper.Map<List<ActionModel>>(response.Actions);
 
-        Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
-
-        Activities = new List<ActivityModel>(myActivities?.Activities?.Count ?? 0);
-        foreach (var activity in myActivities?.Activities ?? new RepeatedField<ActivityDto>())
-        {
-            Activities.Add(Mapper.Map<ActivityModel>(activity));
-        }
+        await ReloadActivities();
     }
     
     protected override async Task OnInitializedAsync()
@@ -173,15 +167,25 @@
             IsPublic = true,
             Positions = { }
         });
-        
-        Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
-        Activities = Mapper.Map<List<ActivityModel>>(myActivities);
-        
-        await InvokeAsync(StateHasChanged);
+
+        await ReloadActivities();
 
         ServiceHelper.CurrentSelectedActivityId = newActivity.Id;
         await PositionHistoryService.CleanHistoryAsync();
 
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task ReloadActivities()
+    {
+        Protos.Activities.GetMyActivities.GetMyActivitiesResponse myActivities = await ActivitiesClientService.getMyActivitiesAsync(new Protos.Activities.GetMyActivities.GetMyActivitiesRequest());
+        
+        Activities = new List<ActivityModel>(myActivities?.Activities?.Count ?? 0);
+        foreach (var activity in myActivities?.Activities ?? new RepeatedField<ActivityDto>())
+        {
+            Activities.Add(Mapper.Map<ActivityModel>(activity));
+        }
+        
         await InvokeAsync(StateHasChanged);
     }
     
