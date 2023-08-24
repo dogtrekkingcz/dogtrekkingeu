@@ -28,7 +28,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="mapping fixies">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +37,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/613cc84566ed975887f6bb51e660dc2f33e1d6179a787ace2f1fc1824e5be3f/Java.Lang.IRunnable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/API.GRPCService/Services/Activities/ActivitiesService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
@@ -295,7 +295,7 @@
       <workItem from="1692259632257" duration="47677000" />
       <workItem from="1692609498738" duration="7565000" />
       <workItem from="1692617743126" duration="33943000" />
-      <workItem from="1692783806290" duration="12494000" />
+      <workItem from="1692783806290" duration="13740000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -553,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692790509334</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="mapping fixies">
+      <option name="closed" value="true" />
+      <created>1692871029385</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1692871029385</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +679,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>174</line>
+          <line>172</line>
           <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="174" isMultiMethodBreakpoint="true">
             <option name="multiMethodBreakpoint" value="true" />
             <startOffsets>
@@ -685,8 +693,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>29</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="29" isMultiMethodBreakpoint="true">
+          <line>180</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="180" isMultiMethodBreakpoint="true">
             <option name="multiMethodBreakpoint" value="true" />
             <startOffsets>
               <option value="-1" />
@@ -695,7 +703,7 @@
               <option value="-1" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="53" />
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

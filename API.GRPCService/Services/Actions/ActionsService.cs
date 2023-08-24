@@ -33,7 +33,6 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
         var actions = new List<Protos.Actions.GetAllActions.Action>();
         foreach (var action in allActions.Actions)
         {
-            Console.WriteLine($"Mapping action: {action.Dump()}");
             actions.Add(_mapper.Map<Protos.Actions.GetAllActions.Action>(action));
         }
         

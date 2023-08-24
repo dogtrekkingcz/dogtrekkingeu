@@ -50,6 +50,11 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
     {
         var activities = await _activitiesService.GetByUserId(userId, cancellationToken);
 
-        return _mapper.Map<GetActivitiesByUserIdInternalStorageResponse>(activities);
+        return new GetActivitiesByUserIdInternalStorageResponse
+        {
+            Activities = activities
+                .Select(activity => _mapper.Map<GetActivitiesByUserIdInternalStorageResponse.ActivityDto>(activity))
+                .ToList()
+        };
     }
 }
