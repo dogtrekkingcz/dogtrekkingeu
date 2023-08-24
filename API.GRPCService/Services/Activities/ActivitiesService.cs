@@ -1,3 +1,4 @@
+using API.GRPCService.Extensions;
 using DogsOnTrail.Interfaces.Actions.Entities.Activities;
 using DogsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
@@ -43,6 +44,8 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
         var apiRequest = _mapper.Map<GetMyActivitiesRequest>(request);
 
         var result = await _activitiesService.GetMyActivitiesAsync(apiRequest, context.CancellationToken);
+        
+        Console.WriteLine(result.Dump());
 
         return new Protos.Activities.GetMyActivities.GetMyActivitiesResponse
         {
