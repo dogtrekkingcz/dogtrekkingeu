@@ -6,17 +6,17 @@ public sealed record GetMyActivitiesResponse
 
     public sealed record ActivityDto
     {
-        public Guid Id { get; } = Guid.Empty;
+        public Guid Id { get; set; } = Guid.Empty;
 
-        public Guid ActionId { get; } = Guid.Empty;
+        public Guid ActionId { get; set; } = Guid.Empty;
 
-        public Guid RaceId { get; } = Guid.Empty;
+        public Guid RaceId { get; set; } = Guid.Empty;
 
-        public Guid CategoryId { get; } = Guid.Empty;
+        public Guid CategoryId { get; set; } = Guid.Empty;
 
         public string Name { get; set; } = string.Empty;
 
-        public string Description { get; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         
         public DateTimeOffset Start { get; set; } = DateTimeOffset.MinValue;
         
