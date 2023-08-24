@@ -51,39 +51,46 @@ public class PositionService : Service
         var notification = new NotificationCompat.Builder(this, ServiceChannelId)
             .SetContentTitle("PetsOnTrail Tracking")
             .SetContentText("Is running")
-            .SetSmallIcon(Resource.Drawable.abc_btn_check_material_anim)
+            .SetSmallIcon(Resource.Drawable.dotnet_bot)
             .SetContentIntent(pendingIntent)
             .Build();
 
         StartForeground(MainActivity.ServiceNotificationId, notification);
-        
-        Task.Run(async () =>
+
+        Task.Run(async () => await StartServiceAsync()).Wait();
+
+        return StartCommandResult.Sticky;
+    }
+
+    private async Task StartServiceAsync()
+    {
+        await Task.Run(async () =>
         {
             while (ServiceHelper.ShouldItRun)
             {
-                while (ServiceHelper.ShouldItRun && (ServiceHelper.LatestPositionTime > DateTimeOffset.Now.AddSeconds((-1) * ServiceHelper.NumberOfSecsBetweenAcquiringPosition)))
+                while (ServiceHelper.ShouldItRun && (ServiceHelper.LatestPositionTime >
+                                                     DateTimeOffset.Now.AddSeconds((-1) *
+                                                         ServiceHelper.NumberOfSecsBetweenAcquiringPosition)))
                     await Task.Delay(200);
 
                 var location = await GetCurrentLocation();
-                
+
                 try
                 {
                     ServiceHelper.LocationChanged(location);
-                    
+
                     ServiceHelper.LatestPositionTime = DateTimeOffset.Now;
                 }
                 catch (Exception ex)
                 {
                     ;
                 }
-                
+
                 await Task.Delay(1000);
             }
 
             StopForeground(true);
-        });
-
-        return StartCommandResult.Sticky;
+        }).WaitAsync(CancellationToken.None);
     }
 
     private void CreateNotificationChannel()

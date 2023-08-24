@@ -26,8 +26,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="mapping fixies">
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="bug with not setting the guids fixed / missing the SETs... :(">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +40,11 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/613cc84566ed975887f6bb51e660dc2f33e1d6179a787ace2f1fc1824e5be3f/Java.Lang.IRunnable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/API.GRPCService/Services/Activities/ActivitiesService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c092928882a17a51a62a367685d90a0a613eb91fb453b9f50147e19c1f3ff40/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/WebAuthenticationCallbackActivity.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/SharedLib/Models/ActivityModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -295,7 +297,8 @@
       <workItem from="1692259632257" duration="47677000" />
       <workItem from="1692609498738" duration="7565000" />
       <workItem from="1692617743126" duration="33943000" />
-      <workItem from="1692783806290" duration="13740000" />
+      <workItem from="1692783806290" duration="18239000" />
+      <workItem from="1692877247902" duration="4025000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -561,7 +564,47 @@
       <option name="project" value="LOCAL" />
       <updated>1692871029385</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="mapping fixies">
+      <option name="closed" value="true" />
+      <created>1692871920912</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1692871920912</updated>
+    </task>
+    <task id="LOCAL-00035" summary="mapping fixies">
+      <option name="closed" value="true" />
+      <created>1692872621529</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1692872621529</updated>
+    </task>
+    <task id="LOCAL-00036" summary="more  loggings">
+      <option name="closed" value="true" />
+      <created>1692873121986</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1692873121986</updated>
+    </task>
+    <task id="LOCAL-00037" summary="bug with not setting the guids fixed / missing the SETs... :(">
+      <option name="closed" value="true" />
+      <created>1692873709528</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1692873709528</updated>
+    </task>
+    <task id="LOCAL-00038" summary="bug with not setting the guids fixed / missing the SETs... :(">
+      <option name="closed" value="true" />
+      <created>1692874201416</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1692874201416</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,7 +635,9 @@
     <MESSAGE value="trackking updates" />
     <MESSAGE value="all record has to have the UserId filled in. + additional filtering by UserId" />
     <MESSAGE value="mapping fixies" />
-    <option name="LAST_COMMIT_MESSAGE" value="mapping fixies" />
+    <MESSAGE value="more  loggings" />
+    <MESSAGE value="bug with not setting the guids fixed / missing the SETs... :(" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug with not setting the guids fixed / missing the SETs... :(" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -655,31 +700,17 @@
           <line>34</line>
           <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Auth0\WebBrowserAuthenticator.cs" initialLine="34" containingFunctionPresentation="Method 'InvokeAsync'">
             <startOffsets>
-              <option value="1085" />
+              <option value="-1" />
             </startOffsets>
             <endOffsets>
-              <option value="1085" />
+              <option value="-1" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>108</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="108" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>172</line>
+          <line>175</line>
           <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="174" isMultiMethodBreakpoint="true">
             <option name="multiMethodBreakpoint" value="true" />
             <startOffsets>
@@ -693,8 +724,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>180</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="180" isMultiMethodBreakpoint="true">
+          <line>200</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="194" isMultiMethodBreakpoint="true">
             <option name="multiMethodBreakpoint" value="true" />
             <startOffsets>
               <option value="-1" />
@@ -703,7 +734,20 @@
               <option value="-1" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="54" />
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs</url>
+          <line>62</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Services\Storage\PositionHistoryService.cs" initialLine="59" containingFunctionPresentation="Method 'OnPositionChangedHandler'">
+            <startOffsets>
+              <option value="1528" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2116" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

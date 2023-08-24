@@ -135,6 +135,9 @@
 
     private async void OnLocationChangeHandler(Location location)
     {
+        if (location == null)
+            return;
+        
         var oldLocation = CurrentLocation;
         CurrentLocation = location;
 
@@ -191,6 +194,9 @@
     
     private (double distance, double speed) GetDistanceAndSpeed(Location pos1, Location pos2)
     {
+        if ((pos1 == null) || (pos2 == null))
+            return (double.NaN, double.NaN);
+        
         // Convert degrees to radians
         var lat1 = pos1.Latitude * Math.PI / 180.0;
         var lon1 = pos1.Longitude * Math.PI / 180.0;

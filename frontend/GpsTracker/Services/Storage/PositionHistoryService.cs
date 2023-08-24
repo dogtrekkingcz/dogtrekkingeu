@@ -57,6 +57,9 @@ public class PositionHistoryService
 
     private async void OnPositionChangedHandler(Location location)
     {
+        if (location == null)
+            return;
+        
         await SaveItemAsync(new PositionHistoryService.PositionDto()
         {
             Latitude = location.Latitude,
