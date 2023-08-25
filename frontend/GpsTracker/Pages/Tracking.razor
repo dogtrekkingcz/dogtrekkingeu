@@ -76,10 +76,18 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            @CurrentSpeed km/h
+            @CurrentSpeed.ToString("F2") km/h
         </div>
         <div class="col-6">
-            @CurrentDistance m
+            @CurrentDistance.ToString("F2") m
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            @CurrentWholeDistance.ToString("F2") m
+        </div>
+        <div class="col-6">
+            @CurrentAvgSpeed.ToString("F2") km/h
         </div>
     </div>
 </div>
@@ -95,6 +103,8 @@
     
     private double CurrentDistance { get; set; } = double.NaN;
     private double CurrentSpeed { get; set; } = double.NaN;
+    private double CurrentWholeDistance { get; set; } = double.NaN;
+    private double CurrentAvgSpeed { get; set; } = double.NaN;
 
     private List<PositionHistoryService.PositionDto> History { get; set; } = new();
 
@@ -144,6 +154,10 @@
         
         CurrentPosition = $"{location.Latitude}N, {location.Longitude}E";
 
+        var distanceAndSpeedPerActivity = await GetDistanceAndSpeedPerActivityAsync();
+        CurrentWholeDistance = distanceAndSpeedPerActivity.distance;
+        CurrentAvgSpeed = distanceAndSpeedPerActivity.speed;
+
         Task.Run(async () => await InvokeAsync(StateHasChanged));
     }
     
@@ -182,6 +196,51 @@
         }
 
         StateHasChanged();
+    }
+    
+    private async Task<(double distance, double speed)> GetDistanceAndSpeedPerActivityAsync()
+    {
+        var allItems = await PositionHistoryService.GetItemsAsync();
+
+        var distance = 0.0;
+        var speed = 0.0;
+
+        var start = DateTimeOffset.MinValue;
+        var end = DateTimeOffset.MinValue;
+
+        Location locationBefore = null;
+
+        foreach (var item in allItems.OrderBy(it => it.Id))
+        {
+            if (start == DateTimeOffset.MinValue)
+                start = item.Time;
+
+            if (end < item.Time)
+                end = item.Time;
+            
+            var currentLocation = new Location
+            {
+                Latitude = item.Latitude,
+                Longitude = item.Longitude,
+                Altitude = item.Altitude,
+                Accuracy = item.Accuracy,
+                Course = item.Course
+            };
+
+            var distanceAndSpeed = GetDistanceAndSpeed(locationBefore, currentLocation);
+
+            if (double.IsNaN(distanceAndSpeed.distance) != true)
+                distance += distanceAndSpeed.distance;
+            
+            locationBefore = currentLocation;
+        }
+
+        var timeDiff = (end - start) / 1000;
+        
+        double speed_mps = distance / timeDiff.TotalMilliseconds;
+        double speed_kph = (speed_mps * 3600.0) / 1000.0;
+        
+        return (distance, speed_kph);
     }
     
     private (double distance, double speed) GetDistanceAndSpeed(Location pos1, Location pos2)
