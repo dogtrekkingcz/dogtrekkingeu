@@ -11,6 +11,8 @@ namespace GpsTracker.Platforms.Android.Services;
 // https://learn.microsoft.com/en-us/xamarin/android/app-fundamentals/services/out-of-process-services#create-a-service-that-runs-in-a-separate-process
 
 // TODO - check after any months ...
+// FROM: https://github.com/xamarin/monodroid-samples/blob/main/ApplicationFundamentals/ServiceSamples/MessengerServiceDemo/MessengerService/Service/TimestampService.cs
+// -------
 // Currently there is an issue with Xamarin.Android where the service
 // will crash on startup when attempting to run it in it's own process. 
 // See https://bugzilla.xamarin.com/show_bug.cgi?id=51940
@@ -57,40 +59,35 @@ public class PositionService : Service
 
         StartForeground(MainActivity.ServiceNotificationId, notification);
 
-        Task.Run(async () => await StartServiceAsync()).Wait();
+        Task.Run(async () => await StartServiceAsync());
 
         return StartCommandResult.Sticky;
     }
 
     private async Task StartServiceAsync()
     {
-        await Task.Run(async () =>
+        while (ServiceHelper.ShouldItRun)
         {
-            while (ServiceHelper.ShouldItRun)
+            while (ServiceHelper.ShouldItRun && (ServiceHelper.LatestPositionTime >
+                                                 DateTimeOffset.Now.AddSeconds((-1) *
+                                                     ServiceHelper.NumberOfSecsBetweenAcquiringPosition)))
             {
-                while (ServiceHelper.ShouldItRun && (ServiceHelper.LatestPositionTime >
-                                                     DateTimeOffset.Now.AddSeconds((-1) *
-                                                         ServiceHelper.NumberOfSecsBetweenAcquiringPosition)))
-                    await Task.Delay(200);
-
-                var location = await GetCurrentLocation();
-
-                try
-                {
-                    ServiceHelper.LocationChanged(location);
-
-                    ServiceHelper.LatestPositionTime = DateTimeOffset.Now;
-                }
-                catch (Exception ex)
-                {
-                    ;
-                }
-
-                await Task.Delay(1000);
+                await Task.Delay(200);
             }
 
-            StopForeground(true);
-        }).WaitAsync(CancellationToken.None);
+            var location = await GetCurrentLocation();
+
+            if (location != null)
+            {                    
+                ServiceHelper.LocationChanged(location);
+
+                ServiceHelper.LatestPositionTime = DateTimeOffset.Now;
+            }
+
+            await Task.Delay(1000);
+        }
+
+        StopForeground(true);
     }
 
     private void CreateNotificationChannel()

@@ -63,10 +63,10 @@
     
     <div class="row">
         <div class="col-4">
-            <button @onclick="@(async () => await StartGpsTrackerServiceAsync())">Start/Pokračovat</button>
+            <button @onclick="StartGpsTrackerService">Start/Pokračovat</button>
         </div>
         <div class="col-4">
-            <button @onclick="@(async () => await StopGpsTrackerServiceAsync())">Ukončení/pauznutí aktivity</button>
+            <button @onclick="StopGpsTrackerService">Ukončení/pauznutí aktivity</button>
         </div>
     </div>
 </div>
@@ -76,10 +76,10 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            @CurrentSpeed
+            @CurrentSpeed km/h
         </div>
         <div class="col-6">
-            @CurrentDistance
+            @CurrentDistance m
         </div>
     </div>
 </div>
@@ -114,23 +114,20 @@
     
     protected override async Task OnInitializedAsync()
     {
-        GpsPositionService.OnChange += OnChangeHandler;
         ServiceHelper.OnLocationChanged += OnLocationChangeHandler;
         History = await PositionHistoryService.GetItemsAsync();
         
         await ReloadData();
     }
 
-    private async Task StartGpsTrackerServiceAsync()
+    private void StartGpsTrackerService()
     {
         ServiceHelper.Start();
     }
-
-    private async void OnChangeHandler()
+    
+    private void StopGpsTrackerService()
     {
-        CurrentPosition = $"{GpsPositionService.CurrentPosition.Latitude}N, {GpsPositionService.CurrentPosition.Longitude}E";
-        
-        await InvokeAsync(StateHasChanged);
+        ServiceHelper.Stop();
     }
 
     private async void OnLocationChangeHandler(Location location)
@@ -146,15 +143,10 @@
         CurrentSpeed = distanceAndSpeed.speed;
         
         CurrentPosition = $"{location.Latitude}N, {location.Longitude}E";
-        
-        await InvokeAsync(StateHasChanged);
+
+        Task.Run(async () => await InvokeAsync(StateHasChanged));
     }
     
-    private async Task StopGpsTrackerServiceAsync()
-    {
-        ServiceHelper.Stop();
-    }
-
     private async Task CreateNewActivityAsync()
     {
         var newActivity = await ActivitiesClientService.createActivityAsync(new CreateActivityRequest
@@ -176,7 +168,7 @@
         ServiceHelper.CurrentSelectedActivityId = newActivity.Id;
         await PositionHistoryService.CleanHistoryAsync();
 
-        await InvokeAsync(StateHasChanged);
+        StateHasChanged();
     }
 
     private async Task ReloadActivities()
@@ -188,8 +180,8 @@
         {
             Activities.Add(Mapper.Map<ActivityModel>(activity));
         }
-        
-        await InvokeAsync(StateHasChanged);
+
+        StateHasChanged();
     }
     
     private (double distance, double speed) GetDistanceAndSpeed(Location pos1, Location pos2)
@@ -233,6 +225,6 @@
         double speed_mps = distance / timeDiff.TotalMilliseconds;
         double speed_kph = (speed_mps * 3600.0) / 1000.0;
         
-        return (distance, speed);
+        return (Math.Abs(distance), Math.Abs(speed_kph));
     }
 }

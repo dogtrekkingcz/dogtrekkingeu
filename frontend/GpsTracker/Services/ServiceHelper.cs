@@ -28,15 +28,15 @@ public static class ServiceHelper {
     public static void Start()
     {
         ShouldItRun = true;
-        
-        OnStartRequest?.Invoke();
+
+        Task.Run(() => OnStartRequest?.Invoke());
     }
 
     public static void Stop()
     {
         ShouldItRun = false;
-        
-        OnStopRequest?.Invoke();
+
+        Task.Run(() => OnStopRequest?.Invoke());
     }
 
     public static void LocationChanged(Location location)

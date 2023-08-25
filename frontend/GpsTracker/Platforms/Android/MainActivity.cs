@@ -34,6 +34,15 @@ public class MainActivity : MauiAppCompatActivity
 	{
 		if (!_isServiceRunning)
 		{
+			// there is a need to request to use the GPS in main thread if not accepted yet
+			GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+			var cancelTokenSource = new CancellationTokenSource();
+
+			Location location = null;
+			var result = Task.Run(
+					async () => location = await Geolocation.Default.GetLocationAsync(request, cancelTokenSource.Token))
+				.Result;
+			
 			ServiceHelper.ShouldItRun = true;
 			
 			var intent = new Intent(ServiceHelper.Context, typeof(PositionService));
