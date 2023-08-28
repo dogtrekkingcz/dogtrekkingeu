@@ -34,8 +34,6 @@ public sealed record CreateActionRequest
     
     public sealed record CheckpointDto
     {
-        public Guid Id { get; set; } = default(Guid);
-
         public string Name { get; set; } = string.Empty;
 
         public LatLngDto Position { get; set; } = new();
@@ -43,7 +41,6 @@ public sealed record CreateActionRequest
     
     public sealed record RaceDto
     {
-        public Guid Id { get; set; } = default(Guid);
         public string Name { get; set; } = string.Empty;
         
         public double? Distance { get; set; } = 0.0;
@@ -67,8 +64,6 @@ public sealed record CreateActionRequest
     
     public sealed record CategoryDto
     {
-        public Guid Id { get; set; } = default(Guid);
-
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;

@@ -73,11 +73,14 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<CreateActionRequest.RequestedPaymentItem, CreateActionInternalStorageRequest.RequestedPaymentItem>();
         typeAdapterConfig.NewConfig<CreateActionRequest.RequestedPaymentsDto, CreateActionInternalStorageRequest.RequestedPaymentsDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.AddressDto, CreateActionInternalStorageRequest.AddressDto>();
-        typeAdapterConfig.NewConfig<CreateActionRequest.CategoryDto, CreateActionInternalStorageRequest.CategoryDto>();
+        typeAdapterConfig.NewConfig<CreateActionRequest.CategoryDto, CreateActionInternalStorageRequest.CategoryDto>()
+            .Ignore(d => d.Id);
         typeAdapterConfig.NewConfig<CreateActionRequest.PetDto, CreateActionInternalStorageRequest.PetDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.LimitsDto, CreateActionInternalStorageRequest.LimitsDto>();
-        typeAdapterConfig.NewConfig<CreateActionRequest.CheckpointDto, CreateActionInternalStorageRequest.CheckpointDto>();
-        typeAdapterConfig.NewConfig<CreateActionRequest.RaceDto, CreateActionInternalStorageRequest.RaceDto>();
+        typeAdapterConfig.NewConfig<CreateActionRequest.CheckpointDto, CreateActionInternalStorageRequest.CheckpointDto>()
+            .Ignore(d => d.Id);
+        typeAdapterConfig.NewConfig<CreateActionRequest.RaceDto, CreateActionInternalStorageRequest.RaceDto>()
+            .Ignore(d => d.Id);
         typeAdapterConfig.NewConfig<CreateActionRequest.RaceState, CreateActionInternalStorageRequest.RaceState>();
         typeAdapterConfig.NewConfig<CreateActionRequest.TermDto, CreateActionInternalStorageRequest.TermDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.VaccinationDto, CreateActionInternalStorageRequest.VaccinationDto>();

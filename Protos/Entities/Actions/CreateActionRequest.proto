@@ -31,30 +31,27 @@ enum ActionType {
 }
 
 message CheckpointDto {
-  string Id = 1;
-  string Name = 2;
-  google.type.LatLng Position = 3;
+  string Name = 1;
+  google.type.LatLng Position = 2;
 }
 
 message RaceDto {
-  string Id = 1;
-  string Name = 2;
-  double Distance = 3;
-  double Incline = 4;
-  google.type.DateTime EnteringFrom = 5;
-  google.type.DateTime EnteringTo = 6;
-  int32 MaxNumberOfCompetitors = 7;
-  google.type.DateTime Begin = 8;
-  repeated CategoryDto Categories = 9;
-  repeated PaymentDefinitionDto Payments = 10;
-  LimitsDto Limits = 11;
+  string Name = 1;
+  double Distance = 2;
+  double Incline = 3;
+  google.type.DateTime EnteringFrom = 4;
+  google.type.DateTime EnteringTo = 5;
+  int32 MaxNumberOfCompetitors = 6;
+  google.type.DateTime Begin = 7;
+  repeated CategoryDto Categories = 8;
+  repeated PaymentDefinitionDto Payments = 9;
+  LimitsDto Limits = 10;
 }
 
 message CategoryDto {
-  string Id = 1;
-  string Name = 2;
-  string Description = 3;
-  repeated RacerDto Racers = 4;
+  string Name = 1;
+  string Description = 2;
+  repeated RacerDto Racers = 3;
 }
 
 enum RaceState {

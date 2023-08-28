@@ -8,7 +8,10 @@
 @using Protos.Activities.CreateActivity
 @using SharedLib.Extensions
 @using Google.Protobuf.Collections
+@using Google.Type
+@using Protos.Actions.CreateAction
 @using Protos.Activities.GetMyActivities
+@using DateTime = System.DateTime
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
@@ -42,16 +45,17 @@
             <div class="col-sm-12 col-4">Název aktivity:</div>
             <div class="col-sm-12 col-8">
                 <input type="text" @bind="ActivityName" />
-                <button type="button" @onclick="async () => await CreateNewActivityAsync()">Create new activity</button>
+                <button type="button" @onclick="async () => await CreateNewActivityAsync()">Vytvoř novou aktivitu</button>
             </div>
         </div>
     }
     
     <div class="row">
-        <div class="col-sm-12 col-4">Patří do akce:</div>
+        <div class="col-sm-12 col-4">Je zařazena do veřejné akce:</div>
         <div class="col-sm-12 col-8">
-            <select @bind="SelectedActionId">
-                <option value="0">--== Select action ==--</option>
+            <select @bind="ServiceHelper.CurrentSelectedActionId">
+                <option value="0">--== Vyber akci ==--</option>
+                <option value="@Guid.Empty.ToString()">--== Přidat novou akci ==--</option>
                 @foreach (var action in Actions
                     .Where(a => a.Term.From <= DateTimeOffset.Now && a.Term.To >= DateTimeOffset.Now))
                 {
@@ -60,6 +64,48 @@
             </select>
         </div>
     </div>
+    
+    @if (ServiceHelper.CurrentSelectedActionId == Guid.Empty.ToString())
+    {
+        <div class="row">
+            <div class="col-sm-12 col-4">Název akce:</div>
+            <div class="col-sm-12 col-8">
+                <input type="text" @bind="ActionName" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-4">Druh akce:</div>
+            <div class="col-sm-12 col-8">
+                <select @bind="NewActionType">
+                    <option value="@ActionType.Unspecified">Nespecifikována</option>
+                    <option value="@ActionType.Trip">Výlet</option>
+                    <option value="@ActionType.Dogtrekking">Dogtrekking</option>
+                    <option value="@ActionType.RallyObedience">Rally Obedience</option>
+                    <option value="@ActionType.Obedience">Obedience</option>
+                    <option value="@ActionType.Agility">Agility</option>
+                    <option value="@ActionType.Mushing">Mushing</option>
+                    <option value="@ActionType.HorseMountainTrail">Horse mountain trail</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-4">Vypsané závody</div>
+            <div class="col-sm-12 col-8">
+                <ul>
+                    @foreach (var race in NewActionRaces)
+                    {
+                        <li>@race.Name</li>
+                    }
+                    <li>
+                        <input type="text" @bind="NewActionRace" placeholder="Nový závod"/>
+                        <button type="button" @onclick="async () => await AddRaceToAction()">Přidat závod</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <button type="button" @onclick="async () => await CreateNewActionAsync()">Vytvoř novou akci</button>
+    }
     
     <div class="row">
         <div class="col-4">
@@ -96,6 +142,10 @@
     List<ActionModel> Actions { get; set; } = new();
     List<ActivityModel> Activities { get; set; } = new();
     private string ActivityName { get; set; } = string.Empty;
+    private string ActionName { get; set; } = string.Empty;
+    private ActionType NewActionType { get; set; } = ActionType.Unspecified;
+    private List<RaceDto> NewActionRaces { get; set; } = new List<RaceDto>();
+    private string NewActionRace { get; set; } = string.Empty;
     
     private string CurrentPosition { get; set; } = string.Empty;
 
@@ -107,12 +157,6 @@
     private double CurrentAvgSpeed { get; set; } = double.NaN;
 
     private List<PositionHistoryService.PositionDto> History { get; set; } = new();
-
-    private string SelectedActionId
-    {
-        get { return ServiceHelper.CurrentSelectedActionId; }
-        set { ServiceHelper.CurrentSelectedActionId = value; }
-    }
 
     private async Task ReloadData()
     {
@@ -166,7 +210,7 @@
         var newActivity = await ActivitiesClientService.createActivityAsync(new CreateActivityRequest
         {
             Name = ActivityName,
-            ActionId = SelectedActionId,
+            ActionId = ServiceHelper.CurrentSelectedActionId,
             RaceId = Guid.Empty.ToString(),
             CategoryId = Guid.Empty.ToString(),
             Description = string.Empty,
@@ -182,6 +226,59 @@
         ServiceHelper.CurrentSelectedActivityId = newActivity.Id;
         await PositionHistoryService.CleanHistoryAsync();
 
+        StateHasChanged();
+    }
+
+    private async Task CreateNewActionAsync()
+    {
+        var now = DateTime.Now;
+        var beginOfDay = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+        var endOfDay = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59);
+
+        var currentPosition = await GpsPositionService.GetCurrentLocationAsync();
+        
+        var newAction = await ActionsClientService.createActionAsync(new CreateActionRequest
+        {
+            Name = ActivityName,
+            Description = string.Empty,
+            Term = new TermDto
+            {
+                From = ((DateTimeOffset) beginOfDay).ToGoogleDateTime(),
+                To = ((DateTimeOffset) endOfDay).ToGoogleDateTime()
+            },
+            Address = new AddressDto
+            {
+                Position = new LatLng
+                {
+                    Latitude = currentPosition.Latitude,
+                    Longitude = currentPosition.Longitude
+                },
+                City = string.Empty,
+                Country = string.Empty,
+                Region = string.Empty,
+                Street = string.Empty,
+                ZipCode = string.Empty
+            },
+            Checkpoints = {  },
+            Sale = new(),
+            ContactMail = string.Empty,
+            Type = NewActionType,
+            Races = { NewActionRaces }
+        });
+    }
+
+    private async Task AddRaceToAction()
+    {
+        var now = DateTime.Now;
+        var beginOfDay = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+        
+        NewActionRaces.Add(
+            new RaceDto
+            {
+                Name = NewActionRace,
+                Begin = ((DateTimeOffset) beginOfDay).ToGoogleDateTime()
+            });
+        
         StateHasChanged();
     }
 

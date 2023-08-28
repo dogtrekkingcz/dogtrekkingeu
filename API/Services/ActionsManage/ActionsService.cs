@@ -54,13 +54,11 @@ namespace DogsOnTrail.Actions.Services.ActionsManage
 
             foreach (var race in addActionRequest.Races)
             {
-                if (race.Id == default)
-                    race.Id = Guid.NewGuid();
+                race.Id = Guid.NewGuid();
 
                 foreach (var category in race.Categories)
                 {
-                    if (category.Id == default)
-                        category.Id = Guid.NewGuid();
+                    category.Id = Guid.NewGuid();
                 }
             }
 

@@ -14,6 +14,7 @@ message AddPointRequest {
   double Altitude = 5;
   double Accuracy = 6;
   double Course = 7;
-  string Note = 8;
-  repeated string PhotoUris = 9;
+  string NoteType = 8;
+  string Note = 9;
+  repeated string PhotoUris = 10;
 }

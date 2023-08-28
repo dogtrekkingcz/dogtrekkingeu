@@ -12,6 +12,8 @@ namespace GpsTracker.Platforms.Android.Services;
 
 // TODO - check after any months ...
 // FROM: https://github.com/xamarin/monodroid-samples/blob/main/ApplicationFundamentals/ServiceSamples/MessengerServiceDemo/MessengerService/Service/TimestampService.cs
+// https://github.com/dotnet/maui/issues/16142
+// https://github.com/xamarin/xamarin-android/issues/3378
 // -------
 // Currently there is an issue with Xamarin.Android where the service
 // will crash on startup when attempting to run it in it's own process. 
