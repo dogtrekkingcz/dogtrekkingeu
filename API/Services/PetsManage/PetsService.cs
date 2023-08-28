@@ -47,7 +47,8 @@ internal class PetsService : IPetsService
         var petRequest = _mapper.Map<UpdateUserProfileInternalStorageRequest.PetDto>(request)
             with
             {
-                Id = petId
+                Id = petId,
+                UserId = _currentUserIdService.GetUserId()
             };
         updateUserProfileRequest.Pets.Add(petRequest);
 

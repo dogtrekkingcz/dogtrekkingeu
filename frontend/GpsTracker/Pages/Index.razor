@@ -19,15 +19,18 @@
 <h1>PetsOnTrail GPS Tracker</h1>
 
 <div class="container">
-    <div class="row">
-        <div class="col-8">
-            <label>Je třeba se přihlásit:</label>
+    @if (ServiceHelper.UserProfile == null)
+    {
+        <div class="row">
+            <div class="col-8">
+                <label>Je třeba se přihlásit:</label>
+            </div>
+            <div class="col-4">
+                <button type="button" @onclick="async () => await LoginClickedAsync()">zde</button>
+            </div>
         </div>
-        <div class="col-4">
-            <button type="button" @onclick="async () => await LoginClickedAsync()">zde</button>
-        </div>
-    </div>
-    
+    }
+
     @if (ServiceHelper.UserProfile != null)
     {
         <div class="row">
@@ -64,7 +67,7 @@
                     {
                         <li>@pet.Name</li>
                     }
-                    <input type="text" @bind="NewPetName" placeholder="Nový mazlík" /><button type="button" @onclick="async() => await AddNewPet()">Přidej</button>
+                    <input type="text" @bind="NewPetName" placeholder="Nový mazlík"/><button type="button" @onclick="async () => await AddNewPet()">Přidej</button>
                 </ul>
             </div>
         </div>
