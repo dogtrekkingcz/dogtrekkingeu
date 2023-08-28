@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets.GetPet";
+
+package getpet;
+
+message GetPetRequest {
+  string Id = 1;
+}

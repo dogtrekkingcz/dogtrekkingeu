@@ -86,4 +86,11 @@ internal class PetsService : IPetsService
 
         return new DeletePetResponse();
     }
+
+    public async Task<GetPetResponse> GetPetAsync(GetPetRequest request, CancellationToken cancellationToken)
+    {
+        var pet = await _petsRepositoryService.GetPetAsync(new GetPetInternalStorageRequest { Id = request.Id }, cancellationToken);
+
+        return _mapper.Map<GetPetResponse>(pet);
+    }
 }

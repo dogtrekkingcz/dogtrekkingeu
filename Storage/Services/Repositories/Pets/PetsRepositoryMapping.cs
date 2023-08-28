@@ -37,6 +37,11 @@ namespace Storage.Services.Repositories.Pets
             typeAdapterConfig.NewConfig<PetRecord.LostPetRecordDto, GetAllPetsInternalStorageResponse.LostPetRecordDto>();
             typeAdapterConfig.NewConfig<PetRecord.PetWasSeenDto, GetAllPetsInternalStorageResponse.PetWasSeenDto>();
             
+            typeAdapterConfig.NewConfig<PetRecord, GetPetInternalStorageResponse>();
+            typeAdapterConfig.NewConfig<PetRecord.VaccinationDto, GetPetInternalStorageResponse.VaccinationDto>();
+            typeAdapterConfig.NewConfig<PetRecord.VaccinationType, GetPetInternalStorageResponse.VaccinationType>();
+            typeAdapterConfig.NewConfig<PetRecord.PetType, GetPetInternalStorageResponse.PetType>();
+            
             return typeAdapterConfig;
         }
     }

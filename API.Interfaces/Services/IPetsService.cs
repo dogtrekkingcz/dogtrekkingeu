@@ -11,4 +11,6 @@ public interface IPetsService
     Task<DeletePetResponse> DeletePetAsync(DeletePetRequest request, CancellationToken cancellationToken);
 
     Task<GetPetsFilteredByChipResponse> GetPetsFilteredByChipAsync(GetPetsFilteredByChipRequest request, CancellationToken cancellationToken);
+
+    Task<GetPetResponse> GetPetAsync(GetPetRequest request, CancellationToken cancellationToken);
 }

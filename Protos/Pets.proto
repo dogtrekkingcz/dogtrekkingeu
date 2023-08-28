@@ -12,10 +12,13 @@ import "Entities/Pets/GetPetsFilteredByChipRequest.proto";
 import "Entities/Pets/GetPetsFilteredByChipResponse.proto";
 import "Entities/Pets/DeletePetRequest.proto";
 import "Entities/Pets/DeletePetResponse.proto";
+import "Entities/Pets/GetPetRequest.proto";
+import "Entities/Pets/GetPetResponse.proto";
 
 service Pets {
   rpc getAllPets (getallpets.GetAllPetsRequest) returns (getallpets.GetAllPetsResponse);
   rpc createPet (createpet.CreatePetRequest) returns (createpet.CreatePetResponse);
   rpc getPetsFilteredByChip (getpetsfilteredbychip.GetPetsFilteredByChipRequest) returns (getpetsfilteredbychip.GetPetsFilteredByChipResponse);
   rpc deletePet (deletepet.DeletePetRequest) returns (deletepet.DeletePetResponse);
+  rpc getPet (getpet.GetPetRequest) returns (getpet.GetPetResponse);
 }

@@ -1,0 +1,22 @@
+﻿@page "/pet_update/{Id}"
+@using Protos.UserProfiles
+@using Protos.Pets
+
+@inject UserProfiles.UserProfilesClient UserProfileClient
+@inject Pets.PetsClient PetsClient  
+
+
+
+@code {
+    public string Id { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ReloadDataAsync();
+    }
+
+    private async Task ReloadDataAsync()
+    {
+        
+    }
+}

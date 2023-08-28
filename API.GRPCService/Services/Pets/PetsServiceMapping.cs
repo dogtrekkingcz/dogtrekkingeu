@@ -36,6 +36,11 @@ internal static class PetsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Pets.DeletePet.DeletePetRequest, DeletePetRequest>();
         typeAdapterConfig.NewConfig<DeletePetResponse, Protos.Pets.DeletePet.DeletePetResponse>();
         
+        typeAdapterConfig.NewConfig<GetPetResponse, Protos.Pets.GetPet.GetPetResponse>();
+        typeAdapterConfig.NewConfig<GetPetResponse.VaccinationDto, Protos.Pets.GetPet.Vaccination>();
+        typeAdapterConfig.NewConfig<GetPetResponse.VaccinationType, Protos.Pets.GetPet.VaccinationType>();
+        typeAdapterConfig.NewConfig<GetPetResponse.PetType, Protos.Pets.GetPet.PetType>();
+        
         return typeAdapterConfig;
     }
 }

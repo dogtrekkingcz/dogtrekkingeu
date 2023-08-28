@@ -52,7 +52,7 @@
             <div class="col-8">
                 <label>Number of seconds between uploading data</label>
             </div>
-            <div class="col-4">
+            <div class="col-4"> 
                 <input type="number" @bind="@ServiceHelper.NumberOfSecsBetweenUploadingData" placeholder="Number of seconds between uploading data"/>
             </div>
         </div>
@@ -65,7 +65,7 @@
                 <ul>
                     @foreach (var pet in ServiceHelper.UserProfile?.Pets ?? new List<UserProfileModel.PetDto>())
                     {
-                        <li>@pet.Name</li>
+                        <li>@pet.Name <a href="/pet_update/{@pet.Id}">Upravit</a></li>
                     }
                     <input type="text" @bind="NewPetName" placeholder="Nový mazlík"/><button type="button" @onclick="async () => await AddNewPet()">Přidej</button>
                 </ul>

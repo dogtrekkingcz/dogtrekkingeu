@@ -10,12 +10,12 @@ namespace Storage.Services.Repositories.Pets
     internal class PetsRepositoryService : IPetsRepositoryService
     {
         private readonly IMapper _mapper;
-        private readonly IStorageService<PetRecord> _PetStorageService;
+        private readonly IStorageService<PetRecord> _petStorageService;
 
-        public PetsRepositoryService(IMapper mapper, IStorageService<PetRecord> PetsStorageService)
+        public PetsRepositoryService(IMapper mapper, IStorageService<PetRecord> petsStorageService)
         {
             _mapper = mapper;
-            _PetStorageService = PetsStorageService;
+            _petStorageService = petsStorageService;
         }
 
         public async Task<AddPetInternalStorageResponse> AddPetAsync(CreatePetInternalStorageRequest request, CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ namespace Storage.Services.Repositories.Pets
             
             var addRequest = _mapper.Map<PetRecord>(request);
             
-            var addedActionRecord = await _PetStorageService.AddAsync(addRequest, cancellationToken);
+            var addedActionRecord = await _petStorageService.AddAsync(addRequest, cancellationToken);
 
             var response = new AddPetInternalStorageResponse
             {
@@ -42,7 +42,7 @@ namespace Storage.Services.Repositories.Pets
             
             Console.WriteLine(updateRequest);
             
-            var result = await _PetStorageService.UpdateAsync(updateRequest, cancellationToken);
+            var result = await _petStorageService.UpdateAsync(updateRequest, cancellationToken);
 
             return new UpdatePetResponse
             {
@@ -50,15 +50,22 @@ namespace Storage.Services.Repositories.Pets
             };
         }
 
+        public async Task<GetPetInternalStorageResponse> GetPetAsync(GetPetInternalStorageRequest request, CancellationToken cancellationToken)
+        {
+            var pet = await _petStorageService.GetAsync(request.Id.ToString(), cancellationToken);
+
+            return _mapper.Map<GetPetInternalStorageResponse>(pet);
+        }
+
         public async Task DeletePetAsync(DeletePetInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            await _PetStorageService.DeleteAsync(request.Id, cancellationToken);
+            await _petStorageService.DeleteAsync(request.Id, cancellationToken);
         }
 
         public async Task<GetPetsFilteredByChipInternalStorageResponse> GetPetsFilteredByChipAsync(GetPetsFilteredByChipInternalStorageRequest request, CancellationToken cancellationToken)
         {
             var filter = new List<(string key, string likeValue)> { ("Chip", request.Chip) };
-            var result = await _PetStorageService.GetByFilterBeLikeAsync(filter, cancellationToken);
+            var result = await _petStorageService.GetByFilterBeLikeAsync(filter, cancellationToken);
 
             if (result == null)
                 return null;
@@ -70,7 +77,7 @@ namespace Storage.Services.Repositories.Pets
 
         public async Task<GetAllPetsInternalStorageResponse> GetAllAsync(CancellationToken cancellationToken)
         {
-            var result = await _PetStorageService.GetAllAsync(cancellationToken);
+            var result = await _petStorageService.GetAllAsync(cancellationToken);
 
             var response = new GetAllPetsInternalStorageResponse
             {

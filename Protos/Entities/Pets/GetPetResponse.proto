@@ -1,16 +1,12 @@
 syntax = "proto3";
 
-option csharp_namespace = "Protos.Pets.GetPetsFilteredByChip";
+option csharp_namespace = "Protos.Pets.GetPet";
 
-package getpetsfilteredbychip;
+package getpet;
 
 import "google/type/datetime.proto";
 
-message GetPetsFilteredByChipResponse {
-  repeated PetDto Pets = 1;
-}
-
-message PetDto {
+message GetPetResponse {
   string Id = 1;
   string UserId = 2;
   string Contact = 3;
@@ -24,19 +20,6 @@ message PetDto {
   PetType Type = 11;
 
   repeated Vaccination Vaccinations = 12;
-  repeated LostPetRecord Losts = 13;
-}
-
-message LostPetRecord {
-  google.type.DateTime Lost = 1;
-  google.type.DateTime Found = 2;
-  string ExpectedArea = 3;
-  repeated PetWasSeen WasSeen = 4;
-}
-
-message PetWasSeen {
-  google.type.DateTime Seen = 1;
-  string Area = 2;
 }
 
 enum PetType {

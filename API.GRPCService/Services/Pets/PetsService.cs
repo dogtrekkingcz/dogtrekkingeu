@@ -9,20 +9,20 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
 {
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
-    private readonly IPetsService _PetsService;
+    private readonly IPetsService _petsService;
 
-    public PetsService(ILogger<PetsService> logger, IMapper mapper, IPetsService PetsService)
+    public PetsService(ILogger<PetsService> logger, IMapper mapper, IPetsService petsService)
     {
         _logger = logger;
         _mapper = mapper;
-        _PetsService = PetsService;
+        _petsService = petsService;
     }
 
     public async override Task<Protos.Pets.CreatePet.CreatePetResponse> createPet(Protos.Pets.CreatePet.CreatePetRequest request, ServerCallContext context)
     {
         var createPetRequest = _mapper.Map<CreatePetRequest>(request);
         
-        var newPet = await _PetsService.CreatePetAsync(createPetRequest, context.CancellationToken);
+        var newPet = await _petsService.CreatePetAsync(createPetRequest, context.CancellationToken);
 
         var response = _mapper.Map<Protos.Pets.CreatePet.CreatePetResponse>(newPet);
 
@@ -33,7 +33,7 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
     {
         var getAllPetsRequest = _mapper.Map<GetAllPetsRequest>(request);
 
-        var Pets = await _PetsService.GetAllPetsAsync(getAllPetsRequest, context.CancellationToken);
+        var Pets = await _petsService.GetAllPetsAsync(getAllPetsRequest, context.CancellationToken);
 
         var response = _mapper.Map<Protos.Pets.GetAllPets.GetAllPetsResponse>(Pets);
 
@@ -44,7 +44,7 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
     {
         var deletePetRequest = _mapper.Map<DeletePetRequest>(request);
 
-        await _PetsService.DeletePetAsync(deletePetRequest, context.CancellationToken);
+        await _petsService.DeletePetAsync(deletePetRequest, context.CancellationToken);
 
         return new Protos.Pets.DeletePet.DeletePetResponse();
     }
@@ -53,8 +53,15 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
     {
         var getPetsFilteredByChipRequest = _mapper.Map<GetPetsFilteredByChipRequest>(request);
 
-        await _PetsService.GetPetsFilteredByChipAsync(getPetsFilteredByChipRequest, context.CancellationToken);
+        await _petsService.GetPetsFilteredByChipAsync(getPetsFilteredByChipRequest, context.CancellationToken);
 
         return new Protos.Pets.GetPetsFilteredByChip.GetPetsFilteredByChipResponse();
+    }
+
+    public async override Task<Protos.Pets.GetPet.GetPetResponse> getPet(Protos.Pets.GetPet.GetPetRequest request, ServerCallContext context)
+    {
+        var pet = await _petsService.GetPetAsync(new GetPetRequest { Id = request.Id.ToGuid() }, context.CancellationToken);
+
+        return _mapper.Map<Protos.Pets.GetPet.GetPetResponse>(pet);
     }
 }
