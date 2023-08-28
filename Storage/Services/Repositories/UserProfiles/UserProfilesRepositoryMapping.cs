@@ -44,6 +44,14 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord.LatLngDto, GetSelectedUserProfilesInternalStorageResponse.LatLngDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.PetDto, GetSelectedUserProfilesInternalStorageResponse.PetDto>();
             
+            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse,  UpdateUserProfileInternalStorageRequest>();
+            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.VaccinationType, UpdateUserProfileInternalStorageRequest.VaccinationType>();
+            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.AddressDto,  UpdateUserProfileInternalStorageRequest.AddressDto>();
+            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ContactDto, UpdateUserProfileInternalStorageRequest.ContactDto>();
+            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.VaccinationDto, UpdateUserProfileInternalStorageRequest.VaccinationDto>();
+            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.LatLngDto, UpdateUserProfileInternalStorageRequest.LatLngDto>();
+            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PetDto, UpdateUserProfileInternalStorageRequest.PetDto>();
+            
             return typeAdapterConfig;
         }
     }

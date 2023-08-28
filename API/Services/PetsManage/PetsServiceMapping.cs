@@ -1,6 +1,7 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Pets;
 using Mapster;
 using Storage.Entities.Pets;
+using Storage.Entities.UserProfiles;
 
 namespace DogsOnTrail.Actions.Services.PetsManage;
 
@@ -33,6 +34,11 @@ internal static class PetsServiceMapping
         typeAdapterConfig.NewConfig<GetPetsFilteredByChipResponse.PetType, GetPetsFilteredByChipResponse.PetType>();
         typeAdapterConfig.NewConfig<GetPetsFilteredByChipResponse.LostPetRecordDto, GetPetsFilteredByChipResponse.LostPetRecordDto>();
         typeAdapterConfig.NewConfig<GetPetsFilteredByChipResponse.PetWasSeenDto, GetPetsFilteredByChipResponse.PetWasSeenDto>();
+
+        typeAdapterConfig.NewConfig<CreatePetRequest, UpdateUserProfileInternalStorageRequest.PetDto>()
+            .Ignore(d => d.Id);
+        typeAdapterConfig.NewConfig<CreatePetRequest.VaccinationDto, UpdateUserProfileInternalStorageRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<CreatePetRequest.VaccinationType, UpdateUserProfileInternalStorageRequest.VaccinationType>();
         
         return typeAdapterConfig;
     }

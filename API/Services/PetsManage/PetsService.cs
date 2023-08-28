@@ -1,7 +1,9 @@
 ﻿using DogsOnTrail.Interfaces.Actions.Entities.Pets;
+using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using DogsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Storage.Entities.Pets;
+using Storage.Entities.UserProfiles;
 using Storage.Interfaces;
 
 namespace DogsOnTrail.Actions.Services.PetsManage;
@@ -10,27 +12,46 @@ internal class PetsService : IPetsService
 {
     private readonly IMapper _mapper;
     private readonly IPetsRepositoryService _petsRepositoryService;
+    private readonly IUserProfilesRepositoryService _userProfileRepositoryService;
     private readonly ICurrentUserIdService _currentUserIdService;
     
-    public PetsService(IMapper mapper, IPetsRepositoryService petsRepositoryService, ICurrentUserIdService currentUserIdService)
+    public PetsService(IMapper mapper, IPetsRepositoryService petsRepositoryService, IUserProfilesRepositoryService userProfileRepositoryService, ICurrentUserIdService currentUserIdService)
     {
         _mapper = mapper;
         _petsRepositoryService = petsRepositoryService;
+        _userProfileRepositoryService = userProfileRepositoryService;
         _currentUserIdService = currentUserIdService;
     }
     
     public async Task<CreatePetResponse> CreatePetAsync(CreatePetRequest request, CancellationToken cancellationToken)
     {
+        var petId = Guid.NewGuid();
+        
         var addPetRequest = _mapper.Map<CreatePetInternalStorageRequest>(request)
             with
             {
-                Id = Guid.NewGuid(),
+                Id = petId,
                 UserId = _currentUserIdService.GetUserId()
             };
         
         var result = await _petsRepositoryService.AddPetAsync(addPetRequest, cancellationToken);
 
         var response = _mapper.Map<CreatePetResponse>(result);
+
+
+        var userProfile = await _userProfileRepositoryService.GetUserProfileAsync(
+            new GetUserProfileInternalStorageRequest { UserId = _currentUserIdService.GetUserId() }, cancellationToken);
+
+        var updateUserProfileRequest = _mapper.Map<UpdateUserProfileInternalStorageRequest>(userProfile);
+
+        var petRequest = _mapper.Map<UpdateUserProfileInternalStorageRequest.PetDto>(request)
+            with
+            {
+                Id = petId
+            };
+        updateUserProfileRequest.Pets.Add(petRequest);
+
+        await _userProfileRepositoryService.UpdateUserProfileAsync(updateUserProfileRequest, cancellationToken);
 
         return response;
     }

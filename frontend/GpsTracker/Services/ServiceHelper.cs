@@ -1,3 +1,4 @@
+using SharedLib.Models;
 #if ANDROID
 using Android.Content;
 using Android.Provider;
@@ -22,6 +23,8 @@ public static class ServiceHelper {
     public static int NumberOfSecsBetweenAcquiringPosition = 10;
     public static DateTimeOffset LatestUploadTime = DateTimeOffset.MinValue;
     public static int NumberOfSecsBetweenUploadingData = 10;
+
+    public static UserProfileModel UserProfile { get; set; } = null;
 
     public static bool IsLoggedIn { get; set; } = false;
 

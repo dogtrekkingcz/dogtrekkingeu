@@ -3,53 +3,77 @@
 @using GpsTracker.Services.Storage
 @using MapsterMapper
 @using GpsTracker.Auth0
+@using Protos.Pets
+@using Protos.Pets.CreatePet
+@using Protos.UserProfiles
+@using Protos.UserProfiles.GetUserProfile
+@using SharedLib.Models
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
 @inject IMapper Mapper;
 @inject Auth0Client AuthClient;
+@inject UserProfiles.UserProfilesClient UserProfileClient
+@inject Pets.PetsClient PetsClient  
 
 <h1>PetsOnTrail GPS Tracker</h1>
 
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <label>Login:</label>
+            <label>Je třeba se přihlásit:</label>
         </div>
         <div class="col-4">
-            <button type="button" @onclick="async () => await LoginClickedAsync()">Login</button>
+            <button type="button" @onclick="async () => await LoginClickedAsync()">zde</button>
         </div>
     </div>
     
-    <div class="row">
-        <div class="col">
-            State: @LoggedIn
+    @if (ServiceHelper.UserProfile != null)
+    {
+        <div class="row">
+            <div class="col">
+                State: @LoggedIn
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-8">
-            <label>Number of seconds between acquiring position</label>
+        <div class="row">
+            <div class="col-8">
+                <label>Number of seconds between acquiring position</label>
+            </div>
+            <div class="col-4">
+                <input type="number" @bind="@ServiceHelper.NumberOfSecsBetweenAcquiringPosition" placeholder="Number of seconds between acquiring position"/>
+            </div>
         </div>
-        <div class="col-4">
-            <input type="number" @bind="@ServiceHelper.NumberOfSecsBetweenAcquiringPosition" placeholder="Number of seconds between acquiring position"/>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-8">
-            <label>Number of seconds between uploading data</label>
+        <div class="row">
+            <div class="col-8">
+                <label>Number of seconds between uploading data</label>
+            </div>
+            <div class="col-4">
+                <input type="number" @bind="@ServiceHelper.NumberOfSecsBetweenUploadingData" placeholder="Number of seconds between uploading data"/>
+            </div>
         </div>
-        <div class="col-4">
-            <input type="number" @bind="@ServiceHelper.NumberOfSecsBetweenUploadingData" placeholder="Number of seconds between uploading data"/>
+
+        <div class="row">
+            <div class="col-sm-12 col-4">
+                <label>Moji mazlíci</label>
+            </div>
+            <div class="col-sm-12 col-8">
+                <ul>
+                    @foreach (var pet in ServiceHelper.UserProfile?.Pets ?? new List<UserProfileModel.PetDto>())
+                    {
+                        <li>@pet.Name</li>
+                    }
+                    <input type="text" @bind="NewPetName" placeholder="Nový mazlík" /><button type="button" @onclick="async() => await AddNewPet()">Přidej</button>
+                </ul>
+            </div>
         </div>
-    </div>
-
-
+    }
 </div>
 
 @code {
     private string LoggedIn = "Not logged in";
+    private string NewPetName = string.Empty;
 
     private async Task LoginClickedAsync()
     {
@@ -58,12 +82,38 @@
         if (!loginResult.IsError)
         {
             LoggedIn = "Logged in";
+
+            var id = loginResult.User?.Claims?.First(claim => claim.Type == "sub")?.Value ?? string.Empty;
+            await ReloadUserProfileAsync(id);
             
             StateHasChanged();
         }
         else
         {
-
+            LoggedIn = loginResult.Error;
         }
     }
+
+    private async Task AddNewPet()
+    {
+        var newPetRequest = new CreatePetRequest
+        {
+            Name = NewPetName
+        };
+
+        await PetsClient.createPetAsync(newPetRequest);
+
+        NewPetName = string.Empty;
+
+        await ReloadUserProfileAsync(ServiceHelper.UserProfile.UserId);
+        
+        StateHasChanged();
+    }
+
+    private async Task ReloadUserProfileAsync(string id)
+    {
+        var userProfile = await UserProfileClient.getUserProfileAsync(new GetUserProfileRequest { Id = id });
+
+        ServiceHelper.UserProfile = Mapper.Map<UserProfileModel>(userProfile);
+    } 
 }

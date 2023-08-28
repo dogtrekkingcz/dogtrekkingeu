@@ -40,7 +40,7 @@ internal static class UserProfileMapping
             .Map(d => d.Name, s => s.FirstName)
             .Map(d => d.Surname, s => s.LastName)
             .Map(d => d.Nickname, s => s.Nickname);
-
+        
         return typeAdapterConfig;
     }
 }
