@@ -26,27 +26,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work">
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/GetPetRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/GetPetResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Pets/GetPetRequest.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Pets/GetPetResponse.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Pets/GetPetInternalStorageRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Pets/GetPetInternalStorageResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/PetUpdate.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IPetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IPetsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/PetsManage/PetsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/PetsManage/PetsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Pets/GetPetsFilteredByChipResponse.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Pets/GetPetsFilteredByChipResponse.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Pets.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Pets.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Interfaces/IPetsRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Interfaces/IPetsRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Index.razor" afterDir="false" />
-    </list>
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +41,7 @@
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Entities/Pets/GetPetResponseGrpc.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Tracking.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Platforms/Android/MainActivity.cs" root0="SKIP_HIGHLIGHTING" />
@@ -322,7 +303,7 @@
       <workItem from="1692609498738" duration="7565000" />
       <workItem from="1692617743126" duration="33943000" />
       <workItem from="1692783806290" duration="18239000" />
-      <workItem from="1692877247902" duration="41142000" />
+      <workItem from="1692877247902" duration="41531000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -676,7 +657,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693213474957</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="adding pets work">
+      <option name="closed" value="true" />
+      <created>1693227678560</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1693227678560</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
