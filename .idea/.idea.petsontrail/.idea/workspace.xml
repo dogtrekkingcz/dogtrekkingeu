@@ -28,7 +28,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/PetUpdate.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/PetUpdate.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsServiceMapping.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModelMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +48,7 @@
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/MainApplication.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/WebAuthenticationCallbackActivity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/SharedLib/Models/PetModelMapping.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -305,7 +306,7 @@
       <workItem from="1692617743126" duration="33943000" />
       <workItem from="1692783806290" duration="18239000" />
       <workItem from="1692877247902" duration="41531000" />
-      <workItem from="1693228047486" duration="7296000" />
+      <workItem from="1693228047486" duration="8002000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -683,7 +684,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693293587178</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="adding pets work">
+      <option name="closed" value="true" />
+      <created>1693298448950</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1693298448950</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

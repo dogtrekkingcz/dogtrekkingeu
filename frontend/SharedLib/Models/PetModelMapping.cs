@@ -20,7 +20,8 @@ internal static class PetModelMapping
         typeAdapterConfig.NewConfig<PetModel.LostPetRecordDto, Protos.Pets.CreatePet.LostPetRecord>();
         typeAdapterConfig.NewConfig<PetModel.PetWasSeenDto, Protos.Pets.CreatePet.PetWasSeen>();
 
-        typeAdapterConfig.NewConfig<Protos.Pets.GetPet.GetPetResponse, SharedLib.Models.PetModel>();
+        typeAdapterConfig.NewConfig<Protos.Pets.GetPet.GetPetResponse, SharedLib.Models.PetModel>()
+            .Ignore(d => d.Losts);
         typeAdapterConfig.NewConfig<Protos.Pets.GetPet.VaccinationType, SharedLib.Models.PetModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Pets.GetPet.Vaccination, SharedLib.Models.PetModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.Pets.GetPet.PetType, SharedLib.Models.PetModel.PetType>();
