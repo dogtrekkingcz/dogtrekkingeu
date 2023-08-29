@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-option csharp_namespace = "Protos.Pets.CreatePet";
+option csharp_namespace = "Protos.Pets.UpdatePet";
 
 import "google/type/datetime.proto";
 
-package createpet;
+package updatepet;
 
-message CreatePetRequest {
+message UpdatePetRequest {
   string UserId = 1;
   string Contact = 2;
   string Name = 3;
@@ -19,19 +19,6 @@ message CreatePetRequest {
   PetType Type = 10;
 
   repeated Vaccination Vaccinations = 11;
-  repeated LostPetRecord Losts = 12;
-}
-
-message LostPetRecord {
-  google.type.DateTime Lost = 1;
-  google.type.DateTime Found = 2;
-  string ExpectedArea = 3;
-  repeated PetWasSeen WasSeen = 4;
-}
-
-message PetWasSeen {
-  google.type.DateTime Seen = 1;
-  string Area = 2;
 }
 
 enum PetType {

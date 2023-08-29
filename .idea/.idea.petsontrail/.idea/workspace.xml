@@ -26,30 +26,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work" />
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work">
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/UpdatePetRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/UpdatePetResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Pets/UpdatePetRequest.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Protos/Entities/Pets/UpdatePetResponse.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetInternalStorageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/CreatePetResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/CreatePetResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IPetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IPetsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/PetsManage/PetsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/PetsManage/PetsServiceMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Entities/Pets/CreatePetRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Pets/CreatePetRequest.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Pets.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Pets.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetInternalStorageRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetResponse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Interfaces/IPetsRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Interfaces/IPetsRepositoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryService.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/613cc84566ed975887f6bb51e660dc2f33e1d6179a787ace2f1fc1824e5be3f/Java.Lang.IRunnable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c092928882a17a51a62a367685d90a0a613eb91fb453b9f50147e19c1f3ff40/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/API.GRPCService/Services/Pets/PetsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.WebApiService/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/API/Services/ActionsManage/ActionsService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Activities.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Protos/obj/Debug/net7.0/Entities/Pets/GetPetResponseGrpc.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Pages/Tracking.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Platforms/Android/MainActivity.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/MainActivity.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/MainApplication.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/WebAuthenticationCallbackActivity.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/GpsTracker/Services/Storage/PositionHistoryService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -63,6 +75,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
   <component name="ProjectId" id="2U6LdxVBpVAZ8jrzInMMNFSwI8f" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -304,6 +319,7 @@
       <workItem from="1692617743126" duration="33943000" />
       <workItem from="1692783806290" duration="18239000" />
       <workItem from="1692877247902" duration="41531000" />
+      <workItem from="1693228047486" duration="3689000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -665,7 +681,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693227678560</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="adding pets work">
+      <option name="closed" value="true" />
+      <created>1693231122232</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1693231122232</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

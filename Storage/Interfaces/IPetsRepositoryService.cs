@@ -6,7 +6,7 @@ public interface IPetsRepositoryService : IRepositoryService
 {
     Task<AddPetInternalStorageResponse> AddPetAsync(CreatePetInternalStorageRequest request, CancellationToken cancellationToken);
 
-    Task<UpdatePetResponse> UpdatePetAsync(UpdatePetInternalStorageRequest request, CancellationToken cancellationToken);
+    Task<UpdatePetInternalStorageResponse> UpdatePetAsync(UpdatePetInternalStorageRequest request, CancellationToken cancellationToken);
 
     Task<GetPetsFilteredByChipInternalStorageResponse> GetPetsFilteredByChipAsync(GetPetsFilteredByChipInternalStorageRequest request, CancellationToken cancellationToken);
     

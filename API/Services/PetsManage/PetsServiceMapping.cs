@@ -39,11 +39,23 @@ internal static class PetsServiceMapping
             .Ignore(d => d.Id);
         typeAdapterConfig.NewConfig<CreatePetRequest.VaccinationDto, UpdateUserProfileInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<CreatePetRequest.VaccinationType, UpdateUserProfileInternalStorageRequest.VaccinationType>();
+
+        typeAdapterConfig.NewConfig<UpdatePetRequest, UpdateUserProfileInternalStorageRequest.PetDto>();
+        typeAdapterConfig.NewConfig<UpdatePetRequest.VaccinationDto, UpdateUserProfileInternalStorageRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<UpdatePetRequest.VaccinationType, UpdateUserProfileInternalStorageRequest.VaccinationType>();
         
         typeAdapterConfig.NewConfig<GetPetInternalStorageResponse, GetPetResponse>();
         typeAdapterConfig.NewConfig<GetPetInternalStorageResponse.VaccinationDto, GetPetResponse.VaccinationDto>();
         typeAdapterConfig.NewConfig<GetPetInternalStorageResponse.VaccinationType, GetPetResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetPetInternalStorageResponse.PetType, GetPetResponse.PetType>();
+        
+        typeAdapterConfig.NewConfig<UpdatePetRequest, UpdatePetInternalStorageRequest>();
+        typeAdapterConfig.NewConfig<UpdatePetRequest.VaccinationDto, UpdatePetInternalStorageRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<UpdatePetRequest.VaccinationType, UpdatePetInternalStorageRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<UpdatePetRequest.PetType, UpdatePetInternalStorageRequest.PetType>();
+        typeAdapterConfig.NewConfig<UpdatePetRequest.LostPetRecordDto, UpdatePetInternalStorageRequest.LostPetRecordDto>();
+        typeAdapterConfig.NewConfig<UpdatePetRequest.PetWasSeenDto, UpdatePetInternalStorageRequest.PetWasSeenDto>();
+        typeAdapterConfig.NewConfig<UpdatePetInternalStorageResponse, UpdatePetResponse>();
 
         return typeAdapterConfig;
     }

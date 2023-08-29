@@ -34,7 +34,7 @@ namespace Storage.Services.Repositories.Pets
             return response;
         }
 
-        public async Task<UpdatePetResponse> UpdatePetAsync(UpdatePetInternalStorageRequest request, CancellationToken cancellationToken)
+        public async Task<UpdatePetInternalStorageResponse> UpdatePetAsync(UpdatePetInternalStorageRequest request, CancellationToken cancellationToken)
         {
             Console.WriteLine($"{nameof(UpdatePetAsync)}: '{request?.Dump()}'");
             
@@ -44,9 +44,9 @@ namespace Storage.Services.Repositories.Pets
             
             var result = await _petStorageService.UpdateAsync(updateRequest, cancellationToken);
 
-            return new UpdatePetResponse
+            return new UpdatePetInternalStorageResponse
             {
-                
+                Id = result.Id?.ToGuid() ?? Guid.Empty
             };
         }
 

@@ -65,4 +65,13 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
 
         return _mapper.Map<Protos.Pets.GetPet.GetPetResponse>(pet);
     }
+
+    public async override Task<Protos.Pets.UpdatePet.UpdatePetResponse> updatePet(Protos.Pets.UpdatePet.UpdatePetRequest request, ServerCallContext context)
+    {
+        var updateRequest = _mapper.Map<UpdatePetRequest>(request);
+
+        var response = await _petsService.UpdatePetAsync(updateRequest, context.CancellationToken);
+
+        return _mapper.Map<Protos.Pets.UpdatePet.UpdatePetResponse>(response);
+    }
 }

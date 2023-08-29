@@ -1,6 +1,6 @@
-﻿namespace Storage.Entities.Pets;
+﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Pets;
 
-public sealed record UpdatePetInternalStorageRequest
+public sealed record UpdatePetRequest
 {
     public Guid Id { get; set; } = Guid.Empty;
 

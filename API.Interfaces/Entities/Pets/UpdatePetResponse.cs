@@ -1,6 +1,6 @@
 ﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Pets;
 
-public sealed record CreatePetResponse
+public sealed record UpdatePetResponse
 {
     public Guid Id { get; init; } = Guid.Empty;
 }
