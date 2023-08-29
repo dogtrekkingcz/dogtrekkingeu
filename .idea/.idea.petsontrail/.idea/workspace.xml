@@ -26,7 +26,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work" />
+    <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -302,15 +305,7 @@
       <workItem from="1692783806290" duration="18239000" />
       <workItem from="1692877247902" duration="41531000" />
       <workItem from="1693228047486" duration="8925000" />
-      <workItem from="1693300030427" duration="1217000" />
-    </task>
-    <task id="LOCAL-00002" summary="Moving back to dotnet 7.0 for all but maui apps">
-      <option name="closed" value="true" />
-      <created>1692260144830</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1692260144830</updated>
+      <workItem from="1693300030427" duration="3393000" />
     </task>
     <task id="LOCAL-00003" summary="forgot to add the shared ITokenProvider implementation">
       <option name="closed" value="true" />
@@ -696,7 +691,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693300842179</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="adding pets work">
+      <option name="closed" value="true" />
+      <created>1693301356431</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1693301356431</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -113,7 +113,12 @@ internal class PetsService : IPetsService
             {
                 UserId = _currentUserIdService.GetUserId()
             };
-        updateUserProfileRequest.Pets.Add(petRequest);
+
+        var existingPet = updateUserProfileRequest.Pets.FirstOrDefault(pet => pet.Id == request.Id);
+        if (existingPet == null)
+            updateUserProfileRequest.Pets.Add(petRequest);
+        else
+            existingPet = petRequest;
 
         await _userProfileRepositoryService.UpdateUserProfileAsync(updateUserProfileRequest, cancellationToken);
 
