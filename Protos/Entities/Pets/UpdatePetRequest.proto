@@ -7,18 +7,19 @@ import "google/type/datetime.proto";
 package updatepet;
 
 message UpdatePetRequest {
-  string UserId = 1;
-  string Contact = 2;
-  string Name = 3;
-  string Kennel = 4;
-  string Pedigree = 5;
-  string Chip = 6;
-  optional google.type.DateTime Birthday = 7;
-  optional google.type.DateTime Decease = 8;
-  string UriToPhoto = 9;
-  PetType Type = 10;
+  string Id = 1;
+  string UserId = 2;
+  string Contact = 3;
+  string Name = 4;
+  string Kennel = 5;
+  string Pedigree = 6;
+  string Chip = 7;
+  optional google.type.DateTime Birthday = 8;
+  optional google.type.DateTime Decease = 9;
+  string UriToPhoto = 10;
+  PetType Type = 11;
 
-  repeated Vaccination Vaccinations = 11;
+  repeated Vaccination Vaccinations = 12;
 }
 
 enum PetType {
