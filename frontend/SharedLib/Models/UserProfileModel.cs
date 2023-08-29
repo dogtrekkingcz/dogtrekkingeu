@@ -75,6 +75,8 @@ public sealed record UserProfileModel
 
         public string Contact { get; set; } = string.Empty;
 
+        public bool IsSelected { get; set; } = false;
+
         public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>
         {
             new VaccinationDto

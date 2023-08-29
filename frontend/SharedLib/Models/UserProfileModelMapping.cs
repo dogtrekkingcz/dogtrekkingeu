@@ -10,7 +10,8 @@ internal static class UserProfileModelMapping
             .Ignore(d => d.Rights);
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Address, UserProfileModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Contact, UserProfileModel.ContactDto>();
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Pet, UserProfileModel.PetDto>();
+        typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Pet, UserProfileModel.PetDto>()
+            .Ignore(d => d.IsSelected);
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.Vaccination, UserProfileModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.GetUserProfile.VaccinationType, UserProfileModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, UserProfileModel.LatLngDto>();
@@ -18,7 +19,8 @@ internal static class UserProfileModelMapping
         typeAdapterConfig.NewConfig<UserProfileModel, UserProfileModel>();
         typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, UserProfileModel.AddressDto>();
         typeAdapterConfig.NewConfig<UserProfileModel.ContactDto, UserProfileModel.ContactDto>();
-        typeAdapterConfig.NewConfig<UserProfileModel.PetDto, UserProfileModel.PetDto>();
+        typeAdapterConfig.NewConfig<UserProfileModel.PetDto, UserProfileModel.PetDto>()
+            .Ignore(d => d.IsSelected);
         typeAdapterConfig.NewConfig<UserProfileModel.VaccinationDto, UserProfileModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<UserProfileModel.VaccinationType, UserProfileModel.VaccinationType>();
         typeAdapterConfig.NewConfig<UserProfileModel.LatLngDto, UserProfileModel.LatLngDto>();

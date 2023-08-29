@@ -12,6 +12,7 @@
 @using Protos.Actions.CreateAction
 @using Protos.Activities.GetMyActivities
 @using DateTime = System.DateTime
+@using Android.Content
 
 @inject IGpsPositionService GpsPositionService;
 @inject PositionHistoryService PositionHistoryService;
@@ -106,6 +107,18 @@
         
         <button type="button" @onclick="async () => await CreateNewActionAsync()">Vytvoř novou akci</button>
     }
+    
+    <div class="row">
+        <div class="col-12">
+            Mazlíci, kteří se účastní:
+        </div>
+        @foreach (var pet in ServiceHelper.UserProfile.Pets)
+        {
+            <div class="col-12">
+                <input type="checkbox" @bind="@pet.IsSelected" />
+            </div>
+        }
+    </div>
     
     <div class="row">
         <div class="col-4">
@@ -216,7 +229,13 @@
             Description = string.Empty,
             Start = DateTimeOffset.Now.ToGoogleDateTime(),
             End = null,
-            PetIds = { },
+            PetIds = 
+            { 
+                ServiceHelper.UserProfile.Pets
+                    .Where(pet => pet.IsSelected)
+                    .Select(pet => pet.Id ?? Guid.Empty.ToString())
+                    .ToList()
+            },
             IsPublic = true,
             Positions = { }
         });
