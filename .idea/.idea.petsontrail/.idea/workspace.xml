@@ -27,23 +27,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work">
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/UpdatePetRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/UpdatePetResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Pets/UpdatePetRequest.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Protos/Entities/Pets/UpdatePetResponse.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetInternalStorageResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.GRPCService/Services/Pets/PetsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/CreatePetResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Entities/Pets/CreatePetResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.Interfaces/Services/IPetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.Interfaces/Services/IPetsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/PetsManage/PetsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Services/PetsManage/PetsServiceMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Services/PetsManage/PetsServiceMapping.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Entities/Pets/CreatePetRequest.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Entities/Pets/CreatePetRequest.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Pets.proto" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Pets.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Protos/Protos.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Protos/Protos.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetInternalStorageRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetInternalStorageRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Entities/Pets/UpdatePetResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Interfaces/IPetsRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Interfaces/IPetsRepositoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Storage/Services/Repositories/Pets/PetsRepositoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/PetUpdate.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/PetUpdate.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModelMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,7 +305,7 @@
       <workItem from="1692617743126" duration="33943000" />
       <workItem from="1692783806290" duration="18239000" />
       <workItem from="1692877247902" duration="41531000" />
-      <workItem from="1693228047486" duration="3689000" />
+      <workItem from="1693228047486" duration="7296000" />
     </task>
     <task id="LOCAL-00001" summary="removing testing empty project">
       <option name="closed" value="true" />
@@ -689,7 +675,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693231122232</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="adding pets work">
+      <option name="closed" value="true" />
+      <created>1693293587178</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1693293587178</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -820,6 +814,20 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/PetUpdate.razor</url>
+          <line>47</line>
+          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\PetUpdate.razor" initialLine="47" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

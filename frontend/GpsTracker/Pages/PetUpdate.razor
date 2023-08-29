@@ -1,14 +1,42 @@
 ﻿@page "/pet_update/{Id}"
 @using Protos.UserProfiles
 @using Protos.Pets
+@using Protos.Pets.GetPet
+@using SharedLib.Models
+@using MapsterMapper
 
 @inject UserProfiles.UserProfilesClient UserProfileClient
-@inject Pets.PetsClient PetsClient  
+@inject Pets.PetsClient PetsClient
+@inject IMapper Mapper;
 
-
+@if (Pet == null)
+{
+    <h3>-- Nahrávám --</h3>
+}
+else
+{
+    <h3>@Pet.Name</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-4">Jméno</div>
+            <div class="col-sm-12 col-8">
+                <input type="text" @bind="@Pet.Name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-4">Čip</div>
+            <div class="col-sm-12 col-8">
+                <input type="text" @bind="@Pet.Chip" />
+            </div>
+        </div>
+    </div>
+    <button type="button" @onclick="async () => await SavePetAsync()">Uložit změny</button>
+}
 
 @code {
+    [Parameter]
     public string Id { get; set; } = string.Empty;
+    private PetModel Pet { get; set; } = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -17,6 +45,15 @@
 
     private async Task ReloadDataAsync()
     {
-        
+        var response = await PetsClient.getPetAsync(new GetPetRequest { Id = Id });
+
+        Pet = Mapper.Map<PetModel>(response);
+    }
+
+    private async Task SavePetAsync()
+    {
+        var request = Mapper.Map<Protos.Pets.UpdatePet.UpdatePetRequest>(Pet);
+
+        await PetsClient.updatePetAsync(request);
     }
 }

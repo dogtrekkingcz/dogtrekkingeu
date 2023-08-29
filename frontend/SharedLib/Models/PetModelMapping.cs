@@ -19,6 +19,16 @@ internal static class PetModelMapping
         typeAdapterConfig.NewConfig<PetModel.PetType, Protos.Pets.CreatePet.PetType>();
         typeAdapterConfig.NewConfig<PetModel.LostPetRecordDto, Protos.Pets.CreatePet.LostPetRecord>();
         typeAdapterConfig.NewConfig<PetModel.PetWasSeenDto, Protos.Pets.CreatePet.PetWasSeen>();
+
+        typeAdapterConfig.NewConfig<Protos.Pets.GetPet.GetPetResponse, SharedLib.Models.PetModel>();
+        typeAdapterConfig.NewConfig<Protos.Pets.GetPet.VaccinationType, SharedLib.Models.PetModel.VaccinationType>();
+        typeAdapterConfig.NewConfig<Protos.Pets.GetPet.Vaccination, SharedLib.Models.PetModel.VaccinationDto>();
+        typeAdapterConfig.NewConfig<Protos.Pets.GetPet.PetType, SharedLib.Models.PetModel.PetType>();
+        
+        typeAdapterConfig.NewConfig<PetModel, Protos.Pets.UpdatePet.UpdatePetRequest>();
+        typeAdapterConfig.NewConfig<PetModel.VaccinationType, Protos.Pets.UpdatePet.VaccinationType>();
+        typeAdapterConfig.NewConfig<PetModel.VaccinationDto, Protos.Pets.UpdatePet.Vaccination>();
+        typeAdapterConfig.NewConfig<PetModel.PetType, Protos.Pets.UpdatePet.PetType>();
         
         return typeAdapterConfig;
     }
