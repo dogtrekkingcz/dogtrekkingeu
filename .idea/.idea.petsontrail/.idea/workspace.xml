@@ -27,10 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6fd75f8-8f56-4b52-9527-b44491968144" name="Changes" comment="adding pets work">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.petsontrail/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/PetModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/UserProfileModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/UserProfileModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/SharedLib/Models/UserProfileModelMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SharedLib/Models/UserProfileModelMapping.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +48,7 @@
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/MainApplication.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/Services/PositionService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/frontend/GpsTracker/Platforms/Android/WebAuthenticationCallbackActivity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/projects/_private/petsontrail.eu/frontend/SharedLib/Models/PetModel.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -308,15 +307,7 @@
       <workItem from="1692783806290" duration="18239000" />
       <workItem from="1692877247902" duration="41531000" />
       <workItem from="1693228047486" duration="8925000" />
-      <workItem from="1693300030427" duration="5012000" />
-    </task>
-    <task id="LOCAL-00004" summary="forgot to add the shared ITokenProvider implementation">
-      <option name="closed" value="true" />
-      <created>1692263597723</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1692263597723</updated>
+      <workItem from="1693300030427" duration="7819000" />
     </task>
     <task id="LOCAL-00005" summary="moving back to .net 7.0 in the dockerfiles">
       <option name="closed" value="true" />
@@ -702,7 +693,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693303893484</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="adding pets work">
+      <option name="closed" value="true" />
+      <created>1693317751980</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1693317751980</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -808,7 +807,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>244</line>
+          <line>243</line>
           <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="174" isMultiMethodBreakpoint="true">
             <option name="multiMethodBreakpoint" value="true" />
             <startOffsets>
@@ -819,20 +818,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/Tracking.razor</url>
-          <line>175</line>
-          <properties documentPath="C:\projects\_private\petsontrail.eu\frontend\GpsTracker\Pages\Tracking.razor" initialLine="162" isMultiMethodBreakpoint="true">
-            <option name="multiMethodBreakpoint" value="true" />
-            <startOffsets>
-              <option value="-1" />
-            </startOffsets>
-            <endOffsets>
-              <option value="-1" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/frontend/GpsTracker/Pages/PetUpdate.razor</url>
