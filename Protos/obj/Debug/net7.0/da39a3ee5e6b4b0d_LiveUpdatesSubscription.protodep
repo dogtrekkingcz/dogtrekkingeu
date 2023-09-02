@@ -1,0 +1,6 @@
+obj\Debug\net7.0/LiveUpdatesSubscription.cs \
+obj\Debug\net7.0/LiveUpdatesSubscriptionGrpc.cs: C:/Users/Radek/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/duration.proto\
+ google/type/datetime.proto\
+ Entities/LiveUpdatesSubscription/LiveUpdatesSubscriptionRequest.proto\
+ Entities/LiveUpdatesSubscription/LiveUpdatesSubscriptionItem.proto\
+ LiveUpdatesSubscription.proto

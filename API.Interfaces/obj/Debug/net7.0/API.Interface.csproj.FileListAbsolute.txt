@@ -1,0 +1,12 @@
+E:\projects\petsontrail.eu\API.Interfaces\bin\Debug\net7.0\API.Interface.deps.json
+E:\projects\petsontrail.eu\API.Interfaces\bin\Debug\net7.0\API.Interface.dll
+E:\projects\petsontrail.eu\API.Interfaces\bin\Debug\net7.0\API.Interface.pdb
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\API.Interface.GeneratedMSBuildEditorConfig.editorconfig
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\API.Interface.AssemblyInfoInputs.cache
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\API.Interface.AssemblyInfo.cs
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\API.Interface.csproj.CoreCompileInputs.cache
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\API.Interface.sourcelink.json
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\API.Interface.dll
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\refint\API.Interface.dll
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\API.Interface.pdb
+E:\projects\petsontrail.eu\API.Interfaces\obj\Debug\net7.0\ref\API.Interface.dll

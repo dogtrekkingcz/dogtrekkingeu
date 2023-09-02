@@ -1,0 +1,16 @@
+E:\projects\petsontrail.eu\frontend\SharedLib\bin\Release\net7.0\SharedLib.deps.json
+E:\projects\petsontrail.eu\frontend\SharedLib\bin\Release\net7.0\SharedLib.dll
+E:\projects\petsontrail.eu\frontend\SharedLib\bin\Release\net7.0\SharedLib.pdb
+E:\projects\petsontrail.eu\frontend\SharedLib\bin\Release\net7.0\Protos.dll
+E:\projects\petsontrail.eu\frontend\SharedLib\bin\Release\net7.0\Protos.pdb
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.csproj.AssemblyReference.cache
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.GeneratedMSBuildEditorConfig.editorconfig
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.AssemblyInfoInputs.cache
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.AssemblyInfo.cs
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.csproj.CoreCompileInputs.cache
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.sourcelink.json
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.csproj.CopyComplete
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.dll
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\refint\SharedLib.dll
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\SharedLib.pdb
+E:\projects\petsontrail.eu\frontend\SharedLib\obj\Release\net7.0\ref\SharedLib.dll

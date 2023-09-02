@@ -1,0 +1,12 @@
+E:\projects\petsontrail.eu\Shared\Constants\bin\Debug\net7.0\Constants.deps.json
+E:\projects\petsontrail.eu\Shared\Constants\bin\Debug\net7.0\Constants.dll
+E:\projects\petsontrail.eu\Shared\Constants\bin\Debug\net7.0\Constants.pdb
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\Constants.GeneratedMSBuildEditorConfig.editorconfig
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\Constants.AssemblyInfoInputs.cache
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\Constants.AssemblyInfo.cs
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\Constants.csproj.CoreCompileInputs.cache
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\Constants.sourcelink.json
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\Constants.dll
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\refint\Constants.dll
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\Constants.pdb
+E:\projects\petsontrail.eu\Shared\Constants\obj\Debug\net7.0\ref\Constants.dll

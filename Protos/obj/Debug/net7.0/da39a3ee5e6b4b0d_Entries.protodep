@@ -1,0 +1,9 @@
+obj\Debug\net7.0/Entries.cs \
+obj\Debug\net7.0/EntriesGrpc.cs: C:/Users/Radek/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/duration.proto\
+ google/type/datetime.proto\
+ google/type/latlng.proto\
+ Entities/Entries/CreateEntryRequest.proto\
+ Entities/Entries/CreateEntryResponse.proto\
+ Entities/Entries/GetEntriesByActionResponse.proto\
+ Entities/Entries/GetAllEntriesResponse.proto\
+ Entries.proto

@@ -1,0 +1,4 @@
+obj\Release\net7.0/ActionRights.cs \
+obj\Release\net7.0/ActionRightsGrpc.cs: Entities/ActionRights/GetActionRightsRequest.proto\
+ Entities/ActionRights/GetActionRightsResponse.proto\
+ ActionRights.proto

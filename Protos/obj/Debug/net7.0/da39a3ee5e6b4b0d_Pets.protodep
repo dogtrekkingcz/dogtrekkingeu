@@ -1,0 +1,16 @@
+obj\Debug\net7.0/Pets.cs \
+obj\Debug\net7.0/PetsGrpc.cs: Entities/Pets/GetAllPetsRequest.proto\
+ C:/Users/Radek/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/duration.proto\
+ google/type/datetime.proto\
+ Entities/Pets/GetAllPetsResponse.proto\
+ Entities/Pets/CreatePetRequest.proto\
+ Entities/Pets/CreatePetResponse.proto\
+ Entities/Pets/GetPetsFilteredByChipRequest.proto\
+ Entities/Pets/GetPetsFilteredByChipResponse.proto\
+ Entities/Pets/DeletePetRequest.proto\
+ Entities/Pets/DeletePetResponse.proto\
+ Entities/Pets/GetPetRequest.proto\
+ Entities/Pets/GetPetResponse.proto\
+ Entities/Pets/UpdatePetRequest.proto\
+ Entities/Pets/UpdatePetResponse.proto\
+ Pets.proto

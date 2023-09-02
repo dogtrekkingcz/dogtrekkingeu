@@ -1,0 +1,3 @@
+obj\Debug\net7.0\Entities\Pets/GetPetResponse.cs: C:/Users/Radek/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/duration.proto\
+ google/type/datetime.proto\
+ Entities/Pets/GetPetResponse.proto

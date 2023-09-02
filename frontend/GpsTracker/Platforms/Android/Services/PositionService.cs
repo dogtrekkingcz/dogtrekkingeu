@@ -55,7 +55,7 @@ public class PositionService : Service
         var notification = new NotificationCompat.Builder(this, ServiceChannelId)
             .SetContentTitle("PetsOnTrail Tracking")
             .SetContentText("Is running")
-            .SetSmallIcon(Resource.Drawable.dotnet_bot)
+            .SetSmallIcon(Resource.Drawable.abc_star_black_48dp)
             .SetContentIntent(pendingIntent)
             .Build();
 

@@ -1,0 +1,9 @@
+obj\Debug\net7.0/Checkpoints.cs \
+obj\Debug\net7.0/CheckpointsGrpc.cs: C:/Users/Radek/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/duration.proto\
+ google/type/datetime.proto\
+ google/type/latlng.proto\
+ Entities/Checkpoints/AddCheckpointRequest.proto\
+ Entities/Checkpoints/AddCheckpointResponse.proto\
+ Entities/Checkpoints/GetCheckpointsRequest.proto\
+ Entities/Checkpoints/GetCheckpointsResponse.proto\
+ Checkpoints.proto
