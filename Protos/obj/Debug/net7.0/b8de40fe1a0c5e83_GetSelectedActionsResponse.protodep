@@ -1,4 +1,0 @@
-obj\Debug\net7.0\Entities\Actions/GetSelectedActionsResponse.cs: C:/Users/Radek/.nuget/packages/grpc.tools/2.50.0/build/native/include/google/protobuf/duration.proto\
- google/type/datetime.proto\
- google/type/latlng.proto\
- Entities/Actions/GetSelectedActionsResponse.proto

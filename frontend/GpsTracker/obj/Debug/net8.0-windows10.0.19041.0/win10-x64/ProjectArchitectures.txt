@@ -1,1 +1,0 @@
-E:\projects\petsontrail.eu\frontend\GpsTracker\GpsTracker.csproj;x64
