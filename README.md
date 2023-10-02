@@ -8,6 +8,4 @@ And finally - if you found the project useful anyhow - I would be very happy if 
 
 ![Kód QR](https://user-images.githubusercontent.com/39901955/225464267-f3b10b96-72ae-4fde-a7d5-b949a7c48bd8.png)
 
-qrencode "bitcoin:36j8C43FSftiQVjAdxzZH1GF4NAMF39k3M" -lQ -o- | display
-
 And finally: take care, I am sharing this project under the GPL license. Check the details in the LICENSE file.
