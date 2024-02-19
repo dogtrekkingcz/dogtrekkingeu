@@ -57,24 +57,25 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazor.Bootstrap" Version="1.10.2" />
+        <PackageReference Include="Blazor.Bootstrap" Version="1.11.1" />
         <PackageReference Include="IdentityModel.OidcClient" Version="5.2.1" />
-        <PackageReference Include="Mapster" Version="7.4.0-pre06" />
-        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1-pre02" />
-        <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.0-rc.1.23421.29" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.0-rc.1.23421.29" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.0-rc.1.23421.29" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0-rc.1.23419.4" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-rc.1.23419.4" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-rc.1.23419.4" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.1.23419.4" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-rc.1.23419.4" />
-        <PackageReference Include="Microsoft.JSInterop" Version="8.0.0-rc.1.23421.29" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0-rc.1.23419.4" />
+        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.JSInterop" Version="8.0.2" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
         <PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
-        <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
+        <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -97,14 +98,6 @@
     </ItemGroup>
 
 
-
-
-
-    <ItemGroup>
-      <Folder Include="obj\Debug\net8.0-windows10.0.19041.0\win10-x64\Platforms\Windows\" />
-    </ItemGroup>
-
-
     <!-- Build Properties must be defined within these property groups to ensure successful publishing
          to the Mac App Store. See: https://aka.ms/maui-publish-app-store#define-build-properties-in-your-project-file -->
     <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Debug'">
@@ -115,4 +108,8 @@
         <CodesignEntitlements>Platforms/MacCatalyst/Entitlements.Release.plist</CodesignEntitlements>
         <UseHardenedRuntime>true</UseHardenedRuntime>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.7" />
+    </ItemGroup>
 </Project>

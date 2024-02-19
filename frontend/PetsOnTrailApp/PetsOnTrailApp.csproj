@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
@@ -11,24 +11,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazor.Bootstrap" Version="1.9.5" />
-        <PackageReference Include="BlazorDateRangePicker" Version="4.3.0" />
-        <PackageReference Include="Blazored.Modal" Version="7.1.0" />
-        <PackageReference Include="bootstrap" Version="5.2.3" />
-        <PackageReference Include="Google.Protobuf" Version="3.22.1" />
-        <PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
-        <PackageReference Include="Grpc.Net.ClientFactory" Version="2.52.0" />
-        <PackageReference Include="Grpc.Tools" Version="2.52.0">
+        <PackageReference Include="Blazor.Bootstrap" Version="1.11.1" />
+        <PackageReference Include="BlazorDateRangePicker" Version="5.2.0" />
+        <PackageReference Include="Blazored.Modal" Version="7.2.0" />
+        <PackageReference Include="bootstrap" Version="5.3.2" />
+        <PackageReference Include="Google.Protobuf" Version="3.25.3" />
+        <PackageReference Include="Grpc.Net.Client" Version="2.60.0" />
+        <PackageReference Include="Grpc.Net.ClientFactory" Version="2.60.0" />
+        <PackageReference Include="Grpc.Tools" Version="2.61.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Mapster" Version="7.3.0" />
-        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.4" />
+        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.2" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.2" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.3" />
+      <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
     </ItemGroup>
 
     <ItemGroup>
@@ -79,7 +81,6 @@
 
     <ItemGroup>
       <Folder Include="Events" />
-      <Folder Include="obj\Debug\net7.0" />
       <Folder Include="Pages\Actions\View" />
     </ItemGroup>
 
