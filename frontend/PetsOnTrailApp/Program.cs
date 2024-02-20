@@ -17,6 +17,7 @@ using AppTokenProvider = PetsOnTrailApp.Providers.AppTokenProvider;
 using TokenStorage = PetsOnTrailApp.Providers.TokenStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
