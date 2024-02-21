@@ -102,6 +102,7 @@ services:
       KEYCLOAK_PASSWORD: asc88a8c0ssssqs
     ports:
       - 8443:8443
+      - 9990:9990
     volumes:
       - /petsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/etc/x509/https/tls.crt
