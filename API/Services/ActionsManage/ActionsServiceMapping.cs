@@ -123,6 +123,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.MerchandizeItemDto, GetActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PaymentDefinitionDto, GetActionResponse.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleItemDto, GetActionResponse.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PassedCheckpointDto, GetActionResponse.PassedCheckpointDto>();
 
         typeAdapterConfig.NewConfig<UpdateActionRequest, UpdateActionInternalStorageRequest>()
             .Ignore(d => d.UserId);
