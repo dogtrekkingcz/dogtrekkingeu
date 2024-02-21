@@ -24,8 +24,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 try 
 { 
-    var certPem = File.ReadAllText("/app/certs/fullchain.pem");
-    var keyPem = File.ReadAllText("/app/certs/privkey.pem");
+    var certPem = File.ReadAllText("/app/fullchain.pem");
+    var keyPem = File.ReadAllText("/app/privkey.pem");
     var x509 = X509Certificate2.CreateFromPem(certPem, keyPem);
 
     builder.WebHost.ConfigureKestrel(s => {
@@ -39,7 +39,7 @@ catch (Exception ex)
 {
     try
     {
-        var files = Directory.EnumerateFiles("/", "*", SearchOption.AllDirectories);
+        var files = Directory.EnumerateFiles("/app/", "*", SearchOption.AllDirectories);
 
         foreach (string currentFile in files)
         {

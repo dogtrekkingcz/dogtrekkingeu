@@ -12,7 +12,8 @@ services:
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
     volumes:
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu:/app/certs:ro
+      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/app/privkey.pem:ro
+      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/app/fullchain.pem:ro
     networks:
       - backend
       - frontend
@@ -28,7 +29,8 @@ services:
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
     volumes:
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu:/app/certs:ro
+      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/app/privkey.pem:ro
+      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/app/fullchain.pem:ro
     networks:
       - frontend
       - backend
@@ -102,8 +104,8 @@ services:
       - 8443:8443
     volumes:
       - /petsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
-      - /petsontrail_data/certbot/conf/live/petsontrail.eu/fullchain.pem:/etc/x509/https/tls.crt
-      - /petsontrail_data/certbot/conf/live/petsontrail.eu/privkey.pem:/etc/x509/https/tls.key
+      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/etc/x509/https/tls.crt
+      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/etc/x509/https/tls.key
     depends_on:
       - postgres
     networks:
