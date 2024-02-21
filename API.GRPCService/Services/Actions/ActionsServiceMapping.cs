@@ -34,7 +34,9 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsResponse.MerchandizeItemDto, Protos.Actions.GetAllActions.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.PaymentDefinitionDto, Protos.Actions.GetAllActions.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.ActionSaleItemDto, Protos.Actions.GetAllActions.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<GetAllActionsResponse.PassedCheckpointDto, Protos.Actions.GetAllActions.PassedCheckpointDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.LatLngDto, Google.Type.LatLng>();
+        
         
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.GetSelectedActionsRequest, GetSelectedActionsRequest>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse, Protos.Actions.GetSelectedActions.GetSelectedActionsResponse>();
