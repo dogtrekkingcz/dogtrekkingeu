@@ -8,16 +8,35 @@ using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var certPem = File.ReadAllText("/app/certs/fullchain.pem");
-var keyPem = File.ReadAllText("/app/certs/privkey.pem");
-var x509 = X509Certificate2.CreateFromPem(certPem, keyPem);
+try
+{
+    var certPem = File.ReadAllText("/app/certs/fullchain.pem");
+    var keyPem = File.ReadAllText("/app/certs/privkey.pem");
+    var x509 = X509Certificate2.CreateFromPem(certPem, keyPem);
 
-builder.WebHost.ConfigureKestrel(s => {
-    s.ListenAnyIP(443, options =>
-    {
-        options.UseHttps(x509);
+    builder.WebHost.ConfigureKestrel(s => {
+        s.ListenAnyIP(443, options =>
+        {
+            options.UseHttps(x509);
+        });
     });
-});
+}
+catch (Exception ex)
+{
+    try
+    {
+        var files = Directory.EnumerateFiles("/", "*", SearchOption.AllDirectories);
+
+        foreach (string currentFile in files)
+        {
+            Console.WriteLine(currentFile);
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+}
 
 builder.Services.AddControllers();
 builder.Services.AddMediator();
