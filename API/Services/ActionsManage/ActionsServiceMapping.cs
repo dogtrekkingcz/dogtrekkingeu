@@ -32,7 +32,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.MerchandizeItemDto, GetAllActionsResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.PaymentDefinitionDto, GetAllActionsResponse.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.ActionSaleItemDto, GetAllActionsResponse.ActionSaleItemDto>();
-        
+        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.PassedCheckpointDto, GetAllActionsResponse.PassedCheckpointDto>();
 
         typeAdapterConfig.NewConfig<GetSelectedActionsRequest, GetSelectedActionsInternalStorageRequest>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse, GetSelectedActionsResponse>();
