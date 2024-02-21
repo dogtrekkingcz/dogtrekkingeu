@@ -4,8 +4,20 @@ using API.WebApiService.Validators;
 using Mapster;
 using Storage;
 using Storage.Options;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var certPem = File.ReadAllText("/app/certs/fullchain.pem");
+var keyPem = File.ReadAllText("/app/certs/privkey.pem");
+var x509 = X509Certificate2.CreateFromPem(certPem, keyPem);
+
+builder.WebHost.ConfigureKestrel(s => {
+    s.ListenAnyIP(443, options =>
+    {
+        options.UseHttps(x509);
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddMediator();
