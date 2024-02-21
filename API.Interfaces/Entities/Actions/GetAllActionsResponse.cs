@@ -121,6 +121,17 @@ public sealed record GetAllActionsResponse
         public List<MerchandizeItemDto> Merchandize { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();
+
+        public List<PassedCheckpointDto> PassedCheckpoints { get; set; } = new();
+}
+
+    public class PassedCheckpointDto
+    {
+        public string Id { get; set; }
+
+        public DateTimeOffset? Passed { get; set; }
+
+        public LatLngDto Position { get; set; } = new();
     }
     
     public class NoteDto
