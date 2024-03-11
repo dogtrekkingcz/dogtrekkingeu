@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
+import android.location.Location
 import android.os.Build
 import android.os.IBinder
 import android.os.Looper
@@ -38,6 +39,13 @@ class LocationTrackerService : Service() {
     private lateinit var notification: Notification
     private lateinit var notificationManager: NotificationManager
 
+    private lateinit var locationUpdateListener: LocationUpdateListener
+    private lateinit var notSynchronizedlocations: MutableList<Location>
+
+    public fun setLocationUpdateListener(listener: LocationUpdateListener) {
+        locationUpdateListener = listener
+    }
+
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
@@ -57,6 +65,18 @@ class LocationTrackerService : Service() {
                     var message = "[lat : ${location.latitude}, lng : ${location.longitude}]"
                     notificationBuilder.setContentText(message);
                     notificationManager.notify(100, notificationBuilder.build())
+
+                    if (locationUpdateListener != null) {
+                        if (notSynchronizedlocations.isNotEmpty()) {
+                            locationUpdateListener.onUpdateMultipleLocations(notSynchronizedlocations)
+                            notSynchronizedlocations.clear()
+                        }
+
+                        locationUpdateListener.onUpdateLocation(location)
+                    }
+                    else {
+                        notSynchronizedlocations.add(location)
+                    }
                 }
             }
         }

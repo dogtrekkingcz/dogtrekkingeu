@@ -1,5 +1,6 @@
 package eu.petsontrail.petsontrailtracker
 
+import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -11,9 +12,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import eu.petsontrail.petsontrailtracker.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), LocationUpdateListener {
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var locations: MutableList<Location>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,5 +37,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onUpdateLocation(location: Location): Int {
+        locations.add(location)
+
+        return 1
+    }
+
+    override fun onUpdateMultipleLocations(newLocations: MutableList<Location>): Int {
+        locations.addAll(newLocations)
+
+        return newLocations.size
     }
 }
