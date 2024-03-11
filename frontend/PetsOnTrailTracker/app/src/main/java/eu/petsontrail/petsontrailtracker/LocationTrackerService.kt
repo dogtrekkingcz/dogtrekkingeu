@@ -1,11 +1,13 @@
 package eu.petsontrail.petsontrailtracker
 
 import android.Manifest
+import android.app.Notification
 import android.app.Notification.EXTRA_NOTIFICATION_ID
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
@@ -17,6 +19,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -28,12 +31,18 @@ import com.google.android.gms.tasks.CancellationTokenSource
 
 
 class LocationTrackerService : Service() {
+    private lateinit var locationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
+    private lateinit var notificationBuilder: NotificationCompat.Builder
+    private lateinit var notificationChannel: NotificationChannel
+    private lateinit var notification: Notification
+    private lateinit var notificationManager: NotificationManager
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate() {
         super.onCreate()
 
@@ -43,11 +52,16 @@ class LocationTrackerService : Service() {
                 for (location in locationResult.locations){
                     Log.d(
                         "Position",
-                        "Current Location = [lat : ${location.latitude}, lng : ${location.longitude}]",
-                    )
+                        "Current Location = [lat : ${location.latitude}, lng : ${location.longitude}]")
+
+                    var message = "[lat : ${location.latitude}, lng : ${location.longitude}]"
+                    notificationBuilder.setContentText(message);
+                    notificationManager.notify(100, notificationBuilder.build())
                 }
             }
         }
+
+        startForeground()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -70,15 +84,15 @@ class LocationTrackerService : Service() {
             return
         }
 
-        val channel = NotificationChannel(
+        notificationChannel = NotificationChannel(
             "CHANNEL_ID",
             "PetsOnTrailTrackerChannel",
             NotificationManager.IMPORTANCE_DEFAULT
         )
-        channel.description = "PetsOnTrail Tracker channel for foreground service notification"
+        notificationChannel.description = "PetsOnTrail Tracker channel for foreground service notification"
 
-        val notificationManager = getSystemService<NotificationManager>(NotificationManager::class.java)
-        notificationManager.createNotificationChannel(channel)
+        notificationManager = getSystemService<NotificationManager>(NotificationManager::class.java)
+        notificationManager.createNotificationChannel(notificationChannel)
 
         val intent = Intent(this, LocationTrackerService::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -92,17 +106,17 @@ class LocationTrackerService : Service() {
         val snoozePendingIntent: PendingIntent =
             PendingIntent.getBroadcast(this, 0, snoozeIntent, PendingIntent.FLAG_IMMUTABLE)
 
-        val builder = NotificationCompat.Builder(this, "CHANNEL_ID")
+        notificationBuilder = NotificationCompat.Builder(this, "CHANNEL_ID")
             .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-            .setContentTitle("My notification")
-            .setContentText("Hello World!")
+            .setContentTitle("PetsOnTrail Tracker")
+            .setContentText("Position: ???")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_tracking),
                 snoozePendingIntent)
             .setAutoCancel(true)
 
-        val notification = builder.build()
+        notification = notificationBuilder.build()
 
         ServiceCompat.startForeground(
             /* service = */ this,
@@ -129,19 +143,16 @@ class LocationTrackerService : Service() {
         }
         Log.d("Service Status","Starting Service")
 
-        startForeground()
+        locationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
 
-        val locationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
-
-        getLocation(locationClient)
+        getLocation()
 
         return START_STICKY
     }
 
-    fun getLocation(locationClient: FusedLocationProviderClient) {
+    fun getLocation() {
         var locationRequest: LocationRequest
-        locationRequest = LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 1000).build()
-
+        locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000).build()
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -161,8 +172,9 @@ class LocationTrackerService : Service() {
             return
         }
 
+
         locationClient.getCurrentLocation(
-            Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token,
+            Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token
         ).addOnSuccessListener { location ->
             location?.let {
                 Log.d(
