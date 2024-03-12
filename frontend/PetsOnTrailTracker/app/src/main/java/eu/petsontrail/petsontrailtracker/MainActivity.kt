@@ -3,12 +3,13 @@ package eu.petsontrail.petsontrailtracker
 import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.databinding.ActivityMainBinding
 
 
@@ -37,6 +38,11 @@ class MainActivity : AppCompatActivity(), LocationUpdateListener {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "petsOnTrailTracker_db"
+        ).build()
     }
 
     override fun onUpdateLocation(location: Location): Int {

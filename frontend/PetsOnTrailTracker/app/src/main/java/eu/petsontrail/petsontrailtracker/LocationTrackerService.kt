@@ -7,7 +7,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
@@ -20,8 +19,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
+import androidx.room.Room
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -29,6 +28,10 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
+import eu.petsontrail.petsontrailtracker.data.AppDatabase
+import eu.petsontrail.petsontrailtracker.data.LocationDto
+import eu.petsontrail.petsontrailtracker.mapper.toLocationDto
+import java.util.UUID
 
 
 class LocationTrackerService : Service() {
@@ -40,7 +43,9 @@ class LocationTrackerService : Service() {
     private lateinit var notificationManager: NotificationManager
 
     private lateinit var locationUpdateListener: LocationUpdateListener
-    private lateinit var notSynchronizedlocations: MutableList<Location>
+
+    private lateinit var db: AppDatabase
+    private lateinit var currentActivityId: UUID
 
     public fun setLocationUpdateListener(listener: LocationUpdateListener) {
         locationUpdateListener = listener
@@ -54,10 +59,16 @@ class LocationTrackerService : Service() {
     override fun onCreate() {
         super.onCreate()
 
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "petsOnTrailTracker_db"
+        ).build()
+
+        currentActivityId = UUID.randomUUID()
+
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                locationResult ?: return
-                for (location in locationResult.locations){
+                for (location in locationResult.locations) {
                     Log.d(
                         "Position",
                         "Current Location = [lat : ${location.latitude}, lng : ${location.longitude}]")
@@ -66,17 +77,9 @@ class LocationTrackerService : Service() {
                     notificationBuilder.setContentText(message);
                     notificationManager.notify(100, notificationBuilder.build())
 
-                    if (locationUpdateListener != null) {
-                        if (notSynchronizedlocations.isNotEmpty()) {
-                            locationUpdateListener.onUpdateMultipleLocations(notSynchronizedlocations)
-                            notSynchronizedlocations.clear()
-                        }
+                    locationUpdateListener.onUpdateLocation(location)
 
-                        locationUpdateListener.onUpdateLocation(location)
-                    }
-                    else {
-                        notSynchronizedlocations.add(location)
-                    }
+                    db.locationDao().insertOne(location.toLocationDto(currentActivityId))
                 }
             }
         }

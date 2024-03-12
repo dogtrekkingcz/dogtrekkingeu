@@ -1,18 +1,23 @@
 package eu.petsontrail.petsontrailtracker.ui.home
 
-import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.R
+import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import eu.petsontrail.petsontrailtracker.LocationTrackerService
+import eu.petsontrail.petsontrailtracker.LocationUpdateListener
 import eu.petsontrail.petsontrailtracker.databinding.FragmentHomeBinding
 
 
@@ -35,11 +40,6 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
 
         val btnTrackingStartStop: Button = binding.buttonStartStopTracking
         btnTrackingStartStop.setOnClickListener {
