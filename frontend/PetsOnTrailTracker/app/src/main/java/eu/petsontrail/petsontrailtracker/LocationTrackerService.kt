@@ -84,6 +84,7 @@ class LocationTrackerService : Service() {
             }
         }
 
+
         startForeground()
     }
 
