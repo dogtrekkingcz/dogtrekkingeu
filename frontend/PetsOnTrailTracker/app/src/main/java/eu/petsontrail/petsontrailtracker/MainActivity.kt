@@ -23,6 +23,14 @@ class MainActivity : AppCompatActivity(), LocationUpdateListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // TODO: No db queries on main thread! Needs to be done differently!
+        //val db = Room.databaseBuilder(
+        //    applicationContext,
+        //    AppDatabase::class.java, "petsOnTrailTracker_db"
+        //)
+        //    .enableMultiInstanceInvalidation()
+        //    .build()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,11 +46,6 @@ class MainActivity : AppCompatActivity(), LocationUpdateListener {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "petsOnTrailTracker_db"
-        ).build()
     }
 
     override fun onUpdateLocation(location: Location): Int {

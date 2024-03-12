@@ -10,7 +10,7 @@ import java.util.UUID
 @Entity(tableName = "my_locations")
 data class LocationDto(
     @PrimaryKey val uid: UUID,
-    @ColumnInfo(name = "time") val time: LocalDate,
+    @ColumnInfo(name = "time") val time: Long,
     @ColumnInfo(name = "id_activity") val activityId: UUID?,
     @ColumnInfo(name = "provider") val provider: String?,
     @ColumnInfo(name = "time_ms") val timeMs: Long?,

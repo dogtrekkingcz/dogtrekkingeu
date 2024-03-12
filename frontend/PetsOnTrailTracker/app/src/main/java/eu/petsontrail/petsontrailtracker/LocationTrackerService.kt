@@ -10,7 +10,6 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
-import android.location.Location
 import android.os.Build
 import android.os.IBinder
 import android.os.Looper
@@ -29,7 +28,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
-import eu.petsontrail.petsontrailtracker.data.LocationDto
 import eu.petsontrail.petsontrailtracker.mapper.toLocationDto
 import java.util.UUID
 
@@ -42,13 +40,13 @@ class LocationTrackerService : Service() {
     private lateinit var notification: Notification
     private lateinit var notificationManager: NotificationManager
 
-    private lateinit var locationUpdateListener: LocationUpdateListener
+    // private lateinit var locationUpdateListener: LocationUpdateListener
 
     private lateinit var db: AppDatabase
     private lateinit var currentActivityId: UUID
 
     public fun setLocationUpdateListener(listener: LocationUpdateListener) {
-        locationUpdateListener = listener
+        // locationUpdateListener = listener
     }
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -59,10 +57,13 @@ class LocationTrackerService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        db = Room.databaseBuilder(
+        val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "petsOnTrailTracker_db"
-        ).build()
+        )
+            .enableMultiInstanceInvalidation()
+            .allowMainThreadQueries() // TODO: bad practice
+            .build()
 
         currentActivityId = UUID.randomUUID()
 
@@ -77,7 +78,7 @@ class LocationTrackerService : Service() {
                     notificationBuilder.setContentText(message);
                     notificationManager.notify(100, notificationBuilder.build())
 
-                    locationUpdateListener.onUpdateLocation(location)
+                    // locationUpdateListener.onUpdateLocation(location)
 
                     db.locationDao().insertOne(location.toLocationDto(currentActivityId))
                 }
