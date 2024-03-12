@@ -12,20 +12,20 @@ import java.util.UUID
 @Dao
 interface LocationDao {
     @Query("SELECT * FROM my_locations")
-    fun getAll(): List<ActivityDto>
+    suspend fun getAll(): List<ActivityDto>
 
     @Query("SELECT * FROM my_locations WHERE uid IN (:locationIds)")
-    fun loadAllByIds(locationIds: IntArray): List<LocationDto>
+    suspend fun loadAllByIds(locationIds: IntArray): List<LocationDto>
 
     @Query("SELECT * FROM my_locations WHERE id_activity LIKE :activityId")
-    fun findByActivityId(activityId: UUID): List<LocationDto>
+    suspend fun findByActivityId(activityId: UUID): List<LocationDto>
 
     @Insert
-    fun insertAll(vararg location: LocationDto)
+    suspend fun insertAll(vararg location: LocationDto)
 
     @Insert
-    fun insertOne(vararg location: LocationDto)
+    suspend fun insertOne(vararg location: LocationDto)
 
     @Delete
-    fun delete(location: LocationDto)
+    suspend fun delete(location: LocationDto)
 }

@@ -9,17 +9,17 @@ import eu.petsontrail.petsontrailtracker.data.ActivityDto
 @Dao
 interface ActivityDao {
     @Query("SELECT * FROM my_activities")
-    fun getAll(): List<ActivityDto>
+    suspend fun getAll(): List<ActivityDto>
 
     @Query("SELECT * FROM my_activities WHERE uid IN (:activityIds)")
-    fun loadAllByIds(activityIds: IntArray): List<ActivityDto>
+    suspend fun loadAllByIds(activityIds: IntArray): List<ActivityDto>
 
     @Query("SELECT * FROM my_activities WHERE name LIKE :name LIMIT 1")
-    fun findByName(name: String): ActivityDto
+    suspend fun findByName(name: String): ActivityDto
 
     @Insert
-    fun insertAll(vararg activity: ActivityDto)
+    suspend fun insertAll(vararg activity: ActivityDto)
 
     @Delete
-    fun delete(activity: ActivityDto)
+    suspend fun delete(activity: ActivityDto)
 }

@@ -30,7 +30,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.mapper.toLocationDto
 import java.util.UUID
-
+import kotlinx.coroutines.*
 
 class LocationTrackerService : Service() {
     private lateinit var locationClient: FusedLocationProviderClient
@@ -60,10 +60,7 @@ class LocationTrackerService : Service() {
         val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "petsOnTrailTracker_db"
-        )
-            .enableMultiInstanceInvalidation()
-            .allowMainThreadQueries() // TODO: bad practice
-            .build()
+        ).build()
 
         currentActivityId = UUID.randomUUID()
 
@@ -78,13 +75,12 @@ class LocationTrackerService : Service() {
                     notificationBuilder.setContentText(message);
                     notificationManager.notify(100, notificationBuilder.build())
 
-                    // locationUpdateListener.onUpdateLocation(location)
-
-                    db.locationDao().insertOne(location.toLocationDto(currentActivityId))
+                    runBlocking {
+                        db.locationDao().insertOne(location.toLocationDto(currentActivityId))
+                    }
                 }
             }
         }
-
 
         startForeground()
     }
@@ -119,10 +115,12 @@ class LocationTrackerService : Service() {
         notificationManager = getSystemService<NotificationManager>(NotificationManager::class.java)
         notificationManager.createNotificationChannel(notificationChannel)
 
-        val intent = Intent(this, LocationTrackerService::class.java).apply {
+        val intent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val mainActivityIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+
 
         val snoozeIntent = Intent(this, LocationTrackerService::class.java).apply {
             action = "snooze"
@@ -136,9 +134,9 @@ class LocationTrackerService : Service() {
             .setContentTitle("PetsOnTrail Tracker")
             .setContentText("Position: ???")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_tracking),
-                snoozePendingIntent)
+            .setContentIntent(mainActivityIntent)
+            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_tracking), snoozePendingIntent)
+            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_app), mainActivityIntent)
             .setAutoCancel(true)
 
         notification = notificationBuilder.build()

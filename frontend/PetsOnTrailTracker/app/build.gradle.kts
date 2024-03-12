@@ -57,4 +57,10 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")//KTX Extensions/Coroutines for Room
     ksp("androidx.room:room-compiler:$room_version")
+
+    // lifecycleScope:
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha04")
+
+    // viewModelScope:
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha04")
 }
