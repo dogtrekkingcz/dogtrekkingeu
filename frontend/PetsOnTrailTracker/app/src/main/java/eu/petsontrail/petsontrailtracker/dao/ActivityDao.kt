@@ -18,7 +18,7 @@ interface ActivityDao {
     suspend fun findByName(name: String): ActivityDto
 
     @Insert
-    suspend fun insertAll(vararg activity: ActivityDto)
+    suspend fun insertOne(vararg activity: ActivityDto)
 
     @Delete
     suspend fun delete(activity: ActivityDto)

@@ -9,7 +9,7 @@ import java.util.UUID
 @Entity(tableName = "my_activities")
 data class ActivityDto(
     @PrimaryKey val uid: UUID,
-    @ColumnInfo(name = "time") val time: Long?,
+    @ColumnInfo(name = "time") var time: Long?,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "description") val description: String?,
 )

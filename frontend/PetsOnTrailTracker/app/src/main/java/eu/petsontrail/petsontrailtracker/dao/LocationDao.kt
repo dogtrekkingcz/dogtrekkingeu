@@ -21,9 +21,6 @@ interface LocationDao {
     suspend fun findByActivityId(activityId: UUID): List<LocationDto>
 
     @Insert
-    suspend fun insertAll(vararg location: LocationDto)
-
-    @Insert
     suspend fun insertOne(vararg location: LocationDto)
 
     @Delete

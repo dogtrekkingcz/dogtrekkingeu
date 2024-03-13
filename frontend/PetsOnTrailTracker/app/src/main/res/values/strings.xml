@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">PetsOnTrail Tracker</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_activities">Activities</string>
     <string name="title_notifications">Notifications</string>
     <string name="start_tracking">Start tracking</string>
     <string name="start_app">Start app</string>
+    <string name="create_new_activity">Create new activity</string>
 </resources>

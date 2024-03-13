@@ -1,13 +1,18 @@
 package eu.petsontrail.petsontrailtracker
 
 import android.Manifest
+import android.R.attr.data
+import android.app.IntentService
 import android.app.Notification
 import android.app.Notification.EXTRA_NOTIFICATION_ID
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.os.Build
@@ -27,10 +32,16 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
+import eu.petsontrail.petsontrailtracker.data.ActivityDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.mapper.toLocationDto
-import java.util.UUID
 import kotlinx.coroutines.*
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import java.util.UUID
+
 
 class LocationTrackerService : Service() {
     private lateinit var locationClient: FusedLocationProviderClient
@@ -57,12 +68,12 @@ class LocationTrackerService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        val db = Room.databaseBuilder(
+        db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "petsOnTrailTracker_db"
         ).build()
 
-        currentActivityId = UUID.randomUUID()
+        createNewActivity()
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
@@ -121,22 +132,25 @@ class LocationTrackerService : Service() {
         val mainActivityIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
 
+        val startTrackingIntent = Intent(this, LocationTrackerService::class.java)
+        startTrackingIntent.putExtra("action", "startTracking")
+        val startTrackingPendingIntent: PendingIntent = PendingIntent.getForegroundService(this, 0, startTrackingIntent, PendingIntent.FLAG_IMMUTABLE)
 
-        val snoozeIntent = Intent(this, LocationTrackerService::class.java).apply {
-            action = "snooze"
-            putExtra(EXTRA_NOTIFICATION_ID, 0)
-        }
-        val snoozePendingIntent: PendingIntent =
-            PendingIntent.getBroadcast(this, 0, snoozeIntent, PendingIntent.FLAG_IMMUTABLE)
+        val newActivityIntent = Intent(this, LocationTrackerService::class.java)
+        newActivityIntent.putExtra("action", "createNewActivity")
+        val newActivityPendingIntent: PendingIntent = PendingIntent.getForegroundService(this, 0, newActivityIntent, PendingIntent.FLAG_IMMUTABLE)
+
 
         notificationBuilder = NotificationCompat.Builder(this, "CHANNEL_ID")
             .setSmallIcon(R.drawable.ic_notifications_black_24dp)
             .setContentTitle("PetsOnTrail Tracker")
-            .setContentText("Position: ???")
+            .setContentText("Pos: ???")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(mainActivityIntent)
-            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_tracking), snoozePendingIntent)
-            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_app), mainActivityIntent)
+            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_tracking), startTrackingPendingIntent)
+            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.create_new_activity), newActivityPendingIntent)
+            //.setStyle(NotificationCompat.BigTextStyle()
+            //    .bigText("Much longer text that cannot fit one line..."))
             .setAutoCancel(true)
 
         notification = notificationBuilder.build()
@@ -166,9 +180,17 @@ class LocationTrackerService : Service() {
         }
         Log.d("Service Status","Starting Service")
 
-        locationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
+        // ------------------------------------------------------
+        var action = intent?.getStringExtra("action")
 
-        getLocation()
+        if (action == "createNewActivity") {
+            createNewActivity()
+        }
+
+        if (action == "startTracking") {
+            locationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
+            getLocation()
+        }
 
         return START_STICKY
     }
@@ -225,5 +247,22 @@ class LocationTrackerService : Service() {
         ).show()
         Log.d("Stopped","Service Stopped")
         super.onDestroy()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun createNewActivity() {
+        Log.d("New activity", "Creating a new activity ...")
+        currentActivityId = UUID.randomUUID()
+
+        runBlocking {
+            var newActivity = ActivityDto(
+                uid = currentActivityId,
+                time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)),
+                description = ""
+            )
+
+            db.activityDao().insertOne(newActivity)
+        }
     }
 }

@@ -1,23 +1,22 @@
 package eu.petsontrail.petsontrailtracker.ui.home
 
 import android.R
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.location.Location
+import android.database.Cursor
 import android.os.Build
 import android.os.Bundle
+import android.provider.CallLog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.loader.content.CursorLoader
 import eu.petsontrail.petsontrailtracker.LocationTrackerService
-import eu.petsontrail.petsontrailtracker.LocationUpdateListener
 import eu.petsontrail.petsontrailtracker.databinding.FragmentHomeBinding
 
 
