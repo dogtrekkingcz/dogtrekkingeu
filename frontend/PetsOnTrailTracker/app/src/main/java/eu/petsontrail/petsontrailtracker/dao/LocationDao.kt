@@ -12,7 +12,7 @@ import java.util.UUID
 @Dao
 interface LocationDao {
     @Query("SELECT * FROM my_locations")
-    suspend fun getAll(): List<ActivityDto>
+    suspend fun getAll(): List<LocationDto>
 
     @Query("SELECT * FROM my_locations WHERE uid IN (:locationIds)")
     suspend fun loadAllByIds(locationIds: IntArray): List<LocationDto>

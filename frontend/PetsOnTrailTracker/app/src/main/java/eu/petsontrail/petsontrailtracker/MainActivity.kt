@@ -1,5 +1,6 @@
 package eu.petsontrail.petsontrailtracker
 
+import MIGRATION_1_2
 import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -23,13 +24,12 @@ class MainActivity : AppCompatActivity(), LocationUpdateListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO: No db queries on main thread! Needs to be done differently!
-        //val db = Room.databaseBuilder(
-        //    applicationContext,
-        //    AppDatabase::class.java, "petsOnTrailTracker_db"
-        //)
-        //    .enableMultiInstanceInvalidation()
-        //    .build()
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "petsOnTrailTracker_db"
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

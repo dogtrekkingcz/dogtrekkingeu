@@ -6,4 +6,6 @@
     <string name="start_tracking">Start tracking</string>
     <string name="start_app">Start app</string>
     <string name="create_new_activity">Create new activity</string>
+    <string name="clean_empty_activities">Clean empty</string>
+    <string name="reload_activities">Reload</string>
 </resources>

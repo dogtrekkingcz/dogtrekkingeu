@@ -1,5 +1,6 @@
 package eu.petsontrail.petsontrailtracker
 
+import MIGRATION_1_2
 import android.Manifest
 import android.R.attr.data
 import android.app.IntentService
@@ -71,7 +72,9 @@ class LocationTrackerService : Service() {
         db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "petsOnTrailTracker_db"
-        ).build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
 
         createNewActivity()
 
@@ -88,6 +91,7 @@ class LocationTrackerService : Service() {
 
                     runBlocking {
                         db.locationDao().insertOne(location.toLocationDto(currentActivityId))
+                        Log.d("ActivityId", currentActivityId.toString())
                     }
                 }
             }
@@ -132,12 +136,16 @@ class LocationTrackerService : Service() {
         val mainActivityIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
 
-        val startTrackingIntent = Intent(this, LocationTrackerService::class.java)
-        startTrackingIntent.putExtra("action", "startTracking")
+        val startTrackingIntent = Intent(this, LocationTrackerService::class.java).apply {
+            action = "start-tracking"
+            putExtra("method_to_call", 1001)
+        }
         val startTrackingPendingIntent: PendingIntent = PendingIntent.getForegroundService(this, 0, startTrackingIntent, PendingIntent.FLAG_IMMUTABLE)
 
-        val newActivityIntent = Intent(this, LocationTrackerService::class.java)
-        newActivityIntent.putExtra("action", "createNewActivity")
+        val newActivityIntent = Intent(this, LocationTrackerService::class.java).apply {
+            action = "create-new-activity"
+            putExtra("method_to_call", 1002)
+        }
         val newActivityPendingIntent: PendingIntent = PendingIntent.getForegroundService(this, 0, newActivityIntent, PendingIntent.FLAG_IMMUTABLE)
 
 
@@ -181,13 +189,16 @@ class LocationTrackerService : Service() {
         Log.d("Service Status","Starting Service")
 
         // ------------------------------------------------------
-        var action = intent?.getStringExtra("action")
 
-        if (action == "createNewActivity") {
+        Log.d("extras:", intent?.extras.toString())
+
+        var action = intent?.getIntExtra("method_to_call", 0)
+
+        if (action == 1002) {
             createNewActivity()
         }
 
-        if (action == "startTracking") {
+        if (action == 1001) {
             locationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
             getLocation()
         }
@@ -255,14 +266,19 @@ class LocationTrackerService : Service() {
         currentActivityId = UUID.randomUUID()
 
         runBlocking {
+            db.activityDao().resetActiveActivities()
+
             var newActivity = ActivityDto(
                 uid = currentActivityId,
                 time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)),
+                active = 1,
                 description = ""
             )
 
             db.activityDao().insertOne(newActivity)
+
+            currentActivityId = db.activityDao().getActive().uid
         }
     }
 }

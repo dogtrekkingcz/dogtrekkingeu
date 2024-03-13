@@ -12,4 +12,5 @@ data class ActivityDto(
     @ColumnInfo(name = "time") var time: Long?,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "description") val description: String?,
+    @ColumnInfo(name = "active") val active: Int = 0
 )
