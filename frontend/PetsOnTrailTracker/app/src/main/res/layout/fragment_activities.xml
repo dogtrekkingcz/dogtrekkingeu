@@ -11,24 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/reload_activities_button"
         tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/clean_empty_activities_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/clean_empty_activities"
-        tools:layout_editor_absoluteX="254dp"
-        tools:layout_editor_absoluteY="678dp" />
 
     <Button
         android:id="@+id/reload_activities_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="@string/reload_activities"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="679dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/clean_empty_activities_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/clean_empty_activities"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

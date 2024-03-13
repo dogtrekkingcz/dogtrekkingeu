@@ -40,10 +40,16 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val btnTrackingStartStop: Button = binding.buttonStartStopTracking
-        btnTrackingStartStop.setOnClickListener {
+        val btnStartTrackingService: Button = binding.buttonStartStopTracking
+        btnStartTrackingService.setOnClickListener {
             val intent = Intent(this.context, LocationTrackerService::class.java)
             this.context?.startForegroundService(intent)
+        }
+
+        val btnStopTrackingService: Button = binding.buttonStopTrackingService
+        btnStopTrackingService.setOnClickListener {
+            val intent = Intent(this.context, LocationTrackerService::class.java)
+            this.context?.stopService(intent)
         }
 
         return root

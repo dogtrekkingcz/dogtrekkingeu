@@ -3,9 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_activities">Activities</string>
     <string name="title_notifications">Notifications</string>
-    <string name="start_tracking">Start tracking</string>
+    <string name="start_tracking_service">Start tracking service</string>
+    <string name="stop_tracking_service">Stop tracking service</string>
     <string name="start_app">Start app</string>
     <string name="create_new_activity">Create new activity</string>
     <string name="clean_empty_activities">Clean empty</string>
     <string name="reload_activities">Reload</string>
+    <string name="start_tracking">Start tracking</string>
 </resources>

@@ -271,7 +271,7 @@ class LocationTrackerService : Service() {
             var newActivity = ActivityDto(
                 uid = currentActivityId,
                 time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
-                name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)),
+                name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)),
                 active = 1,
                 description = ""
             )

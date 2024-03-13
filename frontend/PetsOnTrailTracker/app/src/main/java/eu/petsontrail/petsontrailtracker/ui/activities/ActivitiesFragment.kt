@@ -87,10 +87,10 @@ class ActivitiesFragment : Fragment() {
         var activitiesNames = ArrayList<String>()
 
         runBlocking {
-            var activities = db.activityDao().getAll()
+            var activities = db.activityDao().getAll().sortedByDescending { it -> it.time }
 
             for (activity in activities) {
-                var activityLocations = db.locationDao().findByActivityId(activity.uid).toMutableList()
+                var activityLocations = db.locationDao().findByActivityId(activity.uid).toMutableList().sortedByDescending { it -> it.time }
 
                 Collections.sort<LocationDto>(activityLocations, Comparator.comparing(LocationDto::time))
 
