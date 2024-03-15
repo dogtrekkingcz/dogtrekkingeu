@@ -116,6 +116,43 @@ class HomeFragment : Fragment() {
             this.context?.stopService(intent)
         }
 
+        val btnNewActivity: Button = binding.buttonNewActivity
+        btnNewActivity.setOnClickListener {
+            runBlocking {
+                db.activityDao().resetActiveActivities()
+
+                var nameOfActivity: String? = null
+
+                val editTextNameOfActivity: EditText = binding.editTextNameOfActivity
+                if (editTextNameOfActivity.text.isEmpty()) {
+                    nameOfActivity = LocalDateTime.now()
+                        .format(
+                            DateTimeFormatter.ofPattern(
+                                "yyyy-MM-dd HH:mm:ss",
+                                Locale.ENGLISH
+                            )
+                        )
+
+                    editTextNameOfActivity.setText(nameOfActivity)
+                }
+                else {
+                    nameOfActivity = editTextNameOfActivity.text.toString()
+                }
+
+                var newActivity = ActivityDto(
+                    uid = UUID.randomUUID(),
+                    time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                    name = nameOfActivity,
+                    active = 1,
+                    description = ""
+                )
+
+                db.activityDao().insertOne(newActivity)
+
+                reloadActivity()
+            }
+        }
+
         reloadActivity()
 
         return root
