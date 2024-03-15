@@ -1,8 +1,6 @@
 package eu.petsontrail.petsontrailtracker.ui.activities
 
 import MIGRATION_1_2
-import android.content.Intent
-import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +11,10 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
-import eu.petsontrail.petsontrailtracker.LocationTrackerService
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.data.LocationDto
 import eu.petsontrail.petsontrailtracker.databinding.FragmentActivitiesBinding
+import eu.petsontrail.petsontrailtracker.helper.DistanceHelper
 import kotlinx.coroutines.runBlocking
 import java.util.Collections
 
@@ -94,31 +92,7 @@ class ActivitiesFragment : Fragment() {
 
                 Collections.sort<LocationDto>(activityLocations, Comparator.comparing(LocationDto::time))
 
-                var distance = 0.0;
-                var previousLocation: LocationDto? = null
-                var aLocation: Location = Location("point A")
-                var bLocation: Location = Location("point B")
-
-                for (location in activityLocations) {
-                    if (previousLocation == null) {
-                        previousLocation = location
-
-                        aLocation.latitude = previousLocation.latitudeDegrees!!
-                        aLocation.longitude = previousLocation.longitudeDegrees!!
-
-                        continue
-                    }
-
-                    bLocation.latitude = location.latitudeDegrees!!
-                    bLocation.longitude = location.longitudeDegrees!!
-
-                    distance += aLocation.distanceTo(bLocation)
-
-                    aLocation.latitude = bLocation.latitude
-                    aLocation.longitude = bLocation.longitude
-                }
-
-                var item = activity.name!! + " [" + activityLocations.size + "] -> [" + String.format("%.2f", distance/1000) + "km]"
+                var item = activity.name!! + " [" + activityLocations.size + "] -> [" + String.format("%.2f", DistanceHelper().GetDistanceInMeters(activityLocations)/1000) + "km]"
 
                 activitiesNames.add(item)
             }

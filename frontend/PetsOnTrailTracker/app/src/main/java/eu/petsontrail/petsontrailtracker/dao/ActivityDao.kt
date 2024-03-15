@@ -12,13 +12,13 @@ interface ActivityDao {
     suspend fun getAll(): List<ActivityDto>
 
     @Query("SELECT * FROM my_activities WHERE active=1 LIMIT 1")
-    suspend fun getActive(): ActivityDto
+    suspend fun getActive(): ActivityDto?
 
     @Query("SELECT * FROM my_activities WHERE uid IN (:activityIds)")
     suspend fun loadAllByIds(activityIds: IntArray): List<ActivityDto>
 
     @Query("SELECT * FROM my_activities WHERE name LIKE :name LIMIT 1")
-    suspend fun findByName(name: String): ActivityDto
+    suspend fun findByName(name: String): ActivityDto?
 
     @Query("UPDATE my_activities SET active=0 WHERE active=1")
     suspend fun resetActiveActivities()

@@ -248,6 +248,12 @@ class LocationTrackerService : Service() {
     override fun stopService(name: Intent?): Boolean {
         Log.d("Stopping","Stopping Service")
 
+        locationClient.removeLocationUpdates(locationCallback)
+
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+
+        stopSelf()
+
         return super.stopService(name)
     }
 
@@ -278,7 +284,7 @@ class LocationTrackerService : Service() {
 
             db.activityDao().insertOne(newActivity)
 
-            currentActivityId = db.activityDao().getActive().uid
+            currentActivityId = db.activityDao().getActive()?.uid!!
         }
     }
 }

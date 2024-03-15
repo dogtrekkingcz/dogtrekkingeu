@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import eu.petsontrail.petsontrailtracker.databinding.FragmentNotificationsBinding
@@ -27,11 +26,19 @@ class NotificationsFragment : Fragment() {
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+/*
+        val port = 50051
+        val channel = ManagedChannelBuilder.forAddress("192.168.0.13", port).usePlaintext().build()
+        val stub = PingPongGrpcKt.PingPongCoroutineStub(channel)
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        binding.buttonFirst.setOnClickListener {
+            runBlocking {
+                val request = Pingpong.PingPongMsg.newBuilder().setPayload("World").build()
+                val response = stub.ping(request)
+                Log.i("result", response.toString())
+            }
         }
+  */
         return root
     }
 
