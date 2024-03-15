@@ -2,18 +2,12 @@ package eu.petsontrail.petsontrailtracker
 
 import MIGRATION_1_2
 import android.Manifest
-import android.R.attr.data
-import android.app.IntentService
 import android.app.Notification
-import android.app.Notification.EXTRA_NOTIFICATION_ID
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.os.Build
@@ -33,6 +27,7 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.Task
 import eu.petsontrail.petsontrailtracker.data.ActivityDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.mapper.toLocationDto
@@ -42,6 +37,7 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import java.util.UUID
+import kotlin.properties.Delegates
 
 
 class LocationTrackerService : Service() {
@@ -55,7 +51,9 @@ class LocationTrackerService : Service() {
     // private lateinit var locationUpdateListener: LocationUpdateListener
 
     private lateinit var db: AppDatabase
-    private lateinit var currentActivityId: UUID
+    private var currentActivityId: UUID? = null
+    private var currentActivityName: String? = null
+    private var _startId by Delegates.notNull<Int>()
 
     public fun setLocationUpdateListener(listener: LocationUpdateListener) {
         // locationUpdateListener = listener
@@ -76,7 +74,11 @@ class LocationTrackerService : Service() {
             .addMigrations(MIGRATION_1_2)
             .build()
 
-        createNewActivity()
+        runBlocking {
+            var active = db.activityDao().getActive()
+            currentActivityId = active?.uid
+            currentActivityName = active?.name
+        }
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
@@ -87,11 +89,14 @@ class LocationTrackerService : Service() {
 
                     var message = "[lat : ${location.latitude}, lng : ${location.longitude}]"
                     notificationBuilder.setContentText(message);
+                    notificationBuilder.setContentTitle(currentActivityName)
                     notificationManager.notify(100, notificationBuilder.build())
 
                     runBlocking {
-                        db.locationDao().insertOne(location.toLocationDto(currentActivityId))
-                        Log.d("ActivityId", currentActivityId.toString())
+                        if (currentActivityId != null) {
+                            db.locationDao().insertOne(location.toLocationDto(currentActivityId!!))
+                            Log.d("ActivityId", currentActivityId.toString())
+                        }
                     }
                 }
             }
@@ -136,17 +141,25 @@ class LocationTrackerService : Service() {
         val mainActivityIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
 
+        /*
         val startTrackingIntent = Intent(this, LocationTrackerService::class.java).apply {
             action = "start-tracking"
             putExtra("method_to_call", 1001)
         }
         val startTrackingPendingIntent: PendingIntent = PendingIntent.getForegroundService(this, 0, startTrackingIntent, PendingIntent.FLAG_IMMUTABLE)
+        */
 
         val newActivityIntent = Intent(this, LocationTrackerService::class.java).apply {
             action = "create-new-activity"
             putExtra("method_to_call", 1002)
         }
         val newActivityPendingIntent: PendingIntent = PendingIntent.getForegroundService(this, 0, newActivityIntent, PendingIntent.FLAG_IMMUTABLE)
+
+        val closeActivityIntent = Intent(this, LocationTrackerService::class.java).apply {
+            action = "close-activity"
+            putExtra("method-to-call", 1003)
+        }
+        val closeActivityPendingIntent: PendingIntent = PendingIntent.getForegroundService(this, 0, closeActivityIntent, PendingIntent.FLAG_IMMUTABLE)
 
 
         notificationBuilder = NotificationCompat.Builder(this, "CHANNEL_ID")
@@ -155,8 +168,9 @@ class LocationTrackerService : Service() {
             .setContentText("Pos: ???")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(mainActivityIntent)
-            .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_tracking), startTrackingPendingIntent)
+            // .addAction(R.drawable.ic_launcher_foreground, getString(R.string.start_tracking), startTrackingPendingIntent)
             .addAction(R.drawable.ic_launcher_foreground, getString(R.string.create_new_activity), newActivityPendingIntent)
+            .addAction(R.drawable.ic_launcher_foreground, "Close activity", closeActivityPendingIntent)
             //.setStyle(NotificationCompat.BigTextStyle()
             //    .bigText("Much longer text that cannot fit one line..."))
             .setAutoCancel(true)
@@ -178,6 +192,8 @@ class LocationTrackerService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        _startId = startId
+
         val name=intent?.getStringExtra("name")
         Toast.makeText(
             applicationContext, "Service has started running in the background",
@@ -197,10 +213,19 @@ class LocationTrackerService : Service() {
         if (action == 1002) {
             createNewActivity()
         }
+        else if (action == 1003) {
+            runBlocking {
+                db.activityDao().resetActiveActivities()
 
-        if (action == 1001) {
+                prepareToStopService()
+            }
+        }
+        else {
+            // defaultly start the service immediately
+            //if (action == 1001) {
             locationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
             getLocation()
+            //}
         }
 
         return START_STICKY
@@ -229,35 +254,59 @@ class LocationTrackerService : Service() {
         }
 
 
-        locationClient.getCurrentLocation(
-            Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token
-        ).addOnSuccessListener { location ->
+        locationClient.getLastLocation().addOnSuccessListener { location ->
             location?.let {
                 Log.d(
                     "Position",
-                    "Current Location = [lat : ${location.latitude}, lng : ${location.longitude}]",
+                    "Last known location = [lat : ${location.latitude}, lng : ${location.longitude}]",
                 )
 
                 locationClient.requestLocationUpdates(locationRequest,
                     locationCallback,
-                    Looper.getMainLooper())
+                    Looper.myLooper())
             }
+        }
+    }
+
+    fun prepareToStopService() {
+        try {
+            CancellationTokenSource().cancel()
+
+            val voidTask: Task<Void> = locationClient.removeLocationUpdates(locationCallback)
+            voidTask.addOnCompleteListener {
+                if(it.isSuccessful) {
+                    Log.d("Location", "stopMonitoring: removeLocationUpdates successful.")
+
+                    ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+
+                    stopSelf()
+
+                    super.stopSelfResult(_startId)
+
+                } else {
+                    Log.d("Location", "stopMonitoring: removeLocationUpdates updates unsuccessful! " + voidTask.toString())
+                }
+            }
+
+            Thread.sleep(2000)
+        } catch (exp: SecurityException) {
+            Log.d("TAG", " Security exception while removeLocationUpdates")
         }
     }
 
     override fun stopService(name: Intent?): Boolean {
         Log.d("Stopping","Stopping Service")
 
-        locationClient.removeLocationUpdates(locationCallback)
+        var result: Boolean = false
 
-        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+        prepareToStopService()
 
-        stopSelf()
-
-        return super.stopService(name)
+        return result
     }
 
     override fun onDestroy() {
+        prepareToStopService()
+
         Toast.makeText(
             applicationContext, "Service execution completed",
             Toast.LENGTH_SHORT
@@ -275,7 +324,7 @@ class LocationTrackerService : Service() {
             db.activityDao().resetActiveActivities()
 
             var newActivity = ActivityDto(
-                uid = currentActivityId,
+                uid = currentActivityId!!,
                 time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)),
                 active = 1,

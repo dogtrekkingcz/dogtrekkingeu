@@ -5,6 +5,8 @@ import android.R
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +19,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.google.android.gms.maps.MapView
 import eu.petsontrail.petsontrailtracker.LocationTrackerService
+import eu.petsontrail.petsontrailtracker.data.ActivityDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.databinding.FragmentHomeBinding
 import eu.petsontrail.petsontrailtracker.helper.DistanceHelper
 import kotlinx.coroutines.runBlocking
+import java.lang.IllegalArgumentException
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import java.util.Timer
+import java.util.TimerTask
+import java.util.UUID
 
 
 class HomeFragment : Fragment() {
@@ -32,6 +43,15 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var db: AppDatabase
+
+    /*
+    val timer = Timer().scheduleAtFixedRate(object: TimerTask() {
+        override fun run() {
+            reloadActivity()
+        }
+    }, 1000, 3000)
+
+    */
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -54,6 +74,38 @@ class HomeFragment : Fragment() {
 
         val btnStartTrackingService: Button = binding.buttonStartStopTracking
         btnStartTrackingService.setOnClickListener {
+            runBlocking {
+                if (db.activityDao().getActive() == null) {
+                    var nameOfActivity: String? = null
+
+                    val editTextNameOfActivity: EditText = binding.editTextNameOfActivity
+                    if (editTextNameOfActivity.text.isEmpty()) {
+                        nameOfActivity = LocalDateTime.now()
+                            .format(
+                                DateTimeFormatter.ofPattern(
+                                    "yyyy-MM-dd HH:mm:ss",
+                                    Locale.ENGLISH
+                                )
+                            )
+
+                        editTextNameOfActivity.setText(nameOfActivity)
+                    }
+                    else {
+                        nameOfActivity = editTextNameOfActivity.text.toString()
+                    }
+
+                    var newActivity = ActivityDto(
+                        uid = UUID.randomUUID(),
+                        time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                        name = nameOfActivity,
+                        active = 1,
+                        description = ""
+                    )
+
+                    db.activityDao().insertOne(newActivity)
+                }
+            }
+
             val intent = Intent(this.context, LocationTrackerService::class.java)
             this.context?.startForegroundService(intent)
         }
@@ -76,9 +128,20 @@ class HomeFragment : Fragment() {
             if (activeActivity == null)
                 return@runBlocking
 
-            val editTextNameOfActivity: EditText = binding.editTextNameOfActivity
-            editTextNameOfActivity.setText(activeActivity.name!!)
+            if (activeActivity.name != null) {
+                val editTextNameOfActivity: EditText = binding.editTextNameOfActivity
 
+                Log.d("TAG", activeActivity.name!!)
+                try {
+                    editTextNameOfActivity.setText(activeActivity.name)
+                }
+                catch (ex: Exception) {
+                    Log.d("TAG: '${activeActivity.name}'", ex.message!!)
+                }
+                catch (ex: IllegalArgumentException) {
+                    Log.e("TAG", ex.toString())
+                }
+            }
 
             var locations = db.locationDao().findByActivityId(activeActivity.uid)
             if (locations.size == 0)
