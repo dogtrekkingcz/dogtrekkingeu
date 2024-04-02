@@ -7,7 +7,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <Button
-        android:id="@+id/buttonStartStopTracking"
+        android:id="@+id/buttonStartTracking"
         android:layout_width="144dp"
         android:layout_height="52dp"
         android:layout_marginTop="12dp"
@@ -33,22 +33,32 @@
         android:layout_height="18dp"
         android:layout_marginTop="15dp"
         android:text="@string/name_of_activity"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartStopTracking"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartTracking"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteX="10dp" />
 
     <EditText
         android:id="@+id/editTextNameOfActivity"
-        android:layout_width="390dp"
-        android:layout_height="50dp"
+        android:layout_width="212dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="184dp"
         android:ems="10"
         android:inputType="text"
         android:text=""
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameOfActivity"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="10dp" />
+        app:layout_constraintRight_toLeftOf="@+id/buttonNewActivity"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameOfActivity" />
+
+    <Button
+        android:id="@+id/buttonNewActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/new_activity"
+        app:layout_constraintLeft_toRightOf="@+id/editTextNameOfActivity"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameOfActivity" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="410dp"
@@ -127,7 +137,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDistance" />
 
-        <com.google.android.gms.maps.MapView
+        <!-- <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
             android:layout_width="380dp"
             android:layout_height="278dp"
@@ -135,18 +145,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.433"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" /> -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/buttonNewActivity"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonRefresh"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="New activity"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartStopTracking"
-        tools:layout_editor_absoluteX="11dp" />
-
-
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:text="@string/refresh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,4 +11,6 @@
     <string name="reload_activities">Reload</string>
     <string name="start_tracking">Start tracking</string>
     <string name="name_of_activity">Name of activity</string>
+    <string name="new_activity">New activity</string>
+    <string name="refresh">Refresh</string>
 </resources>

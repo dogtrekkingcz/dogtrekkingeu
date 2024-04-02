@@ -90,7 +90,9 @@ class LocationTrackerService : Service() {
                     var message = "[lat : ${location.latitude}, lng : ${location.longitude}]"
                     notificationBuilder.setContentText(message);
                     notificationBuilder.setContentTitle(currentActivityName)
-                    notificationManager.notify(100, notificationBuilder.build())
+
+                    // this will create notification every second (or oftenly...) - the location in the tray should be anyhow computed for set distance... maybe?
+                    // notificationManager.notify(100, notificationBuilder.build())
 
                     runBlocking {
                         if (currentActivityId != null) {

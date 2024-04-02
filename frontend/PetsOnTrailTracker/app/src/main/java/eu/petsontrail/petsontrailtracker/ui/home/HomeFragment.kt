@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val btnStartTrackingService: Button = binding.buttonStartStopTracking
+        val btnStartTrackingService: Button = binding.buttonStartTracking
         btnStartTrackingService.setOnClickListener {
             runBlocking {
                 if (db.activityDao().getActive() == null) {
@@ -114,6 +114,13 @@ class HomeFragment : Fragment() {
         btnStopTrackingService.setOnClickListener {
             val intent = Intent(this.context, LocationTrackerService::class.java)
             this.context?.stopService(intent)
+        }
+
+        val btnRefresh: Button = binding.buttonRefresh
+        btnRefresh.setOnClickListener {
+            runBlocking {
+                reloadActivity()
+            }
         }
 
         val btnNewActivity: Button = binding.buttonNewActivity
@@ -203,7 +210,7 @@ class HomeFragment : Fragment() {
 
             val textViewSpeedPer10Secs: TextView = binding.textViewSpeedPer10Secs
 
-            val mapView: MapView = binding.mapView
+            // val mapView: MapView = binding.mapView
         }
     }
 
