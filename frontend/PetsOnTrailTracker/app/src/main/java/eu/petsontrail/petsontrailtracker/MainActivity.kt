@@ -1,6 +1,5 @@
 package eu.petsontrail.petsontrailtracker
 
-import MIGRATION_1_2
 import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +11,7 @@ import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.databinding.ActivityMainBinding
-
+import eu.petsontrail.petsontrailtracker.helper.DbHelper
 
 
 class MainActivity : AppCompatActivity(), LocationUpdateListener {
@@ -24,12 +23,7 @@ class MainActivity : AppCompatActivity(), LocationUpdateListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "petsOnTrailTracker_db"
-        )
-            .addMigrations(MIGRATION_1_2)
-            .build()
+        val db = DbHelper().InitializeDatabase(applicationContext)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

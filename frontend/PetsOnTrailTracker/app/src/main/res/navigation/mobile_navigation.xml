@@ -22,4 +22,10 @@
         android:name="eu.petsontrail.petsontrailtracker.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_petseditor"
+        android:name="eu.petsontrail.petsontrailtracker.ui.pets.editor.PetsEditorFragment"
+        android:label="Pets editor"
+        tools:layout="@layout/fragment_pets_editor" />
 </navigation>

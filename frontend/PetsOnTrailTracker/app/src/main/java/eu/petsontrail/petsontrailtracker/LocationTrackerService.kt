@@ -1,6 +1,5 @@
 package eu.petsontrail.petsontrailtracker
 
-import MIGRATION_1_2
 import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
@@ -30,6 +29,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import eu.petsontrail.petsontrailtracker.data.ActivityDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
+import eu.petsontrail.petsontrailtracker.helper.DbHelper
 import eu.petsontrail.petsontrailtracker.mapper.toLocationDto
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
@@ -67,12 +67,7 @@ class LocationTrackerService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "petsOnTrailTracker_db"
-        )
-            .addMigrations(MIGRATION_1_2)
-            .build()
+        db = DbHelper().InitializeDatabase(applicationContext)
 
         runBlocking {
             var active = db.activityDao().getActive()

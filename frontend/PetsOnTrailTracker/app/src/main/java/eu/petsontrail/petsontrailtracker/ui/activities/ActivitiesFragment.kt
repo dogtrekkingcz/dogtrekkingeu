@@ -1,6 +1,5 @@
 package eu.petsontrail.petsontrailtracker.ui.activities
 
-import MIGRATION_1_2
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import androidx.room.Room
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.data.LocationDto
 import eu.petsontrail.petsontrailtracker.databinding.FragmentActivitiesBinding
+import eu.petsontrail.petsontrailtracker.helper.DbHelper
 import eu.petsontrail.petsontrailtracker.helper.DistanceHelper
 import kotlinx.coroutines.runBlocking
 import java.util.Collections
@@ -37,12 +37,7 @@ class ActivitiesFragment : Fragment() {
         val activitiesViewModel =
                 ViewModelProvider(this).get(ActivitiesViewModel::class.java)
 
-        db = Room.databaseBuilder(
-            this.requireContext(),
-            AppDatabase::class.java, "petsOnTrailTracker_db"
-        )
-            .addMigrations(MIGRATION_1_2)
-            .build()
+        db = DbHelper().InitializeDatabase(this.requireContext())
 
         _binding = FragmentActivitiesBinding.inflate(inflater, container, false)
         val root: View = binding.root

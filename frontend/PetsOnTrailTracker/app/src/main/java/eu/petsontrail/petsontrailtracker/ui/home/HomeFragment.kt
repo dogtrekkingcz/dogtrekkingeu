@@ -1,11 +1,9 @@
 package eu.petsontrail.petsontrailtracker.ui.home
 
-import MIGRATION_1_2
 import android.R
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,21 +14,18 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.google.android.gms.maps.MapView
 import eu.petsontrail.petsontrailtracker.LocationTrackerService
+import eu.petsontrail.petsontrailtracker.NewActivity
 import eu.petsontrail.petsontrailtracker.data.ActivityDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.databinding.FragmentHomeBinding
+import eu.petsontrail.petsontrailtracker.helper.DbHelper
 import eu.petsontrail.petsontrailtracker.helper.DistanceHelper
 import kotlinx.coroutines.runBlocking
-import java.lang.IllegalArgumentException
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import java.util.Timer
-import java.util.TimerTask
 import java.util.UUID
 
 
@@ -62,12 +57,7 @@ class HomeFragment : Fragment() {
         val homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        db = Room.databaseBuilder(
-            this.requireContext(),
-            AppDatabase::class.java, "petsOnTrailTracker_db"
-        )
-            .addMigrations(MIGRATION_1_2)
-            .build()
+        db = DbHelper().InitializeDatabase(this.requireContext())
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -125,39 +115,8 @@ class HomeFragment : Fragment() {
 
         val btnNewActivity: Button = binding.buttonNewActivity
         btnNewActivity.setOnClickListener {
-            runBlocking {
-                db.activityDao().resetActiveActivities()
-
-                var nameOfActivity: String? = null
-
-                val editTextNameOfActivity: EditText = binding.editTextNameOfActivity
-                if (editTextNameOfActivity.text.isEmpty()) {
-                    nameOfActivity = LocalDateTime.now()
-                        .format(
-                            DateTimeFormatter.ofPattern(
-                                "yyyy-MM-dd HH:mm:ss",
-                                Locale.ENGLISH
-                            )
-                        )
-
-                    editTextNameOfActivity.setText(nameOfActivity)
-                }
-                else {
-                    nameOfActivity = editTextNameOfActivity.text.toString()
-                }
-
-                var newActivity = ActivityDto(
-                    uid = UUID.randomUUID(),
-                    time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
-                    name = nameOfActivity,
-                    active = 1,
-                    description = ""
-                )
-
-                db.activityDao().insertOne(newActivity)
-
-                reloadActivity()
-            }
+            val intent = Intent(this.context, NewActivity::class.java)
+            startActivity(intent)
         }
 
         reloadActivity()

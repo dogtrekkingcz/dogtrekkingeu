@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -22,13 +21,6 @@
         android:theme="@style/Theme.PetsOnTrailTracker"
         tools:targetApi="31">
 
-        <service
-            android:name=".LocationTrackerService"
-            android:process=":externalProcess"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="location" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -38,5 +30,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".NewActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ActivityPetsEditor"
+            android:exported="false" />
+
+
+        <service
+            android:name=".LocationTrackerService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location"
+            android:process=":externalProcess" />
     </application>
 </manifest>
