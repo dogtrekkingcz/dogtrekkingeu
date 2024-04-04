@@ -88,22 +88,18 @@ services:
     restart: always
 
   keycloak:
-    image: quay.io/keycloak/keycloak:23.0.7
+    image: quay.io/keycloak/keycloak:latest
     container_name: PetsOnTrail.KeyCloak
-    command: 
-      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://keycloakdb:5432/keycl0ak
       KC_DB_USERNAME: keycl0ak
       KC_DB_PASSWORD: password
 
-      KC_HOSTNAME: localhost
-
       KC_LOG_LEVEL: info
       KEYCLOAK_ADMIN: administrat0r
       KEYCLOAK_ADMIN_PASSWORD: asc88a8c0ssssqs
-    command: start-dev
+    command: start
     depends_on:
       - keycloakdb
     ports:
