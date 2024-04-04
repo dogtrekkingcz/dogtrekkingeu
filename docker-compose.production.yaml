@@ -99,7 +99,6 @@ services:
       KC_DB_PASSWORD: password
 
       KC_HOSTNAME: localhost
-      KC_HOSTNAME_PORT: 8080
 
       KC_LOG_LEVEL: info
       KEYCLOAK_ADMIN: administrat0r
@@ -109,7 +108,7 @@ services:
       - keycloakdb
     ports:
       - 8443:8443
-      - 9990:9990
+      - 8080:9990
     volumes:
       - /petsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/etc/x509/https/tls.crt
