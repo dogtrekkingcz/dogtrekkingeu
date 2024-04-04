@@ -98,8 +98,8 @@ services:
       KC_DB_USERNAME: keycl0ak
       KC_DB_PASSWORD: password
       KC_LOG_LEVEL: info
-      KC_HTTPS_CERTIFICATE_FILE=/opt/keycloak/conf/server.crt.pem
-      KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/conf/server.key.pem
+      KC_HTTPS_CERTIFICATE_FILE: /opt/keycloak/conf/server.crt.pem
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /opt/keycloak/conf/server.key.pem
       KEYCLOAK_ADMIN: administrat0r
       KEYCLOAK_ADMIN_PASSWORD: asc88a8c0ssssqs
     command: start
