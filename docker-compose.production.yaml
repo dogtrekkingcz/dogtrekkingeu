@@ -106,7 +106,7 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: asc88a8c0ssssqs
     command: start-dev
     depends_on:
-      - postgres
+      - keycloakdb
     ports:
       - 8443:8443
       - 9990:9990
