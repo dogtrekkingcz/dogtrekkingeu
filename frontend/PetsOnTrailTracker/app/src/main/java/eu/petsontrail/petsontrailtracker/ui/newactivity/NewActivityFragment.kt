@@ -1,5 +1,6 @@
 package eu.petsontrail.petsontrailtracker.ui.newactivity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.fragment.app.viewModels
@@ -8,19 +9,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
-import android.widget.HorizontalScrollView
+import android.widget.ListView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import eu.petsontrail.petsontrailtracker.ActivityPetsEditor
+import eu.petsontrail.petsontrailtracker.MainActivity
 
-import eu.petsontrail.petsontrailtracker.R
+import eu.petsontrail.petsontrailtracker.PetListSelector.RawPetListAdapter
+import eu.petsontrail.petsontrailtracker.PetListSelector.RawPetListItemDataModel
+import eu.petsontrail.petsontrailtracker.PetListSelector.RawPetListView
 import eu.petsontrail.petsontrailtracker.data.ActivityDto
+import eu.petsontrail.petsontrailtracker.data.ActivityPetsDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.databinding.FragmentNewActivityActivityBinding
 import eu.petsontrail.petsontrailtracker.helper.DbHelper
-import eu.petsontrail.petsontrailtracker.ui.pets.list.PetLineFragment
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -43,6 +48,8 @@ class NewActivityFragment : Fragment() {
 
     private val viewModel: NewActivityViewModel by viewModels()
 
+    private lateinit var rawPetListView: RawPetListView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,10 +64,14 @@ class NewActivityFragment : Fragment() {
         val newActivityViewModel =
             ViewModelProvider(this).get(eu.petsontrail.petsontrailtracker.ui.newactivity.NewActivityViewModel::class.java)
 
+        var context = this.requireContext()
+
         _binding = FragmentNewActivityActivityBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         db = DbHelper().InitializeDatabase(this.requireContext())
+
+        rawPetListView = RawPetListView(this.requireContext(), binding.listOfPets)
 
         val btnConfirm: Button = binding.btnNewActivityConfirm
         btnConfirm.setOnClickListener {
@@ -93,6 +104,20 @@ class NewActivityFragment : Fragment() {
                 )
 
                 db.activityDao().insertOne(newActivity)
+
+                for (pet in rawPetListView.SelectedPets()) {
+                    var petActivity = ActivityPetsDto(
+                        uid =  UUID.randomUUID(),
+                        activityId = newActivity.uid,
+                        petId = pet.uid,
+                        note = ""
+                    )
+
+                    db.activityPetsDao().insertOne(petActivity)
+                }
+
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -102,11 +127,13 @@ class NewActivityFragment : Fragment() {
             startActivity(intent)
         }
 
-        val petListView: HorizontalScrollView = binding.listOfPets
-
-        val pet: PetLineFragment = PetLineFragment()
+        reloadPetList(this.requireContext())
 
         return root
+    }
+
+    fun reloadPetList(context: Context) {
+        rawPetListView.reload()
     }
 
 }

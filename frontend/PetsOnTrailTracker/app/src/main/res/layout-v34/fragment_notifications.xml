@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:isCredential="true"
-        app:layout_constraintTop_toTopOf="@+id/btn_user_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_user_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

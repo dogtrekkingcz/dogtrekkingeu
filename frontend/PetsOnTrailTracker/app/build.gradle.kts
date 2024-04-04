@@ -70,4 +70,8 @@ dependencies {
 
     // viewModelScope:
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha04")
+
+    implementation("androidx.credentials:credentials:1.3.0-alpha02")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0-alpha02")
+    implementation("net.openid:appauth:0.11.1")
 }

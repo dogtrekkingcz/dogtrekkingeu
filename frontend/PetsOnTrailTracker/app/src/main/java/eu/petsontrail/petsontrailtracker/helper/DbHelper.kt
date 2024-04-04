@@ -9,7 +9,7 @@ class DbHelper {
     {
         val db: AppDatabase = Room.databaseBuilder(
             context,
-            AppDatabase::class.java, "petsOnTrailTracker_dbv2"
+            AppDatabase::class.java, AppDatabase.DatabaseName
         )
         .build()
 

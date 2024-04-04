@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item name="DomainURL" type="string">https://petsontrail.eu:8443/auth/realms/petsontrail.eu/</item>
+	<item name="ClientId" type="string">public</item>
+	<item name="RedirectURL">https://petsontrail.eu/</item>
+	<item name="CidaasVersion">3</item>
+</resources> 

@@ -27,14 +27,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <HorizontalScrollView
+    <ListView
         android:id="@+id/listOfPets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/editTextNameOfActivity"
         app:layout_constraintBottom_toTopOf="@+id/btnNewActivityConfirm">
 
-    </HorizontalScrollView>
+    </ListView>
 
     <Button
         android:id="@+id/btnNewActivityPetsEditor"
