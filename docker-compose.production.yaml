@@ -102,8 +102,6 @@ services:
       KC_HOSTNAME_PORT: 8080
 
       KC_LOG_LEVEL: info
-      KC_METRICS_ENABLED: true
-      KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: administrat0r
       KEYCLOAK_ADMIN_PASSWORD: asc88a8c0ssssqs
     command: start-dev
