@@ -1,6 +1,16 @@
 ﻿version: '3.5'
 
 services:
+  # docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d petsontrail.eu
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - /petsontrail_data/data_certbot/www/:/var/www/certbot/:rw
+      - /petsontrail_data/data_certbot/conf/:/etc/letsencrypt/:rw
+    networks:
+      - frontend
+      - backend
+
   petsontrail_grpc:
     container_name: PetsOnTrail.gRPC
     build:
@@ -11,9 +21,10 @@ services:
       - 4443:443
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/petsontrail.eu.pfx
     volumes:
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/app/privkey.pem:ro
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/app/fullchain.pem:ro
+      - /petsontrail_data/certbot/conf/live/petsontrail.eu/petsontrail.eu.pfx:/app/petsontrail.eu.pfx:ro
     networks:
       - backend
       - frontend
@@ -28,23 +39,19 @@ services:
       - 3443:443
     environment:
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/petsontrail.eu.pfx
     volumes:
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/app/privkey.pem:ro
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/app/fullchain.pem:ro
+      - /petsontrail_data/certbot/conf/live/petsontrail.eu/petsontrail.eu.pfx:/app/petsontrail.eu.pfx:ro
     networks:
       - frontend
       - backend
       
   petsontrail_app: 
     container_name: PetsOnTrail.App
-    restart: unless-stopped
     build:
       context: .
       dockerfile: frontend/PetsOnTrailApp/Dockerfile
-    environment:
-      - CERTBOT_EMAIL=rdk.kotesovec@gmail.com
-    env_file:
-      - ./nginx-certbot.env
     ports:
       - 443:443
       - 80:80
@@ -52,8 +59,6 @@ services:
       - frontend
       - backend
     volumes:
-      - /petsontrail_data/nginx_secrets:/etc/letsencrypt
-      - /petsontrail_data/user_conf.d:/etc/nginx/user_conf.d:ro
       - /petsontrail_data/certbot/conf/live/petsontrail.eu:/etc/nginx/ssl/live/petsontrail.eu:ro
       - /petsontrail_data/PetsOnTrail.App/appsettings.json:/usr/share/nginx/html/appsettings.json
       
@@ -72,7 +77,7 @@ services:
       - backend
     restart: always
    
-  keycloakdb:
+  postgres:
     image: postgres
     container_name: PetsOnTrail.KeyCloakDB
     environment:
@@ -88,28 +93,26 @@ services:
     restart: always
 
   keycloak:
+    image: jboss/keycloak
     container_name: PetsOnTrail.KeyCloak
-    build:
-      context: .
-      dockerfile: keycloak/Dockerfile
+    command: 
+      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:
-      KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://keycloakdb:5432/keycl0ak
-      KC_DB_USERNAME: keycl0ak
-      KC_DB_PASSWORD: password
-      KC_LOG_LEVEL: info
-      KC_HTTPS_CERTIFICATE_FILE=/opt/keycloak/conf/server.crt.pem
-      KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/conf/server.key.pem
-      KEYCLOAK_ADMIN: administrat0r
-      KEYCLOAK_ADMIN_PASSWORD: asc88a8c0ssssqs
-    command: start
-    depends_on:
-      - keycloakdb
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycl0ak
+      DB_USER: keycl0ak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: administrat0r
+      KEYCLOAK_PASSWORD: asc88a8c0ssssqs
     ports:
       - 8443:8443
     volumes:
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/opt/keycloak/conf/server.crt.pem
-      - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/opt/keycloak/conf/server.key.pem
+      - /petsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
+      - /petsontrail_data/certbot/conf/live/petsontrail.eu/fullchain.pem:/etc/x509/https/tls.crt
+      - /petsontrail_data/certbot/conf/live/petsontrail.eu/privkey.pem:/etc/x509/https/tls.key
+    depends_on:
+      - postgres
     networks:
       - frontend
       - backend
@@ -135,7 +138,6 @@ volumes:
   data_mq:
   postgres_data:
       driver: local
-  nginx_secrets:
 
 networks:
   frontend:
