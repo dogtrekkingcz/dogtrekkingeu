@@ -72,7 +72,7 @@ services:
       - backend
     restart: always
    
-  postgres:
+  keycloakdb:
     image: postgres
     container_name: PetsOnTrail.KeyCloakDB
     environment:
@@ -88,18 +88,27 @@ services:
     restart: always
 
   keycloak:
-    image: jboss/keycloak
+    image: quay.io/keycloak/keycloak:23.0.7
     container_name: PetsOnTrail.KeyCloak
-    command: 
-      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycl0ak
-      DB_USER: keycl0ak
-      DB_PASSWORD: password
-      KEYCLOAK_USER: administrat0r
-      KEYCLOAK_PASSWORD: asc88a8c0ssssqs
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloakdb:5432/keycl0ak
+      KC_DB_USERNAME: keycl0ak
+      KC_DB_PASSWORD: password
+
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+
+      KC_LOG_LEVEL: info
+      KC_METRICS_ENABLED: true
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: administrat0r
+      KEYCLOAK_ADMIN_PASSWORD: asc88a8c0ssssqs
+    command: start-dev
+    depends_on:
+      - postgres
     ports:
       - 8443:8443
       - 9990:9990
@@ -107,8 +116,6 @@ services:
       - /petsontrail_data/keycloak/imports:/opt/jboss/keycloak/imports
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/etc/x509/https/tls.crt
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/etc/x509/https/tls.key
-    depends_on:
-      - postgres
     networks:
       - frontend
       - backend
