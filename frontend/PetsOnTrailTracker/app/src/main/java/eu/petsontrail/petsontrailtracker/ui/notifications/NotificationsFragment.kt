@@ -47,7 +47,7 @@ class NotificationsFragment : Fragment() {
         btnLogin.setOnClickListener {
             val serviceConfig = AuthorizationServiceConfiguration(
                 Uri.parse("https://petsontrail.eu:8443/auth/realms/petsontrail.eu/account"),
-                Uri.parse("https://petsontrail.eu:8443/auth/realms/petsontrail.eu/protocol/openid-connect") // token endpoint
+                Uri.parse("https://petsontrail.eu:8443/realms/petsontrail.eu/") // token endpoint
             )
 
             val clientId = "public"

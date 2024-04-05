@@ -32,7 +32,7 @@ public class MailSenderService : IMailSenderService
     private async Task SendMailAsync(SmtpClient smtp, string to, string subject, string body, IList<IFormFile> attachments, CancellationToken cancellationToken)
     {
         var email = new MimeMessage();
-        email.Sender = MailboxAddress.Parse("no-reply@dogsontrail.eu");
+        email.Sender = MailboxAddress.Parse("no-reply@petsontrail.eu");
         email.To.Add(MailboxAddress.Parse(to));
         email.Subject = subject;
         
