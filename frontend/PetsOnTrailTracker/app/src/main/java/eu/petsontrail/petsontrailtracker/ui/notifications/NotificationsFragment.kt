@@ -1,7 +1,6 @@
 package eu.petsontrail.petsontrailtracker.ui.notifications
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,9 @@ import androidx.credentials.CredentialManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import eu.petsontrail.petsontrailtracker.databinding.FragmentNotificationsBinding
+import eu.petsontrail.petsontrailtracker.ui.login.LoginActivity
 import net.openid.appauth.AuthorizationException
-import net.openid.appauth.AuthorizationRequest
 import net.openid.appauth.AuthorizationResponse
-import net.openid.appauth.AuthorizationService
-import net.openid.appauth.AuthorizationServiceConfiguration
-import net.openid.appauth.ResponseTypeValues
 
 
 class NotificationsFragment : Fragment() {
@@ -45,26 +41,12 @@ class NotificationsFragment : Fragment() {
 
         val btnLogin: Button = binding.btnUserLogin
         btnLogin.setOnClickListener {
-            val serviceConfig = AuthorizationServiceConfiguration(
-                Uri.parse("https://petsontrail.eu:8443/auth/realms/petsontrail.eu/account"),
-                Uri.parse("https://petsontrail.eu:8443/realms/petsontrail.eu/") // token endpoint
-            )
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+//                addRequestProperty("client_id", "tracker-app")
+  //              addRequestProperty("client_secret", "NmdTc3gQZr7AQM33ZIQ9TdjXV7wJA92m")
+    //            setRequestProperty("Authorization", "OAuth $token")
 
-            val clientId = "public"
-            val redirectUri = Uri.parse("eu.petsontrail.petsontrailtracker.appauth:/oauth2callback")
-            val builder = AuthorizationRequest.Builder(
-                serviceConfig,
-                clientId,
-                ResponseTypeValues.CODE,
-                redirectUri
-            )
-            builder.setScopes("profile")
-
-            val authRequest = builder.build()
-
-            val authService = AuthorizationService(requireContext())
-            val authIntent = authService.getAuthorizationRequestIntent(authRequest)
-            startActivityForResult(authIntent, RC_AUTH)
         }
 
         return root
