@@ -13,7 +13,7 @@ internal static class ActivitiesMapping
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Activities.CreateActivityResponse, CreateActivityResponse>();
 
         typeAdapterConfig.NewConfig<UpdateActivityRequest, PetsOnTrail.Interfaces.Actions.Entities.Activities.UpdateActivityRequest>();
-        typeAdapterConfig.NewConfig<UpdateActivityRequest.ActivityPointDto, PetsOnTrail.Interfaces.Actions.Entities.Activities.UpdateActivityRequest.PositionDto>();
+        typeAdapterConfig.NewConfig<UpdateActivityRequest.PositionDto, PetsOnTrail.Interfaces.Actions.Entities.Activities.UpdateActivityRequest.PositionDto>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Activities.UpdateActivityResponse, UpdateActivityResponse>();
 
         return typeAdapterConfig;

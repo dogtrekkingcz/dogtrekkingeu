@@ -4,9 +4,9 @@ public sealed record UpdateActivityInternalStorageRequest
 {
     public Guid Id { get; init; }
 
-    public List<ActivityPointDto> Points { get; init; } = new List<ActivityPointDto>();
+    public List<PositionDto> Positions { get; init; } = new List<PositionDto>();
 
-    public sealed record ActivityPointDto
+    public sealed record PositionDto
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
