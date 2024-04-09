@@ -8,8 +8,11 @@ internal static class ActivitiesServiceMapping
 {
     internal static TypeAdapterConfig AddCActivitiesServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.CreateActivityRequest, CreateActivityRequest>();
+        typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.CreateActivityRequest, CreateActivityRequest>()
+            .Ignore(d => d.Id);
         typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.PositionDto, CreateActivityRequest.PositionDto>();
+        typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.PetDto, CreateActivityRequest.PetDto>();
+
         typeAdapterConfig.NewConfig<CreateActivityResponse, Protos.Activities.CreateActivity.CreateActivityResponse>();
 
         typeAdapterConfig.NewConfig<Protos.Activities.AddPoint.AddPointRequest, AddPointRequest>();

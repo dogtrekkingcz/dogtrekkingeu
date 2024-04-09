@@ -17,6 +17,7 @@ message CreateActivityRequest {
   repeated string PetIds = 8;
   bool IsPublic = 9;
   repeated PositionDto Positions = 10;
+  repeated PetDto Pets = 11;
 }
 
 message PositionDto {
@@ -29,4 +30,14 @@ message PositionDto {
   double Course = 7;
   string Note = 8;
   repeated string PhotoUris = 9;
+}
+
+message PetDto {
+  string Id = 1;
+  optional string Chip = 2;
+  optional string Name = 3;
+  optional string Breed = 4;
+  optional string Color = 5;
+  optional string Kennel = 6;
+  optional google.type.DateTime BirthDate = 7;
 }

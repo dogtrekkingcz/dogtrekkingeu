@@ -27,6 +27,7 @@ internal static class EntriesMapping
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.PetDto, Entities.GetEntriesByActionResponse.PetDto>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.MerchandizeItemDto, Entities.GetEntriesByActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.AddressDto, Entities.GetEntriesByActionResponse.AddressDto>();
+        typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.LatLngDto, Entities.GetEntriesByActionResponse.LatLngDto>();
 
         return typeAdapterConfig;
     }
