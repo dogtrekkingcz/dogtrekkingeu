@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace DogsOnTrail.Actions.Extensions;
+namespace PetsOnTrail.Actions.Extensions;
 
 public static class ObjectExtensions
 {

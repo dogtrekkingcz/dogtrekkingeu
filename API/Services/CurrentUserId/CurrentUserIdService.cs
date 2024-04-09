@@ -1,6 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Services;
 
-namespace DogsOnTrail.Actions.Services.CurrentUserId;
+namespace PetsOnTrail.Actions.Services.CurrentUserId;
 
 public class CurrentUserIdService : ICurrentUserIdService
 {

@@ -1,7 +1,9 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Activities;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Activities;
 
 public sealed record CreateActivityRequest
 {
+    public Guid? Id { get; set; } = null;
+
     public Guid ActionId { get; set; } = Guid.Empty;
 
     public Guid RaceId { get; set; } = Guid.Empty;
@@ -22,6 +24,8 @@ public sealed record CreateActivityRequest
 
     public IEnumerable<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
 
+    public IEnumerable<PetDto> Pets { get; set; } = new List<PetDto>(0);
+
     public sealed record PositionDto
     {
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -41,5 +45,22 @@ public sealed record CreateActivityRequest
         public string Note { get; set; } = string.Empty;
         
         public List<string> PhotoUris { get; set; } = new();
+    }
+
+    public sealed record PetDto
+    {
+        public Guid Id { get; init; } = Guid.NewGuid();
+
+        public string? Chip { get; init; }
+
+        public string? Name { get; init; }
+
+        public string? Breed { get; init; }
+
+        public string? Color { get; init; }
+
+        public string Kennel { get; init; }
+
+        public DateTimeOffset? BirthDate { get; init; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using Mapster;
 
 namespace API.GRPCService.Services.UserProfiles;

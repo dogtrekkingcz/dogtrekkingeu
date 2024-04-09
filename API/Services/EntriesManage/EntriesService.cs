@@ -1,7 +1,7 @@
-﻿using DogsOnTrail.Actions.Extensions;
-using DogsOnTrail.Interfaces.Actions.Entities.Entries;
-using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Actions.Extensions;
+using PetsOnTrail.Interfaces.Actions.Entities.Entries;
+using PetsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Mails.Builders.Emails;
 using Mails.Entities;
 using Mails.Entities.RegistrationToActionReceived;
@@ -10,7 +10,7 @@ using MapsterMapper;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.EntriesManage
+namespace PetsOnTrail.Actions.Services.EntriesManage
 {
     internal class EntriesService : IEntriesService
     {

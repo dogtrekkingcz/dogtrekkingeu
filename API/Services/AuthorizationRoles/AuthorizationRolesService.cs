@@ -1,6 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Services;
 
-namespace DogsOnTrail.Actions.Services.AuthorizationRoles
+namespace PetsOnTrail.Actions.Services.AuthorizationRoles
 {
     internal class AuthorizationRolesService : IAuthorizationRolesService
     {

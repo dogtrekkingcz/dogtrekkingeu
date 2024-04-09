@@ -1,6 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Checkpoints;
 
-namespace DogsOnTrail.Interfaces.Actions.Services;
+namespace PetsOnTrail.Interfaces.Actions.Services;
 
 public interface ICheckpointsService
 {

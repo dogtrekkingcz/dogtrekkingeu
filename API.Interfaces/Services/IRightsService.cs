@@ -1,6 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Rights;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Rights;
 
-namespace DogsOnTrail.Interfaces.Actions.Services
+namespace PetsOnTrail.Interfaces.Actions.Services
 {
     public interface IRightsService
     {

@@ -1,10 +1,10 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Results;
+using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Storage.Entities.Actions;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.ResultsManage;
+namespace PetsOnTrail.Actions.Services.ResultsManage;
 
  internal class ResultsService : IResultsService
 {

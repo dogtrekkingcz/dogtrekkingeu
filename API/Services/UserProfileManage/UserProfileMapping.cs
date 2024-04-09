@@ -1,8 +1,8 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using Mapster;
 using Storage.Entities.UserProfiles;
 
-namespace DogsOnTrail.Actions.Services.UserProfileManage;
+namespace PetsOnTrail.Actions.Services.UserProfileManage;
 
 internal static class UserProfileMapping
 {

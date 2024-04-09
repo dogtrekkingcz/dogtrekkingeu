@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace DogsOnTrail.Actions.Services.Authorization;
+namespace PetsOnTrail.Actions.Services.Authorization;
 
 internal interface IAuthorizationService
 {

@@ -1,10 +1,10 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Rights;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Rights;
+using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Storage.Entities.ActionRights;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.Rights;
+namespace PetsOnTrail.Actions.Services.Rights;
 
 internal sealed class RightsService : IRightsService
 {

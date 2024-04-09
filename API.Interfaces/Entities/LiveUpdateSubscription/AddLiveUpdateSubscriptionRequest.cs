@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
 
 public sealed record AddLiveUpdateSubscriptionRequest
 {

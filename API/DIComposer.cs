@@ -1,24 +1,24 @@
-﻿using DogsOnTrail.Actions.Services.ActionsManage;
-using DogsOnTrail.Actions.Services.Activities;
-using DogsOnTrail.Actions.Services.Authorization;
-using DogsOnTrail.Actions.Services.Checkpoints;
-using DogsOnTrail.Actions.Services.CurrentUserId;
-using DogsOnTrail.Actions.Services.EntriesManage;
-using DogsOnTrail.Actions.Services.LiveUpdateSubscription;
-using DogsOnTrail.Actions.Services.PetsManage;
-using DogsOnTrail.Actions.Services.ResultsManage;
-using DogsOnTrail.Actions.Services.Rights;
-using DogsOnTrail.Actions.Services.UserProfileManage;
+﻿using PetsOnTrail.Actions.Services.ActionsManage;
+using PetsOnTrail.Actions.Services.Activities;
+using PetsOnTrail.Actions.Services.Authorization;
+using PetsOnTrail.Actions.Services.Checkpoints;
+using PetsOnTrail.Actions.Services.CurrentUserId;
+using PetsOnTrail.Actions.Services.EntriesManage;
+using PetsOnTrail.Actions.Services.LiveUpdateSubscription;
+using PetsOnTrail.Actions.Services.PetsManage;
+using PetsOnTrail.Actions.Services.ResultsManage;
+using PetsOnTrail.Actions.Services.Rights;
+using PetsOnTrail.Actions.Services.UserProfileManage;
 using Mails;
 using Mails.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DogsOnTrail.Actions
+namespace PetsOnTrail.Actions
 {
     public static class DIComposer
     {
-        public static IServiceCollection AddApiLayer(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrail.Actions.Options.DogsOnTrailOptions options)
+        public static IServiceCollection AddApiLayer(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, PetsOnTrail.Actions.Options.PetsOnTrailOptions options)
         {
             services
                 .AddActions(typeAdapterConfig, options)
@@ -27,7 +27,7 @@ namespace DogsOnTrail.Actions
                 .AddUserProfiles(typeAdapterConfig, options)
                 .AddPets(typeAdapterConfig, options)
                 .AddResults(typeAdapterConfig, options)
-                .AddEmails(typeAdapterConfig, new DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
+                .AddEmails(typeAdapterConfig, new PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
                 .AddCurrentUserId(typeAdapterConfig, options)
                 .AddLiveUpdatesSubscription(typeAdapterConfig, options)
                 .AddCheckpoints(typeAdapterConfig, options)

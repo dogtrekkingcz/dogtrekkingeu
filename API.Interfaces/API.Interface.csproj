@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>DogsOnTrail.Interfaces.Actions</RootNamespace>
+    <RootNamespace>PetsOnTrail.Interfaces.Actions</RootNamespace>
   </PropertyGroup>
 
 

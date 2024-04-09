@@ -1,5 +1,5 @@
 ﻿using API.WebApiService.Entities;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Mediator;
 

@@ -1,11 +1,11 @@
-﻿using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Entries;
-using CreateEntryRequest = DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest;
-using DeleteEntryRequest = DogsOnTrail.Interfaces.Actions.Entities.Entries.DeleteEntryRequest;
-using GetAllEntriesRequest = DogsOnTrail.Interfaces.Actions.Entities.Entries.GetAllEntriesRequest;
-using GetEntriesByActionRequest = DogsOnTrail.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest;
+using CreateEntryRequest = PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest;
+using DeleteEntryRequest = PetsOnTrail.Interfaces.Actions.Entities.Entries.DeleteEntryRequest;
+using GetAllEntriesRequest = PetsOnTrail.Interfaces.Actions.Entities.Entries.GetAllEntriesRequest;
+using GetEntriesByActionRequest = PetsOnTrail.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest;
 
 namespace API.GRPCService.Services.Entries;
 

@@ -1,5 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 

@@ -1,6 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.UserProfile;
 
-namespace DogsOnTrail.Interfaces.Actions.Services
+namespace PetsOnTrail.Interfaces.Actions.Services
 {
     public interface IUserProfileService
     {

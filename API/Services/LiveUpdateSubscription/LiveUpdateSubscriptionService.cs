@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DogsOnTrail.Actions.Services.LiveUpdateSubscription;
+namespace PetsOnTrail.Actions.Services.LiveUpdateSubscription;
 
 public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
 {

@@ -1,15 +1,15 @@
 ﻿using API.WebApiService.Entities;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Mediator;
 
 namespace API.WebApiService.RequestHandlers.Entries
 {
-    public sealed class CreateEntryHandler : IRequestHandler<CreateEntryRequest, CreateEntryResponse>
+    public sealed class CreateActivityHandler : IRequestHandler<CreateEntryRequest, CreateEntryResponse>
     {
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public CreateEntryHandler(IServiceScopeFactory serviceScopeFactory)
+        public CreateActivityHandler(IServiceScopeFactory serviceScopeFactory)
         {
             _serviceScopeFactory = serviceScopeFactory;
         }
@@ -23,7 +23,7 @@ namespace API.WebApiService.RequestHandlers.Entries
                 var entriesService = scope.ServiceProvider.GetRequiredService<IEntriesService>();
 
                 var createEntryRequest =
-                    mapper.Map<DogsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest>(request);
+                    mapper.Map<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest>(request);
 
                 var newEntry = await entriesService.CreateEntryAsync(createEntryRequest, cancellationToken);
 

@@ -1,9 +1,9 @@
-﻿using DogsOnTrail.Actions.Attributes;
-using DogsOnTrail.Actions.Exceptions;
-using DogsOnTrail.Actions.Extensions;
-using DogsOnTrail.Actions.Services.Authorization;
-using DogsOnTrail.Interfaces.Actions.Entities.Actions;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Actions.Attributes;
+using PetsOnTrail.Actions.Exceptions;
+using PetsOnTrail.Actions.Extensions;
+using PetsOnTrail.Actions.Services.Authorization;
+using PetsOnTrail.Interfaces.Actions.Entities.Actions;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Mails.Builders.Emails;
 using Mails.Entities.PaymentOfRegistrationReceived;
 using Mails.Services;
@@ -13,7 +13,7 @@ using Storage.Entities.Actions;
 using Storage.Entities.Entries;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.ActionsManage
+namespace PetsOnTrail.Actions.Services.ActionsManage
 {
     internal class ActionsService : IActionsService
     {

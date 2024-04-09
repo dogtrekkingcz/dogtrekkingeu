@@ -1,10 +1,10 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Actions;
 using Mapster;
 using Storage.Entities.Actions;
 using Storage.Entities.Checkpoints;
 using Storage.Entities.Entries;
 
-namespace DogsOnTrail.Actions.Services.ActionsManage;
+namespace PetsOnTrail.Actions.Services.ActionsManage;
 
 internal static class ActionsServiceMapping
 {

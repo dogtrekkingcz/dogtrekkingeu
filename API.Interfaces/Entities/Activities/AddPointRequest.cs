@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Activities;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Activities;
 
 public sealed record AddPointRequest
 {

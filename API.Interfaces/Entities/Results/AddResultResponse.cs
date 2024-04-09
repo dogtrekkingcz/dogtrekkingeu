@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Results;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Results;
 
 public record AddResultResponse
 {

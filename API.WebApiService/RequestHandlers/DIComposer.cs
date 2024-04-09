@@ -1,4 +1,5 @@
 ﻿using API.WebApiService.RequestHandlers.Actions;
+using API.WebApiService.RequestHandlers.Activities;
 using API.WebApiService.RequestHandlers.Entries;
 using Mapster;
 
@@ -15,7 +16,8 @@ namespace API.WebApiService.RequestHandlers
         {
             typeAdapterConfig
                 .AddActionsMapping()
-                .AddEntriesMapping();
+                .AddEntriesMapping()
+                .AddActivitiesMapping();
 
             return typeAdapterConfig;
         }

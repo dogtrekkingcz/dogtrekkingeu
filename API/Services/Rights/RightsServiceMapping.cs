@@ -1,8 +1,8 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Rights;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Rights;
 using Mapster;
 using Storage.Entities.ActionRights;
 
-namespace DogsOnTrail.Actions.Services.Rights;
+namespace PetsOnTrail.Actions.Services.Rights;
 
 internal static class RightsServiceMapping
 {

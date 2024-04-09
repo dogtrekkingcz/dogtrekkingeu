@@ -52,4 +52,18 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
         return _mapper.Map<GetActivitiesByUserIdInternalStorageResponse>(activities);
     }
+
+    public async Task<UpdateActivityInternalStorageResponse> UpdateActivityAsync(UpdateActivityInternalStorageRequest request, CancellationToken cancellationToken)
+    {
+        var activity = await _activitiesService.GetAsync(request.Id.ToString(), cancellationToken);
+
+        activity.Positions.Add(_mapper.Map<ActivityRecord.PositionDto>(request));
+
+        await _activitiesService.UpdateAsync(activity, cancellationToken);
+
+        return new UpdateActivityInternalStorageResponse
+        {
+            Id = request.Id
+        };
+    }
 }

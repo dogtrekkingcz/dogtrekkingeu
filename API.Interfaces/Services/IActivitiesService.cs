@@ -1,6 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Activities;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Activities;
 
-namespace DogsOnTrail.Interfaces.Actions.Services;
+namespace PetsOnTrail.Interfaces.Actions.Services;
 
 public interface IActivitiesService
 {
@@ -9,4 +9,6 @@ public interface IActivitiesService
     Task<AddPointResponse> AddPointAsync(AddPointRequest request, CancellationToken cancellationToken);
     
     Task<GetMyActivitiesResponse> GetMyActivitiesAsync(GetMyActivitiesRequest request, CancellationToken cancellationToken);
+
+    Task<UpdateActivityResponse> UpdateActivityAsync(UpdateActivityRequest request, CancellationToken cancellationToken);
 }

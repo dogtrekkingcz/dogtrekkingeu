@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.UserProfile;
 
 public sealed record CreateUserProfileRequest
 {

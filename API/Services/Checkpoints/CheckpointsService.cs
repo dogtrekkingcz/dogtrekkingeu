@@ -1,12 +1,12 @@
-﻿using DogsOnTrail.Actions.Extensions;
-using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
-using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Actions.Extensions;
+using PetsOnTrail.Interfaces.Actions.Entities.Checkpoints;
+using PetsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
+using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Storage.Entities.Checkpoints;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.Checkpoints;
+namespace PetsOnTrail.Actions.Services.Checkpoints;
 
 public class CheckpointsService : ICheckpointsService
 {

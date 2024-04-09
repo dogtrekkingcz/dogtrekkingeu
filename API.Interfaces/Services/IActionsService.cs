@@ -1,8 +1,8 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities;
-using DogsOnTrail.Interfaces.Actions.Entities.Actions;
-using DogsOnTrail.Interfaces.Actions.Entities.Results;
+﻿using PetsOnTrail.Interfaces.Actions.Entities;
+using PetsOnTrail.Interfaces.Actions.Entities.Actions;
+using PetsOnTrail.Interfaces.Actions.Entities.Results;
 
-namespace DogsOnTrail.Interfaces.Actions.Services
+namespace PetsOnTrail.Interfaces.Actions.Services
 {
     public interface IActionsService
     {

@@ -1,5 +1,5 @@
 ﻿using API.WebApiService.Entities;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Mediator;
 
@@ -21,7 +21,7 @@ namespace API.WebApiService.RequestHandlers.Entries
 
             var entriesService = scope.ServiceProvider.GetRequiredService<IEntriesService>();
 
-            var getEntriesByActionRequest = mapper.Map<DogsOnTrail.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest>(request);
+            var getEntriesByActionRequest = mapper.Map<PetsOnTrail.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest>(request);
 
             var entries = await entriesService.GetEntriesByActionAsync(getEntriesByActionRequest, cancellationToken);
 

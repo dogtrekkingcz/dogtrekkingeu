@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Rights
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Rights
 {
     public sealed record GetAllRightsRequest
     {

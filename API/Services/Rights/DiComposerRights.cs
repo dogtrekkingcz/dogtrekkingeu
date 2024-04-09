@@ -1,8 +1,8 @@
-﻿using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DogsOnTrail.Actions.Services.Rights;
+namespace PetsOnTrail.Actions.Services.Rights;
 
 internal static class DiComposerRights
 {

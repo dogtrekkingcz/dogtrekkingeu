@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Services;
+﻿namespace PetsOnTrail.Interfaces.Actions.Services;
 
 public interface ICurrentUserIdService
 {

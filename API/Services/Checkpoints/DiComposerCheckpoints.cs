@@ -1,13 +1,13 @@
-﻿using DogsOnTrail.Actions.Options;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Actions.Options;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DogsOnTrail.Actions.Services.Checkpoints;
+namespace PetsOnTrail.Actions.Services.Checkpoints;
 
 internal static class DiComposerCheckpoints
 {
-    public static IServiceCollection AddCheckpoints(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrailOptions options)
+    public static IServiceCollection AddCheckpoints(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, PetsOnTrailOptions options)
     {
         typeAdapterConfig.AddCheckpointsMapping();
             

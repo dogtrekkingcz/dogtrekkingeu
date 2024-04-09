@@ -21,10 +21,8 @@ import eu.petsontrail.petsontrailtracker.dao.UserSettingsDao
         UserSettingsDto::class
     ],
     autoMigrations = [
-        AutoMigration (
-            from = 1,
-            to = 2
-        )
+        AutoMigration ( from = 1, to = 2 ),
+        AutoMigration ( from = 2, to = 3 )
     ],
     exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
@@ -43,6 +41,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         public const val DatabaseName = "PetsOnTrail.DB.v1"
-        public const val LATEST_VERSION = 2
+        public const val LATEST_VERSION = 3
     }
 }

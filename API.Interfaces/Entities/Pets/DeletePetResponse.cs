@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Pets;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Pets;
 
 public record DeletePetResponse
 {

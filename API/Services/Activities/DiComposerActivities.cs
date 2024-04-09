@@ -1,14 +1,14 @@
-﻿using DogsOnTrail.Actions.Options;
-using DogsOnTrail.Actions.Services.Checkpoints;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Actions.Options;
+using PetsOnTrail.Actions.Services.Checkpoints;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DogsOnTrail.Actions.Services.Activities;
+namespace PetsOnTrail.Actions.Services.Activities;
 
 internal static class DiComposerActivities
 {
-    public static IServiceCollection AddActivities(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrailOptions options)
+    public static IServiceCollection AddActivities(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, PetsOnTrailOptions options)
     {
         typeAdapterConfig.AddActivitiesMapping();
             

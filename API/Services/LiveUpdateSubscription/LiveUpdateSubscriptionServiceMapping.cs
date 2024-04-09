@@ -1,6 +1,6 @@
 ﻿using Mapster;
 
-namespace DogsOnTrail.Actions.Services.LiveUpdateSubscription;
+namespace PetsOnTrail.Actions.Services.LiveUpdateSubscription;
 
 internal static class LiveUpdateSubscriptionServiceMapping
 {

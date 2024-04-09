@@ -12,5 +12,8 @@ data class ActivityDto(
     @ColumnInfo(name = "time") var time: Long?,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "description") val description: String?,
-    @ColumnInfo(name = "active") val active: Int = 0
+    @ColumnInfo(name = "active") val active: Int = 0,
+    @ColumnInfo(name = "synchronize") val synchronize: Boolean = true,
+    @ColumnInfo(name = "synchronize_every_n_secs") val synchronizeEveryNSecs: Int = 60,
+    @ColumnInfo(name = "is_synchronized") val isSynchronized: Boolean = false
 )

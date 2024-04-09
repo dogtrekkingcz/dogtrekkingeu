@@ -1,10 +1,10 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.UserProfile;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.UserProfile;
+using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Storage.Entities.UserProfiles;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.UserProfileManage
+namespace PetsOnTrail.Actions.Services.UserProfileManage
 {
     internal class UserProfileService : IUserProfileService
     {

@@ -1,6 +1,6 @@
-﻿namespace DogsOnTrail.Actions.Options;
+﻿namespace PetsOnTrail.Actions.Options;
 
-public sealed record DogsOnTrailOptions
+public sealed record PetsOnTrailOptions
 {
     public string MongoDbConnectionString { get; set; } = "";
 }

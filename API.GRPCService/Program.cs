@@ -11,7 +11,7 @@ using API.GRPCService.Services.LiveUpdatesSubscription;
 using API.GRPCService.Services.Pets;
 using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
-using DogsOnTrail.Actions;
+using PetsOnTrail.Actions;
 using Google.Protobuf.Collections;
 using Import;
 using Mapster;
@@ -56,7 +56,7 @@ catch (Exception ex)
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 
 TypeAdapterConfig typeAdapterConfig = null;
-var options = new DogsOnTrailOptions()
+var options = new PetsOnTrailOptions()
 {
     MongoDbConnectionString = MongoDbConnectionString
 };
@@ -91,7 +91,7 @@ builder.Services
 
 builder.Services
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
-    .AddApiLayer(typeAdapterConfig, new DogsOnTrail.Actions.Options.DogsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
+    .AddApiLayer(typeAdapterConfig, new PetsOnTrail.Actions.Options.PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
     .AddImport(typeAdapterConfig)
     .AddScoped<IJwtTokenService, JwtTokenService>()
     .AddGrpc(options =>

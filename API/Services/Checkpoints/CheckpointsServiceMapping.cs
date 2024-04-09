@@ -1,8 +1,8 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Checkpoints;
 using Mapster;
 using Storage.Entities.Checkpoints;
 
-namespace DogsOnTrail.Actions.Services.Checkpoints;
+namespace PetsOnTrail.Actions.Services.Checkpoints;
 
 internal static class CheckpointsServiceMapping
 {

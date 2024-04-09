@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Checkpoints;
 
 public sealed record GetCheckpointItemsRequest
 {

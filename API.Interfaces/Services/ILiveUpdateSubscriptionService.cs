@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
+using PetsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
 
-namespace DogsOnTrail.Interfaces.Actions.Services;
+namespace PetsOnTrail.Interfaces.Actions.Services;
 
 public interface ILiveUpdateSubscriptionService
 {

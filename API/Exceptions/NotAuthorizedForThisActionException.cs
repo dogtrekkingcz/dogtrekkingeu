@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Actions.Exceptions;
+﻿namespace PetsOnTrail.Actions.Exceptions;
 
 public class NotAuthorizedForThisActionException : Exception
 {

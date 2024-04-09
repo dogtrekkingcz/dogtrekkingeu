@@ -1,5 +1,5 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
-using DogsOnTrail.Interfaces.Actions.Services;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Results;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
 

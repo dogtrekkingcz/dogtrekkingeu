@@ -1,13 +1,10 @@
-﻿using DogsOnTrail.Actions.Extensions;
-using DogsOnTrail.Interfaces.Actions.Entities.Activities;
-using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
-using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
-using DogsOnTrail.Interfaces.Actions.Services;
-using MapsterMapper;
+﻿using MapsterMapper;
+using PetsOnTrail.Interfaces.Actions.Entities.Activities;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Storage.Entities.Activities;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.Activities;
+namespace PetsOnTrail.Actions.Services.Activities;
 
 internal class ActivitiesService : IActivitiesService
 {
@@ -56,5 +53,14 @@ internal class ActivitiesService : IActivitiesService
         var activities = await _activitiesRepositoryService.GetActivitiesByUserId(_currentUserIdService.GetUserId(), cancellationToken);
 
         return _mapper.Map<GetMyActivitiesResponse>(activities);
+    }
+
+    public async Task<UpdateActivityResponse> UpdateActivityAsync(UpdateActivityRequest request, CancellationToken cancellationToken)
+    {
+        var updateInternalStorageRequest = _mapper.Map<UpdateActivityInternalStorageRequest>(request);
+
+        var response = await _activitiesRepositoryService.UpdateActivityAsync(updateInternalStorageRequest, cancellationToken);
+
+        return _mapper.Map<UpdateActivityResponse>(response);
     }
 }

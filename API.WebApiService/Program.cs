@@ -47,9 +47,26 @@ string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionStrin
 Console.WriteLine(MongoDbConnectionString);
 
 TypeAdapterConfig typeAdapterConfig = null;
-var options = new DogsOnTrailOptions()
+var options = new PetsOnTrailOptions()
 {
     MongoDbConnectionString = MongoDbConnectionString
+};
+
+typeAdapterConfig = new TypeAdapterConfig
+{
+    RequireDestinationMemberSource = true,
+    RequireExplicitMapping = true,
+    Default =
+    {
+        Settings =
+        {
+            UseDestinationValues =
+            {
+                (member => member.SetterModifier == AccessModifier.None &&
+                           member.Type.IsGenericType)
+            }
+        }
+    }
 };
 
 builder.Services

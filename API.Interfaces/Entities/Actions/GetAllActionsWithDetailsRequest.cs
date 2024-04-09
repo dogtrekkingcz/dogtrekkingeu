@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Interfaces.Actions.Entities.Actions;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Actions;
 
 public sealed record GetAllActionsWithDetailsRequest
 {

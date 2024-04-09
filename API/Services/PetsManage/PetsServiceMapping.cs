@@ -1,9 +1,9 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Pets;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Pets;
 using Mapster;
 using Storage.Entities.Pets;
 using Storage.Entities.UserProfiles;
 
-namespace DogsOnTrail.Actions.Services.PetsManage;
+namespace PetsOnTrail.Actions.Services.PetsManage;
 
 internal static class PetsServiceMapping
 {

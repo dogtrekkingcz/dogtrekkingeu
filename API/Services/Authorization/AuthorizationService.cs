@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using DogsOnTrail.Actions.Attributes;
-using DogsOnTrail.Actions.Extensions;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Actions.Attributes;
+using PetsOnTrail.Actions.Extensions;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Storage.Entities.ActionRights;
 using Storage.Interfaces;
 
-namespace DogsOnTrail.Actions.Services.Authorization;
+namespace PetsOnTrail.Actions.Services.Authorization;
 
 internal class AuthorizationService : IAuthorizationService
 {

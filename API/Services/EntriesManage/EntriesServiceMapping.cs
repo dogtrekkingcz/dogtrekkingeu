@@ -1,10 +1,10 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Entries;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Entries;
 using Mails.Entities;
 using Mails.Entities.RegistrationToActionReceived;
 using Mapster;
 using Storage.Entities.Entries;
 
-namespace DogsOnTrail.Actions.Services.EntriesManage;
+namespace PetsOnTrail.Actions.Services.EntriesManage;
 
 internal static class EntriesServiceMapping
 {

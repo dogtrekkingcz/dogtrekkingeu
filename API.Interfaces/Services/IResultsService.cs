@@ -1,6 +1,6 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Results;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Results;
 
-namespace DogsOnTrail.Interfaces.Actions.Services;
+namespace PetsOnTrail.Interfaces.Actions.Services;
 
 public interface IResultsService
 {

@@ -1,10 +1,10 @@
 using API.GRPCService.Extensions;
-using DogsOnTrail.Interfaces.Actions.Entities.Activities;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Entities.Activities;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Activities.GetMyActivities;
-using GetMyActivitiesRequest = DogsOnTrail.Interfaces.Actions.Entities.Activities.GetMyActivitiesRequest;
+using GetMyActivitiesRequest = PetsOnTrail.Interfaces.Actions.Entities.Activities.GetMyActivitiesRequest;
 
 namespace API.GRPCService.Services.Activities;
 

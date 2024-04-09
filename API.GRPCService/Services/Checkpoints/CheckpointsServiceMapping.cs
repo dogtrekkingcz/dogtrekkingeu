@@ -1,4 +1,4 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Checkpoints;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Checkpoints;
 using Mapster;
 
 namespace API.GRPCService.Services.Checkpoints;

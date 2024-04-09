@@ -1,4 +1,4 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.Actions;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Actions;
 using Google.Protobuf.Collections;
 using Mapster;
 

@@ -1,4 +1,4 @@
-﻿namespace DogsOnTrail.Actions.Extensions;
+﻿namespace PetsOnTrail.Actions.Extensions;
 
 internal static class StringExtensions
 {

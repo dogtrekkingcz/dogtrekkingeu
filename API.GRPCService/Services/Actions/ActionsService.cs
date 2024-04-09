@@ -1,12 +1,12 @@
 using API.GRPCService.Extensions;
-using DogsOnTrail.Interfaces.Actions.Entities.Actions;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Entities.Actions;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.Actions;
-using AcceptPaymentRequest = DogsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
+using AcceptPaymentRequest = PetsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
 using Action = Protos.Actions.GetAllActions.Action;
 
 namespace API.GRPCService.Services.Actions;

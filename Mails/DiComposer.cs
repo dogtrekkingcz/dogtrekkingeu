@@ -8,7 +8,7 @@ namespace Mails;
 
 public static class DiComposer
 {
-    public static IServiceCollection AddEmails(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, DogsOnTrailOptions options)
+    public static IServiceCollection AddEmails(this IServiceCollection services, TypeAdapterConfig typeAdapterConfig, PetsOnTrailOptions options)
     {
         typeAdapterConfig.AddEmailsMapping();
         

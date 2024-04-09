@@ -1,8 +1,8 @@
 ﻿using System.Collections.Specialized;
 using System.ComponentModel;
 using API.GRPCService.Extensions;
-using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
-using DogsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
+using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
 using Microsoft.VisualBasic;

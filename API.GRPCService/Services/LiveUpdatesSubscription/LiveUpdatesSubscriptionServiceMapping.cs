@@ -1,5 +1,5 @@
-﻿using DogsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
-using DogsOnTrail.Interfaces.Actions.Entities.Results;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.LiveUpdateSubscription;
+using PetsOnTrail.Interfaces.Actions.Entities.Results;
 using Mapster;
 
 namespace API.GRPCService.Services.LiveUpdatesSubscription;
