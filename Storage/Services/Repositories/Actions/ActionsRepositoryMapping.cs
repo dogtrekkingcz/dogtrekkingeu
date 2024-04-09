@@ -163,7 +163,12 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.AddressDto, UpdateActionInternalStorageRequest.AddressDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
-            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>()
+                .Ignore(d => d.UserId)
+                .Ignore(d => d.Kennel)
+                .Ignore(d => d.Decease)
+                .Ignore(d => d.UriToPhoto)
+                .Ignore(d => d.Contact);
 
             return typeAdapterConfig;
         }
