@@ -20,6 +20,7 @@ internal static class EntriesMapping
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Entities.GetEntriesByActionResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.MerchandizeItemDto, Entities.GetEntriesByActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.AddressDto, Entities.GetEntriesByActionResponse.AddressDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.LatLngDto, Entities.GetEntriesByActionResponse.LatLngDto>();
 
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationDto, Entities.GetEntriesByActionResponse.VaccinationDto>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationType, Entities.GetEntriesByActionResponse.VaccinationType>();
