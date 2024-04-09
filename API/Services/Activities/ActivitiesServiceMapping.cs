@@ -23,7 +23,7 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.ActivityDto, GetMyActivitiesResponse.ActivityDto>();
 
         typeAdapterConfig.NewConfig<UpdateActivityRequest, UpdateActivityInternalStorageRequest>();
-        typeAdapterConfig.NewConfig<UpdateActivityRequest.PositionDto, UpdateActivityInternalStorageRequest.ActivityPointDto>();
+        typeAdapterConfig.NewConfig<UpdateActivityRequest.PositionDto, UpdateActivityInternalStorageRequest.PositionDto>();
         
         return typeAdapterConfig;
     }
