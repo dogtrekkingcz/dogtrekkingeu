@@ -8,11 +8,9 @@ public sealed record GetEntriesByActionResponse
     {
         public string? Id { get; set; } = "";
 
-        public string UserProfileId { get; set; } = "";
+        public string UserId { get; set; } = "";
 
         public EntryState State { get; set; } = EntryState.Unspecified;
-
-        public string UserId { get; set; } = "";
 
         public string CompetitorId { get; set; } = "";
 
