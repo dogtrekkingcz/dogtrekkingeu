@@ -10,8 +10,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
+import eu.petsontrail.petsontrailtracker.data.UserSettingsDto
 import eu.petsontrail.petsontrailtracker.databinding.ActivityMainBinding
 import eu.petsontrail.petsontrailtracker.helper.DbHelper
+import kotlinx.coroutines.runBlocking
+import java.util.UUID
 
 
 class MainActivity : AppCompatActivity(), LocationUpdateListener {
@@ -24,6 +27,13 @@ class MainActivity : AppCompatActivity(), LocationUpdateListener {
         super.onCreate(savedInstanceState)
 
         val db = DbHelper().InitializeDatabase(applicationContext)
+
+        runBlocking {
+            if (db.userSettingsDao().getAll().size == 0) {
+                var userSettings = UserSettingsDto(UUID.randomUUID(), null, null, null, null, null, "")
+                db.userSettingsDao().insertOne(userSettings)
+            }
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

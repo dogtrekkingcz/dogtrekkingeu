@@ -8,6 +8,7 @@ import eu.petsontrail.petsontrailtracker.dao.ActivityPetDao
 import eu.petsontrail.petsontrailtracker.dao.LocationDao
 import eu.petsontrail.petsontrailtracker.dao.PetGroupDao
 import eu.petsontrail.petsontrailtracker.dao.PetDao
+import eu.petsontrail.petsontrailtracker.dao.UserSettingsDao
 
 @Database(
     version = AppDatabase.LATEST_VERSION,
@@ -17,6 +18,7 @@ import eu.petsontrail.petsontrailtracker.dao.PetDao
         PetGroupDto::class,
         PetDto::class,
         ActivityPetsDto::class,
+        UserSettingsDto::class
     ],
     autoMigrations = [
         AutoMigration (
@@ -37,8 +39,10 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun activityPetsDao(): ActivityPetDao
 
+    abstract fun userSettingsDao(): UserSettingsDao
+
     companion object {
         public const val DatabaseName = "PetsOnTrail.DB.v1"
-        public const val LATEST_VERSION = 1
+        public const val LATEST_VERSION = 2
     }
 }

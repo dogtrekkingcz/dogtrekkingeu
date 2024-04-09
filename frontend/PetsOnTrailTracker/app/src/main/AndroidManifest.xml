@@ -49,7 +49,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="petsontrail:/tracker" />
+                <data android:scheme="petsontrail" />
             </intent-filter>
         </activity>
         <activity
