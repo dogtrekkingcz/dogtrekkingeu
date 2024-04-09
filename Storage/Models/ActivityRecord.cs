@@ -22,11 +22,9 @@
 
         public bool IsPublic { get; set; } = true;
 
-        public List<string> PetIds { get; set; } = new();
+        public List<PetDto> PetIds { get; set; } = new List<PetDto>(0);
 
-        public List<PositionDto> Positions { get; set; } = new();
-        
-        
+        public List<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
 
         public sealed record PositionDto
         {
@@ -47,6 +45,23 @@
             public string Note { get; set; } = string.Empty;
             
             public List<string> PhotoUris { get; set; } = new();
+        }
+
+        public sealed record PetDto
+        {
+            public Guid Id { get; init; } = Guid.NewGuid();
+
+            public string? Chip { get; init; }
+
+            public string? Name { get; init; }
+
+            public string? Breed { get; init; }
+
+            public string? Color { get; init; }
+
+            public string Kennel { get; init; }
+
+            public DateTimeOffset? BirthDate { get; init; }
         }
     }
 }

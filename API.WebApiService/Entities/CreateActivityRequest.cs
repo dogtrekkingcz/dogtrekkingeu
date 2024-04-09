@@ -15,11 +15,11 @@ public sealed record CreateActivityRequest : IRequest<CreateActivityResponse>
     public string Type { get; init; } = string.Empty;
 
 
-    public List<ActivityPetDto> Pets { get; init; } = new List<ActivityPetDto>();
+    public IEnumerable<PetDto> Pets { get; init; } = new List<PetDto>(0);
 
-    public List<ActivityPointDto> Points { get; init; } = new List<ActivityPointDto>();
+    public IEnumerable<PositionDto> Points { get; init; } = new List<PositionDto>(0);
 
-    public sealed record ActivityPetDto
+    public sealed record PetDto
     {
         public Guid Id { get; init; } = Guid.NewGuid();
 
@@ -36,7 +36,7 @@ public sealed record CreateActivityRequest : IRequest<CreateActivityResponse>
         public DateTimeOffset? BirthDate { get; init; }
     }
 
-    public sealed record ActivityPointDto
+    public sealed record PositionDto
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 

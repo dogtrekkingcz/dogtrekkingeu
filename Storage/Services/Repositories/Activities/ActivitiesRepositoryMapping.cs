@@ -10,6 +10,7 @@ namespace Storage.Services.Repositories.Activities
         {
             typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest, ActivityRecord>();
             typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PositionDto, ActivityRecord.PositionDto>();
+            typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PetDto, ActivityRecord.PetDto>();
             typeAdapterConfig.NewConfig<ActivityRecord, CreateActivityInternalStorageResponse>();
             
             typeAdapterConfig.NewConfig<AddPointInternalStorageRequest, ActivityRecord.PositionDto>();
@@ -21,6 +22,7 @@ namespace Storage.Services.Repositories.Activities
 
             typeAdapterConfig.NewConfig<UpdateActivityInternalStorageRequest, ActivityRecord>();
             typeAdapterConfig.NewConfig<UpdateActivityInternalStorageRequest.PositionDto, ActivityRecord.PositionDto>();
+            typeAdapterConfig.NewConfig<UpdateActivityInternalStorageRequest.PetDto, ActivityRecord.PetDto>();
 
             return typeAdapterConfig;
         }
