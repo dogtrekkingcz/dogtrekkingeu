@@ -15,6 +15,12 @@ internal static class EntriesMapping
         typeAdapterConfig.NewConfig<GetEntriesByActionRequest, PetsOnTrail.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse, Entities.GetEntriesByActionResponse>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Entities.GetEntriesByActionResponse.EntryDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.PetDto, Entities.GetEntriesByActionResponse.PetDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationDto, Entities.GetEntriesByActionResponse.VaccinationDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Entities.GetEntriesByActionResponse.VaccinationType>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.MerchandizeItemDto, Entities.GetEntriesByActionResponse.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.AddressDto, Entities.GetEntriesByActionResponse.AddressDto>();
+
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationDto, Entities.GetEntriesByActionResponse.VaccinationDto>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationType, Entities.GetEntriesByActionResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.PetDto, Entities.GetEntriesByActionResponse.PetDto>();
