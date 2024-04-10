@@ -19,6 +19,29 @@ message ActivityDto {
   string Description = 6;
   google.type.DateTime Start = 7;
   optional google.type.DateTime End = 8;
-  repeated string PetIds = 9;
   bool IsPublic = 10;
+  repeated PositionDto Positions = 11;
+  repeated PetDto Pets = 12;
+}
+
+message PositionDto {
+  string Id = 1;
+  google.type.DateTime Time = 2;
+  double Latitude = 3;
+  double Longitude = 4;
+  double Altitude = 5;
+  double Accuracy = 6;
+  double Course = 7;
+  string Note = 8;
+  repeated string PhotoUris = 9;
+}
+
+message PetDto {
+  string Id = 1;
+  optional string Chip = 2;
+  optional string Name = 3;
+  optional string Breed = 4;
+  optional string Color = 5;
+  optional string Kennel = 6;
+  optional google.type.DateTime BirthDate = 7;
 }

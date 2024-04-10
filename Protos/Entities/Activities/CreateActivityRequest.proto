@@ -14,10 +14,9 @@ message CreateActivityRequest {
   string Description = 5;
   google.type.DateTime Start = 6;
   optional google.type.DateTime End = 7;
-  repeated string PetIds = 8;
-  bool IsPublic = 9;
-  repeated PositionDto Positions = 10;
-  repeated PetDto Pets = 11;
+  bool IsPublic = 8;
+  repeated PositionDto Positions = 9;
+  repeated PetDto Pets = 10;
 }
 
 message PositionDto {
