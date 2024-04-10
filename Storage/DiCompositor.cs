@@ -29,17 +29,13 @@ public static class DiCompositor
         {
             var serviceProvider = scope.ServiceProvider;
 
-            var initializationService = serviceProvider.GetRequiredService<IInitializeService>();
-            if (initializationService == null)
-                throw new Exception($"When calling '{nameof(ConfigureStorageAsync)}' the '{nameof(IInitializeService)}' is not registered");
-
-            await initializationService.InitializeAsync(cancellationToken);
+            //var initializationService = serviceProvider.GetRequiredService<IInitializeService>();
+            //if (initializationService != null)
+            //    await initializationService.InitializeAsync(cancellationToken);
 
             var migrationService = serviceProvider.GetRequiredService<IMigrationsService>();
-            if (migrationService == null)
-                throw new Exception($"When calling '{nameof(ConfigureStorageAsync)}' the '{nameof(IMigrationsService)}' is not registered");
-
-            await migrationService.RunMigrationsAsync(host, cancellationToken);
+            if (migrationService != null)
+                await migrationService.RunMigrationsAsync(host, cancellationToken);
         }
             
         return host;
