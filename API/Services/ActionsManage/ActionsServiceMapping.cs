@@ -186,9 +186,7 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.PassedCheckpoints)
             .Ignore(d => d.CheckpointData)
             .Ignore(d => d.PayedDate)
-            .Ignore(d => d.AcceptedDate)
-            .Map(d => d.FirstName, s => s.Name)
-            .Map(d => d.LastName, s => s.Surname);
+            .Ignore(d => d.AcceptedDate);
             
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();

@@ -158,11 +158,11 @@
     private ActionType NewActionType { get; set; } = ActionType.Unspecified;
     private List<RaceDto> NewActionRaces { get; set; } = new List<RaceDto>();
     private string NewActionRace { get; set; } = string.Empty;
-    
+
     private string CurrentPosition { get; set; } = string.Empty;
 
     private Location CurrentLocation { get; set; } = new();
-    
+
     private double CurrentDistance { get; set; } = double.NaN;
     private double CurrentSpeed { get; set; } = double.NaN;
     private double CurrentWholeDistance { get; set; } = double.NaN;
@@ -177,12 +177,12 @@
 
         await ReloadActivities();
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
         ServiceHelper.OnLocationChanged += OnLocationChangeHandler;
         History = await PositionHistoryService.GetItemsAsync();
-        
+
         await ReloadData();
     }
 
@@ -190,7 +190,7 @@
     {
         ServiceHelper.Start();
     }
-    
+
     private void StopGpsTrackerService()
     {
         ServiceHelper.Stop();
@@ -200,14 +200,14 @@
     {
         if (location == null)
             return;
-        
+
         var oldLocation = CurrentLocation;
         CurrentLocation = location;
 
         var distanceAndSpeed = GetDistanceAndSpeed(oldLocation, CurrentLocation);
         CurrentDistance = distanceAndSpeed.distance;
         CurrentSpeed = distanceAndSpeed.speed;
-        
+
         CurrentPosition = $"{location.Latitude}N, {location.Longitude}E";
 
         var distanceAndSpeedPerActivity = await GetDistanceAndSpeedPerActivityAsync();
@@ -216,9 +216,20 @@
 
         Task.Run(async () => await InvokeAsync(StateHasChanged));
     }
-    
+
     private async Task CreateNewActivityAsync()
     {
+        var pets = new List<CreateActivityRequest.PetDto>();
+        foreach (var pet in ServiceHelper.UserProfile.Pets)
+        {
+            if (pet.IsSelected)
+            {
+                pets.Add(new CreateActivityRequest.PetDto
+                {
+                    Id = pet.Id ?? Guid.NewGuid().ToString()
+                });
+            }
+        }
         var newActivity = await ActivitiesClientService.createActivityAsync(new CreateActivityRequest
         {
             Name = ActivityName,
@@ -228,13 +239,7 @@
             Description = string.Empty,
             Start = DateTimeOffset.Now.ToGoogleDateTime(),
             End = null,
-            PetIds = 
-            { 
-                ServiceHelper.UserProfile.Pets
-                    .Where(pet => pet.IsSelected)
-                    .Select(pet => pet.Id ?? Guid.Empty.ToString())
-                    .ToList()
-            },
+            Pets = pets,
             IsPublic = true,
             Positions = { }
         });
