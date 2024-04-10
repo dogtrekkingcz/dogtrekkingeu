@@ -157,7 +157,15 @@ namespace Storage.Services.Repositories.Actions
                 .Map(d => d.AcceptedDate, s => DateTime.Now)
                 .Map(d => d.Payed, s => false);
 
-            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateActionInternalStorageRequest.RacerDto>();
+            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse, UpdateActionInternalStorageRequest.RacerDto>()
+                .Ignore(d => d.CheckpointData)
+                .Ignore(d => d.Start)
+                .Ignore(d => d.Finish)
+                .Ignore(d => d.Payed)
+                .Ignore(d => d.PayedDate)
+                .Ignore(d => d.Payments)
+                .Ignore(d => d.RequestedPayments)
+                .Ignore(d => d.PassedCheckpoints);
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.AddressDto, UpdateActionInternalStorageRequest.AddressDto>();
