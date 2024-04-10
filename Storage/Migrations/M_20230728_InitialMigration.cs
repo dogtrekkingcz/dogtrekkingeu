@@ -6,8 +6,15 @@ namespace Storage.Migrations;
 
 internal class M_20230728_InitialMigration : M_00_MigrationBase
 {
-    public override async Task RunAsync(CancellationToken cancellationToken)
+    private readonly Guid _guid = Guid.Parse("6362aefb-e6fc-4bd1-a534-26c5b7333cff");
+
+    public override async Task UpAsync(CancellationToken cancellationToken)
     {
+        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
+        {
+            return;
+        }
+
         await AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
         {
             Id = Constants.Roles.InternalAdministrator.Id,
@@ -31,5 +38,25 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             },
             ActionId = string.Empty
         }, cancellationToken);
+
+        await MigrationsRepositoryService.CreateMigrationAsync(new Entities.Migrations.CreateMigrationInternalStorageRequest
+        {
+            Id = _guid.ToString(),
+            Name = nameof(M_20230728_InitialMigration),
+            Created = DateTime.UtcNow
+        }, cancellationToken);
+    }
+
+    public override async Task DownAsync(CancellationToken cancellationToken)
+    {
+        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) == null)
+        {
+            return;
+        }
+
+        // await AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalAdministrator.Id, cancellationToken);
+        // await UserProfilesRepositoryService.DeleteUserProfileAsync("")
+
+        await MigrationsRepositoryService.DeleteMigrationAsync(_guid.ToString(), cancellationToken);
     }
 }

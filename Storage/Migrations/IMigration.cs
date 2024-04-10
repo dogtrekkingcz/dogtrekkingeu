@@ -2,5 +2,7 @@
 
 internal interface IMigration
 {
-    public Task RunAsync(CancellationToken cancellationToken);
+    public Task UpAsync(CancellationToken cancellationToken);
+
+    public Task DownAsync(CancellationToken cancellationToken);
 }

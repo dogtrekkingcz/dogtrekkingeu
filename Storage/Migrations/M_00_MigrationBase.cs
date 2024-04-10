@@ -10,6 +10,7 @@ internal abstract class M_00_MigrationBase : IMigration
     protected readonly IPetsRepositoryService DogsRepositoryService;
     protected readonly IEntriesRepositoryService EntriesRepositoryService;
     protected readonly IUserProfilesRepositoryService UserProfilesRepositoryService;
+    protected readonly IMigrationsRepositoryService MigrationsRepositoryService;
 
     public M_00_MigrationBase()
     {
@@ -22,7 +23,8 @@ internal abstract class M_00_MigrationBase : IMigration
         IAuthorizationRolesRepositoryService authorizationRolesRepositoryService,
         IPetsRepositoryService petsRepositoryService,
         IEntriesRepositoryService entriesRepositoryService,
-        IUserProfilesRepositoryService userProfilesRepositoryService
+        IUserProfilesRepositoryService userProfilesRepositoryService,
+        IMigrationsRepositoryService migrationsRepositoryService
         )
     {
         ActionRightsRepositoryService = actionRightsRepositoryService;
@@ -31,7 +33,10 @@ internal abstract class M_00_MigrationBase : IMigration
         DogsRepositoryService = petsRepositoryService;
         EntriesRepositoryService = entriesRepositoryService;
         UserProfilesRepositoryService = userProfilesRepositoryService;
+        MigrationsRepositoryService = migrationsRepositoryService;
     }
 
-    public abstract Task RunAsync(CancellationToken cancellationToken);
+    public abstract Task UpAsync(CancellationToken cancellationToken);
+
+    public abstract Task DownAsync(CancellationToken cancellationToken);
 }

@@ -33,4 +33,9 @@ internal sealed class MigrationsRepositoryService : IMigrationsRepositoryService
         
         return _mapper.Map<GetMigrationInternalStorageResponse>(migration);
     }
+
+    public async Task DeleteMigrationAsync(string id, CancellationToken cancellationToken)
+    {
+        await _migrationsStorageService.DeleteAsync(id, cancellationToken);
+    }
 }

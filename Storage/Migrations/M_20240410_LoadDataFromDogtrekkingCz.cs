@@ -1,206 +1,86 @@
-﻿using Storage.Entities.ActionRights;
-using Storage.Entities.AuthorizationRoles;
-using Storage.Entities.UserProfiles;
+﻿using Storage.Migrations._2024;
+using Storage.Services.Repositories.Migrations;
 
 namespace Storage.Migrations;
 
 internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
 {
-    public override async Task RunAsync(CancellationToken cancellationToken)
+    private Guid _guid = Guid.Parse("9558cd8f-d871-4ccb-a72e-75e1fb9f0235");
+
+    public override async Task UpAsync(CancellationToken cancellationToken)
     {
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
         {
-            Id = Guid.NewGuid(),
-            Name = "ZDE JSOU LVI",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Rychta a fara v Úvalně"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 3, 28, 17, 0, 0),
-                To = new DateTime(2024, 3, 31, 13, 0, 0)
-            }
-        }, cancellationToken);
+            return;
+        }
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "Šlapanický vlk",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Šlapanice"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 4, 11, 17, 0, 0),
-                To = new DateTime(2024, 4, 14, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240328_ZdeJsouLvi().UpAsync(cancellationToken);
+        
+        await new _20240411_SlapanickyVlk().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "Krušnohorský dogtrekking",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Kemp Stebnice, obec Lipová u Chebu"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 4, 25, 17, 0, 0),
-                To = new DateTime(2024, 4, 28, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240425_KrusnohorskyDogtrekking().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "DT Rudolf jede na Sázavu",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Kácov"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 5, 9, 17, 0, 0),
-                To = new DateTime(2024, 5, 12, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240509_DT_RudolfJedeNaSazavu().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "V srdci Česka",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Kemp MOŘE, rybník ŘEKA, Krucemburk"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 5, 30, 17, 0, 0),
-                To = new DateTime(2024, 6, 2, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240530_VSrdciCeska().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "DT Krajem břidlice",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Šternberk"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 6, 13, 17, 0, 0),
-                To = new DateTime(2024, 6, 16, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240613_DTKrajemBridlice().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "Dogtrekking Beskydský puchýř",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Palkovice"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 6, 27, 17, 0, 0),
-                To = new DateTime(2024, 6, 30, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240627_DogtrekkingBeskydskyPuchyr().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "Stopou strejdy Šeráka",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Lipová lázně"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 7, 12, 17, 0, 0),
-                To = new DateTime(2024, 7, 14, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240712_StopouStrejdySeraka().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "Fryštácký dogtrekking",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Ranč kemp Bystřička"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 9, 5, 17, 0, 0),
-                To = new DateTime(2024, 9, 8, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240905_FrystackyDogtrekking().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "DT Košťálov",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Košťálov"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 9, 19, 17, 0, 0),
-                To = new DateTime(2024, 9, 22, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20240919_DTKostalov().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "Dogtrekking za pokladem Voka IV. z Holštejna",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Moravský kras"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 10, 3, 17, 0, 0),
-                To = new DateTime(2024, 10, 6, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20241003_DogtrekkingZaPoklademVokaIVZHolstejna().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Guid.NewGuid(),
-            Name = "Valašská Vlčica - Memoriál Alči Veselé",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Chřiby"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 10, 25, 17, 0, 0),
-                To = new DateTime(2024, 10, 28, 13, 0, 0)
-            }
-        }, cancellationToken);
+        await new _20241025_ValasskaVlcicaMemorialAlciVesele().UpAsync(cancellationToken);
 
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+        await new _20241017_DogtrekkingBileKarpaty().UpAsync(cancellationToken);
+
+        await MigrationsRepositoryService.CreateMigrationAsync(new Entities.Migrations.CreateMigrationInternalStorageRequest
         {
-            Id = Guid.NewGuid(),
-            Name = "Dogtrekking Bílé Karpaty",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
-            {
-                City = "Bílé Karpaty"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 10, 17, 17, 0, 0),
-                To = new DateTime(2024, 10, 20, 13, 0, 0)
-            }
+            Id = _guid.ToString(),
+            Name = nameof(M_20240410_LoadActionsForYear2024),
+            Created = DateTime.UtcNow
         }, cancellationToken);
+    }
+
+    public override async Task DownAsync(CancellationToken cancellationToken)
+    {
+        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) == null)
+        {
+            return;
+        }
+
+        await new _20240328_ZdeJsouLvi().DownAsync(cancellationToken);
+
+        await new _20240411_SlapanickyVlk().DownAsync(cancellationToken);
+
+        await new _20240425_KrusnohorskyDogtrekking().DownAsync(cancellationToken);
+
+        await new _20240509_DT_RudolfJedeNaSazavu().DownAsync(cancellationToken);
+
+        await new _20240530_VSrdciCeska().DownAsync(cancellationToken);
+
+        await new _20240613_DTKrajemBridlice().DownAsync(cancellationToken);
+
+        await new _20240627_DogtrekkingBeskydskyPuchyr().DownAsync(cancellationToken);
+
+        await new _20240712_StopouStrejdySeraka().DownAsync(cancellationToken);
+
+        await new _20240905_FrystackyDogtrekking().DownAsync(cancellationToken);
+
+        await new _20240919_DTKostalov().DownAsync(cancellationToken);
+
+        await new _20241003_DogtrekkingZaPoklademVokaIVZHolstejna().DownAsync(cancellationToken);
+
+        await new _20241025_ValasskaVlcicaMemorialAlciVesele().DownAsync(cancellationToken);
+
+        await new _20241017_DogtrekkingBileKarpaty().DownAsync(cancellationToken);
+
+        await MigrationsRepositoryService.DeleteMigrationAsync(_guid.ToString(), cancellationToken);
     }
 }
