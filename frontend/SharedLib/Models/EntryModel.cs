@@ -13,10 +13,10 @@ public sealed record EntryModel
     public string CompetitorId { get; set; } = "";
 
     [Required]
-    public string Name { get; set; } = "";
+    public string FirstName { get; set; } = "";
 
     [Required]
-    public string Surname { get; set; } = "";
+    public string LastName { get; set; } = "";
 
     [Required]
     [Phone]

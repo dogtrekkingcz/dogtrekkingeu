@@ -14,7 +14,7 @@ public sealed class NewActionRegistrationPaymentReceivedEmailBuilder : IEmailBui
 
     public string To => $@"{ _request.Action.Email }";
     
-    public string Subject => $@"[{_request.Action.Name}][{_request.Racer.Surname}, {_request.Racer.Name} - {_request.Amount},-] {_localizeService.Get("NewActionRegistrationPayment.Emails.NewRegistrationPaymentReceived")}";
+    public string Subject => $@"[{_request.Action.Name}][{_request.Racer.LastName}, {_request.Racer.FirstName} - {_request.Amount},-] {_localizeService.Get("NewActionRegistrationPayment.Emails.NewRegistrationPaymentReceived")}";
     
     public string Body => $@"
         <div>
@@ -22,7 +22,7 @@ public sealed class NewActionRegistrationPaymentReceivedEmailBuilder : IEmailBui
             <h4>{_localizeService.Get("NewActionRegistrationPayment.Emails.ReceivedInformations")}:</h4>
             <table>
                 <tr>
-                    <td><b>{_localizeService.Get("NewActionRegistrationPayment.Emails.NameSurname")}</b></td><td>{_request.Racer.Name}, {_request.Racer.Surname}</td>
+                    <td><b>{_localizeService.Get("NewActionRegistrationPayment.Emails.NameSurname")}</b></td><td>{_request.Racer.FirstName}, {_request.Racer.LastName}</td>
                 </tr>
                 <tr>
                     <td><b>{_localizeService.Get("NewActionRegistrationPayment.Emails.Action")}</b></td><td>{_request.Action.Name}</td>

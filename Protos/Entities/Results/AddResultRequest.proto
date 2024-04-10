@@ -11,8 +11,8 @@ message AddResultRequest {
   string RaceId = 2;
   string CategoryId = 3;
   
-  string Name = 4;
-  string Surname = 5;
+  string FirstName = 4;
+  string LastName = 5;
   string Phone = 6;
   string Email = 7;
   AddResultRequest_FinalState State = 8;

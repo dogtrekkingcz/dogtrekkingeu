@@ -10,7 +10,7 @@ message GetSelectedSurnameNameResponse {
 
 message SelectedSurnameName {
   string Id = 1;
-  string Name = 2;
-  string Surname = 3;
+  string FirstName = 2;
+  string LastName = 3;
   string Nickname = 4;
 }

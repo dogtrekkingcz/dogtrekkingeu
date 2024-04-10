@@ -350,8 +350,8 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
                 {
                     LanguageCode = registration.LanguageCode,
                     Id = registration.Id,
-                    Name = registration.FirstName,
-                    Surname = registration.LastName,
+                    FirstName = registration.FirstName,
+                    LastName = registration.LastName,
                     CompetitorId = registration.CompetitorId,
                     UserId = registration.UserId,
                     Created = registration.Created

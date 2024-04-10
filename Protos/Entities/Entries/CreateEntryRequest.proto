@@ -9,8 +9,8 @@ import "google/type/latlng.proto";
 
 message CreateEntryRequest {
   string CompetitorId = 3;
-  string Name = 4;
-  string Surname = 5;
+  string FirstName = 4;
+  string LastName = 5;
   string Phone = 6;
   string Email = 7;
   repeated Pet Pets = 8;

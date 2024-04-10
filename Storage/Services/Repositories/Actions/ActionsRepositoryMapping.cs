@@ -151,8 +151,6 @@ namespace Storage.Services.Repositories.Actions
                 .Ignore(d => d.PassedCheckpoints)
                 .Ignore(d => d.CheckpointData)
                 .Ignore(d => d.PayedDate)
-                .Map(d => d.FirstName, s => s.Name)
-                .Map(d => d.LastName, s => s.Surname)
                 .Map(d => d.Accepted, s => true)
                 .Map(d => d.AcceptedDate, s => DateTime.Now)
                 .Map(d => d.Payed, s => false);

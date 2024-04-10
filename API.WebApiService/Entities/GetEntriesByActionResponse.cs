@@ -12,9 +12,9 @@ public List<EntryDto> Entries { get; init; } = new();
 
         public string CompetitorId { get; set; } = "";
 
-        public string Name { get; set; } = "";
+        public string FirstName { get; set; } = "";
 
-        public string Surname { get; set; } = "";
+        public string LastName { get; set; } = "";
 
         public string Phone { get; set; } = "";
 

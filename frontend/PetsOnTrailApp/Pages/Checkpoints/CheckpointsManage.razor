@@ -195,7 +195,7 @@ else
     
     private List<CheckpointModel> _checkpointsList { get; set; } = null;
 
-    private List<(string Id, string Name, string Surname, string Nickname)> _usedUserProfiles { get; set; } = null;
+    private List<(string Id, string FirstName, string LastName, string Nickname)> _usedUserProfiles { get; set; } = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -241,7 +241,7 @@ else
             Ids = { usersList }
         });
 
-        _usedUserProfiles = selectedUserProfiles.Items.Select(up => (Id: up.Id, Name: up.Name, Surname: up.Surname, Nickname: up.Nickname)).ToList();
+        _usedUserProfiles = selectedUserProfiles.Items.Select(up => (Id: up.Id, FirstName: up.FirstName, LastName: up.LastName, Nickname: up.Nickname)).ToList();
         
         StateHasChanged();
     }
@@ -268,7 +268,7 @@ else
         if (identifiedUser == null)
             return userId;
 
-        return $"{identifiedUser.Value.Surname}, {identifiedUser.Value.Name} ({identifiedUser.Value.Nickname})";
+        return $"{identifiedUser.Value.LastName}, {identifiedUser.Value.FirstName} ({identifiedUser.Value.Nickname})";
     }
 
     private string ResolveData(Guid actionId, string data)

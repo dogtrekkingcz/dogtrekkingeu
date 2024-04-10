@@ -23,7 +23,7 @@ public sealed class NewActionRegistrationReceivedEmailBuilder : IEmailBuilder
             <h4>{_localizeService.Get("NewActionRegistration.Emails.ReceivedInformations")}:</h4>
             <table>
                 <tr>
-                    <td><b>{_localizeService.Get("NewActionRegistration.Emails.NameSurname")}</b></td><td>{_request.Racer.Name}, {_request.Racer.Surname}</td>
+                    <td><b>{_localizeService.Get("NewActionRegistration.Emails.NameSurname")}</b></td><td>{_request.Racer.FirstName}, {_request.Racer.LastName}</td>
                 </tr>
                 <tr>
                     <td><b>{_localizeService.Get("NewActionRegistration.Emails.ActionRaceCategory")}</b></td><td>{_request.Action.Name} - {_request.Race.Name} - {_request.Category.Name}</td>

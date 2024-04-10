@@ -16,8 +16,8 @@ message Entry {
   google.type.DateTime Created = 2;
   string UserId = 3;
   string CompetitorId = 4;
-  string Name = 5;
-  string Surname = 6;
+  string FirstName = 5;
+  string LastName = 6;
   string Phone = 7;
   string Email = 8;
   repeated Pet Pets = 9;

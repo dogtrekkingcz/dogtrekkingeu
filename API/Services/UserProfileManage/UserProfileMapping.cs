@@ -37,8 +37,6 @@ internal static class UserProfileMapping
 
         typeAdapterConfig.NewConfig<GetSelectedUserProfilesInternalStorageResponse.UserProfileDto, GetSelectedSurnameNameResponse.SelectedSurnameNameDto>()
             .Map(d => d.Id, s => s.UserId)
-            .Map(d => d.Name, s => s.FirstName)
-            .Map(d => d.Surname, s => s.LastName)
             .Map(d => d.Nickname, s => s.Nickname);
         
         return typeAdapterConfig;

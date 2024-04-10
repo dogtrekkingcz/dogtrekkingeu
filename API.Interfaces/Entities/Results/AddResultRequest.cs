@@ -8,9 +8,9 @@ public sealed record AddResultRequest
 
     public string CategoryId { get; set; } = string.Empty;
 
-    public string Name { get; set; } = string.Empty;
+    public string FirstName { get; set; } = string.Empty;
 
-    public string Surname { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
 
     public string Phone { get; set; } = string.Empty;
 

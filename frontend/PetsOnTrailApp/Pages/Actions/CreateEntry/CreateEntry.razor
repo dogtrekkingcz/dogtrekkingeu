@@ -77,8 +77,8 @@
         if (userProfile != null)
         {
             // TODO: enhance it !
-            Entry.Name = userProfile.FirstName;
-            Entry.Surname = userProfile.LastName;
+            Entry.FirstName = userProfile.FirstName;
+            Entry.LastName = userProfile.LastName;
             Entry.Email = userProfile.Contact.EmailAddress;
             Entry.Phone = userProfile.Contact.PhoneNumber;
             Entry.UserId = userProfile.Id ?? Guid.Empty.ToString();
