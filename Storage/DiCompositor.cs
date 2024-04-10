@@ -25,18 +25,13 @@ public static class DiCompositor
 {
     public static async Task<IHost> ConfigureStorageAsync(this IHost host, CancellationToken cancellationToken)
     {
-        using (var scope = host.Services.CreateAsyncScope())
-        {
-            var serviceProvider = scope.ServiceProvider;
+        //var initializationService = serviceProvider.GetRequiredService<IInitializeService>();
+        //if (initializationService != null)
+        //    await initializationService.InitializeAsync(cancellationToken);
 
-            //var initializationService = serviceProvider.GetRequiredService<IInitializeService>();
-            //if (initializationService != null)
-            //    await initializationService.InitializeAsync(cancellationToken);
-
-            var migrationService = serviceProvider.GetRequiredService<IMigrationsService>();
-            if (migrationService != null)
-                await migrationService.RunMigrationsAsync(host, cancellationToken);
-        }
+        var migrationService = host.Services.GetRequiredService<IMigrationsService>();
+        if (migrationService != null)
+            await migrationService.RunMigrationsAsync(host, cancellationToken);
             
         return host;
     } 

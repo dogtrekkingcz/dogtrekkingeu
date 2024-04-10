@@ -2,6 +2,7 @@ using API.WebApiService.Options;
 using API.WebApiService.RequestHandlers;
 using API.WebApiService.Validators;
 using Mapster;
+using MapsterMapper;
 using Storage;
 using Storage.Options;
 using System.Security.Cryptography.X509Certificates;
@@ -70,6 +71,8 @@ typeAdapterConfig = new TypeAdapterConfig
 };
 
 builder.Services
+    .AddSingleton(typeAdapterConfig)
+    .AddScoped<IMapper, ServiceMapper>()
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig);
 
 typeAdapterConfig.AddMapping();
