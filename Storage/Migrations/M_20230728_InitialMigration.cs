@@ -22,7 +22,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             Actions = Constants.Roles.InternalAdministrator.Actions
         }, cancellationToken);
 
-        await UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
+        var userProfile = await UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
         {
             Id = "admin@petsontrail.eu",
             UserId = "aaa"
@@ -31,7 +31,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
         await ActionRightsRepositoryService.AddActionRightsAsync(new AddActionRightsInternalStorageRequest
         {
             Id = Guid.NewGuid().ToString(),
-            UserId = "aaa",
+            UserId = userProfile.Id.ToString(),
             Roles = new List<string>
             {
                 Constants.Roles.InternalAdministrator.Id

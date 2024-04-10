@@ -78,6 +78,9 @@ typeAdapterConfig.Compile();
 
 var app = builder.Build();
 
+// also running migrations ...
+app.ConfigureStorageAsync(CancellationToken.None).Wait();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
