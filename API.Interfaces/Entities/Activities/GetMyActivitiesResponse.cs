@@ -22,8 +22,48 @@ public sealed record GetMyActivitiesResponse
         
         public DateTimeOffset? End { get; set; } = null;
         
-        public List<Guid> PetIds { get; set; } = new();
-        
         public bool IsPublic { get; set; } = true;
+
+        public IEnumerable<PetDto> Pets { get; set; } = new List<PetDto>(0);
+
+        public IEnumerable<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
+    }
+
+    public sealed record PositionDto
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
+
+        public double Latitude { get; set; } = double.NaN;
+
+        public double Longitude { get; set; } = double.NaN;
+
+        public double Altitude { get; set; } = double.NaN;
+
+        public double Accuracy { get; set; } = double.NaN;
+
+        public double Course { get; set; } = double.NaN;
+
+        public string Note { get; set; } = string.Empty;
+
+        public List<string> PhotoUris { get; set; } = new();
+    }
+
+    public sealed record PetDto
+    {
+        public Guid Id { get; init; } = Guid.NewGuid();
+
+        public string? Chip { get; init; }
+
+        public string? Name { get; init; }
+
+        public string? Breed { get; init; }
+
+        public string? Color { get; init; }
+
+        public string Kennel { get; init; }
+
+        public DateTimeOffset? BirthDate { get; init; }
     }
 }

@@ -4,20 +4,27 @@ namespace API.WebApiService.Entities;
 
 public sealed record CreateActivityRequest : IRequest<CreateActivityResponse>
 {
-    public Guid IdActivity { get; init; } = Guid.NewGuid();
+    public Guid? Id { get; set; } = Guid.NewGuid();
 
-    public DateTimeOffset Created { get; init; } = DateTimeOffset.Now;
+    public Guid ActionId { get; set; } = Guid.Empty;
 
-    public string Name { get; init; } = string.Empty;
+    public Guid RaceId { get; set; } = Guid.Empty;
 
-    public string Description { get; init; } = string.Empty;
+    public Guid CategoryId { get; set; } = Guid.Empty;
 
-    public string Type { get; init; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
+    public string Description { get; set; } = string.Empty;
 
-    public IEnumerable<PetDto> Pets { get; init; } = new List<PetDto>(0);
+    public DateTimeOffset Start { get; set; } = DateTimeOffset.Now;
 
-    public IEnumerable<PositionDto> Points { get; init; } = new List<PositionDto>(0);
+    public DateTimeOffset? End { get; set; } = null;
+
+    public bool IsPublic { get; set; } = true;
+
+    public IEnumerable<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
+
+    public IEnumerable<PetDto> Pets { get; set; } = new List<PetDto>(0);
 
     public sealed record PetDto
     {
