@@ -4,6 +4,8 @@ internal class _20240613_DTKrajemBridlice : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("044db04d-1200-4c3e-9100-f7d3cb7e7137");
 
+    public _20240613_DTKrajemBridlice(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

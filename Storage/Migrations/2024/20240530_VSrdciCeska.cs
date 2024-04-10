@@ -4,6 +4,8 @@ internal class _20240530_VSrdciCeska : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("f6a9149b-c0e3-4cd9-8422-59f0c4192f13");
 
+    public _20240530_VSrdciCeska(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

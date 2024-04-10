@@ -4,6 +4,10 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("2d87002d-611e-4130-99d9-564b7d4d6fb5");
 
+    public _20240627_DogtrekkingBeskydskyPuchyr(IServiceProvider serviceProvider) : base(serviceProvider)
+    {
+    }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

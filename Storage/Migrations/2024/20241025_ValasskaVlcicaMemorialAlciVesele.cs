@@ -4,6 +4,8 @@ internal class _20241025_ValasskaVlcicaMemorialAlciVesele : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("49d22684-7bab-4f05-943b-eba59551c2b2");
 
+    public _20241025_ValasskaVlcicaMemorialAlciVesele(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

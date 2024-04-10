@@ -1,39 +1,31 @@
-﻿using Storage.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Storage.Interfaces;
 
 namespace Storage.Migrations;
 
 internal abstract class M_00_MigrationBase : IMigration
 {
+    protected IServiceProvider ServiceProvider { get; }
+
     protected readonly IActionRightsRepositoryService ActionRightsRepositoryService;
     protected readonly IActionsRepositoryService ActionsRepositoryService;
     protected readonly IAuthorizationRolesRepositoryService AuthorizationRolesRepositoryService;
-    protected readonly IPetsRepositoryService DogsRepositoryService;
+    protected readonly IPetsRepositoryService PetsRepositoryService;
     protected readonly IEntriesRepositoryService EntriesRepositoryService;
     protected readonly IUserProfilesRepositoryService UserProfilesRepositoryService;
     protected readonly IMigrationsRepositoryService MigrationsRepositoryService;
 
-    public M_00_MigrationBase()
+    public M_00_MigrationBase(IServiceProvider serviceProvider)
     {
-        
-    }
-    
-    public M_00_MigrationBase(
-        IActionRightsRepositoryService actionRightsRepositoryService,
-        IActionsRepositoryService actionsRepositoryService,
-        IAuthorizationRolesRepositoryService authorizationRolesRepositoryService,
-        IPetsRepositoryService petsRepositoryService,
-        IEntriesRepositoryService entriesRepositoryService,
-        IUserProfilesRepositoryService userProfilesRepositoryService,
-        IMigrationsRepositoryService migrationsRepositoryService
-        )
-    {
-        ActionRightsRepositoryService = actionRightsRepositoryService;
-        ActionsRepositoryService = actionsRepositoryService;
-        AuthorizationRolesRepositoryService = authorizationRolesRepositoryService;
-        DogsRepositoryService = petsRepositoryService;
-        EntriesRepositoryService = entriesRepositoryService;
-        UserProfilesRepositoryService = userProfilesRepositoryService;
-        MigrationsRepositoryService = migrationsRepositoryService;
+        ServiceProvider = serviceProvider;
+
+        ActionRightsRepositoryService = serviceProvider.GetRequiredService<IActionRightsRepositoryService>();
+        ActionsRepositoryService = serviceProvider.GetRequiredService<IActionsRepositoryService>();
+        AuthorizationRolesRepositoryService = serviceProvider.GetRequiredService<IAuthorizationRolesRepositoryService>();
+        PetsRepositoryService = serviceProvider.GetRequiredService<IPetsRepositoryService>();
+        EntriesRepositoryService = serviceProvider.GetRequiredService<IEntriesRepositoryService>();
+        UserProfilesRepositoryService = serviceProvider.GetRequiredService<IUserProfilesRepositoryService>();
+        MigrationsRepositoryService = serviceProvider.GetRequiredService<IMigrationsRepositoryService>();
     }
 
     public abstract Task UpAsync(CancellationToken cancellationToken);

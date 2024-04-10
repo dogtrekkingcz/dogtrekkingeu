@@ -4,6 +4,8 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("e155cf24-1147-453a-8d08-0010a1dfceb7");
 
+    public _20240328_ZdeJsouLvi(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

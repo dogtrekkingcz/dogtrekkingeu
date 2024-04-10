@@ -8,6 +8,8 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 {
     private readonly Guid _guid = Guid.Parse("6362aefb-e6fc-4bd1-a534-26c5b7333cff");
 
+    public M_20230728_InitialMigration(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)

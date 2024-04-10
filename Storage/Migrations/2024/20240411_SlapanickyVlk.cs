@@ -4,6 +4,8 @@ internal class _20240411_SlapanickyVlk : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("e67c4971-1185-4e40-864f-fc3f876c84fd");
 
+    public _20240411_SlapanickyVlk(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

@@ -4,6 +4,8 @@ internal class _20240919_DTKostalov : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("9e7ade86-f39c-4383-8458-825a15e863ae");
 
+    public _20240919_DTKostalov(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

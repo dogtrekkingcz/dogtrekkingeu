@@ -146,7 +146,6 @@ public static class DiCompositor
         {
             db.CreateCollection("Activities");
         }
-
         if (listOfCollections.Contains("Migrations") == false)
         {
             db.CreateCollection("Migrations");

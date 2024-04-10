@@ -4,6 +4,8 @@ internal class _20240509_DT_RudolfJedeNaSazavu : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("8e57b433-557e-432a-bb05-21262b75e80e");
 
+    public _20240509_DT_RudolfJedeNaSazavu(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

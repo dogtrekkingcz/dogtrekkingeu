@@ -4,6 +4,8 @@ internal class _20241003_DogtrekkingZaPoklademVokaIVZHolstejna : M_00_MigrationB
 {
     private Guid _guid = Guid.Parse("b67b4ee1-0719-4b8b-8fbc-6ae64cc68a48");
 
+    public _20241003_DogtrekkingZaPoklademVokaIVZHolstejna(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

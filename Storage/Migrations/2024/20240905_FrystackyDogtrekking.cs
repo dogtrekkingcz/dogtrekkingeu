@@ -4,6 +4,8 @@ internal class _20240905_FrystackyDogtrekking : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("c684c2f2-0676-4fd9-b34a-a2ae383fd90d");
 
+    public _20240905_FrystackyDogtrekking(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

@@ -4,6 +4,8 @@ internal class _20240712_StopouStrejdySeraka : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("854b2a95-7ee8-4b49-9da5-851928ce1822");
 
+    public _20240712_StopouStrejdySeraka(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest

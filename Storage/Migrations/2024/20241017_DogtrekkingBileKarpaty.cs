@@ -4,6 +4,8 @@ internal class _20241017_DogtrekkingBileKarpaty : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("18558dc3-d06b-4bcf-afe4-c2284152b3da");
 
+    public _20241017_DogtrekkingBileKarpaty(IServiceProvider serviceProvider) : base(serviceProvider) { }
+
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
