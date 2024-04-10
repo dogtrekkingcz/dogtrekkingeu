@@ -142,6 +142,8 @@ builder.Services.AddLocalization();
 
 var app = builder.Build();
 
+app.ConfigureStorageAsync(CancellationToken.None).Wait();
+
 app.UseRouting();
 
 app.UseGrpcWeb();

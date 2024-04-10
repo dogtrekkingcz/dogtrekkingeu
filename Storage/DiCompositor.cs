@@ -25,14 +25,14 @@ public static class DiCompositor
 {
     public static async Task<IHost> ConfigureStorageAsync(this IHost host, CancellationToken cancellationToken)
     {
-        var initializationService = host.Services.GetService<IInitializeService>();
+        var initializationService = host.Services.GetRequiredService<IInitializeService>();
         if (initializationService == null)
             throw new Exception($"When calling '{nameof(ConfigureStorageAsync)}' the '{nameof(IInitializeService)}' is not registered");
 
         await initializationService.InitializeAsync(cancellationToken);
 
 
-        var migrationService = host.Services.GetService<IMigrationsService>();
+        var migrationService = host.Services.GetRequiredService<IMigrationsService>();
         if (migrationService == null)
             throw new Exception($"When calling '{nameof(ConfigureStorageAsync)}' the '{nameof(IMigrationsService)}' is not registered");
         
