@@ -77,7 +77,7 @@ internal sealed record EntryRecord : IRecord
     {
         public string? Id { get; set; }
         
-        public string FirstName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         public string Pedigree { get; set; } = string.Empty;
 
