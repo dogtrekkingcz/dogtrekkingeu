@@ -22,7 +22,7 @@ public sealed record GetActivitiesByUserIdInternalStorageResponse
         
         public DateTimeOffset? End { get; set; } = null;
 
-        public List<PetDto> PetIds { get; set; } = new List<PetDto>(0);
+        public List<PetDto> Pets { get; set; } = new List<PetDto>(0);
 
         public List<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
 
