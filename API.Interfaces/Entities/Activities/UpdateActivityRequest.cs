@@ -22,7 +22,7 @@ public sealed record UpdateActivityRequest
 
     public bool IsPublic { get; set; } = true;
 
-    public IEnumerable<PetDto> PetIds { get; set; } = new List<PetDto>(0);
+    public IEnumerable<PetDto> Pets { get; set; } = new List<PetDto>(0);
 
     public IEnumerable<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
 
