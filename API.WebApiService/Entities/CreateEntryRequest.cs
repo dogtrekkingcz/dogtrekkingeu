@@ -18,9 +18,9 @@ public sealed record CreateEntryRequest : IRequest<CreateEntryResponse>
 
     public string Email { get; set; } = "";
 
-    public List<DogDto> Dogs { get; set; } = new List<DogDto>();
+    public IEnumerable<PetDto> Pets { get; set; } = new List<PetDto>(0);
 
-    public List<string> Notes { get; set; } = new List<string>();
+    public List<string> Notes { get; set; } = new List<string>(0);
 
     public Guid ActionId { get; set; } = Guid.Empty;
 
@@ -36,7 +36,7 @@ public sealed record CreateEntryRequest : IRequest<CreateEntryResponse>
     
     public DateTimeOffset? AcceptedDate { get; set; } = null;
 
-    public List<MerchandizeItemDto> Merchandize { get; set; } = new();
+    public IEnumerable<MerchandizeItemDto> Merchandize { get; set; } = new List<MerchandizeItemDto>(0);
     
     public sealed record AddressDto
     {
@@ -59,11 +59,11 @@ public sealed record CreateEntryRequest : IRequest<CreateEntryResponse>
 
         public double Longitude { get; set; } = 0.0;
     }
-    
-    public record DogDto
+
+    public record PetDto
     {
         public string? Id { get; set; }
-        
+
         public string Name { get; set; } = string.Empty;
 
         public string Pedigree { get; set; } = string.Empty;
@@ -72,16 +72,9 @@ public sealed record CreateEntryRequest : IRequest<CreateEntryResponse>
 
         public DateTimeOffset? Birthday { get; set; } = null;
 
-        public List<VaccinationDto> Vaccinations { get; set; } =
-            new List<VaccinationDto>
-            {
-                new VaccinationDto
-                {
-                    Type = VaccinationType.Rabies
-                }
-            };
+        public IEnumerable<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>(0);
     }
-    
+
     public sealed record VaccinationDto
     {
         public DateTimeOffset? Date { get; set; } = DateTimeOffset.Now;

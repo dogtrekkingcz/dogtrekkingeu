@@ -2,7 +2,7 @@
 
 public sealed record CreateActivityRequest
 {
-    public Guid? Id { get; set; } = null;
+    public Guid? Id { get; set; } = Guid.NewGuid();
 
     public Guid ActionId { get; set; } = Guid.Empty;
 
@@ -18,8 +18,6 @@ public sealed record CreateActivityRequest
 
     public DateTimeOffset? End { get; set; } = null;
     
-    public List<Guid> PetIds { get; set; } = new();
-
     public bool IsPublic { get; set; } = true;
 
     public IEnumerable<PositionDto> Positions { get; set; } = new List<PositionDto>(0);

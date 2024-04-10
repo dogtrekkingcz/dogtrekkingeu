@@ -10,6 +10,12 @@ internal static class EntriesMapping
     internal static TypeAdapterConfig AddEntriesMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<CreateEntryRequest, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.MerchandizeItemDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.MerchandizeItemDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.PetDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.PetDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationType>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.AddressDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.AddressDto>();
+        typeAdapterConfig.NewConfig<CreateEntryRequest.LatLngDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<CreateEntryResponse, Entities.CreateEntryResponse>();
 
         typeAdapterConfig.NewConfig<GetEntriesByActionRequest, PetsOnTrail.Interfaces.Actions.Entities.Entries.GetEntriesByActionRequest>();

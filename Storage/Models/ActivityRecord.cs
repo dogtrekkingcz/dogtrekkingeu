@@ -49,7 +49,7 @@
 
         public sealed record PetDto
         {
-            public Guid Id { get; init; } = Guid.NewGuid();
+            public string Id { get; init; } = Guid.NewGuid().ToString();
 
             public string? Chip { get; init; }
 

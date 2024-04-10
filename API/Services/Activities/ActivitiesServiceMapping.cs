@@ -9,10 +9,9 @@ internal static class ActivitiesServiceMapping
     public static TypeAdapterConfig AddActivitiesMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<CreateActivityRequest, CreateActivityInternalStorageRequest>()
-            .Ignore(d => d.Id)
             .Ignore(d => d.UserId);
-        typeAdapterConfig.NewConfig<CreateActivityRequest.PositionDto, CreateActivityInternalStorageRequest.PositionDto>()
-            .Ignore(d => d.Id);
+        typeAdapterConfig.NewConfig<CreateActivityRequest.PositionDto, CreateActivityInternalStorageRequest.PositionDto>();
+        typeAdapterConfig.NewConfig<CreateActivityRequest.PetDto, CreateActivityInternalStorageRequest.PetDto>();
         typeAdapterConfig.NewConfig<CreateActivityInternalStorageResponse, CreateActivityResponse>();
 
         typeAdapterConfig.NewConfig<AddPointRequest, AddPointInternalStorageRequest>()
