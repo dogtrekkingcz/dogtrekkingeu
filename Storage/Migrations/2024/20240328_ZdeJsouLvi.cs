@@ -2,15 +2,14 @@
 
 internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
 {
-    private Guid _guid = Guid.Parse("e155cf24-1147-453a-8d08-0010a1dfceb7");
+    protected override Guid Id { get; init; } = Guid.Parse("e155cf24-1147-453a-8d08-0010a1dfceb7");
+    protected override string Name { get; init; } = nameof(_20240328_ZdeJsouLvi);
 
-    public _20240328_ZdeJsouLvi(IServiceProvider serviceProvider) : base(serviceProvider) { }
-
-    public override async Task UpAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+    public _20240328_ZdeJsouLvi(IServiceProvider serviceProvider) : base(serviceProvider) 
+    { 
+        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
         {
-            Id = _guid,
+            Id = Id,
             Name = "ZDE JSOU LVI",
             Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
             {
@@ -56,11 +55,8 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                     }
                 }
             }
-        }, cancellationToken);
-    }
+        }, CancellationToken.None));
 
-    public override async Task DownAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.DeleteActionAsync(_guid, cancellationToken);
+        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

@@ -20,6 +20,10 @@
       <ProjectReference Include="..\Shared\Constants\Constants.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\0000\" />
+    </ItemGroup>
+
 
 
 </Project>

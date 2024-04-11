@@ -2,15 +2,14 @@
 
 internal class _20241003_DogtrekkingZaPoklademVokaIVZHolstejna : M_00_MigrationBase
 {
-    private Guid _guid = Guid.Parse("b67b4ee1-0719-4b8b-8fbc-6ae64cc68a48");
+    protected override Guid Id { get; init; } = Guid.Parse("b67b4ee1-0719-4b8b-8fbc-6ae64cc68a48");
+    protected override string Name { get; init; } = nameof(_20241003_DogtrekkingZaPoklademVokaIVZHolstejna);
 
-    public _20241003_DogtrekkingZaPoklademVokaIVZHolstejna(IServiceProvider serviceProvider) : base(serviceProvider) { }
-
-    public override async Task UpAsync(CancellationToken cancellationToken)
+    public _20241003_DogtrekkingZaPoklademVokaIVZHolstejna(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
         {
-            Id = _guid,
+            Id = Id,
             Name = "Dogtrekking za pokladem Voka IV. z Holštejna",
             Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
             {
@@ -21,11 +20,8 @@ internal class _20241003_DogtrekkingZaPoklademVokaIVZHolstejna : M_00_MigrationB
                 From = new DateTime(2024, 10, 3, 17, 0, 0),
                 To = new DateTime(2024, 10, 6, 13, 0, 0)
             }
-        }, cancellationToken);
-    }
+        }, CancellationToken.None));
 
-    public override async Task DownAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.DeleteActionAsync(_guid, cancellationToken);
+        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

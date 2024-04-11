@@ -2,15 +2,14 @@
 
 internal class _20240905_FrystackyDogtrekking : M_00_MigrationBase
 {
-    private Guid _guid = Guid.Parse("c684c2f2-0676-4fd9-b34a-a2ae383fd90d");
+    protected override Guid Id { get; init; } = Guid.Parse("c684c2f2-0676-4fd9-b34a-a2ae383fd90d");
+    protected override string Name { get; init; } = nameof(_20240905_FrystackyDogtrekking);
 
-    public _20240905_FrystackyDogtrekking(IServiceProvider serviceProvider) : base(serviceProvider) { }
-
-    public override async Task UpAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+    public _20240905_FrystackyDogtrekking(IServiceProvider serviceProvider) : base(serviceProvider) 
+    { 
+        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
         {
-            Id = _guid,
+            Id = Id,
             Name = "Fryštácký dogtrekking",
             Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
             {
@@ -21,11 +20,8 @@ internal class _20240905_FrystackyDogtrekking : M_00_MigrationBase
                 From = new DateTime(2024, 9, 5, 17, 0, 0),
                 To = new DateTime(2024, 9, 8, 13, 0, 0)
             }
-        }, cancellationToken);
-    }
+        }, CancellationToken.None));
 
-    public override async Task DownAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.DeleteActionAsync(_guid, cancellationToken);
+        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

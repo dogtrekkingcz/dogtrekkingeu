@@ -2,15 +2,14 @@
 
 internal class _20240712_StopouStrejdySeraka : M_00_MigrationBase
 {
-    private Guid _guid = Guid.Parse("854b2a95-7ee8-4b49-9da5-851928ce1822");
+    protected override Guid Id { get; init; } = Guid.Parse("854b2a95-7ee8-4b49-9da5-851928ce1822");
+    protected override string Name { get; init; } = nameof(_20240712_StopouStrejdySeraka);
 
-    public _20240712_StopouStrejdySeraka(IServiceProvider serviceProvider) : base(serviceProvider) { }
-
-    public override async Task UpAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+    public _20240712_StopouStrejdySeraka(IServiceProvider serviceProvider) : base(serviceProvider) 
+    { 
+        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
         {
-            Id = _guid,
+            Id = Id,
             Name = "Stopou strejdy Šeráka",
             Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
             {
@@ -21,11 +20,8 @@ internal class _20240712_StopouStrejdySeraka : M_00_MigrationBase
                 From = new DateTime(2024, 7, 12, 17, 0, 0),
                 To = new DateTime(2024, 7, 14, 13, 0, 0)
             }
-        }, cancellationToken);
-    }
+        }, CancellationToken.None));
 
-    public override async Task DownAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.DeleteActionAsync(_guid, cancellationToken);
+        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

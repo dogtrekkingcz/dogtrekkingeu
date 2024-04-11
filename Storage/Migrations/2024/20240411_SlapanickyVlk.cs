@@ -1,16 +1,17 @@
-﻿namespace Storage.Migrations._2024;
+﻿using System.Threading;
+
+namespace Storage.Migrations._2024;
 
 internal class _20240411_SlapanickyVlk : M_00_MigrationBase
 {
-    private Guid _guid = Guid.Parse("e67c4971-1185-4e40-864f-fc3f876c84fd");
+    protected override Guid Id { get; init; } = Guid.Parse("e67c4971-1185-4e40-864f-fc3f876c84fd");
+    protected override string Name { get; init; } = nameof(_20240411_SlapanickyVlk);
 
-    public _20240411_SlapanickyVlk(IServiceProvider serviceProvider) : base(serviceProvider) { }
-
-    public override async Task UpAsync(CancellationToken cancellationToken)
+    public _20240411_SlapanickyVlk(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
-        await ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
         {
-            Id = _guid,
+            Id = Id,
             Name = "Šlapanický vlk",
             Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
             {
@@ -21,11 +22,8 @@ internal class _20240411_SlapanickyVlk : M_00_MigrationBase
                 From = new DateTime(2024, 4, 11, 17, 0, 0),
                 To = new DateTime(2024, 4, 14, 13, 0, 0)
             }
-        }, cancellationToken);
-    }
+        }, CancellationToken.None));
 
-    public override async Task DownAsync(CancellationToken cancellationToken)
-    {
-        await ActionsRepositoryService.DeleteActionAsync(_guid, cancellationToken);
+        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }
