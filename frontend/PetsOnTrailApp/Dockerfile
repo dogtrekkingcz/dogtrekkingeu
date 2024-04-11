@@ -10,6 +10,10 @@ COPY . ./
 
 RUN dotnet restore frontend/PetsOnTrailApp/PetsOnTrailApp.csproj
 
+RUN dotnet workload restore
+RUN dotnet workload install wasm-tools maui-android ios maccatalyst
+
+
 RUN dotnet build frontend/PetsOnTrailApp/PetsOnTrailApp.csproj -c Release -o /app/build
 
 FROM build AS publish

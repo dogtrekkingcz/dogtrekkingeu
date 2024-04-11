@@ -8,6 +8,8 @@
         <UserSecretsId>4b837038-1852-4dca-8338-8f2620172eaa</UserSecretsId>
         <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
         <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+        <RunAOTCompilation>true</RunAOTCompilation>
+      <SelfContained>false</SelfContained>
     </PropertyGroup>
 
     <ItemGroup>
