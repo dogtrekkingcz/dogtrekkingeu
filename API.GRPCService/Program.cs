@@ -142,8 +142,6 @@ builder.Services.AddLocalization();
 
 var app = builder.Build();
 
-app.ConfigureStorageAsync(CancellationToken.None).Wait();
-
 app.UseRouting();
 
 app.UseGrpcWeb();
@@ -171,6 +169,8 @@ app.UseEndpoints(endpoints =>
 
 
 await app.SeedDataAsync();
+
+_ = app.ConfigureStorageAsync(CancellationToken.None);
 
 await app.RunAsync();
 

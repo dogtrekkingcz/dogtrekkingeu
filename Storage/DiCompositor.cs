@@ -29,6 +29,8 @@ public static class DiCompositor
         //if (initializationService != null)
         //    await initializationService.InitializeAsync(cancellationToken);
 
+        Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! ConfigureStorageAsync");
+
         using (var scope = host.Services.CreateScope())
         {
             var serviceProvider = scope.ServiceProvider;
@@ -40,6 +42,8 @@ public static class DiCompositor
             else
                 Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! MigrationsService is null");
         }
+
+        Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! ConfigureStorageAsync done");
 
         return host;
     } 
