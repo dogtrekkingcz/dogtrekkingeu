@@ -29,10 +29,18 @@ public static class DiCompositor
         //if (initializationService != null)
         //    await initializationService.InitializeAsync(cancellationToken);
 
-        var migrationService = host.Services.GetRequiredService<IMigrationsService>();
-        if (migrationService != null)
-            await migrationService.RunMigrationsAsync(host, cancellationToken);
-            
+        using (var scope = host.Services.CreateScope())
+        {
+            var serviceProvider = scope.ServiceProvider;
+
+            var migrationService = serviceProvider.GetRequiredService<IMigrationsService>();
+            if (migrationService != null)
+                await migrationService.RunMigrationsAsync(host, cancellationToken);
+
+            else
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! MigrationsService is null");
+        }
+
         return host;
     } 
     

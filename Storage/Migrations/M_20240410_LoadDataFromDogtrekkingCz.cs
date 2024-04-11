@@ -10,6 +10,8 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
 
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
+        Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is running...");
+
         if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
         {
             return;
@@ -47,6 +49,8 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
             Name = nameof(M_20240410_LoadActionsForYear2024),
             Created = DateTime.UtcNow
         }, cancellationToken);
+
+        Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is finished...");
     }
 
     public override async Task DownAsync(CancellationToken cancellationToken)

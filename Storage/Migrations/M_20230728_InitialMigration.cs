@@ -12,6 +12,8 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
+        Console.WriteLine("M_20230728_InitialMigration UP is running");
+
         if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
         {
             return;
@@ -47,6 +49,8 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             Name = nameof(M_20230728_InitialMigration),
             Created = DateTime.UtcNow
         }, cancellationToken);
+
+        Console.WriteLine("M_20230728_InitialMigration UP is done");
     }
 
     public override async Task DownAsync(CancellationToken cancellationToken)

@@ -81,8 +81,8 @@ typeAdapterConfig.Compile();
 
 var app = builder.Build();
 
-// also running migrations ...
-app.ConfigureStorageAsync(CancellationToken.None).Wait();
+// migrations will be running only on gRPC.API instance...
+// app.ConfigureStorageAsync(CancellationToken.None).Wait();
 
 app.UseSwagger();
 app.UseSwaggerUI();
