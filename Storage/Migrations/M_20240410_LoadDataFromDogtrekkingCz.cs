@@ -1,4 +1,5 @@
 ﻿using Storage.Migrations._2024;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Storage.Migrations;
 
@@ -6,24 +7,33 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
 {
     private Guid _guid = Guid.Parse("9558cd8f-d871-4ccb-a72e-75e1fb9f0235");
 
+    private readonly List<Type> actions = new List<Type>()
+    {
+        typeof(_20240411_SlapanickyVlk),
+        typeof(_20240425_KrusnohorskyDogtrekking),
+        typeof(_20240509_DT_RudolfJedeNaSazavu),
+        typeof(_20240530_VSrdciCeska),
+        typeof(_20240613_DTKrajemBridlice),
+        typeof(_20240627_DogtrekkingBeskydskyPuchyr),
+        typeof(_20240712_StopouStrejdySeraka),
+        typeof(_20240905_FrystackyDogtrekking),
+        typeof(_20240919_DTKostalov),
+        typeof(_20241003_DogtrekkingZaPoklademVokaIVZHolstejna),
+        typeof(_20241025_ValasskaVlcicaMemorialAlciVesele),
+        typeof(_20241017_DogtrekkingBileKarpaty)
+    };
+
+
     public M_20240410_LoadActionsForYear2024(IServiceProvider serviceProvider) : base(serviceProvider) { }
 
     public override async Task UpAsync(CancellationToken cancellationToken)
     {
         Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is running...");
 
-        try
-        { 
-            var thisMigration = await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken);
-            if (thisMigration is not null && (thisMigration.Id == _guid.ToString()))
-            {
-                Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is already done, the ID is exists");
-                return;
-            }
-        }
-        catch (Exception ex)
+        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) is not null)
         {
-            Console.WriteLine($"[FAILED] Load _20240410_LoadActionsForYear2024.MigrationExists: '{ex}'");
+            Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is already done, the ID is exists");
+            return;
         }
 
         try 
@@ -36,29 +46,8 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
         }
 
 
-        await new _20240411_SlapanickyVlk(ServiceProvider).UpAsync(cancellationToken);
+        await Task.WhenAll(actions.Select(action => (Activator.CreateInstance(action, ServiceProvider) as M_00_MigrationBase).UpAsync(cancellationToken)));
 
-        await new _20240425_KrusnohorskyDogtrekking(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20240509_DT_RudolfJedeNaSazavu(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20240530_VSrdciCeska(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20240613_DTKrajemBridlice(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20240627_DogtrekkingBeskydskyPuchyr(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20240712_StopouStrejdySeraka(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20240905_FrystackyDogtrekking(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20240919_DTKostalov(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20241003_DogtrekkingZaPoklademVokaIVZHolstejna(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20241025_ValasskaVlcicaMemorialAlciVesele(ServiceProvider).UpAsync(cancellationToken);
-
-        await new _20241017_DogtrekkingBileKarpaty(ServiceProvider).UpAsync(cancellationToken);
 
         await MigrationsRepositoryService.CreateMigrationAsync(new Entities.Migrations.CreateMigrationInternalStorageRequest
         {
@@ -74,37 +63,15 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
     {
         Console.WriteLine("M_20240410_LoadActionsForYear2024 DOWN is running...");
 
-        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) == null)
+        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) is null)
         {
             Console.WriteLine("M_20240410_LoadActionsForYear2024 DOWN is already done, the ID is not exists");
             return;
         }
 
-        await new _20240328_ZdeJsouLvi(ServiceProvider).DownAsync(cancellationToken);
+        
+        await Task.WhenAll(actions.Select(action => (Activator.CreateInstance(action, ServiceProvider) as M_00_MigrationBase).DownAsync(cancellationToken)));
 
-        await new _20240411_SlapanickyVlk(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240425_KrusnohorskyDogtrekking(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240509_DT_RudolfJedeNaSazavu(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240530_VSrdciCeska(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240613_DTKrajemBridlice(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240627_DogtrekkingBeskydskyPuchyr(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240712_StopouStrejdySeraka(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240905_FrystackyDogtrekking(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20240919_DTKostalov(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20241003_DogtrekkingZaPoklademVokaIVZHolstejna(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20241025_ValasskaVlcicaMemorialAlciVesele(ServiceProvider).DownAsync(cancellationToken);
-
-        await new _20241017_DogtrekkingBileKarpaty(ServiceProvider).DownAsync(cancellationToken);
 
         await MigrationsRepositoryService.DeleteMigrationAsync(_guid.ToString(), cancellationToken);
 

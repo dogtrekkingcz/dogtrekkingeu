@@ -30,7 +30,11 @@ internal sealed class MigrationsRepositoryService : IMigrationsRepositoryService
     public async Task<GetMigrationInternalStorageResponse> GetAsync(string id, CancellationToken cancellationToken)
     {
         var migration = await _migrationsStorageService.GetAsync(id, cancellationToken);
-        
+        if (migration is null)
+        {
+            return null;
+        }
+
         return _mapper.Map<GetMigrationInternalStorageResponse>(migration);
     }
 
