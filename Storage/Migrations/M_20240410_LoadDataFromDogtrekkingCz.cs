@@ -12,14 +12,30 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
     {
         Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is running...");
 
-        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
+        try
+        { 
+            var thisMigration = await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken);
+            if (thisMigration is not null && (thisMigration.Id == _guid.ToString()))
+            {
+                Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is already done, the ID is exists");
+                return;
+            }
+        }
+        catch (Exception ex)
         {
-            Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is already done, the ID is exists");
-            return;
+            Console.WriteLine($"[FAILED] Load _20240410_LoadActionsForYear2024.MigrationExists: '{ex}'");
         }
 
-        await new _20240328_ZdeJsouLvi(ServiceProvider).UpAsync(cancellationToken);
-        
+        try 
+        { 
+            await new _20240328_ZdeJsouLvi(ServiceProvider).UpAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[FAILED] Load _20240328_ZdeJsouLvi: '{ex}'");
+        }
+
+
         await new _20240411_SlapanickyVlk(ServiceProvider).UpAsync(cancellationToken);
 
         await new _20240425_KrusnohorskyDogtrekking(ServiceProvider).UpAsync(cancellationToken);
