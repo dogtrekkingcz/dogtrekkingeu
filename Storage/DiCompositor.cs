@@ -37,7 +37,7 @@ public static class DiCompositor
 
             var migrationService = serviceProvider.GetRequiredService<IMigrationsService>();
             if (migrationService != null)
-                await migrationService.RunMigrationsAsync(host, cancellationToken);
+                await migrationService.RunMigrationsAsync(serviceProvider, cancellationToken);
 
             else
                 Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! MigrationsService is null");

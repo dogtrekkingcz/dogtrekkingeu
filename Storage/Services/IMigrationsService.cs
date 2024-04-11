@@ -4,5 +4,5 @@ namespace Storage.Services;
 
 internal interface IMigrationsService
 {
-    Task RunMigrationsAsync(IHost host, CancellationToken cancellationToken);
+    Task RunMigrationsAsync(IServiceProvider serviceProvider, CancellationToken cancellationToken);
 }

@@ -5,11 +5,11 @@ namespace Storage.Services;
 
 internal class MigrationsService : IMigrationsService
 {
-    public async Task RunMigrationsAsync(IHost host, CancellationToken cancellationToken)
+    public async Task RunMigrationsAsync(IServiceProvider serviceProvider, CancellationToken cancellationToken)
     {
         try 
         { 
-            await new M_20230728_InitialMigration(host.Services).UpAsync(cancellationToken);
+            await new M_20230728_InitialMigration(serviceProvider).UpAsync(cancellationToken);
         }
         catch (Exception ex)
         {
@@ -19,7 +19,7 @@ internal class MigrationsService : IMigrationsService
 
         try
         {
-            await new M_20240410_LoadActionsForYear2024(host.Services).UpAsync(cancellationToken);
+            await new M_20240410_LoadActionsForYear2024(serviceProvider).UpAsync(cancellationToken);
         }
         catch (Exception ex)
         {
