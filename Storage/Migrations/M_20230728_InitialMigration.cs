@@ -14,8 +14,9 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
     {
         Console.WriteLine("M_20230728_InitialMigration UP is running");
 
-        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
+        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
         {
+            Console.WriteLine("M_20230728_InitialMigration UP is already done, the ID is exists");
             return;
         }
 
@@ -55,8 +56,11 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
     public override async Task DownAsync(CancellationToken cancellationToken)
     {
-        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) == null)
+        Console.WriteLine("M_20230728_InitialMigration DOWN is running");
+
+        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) == null)
         {
+            Console.WriteLine("M_20230728_InitialMigration DOWN is already done, the ID is not exists");
             return;
         }
 
@@ -64,5 +68,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
         // await UserProfilesRepositoryService.DeleteUserProfileAsync("")
 
         await MigrationsRepositoryService.DeleteMigrationAsync(_guid.ToString(), cancellationToken);
+
+        Console.WriteLine("M_20230728_InitialMigration DOWN is done");
     }
 }

@@ -12,8 +12,9 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
     {
         Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is running...");
 
-        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
+        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) != null)
         {
+            Console.WriteLine("M_20240410_LoadActionsForYear2024 UP is already done, the ID is exists");
             return;
         }
 
@@ -55,8 +56,11 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
 
     public override async Task DownAsync(CancellationToken cancellationToken)
     {
-        if (MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) == null)
+        Console.WriteLine("M_20240410_LoadActionsForYear2024 DOWN is running...");
+
+        if (await MigrationsRepositoryService.GetAsync(_guid.ToString(), cancellationToken) == null)
         {
+            Console.WriteLine("M_20240410_LoadActionsForYear2024 DOWN is already done, the ID is not exists");
             return;
         }
 
@@ -87,5 +91,7 @@ internal class M_20240410_LoadActionsForYear2024 : M_00_MigrationBase
         await new _20241017_DogtrekkingBileKarpaty(ServiceProvider).DownAsync(cancellationToken);
 
         await MigrationsRepositoryService.DeleteMigrationAsync(_guid.ToString(), cancellationToken);
+
+        Console.WriteLine("M_20240410_LoadActionsForYear2024 DOWN is finished...");
     }
 }

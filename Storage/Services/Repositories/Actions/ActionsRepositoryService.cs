@@ -50,6 +50,7 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task DeleteActionAsync(Guid id, CancellationToken cancellationToken)
         {
+            Console.WriteLine($"{nameof(DeleteActionAsync)} - id: '{id}'");
             await _actionsStorageService.DeleteAsync(id.ToString(), cancellationToken);
         }
 
