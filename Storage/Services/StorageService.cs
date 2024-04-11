@@ -47,7 +47,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
         var document = await _collection
             .Find(filter)
-            .FirstAsync(cancellationToken: cancellationToken);
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
         
         if (document != null)
             Console.WriteLine($"StorageService:GetAsync(): {document.Dump()}");
