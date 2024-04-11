@@ -54,7 +54,8 @@ internal abstract class M_00_MigrationBase : IMigration
     {
         Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is running...");
 
-        if (await MigrationsRepositoryService.GetAsync(Id.ToString(), cancellationToken) is not null)
+        var migration = await MigrationsRepositoryService.GetAsync(Id.ToString(), cancellationToken);
+        if (migration is not null)
         {
             Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is already done, the ID is exists");
             return;

@@ -13,7 +13,7 @@ internal class MigrationsService : IMigrationsService
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[FAILED] Load initial migration: '{ex.Message}'");
+            Console.WriteLine($"[FAILED] Load initial migration: '{ex}'");
         }
 
 
@@ -23,7 +23,7 @@ internal class MigrationsService : IMigrationsService
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[FAILED] Load actions for 2024: '{ex.Message}'");
+            Console.WriteLine($"[FAILED] Load actions for 2024: '{ex}'");
         }
     }
 }
