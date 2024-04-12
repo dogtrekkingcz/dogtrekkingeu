@@ -37,9 +37,11 @@ public sealed class UserProfileService : IUserProfileService
         IsRunning = true;
         
         var userProfile = await _userProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
-
         if (userProfile == null || userProfile.Id == string.Empty)
+        {
+            IsRunning = false;
             return null;
+        }
 
         using (var scope = _serviceProvider.CreateScope())
         {

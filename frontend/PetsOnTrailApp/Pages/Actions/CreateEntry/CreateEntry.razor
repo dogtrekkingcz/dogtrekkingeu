@@ -90,6 +90,7 @@
 
         Entry.ActionId = Guid.Parse(actionSettings.Id);
 
+        
         var userProfile = await UserProfileService.GetAsync();
         if (userProfile != null)
         {
