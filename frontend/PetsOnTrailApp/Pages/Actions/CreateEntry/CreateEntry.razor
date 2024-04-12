@@ -19,7 +19,7 @@
     @if (_loading)
     {
         <div class="spinner-border" role="status">
-            <span class="sr-only">@localizer["Loading ..."]</span>
+            <span class="sr-only"></span>
         </div>
     }
     else
@@ -78,9 +78,15 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Console.WriteLine("create_entry: OnInitializeAsync start");
+
         var actionSettings = await ActionsClient.getActionEntrySettingsAsync(new GetActionEntrySettingsRequest { Id = ActionId });
 
+        Console.WriteLine("create_entry: ActionSettings: " + actionSettings);
+
         ActionSettings = Mapper.Map<ActionSettingsModel>(actionSettings);
+
+        Console.WriteLine("create_entry: Mapping ok");
 
         Entry.ActionId = Guid.Parse(actionSettings.Id);
 
@@ -106,6 +112,8 @@
                 })
                 .ToList();
         }
+
+        Console.WriteLine("create_entry: OnInitializeAsync end, setting loading to false and StateHasChanged calling");
 
         _loading = false;
 
