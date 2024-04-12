@@ -39,7 +39,7 @@ message CategoryDto {
 }
 
 message RaceLimitsDto {
-  int32 MinimalAgeOfTheDogInDayes = 1;
+  int32 MinimalAgeOfThePetInDayes = 1;
   int32 MinimalAgeOfRacerInDayes = 2;
-  bool WithDogs = 3;
+  bool WithPets = 3;
 }

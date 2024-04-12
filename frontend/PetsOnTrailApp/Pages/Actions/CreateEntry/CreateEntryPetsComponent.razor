@@ -19,7 +19,7 @@
         {
             var age = Race.Start - (pet.Birthday ?? DateTimeOffset.Now);
             var ageInYears = (Math.Floor(age.TotalDays / 365));
-            var isValid = RaceLimits.MinimalAgeOfTheDogInDayes <= age.TotalDays;
+            var isValid = RaceLimits.MinimalAgeOfThePetInDayes <= age.TotalDays;
             var message = "";
 
             if (!isValid)
@@ -27,7 +27,7 @@
                 message = string.Format("{0} ({1}: '{2} / {3}')", 
                     localizer["Messages.Limits.Failed.MinimalAgeOfDogForRace"], 
                     localizer["Messages.Limits.Info.MinimalAgeOfDogForRaceInDaysIs"], 
-                    RaceLimits.MinimalAgeOfTheDogInDayes,
+                    RaceLimits.MinimalAgeOfThePetInDayes,
                     Math.Floor(age.TotalDays));
             }
                 

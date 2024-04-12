@@ -32,10 +32,10 @@ public record ActionSettingsModel
 
     public sealed record RaceLimits
     {
-        public int MinimalAgeOfTheDogInDayes = 0;
+        public int MinimalAgeOfThePetInDayes = 0;
 
         public int MinimalAgeOfRacerInDayes = 0;
 
-        public bool WithDogs = true;
+        public bool WithPets = true;
     }
 }

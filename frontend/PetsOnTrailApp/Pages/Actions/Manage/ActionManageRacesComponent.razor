@@ -95,9 +95,9 @@
                 </td>
                 <td>
                     <ul>
-                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfDogForRace"]: @(modelRace.Limits.MinimalAgeOfTheDogInDayes / 30)</li>
+                        <li>@localizer["Actions.Races.Limits.MinimalAgeOfDogForRace"]: @(modelRace.Limits.MinimalAgeOfThePetInDayes / 30)</li>
                         <li>@localizer["Actions.Races.Limits.MinimalAgeOfRacerForRace"]: @(modelRace.Limits.MinimalAgeOfRacerInDayes / 365)</li>
-                        <li>@localizer["Actions.Races.Limits.WithDogs"]: @(modelRace.Limits.WithDogs)</li>
+                        <li>@localizer["Actions.Races.Limits.WithPets"]: @(modelRace.Limits.WithPets)</li>
                     </ul>
                 </td>
                 <td>
@@ -180,7 +180,7 @@
             },
             Limits = new ActionModel.LimitsDto
             {
-                MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
+                MinimalAgeOfThePetInDayes = 18 * 30, // 18 months
                 MinimalAgeOfRacerInDayes = 15 * 12 * 30 // 15 years
             },
             Payments = new List<ActionModel.PaymentDefinitionDto>
@@ -216,7 +216,7 @@
             },
             Limits = new ActionModel.LimitsDto
             {
-                MinimalAgeOfTheDogInDayes = 18 * 30, // 18 months
+                MinimalAgeOfThePetInDayes = 18 * 30, // 18 months
                 MinimalAgeOfRacerInDayes = 15 * 12 * 30 // 15 years
             },
             Payments = new List<ActionModel.PaymentDefinitionDto>
@@ -249,7 +249,7 @@
             },
             Limits = new ActionModel.LimitsDto
             {
-                MinimalAgeOfTheDogInDayes = 0,
+                MinimalAgeOfThePetInDayes = 0,
                 MinimalAgeOfRacerInDayes = 0
             },
             Payments = new List<ActionModel.PaymentDefinitionDto>

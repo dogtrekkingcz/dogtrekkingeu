@@ -25,6 +25,15 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                     new Entities.Actions.CreateActionInternalStorageRequest.RaceDto
                     {
                         Name = "Dogtrekking",
+                        EnteringFrom = new DateTime(2024, 3, 28, 17, 0, 0),
+                        EnteringTo = new DateTime(2024, 4, 28, 17, 30, 0),
+                        Begin = new DateTime(2024, 3, 29, 07, 0, 0),
+                        Limits = new Entities.Actions.CreateActionInternalStorageRequest.LimitsDto
+                        {
+                            WithPets = true,
+                            MinimalAgeOfRacerInDayes = 0,
+                            MinimalAgeOfThePetInDayes = 18 * 30,
+                        },
                         Categories = new List<Entities.Actions.CreateActionInternalStorageRequest.CategoryDto>
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto

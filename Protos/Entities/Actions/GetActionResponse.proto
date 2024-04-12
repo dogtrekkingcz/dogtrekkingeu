@@ -183,8 +183,8 @@ message PaymentDefinitionDto {
 
 message LimitsDto {
   int32 MinimalAgeOfRacerInDayes = 1;
-  int32 MinimalAgeOfTheDogInDayes = 2;
-  bool WithDogs = 3;
+  int32 MinimalAgeOfThePetInDayes = 2;
+  bool WithPets = 3;
 }
 
 message TermDto {

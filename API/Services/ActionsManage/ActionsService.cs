@@ -200,7 +200,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
                             Limits = new GetActionEntrySettingsResponse.RaceLimits
                             {
                                 MinimalAgeOfRacerInDayes = r.Limits?.MinimalAgeOfRacerInDayes ?? 0,
-                                MinimalAgeOfTheDogInDayes = r.Limits?.MinimalAgeOfTheDogInDayes ?? 0
+                                MinimalAgeOfThePetInDayes = r.Limits?.MinimalAgeOfThePetInDayes ?? 0
                             }
                         })
                         .ToList(),

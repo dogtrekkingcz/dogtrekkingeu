@@ -649,7 +649,7 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         /// </summary>
         internal static string Actions_Races_Limits_WithDogs {
             get {
-                return ResourceManager.GetString("Actions.Races.Limits.WithDogs", resourceCulture);
+                return ResourceManager.GetString("Actions.Races.Limits.WithPets", resourceCulture);
             }
         }
         

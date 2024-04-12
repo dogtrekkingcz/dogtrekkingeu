@@ -33,7 +33,7 @@
     
         @if (Entry.RaceId != null && Entry.RaceId != Guid.Empty)
         {
-            if (ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits.WithDogs == true)
+            if (ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits.WithPets == true)
             {
                 <CreateEntryPetsComponent
                     RaceLimits="@ActionSettings.Races.First(r => r.Id == Entry.RaceId)?.Limits"

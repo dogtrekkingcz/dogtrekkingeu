@@ -339,7 +339,7 @@
     <data name="Action.Manage.DefineAccompanyingSale" xml:space="preserve">
         <value>Doprovodný prodej</value>
     </data>
-    <data name="Actions.Races.Limits.WithDogs" xml:space="preserve">
+    <data name="Actions.Races.Limits.WithPets" xml:space="preserve">
         <value>Se psy</value>
     </data>
     <data name="Actions.Sales.AddNewItem" xml:space="preserve">
