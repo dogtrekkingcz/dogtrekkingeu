@@ -2,78 +2,80 @@
 
 public sealed record CreateUserProfileRequest
 {
-    public string? Id { get; set; } = string.Empty;
+    public string? Id { get; init; } = string.Empty;
 
-    public string UserId { get; set; } = string.Empty;
+    public string UserId { get; init; } = string.Empty;
 
-    public Guid CompetitorId { get; set; } = default(Guid);
+    public Guid CompetitorId { get; init; } = default(Guid);
 
-    public string FirstName { get; set; } = string.Empty;
+    public string FirstName { get; init; } = string.Empty;
 
-    public string LastName { get; set; } = string.Empty;
+    public string LastName { get; init; } = string.Empty;
 
-    public string Nickname { get; set; } = string.Empty;
+    public string Nickname { get; init; } = string.Empty;
 
-    public DateTimeOffset? Birthday { get; set; } = null;
+    public DateTimeOffset? Birthday { get; init; } = null;
 
-    public AddressDto Address { get; set; } = new();
+    public AddressDto Address { get; init; } = new();
 
-    public ContactDto Contact { get; set; } = new();
+    public ContactDto Contact { get; init; } = new();
 
-    public List<PetDto> Pets { get; set; } = new List<PetDto>();
+    public List<PetDto> Pets { get; init; } = new List<PetDto>();
+
+    public List<string> Roles { get; init; } = new List<string>();
     
     public sealed record AddressDto
     {
-        public string Country { get; set; } = string.Empty;
+        public string Country { get; init; } = string.Empty;
 
-        public string Region { get; set; } = string.Empty;
+        public string Region { get; init; } = string.Empty;
 
-        public string ZipCode { get; set; } = string.Empty;
+        public string ZipCode { get; init; } = string.Empty;
 
-        public string City { get; set; } = string.Empty;
+        public string City { get; init; } = string.Empty;
 
-        public string Street { get; set; } = string.Empty;
+        public string Street { get; init; } = string.Empty;
 
-        public LatLngDto Position { get; set; } = new();
+        public LatLngDto Position { get; init; } = new();
     }
     
     public sealed record LatLngDto
     {
-        public double Latitude { get; set; } = 0.0;
+        public double Latitude { get; init; } = 0.0;
 
-        public double Longitude { get; set; } = 0.0;
+        public double Longitude { get; init; } = 0.0;
     }
     
     public sealed record ContactDto
     {
-        public string PhoneNumber { get; set; } = string.Empty;
+        public string PhoneNumber { get; init; } = string.Empty;
 
-        public string EmailAddress { get; set; } = string.Empty;
+        public string EmailAddress { get; init; } = string.Empty;
     }
     
-    public record PetDto
+    public sealed record PetDto
     {
-        public string? Id { get; set; }
+        public string? Id { get; init; }
 
-        public string UserId { get; set; } = string.Empty;
+        public string UserId { get; init; } = string.Empty;
 
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
 
-        public string Kennel { get; set; } = string.Empty;
+        public string Kennel { get; init; } = string.Empty;
 
-        public string Pedigree { get; set; } = string.Empty;
+        public string Pedigree { get; init; } = string.Empty;
 
-        public string Chip { get; set; } = string.Empty;
+        public string Chip { get; init; } = string.Empty;
 
-        public DateTimeOffset? Birthday { get; set; } = null;
+        public DateTimeOffset? Birthday { get; init; } = null;
 
-        public DateTimeOffset? Decease { get; set; } = null;
+        public DateTimeOffset? Decease { get; init; } = null;
 
-        public string UriToPhoto { get; set; } = string.Empty;
+        public string UriToPhoto { get; init; } = string.Empty;
 
-        public string Contact { get; set; } = string.Empty;
+        public string Contact { get; init; } = string.Empty;
 
-        public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>
+        public List<VaccinationDto> Vaccinations { get; init; } = new List<VaccinationDto>
         {
             new VaccinationDto
             {
@@ -84,15 +86,15 @@ public sealed record CreateUserProfileRequest
     
     public sealed record VaccinationDto
     {
-        public DateTimeOffset? Date { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset? Date { get; init; } = DateTimeOffset.Now;
 
-        public DateTimeOffset? ValidUntil { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset? ValidUntil { get; init; } = DateTimeOffset.Now;
 
-        public VaccinationType Type { get; set; } = VaccinationType.NotValid;
+        public VaccinationType Type { get; init; } = VaccinationType.NotValid;
 
-        public string UriToPhoto { get; set; } = string.Empty;
+        public string UriToPhoto { get; init; } = string.Empty;
 
-        public string Note { get; set; } = string.Empty;
+        public string Note { get; init; } = string.Empty;
     }
 
     public enum VaccinationType
