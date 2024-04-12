@@ -47,7 +47,7 @@ namespace Storage.Services.Repositories.UserProfiles
 
         public async Task DeleteUserProfileAsync(DeleteUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            await _userProfileStorageService.DeleteAsync(request.Email, cancellationToken);
+            await _userProfileStorageService.DeleteAsync(request.Id, cancellationToken);
         }
 
         public async Task<GetUserProfileInternalStorageResponse> GetUserProfileAsync(GetUserProfileInternalStorageRequest request, CancellationToken cancellationToken)

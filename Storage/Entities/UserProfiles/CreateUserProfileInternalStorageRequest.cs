@@ -21,6 +21,8 @@ public sealed record CreateUserProfileInternalStorageRequest
     public ContactDto Contact { get; set; } = new();
 
     public List<PetDto> Pets { get; set; } = new List<PetDto>();
+
+    public List<string> Roles { get; init; } = new List<string>();
     
     public sealed record AddressDto
     {

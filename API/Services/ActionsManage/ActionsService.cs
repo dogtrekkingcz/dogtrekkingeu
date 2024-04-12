@@ -66,7 +66,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
 
             await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsInternalStorageRequest
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 ActionId = result.Id,
                 UserId = _currentUserIdService.GetUserId(),
                 Roles = new List<string> { Constants.Roles.OwnerOfAction.Id }

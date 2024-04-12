@@ -2,15 +2,7 @@
 
 public static class InternalAdministrator
 {
-    public const string Id = "InternalAdministrator";
+    public const string Id = "31e51978-be48-47f7-b4df-0a690afc7c7b";
 
     public const string Name = "Internal Administrator";
-
-    public static IList<string> Actions = new List<string>
-    {
-        Constants.Actions.ManageAllActions,
-        Constants.Actions.ManageAllEntries,
-        Constants.Actions.ManageAllDogs,
-        Constants.Actions.ManageAllActionRights
-    };
 }

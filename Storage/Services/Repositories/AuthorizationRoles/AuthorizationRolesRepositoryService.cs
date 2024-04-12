@@ -22,6 +22,8 @@ namespace Storage.Services.Repositories.AuthorizationRoles
 
         public async Task AddAuthorizationRoleAsync(AddAuthorizationRoleRequest request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"Adding authorization role with id: '{request.Id}', name: '{request.Name}'");
+
             var authorizationRoleRecord = _mapper.Map<AuthorizationRoleRecord>(request);
             await _authorizationRoleStorageService.AddAsync(authorizationRoleRecord, cancellationToken);
         }
@@ -33,6 +35,13 @@ namespace Storage.Services.Repositories.AuthorizationRoles
             var response = _mapper.Map<GetAllAuthorizationRolesResponse>(result);
 
             return response;
+        }
+
+        public async Task DeleteAuthorizationRoleAsync(string id, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation($"Deleting authorization role with id: '{id}'");
+
+            await _authorizationRoleStorageService.DeleteAsync(id, cancellationToken);
         }
     }
 }

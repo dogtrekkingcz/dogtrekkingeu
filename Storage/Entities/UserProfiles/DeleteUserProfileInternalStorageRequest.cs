@@ -2,5 +2,5 @@
 
 public sealed record DeleteUserProfileInternalStorageRequest
 {
-    public string Email { get; set; }
+    public string Id { get; init; }
 }

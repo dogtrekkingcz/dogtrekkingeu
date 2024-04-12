@@ -2,12 +2,21 @@
 {
     public record AddAuthorizationRoleRequest
     {
-        public string? Id { get; set; } = string.Empty;
-        
-        public string? UserId { get; set; }
+        public string? Id { get; init; }
 
-        public string Name { get; set; } = string.Empty;
+        public string UserId { get; init; } = string.Empty;
 
-        public IList<string> Actions { get; set; } = new List<string>();
+        public RoleType Type { get; init; } = RoleType.None;
+
+        public string Name { get; init; } = string.Empty;
+
+        public IList<Constants.ActionType> Actions { get; init; } = new List<Constants.ActionType>();
+
+        public enum RoleType
+        {
+            None = 0,
+            User = 1,
+            Owner = 2
+        }
     }
 }

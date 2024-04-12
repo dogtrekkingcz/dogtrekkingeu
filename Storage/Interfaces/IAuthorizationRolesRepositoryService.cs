@@ -7,5 +7,7 @@ namespace Storage.Interfaces
         public Task AddAuthorizationRoleAsync(AddAuthorizationRoleRequest request, CancellationToken cancellationToken);
 
         public Task<GetAllAuthorizationRolesResponse> GetAllAuthorizationRolesAsync(CancellationToken cancellationToken);
+
+        public Task DeleteAuthorizationRoleAsync(string id, CancellationToken cancellationToken);
     }
 }

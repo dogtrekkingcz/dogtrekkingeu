@@ -103,7 +103,8 @@ public static class DiCompositor
             .AddPetsRepositoryMapping()
             .AddCheckpointsRepositoryMapping()
             .AddActivitiesRepositoryMapping()
-            .AddMigrationsRepositoryMapping();
+            .AddMigrationsRepositoryMapping()
+            .AddAuthorizationRolesRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
         BsonClassMap.RegisterClassMap<UserProfileRecord>();
