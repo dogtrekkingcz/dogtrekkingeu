@@ -15,7 +15,8 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<GetUserProfileResponse.VaccinationDto, Protos.UserProfiles.GetUserProfile.Vaccination>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.LatLngDto, Google.Type.LatLng>();
 
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest, CreateUserProfileRequest>();
+        typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest, CreateUserProfileRequest>()
+            .Ignore(d => d.Roles);
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.VaccinationType, CreateUserProfileRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Address, CreateUserProfileRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Contact, CreateUserProfileRequest.ContactDto>();
