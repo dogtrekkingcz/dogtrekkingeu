@@ -10,7 +10,7 @@ internal class _20240411_SlapanickyVlk : M_00_MigrationBase
     public _20240411_SlapanickyVlk(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
         this
-            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+            .AddUpAction(() => ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
                 Id = Id,
                 Name = "Šlapanický vlk",
@@ -25,6 +25,6 @@ internal class _20240411_SlapanickyVlk : M_00_MigrationBase
                 }
             }, CancellationToken.None))
 
-            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(() => ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

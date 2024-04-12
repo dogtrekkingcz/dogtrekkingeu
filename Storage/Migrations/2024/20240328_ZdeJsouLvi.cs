@@ -8,7 +8,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
     public _20240328_ZdeJsouLvi(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
         this
-            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+            .AddUpAction(() => ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
                 Id = Id,
                 Name = "ZDE JSOU LVI",
@@ -58,6 +58,6 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                 }
             }, CancellationToken.None))
 
-            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(() => ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

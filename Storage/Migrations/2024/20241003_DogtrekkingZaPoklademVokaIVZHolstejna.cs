@@ -8,7 +8,7 @@ internal class _20241003_DogtrekkingZaPoklademVokaIVZHolstejna : M_00_MigrationB
     public _20241003_DogtrekkingZaPoklademVokaIVZHolstejna(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
         this
-            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+            .AddUpAction(() => ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
                 Id = Id,
                 Name = "Dogtrekking za pokladem Voka IV. z Holštejna",
@@ -23,6 +23,6 @@ internal class _20241003_DogtrekkingZaPoklademVokaIVZHolstejna : M_00_MigrationB
                 }
             }, CancellationToken.None))
 
-            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(() => ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

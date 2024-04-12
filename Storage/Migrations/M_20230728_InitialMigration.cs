@@ -17,7 +17,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
     public M_20230728_InitialMigration(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
         this
-            .AddUpAction(AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
+            .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
                 Id = Constants.Roles.InternalAdministrator.Id,
                 Name = Constants.Roles.InternalAdministrator.Name,
@@ -30,7 +30,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 }
             }, CancellationToken.None))
 
-            .AddUpAction(AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
+            .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
                 Id = Constants.Roles.InternalUser.Id,
                 Name = Constants.Roles.InternalUser.Name,
@@ -43,7 +43,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 }
             }, CancellationToken.None))
 
-            .AddUpAction(AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
+            .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
                 Id = Constants.Roles.ExternalUser.Id,
                 Name = Constants.Roles.ExternalUser.Name,
@@ -55,7 +55,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
             //------------------------------------------------------------------------------------------------------------
 
-            .AddUpAction(UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
+            .AddUpAction(() => UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
             {
                 Id = _userIdAdmin,
                 FirstName = "Admin",
@@ -72,7 +72,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 }
             }, CancellationToken.None))
 
-            .AddUpAction(UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
+            .AddUpAction(() => UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
             {
                 Id = _userIdRadekKotesovec,
                 FirstName = "Radek",
@@ -91,10 +91,10 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
             // ------------------------------------------------------------------------------------------------------------
 
-            .AddDownAction(UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdRadekKotesovec }, CancellationToken.None))
-            .AddDownAction(UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdAdmin }, CancellationToken.None))
-            .AddDownAction(AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalAdministrator.Id.ToString(), CancellationToken.None))
-            .AddDownAction(AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalUser.Id.ToString(), CancellationToken.None))
-            .AddDownAction(AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.ExternalUser.Id.ToString(), CancellationToken.None));
+            .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdRadekKotesovec }, CancellationToken.None))
+            .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdAdmin }, CancellationToken.None))
+            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalAdministrator.Id.ToString(), CancellationToken.None))
+            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalUser.Id.ToString(), CancellationToken.None))
+            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.ExternalUser.Id.ToString(), CancellationToken.None));
     }
 }

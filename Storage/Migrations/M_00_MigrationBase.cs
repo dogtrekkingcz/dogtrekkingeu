@@ -12,8 +12,8 @@ internal abstract class M_00_MigrationBase : IMigration
     protected abstract string Name { get; init; }
     protected virtual List<Type> ActionsToMigrate { get; init; } = new();
 
-    private List<Task> _upList = new();
-    private List<Task> _downList = new();
+    private List<Func<Task>> _upList = new();
+    private List<Func<Task>> _downList = new();
 
     protected readonly IActionRightsRepositoryService ActionRightsRepositoryService;
     protected readonly IActionsRepositoryService ActionsRepositoryService;
@@ -36,16 +36,16 @@ internal abstract class M_00_MigrationBase : IMigration
         MigrationsRepositoryService = serviceProvider.GetRequiredService<IMigrationsRepositoryService>();
     }
 
-    public M_00_MigrationBase AddUpAction(Task task)
+    public M_00_MigrationBase AddUpAction(Func<Task> action)
     {
-        _upList.Add(task);
+        _upList.Add(action);
 
         return this;
     }
 
-    public M_00_MigrationBase AddDownAction(Task task)
+    public M_00_MigrationBase AddDownAction(Func<Task> action)
     {
-        _downList.Add(task);
+        _downList.Add(action);
 
         return this;
     }
@@ -68,7 +68,7 @@ internal abstract class M_00_MigrationBase : IMigration
         else
         {
             Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is running UP actions [{_upList.Count}] tasks");
-            await Task.WhenAll(_upList.Select(action => action));
+            await Task.WhenAll(_upList.Select(action => action()));
         }
 
         await MigrationsRepositoryService.CreateMigrationAsync(new Entities.Migrations.CreateMigrationInternalStorageRequest
@@ -96,7 +96,7 @@ internal abstract class M_00_MigrationBase : IMigration
         else
         {
             Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is running DOWN actions [{_upList.Count}] tasks");
-            await Task.WhenAll(_downList.Select(action => action));
+            await Task.WhenAll(_downList.Select(action => action()));
         }
         
 

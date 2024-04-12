@@ -8,7 +8,7 @@ internal class _20240530_VSrdciCeska : M_00_MigrationBase
     public _20240530_VSrdciCeska(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
         this
-            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
+            .AddUpAction(() => ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
                 Id = Id,
                 Name = "V srdci Česka",
@@ -23,6 +23,6 @@ internal class _20240530_VSrdciCeska : M_00_MigrationBase
                 }
             }, CancellationToken.None))
 
-            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(() => ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }
