@@ -36,44 +36,52 @@ public sealed class UserProfileService : IUserProfileService
 
         IsRunning = true;
         
-        var userProfile = await _userProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
-        if (userProfile == null || userProfile.Id == string.Empty)
+        try
+        {
+            var userProfile = await _userProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
+            if (userProfile == null || userProfile.Id == string.Empty)
+            {
+                IsRunning = false;
+                return null;
+            }
+
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+                SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
+            }
+
+            var getActionRightsResponse = await _actionRightsClient.getActionRightsAsync(
+                new Protos.ActionRights.GetActionRights.GetActionRightsRequest
+                {
+                    Id = ""
+                });
+
+            var userRights = new List<UserProfileModel.ActionRightsDto>();
+            foreach (var right in getActionRightsResponse.Rights)
+            {
+                userRights.Add(new UserProfileModel.ActionRightsDto
+                {
+                    Id = right.Id,
+                    ActionId = right.ActionId,
+                    UserId = right.UserId,
+                    Roles = right.Roles
+                });
+            }
+
+            SetRights(userRights);
+
+            IsValidTime = DateTimeOffset.Now;
+
+            IsRunning = false;
+
+            return _userProfileModel;
+        }
+        catch (Exception ex)
         {
             IsRunning = false;
             return null;
         }
-
-        using (var scope = _serviceProvider.CreateScope())
-        {
-            var mapper = scope.ServiceProvider.GetRequiredService<IMapper>();
-            SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
-        }
-        
-        var getActionRightsResponse = await _actionRightsClient.getActionRightsAsync(
-            new Protos.ActionRights.GetActionRights.GetActionRightsRequest
-            {
-                Id = ""
-            });
-
-        var userRights = new List<UserProfileModel.ActionRightsDto>();
-        foreach (var right in getActionRightsResponse.Rights)
-        {
-            userRights.Add(new UserProfileModel.ActionRightsDto
-            {
-                Id = right.Id,
-                ActionId = right.ActionId,
-                UserId = right.UserId,
-                Roles = right.Roles
-            });
-        }
-
-        SetRights(userRights);
-        
-        IsValidTime = DateTimeOffset.Now;
-
-        IsRunning = false;
-
-        return _userProfileModel;
     }
 
     public void Invalidate()
