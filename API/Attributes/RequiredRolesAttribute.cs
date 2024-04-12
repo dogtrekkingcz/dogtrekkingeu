@@ -1,6 +1,4 @@
-﻿using Storage.Interfaces;
-
-namespace PetsOnTrail.Actions.Attributes;
+﻿namespace PetsOnTrail.Actions.Attributes;
 
 [AttributeUsage(AttributeTargets.Method)]
 internal class RequiredRolesAttribute : Attribute

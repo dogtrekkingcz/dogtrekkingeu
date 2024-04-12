@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using PetsOnTrail.Actions.Attributes;
 using PetsOnTrail.Interfaces.Actions.Entities.Activities;
 using PetsOnTrail.Interfaces.Actions.Services;
 using Storage.Entities.Activities;
@@ -55,6 +56,7 @@ internal class ActivitiesService : IActivitiesService
         return _mapper.Map<GetMyActivitiesResponse>(activities);
     }
 
+    [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
     public async Task<UpdateActivityResponse> UpdateActivityAsync(UpdateActivityRequest request, CancellationToken cancellationToken)
     {
         var updateInternalStorageRequest = _mapper.Map<UpdateActivityInternalStorageRequest>(request);

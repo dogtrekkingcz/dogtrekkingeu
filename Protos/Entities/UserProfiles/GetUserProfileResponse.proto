@@ -18,6 +18,7 @@ message GetUserProfileResponse {
   Address Address = 8;
   Contact Contact = 9;
   repeated Pet Pets = 10;
+  repeated string Roles = 11;
 }
 
 message Address {

@@ -21,6 +21,8 @@ public sealed record GetUserProfileResponse
     public ContactDto Contact { get; set; } = new();
 
     public List<PetDto> Pets { get; set; } = new List<PetDto>();
+
+    public List<string> Roles { get; set; } = new List<string>();
     
     public sealed record AddressDto
     {
