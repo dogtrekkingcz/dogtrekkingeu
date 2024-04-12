@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using PetsOnTrailApp.Providers;
 using Protos.UserProfiles.GetUserProfile;
 using SharedLib.Models;
 
@@ -11,21 +12,27 @@ public sealed class UserProfileService : IUserProfileService
     private readonly Protos.ActionRights.ActionRights.ActionRightsClient _actionRightsClient;
     private readonly Protos.UserProfiles.UserProfiles.UserProfilesClient _userProfilesClient;
     private readonly IServiceProvider _serviceProvider;
+    private readonly TokenStorage _tokenStorage;
 
     private DateTimeOffset? IsValidTime { get; set; } = null;
 
     public UserProfileService(
         Protos.ActionRights.ActionRights.ActionRightsClient actionRightsClient, 
         Protos.UserProfiles.UserProfiles.UserProfilesClient userProfilesClient,
+        TokenStorage tokenStorage,
         IServiceProvider serviceProvider)
     {
         _actionRightsClient = actionRightsClient;
         _userProfilesClient = userProfilesClient;
         _serviceProvider = serviceProvider;
+        _tokenStorage = tokenStorage;
     }
     
     public async Task<UserProfileModel> GetAsync()
     {   
+        if (string.IsNullOrWhiteSpace(await _tokenStorage.GetAccessToken()))
+            return null;
+
         if (IsValidTime != null && IsValidTime > DateTimeOffset.Now.AddMinutes(-5))
             return _userProfileModel;
                 
@@ -34,6 +41,7 @@ public sealed class UserProfileService : IUserProfileService
             var userProfile = await _userProfilesClient.getUserProfileAsync(new GetUserProfileRequest());
             if (userProfile == null || userProfile.Id == string.Empty)
             {
+                IsValidTime = DateTimeOffset.Now;
                 return null;
             }
 
@@ -69,6 +77,7 @@ public sealed class UserProfileService : IUserProfileService
         }
         catch (Exception ex)
         {
+            IsValidTime = DateTimeOffset.Now;
             return null;
         }
     }
