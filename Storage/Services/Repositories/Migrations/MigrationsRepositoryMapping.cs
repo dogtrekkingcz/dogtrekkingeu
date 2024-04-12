@@ -1,4 +1,6 @@
 ﻿using Mapster;
+using Storage.Entities.Migrations;
+using Storage.Models;
 
 namespace Storage.Services.Repositories.Migrations
 {
@@ -6,7 +8,9 @@ namespace Storage.Services.Repositories.Migrations
     {
         internal static TypeAdapterConfig AddMigrationsRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            
+            typeAdapterConfig.NewConfig<CreateMigrationInternalStorageRequest, MigrationRecord>();
+            typeAdapterConfig.NewConfig<MigrationRecord, CreateMigrationInternalStorageRequest>();
+
             return typeAdapterConfig;
         }
     }
