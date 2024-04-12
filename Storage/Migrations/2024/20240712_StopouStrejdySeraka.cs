@@ -7,21 +7,22 @@ internal class _20240712_StopouStrejdySeraka : M_00_MigrationBase
 
     public _20240712_StopouStrejdySeraka(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "Stopou strejdy Šeráka",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Lipová lázně"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 7, 12, 17, 0, 0),
-                To = new DateTime(2024, 7, 14, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "Stopou strejdy Šeráka",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Lipová lázně"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 7, 12, 17, 0, 0),
+                    To = new DateTime(2024, 7, 14, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

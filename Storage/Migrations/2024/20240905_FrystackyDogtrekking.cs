@@ -7,21 +7,22 @@ internal class _20240905_FrystackyDogtrekking : M_00_MigrationBase
 
     public _20240905_FrystackyDogtrekking(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "Fryštácký dogtrekking",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Ranč kemp Bystřička"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 9, 5, 17, 0, 0),
-                To = new DateTime(2024, 9, 8, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "Fryštácký dogtrekking",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Ranč kemp Bystřička"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 9, 5, 17, 0, 0),
+                    To = new DateTime(2024, 9, 8, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

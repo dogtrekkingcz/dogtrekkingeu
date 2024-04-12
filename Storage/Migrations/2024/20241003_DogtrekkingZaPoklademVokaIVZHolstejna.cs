@@ -7,21 +7,22 @@ internal class _20241003_DogtrekkingZaPoklademVokaIVZHolstejna : M_00_MigrationB
 
     public _20241003_DogtrekkingZaPoklademVokaIVZHolstejna(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "Dogtrekking za pokladem Voka IV. z Holštejna",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Moravský kras"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 10, 3, 17, 0, 0),
-                To = new DateTime(2024, 10, 6, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "Dogtrekking za pokladem Voka IV. z Holštejna",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Moravský kras"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 10, 3, 17, 0, 0),
+                    To = new DateTime(2024, 10, 6, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

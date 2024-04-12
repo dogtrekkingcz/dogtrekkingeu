@@ -7,21 +7,22 @@ internal class _20240919_DTKostalov : M_00_MigrationBase
 
     public _20240919_DTKostalov(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "DT Košťálov",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Košťálov"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 9, 19, 17, 0, 0),
-                To = new DateTime(2024, 9, 22, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "DT Košťálov",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Košťálov"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 9, 19, 17, 0, 0),
+                    To = new DateTime(2024, 9, 22, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

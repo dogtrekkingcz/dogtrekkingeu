@@ -7,21 +7,22 @@ internal class _20240425_KrusnohorskyDogtrekking : M_00_MigrationBase
 
     public _20240425_KrusnohorskyDogtrekking(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "Krušnohorský dogtrekking",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Kemp Stebnice, obec Lipová u Chebu"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 4, 25, 17, 0, 0),
-                To = new DateTime(2024, 4, 28, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "Krušnohorský dogtrekking",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Kemp Stebnice, obec Lipová u Chebu"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 4, 25, 17, 0, 0),
+                    To = new DateTime(2024, 4, 28, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

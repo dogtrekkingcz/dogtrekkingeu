@@ -6,22 +6,23 @@ internal class _20240509_DT_RudolfJedeNaSazavu : M_00_MigrationBase
     protected override string Name { get; init; } = nameof(_20240509_DT_RudolfJedeNaSazavu);
 
     public _20240509_DT_RudolfJedeNaSazavu(IServiceProvider serviceProvider) : base(serviceProvider) 
-    { 
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "DT Rudolf jede na Sázavu",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+    {
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Kácov"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 5, 9, 17, 0, 0),
-                To = new DateTime(2024, 5, 12, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "DT Rudolf jede na Sázavu",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Kácov"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 5, 9, 17, 0, 0),
+                    To = new DateTime(2024, 5, 12, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

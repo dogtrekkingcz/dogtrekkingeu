@@ -7,21 +7,22 @@ internal class _20241025_ValasskaVlcicaMemorialAlciVesele : M_00_MigrationBase
 
     public _20241025_ValasskaVlcicaMemorialAlciVesele(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "Valašská Vlčica - Memoriál Alči Veselé",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Chřiby"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 10, 25, 17, 0, 0),
-                To = new DateTime(2024, 10, 28, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "Valašská Vlčica - Memoriál Alči Veselé",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Chřiby"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 10, 25, 17, 0, 0),
+                    To = new DateTime(2024, 10, 28, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }

@@ -61,11 +61,15 @@ internal abstract class M_00_MigrationBase : IMigration
             return;
         }
 
-        if (ActionsToMigrate.Count > 0)
+        if (ActionsToMigrate.Count > 0) 
+        { 
             await Task.WhenAll(ActionsToMigrate.Select(action => (Activator.CreateInstance(action, ServiceProvider) as M_00_MigrationBase).UpAsync(cancellationToken)));
+        }
         else
+        {
+            Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is running UP actions [{_upList.Count}] tasks");
             await Task.WhenAll(_upList.Select(action => action));
-
+        }
 
         await MigrationsRepositoryService.CreateMigrationAsync(new Entities.Migrations.CreateMigrationInternalStorageRequest
         {
@@ -87,9 +91,14 @@ internal abstract class M_00_MigrationBase : IMigration
             return;
         }
 
-
-        await Task.WhenAll(ActionsToMigrate.Select(action => (Activator.CreateInstance(action, ServiceProvider) as M_00_MigrationBase).DownAsync(cancellationToken)));
-
+        if (ActionsToMigrate.Count > 0)
+            await Task.WhenAll(ActionsToMigrate.Select(action => (Activator.CreateInstance(action, ServiceProvider) as M_00_MigrationBase).DownAsync(cancellationToken)));
+        else
+        {
+            Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is running DOWN actions [{_upList.Count}] tasks");
+            await Task.WhenAll(_downList.Select(action => action));
+        }
+        
 
         await MigrationsRepositoryService.DeleteMigrationAsync(Id.ToString(), cancellationToken);
 

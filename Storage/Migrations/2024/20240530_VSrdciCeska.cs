@@ -7,21 +7,22 @@ internal class _20240530_VSrdciCeska : M_00_MigrationBase
 
     public _20240530_VSrdciCeska(IServiceProvider serviceProvider) : base(serviceProvider) 
     { 
-        AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
-        {
-            Id = Id,
-            Name = "V srdci Česka",
-            Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+        this
+            .AddUpAction(ActionsRepositoryService.AddActionAsync(new Entities.Actions.CreateActionInternalStorageRequest
             {
-                City = "Kemp MOŘE, rybník ŘEKA, Krucemburk"
-            },
-            Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
-            {
-                From = new DateTime(2024, 5, 30, 17, 0, 0),
-                To = new DateTime(2024, 6, 2, 13, 0, 0)
-            }
-        }, CancellationToken.None));
+                Id = Id,
+                Name = "V srdci Česka",
+                Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
+                {
+                    City = "Kemp MOŘE, rybník ŘEKA, Krucemburk"
+                },
+                Term = new Entities.Actions.CreateActionInternalStorageRequest.TermDto
+                {
+                    From = new DateTime(2024, 5, 30, 17, 0, 0),
+                    To = new DateTime(2024, 6, 2, 13, 0, 0)
+                }
+            }, CancellationToken.None))
 
-        AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
+            .AddDownAction(ActionsRepositoryService.DeleteActionAsync(Id, CancellationToken.None));
     }
 }
