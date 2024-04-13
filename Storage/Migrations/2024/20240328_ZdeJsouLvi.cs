@@ -727,25 +727,85 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             {
                                 Name = "DMW1",
                                 Racers = new List<RacerDto>
-                                { }
+                                { 
+                                    new RacerDto
+                                    {
+                                        FirstName = "dmw1_tester", 
+                                        LastName = "dmw1_Tester", 
+                                        Start = start,
+                                        Finish = start.AddHours(21).AddMinutes(40),
+                                        Pets = new List<PetDto>
+                                        {
+                                            new PetDto
+                                            {
+                                                Name = "Aimy z Archy",
+                                            }
+                                        }
+                                    },
+                                }
                             },
                             new CategoryDto
                             {
                                 Name = "DMW2",
                                 Racers = new List<RacerDto>
-                                { }
+                                { 
+                                    new RacerDto
+                                    {
+                                        FirstName = "dmw2_tester", 
+                                        LastName = "dmw2_Tester", 
+                                        Start = start,
+                                        Finish = start.AddHours(10).AddMinutes(45),
+                                        Pets = new List<PetDto>
+                                        {
+                                            new PetDto
+                                            {
+                                                Name = "Darko",
+                                            }
+                                        }
+                                    },
+                                }
                             },
                             new CategoryDto
                             {
                                 Name = "DMM1",
                                 Racers = new List<RacerDto>
-                                { }
+                                { 
+                                    new RacerDto
+                                    {
+                                        FirstName = "dmm1_tester", 
+                                        LastName = "dmm1_Tester", 
+                                        Start = start,
+                                        Finish = start.AddHours(9).AddMinutes(15),
+                                        Pets = new List<PetDto>
+                                        {
+                                            new PetDto
+                                            {
+                                                Name = "Delta",
+                                            }
+                                        }
+                                    },
+                                }
                             },
                             new CategoryDto
                             {
                                 Name = "DMM2",
                                 Racers = new List<RacerDto>
-                                { }
+                                { 
+                                    new RacerDto
+                                    {
+                                        FirstName = "dmm2_tester", 
+                                        LastName = "dmm2_Tester", 
+                                        Start = start,
+                                        Finish = start.AddHours(9).AddMinutes(13),
+                                        Pets = new List<PetDto>
+                                        {
+                                            new PetDto
+                                            {
+                                                Name = "Neo",
+                                            }
+                                        }
+                                    },
+                                }
                             }
                         }
                     }
