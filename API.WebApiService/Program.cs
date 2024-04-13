@@ -86,9 +86,10 @@ var app = builder.Build();
 // app.ConfigureStorageAsync(CancellationToken.None).Wait();
 
 app.UseSwagger();
-app.UseSwaggerUI(c =>
+app.UseSwaggerUI(options =>
 {
-    c.SwaggerEndpoint("/swagger/swagger.json", "PetsOnTrail API");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
 });
 
 app.UseHttpsRedirection();
