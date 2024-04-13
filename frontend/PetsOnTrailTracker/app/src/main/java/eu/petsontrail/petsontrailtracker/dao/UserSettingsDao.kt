@@ -20,6 +20,9 @@ interface UserSettingsDao {
     @Query("UPDATE user_settings SET access_token = :accessToken")
     suspend fun updateAccessToken(vararg accessToken: String)
 
+    @Query("SELECT access_token FROM user_settings LIMIT 1")
+    suspend fun getAccessToken(): String
+
     @Insert
     suspend fun insertOne(vararg userSettings: UserSettingsDto)
 

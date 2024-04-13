@@ -1,18 +1,22 @@
 package eu.petsontrail.petsontrailtracker
 
-import android.app.Activity
 import android.app.Service
 import android.content.Intent
-import android.os.Build
 import android.os.IBinder
-import androidx.annotation.RequiresApi
 import eu.petsontrail.petsontrailtracker.data.ActivityDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.helper.DbHelper
 import kotlinx.coroutines.runBlocking
+import net.openid.appauth.AuthState
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.io.IOException
+
 
 class ActivityUploadService : Service() {
     private lateinit var db: AppDatabase
+    private val client = OkHttpClient()
+    private val baseUrl = "https://petsontrail.eu:4443/api/activities/"
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -41,9 +45,25 @@ class ActivityUploadService : Service() {
         // TODO: Update activity data - generally points
     }
     fun CreateActivity(activity: ActivityDto) {
+        runBlocking {
+            val token = db.userSettingsDao().getAccessToken()
+
+            val request: Request = Request.Builder()
+                .url(url) //This adds the token to the header.
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+
+            client.newCall(request).execute().use { response ->
+                if (!response.isSuccessful) {
+                    throw IOException("Unexpected code $response")
+                }
+                System.out.println("Server: " + response.header("anykey"))
+            }
+        }
+
         // TODO: create a new activity on the server
         /*
-
+    }
 
     public Guid IdActivity { get; init; } = Guid.NewGuid();
 

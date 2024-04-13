@@ -85,16 +85,11 @@ var app = builder.Build();
 // migrations will be running only on gRPC.API instance...
 // app.ConfigureStorageAsync(CancellationToken.None).Wait();
 
-app.UseSwagger(c =>
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    var basePath = "/v1";
-    c.RouteTemplate = "swagger/{documentName}/swagger.json";
-    c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
-    {
-        swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" } };
-    });
+    c.SwaggerEndpoint("/swagger/swagger.json", "PetsOnTrail API");
 });
-app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
