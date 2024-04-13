@@ -3,6 +3,7 @@ using API.WebApiService.RequestHandlers;
 using API.WebApiService.Validators;
 using Mapster;
 using MapsterMapper;
+using Microsoft.OpenApi.Models;
 using Storage;
 using Storage.Options;
 using System.Security.Cryptography.X509Certificates;
@@ -84,7 +85,15 @@ var app = builder.Build();
 // migrations will be running only on gRPC.API instance...
 // app.ConfigureStorageAsync(CancellationToken.None).Wait();
 
-app.UseSwagger();
+app.UseSwagger(c =>
+{
+    var basePath = "/v1";
+    c.RouteTemplate = "swagger/{documentName}/swagger.json";
+    c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+    {
+        swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}{basePath}" } };
+    });
+});
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
