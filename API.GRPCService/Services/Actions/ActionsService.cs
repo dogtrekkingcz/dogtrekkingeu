@@ -163,9 +163,19 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
     
     public async override Task<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse> getPublicActionsList(Empty request, ServerCallContext context)
     {
-        var actions = await _actionsService.GetPublicActionsListAsync(new GetPublicActionsListRequest(), context.CancellationToken);
+        try
+        {
+            var actions = await _actionsService.GetPublicActionsListAsync(new GetPublicActionsListRequest(), context.CancellationToken);
 
-        return _mapper.Map<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse>(actions);
+            var response = _mapper.Map<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse>(actions);
+
+            return response;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, $"{nameof(getPublicActionsList)}: Error while getting public actions list");
+            throw;
+        }
     }
     
     public async override Task<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse> getSelectedPublicActionsList(Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest request, ServerCallContext context)
