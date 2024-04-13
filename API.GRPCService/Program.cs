@@ -74,7 +74,8 @@ typeAdapterConfig = new TypeAdapterConfig
                 (member => member.SetterModifier == AccessModifier.None &&
                            member.Type.IsGenericType &&
                            member.Type.GetGenericTypeDefinition() == typeof(RepeatedField<>))
-            }
+            },
+            IgnoreNullValues = true
         }
     }
 };
