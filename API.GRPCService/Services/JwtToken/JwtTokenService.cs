@@ -19,22 +19,31 @@ namespace API.GRPCService.Services.JwtToken
 
         public void Parse(ServerCallContext context)
         {
-            var token = context.RequestHeaders.Get("authorization")?.Value;
+            var tokenSource = context.RequestHeaders.Get("authorization");
 
-            _logger.LogInformation($"'{nameof(Parse)}': token: '{token}'");
-            if (token == null)
+            _logger.LogInformation($"{nameof(Parse)}: Try to parse token: '{tokenSource?.Value ?? "null"}'");
+            if (tokenSource is null)
             {
+                _logger.LogInformation($"{nameof(Parse)}: Token is null");
                 return;
             }
 
+            var token = tokenSource?.Value;
+
             var handler = new JwtSecurityTokenHandler();
 
+            if (token is null)
+                return;
+
             var pos = token.IndexOf("Bearer ");
-            if (pos >= 0)
-            {   
-                token = token.Substring(pos + 7);
-                _logger.LogInformation($"Token: '{token}'");
+            if (pos < 0)
+            {
+                _logger.LogInformation($"{nameof(Parse)}: Token is not a Bearer token");
+                return;
             }
+
+            token = token.Substring(pos + 7);
+            _logger.LogInformation($"Token: '{token}'");
 
             if (handler.CanReadToken(token))
             {

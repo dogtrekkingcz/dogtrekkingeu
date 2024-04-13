@@ -28,7 +28,7 @@ namespace API.GRPCService.Interceptors
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _logger.LogError(ex, $"{nameof(JwtTokenInterceptor)}: error while trying to run continuation with accepted request: '{request}'/context: '{context}'");
                 throw;
             }
         }
