@@ -129,7 +129,7 @@ typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
 typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset>()
     .MapWith(s => s.ToDateTimeOffset() ?? DateTimeOffset.MinValue);
 
-typeAdapterConfig.Compile();
+TypeAdapterConfig.GlobalSettings.Compile();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {
