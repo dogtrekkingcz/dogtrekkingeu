@@ -43,7 +43,8 @@ catch (Exception ex)
 builder.Services.AddControllers();
 builder.Services.AddMediator();
 builder.Services.AddValidators();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options => options.CustomSchemaIds(type => type.ToString()));
+
 
 string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
 Console.WriteLine(MongoDbConnectionString);
