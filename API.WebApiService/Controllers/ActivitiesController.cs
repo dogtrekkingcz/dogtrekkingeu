@@ -1,4 +1,5 @@
 ﻿using API.WebApiService.Entities;
+using API.WebApiService.Interceptors;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace API.WebApiService.Controllers
 {
     [Route("api/activities")]
     [ApiController]
+    [JwtTokenFilter]
     public class ActivitiesController : ControllerBase
     {
         private readonly IMediator _mediator;

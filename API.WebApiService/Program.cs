@@ -3,7 +3,7 @@ using API.WebApiService.RequestHandlers;
 using API.WebApiService.Validators;
 using Mapster;
 using MapsterMapper;
-using Microsoft.OpenApi.Models;
+using PetsOnTrail.Api;
 using Storage;
 using Storage.Options;
 using System.Security.Cryptography.X509Certificates;
@@ -75,7 +75,8 @@ typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig);
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
+    .AddApiLayer(typeAdapterConfig, new PetsOnTrail.Actions.Options.PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString });
 
 typeAdapterConfig.AddMapping();
 

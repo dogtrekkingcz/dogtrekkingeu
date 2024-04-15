@@ -14,7 +14,7 @@ using Mails.Options;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PetsOnTrail.Actions
+namespace PetsOnTrail.Api
 {
     public static class DIComposer
     {
@@ -31,7 +31,8 @@ namespace PetsOnTrail.Actions
                 .AddCurrentUserId(typeAdapterConfig, options)
                 .AddLiveUpdatesSubscription(typeAdapterConfig, options)
                 .AddCheckpoints(typeAdapterConfig, options)
-                .AddActivities(typeAdapterConfig, options);
+                .AddActivities(typeAdapterConfig, options)
+                .AddJwtToken(typeAdapterConfig, options);
 
             services.AddScoped<IAuthorizationService, AuthorizationService>();
             

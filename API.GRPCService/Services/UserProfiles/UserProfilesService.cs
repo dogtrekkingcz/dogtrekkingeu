@@ -1,10 +1,9 @@
-using API.GRPCService.Services.JwtToken;
 using PetsOnTrail.Interfaces.Actions.Entities.UserProfile;
 using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
-using Protos.UserProfiles.GetUserProfile;
 using GetUserProfileRequest = PetsOnTrail.Interfaces.Actions.Entities.UserProfile.GetUserProfileRequest;
+using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 
 namespace API.GRPCService.Services.UserProfiles;
 

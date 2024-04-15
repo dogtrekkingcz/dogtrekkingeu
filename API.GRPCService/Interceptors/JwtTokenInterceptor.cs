@@ -1,6 +1,7 @@
-﻿using API.GRPCService.Services.JwtToken;
-using Grpc.Core.Interceptors;
+﻿using Grpc.Core.Interceptors;
 using Grpc.Core;
+using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace API.GRPCService.Interceptors
 {
@@ -20,7 +21,13 @@ namespace API.GRPCService.Interceptors
             ServerCallContext context,
             UnaryServerMethod<TRequest, TResponse> continuation)
         {
-            _jwtTokenService.Parse(context);
+            var tokenSource = context.RequestHeaders.Get("authorization");
+            if (tokenSource is not null)
+            { 
+                var token = tokenSource?.Value ?? string.Empty;
+
+                _jwtTokenService.Parse(token);
+            }
 
             try
             {

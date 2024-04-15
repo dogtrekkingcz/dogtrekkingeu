@@ -6,12 +6,11 @@ using API.GRPCService.Services.Actions;
 using API.GRPCService.Services.Activities;
 using API.GRPCService.Services.Checkpoints;
 using API.GRPCService.Services.Entries;
-using API.GRPCService.Services.JwtToken;
 using API.GRPCService.Services.LiveUpdatesSubscription;
 using API.GRPCService.Services.Pets;
 using API.GRPCService.Services.Results;
 using API.GRPCService.Services.UserProfiles;
-using PetsOnTrail.Actions;
+using PetsOnTrail.Api;
 using Google.Protobuf.Collections;
 using Import;
 using Mapster;
@@ -83,7 +82,6 @@ typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
-    .AddScoped<IJwtTokenService, JwtTokenService>()
     .AddScoped<JwtTokenInterceptor>()
     .AddLogging(config =>
     {
@@ -94,7 +92,6 @@ builder.Services
     .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
     .AddApiLayer(typeAdapterConfig, new PetsOnTrail.Actions.Options.PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
     .AddImport(typeAdapterConfig)
-    .AddScoped<IJwtTokenService, JwtTokenService>()
     .AddGrpc(options =>
     {
         options.Interceptors.Add<JwtTokenInterceptor>();

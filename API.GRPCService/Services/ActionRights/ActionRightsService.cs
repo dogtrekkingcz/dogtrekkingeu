@@ -1,9 +1,9 @@
-﻿using API.GRPCService.Services.JwtToken;
-using PetsOnTrail.Interfaces.Actions.Entities.Rights;
+﻿using PetsOnTrail.Interfaces.Actions.Entities.Rights;
 using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
 using Protos.ActionRights.GetActionRights;
+using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 
 namespace API.GRPCService.Services.ActionRights;
 
