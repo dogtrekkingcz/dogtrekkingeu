@@ -11,6 +11,8 @@ namespace Storage.Interfaces
 
         Task<GetActivitiesByUserIdInternalStorageResponse> GetActivitiesByUserId(string userId, CancellationToken cancellationToken);
 
+        Task<GetActivitiesInternalStorageResponse> GetActivitiesAsync(CancellationToken cancellationToken);
+
         Task<UpdateActivityInternalStorageResponse> UpdateActivityAsync(UpdateActivityInternalStorageRequest request, CancellationToken cancellationToken);
     }
 }

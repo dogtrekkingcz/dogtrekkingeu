@@ -17,7 +17,8 @@ interface ActivityDao {
     @Query("SELECT * FROM my_activities WHERE uid IN (:activityIds)")
     suspend fun loadAllByIds(activityIds: IntArray): List<ActivityDto>
 
-    @Query("SELECT * FROM my_activities WHERE synchronize = true")
+    // @Query("SELECT * FROM my_activities WHERE synchronize = true")
+    @Query("SELECT * FROM my_activities")
     suspend fun getActivitiesToSynchronize(): List<ActivityDto>
 
     @Query("SELECT * FROM my_activities WHERE name LIKE :name LIMIT 1")

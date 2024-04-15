@@ -10,5 +10,7 @@ public interface IActivitiesService
     
     Task<GetMyActivitiesResponse> GetMyActivitiesAsync(GetMyActivitiesRequest request, CancellationToken cancellationToken);
 
+    Task<GetActivitiesResponse> GetActivitiesAsync(CancellationToken cancellationToken);
+
     Task<UpdateActivityResponse> UpdateActivityAsync(UpdateActivityRequest request, CancellationToken cancellationToken);
 }

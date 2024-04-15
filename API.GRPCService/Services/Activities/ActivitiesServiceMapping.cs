@@ -24,6 +24,11 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetMyActivitiesResponse.PetDto, Protos.Activities.GetMyActivities.PetDto>();
         typeAdapterConfig.NewConfig<GetMyActivitiesResponse.PositionDto, Protos.Activities.GetMyActivities.PositionDto>();
 
+        typeAdapterConfig.NewConfig<GetActivitiesResponse, Protos.Activities.GetActivities.GetActivitiesResponse>();
+        typeAdapterConfig.NewConfig<GetActivitiesResponse.ActivityDto, Protos.Activities.GetActivities.ActivityDto>();
+        typeAdapterConfig.NewConfig<GetActivitiesResponse.PetDto, Protos.Activities.GetActivities.PetDto>();
+        typeAdapterConfig.NewConfig<GetActivitiesResponse.PositionDto, Protos.Activities.GetActivities.PositionDto>();
+
         return typeAdapterConfig;
     }
 }

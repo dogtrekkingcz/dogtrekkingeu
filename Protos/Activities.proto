@@ -10,6 +10,7 @@ import "Entities/Activities/AddPointRequest.proto";
 import "Entities/Activities/AddPointResponse.proto";
 import "Entities/Activities/GetMyActivitiesRequest.proto";
 import "Entities/Activities/GetMyActivitiesResponse.proto";
+import "Entities/Activities/GetActivitiesResponse.proto";
 
 import "google/protobuf/empty.proto";
 
@@ -19,4 +20,6 @@ service Activities {
   rpc addPoint (addpoint.AddPointRequest) returns (addpoint.AddPointResponse);
   
   rpc getMyActivities (getmyactivities.GetMyActivitiesRequest) returns (getmyactivities.GetMyActivitiesResponse);
+
+  rpc getActivities (google.protobuf.Empty) returns (getactivities.GetActivitiesResponse);
 }

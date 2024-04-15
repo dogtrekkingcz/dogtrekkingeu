@@ -53,6 +53,13 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
         return _mapper.Map<GetActivitiesByUserIdInternalStorageResponse>(activities);
     }
 
+    public async Task<GetActivitiesInternalStorageResponse> GetActivitiesAsync(CancellationToken cancellationToken)
+    {
+        var activities = await _activitiesService.GetAllAsync(cancellationToken);
+
+        return _mapper.Map<GetActivitiesInternalStorageResponse>(activities);
+    }
+
     public async Task<UpdateActivityInternalStorageResponse> UpdateActivityAsync(UpdateActivityInternalStorageRequest request, CancellationToken cancellationToken)
     {
         var activity = await _activitiesService.GetAsync(request.Id.ToString(), cancellationToken);

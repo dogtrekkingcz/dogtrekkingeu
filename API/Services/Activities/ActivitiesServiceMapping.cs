@@ -23,6 +23,11 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.PositionDto, GetMyActivitiesResponse.PositionDto>();
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.PetDto, GetMyActivitiesResponse.PetDto>();
 
+        typeAdapterConfig.NewConfig<GetActivitiesInternalStorageResponse, GetActivitiesResponse>();
+        typeAdapterConfig.NewConfig<GetActivitiesInternalStorageResponse.ActivityDto, GetActivitiesResponse.ActivityDto>();
+        typeAdapterConfig.NewConfig<GetActivitiesInternalStorageResponse.PositionDto, GetActivitiesResponse.PositionDto>();
+        typeAdapterConfig.NewConfig<GetActivitiesInternalStorageResponse.PetDto, GetActivitiesResponse.PetDto>();
+
         typeAdapterConfig.NewConfig<UpdateActivityRequest, UpdateActivityInternalStorageRequest>();
         typeAdapterConfig.NewConfig<UpdateActivityRequest.PositionDto, UpdateActivityInternalStorageRequest.PositionDto>();
         typeAdapterConfig.NewConfig<UpdateActivityRequest.PetDto, UpdateActivityInternalStorageRequest.PetDto>();

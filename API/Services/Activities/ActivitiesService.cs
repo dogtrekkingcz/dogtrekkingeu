@@ -56,6 +56,13 @@ internal class ActivitiesService : IActivitiesService
         return _mapper.Map<GetMyActivitiesResponse>(activities);
     }
 
+    public async Task<GetActivitiesResponse> GetActivitiesAsync(CancellationToken cancellationToken)
+    {
+        var activities = await _activitiesRepositoryService.GetActivitiesAsync(cancellationToken);
+
+        return _mapper.Map<GetActivitiesResponse>(activities);
+    }
+
     [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
     public async Task<UpdateActivityResponse> UpdateActivityAsync(UpdateActivityRequest request, CancellationToken cancellationToken)
     {
