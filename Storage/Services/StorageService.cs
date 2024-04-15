@@ -1,6 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Core.Operations;
 using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
@@ -10,26 +10,43 @@ namespace Storage.Services;
 internal class StorageService<T> : IStorageService<T> where T: IRecord
 {
     private readonly IMongoCollection<T> _collection;
+    private readonly ILogger<StorageService<T>> _logger;
     
-    public StorageService(IMongoCollection<T> collection)
+    public StorageService(ILogger<StorageService<T>> logger, IMongoCollection<T> collection)
     {
         _collection = collection;
+        _logger = logger;
     }
     public async Task<T> AddAsync(T request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation($"StorageService:AddAsync(): {request.Dump()}");
+
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
         
-        await _collection.InsertOneAsync(request, cancellationToken: cancellationToken);
+        var result = await _collection.UpdateOneAsync(
+                Builders<T>.Filter.Eq(x => x.Id, request.Id),
+                Builders<T>.Update.SetOnInsert(x => x.Id, request.Id),
+                new UpdateOptions
+                {
+                    IsUpsert = true
+                },
+                cancellationToken);
+
+        _logger.LogInformation($"StorageService:AddAsync(): {result.Dump()}");
 
         return request;
     }
 
     public async Task<T> UpdateAsync(T request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation($"StorageService:UpdateAsync(): {request.Dump()}");
+
         var filter = Builders<T>.Filter.Eq(x => x.Id, request.Id);
         
-        await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
+        var result = await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
+
+        _logger.LogInformation($"StorageService:UpdateAsync(): {result.Dump()}");
 
         return request;
     }

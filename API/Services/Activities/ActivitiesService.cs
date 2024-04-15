@@ -28,7 +28,7 @@ internal class ActivitiesService : IActivitiesService
     {
         var createInternalStorageRequest = _mapper.Map<CreateActivityInternalStorageRequest>(request) with
         {
-            Id = Guid.NewGuid(),
+            Id = request.Id is null ? Guid.NewGuid() : request.Id.Value,
             UserId = _currentUserIdService.GetUserId()
         };
 
