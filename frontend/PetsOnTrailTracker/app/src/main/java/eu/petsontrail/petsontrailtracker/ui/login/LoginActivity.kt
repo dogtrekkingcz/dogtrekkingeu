@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import eu.petsontrail.petsontrailtracker.MainActivity
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
 import eu.petsontrail.petsontrailtracker.helper.DbHelper
 import kotlinx.coroutines.runBlocking
@@ -93,6 +94,9 @@ class LoginActivity : AppCompatActivity() {
 
         // Handle authorization response error here
         retrieveTokens(authResponse!!)
+
+        val mainActivityIntent = Intent(this, MainActivity::class.java)
+        startActivity(mainActivityIntent)
     }
 
     private fun retrieveTokens(authResponse: AuthorizationResponse) {
