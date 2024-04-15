@@ -30,6 +30,7 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -185,8 +186,8 @@ class ActivityUploadService : Service() {
             var json = gson.toJson(MapActivity(activity, pets, positions))
 
             var request: Request? = null
-            val JSON: MediaType? = "application/json; charset=utf-8".toMediaTypeOrNull()
-            val body: RequestBody = json.toRequestBody(JSON)
+            val JSON: MediaType? = "application/json; charset=utf-8".toMediaType()
+            val body: RequestBody = json.toString().toRequestBody(JSON)
 
             if (token == "") {
                 request = Request.Builder()
@@ -241,7 +242,7 @@ class ActivityUploadService : Service() {
                 breed = "", // pet.breed,
                 color = "", // pet.color,
                 kennel = pet.kennel,
-                birthDate = petBirthDate
+                birthDate = petBirthDate.toString()
             ))
         }
 
@@ -252,7 +253,7 @@ class ActivityUploadService : Service() {
 
             activityPositions.add(CreateOrUpdateActivityPositionDto(
                 id = position.uid,
-                time =  time,
+                time =  time.toString(),
                 latitude = position.latitudeDegrees,
                 longitude = position.longitudeDegrees,
                 altitude = position.altitudeMeters,
@@ -263,8 +264,8 @@ class ActivityUploadService : Service() {
             ))
         }
 
-        var activityStart: LocalDateTime? = null
-        var activityEnd: LocalDateTime? = null
+        var activityStart: LocalDateTime = LocalDateTime.now().minusYears(1)
+        var activityEnd: LocalDateTime = LocalDateTime.now().plusYears(1)
         val zoneId = ZoneId.systemDefault()
         if (activity.start != null) {
             val instant = Instant.ofEpochSecond(activity.start)
@@ -277,8 +278,8 @@ class ActivityUploadService : Service() {
         }
         val result: CreateOrUpdateActivityDto = CreateOrUpdateActivityDto(
             id = activity.uid,
-            start = activityStart,
-            end = activityEnd,
+            start = activityStart.toString(),
+            end = activityEnd.toString(),
             description = "",
             actionId = null,
             categoryId = null,

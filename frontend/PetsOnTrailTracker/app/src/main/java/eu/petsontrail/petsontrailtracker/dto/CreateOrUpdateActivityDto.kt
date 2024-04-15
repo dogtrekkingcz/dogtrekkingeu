@@ -11,8 +11,8 @@ data class CreateOrUpdateActivityDto(
     val categoryId: UUID?,
     val name: String?,
     val description: String?,
-    val start: LocalDateTime?,
-    val end: LocalDateTime?,
+    val start: String?,
+    val end: String?,
     val isPublic: Boolean,
     val positions: Array<CreateOrUpdateActivityPositionDto>,
     val pets: Array<CreateOrUpdateActivityPetDto>,
@@ -20,7 +20,7 @@ data class CreateOrUpdateActivityDto(
 
 data class CreateOrUpdateActivityPositionDto(
     val id: UUID,
-    val time: LocalDateTime,
+    val time: String,
     val latitude: Double?,
     val longitude: Double?,
     val altitude: Double?,
@@ -37,5 +37,5 @@ data class CreateOrUpdateActivityPetDto(
     val breed: String?,
     val color: String?,
     val kennel: String?,
-    val birthDate: LocalDateTime?
+    val birthDate: String?
 )
