@@ -2,21 +2,33 @@ package eu.petsontrail.petsontrailtracker
 
 import android.app.Service
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
+import androidx.annotation.RequiresApi
+import com.google.gson.Gson
 import eu.petsontrail.petsontrailtracker.data.ActivityDto
 import eu.petsontrail.petsontrailtracker.data.AppDatabase
+import eu.petsontrail.petsontrailtracker.data.LocationDto
+import eu.petsontrail.petsontrailtracker.data.PetDto
+import eu.petsontrail.petsontrailtracker.dto.CreateOrUpdateActivityDto
+import eu.petsontrail.petsontrailtracker.dto.CreateOrUpdateActivityPetDto
+import eu.petsontrail.petsontrailtracker.dto.CreateOrUpdateActivityPositionDto
 import eu.petsontrail.petsontrailtracker.helper.DbHelper
 import kotlinx.coroutines.runBlocking
-import net.openid.appauth.AuthState
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.UUID
 
 
 class ActivityUploadService : Service() {
     private lateinit var db: AppDatabase
     private val client = OkHttpClient()
-    private val baseUrl = "https://petsontrail.eu:4443/api/activities/"
+    private val createOrUpdateUrl = "https://petsontrail.eu:3443/api/activities/create"
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -32,25 +44,31 @@ class ActivityUploadService : Service() {
 
             for (activity in activitiesToSynchronize) {
                 if (activity.isSynchronized == false) {
-                    CreateActivity(activity)
-                }
-                else {
-                    // TODO: just update it
+                    CreateOrUpdateActivity(activity)
                 }
             }
         }
     }
 
-    fun UpdateActivity(activity: ActivityDto) {
-        // TODO: Update activity data - generally points
-    }
-    fun CreateActivity(activity: ActivityDto) {
+    fun CreateOrUpdateActivity(activity: ActivityDto) {
         runBlocking {
             val token = db.userSettingsDao().getAccessToken()
+            val activityPets = db.activityPetsDao().loadAllByActivityId(activity.uid)
+            val positions = db.locationDao().findByActivityId(activity.uid)
+
+            val activityPetsIds = ArrayList<UUID>()
+            for (ap in activityPets) {
+                activityPetsIds.add(ap.petId)
+            }
+            val pets = db.petDao().loadAllByIds(activityPetsIds.toTypedArray())
+
+            var gson = Gson()
+            var json = gson.toJson(MapActivity(activity, pets, positions))
 
             val request: Request = Request.Builder()
-                .url(url) //This adds the token to the header.
+                .url(createOrUpdateUrl) //This adds the token to the header.
                 .addHeader("Authorization", "Bearer $token")
+                .post(json.toRequestBody())
                 .build()
 
             client.newCall(request).execute().use { response ->
@@ -60,64 +78,78 @@ class ActivityUploadService : Service() {
                 System.out.println("Server: " + response.header("anykey"))
             }
         }
-
-        // TODO: create a new activity on the server
-        /*
     }
 
-    public Guid IdActivity { get; init; } = Guid.NewGuid();
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun MapActivity(activity: ActivityDto, pets: List<PetDto>, positions: List<LocationDto>) : CreateOrUpdateActivityDto {
+        val activityPets = ArrayList<CreateOrUpdateActivityPetDto>()
+        val activityPositions = ArrayList<CreateOrUpdateActivityPositionDto>()
 
-    public DateTimeOffset Created { get; init; } = DateTimeOffset.Now;
+        for (pet in pets) {
+            var petBirthDate: LocalDateTime? = null
+            if (pet.birthday != null) {
+                val instant = Instant.ofEpochSecond(pet.birthday)
 
-    public string Name { get; init; } = string.Empty;
+                val zoneId = ZoneId.systemDefault()
 
-    public string Description { get; init; } = string.Empty;
+                petBirthDate = instant.atZone(zoneId).toLocalDateTime()
+            }
 
-    public string Type { get; init; } = string.Empty;
+            activityPets.add(CreateOrUpdateActivityPetDto(
+                id = pet.uid,
+                chip = pet.chip,
+                name = pet.name,
+                breed = "", // pet.breed,
+                color = "", // pet.color,
+                kennel = pet.kennel,
+                birthDate = petBirthDate
+            ))
+        }
 
+        for (position in positions) {
+            val instant = Instant.ofEpochSecond(position.time)
+            val zoneId = ZoneId.systemDefault()
+            val time = instant.atZone(zoneId).toLocalDateTime()
 
-    public List<ActivityPetDto> Pets { get; init; } = new List<ActivityPetDto>();
+            activityPositions.add(CreateOrUpdateActivityPositionDto(
+                id = position.uid,
+                time =  time,
+                latitude = position.latitudeDegrees,
+                longitude = position.longitudeDegrees,
+                altitude = position.altitudeMeters,
+                accuracy = position.horizontalAccuracyMeters,
+                course = null,
+                note =  "",
+                photoUris = null
+            ))
+        }
 
-    public List<ActivityPointDto> Points { get; init; } = new List<ActivityPointDto>();
+        var activityStart: LocalDateTime? = null
+        var activityEnd: LocalDateTime? = null
+        val zoneId = ZoneId.systemDefault()
+        if (activity.start != null) {
+            val instant = Instant.ofEpochSecond(activity.start)
 
-    public sealed record ActivityPetDto
-    {
-        public Guid Id { get; init; } = Guid.NewGuid();
+            activityStart = instant.atZone(zoneId).toLocalDateTime()
+        }
+        if (activity.end != null) {
+            val instant = Instant.ofEpochSecond(activity.end)
+            activityEnd = instant.atZone(zoneId).toLocalDateTime()
+        }
+        val result: CreateOrUpdateActivityDto = CreateOrUpdateActivityDto(
+            id = activity.uid,
+            start = activityStart,
+            end = activityEnd,
+            description = "",
+            actionId = null,
+            categoryId = null,
+            isPublic = true,
+            name = activity.name,
+            raceId = null,
+            pets = activityPets.toTypedArray(),
+            positions = activityPositions.toTypedArray()
+        )
 
-        public string? Chip { get; init; }
-
-        public string? Name { get; init; }
-
-        public string? Breed { get; init; }
-
-        public string? Color { get; init; }
-
-        public string Kennel { get; init; }
-
-        public DateTimeOffset? BirthDate { get; init; }
-    }
-
-    public sealed record ActivityPointDto
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
-
-        public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
-
-        public double Latitude { get; set; } = double.NaN;
-
-        public double Longitude { get; set; } = double.NaN;
-
-        public double Altitude { get; set; } = double.NaN;
-
-        public double Accuracy { get; set; } = double.NaN;
-
-        public double Course { get; set; } = double.NaN;
-
-        public string Note { get; set; } = string.Empty;
-
-        public List<string> PhotoUris { get; set; } = new();
-    }
-
-         */
+        return result
     }
 }

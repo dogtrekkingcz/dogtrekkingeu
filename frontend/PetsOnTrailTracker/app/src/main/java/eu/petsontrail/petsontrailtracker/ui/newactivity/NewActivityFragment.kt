@@ -100,7 +100,9 @@ class NewActivityFragment : Fragment() {
                     time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                     name = nameOfActivity,
                     active = 1,
-                    description = ""
+                    description = "",
+                    start = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                    end = null
                 )
 
                 db.activityDao().insertOne(newActivity)

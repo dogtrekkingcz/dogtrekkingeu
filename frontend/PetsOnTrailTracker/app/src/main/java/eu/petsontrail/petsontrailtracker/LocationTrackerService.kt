@@ -325,6 +325,8 @@ class LocationTrackerService : Service() {
                 time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)),
                 active = 1,
+                start = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                end = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 description = ""
             )
 

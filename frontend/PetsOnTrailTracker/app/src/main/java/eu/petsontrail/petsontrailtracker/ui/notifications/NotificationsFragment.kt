@@ -1,14 +1,18 @@
 package eu.petsontrail.petsontrailtracker.ui.notifications
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import androidx.credentials.CredentialManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import eu.petsontrail.petsontrailtracker.ActivityUploadService
+import eu.petsontrail.petsontrailtracker.LocationTrackerService
 import eu.petsontrail.petsontrailtracker.databinding.FragmentNotificationsBinding
 import eu.petsontrail.petsontrailtracker.ui.login.LoginActivity
 import net.openid.appauth.AuthorizationException
@@ -27,6 +31,7 @@ class NotificationsFragment : Fragment() {
 
     private lateinit var credentialManager: CredentialManager
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -43,10 +48,12 @@ class NotificationsFragment : Fragment() {
         btnLogin.setOnClickListener {
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
-//                addRequestProperty("client_id", "tracker-app")
-  //              addRequestProperty("client_secret", "NmdTc3gQZr7AQM33ZIQ9TdjXV7wJA92m")
-    //            setRequestProperty("Authorization", "OAuth $token")
+        }
 
+        val btnSynchronize: Button = binding.btnSynchronize
+        btnSynchronize.setOnClickListener {
+            val intent = Intent(this.context, ActivityUploadService::class.java)
+            this.context?.startForegroundService(intent)
         }
 
         return root

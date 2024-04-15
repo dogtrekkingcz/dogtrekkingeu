@@ -17,7 +17,7 @@ interface PetDao {
     suspend fun getAll(): List<PetDto>
 
     @Query("SELECT * FROM pets WHERE uid IN (:ids)")
-    suspend fun loadAllByIds(ids: IntArray): List<PetDto>
+    suspend fun loadAllByIds(ids: Array<UUID>): List<PetDto>
 
     @Insert
     suspend fun insertOne(vararg pet: PetDto)
