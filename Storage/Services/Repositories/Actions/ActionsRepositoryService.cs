@@ -72,6 +72,8 @@ namespace Storage.Services.Repositories.Actions
         {
             var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
 
+            _logger.LogInformation($"{nameof(GetAllActionsAsync)} - response from storage: '{getAllActions?.Dump()}'");
+
             var actions = new List<GetAllActionsInternalStorageResponse.ActionDto>();
             foreach (var action in getAllActions
                 .Where(a => a.Id != null))
@@ -83,6 +85,8 @@ namespace Storage.Services.Repositories.Actions
             {
                 Actions = actions
             };
+
+            _logger.LogInformation($"{nameof(GetAllActionsAsync)} - response: '{response?.Dump()}'");
             
             return response;
         }
