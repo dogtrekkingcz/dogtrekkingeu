@@ -163,11 +163,15 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
     
     public async override Task<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse> getPublicActionsList(Empty request, ServerCallContext context)
     {
+        _logger.LogInformation($"{nameof(getPublicActionsList)}: Getting public actions list");
+
         try
         {
             var actions = await _actionsService.GetPublicActionsListAsync(new GetPublicActionsListRequest(), context.CancellationToken);
 
             var response = _mapper.Map<Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse>(actions);
+
+            _logger.LogInformation($"{nameof(getPublicActionsList)}: Public actions list has been retrieved: '{response.Dump()}'");
 
             return response;
         }
