@@ -52,12 +52,13 @@ catch (Exception ex)
 }
 
 
-string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"];
+string MongoDbConnectionString = builder.Configuration["MongoDB:ConnnectionString"] ?? string.Empty;
 
 TypeAdapterConfig typeAdapterConfig = null;
 var options = new PetsOnTrailOptions()
 {
-    MongoDbConnectionString = MongoDbConnectionString
+    MongoDbConnectionString = MongoDbConnectionString ?? string.Empty,
+    BackupPath = builder.Configuration["Backup:Path"] ?? string.Empty
 };
 
 typeAdapterConfig = new TypeAdapterConfig
@@ -89,7 +90,7 @@ builder.Services
     });
 
 builder.Services
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString, BackupPath = options.BackupPath }, typeAdapterConfig)
     .AddApiLayer(typeAdapterConfig, new PetsOnTrail.Actions.Options.PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
     .AddImport(typeAdapterConfig)
     .AddGrpc(options =>

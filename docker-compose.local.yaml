@@ -27,6 +27,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
       - ~/.aspnet/https:/https:ro
+      - ~/backup:/backup
       
   petsontrail_webapi:
     image: petsontrail_server_api
@@ -43,6 +44,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
       - ~/.aspnet/https:/https:ro
+      - ~/backup:/backup
       
   petsontrail_app: 
     image: petsontrail_client_app

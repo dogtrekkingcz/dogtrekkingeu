@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
+using Storage.Options;
 
 namespace Storage.Services;
 
@@ -11,11 +12,13 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 {
     private readonly IMongoCollection<T> _collection;
     private readonly ILogger<StorageService<T>> _logger;
+    private readonly StorageOptions _storageOptions;
     
-    public StorageService(ILogger<StorageService<T>> logger, IMongoCollection<T> collection)
+    public StorageService(ILogger<StorageService<T>> logger, IMongoCollection<T> collection, StorageOptions storageOptions)
     {
         _collection = collection;
         _logger = logger;
+        _storageOptions = storageOptions;
     }
     public async Task<T> AddOrUpdateAsync(T request, CancellationToken cancellationToken)
     {
@@ -25,7 +28,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
 
-        var targetDirectory = Path.Combine(Directory.GetCurrentDirectory(), $"/backups/{nameof(T)}/");
+        var targetDirectory = Path.Combine(_storageOptions.BackupPath, $"{typeof(T).FullName}/");
         var targetFile = Path.Combine(targetDirectory, $"{request.Id}.{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.json");
         using (FileStream fcreate = File.Open(targetFile, FileMode.Create))
         { 
