@@ -52,7 +52,7 @@ Console.WriteLine(MongoDbConnectionString);
 TypeAdapterConfig typeAdapterConfig = null;
 var options = new PetsOnTrailOptions()
 {
-    MongoDbConnectionString = MongoDbConnectionString
+    MongoDbConnectionString = MongoDbConnectionString,
 };
 
 typeAdapterConfig = new TypeAdapterConfig
@@ -75,7 +75,7 @@ typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString }, typeAdapterConfig)
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString, BackupPath = builder.Configuration["BackupDirectory:Path"] }, typeAdapterConfig)
     .AddApiLayer(typeAdapterConfig, new PetsOnTrail.Actions.Options.PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString });
 
 typeAdapterConfig.AddMapping();
