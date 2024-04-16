@@ -53,7 +53,7 @@ public static class DiCompositor
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
         serviceProvider
-            .AddSingleton<StorageOptions>()
+            .AddSingleton<StorageOptions>(options)
 
             .AddSingleton<IInitializeService>(new InitializeService(options))
             .AddScoped<StorageSeedEngine>()
