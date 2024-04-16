@@ -28,8 +28,10 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
 
-        var targetDirectory = Path.Combine(_storageOptions.BackupPath, $"{typeof(T).FullName}/");
-        var targetFile = Path.Combine(targetDirectory, $"{request.Id}.{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.json");
+        var targetDirectory = Path.Combine(_storageOptions.BackupPath, $"{typeof(T).FullName}/{DateTime.Now.ToString("yyyy-MM-dd")}/");
+        Directory.CreateDirectory(targetDirectory);
+
+        var targetFile = Path.Combine(targetDirectory, $"{request.Id}___{DateTime.Now.ToString("HHmmss")}.json");
         using (FileStream fcreate = File.Open(targetFile, FileMode.Create))
         { 
             using (StreamWriter outputFile = new StreamWriter(fcreate))
