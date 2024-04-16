@@ -22,8 +22,10 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<CreateActionInternalStorageResponse> AddActionAsync(CreateActionInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"{nameof(AddActionAsync)} - request: '{request?.Dump()}'");
+            _logger.LogInformation($"{nameof(AddActionAsync)} - request: '{request?.Dump()}'");
+
             var addRequest = _mapper.Map<ActionRecord>(request);
+            _logger.LogInformation($"{nameof(AddActionAsync)} - addRequest: '{addRequest?.Dump()}'");
             
             var addedActionRecord = await _actionsStorageService.AddAsync(addRequest, cancellationToken);
 
