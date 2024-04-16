@@ -21,19 +21,14 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
     {
         _logger.LogInformation($"StorageService:AddAsync(): {request.Dump()}");
 
+        var filter = Builders<T>.Filter.Eq(x => x.Id, request.Id);
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
-        
-        var result = await _collection.UpdateOneAsync(
-                Builders<T>.Filter.Eq(x => x.Id, request.Id),
-                Builders<T>.Update.SetOnInsert(x => x, request),
-                new UpdateOptions
-                {
-                    IsUpsert = true
-                },
-                cancellationToken);
 
-        _logger.LogInformation($"StorageService:AddAsync(): {result.Dump()}");
+        if (_collection.FindAsync(filter).Result.Any(cancellationToken))
+            await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
+        else
+            await _collection.InsertOneAsync(request, cancellationToken: cancellationToken);
 
         return request;
     }
