@@ -25,7 +25,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
 
-        if (_collection.FindAsync(filter).Result.Any(cancellationToken))
+        if ((await _collection.FindAsync(filter)).Any(cancellationToken))
             await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
         else
             await _collection.InsertOneAsync(request, cancellationToken: cancellationToken);
