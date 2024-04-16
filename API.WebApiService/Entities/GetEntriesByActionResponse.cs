@@ -2,7 +2,7 @@
 
 public sealed record GetEntriesByActionResponse
 {
-public List<EntryDto> Entries { get; init; } = new();
+    public List<EntryDto> Entries { get; init; } = new();
     
     public sealed record EntryDto
     {
