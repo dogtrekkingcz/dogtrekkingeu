@@ -23,7 +23,12 @@ else
         <div class="">
             @foreach (var category in race.Categories)
             {
-                @* <ResultsAdd ActionId="@ActionId" Race="@race" Category="@category" OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)"></ResultsAdd> *@
+                <ResultsAdd 
+                    ActionId="@ActionId" 
+                    RaceId="@race.Id" 
+                    RaceBegin="@race.Begin"
+                    CategoryId="@category.Id" 
+                    OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)"></ResultsAdd>
                 <ResultsCategory ActionId="@ActionId" Race="@race" Category="@category" />
             }
         </div>
