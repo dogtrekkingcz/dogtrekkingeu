@@ -26,7 +26,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         
         var result = await _collection.UpdateOneAsync(
                 Builders<T>.Filter.Eq(x => x.Id, request.Id),
-                Builders<T>.Update.SetOnInsert(x => x.Id, request.Id),
+                Builders<T>.Update.SetOnInsert(x => x, request),
                 new UpdateOptions
                 {
                     IsUpsert = true
