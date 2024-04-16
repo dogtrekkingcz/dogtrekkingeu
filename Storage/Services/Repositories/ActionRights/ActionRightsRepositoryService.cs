@@ -25,7 +25,7 @@ namespace Storage.Services.Repositories.ActionRights
                 addRequest.Id = Guid.NewGuid().ToString();
             }
 
-            var addedActionRightsRecord = await _actionRightsStorageService.AddAsync(addRequest, cancellationToken);
+            var addedActionRightsRecord = await _actionRightsStorageService.AddOrUpdateAsync(addRequest, cancellationToken);
 
             var response = new AddActionRightsInternalStorageResponse
             {

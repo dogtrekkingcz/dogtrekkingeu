@@ -25,7 +25,7 @@ namespace Storage.Services.Repositories.UserProfiles
         {
             var addRequest = _mapper.Map<UserProfileRecord>(request);
             
-            var addedUserProfileRecord = await _userProfileStorageService.AddAsync(addRequest, cancellationToken);
+            var addedUserProfileRecord = await _userProfileStorageService.AddOrUpdateAsync(addRequest, cancellationToken);
 
             var response = _mapper.Map<CreateUserProfileInternalStorageResponse>(addedUserProfileRecord);
 
@@ -38,7 +38,7 @@ namespace Storage.Services.Repositories.UserProfiles
             
             var updateRequest = _mapper.Map<UserProfileRecord>(request);
             
-            var result = await _userProfileStorageService.UpdateAsync(updateRequest, cancellationToken);
+            var result = await _userProfileStorageService.AddOrUpdateAsync(updateRequest, cancellationToken);
             
             _logger.LogInformation($"'{nameof(UpdateUserProfileAsync)}': Response: '{result.Dump()}'");
 

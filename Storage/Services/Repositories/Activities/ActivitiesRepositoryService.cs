@@ -25,7 +25,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
             
         var addRequest = _mapper.Map<ActivityRecord>(request);
             
-        var createdActivityRecord = await _activitiesService.AddAsync(addRequest, cancellationToken);
+        var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
 
         var response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
 
@@ -38,7 +38,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
         
         activity.Positions.Add(_mapper.Map<ActivityRecord.PositionDto>(request));
 
-        await _activitiesService.UpdateAsync(activity, cancellationToken);
+        await _activitiesService.AddOrUpdateAsync(activity, cancellationToken);
 
         return new AddPointInternalStorageResponse
         {
@@ -66,7 +66,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
         activity.Positions.Add(_mapper.Map<ActivityRecord.PositionDto>(request));
 
-        await _activitiesService.UpdateAsync(activity, cancellationToken);
+        await _activitiesService.AddOrUpdateAsync(activity, cancellationToken);
 
         return new UpdateActivityInternalStorageResponse
         {

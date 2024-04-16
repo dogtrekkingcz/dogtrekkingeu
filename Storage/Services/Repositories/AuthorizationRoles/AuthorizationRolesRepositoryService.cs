@@ -25,7 +25,7 @@ namespace Storage.Services.Repositories.AuthorizationRoles
             _logger.LogInformation($"Adding authorization role with id: '{request.Id}', name: '{request.Name}'");
 
             var authorizationRoleRecord = _mapper.Map<AuthorizationRoleRecord>(request);
-            await _authorizationRoleStorageService.AddAsync(authorizationRoleRecord, cancellationToken);
+            await _authorizationRoleStorageService.AddOrUpdateAsync(authorizationRoleRecord, cancellationToken);
         }
 
         public async Task<GetAllAuthorizationRolesResponse> GetAllAuthorizationRolesAsync(CancellationToken cancellationToken)

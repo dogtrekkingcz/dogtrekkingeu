@@ -27,7 +27,7 @@ namespace Storage.Services.Repositories.Actions
             var addRequest = _mapper.Map<ActionRecord>(request);
             _logger.LogInformation($"{nameof(AddActionAsync)} - addRequest: '{addRequest?.Dump()}'");
             
-            var addedActionRecord = await _actionsStorageService.AddAsync(addRequest, cancellationToken);
+            var addedActionRecord = await _actionsStorageService.AddOrUpdateAsync(addRequest, cancellationToken);
 
             var response = new CreateActionInternalStorageResponse
             {
@@ -42,7 +42,7 @@ namespace Storage.Services.Repositories.Actions
             Console.WriteLine($"{nameof(UpdateActionAsync)} - request: '{request?.Dump()}'");
             var updateRequest = _mapper.Map<ActionRecord>(request);
             
-            var result = await _actionsStorageService.UpdateAsync(updateRequest, cancellationToken);
+            var result = await _actionsStorageService.AddOrUpdateAsync(updateRequest, cancellationToken);
 
             return new UpdateActionInternalStorageResponse
             {
@@ -107,7 +107,7 @@ namespace Storage.Services.Repositories.Actions
                 PassedCheckpoints = new List<ActionRecord.PassedCheckpointDto>()
             });
 
-            await _actionsStorageService.UpdateAsync(action, cancellationToken);
+            await _actionsStorageService.AddOrUpdateAsync(action, cancellationToken);
 
             return new AddResultInternalStorageResponse();
         }

@@ -22,7 +22,7 @@ internal sealed class MigrationsRepositoryService : IMigrationsRepositoryService
     {
         var migrationRecord = _mapper.Map<MigrationRecord>(request);
         
-        var createdMigration = await _migrationsStorageService.AddAsync(migrationRecord, cancellationToken);
+        var createdMigration = await _migrationsStorageService.AddOrUpdateAsync(migrationRecord, cancellationToken);
         
         return new CreateMigrationInternalStorageResponse { Id = createdMigration.Id };
     }

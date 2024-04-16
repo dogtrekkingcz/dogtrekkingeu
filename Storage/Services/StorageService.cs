@@ -17,7 +17,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         _collection = collection;
         _logger = logger;
     }
-    public async Task<T> AddAsync(T request, CancellationToken cancellationToken)
+    public async Task<T> AddOrUpdateAsync(T request, CancellationToken cancellationToken)
     {
         _logger.LogInformation($"StorageService:AddAsync(): {request.Dump()}");
 
@@ -25,23 +25,20 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
 
+        var targetDirectory = Path.Combine(Directory.GetCurrentDirectory(), $"/backups/{nameof(T)}/");
+        var targetFile = Path.Combine(targetDirectory, $"{request.Id}.{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.json");
+        using (FileStream fcreate = File.Open(targetFile, FileMode.Create))
+        { 
+            using (StreamWriter outputFile = new StreamWriter(fcreate))
+            {
+                outputFile.Write(request.Dump());
+            }
+        }
+
         if ((await _collection.FindAsync(filter)).Any(cancellationToken))
             await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
         else
             await _collection.InsertOneAsync(request, cancellationToken: cancellationToken);
-
-        return request;
-    }
-
-    public async Task<T> UpdateAsync(T request, CancellationToken cancellationToken)
-    {
-        _logger.LogInformation($"StorageService:UpdateAsync(): {request.Dump()}");
-
-        var filter = Builders<T>.Filter.Eq(x => x.Id, request.Id);
-        
-        var result = await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
-
-        _logger.LogInformation($"StorageService:UpdateAsync(): {result.Dump()}");
 
         return request;
     }

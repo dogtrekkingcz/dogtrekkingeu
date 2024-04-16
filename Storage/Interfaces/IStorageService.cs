@@ -5,9 +5,7 @@ namespace Storage.Interfaces;
 
 internal interface IStorageService<T> where T: IRecord
 {
-    public Task<T> AddAsync(T request, CancellationToken cancellationToken);
-
-    public Task<T> UpdateAsync(T request, CancellationToken cancellationToken);
+    public Task<T> AddOrUpdateAsync(T request, CancellationToken cancellationToken);
 
     public Task DeleteAsync(string id, CancellationToken cancellationToken);
 

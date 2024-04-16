@@ -24,7 +24,7 @@ namespace Storage.Services.Repositories.Pets
             
             var addRequest = _mapper.Map<PetRecord>(request);
             
-            var addedActionRecord = await _petStorageService.AddAsync(addRequest, cancellationToken);
+            var addedActionRecord = await _petStorageService.AddOrUpdateAsync(addRequest, cancellationToken);
 
             var response = new AddPetInternalStorageResponse
             {
@@ -42,7 +42,7 @@ namespace Storage.Services.Repositories.Pets
             
             Console.WriteLine(updateRequest);
             
-            var result = await _petStorageService.UpdateAsync(updateRequest, cancellationToken);
+            var result = await _petStorageService.AddOrUpdateAsync(updateRequest, cancellationToken);
 
             return new UpdatePetInternalStorageResponse
             {

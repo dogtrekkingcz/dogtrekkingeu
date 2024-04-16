@@ -24,7 +24,7 @@ internal class CheckpointsRepositoryService : ICheckpointsRepositoryService
             
         var addRequest = _mapper.Map<CheckpointRecord>(request);
             
-        var addedCheckpointRecord = await _checkpointService.AddAsync(addRequest, cancellationToken);
+        var addedCheckpointRecord = await _checkpointService.AddOrUpdateAsync(addRequest, cancellationToken);
 
         var response = _mapper.Map<AddCheckpointItemInternalStorageResponse>(addedCheckpointRecord);
 

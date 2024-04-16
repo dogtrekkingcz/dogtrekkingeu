@@ -23,7 +23,7 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
         
         var entryRecord = _mapper.Map<EntryRecord>(request);
         
-        var createdEntry = await _entriesStorageService.AddAsync(entryRecord, cancellationToken);
+        var createdEntry = await _entriesStorageService.AddOrUpdateAsync(entryRecord, cancellationToken);
         
         return new CreateEntryInternalStorageResponse { Id = createdEntry.Id };
     }
@@ -76,6 +76,6 @@ internal sealed class EntriesRepositoryService : IEntriesRepositoryService
     {
         Console.WriteLine($"EntriesRepositoryService::{nameof(UpdateEntryAsync)}: '{request?.Dump()}'");
         
-        await _entriesStorageService.UpdateAsync(_mapper.Map<EntryRecord>(request), cancellationToken);
+        await _entriesStorageService.AddOrUpdateAsync(_mapper.Map<EntryRecord>(request), cancellationToken);
     }
 }
