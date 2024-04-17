@@ -24,11 +24,11 @@
         </div>
         <div class="form-group row">
             <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
-            <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Model.Start"></InputDateTime>
+            <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Model.Start" @bind:after="StartChanged"></InputDateTime>
         </div>
         <div class="form-group row">
             <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
-            <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Model.Finish"></InputDateTime>
+            <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Model.Finish" @bind:after="FinishChanged"></InputDateTime>
         </div>
         <div class="form-group row">
             <label class="col-sm-3">@Localizer["Results.Manage.Add.WholeTime"]</label>
@@ -66,7 +66,27 @@
             Finish = Model.Finish.ToGoogleDateTime()
         });
 
-        await OnResultAddedCallback.InvokeAsync();
+        await OnResultAddedCallback.InvokeAsync(Model);
+    }
+
+    private void StartChanged()
+    {
+        if (Model.Start.HasValue && Model.Finish.HasValue)
+        {
+            WholeTime = Model.Finish.Value.Subtract(Model.Start.Value).ToString(@"hh\:mm\:ss");
+        }
+
+        StateHasChanged();
+    }
+
+    private void FinishChanged()
+    {
+        if (Model.Start.HasValue && Model.Finish.HasValue)
+        {
+            WholeTime = Model.Finish.Value.Subtract(Model.Start.Value).ToString(@"hh\:mm\:ss");
+        }
+
+        StateHasChanged();
     }
 
     private void WholeTimeChanged(string val)
@@ -100,5 +120,7 @@
 
         Model.Start = RaceBegin;
         Model.Finish = RaceBegin.AddHours(hours).AddMinutes(minutes).AddSeconds(seconds);
+
+        StateHasChanged();
     }
 }
