@@ -21,7 +21,7 @@ else
 {
     foreach (var race in Model.Races)
     {
-        <div class="">
+        <div>
             @foreach (var category in race.Categories)
             {
                 var actionRace = Action.Races.FirstOrDefault(r => r.Id == race.Id);
@@ -31,7 +31,7 @@ else
                     RaceId="@race.Id"
                     RaceBegin="@actionRace.Begin"
                     CategoryId="@category.Id"
-                    OnResultAddedCallback="(Guid raceId, Guid categoryId, ActionModel.RacerDto racer) => ResultAdded(raceId, categoryId, racer)"></ResultsAdd>
+                    OnResultAddedCallback="(result) => ResultAdded(result)" />
                 <hr />
                 <ResultsCategory ActionId="@ActionId" Race="@race" Category="@category" />
             }
@@ -40,7 +40,9 @@ else
 }
 
 @code {
-    [Parameter] public string ActionId { get; set; }
+    [Parameter] 
+    public string ActionId { get; set; }
+
     private ActionResultsModel Model = null;
     private ActionModel Action = null;
 
@@ -67,12 +69,14 @@ else
         StateHasChanged();
     }
 
-    private void ResultAdded(Guid raceId, Guid categoryId, ActionModel.RacerDto result)
+    private void ResultAdded(object result)
     {
+        var(actionId, raceId, categoryId, racer) = ((string, Guid, Guid, ActionResultsModel.RacerResultDto)) result;
+
         Model
             .Races.FirstOrDefault(r => r.Id == raceId)?
             .Categories.FirstOrDefault(c => c.Id == categoryId)?
-            .Racers.Add(Mapper.Map<ActionResultsModel.RacerResultDto>(result));
+            .Racers.Add(Mapper.Map<ActionResultsModel.RacerResultDto>(racer));
         
         StateHasChanged();
     }

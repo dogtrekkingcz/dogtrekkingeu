@@ -24,7 +24,7 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-3">@Localizer["Results.Manage.Add.Pets"]</label>
-            <InputText class="form-control col-sm-8" Value="@Pets" ValueChanged="PetsChanged" ValueExpression="() => Pets" placeholder="@Localizer["Results.Manage.Add.Pets.DividedByComma"]" />
+            <InputText class="form-control col-sm-8" Value="@_pets" ValueChanged="PetsChanged" ValueExpression="() => _pets" placeholder="@Localizer["Results.Manage.Add.Pets.DividedByComma"]" />
         </div>
         <div class="form-group row">
             <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
@@ -54,7 +54,7 @@
     private ActionModel.RacerDto Model = new();
     private AddNewResult_FinalState State { get; set; }
     private string WholeTime { get; set; } = string.Empty;
-    private string Pets { get; set; } = string.Empty;
+    private string _pets { get; set; } = string.Empty;
 
     protected async Task SubmitAsync()
     {
@@ -68,10 +68,10 @@
             Email = Model.Email,
             Start = Model.Start.ToGoogleDateTime(),
             Finish = Model.Finish.ToGoogleDateTime(),
-            Pets = { Model.Pets }
+            Pets = { Model.Pets.Select(pet => pet.Name) }
         });
 
-        OnResultAddedCallback.Invoke(RaceId, CategoryId, Model);
+        await OnResultAddedCallback.InvokeAsync((ActionId, RaceId, CategoryId, Model));
     }
 
     private void StartChanged()
