@@ -1,5 +1,6 @@
 ﻿@using PetsOnTrailApp.Shared
 @using SharedLib.Models
+@using PetsOnTrailApp.Components
 @inject IStringLocalizer<Resource> localizer
 
 <h3>CreateEntryPetsComponent</h3>
@@ -75,7 +76,7 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Birthday"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent @bind-Date="@NewPet.Birthday"></InputDateComponent>
+                    <InputDateTime id="NewPetBirthday" class="form-control col-sm-8" @bind-Value="@NewPet.Birthday"></InputDateTime>
                 </div>
             </div>
             <div class="row">
@@ -83,7 +84,10 @@
                     <label>@localizer["Action.CreateEntry.Dogs.Vaccinations.AgainstRabies"]</label>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <InputDateComponent @bind-Date="@NewPet.Vaccinations.First(vac => vac.Type == EntryModel.VaccinationType.Rabies).Date"></InputDateComponent>
+                    <InputDateTime 
+                        id="NewPetVaccination" 
+                        class="form-control col-sm-8" 
+                        @bind-Value="@NewPet.Vaccinations.First(vac => vac.Type == EntryModel.VaccinationType.Rabies).Date"></InputDateTime>
                 </div>
             </div>
         </div>

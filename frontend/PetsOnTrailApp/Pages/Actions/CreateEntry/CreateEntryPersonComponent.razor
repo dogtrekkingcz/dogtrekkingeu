@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components
+﻿@using PetsOnTrailApp.Components
 @using PetsOnTrailApp.Shared
 @using SharedLib.Models
 @inject IStringLocalizer<Resource> localizer
@@ -41,7 +41,7 @@
 
     <div class="nice-form-group">
         <label>@localizer["Action.CreateEntry.Person.Birthday"]</label>
-        <InputDateComponent @bind-Date="Model.Birthday" />
+        <InputDateTime id="birthday" class="form-control col-sm-8" @bind-Value="@Model.Birthday"></InputDateTime>
     </div>
 </section>
 
