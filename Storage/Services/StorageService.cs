@@ -28,17 +28,8 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
 
-        var targetDirectory = Path.Combine(_storageOptions.BackupPath, $"{typeof(T).FullName}/{DateTime.Now.ToString("yyyy-MM-dd")}/");
-        Directory.CreateDirectory(targetDirectory);
-
-        var targetFile = Path.Combine(targetDirectory, $"{request.Id}___{DateTime.Now.ToString("HHmmss")}.json");
-        using (FileStream fcreate = File.Open(targetFile, FileMode.Create))
-        { 
-            using (StreamWriter outputFile = new StreamWriter(fcreate))
-            {
-                outputFile.Write(request.Dump());
-            }
-        }
+        BackupHistory(request);
+        UpdateSeedWithLatestData(request);
 
         if ((await _collection.FindAsync(filter)).Any(cancellationToken))
             await _collection.ReplaceOneAsync(filter, request, cancellationToken: cancellationToken);
@@ -46,6 +37,36 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
             await _collection.InsertOneAsync(request, cancellationToken: cancellationToken);
 
         return request;
+    }
+
+    private void UpdateSeedWithLatestData(T request)
+    {
+        var seedTargetDirectory = Path.Combine(_storageOptions.SeedPath, $"{typeof(T).FullName}/");
+        Directory.CreateDirectory(seedTargetDirectory);
+
+        var seedTargetFile = Path.Combine(seedTargetDirectory, $"{request.Id}.json");
+        using (FileStream fcreate = File.Open(seedTargetFile, FileMode.Create))
+        {
+            using (StreamWriter outputFile = new StreamWriter(fcreate))
+            {
+                outputFile.Write(request.Dump());
+            }
+        }
+    }
+
+    private void BackupHistory(T request)
+    {
+        var targetDirectory = Path.Combine(_storageOptions.BackupPath, $"{typeof(T).FullName}/{DateTime.Now.ToString("yyyy-MM-dd")}/");
+        Directory.CreateDirectory(targetDirectory);
+
+        var targetFile = Path.Combine(targetDirectory, $"{request.Id}___{DateTime.Now.ToString("HHmmss")}.json");
+        using (FileStream fcreate = File.Open(targetFile, FileMode.Create))
+        {
+            using (StreamWriter outputFile = new StreamWriter(fcreate))
+            {
+                outputFile.Write(request.Dump());
+            }
+        }
     }
 
     public async Task DeleteAsync(string id, CancellationToken cancellationToken)

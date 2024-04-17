@@ -15,6 +15,7 @@ services:
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/app/privkey.pem:ro
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/app/fullchain.pem:ro
       - /petsontrail_data/backup:/backup
+      - /petsontrail_data/seed:/seed
     networks:
       - backend
       - frontend
@@ -32,7 +33,7 @@ services:
     volumes:
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/privkey.pem:/app/privkey.pem:ro
       - /petsontrail_data/nginx_secrets/live/petsontrail_eu/fullchain.pem:/app/fullchain.pem:ro
-      - /petsontrail_data/backup:/backup
+      - /petsontrail_data/seed:/seed
     networks:
       - frontend
       - backend

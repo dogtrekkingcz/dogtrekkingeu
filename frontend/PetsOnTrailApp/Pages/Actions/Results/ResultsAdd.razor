@@ -4,6 +4,7 @@
 @using PetsOnTrailApp.Extensions
 @using SharedLib.Extensions
 @using SharedLib.Models
+@using PetsOnTrailApp.Components
 
 @inject IStringLocalizer<Resource> Localizer
 @inject Protos.Results.Results.ResultsClient ResultsClient
@@ -12,49 +13,25 @@
 <h3>@Localizer["Results.Manage.Add"]</h3>
 <section>
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@Localizer["Results.Manage.Add.Firstname"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.FirstName"/>
-            </div>
+        <div class="form-group row">
+            <label class="col-sm-3">@Localizer["Results.Manage.Add.Firstname"]</label>
+            <InputText class="form-control col-sm-8" @bind-Value="@Model.FirstName"/>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@Localizer["Results.Manage.Add.Lastname"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@Model.LastName"/>
-            </div>
+        <div class="form-group row">
+            <label class="col-sm-3">@Localizer["Results.Manage.Add.Lastname"]</label>
+            <InputText class="form-control col-sm-8" @bind-Value="@Model.LastName"/>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label for="startDate">@Localizer["Results.Manage.Add.Start"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <div class="form-group row">
-                    <InputDateTime id="startDate" class="form-control col-sm-8" @bind="@Model.Start"></InputDateTime>
-                </div>
-            </div>
+        <div class="form-group row">
+            <label for="startDate class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
+            <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Model.Start"></InputDateTime>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label for="finishDate">@Localizer["Results.Manage.Add.Finish"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <div class="form-group row">
-                    <InputDateTime id="finishDate" class="form-control col-sm-8" @bind="@Model.Finish"></InputDateTime>
-                </div>
-            </div>
+        <div class="form-group row">
+            <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
+            <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Model.Finish"></InputDateTime>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-6">
-                <label>@Localizer["Results.Manage.Add.WholeTime"]</label>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <InputTimeCalcComponent Model="@WholeTimeProxy" />
-            </div>
+        <div class="form-group row">
+            <label class="col-sm-3">@Localizer["Results.Manage.Add.WholeTime"]</label>
+            <InputTimeCalcComponent class="form-control col-sm-8" Model="@WholeTimeProxy" />
         </div>
     </div>
 </section>

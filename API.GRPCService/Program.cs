@@ -58,7 +58,8 @@ TypeAdapterConfig typeAdapterConfig = null;
 var options = new PetsOnTrailOptions()
 {
     MongoDbConnectionString = MongoDbConnectionString ?? string.Empty,
-    BackupPath = builder.Configuration["BackupDirectory:Path"] ?? string.Empty
+    BackupPath = builder.Configuration["BackupDirectory:Path"] ?? string.Empty,
+    SeedPath = builder.Configuration["SeedDirectory:Path"] ?? string.Empty
 };
 
 typeAdapterConfig = new TypeAdapterConfig

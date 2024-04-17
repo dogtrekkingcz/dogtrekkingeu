@@ -40,7 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Shared\InputDateTimeComponent.razor.cs" />
+      <Compile Remove="Shared\InputDateTime.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -103,9 +103,5 @@
       <AdditionalFiles Include="Pages\Actions\Results\Results.razor" />
       <AdditionalFiles Include="Pages\Actions\Results\ResultsAdd.razor" />
       <AdditionalFiles Include="Pages\Actions\Results\ResultsCategory.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="Shared\InputDateTimeComponent.razor.cs" />
     </ItemGroup>
 </Project>

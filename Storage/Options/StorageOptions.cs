@@ -4,4 +4,5 @@ public sealed record StorageOptions
 {
     public string MongoDbConnectionString { get; init; }
     public string BackupPath { get; init; }
+    public string SeedPath { get; init; }
 }

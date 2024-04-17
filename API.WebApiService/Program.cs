@@ -75,7 +75,11 @@ typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString, BackupPath = builder.Configuration["BackupDirectory:Path"] }, typeAdapterConfig)
+    .AddStorage(new StorageOptions() { 
+        MongoDbConnectionString = options.MongoDbConnectionString, 
+        BackupPath = builder.Configuration["BackupDirectory:Path"],
+        SeedPath = builder.Configuration["SeedDirectory:Path"]
+    }, typeAdapterConfig)
     .AddApiLayer(typeAdapterConfig, new PetsOnTrail.Actions.Options.PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString });
 
 typeAdapterConfig.AddMapping();
