@@ -18,6 +18,7 @@ message AddResultRequest {
   AddResultRequest_FinalState State = 8;
   google.type.DateTime Start = 9;
   google.type.DateTime Finish = 10;
+  repeated string Pets = 11;
 }
 
 enum AddResultRequest_FinalState {

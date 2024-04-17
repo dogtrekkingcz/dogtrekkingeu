@@ -104,7 +104,8 @@ namespace Storage.Services.Repositories.Actions
             
             category.Racers.Add(_mapper.Map<ActionRecord.RacerDto>(request) with
             {
-                PassedCheckpoints = new List<ActionRecord.PassedCheckpointDto>()
+                PassedCheckpoints = new List<ActionRecord.PassedCheckpointDto>(),
+                Pets = request.Pets.Select(petName => new ActionRecord.PetDto { Id = Guid.NewGuid().ToString(), Name = petName }).ToList()
             });
 
             await _actionsStorageService.AddOrUpdateAsync(action, cancellationToken);

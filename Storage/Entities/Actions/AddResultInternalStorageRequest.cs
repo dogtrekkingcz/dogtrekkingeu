@@ -25,6 +25,8 @@ public record AddResultInternalStorageRequest
     public DateTimeOffset? Finish { get; set; } = null;
 
     public FinalState State { get; set; } = FinalState.Finished;
+
+    public List<string> Pets { get; set; } = new List<string>();
     
     public enum FinalState {
         NotSpecified = 0,

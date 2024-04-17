@@ -21,6 +21,8 @@ public sealed record AddResultRequest
     public DateTimeOffset? Start { get; set; } = null;
 
     public DateTimeOffset? Finish { get; set; } = null;
+
+    public List<string> Pets {  get; set; } = new List<string>();
     
     public enum FinalState {
         NotSpecified = 0,

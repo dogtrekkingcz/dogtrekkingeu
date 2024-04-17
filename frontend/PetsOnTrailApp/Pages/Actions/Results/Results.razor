@@ -30,9 +30,8 @@ else
                     ActionId="@ActionId" 
                     RaceId="@race.Id"
                     RaceBegin="@actionRace.Begin"
-                    CategoryId="@category.Id" 
-                    OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)"
-                ></ResultsAdd>
+                    CategoryId="@category.Id"
+                    OnResultAddedCallback="(Guid raceId, Guid categoryId, ActionModel.RacerDto racer) => ResultAdded(raceId, categoryId, racer)"></ResultsAdd>
                 <hr />
                 <ResultsCategory ActionId="@ActionId" Race="@race" Category="@category" />
             }
@@ -68,9 +67,13 @@ else
         StateHasChanged();
     }
 
-    private async Task ResultAdded(string actionId, Guid raceId, Guid categoryId, ActionModel.RacerDto result)
+    private void ResultAdded(Guid raceId, Guid categoryId, ActionModel.RacerDto result)
     {
-        // TODO: add result to the list, no slowly reloading...
-        await ReloadData();
+        Model
+            .Races.FirstOrDefault(r => r.Id == raceId)?
+            .Categories.FirstOrDefault(c => c.Id == categoryId)?
+            .Racers.Add(Mapper.Map<ActionResultsModel.RacerResultDto>(result));
+        
+        StateHasChanged();
     }
 }
