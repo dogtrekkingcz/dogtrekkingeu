@@ -31,7 +31,7 @@ else
                     RaceId="@race.Id"
                     RaceBegin="@actionRace.Begin"
                     CategoryId="@category.Id" 
-                    @* OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)" *@
+                    OnResultAddedCallback="(result) => ResultAdded(ActionId, race.Id, category.Id, result)"
                 ></ResultsAdd>
                 <hr />
                 <ResultsCategory ActionId="@ActionId" Race="@race" Category="@category" />
@@ -64,5 +64,13 @@ else
         var response = await ActionsClient.getResultsForActionAsync(new GetResultsForActionRequest() { ActionId = ActionId });
 
         Model = Mapper.Map<ActionResultsModel>(response);
+
+        StateHasChanged();
+    }
+
+    private async Task ResultAdded(string actionId, Guid raceId, Guid categoryId, ActionModel.RacerDto result)
+    {
+        // TODO: add result to the list, no slowly reloading...
+        await ReloadData();
     }
 }

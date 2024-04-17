@@ -61,10 +61,10 @@
     [Parameter] public Guid RaceId { get; set; }
     [Parameter] public Guid CategoryId { get; set; }
     [Parameter] public DateTimeOffset RaceBegin { get; set; }
-    
+
     [Parameter]
     public EventCallback<ActionModel.RacerDto> OnResultAddedCallback { get; set; }
-    
+
     public string FirstName { get; set; }
     public string LastName { get; set; }
     private string Phone { get; set; }
@@ -72,7 +72,7 @@
     private AddNewResult_FinalState State { get; set; }
     private Google.Type.DateTime Start { get; set; }
     private Google.Type.DateTime Finish { get; set; }
-    
+
 
     private InputTimeModel StartProxy = new();
     private InputTimeModel FinishProxy = new();
@@ -91,7 +91,7 @@
             Start = RaceBegin.ToGoogleDateTime();
             Finish = (RaceBegin.AddSeconds(WholeTimeProxy.Value.Seconds)).ToGoogleDateTime();
         }
-        
+
         await ResultsClient.addResultAsync(new AddResultRequest {
             ActionId = ActionId,
             RaceId = RaceId.ToString(),
@@ -104,5 +104,7 @@
             Start = Start,
             Finish = Finish
         });
+
+        await OnResultAddedCallback.InvokeAsync();
     }
 }
