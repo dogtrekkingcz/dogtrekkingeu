@@ -19,6 +19,7 @@ message UpdateUserProfileRequest {
   Contact Contact = 9;
   repeated Pet Pets = 10;
   repeated string Roles = 11;
+  repeated Activity Activities = 12;
 }
 
 message Address {
@@ -70,4 +71,40 @@ enum VaccinationType {
   Babesioza = 8;
   PlisnoveInfekce = 9;
   Leishmanioza = 10;
+}
+
+message Activity {
+  string Id = 1;
+  string ActionId = 2;
+  string RaceId = 3;
+  string CategoryId = 4;
+  string Name = 5;
+  string Description = 6;
+  google.type.DateTime Start = 7;
+  optional google.type.DateTime End = 8;
+  bool IsPublic = 9;
+  repeated Position Positions = 10;
+  repeated ActivityPet Pets = 11;
+}
+
+message Position {
+  string Id = 1;
+  google.type.DateTime Time = 2;
+  double Latitude = 3;
+  double Longitude = 4;
+  double Altitude = 5;
+  double Accuracy = 6;
+  double Course = 7;
+  string Note = 8;
+  repeated string PhotoUris = 9;
+}
+
+message ActivityPet {
+  string Id = 1;
+  optional string Chip = 2;
+  optional string Name = 3;
+  optional string Breed = 4;
+  optional string Color = 5;
+  optional string Kennel = 6;
+  optional google.type.DateTime BirthDate = 7;
 }

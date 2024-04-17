@@ -16,6 +16,9 @@ internal static class UserProfileMapping
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PetDto, GetUserProfileResponse.PetDto>();
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ContactDto, GetUserProfileResponse.ContactDto>();
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.LatLngDto, GetUserProfileResponse.LatLngDto>();
+        typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ActivityDto, GetUserProfileResponse.ActivityDto>();
+        typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PositionDto, GetUserProfileResponse.PositionDto>();
+        typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ActivityPetDto, GetUserProfileResponse.ActivityPetDto>();
 
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest, UpdateUserProfileInternalStorageRequest>();
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.AddressDto, UpdateUserProfileInternalStorageRequest.AddressDto>();
@@ -24,6 +27,9 @@ internal static class UserProfileMapping
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.PetDto, UpdateUserProfileInternalStorageRequest.PetDto>();
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.ContactDto, UpdateUserProfileInternalStorageRequest.ContactDto>();
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.LatLngDto, UpdateUserProfileInternalStorageRequest.LatLngDto>();
+        typeAdapterConfig.NewConfig<UpdateUserProfileRequest.ActivityDto, UpdateUserProfileInternalStorageRequest.ActivityDto>();
+        typeAdapterConfig.NewConfig<UpdateUserProfileRequest.PositionDto, UpdateUserProfileInternalStorageRequest.PositionDto>();
+        typeAdapterConfig.NewConfig<UpdateUserProfileRequest.ActivityPetDto, UpdateUserProfileInternalStorageRequest.ActivityPetDto>();
         typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageResponse, UpdateUserProfileResponse>();
 
         typeAdapterConfig.NewConfig<CreateUserProfileRequest, CreateUserProfileInternalStorageRequest>();
@@ -33,6 +39,9 @@ internal static class UserProfileMapping
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.PetDto, CreateUserProfileInternalStorageRequest.PetDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.ContactDto, CreateUserProfileInternalStorageRequest.ContactDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.LatLngDto, CreateUserProfileInternalStorageRequest.LatLngDto>();
+        typeAdapterConfig.NewConfig<CreateUserProfileRequest.ActivityDto, CreateUserProfileInternalStorageRequest.ActivityDto>();
+        typeAdapterConfig.NewConfig<CreateUserProfileRequest.PositionDto, CreateUserProfileInternalStorageRequest.PositionDto>();
+        typeAdapterConfig.NewConfig<CreateUserProfileRequest.ActivityPetDto, CreateUserProfileInternalStorageRequest.ActivityPetDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageResponse, CreateUserProfileResponse>();
 
         typeAdapterConfig.NewConfig<GetSelectedUserProfilesInternalStorageResponse.UserProfileDto, GetSelectedSurnameNameResponse.SelectedSurnameNameDto>()
