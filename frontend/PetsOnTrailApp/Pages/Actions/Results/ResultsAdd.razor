@@ -76,8 +76,12 @@
 
     private void StartAndFinishIsFilledCountResult(FocusEventArgs args)
     {
+        Console.WriteLine("StartAndFinishIsFilledCountResult");
+
         if (Model.Start.HasValue && Model.Finish.HasValue)
         {
+            Console.WriteLine("StartAndFinishIsFilledCountResult - both filled");
+
             var diff = Model.Finish.Value.Subtract(Model.Start.Value);
             var hours = diff.TotalHours;
 
@@ -87,10 +91,11 @@
             diff -= TimeSpan.FromMinutes(minutes);
             var seconds = diff.TotalSeconds;
 
+            Console.WriteLine($"Hours: {hours}, Minutes: {minutes}, Seconds: {seconds}");
             WholeTime = $"{hours}:{minutes}:{seconds}";
-        }
 
-        StateHasChanged();
+            StateHasChanged();
+        }
     }
 
     private void PetsChanged(string pets)
