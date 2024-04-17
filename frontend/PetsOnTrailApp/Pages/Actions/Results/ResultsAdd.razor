@@ -17,7 +17,7 @@
                 <label>@Localizer["Results.Manage.Add.Firstname"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@FirstName"/>
+                <InputText @bind-Value="@Model.FirstName"/>
             </div>
         </div>
         <div class="row">
@@ -25,23 +25,29 @@
                 <label>@Localizer["Results.Manage.Add.Lastname"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputText @bind-Value="@LastName"/>
+                <InputText @bind-Value="@Model.LastName"/>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-6">
-                <label>@Localizer["Results.Manage.Add.Start"]</label>
+                <label for="startDate">@Localizer["Results.Manage.Add.Start"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputDateTimeComponent Model="@StartProxy" StartDate="DateTime.Today" />
+                <div class="form-group row">
+                    <InputDateTime id="startDate" class="form-control col-sm-8" @bind="@Model.Start"></InputDateTime>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=> Model.Start)"></ValidationMessage>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-6">
-                <label>@Localizer["Results.Manage.Add.Finish"]</label>
+                <label for="finishDate">@Localizer["Results.Manage.Add.Finish"]</label>
             </div>
             <div class="col-xs-12 col-md-6">
-                <InputDateTimeComponent Model="@FinishProxy" StartDate="DateTime.Today" />
+                <div class="form-group row">
+                    <InputDateTime id="finishDate" class="form-control col-sm-8" @bind="@Model.Finish"></InputDateTime>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=> Model.Finish)"></ValidationMessage>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -64,6 +70,8 @@
 
     [Parameter]
     public EventCallback<ActionModel.RacerDto> OnResultAddedCallback { get; set; }
+
+    private ActionModel.RacerDto Model = new();
 
     public string FirstName { get; set; }
     public string LastName { get; set; }

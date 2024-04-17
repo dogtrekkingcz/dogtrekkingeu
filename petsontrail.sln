@@ -12,36 +12,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{BEBBE8
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{FB288BC0-D6D1-48C5-9542-07DBBE68A54B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{CEDF3CC0-F475-44EB-86C1-B9AE5735BBD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{29FC9076-D06A-4CA0-8CA8-517C45C4FBAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.GRPCService", "API.GRPCService\API.GRPCService.csproj", "{B02E2189-0E42-4180-9BA9-B9DE3C743193}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.GRPCService", "API.GRPCService\API.GRPCService.csproj", "{B02E2189-0E42-4180-9BA9-B9DE3C743193}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.WebApiService", "API.WebApiService\API.WebApiService.csproj", "{DFA0E1CB-7682-4F75-8A4D-C26A39AF167A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.WebApiService", "API.WebApiService\API.WebApiService.csproj", "{DFA0E1CB-7682-4F75-8A4D-C26A39AF167A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{58A0FD66-0ED2-4D54-B8FB-589A6EFE338D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{58A0FD66-0ED2-4D54-B8FB-589A6EFE338D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Interface", "API.Interfaces\API.Interface.csproj", "{EE14845D-37AB-45F5-8B6A-3EC180EA419C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Interface", "API.Interfaces\API.Interface.csproj", "{EE14845D-37AB-45F5-8B6A-3EC180EA419C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "init_scripts", "init_scripts", "{1210BB6D-4229-4F77-9F1B-23324BFFBBA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mails", "Mails\Mails.csproj", "{AB7F3E11-2733-4011-AD39-D8029C9BF7B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mails", "Mails\Mails.csproj", "{AB7F3E11-2733-4011-AD39-D8029C9BF7B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QrGenerator", "QrGenerator\QrGenerator.csproj", "{7BCCB03D-6615-447F-AC41-52124797AB17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QrGenerator", "QrGenerator\QrGenerator.csproj", "{7BCCB03D-6615-447F-AC41-52124797AB17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constants", "Shared\Constants\Constants.csproj", "{4F8EAC43-6B03-47F0-96C9-CCB509D77450}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constants", "Shared\Constants\Constants.csproj", "{4F8EAC43-6B03-47F0-96C9-CCB509D77450}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import", "Import\Import.csproj", "{8471AA7D-D196-4CA3-8B1E-DA5ABB806033}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Import", "Import\Import.csproj", "{8471AA7D-D196-4CA3-8B1E-DA5ABB806033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpsTracker", "frontend\GpsTracker\GpsTracker.csproj", "{3F2BA229-AA36-415E-8CE1-28E6DD279E2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GpsTracker", "frontend\GpsTracker\GpsTracker.csproj", "{3F2BA229-AA36-415E-8CE1-28E6DD279E2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetsOnTrailApp", "frontend\PetsOnTrailApp\PetsOnTrailApp.csproj", "{106EF222-B7E7-4775-8E21-E2FE2898EC65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetsOnTrailApp", "frontend\PetsOnTrailApp\PetsOnTrailApp.csproj", "{106EF222-B7E7-4775-8E21-E2FE2898EC65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLib", "frontend\SharedLib\SharedLib.csproj", "{55704709-BED6-4EEB-97BE-13CA497E5A36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLib", "frontend\SharedLib\SharedLib.csproj", "{55704709-BED6-4EEB-97BE-13CA497E5A36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,9 +104,6 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {65883C79-4118-4A25-9E1C-EE4EEDC203EE}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5C476798-4761-4C18-A7DE-7C2ABF25BADC} = {CEDF3CC0-F475-44EB-86C1-B9AE5735BBD0}
 		{6368156F-D0FD-4D60-8265-467242377A75} = {29FC9076-D06A-4CA0-8CA8-517C45C4FBAE}
@@ -122,5 +118,8 @@ Global
 		{3F2BA229-AA36-415E-8CE1-28E6DD279E2C} = {FB288BC0-D6D1-48C5-9542-07DBBE68A54B}
 		{106EF222-B7E7-4775-8E21-E2FE2898EC65} = {FB288BC0-D6D1-48C5-9542-07DBBE68A54B}
 		{55704709-BED6-4EEB-97BE-13CA497E5A36} = {FB288BC0-D6D1-48C5-9542-07DBBE68A54B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65883C79-4118-4A25-9E1C-EE4EEDC203EE}
 	EndGlobalSection
 EndGlobal
