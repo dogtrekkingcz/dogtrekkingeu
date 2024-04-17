@@ -70,7 +70,7 @@ namespace Storage.Services.Repositories.UserProfiles
 
             typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest, UserProfileRecord.ActivityDto>();
             typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PositionDto, UserProfileRecord.PositionDto>();
-            typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PetDto, UserProfileRecord.PetDto>();
+            typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PetDto, UserProfileRecord.ActivityPetDto>();
 
             return typeAdapterConfig;
         }

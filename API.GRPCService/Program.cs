@@ -91,7 +91,7 @@ builder.Services
     });
 
 builder.Services
-    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString, BackupPath = options.BackupPath }, typeAdapterConfig)
+    .AddStorage(new StorageOptions() { MongoDbConnectionString = options.MongoDbConnectionString, BackupPath = options.BackupPath, SeedPath = options.SeedPath }, typeAdapterConfig)
     .AddApiLayer(typeAdapterConfig, new PetsOnTrail.Actions.Options.PetsOnTrailOptions { MongoDbConnectionString = options.MongoDbConnectionString })
     .AddImport(typeAdapterConfig)
     .AddGrpc(options =>
