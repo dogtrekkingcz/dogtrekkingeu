@@ -12,6 +12,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 {
     private readonly IMapper _mapper;
     private readonly IStorageService<ActivityRecord> _activitiesService;
+    private readonly IStorageService<UserProfileRecord> _profilesService;
 
     public ActivitiesRepositoryService(IMapper mapper, IStorageService<ActivityRecord> activitiesService)
     {
@@ -22,12 +23,25 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
     public async Task<CreateActivityInternalStorageResponse> CreateActivityAsync(CreateActivityInternalStorageRequest request, CancellationToken cancellationToken)
     {
         Console.WriteLine($"ActivitiesRepository::{nameof(CreateActivityAsync)}: '{request?.Dump()}'");
+
+        CreateActivityInternalStorageResponse response = null;
             
         var addRequest = _mapper.Map<ActivityRecord>(request);
-            
-        var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
+        
+        if (request.UserId is null)
+        {
+            var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
+            response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
+        }
+        else
+        {
+            var user = await _profilesService.GetAsync(request.UserId.ToString(), cancellationToken);
 
-        var response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
+            var activity = _mapper.Map<UserProfileRecord.ActivityDto>(request);
+            user.Activities.Add(activity);
+
+            var createdActivityRecord = await _profilesService.AddOrUpdateAsync(user, cancellationToken);
+        }
 
         return response;
     }
