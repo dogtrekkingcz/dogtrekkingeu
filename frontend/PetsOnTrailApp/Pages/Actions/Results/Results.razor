@@ -44,10 +44,12 @@ else
     [Parameter] public string ActionId { get; set; }
     private ActionResultsModel Model = null;
     private ActionModel Action = null;
-    
+
     protected override async Task OnInitializedAsync()
     {
-        Action = Mapper.Map<ActionModel>(await ActionsClient.getActionAsync(new GetActionRequest() { Id = ActionId }));
+        Action = Mapper.Map<ActionModel>(
+            await ActionsClient.getSelectedPublicActionsListAsync(
+                new Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest() { Ids = { ActionId } }));
 
         await ReloadData();
     }
