@@ -47,11 +47,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        Action = Mapper.Map<ActionModel>(
-            await ActionsClient.getSelectedPublicActionsListAsync(
-                new Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest() { Ids = { ActionId } }));
+        var selectedActions = await ActionsClient.getSelectedPublicActionsListAsync(
+            new Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest() { Ids = { ActionId } });
 
-        await ReloadData();
+        if ((selectedActions?.Actions?.Count ?? 0) != 0)
+        {
+            Action = Mapper.Map<ActionModel>(selectedActions.Actions[0]);
+            await ReloadData();
+        }
+
+        // no loading data if action is not found
     }
 
     private async Task ReloadData()
