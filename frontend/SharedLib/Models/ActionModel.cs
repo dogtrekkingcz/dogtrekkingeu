@@ -1,4 +1,7 @@
-﻿namespace SharedLib.Models;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace SharedLib.Models;
 
 public record ActionModel
 {
@@ -98,8 +101,12 @@ public record ActionModel
 
         public string CheckpointData { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "FirstName is required.")]
+        [StringLength(50, ErrorMessage = "FirstName must be no more than 50 characters.")]
         public string FirstName { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "LastName is required.")]
+        [StringLength(50, ErrorMessage = "NaLastNameme must be no more than 50 characters.")]
         public string LastName { get; set; } = string.Empty;
 
         public string Phone { get; set; } = string.Empty;
@@ -108,8 +115,10 @@ public record ActionModel
 
         public List<PetDto> Pets { get; set; } = new List<PetDto>();
 
+        [Required(ErrorMessage = "Start is required.")]
         public DateTimeOffset? Start { get; set; } = null;
 
+        [Required(ErrorMessage = "Finish is required.")]
         public DateTimeOffset? Finish { get; set; } = null;
 
         public RaceState State { get; set; } = RaceState.NotValid;

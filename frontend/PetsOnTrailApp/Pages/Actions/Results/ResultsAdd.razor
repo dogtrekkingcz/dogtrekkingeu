@@ -13,7 +13,7 @@
 
 <h3>@Localizer["Results.Manage.Add"]</h3>
 <section>
-    <EditForm Model="@Model" OnValidSubmit="SubmitAsync">
+    <EditForm Model="@Model" OnValidSubmit="OnFormValid" OnInvalidSubmit="OnFormInvalid" FormName="FormResultAdd">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -67,7 +67,7 @@
     private string WholeTime { get; set; } = string.Empty;
     private string _pets { get; set; } = string.Empty;
 
-    protected async Task SubmitAsync()
+    private async Task OnFormValid()
     {
         await ResultsClient.addResultAsync(new AddResultRequest {
             ActionId = ActionId,
@@ -83,6 +83,11 @@
         });
 
         await OnResultAddedCallback.InvokeAsync((ActionId, RaceId, CategoryId, Model));
+    }
+
+    private async Task OnFormInvalid()
+    {
+        
     }
 
     private void StartAndFinishIsFilledCountResult(FocusEventArgs args)
