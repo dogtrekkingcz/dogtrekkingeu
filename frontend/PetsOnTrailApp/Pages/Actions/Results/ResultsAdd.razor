@@ -32,13 +32,13 @@
             </div>
             <div class="form-group row">
                 <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
-                <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="Start" @onblur="StartIsFilled"></InputDateTime>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Model.Start)"></ValidationMessage>
+                <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Start" @onblur="StartIsFilled"></InputDateTime>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
             </div>
             <div class="form-group row">
                 <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
-                <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="Finish" @onblur="FinishIsFilled"></InputDateTime>
-                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Model.Finish)"></ValidationMessage>
+                <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Finish" @onblur="FinishIsFilled"></InputDateTime>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Finish)"></ValidationMessage>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3">@Localizer["Results.Manage.Add.WholeTime"]</label>
@@ -94,6 +94,8 @@
 
     private void StartIsFilled(FocusEventArgs args)
     {
+        Console.WriteLine($"StartIsFilled with value: {Start}");
+
         Model.Start = Start;
 
         StartAndFinishIsFilledCountResult();
@@ -101,6 +103,8 @@
 
     private void FinishIsFilled(FocusEventArgs args)
     {
+        Console.WriteLine($"FinishIsFilled with value: {Finish}");
+
         Model.Finish = Finish;
 
         StartAndFinishIsFilledCountResult();
