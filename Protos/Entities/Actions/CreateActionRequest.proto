@@ -43,9 +43,10 @@ message RaceDto {
   google.type.DateTime EnteringTo = 5;
   int32 MaxNumberOfCompetitors = 6;
   google.type.DateTime Begin = 7;
-  repeated CategoryDto Categories = 8;
-  repeated PaymentDefinitionDto Payments = 9;
-  LimitsDto Limits = 10;
+  google.type.DateTime End = 8;
+  repeated CategoryDto Categories = 9;
+  repeated PaymentDefinitionDto Payments = 10;
+  LimitsDto Limits = 11;
 }
 
 message CategoryDto {

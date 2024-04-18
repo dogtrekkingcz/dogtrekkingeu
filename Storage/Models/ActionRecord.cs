@@ -3,29 +3,17 @@
 internal sealed record ActionRecord : IRecord
 {
     public string? Id { get; set; }
-    
-    public string? UserId { get; set; }
-    
-    public ActionType Type { get; set; }
-    
+    public string? UserId { get; set; }    
+    public ActionType Type { get; set; }    
     public DateTimeOffset Created { get; set; }
-
     public string Name { get; set; } = string.Empty;
-
     public string Description { get; set; } = string.Empty;
-
     public string ContactMail { get; set; } = string.Empty;
-
     public TermDto Term { get; set; } = new();
-
     public AddressDto Address { get; set; } = new();
-
-    public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
-    
+    public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();    
     public List<RaceDto> Races { get; set; } = new List<RaceDto>();
-
     public ActionSaleDto Sale { get; set; } = new();
-
     
     public enum ActionType
     {
@@ -42,33 +30,23 @@ internal sealed record ActionRecord : IRecord
     public sealed record CheckpointDto
     {
         public Guid Id { get; set; } = default(Guid);
-
         public string Name { get; set; } = string.Empty;
-
         public LatLngDto Position { get; set; } = new();
     }
     
     public sealed record RaceDto
     {
         public Guid Id { get; set; } = default(Guid);
-        public string Name { get; set; } = string.Empty;
-        
-        public double? Distance { get; set; } = 0.0;
-        
+        public string Name { get; set; } = string.Empty;        
+        public double? Distance { get; set; } = 0.0;        
         public double? Incline { get; set; } = 0.0;
-
-        public DateTimeOffset EnteringFrom = DateTimeOffset.Now;
-        
-        public DateTimeOffset EnteringTo = DateTimeOffset.Now.AddYears(1);
-        
-        public int MaxNumberOfCompetitors = Int32.MaxValue;
-        
+        public DateTimeOffset EnteringFrom = DateTimeOffset.Now;        
+        public DateTimeOffset EnteringTo = DateTimeOffset.Now.AddYears(1);        
+        public int MaxNumberOfCompetitors = Int32.MaxValue;        
         public DateTimeOffset Begin = DateTimeOffset.Now;
-        
+        public DateTimeOffset End = DateTimeOffset.Now.AddDays(10);
         public IList<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
-
         public IList<PaymentDefinitionDto> Payments { get; set; } = new List<PaymentDefinitionDto>();
-
         public LimitsDto Limits { get; set; } = new();
     }
     

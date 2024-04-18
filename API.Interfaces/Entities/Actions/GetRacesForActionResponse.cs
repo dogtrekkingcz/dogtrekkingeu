@@ -20,7 +20,8 @@ public sealed record GetRacesForActionResponse
         public int MaxNumberOfCompetitors = Int32.MaxValue;
         
         public DateTimeOffset Begin = DateTimeOffset.Now;
-        
+        public DateTimeOffset End = DateTimeOffset.Now.AddDays(10);
+
         public IList<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
         public IList<PaymentDefinitionDto> Payments { get; set; } = new List<PaymentDefinitionDto>();

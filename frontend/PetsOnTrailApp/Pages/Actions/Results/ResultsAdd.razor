@@ -58,6 +58,7 @@
     [Parameter] public Guid RaceId { get; set; }
     [Parameter] public Guid CategoryId { get; set; }
     [Parameter] public DateTimeOffset RaceBegin { get; set; }
+    [Parameter] public DateTimeOffset RaceEnd { get; set; }
 
     [Parameter]
     public EventCallback OnResultAddedCallback { get; set; }
@@ -69,6 +70,12 @@
 
     private DateTimeOffset Start { get; set; }
     private DateTimeOffset Finish { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Start = RaceBegin;
+        Finish = RaceEnd;
+    }
 
     private async Task OnFormValid()
     {

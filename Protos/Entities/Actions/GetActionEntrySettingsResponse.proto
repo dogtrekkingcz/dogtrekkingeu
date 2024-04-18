@@ -29,7 +29,8 @@ message RaceDto {
   string Id = 1;
   string Name = 2;
   google.type.DateTime Start = 3;
-  RaceLimitsDto Limits = 4;
+  google.type.DateTime End = 4;
+  RaceLimitsDto Limits = 5;
 }
 
 message CategoryDto {

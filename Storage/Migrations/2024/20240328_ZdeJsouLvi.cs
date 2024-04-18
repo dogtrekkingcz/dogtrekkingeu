@@ -32,6 +32,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                         EnteringFrom = new DateTime(2024, 3, 28, 17, 0, 0),
                         EnteringTo = new DateTime(2024, 4, 28, 17, 30, 0),
                         Begin = new DateTime(2024, 3, 29, 07, 0, 0),
+                        End = new DateTime(2024, 3, 31, 23, 59, 59),
                         Limits = new Entities.Actions.CreateActionInternalStorageRequest.LimitsDto
                         {
                             WithPets = true,
