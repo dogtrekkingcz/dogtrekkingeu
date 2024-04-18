@@ -13,38 +13,45 @@
 
 <h3>@Localizer["Results.Manage.Add"]</h3>
 <section>
-    <div class="container">
-        <div class="form-group row">
-            <label class="col-sm-3">@Localizer["Results.Manage.Add.Firstname"]</label>
-            <InputText class="form-control col-sm-8" @bind-Value="@Model.FirstName" />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-3">@Localizer["Results.Manage.Add.Lastname"]</label>
-            <InputText class="form-control col-sm-8" @bind-Value="@Model.LastName" />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-3">@Localizer["Results.Manage.Add.Pets"]</label>
-            <InputText class="form-control col-sm-8" Value="@_pets" ValueChanged="PetsChanged" ValueExpression="() => _pets" placeholder="@Localizer["Results.Manage.Add.Pets.DividedByComma"]" />
-        </div>
-        <div class="form-group row">
-            <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
+    <EditForm Model="@Model" OnValidSubmit="SubmitAsync">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-            @* This works but not for InputDateTime - the models are not filled *@
-            @* @onblur="StartAndFinishIsFilledCountResult" *@
+        <div class="container">
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.Firstname"]</label>
+                <InputText class="form-control col-sm-8" @bind-Value="@Model.FirstName" />
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.Lastname"]</label>
+                <InputText class="form-control col-sm-8" @bind-Value="@Model.LastName" />
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.Pets"]</label>
+                <InputText class="form-control col-sm-8" Value="@_pets" ValueChanged="PetsChanged" ValueExpression="() => _pets" placeholder="@Localizer["Results.Manage.Add.Pets.DividedByComma"]" />
+            </div>
+            <div class="form-group row">
+                <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
+                <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="Model.Start"></InputDateTime>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Model.Start)"></ValidationMessage>
+            </div>
+            <div class="form-group row">
+                <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
+                <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="Model.Finish"></InputDateTime>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Model.Finish)"></ValidationMessage>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.WholeTime"]</label>
+                <InputText class="form-control col-sm-8" Value="@WholeTime" ValueChanged="WholeTimeChanged" ValueExpression="() => WholeTime" placeholder="hh:mm:ss / hh:mm / hh"></InputText>
+            </div>
+        </div>
 
-            <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Model.Start"></InputDateTime>
-        </div>
         <div class="form-group row">
-            <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
-            <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Model.Finish"></InputDateTime>
+            <button type="submit" class="btn btn-primary">@Localizer["Results.Manage.Add.Submit"]</button>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-3">@Localizer["Results.Manage.Add.WholeTime"]</label>
-            <InputText class="form-control col-sm-8" Value="@WholeTime" ValueChanged="WholeTimeChanged" ValueExpression="() => WholeTime" placeholder="hh:mm:ss / hh:mm / hh"></InputText>
-        </div>
-    </div>
+    </EditForm>
 </section>
-<button @onclick="@(async () => await SubmitAsync())" class="btn btn-primary">@Localizer["Results.AddResult.Submit"]</button>
+
 
 @code {
     [Parameter] public string ActionId { get; set; }
