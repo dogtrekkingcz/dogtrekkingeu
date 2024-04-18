@@ -32,12 +32,12 @@
             </div>
             <div class="form-group row">
                 <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
-                <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="Model.Start"></InputDateTime>
+                <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="Start" @onblur="StartIsFilled"></InputDateTime>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Model.Start)"></ValidationMessage>
             </div>
             <div class="form-group row">
                 <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
-                <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="Model.Finish"></InputDateTime>
+                <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="Finish" @onblur="FinishIsFilled"></InputDateTime>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Model.Finish)"></ValidationMessage>
             </div>
             <div class="form-group row">
@@ -67,6 +67,9 @@
     private string WholeTime { get; set; } = string.Empty;
     private string _pets { get; set; } = string.Empty;
 
+    private DateTimeOffset Start { get; set; }
+    private DateTimeOffset Finish { get; set; }
+
     private async Task OnFormValid()
     {
         await ResultsClient.addResultAsync(new AddResultRequest {
@@ -85,12 +88,25 @@
         await OnResultAddedCallback.InvokeAsync((ActionId, RaceId, CategoryId, Model));
     }
 
-    private async Task OnFormInvalid()
-    {
-        
+    private async Task OnFormInvalid() {
+
     }
 
-    private void StartAndFinishIsFilledCountResult(FocusEventArgs args)
+    private void StartIsFilled(FocusEventArgs args)
+    {
+        Model.Start = Start;
+
+        StartAndFinishIsFilledCountResult();
+    }
+
+    private void FinishIsFilled(FocusEventArgs args)
+    {
+        Model.Finish = Finish;
+
+        StartAndFinishIsFilledCountResult();
+    }
+
+    private void StartAndFinishIsFilledCountResult()
     {
         Console.WriteLine("StartAndFinishIsFilledCountResult");
 
