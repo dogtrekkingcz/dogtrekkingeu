@@ -31,11 +31,22 @@
                 <InputText class="form-control col-sm-8" Value="@_pets" ValueChanged="PetsChanged" ValueExpression="() => _pets" placeholder="@Localizer["Results.Manage.Add.Pets.DividedByComma"]" />
             </div>
             <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.State"]</label>
+                <InputSelect class="form-control col-sm-8" Value="@Model.State" ValueChanged="@((ActionModel.RaceState state) => RaceStateChanged(state))" ValueExpression="() => Model.State">
+                    <option value="">@Localizer["Results.Manage.Add.State.Choose"]</option>
+                    <option value="@ActionModel.RaceState.NotStarted">@Localizer["Results.Manage.Add.State.NotStarted"]</option>
+                    <option value="@ActionModel.RaceState.Started">@Localizer["Results.Manage.Add.State.Started"]</option>
+                    <option value="@ActionModel.RaceState.Finished">@Localizer["Results.Manage.Add.State.Finished"]</option>
+                    <option value="@ActionModel.RaceState.DidNotFinished">@Localizer["Results.Manage.Add.State.DidNotFinished"]</option>
+                    <option value="@ActionModel.RaceState.Disqualified">@Localizer["Results.Manage.Add.State.Disqualified"]</option>
+                </InputSelect>
+            </div>
+            <div class="form-group row" hidden="@(IsStartShown == false)">
                 <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
                 <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Start" @onblur="StartIsFilled"></InputDateTime>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" hidden="@(IsFinishShown == false)">
                 <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
                 <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Finish" @onblur="FinishIsFilled"></InputDateTime>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Finish)"></ValidationMessage>
@@ -71,6 +82,19 @@
     private DateTimeOffset Start { get; set; }
     private DateTimeOffset Finish { get; set; }
 
+    private bool IsStartShown => (new List<ActionModel.RaceState>() 
+                                    { 
+                                        ActionModel.RaceState.Started,
+                                        ActionModel.RaceState.Finished,
+                                        ActionModel.RaceState.DidNotFinished,
+                                        ActionModel.RaceState.Disqualified
+                                    }).Contains(Model.State);
+
+    private bool IsFinishShown => (new List<ActionModel.RaceState>() 
+    { 
+        ActionModel.RaceState.Finished,
+    }).Contains(Model.State);
+
     protected override void OnInitialized()
     {
         Start = RaceBegin;
@@ -79,6 +103,27 @@
 
     private async Task OnFormValid()
     {
+        AddResultRequest_FinalState resultState = AddResultRequest_FinalState.NotSpecified;
+        switch (Model.State)
+        {
+            case ActionModel.RaceState.NotStarted:
+                resultState = AddResultRequest_FinalState.Accepted;
+                break;
+            case ActionModel.RaceState.Started:
+                resultState = AddResultRequest_FinalState.Started;
+                break;
+            case ActionModel.RaceState.Finished:
+                resultState = AddResultRequest_FinalState.Finished;
+                break;
+            case ActionModel.RaceState.DidNotFinished:
+                resultState = AddResultRequest_FinalState.Dnf;
+                break;
+            case ActionModel.RaceState.Disqualified:
+                resultState = AddResultRequest_FinalState.Dsq;
+                break;
+        }
+
+
         await ResultsClient.addResultAsync(new AddResultRequest {
             ActionId = ActionId,
             RaceId = RaceId.ToString(),
@@ -89,7 +134,8 @@
             Email = Model.Email,
             Start = Model.Start.ToGoogleDateTime(),
             Finish = Model.Finish.ToGoogleDateTime(),
-            Pets = { Model.Pets.Select(pet => pet.Name) }
+            Pets = { Model.Pets.Select(pet => pet.Name) },
+            State = resultState
         });
 
         await OnResultAddedCallback.InvokeAsync((ActionId, RaceId, CategoryId, Model));
@@ -154,6 +200,17 @@
         Model.Pets = petsArray
                         .Select(p => new ActionModel.PetDto { Name = p })
                         .ToList();
+    }
+
+    private void RaceStateChanged(ActionModel.RaceState state)
+    {
+        // Is done with IsStartShown and IsFinishShown above..
+
+        // Model.State = state switch
+        // {
+        //     ActionModel.RaceState.NotStarted => ActionModel.RaceState.NotStarted,
+        //     ActionModel.RaceState.Started => ActionModel.RaceState.Started,
+        // };
     }
 
     private void WholeTimeChanged(string val)
