@@ -2,16 +2,16 @@
 
 @inherits ResultsCategoryViewBase
 
-<h3>@Action.Name - @Race.Name - @Category.Name</h3>
+@inject IStringLocalizer<Resource> Localizer
 
-<ResultsAdd 
+@* <ResultsAdd 
     ActionId="@ActionId" 
-    RaceId="@race.Id"
+    RaceId="@RaceId"
     RaceBegin="@actionRace.Begin"
     RaceEnd="@actionRace.End"
-    CategoryId="@category.Id"
+    CategoryId="@CategoryId"
     OnResultAddedCallback="(args) => ResultAdded(args.Item1, args.Item2, args.Item3)" />
-<hr />
+<hr /> *@
 
 <table class="table">
     <thead>
@@ -22,7 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var racer in Category.Racers
+    @foreach (var racer in Model.Results
         .OrderBy(r =>
         {
             var totalTime = r.Finish.HasValue && r.Start.HasValue ? r.Finish.Value - r.Start.Value : TimeSpan.MaxValue;
@@ -48,7 +48,7 @@
                             <ul>
                                 @foreach (var pet in racer.Pets)
                                 {
-                                    <li>@pet.Name [@pet.Pedigree]</li>
+                                    <li>@pet</li>
                                 }
                             </ul>
                         </div>

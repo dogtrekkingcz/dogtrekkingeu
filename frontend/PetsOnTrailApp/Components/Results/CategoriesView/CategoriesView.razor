@@ -1,6 +1,6 @@
 ﻿@page "/categories/{ActionId}/{RaceId}"
 
-@inherits RacesViewBase
+@inherits CategoriesViewBase
 
 @inject IStringLocalizer<Resource> Localizer
 
@@ -12,10 +12,10 @@
 }
 else
 {
-    foreach (var race in Model.Races)
+    foreach (var category in Model.Categories)
     {
         <div>
-            <span>@race.Name</span>
+            <span>@category.Name</span>
         </div>
     }
 }

@@ -27,15 +27,15 @@ public sealed record ResultsModel : BaseSynchronizedModel
         public DateTimeOffset? Finish { get; set; } = null;
 
         public ResultState State { get; set; } = ResultState.NotValid;
+    }
 
-        public enum ResultState
-        {
-            NotValid = 0,
-            NotStarted,
-            Started,
-            Finished,
-            DidNotFinished,
-            Disqualified
-        }
+    public enum ResultState
+    {
+        NotValid = 0,
+        NotStarted,
+        Started,
+        Finished,
+        DidNotFinished,
+        Disqualified
     }
 }

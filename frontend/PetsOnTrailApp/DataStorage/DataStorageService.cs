@@ -1,4 +1,5 @@
 ﻿
+using MapsterMapper;
 using PetsOnTrailApp.Models;
 using SharedLib.Models;
 using static Protos.Actions.Actions;
@@ -8,6 +9,7 @@ namespace PetsOnTrailApp.DataStorage;
 public class DataStorageService : IDataStorageService
 {
     private readonly ActionsClient _actionsClient;
+    private readonly IMapper _mapper;
 
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
@@ -15,9 +17,10 @@ public class DataStorageService : IDataStorageService
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
 
-    public DataStorageService(ActionsClient actionsClient)
+    public DataStorageService(ActionsClient actionsClient, IMapper mapper)
     {
         _actionsClient = actionsClient;
+        _mapper = mapper;
     }
 
     public Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result)
@@ -60,9 +63,26 @@ public class DataStorageService : IDataStorageService
         if (action != null)
         {
             await semaphoreSlim.WaitAsync();
+
             try
             {
                 _races[actionId] = _mapper.Map<RacesModel>(action);
+
+                foreach (var race in action.Actions[0].Races)
+                {
+                    var raceId = Guid.Parse(race.Id);
+
+                    _categories[(actionId, raceId)] = _mapper.Map<CategoriesModel>(race) with
+                    {
+                        ActionId = Guid.Parse(action.Actions[0].Id),
+                        SynchronizedAt = DateTime.Now,
+                    };
+
+                    foreach (var category in race.Categories)
+                    {
+                        _results[(actionId, raceId, Guid.Parse(category.Id))] = _mapper.Map<ResultsModel>(category);
+                    }
+                }
             }
             finally
             {

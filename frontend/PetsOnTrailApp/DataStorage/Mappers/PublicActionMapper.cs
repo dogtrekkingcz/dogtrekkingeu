@@ -44,7 +44,7 @@ public static class PublicActionMapper
 
     private static List<ResultsModel.ResultDto> MapFromProtoResults(RepeatedField<Protos.Actions.GetSelectedPublicActionsList.RacerDto> racers)
     {
-        var result = List<ResultsModel.ResultDto>();
+        var result = new List<ResultsModel.ResultDto>();
 
         foreach (var racer in racers)
         {
@@ -58,12 +58,12 @@ public static class PublicActionMapper
                 Pets = racer.Pets.Select(pet => pet.Name).ToList(),
                 State = racer.State switch
                 {
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.NotStarted => ResultsModel.ResultDto.ResultState.NotStarted,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Started => ResultsModel.ResultDto.ResultState.Started,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Finished => ResultsModel.ResultDto.ResultState.Finished,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.DidNotFinished => ResultsModel.ResultDto.ResultState.DidNotFinished,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Disqualified => ResultsModel.ResultDto.ResultState.Disqualified,
-                    _ => ResultsModel.ResultDto.ResultState.NotValid
+                    Protos.Actions.GetSelectedPublicActionsList.RaceState.NotStarted => ResultsModel.ResultState.NotStarted,
+                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Started => ResultsModel.ResultState.Started,
+                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Finished => ResultsModel.ResultState.Finished,
+                    Protos.Actions.GetSelectedPublicActionsList.RaceState.DidNotFinished => ResultsModel.ResultState.DidNotFinished,
+                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Disqualified => ResultsModel.ResultState.Disqualified,
+                    _ => ResultsModel.ResultState.NotValid
                 }
             });
         }

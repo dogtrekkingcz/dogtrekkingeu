@@ -3,8 +3,9 @@ using Protos.Results;
 using System.Text.RegularExpressions;
 using static Protos.Results.Results;
 using MapsterMapper;
+using PetsOnTrailApp.Models;
 
-namespace PetsOnTrailApp.Components.ResultsAdd;
+namespace PetsOnTrailApp.Components.Results.ResultsAdd;
 
 public class ResultsAddBase : ComponentBase
 {
@@ -28,7 +29,7 @@ public class ResultsAddBase : ComponentBase
     private IMapper _mapper { get; set; }
 
 
-    protected ResultAddModel Model = new();
+    protected ResultsModel.ResultDto Model = new();
 
     protected string WholeTime { get; set; } = string.Empty;
     protected string _pets { get; set; } = string.Empty;
@@ -36,19 +37,19 @@ public class ResultsAddBase : ComponentBase
     protected DateTimeOffset Start { get; set; }
     protected DateTimeOffset Finish { get; set; }
 
-    protected ResultAddModel.ResultState State { get; set; } = ResultAddModel.ResultState.NotValid;
+    protected ResultsModel.ResultState State { get; set; } = ResultsModel.ResultState.NotValid;
 
-    protected bool IsStartShown => (new List<ResultAddModel.ResultState>()
+    protected bool IsStartShown => (new List<ResultsModel.ResultState>()
                                     {
-                                        ResultAddModel.ResultState.Started,
-                                        ResultAddModel.ResultState.Finished,
-                                        ResultAddModel.ResultState.DidNotFinished,
-                                        ResultAddModel.ResultState.Disqualified
+                                        ResultsModel.ResultState.Started,
+                                        ResultsModel.ResultState.Finished,
+                                        ResultsModel.ResultState.DidNotFinished,
+                                        ResultsModel.ResultState.Disqualified
                                     }).Contains(Model.State);
 
-    protected bool IsFinishShown => (new List<ResultAddModel.ResultState>()
+    protected bool IsFinishShown => (new List<ResultsModel.ResultState>()
     {
-        ResultAddModel.ResultState.Finished,
+        ResultsModel.ResultState.Finished,
     }).Contains(Model.State);
 
     protected override void OnInitialized()
@@ -59,15 +60,6 @@ public class ResultsAddBase : ComponentBase
 
     protected async Task OnFormValid()
     {
-        var request = _mapper.Map<AddResultRequest>(Model) with
-        {
-            ActionId = ActionId,
-            RaceId = RaceId,
-            CategoryId = CategoryId
-        };
-        await _resultsClient.addResultAsync(request);
-
-        await OnResultAddedCallback.InvokeAsync((ActionId, RaceId, CategoryId, Model));
     }
 
     protected async Task OnFormInvalid()
@@ -131,7 +123,7 @@ public class ResultsAddBase : ComponentBase
                         .ToList();
     }
 
-    protected void RaceStateChanged(ResultAddModel.ResultState state)
+    protected void RaceStateChanged(ResultsModel.ResultState state)
     {
         State = state;
         Model.State = state;

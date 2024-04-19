@@ -44,6 +44,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Remove="Components\Results\CategoriesView\CategoriesView.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\SharedLib\SharedLib.csproj" />
       <ProjectReference Include="..\..\Protos\Protos.csproj" />
       <ProjectReference Include="..\..\Shared\Constants\Constants.csproj" />
@@ -86,7 +90,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Components\Results\CategoriesView\" />
       <Folder Include="Events" />
       <Folder Include="Pages\Actions\Results\" />
       <Folder Include="Pages\Actions\View" />
@@ -99,6 +102,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <AdditionalFiles Include="Components\Results\CategoriesView\CategoriesView.razor" />
       <AdditionalFiles Include="Components\Results\RacesView\RacesView.razor" />
       <AdditionalFiles Include="Components\Results\ResultsAdd\ResultsAdd.razor" />
       <AdditionalFiles Include="Components\Results\CategoryView\ResultsCategoryView.razor" />

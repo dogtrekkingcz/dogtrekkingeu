@@ -1,12 +1,14 @@
-﻿namespace PetsOnTrailApp.DataStorage;
+﻿using PetsOnTrailApp.Models;
+
+namespace PetsOnTrailApp.DataStorage;
 
 public interface IDataStorageService
 {
-    Task<List<RaceDto>> GetRacesForActionAsync(Guid actionId);
+    Task<RacesModel> GetRacesForActionAsync(Guid actionId);
 
-    Task<List<CategoryDto>> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId);
+    Task<CategoriesModel> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId);
 
-    Task<List<ResultDto>> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId);
+    Task<ResultsModel> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId);
 
-    Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultDto result);
+    Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result);
 }

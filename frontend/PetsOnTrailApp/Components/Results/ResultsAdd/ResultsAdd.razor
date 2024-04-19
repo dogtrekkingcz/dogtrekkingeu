@@ -1,4 +1,7 @@
-﻿@inherits ResultsAddBase
+﻿@using PetsOnTrailApp.Models
+
+@inherits ResultsAddBase
+
 
 @inject IStringLocalizer<Resource> Localizer
 
@@ -23,13 +26,13 @@
             </div>
             <div class="form-group row">
                 <label class="col-sm-3">@Localizer["Results.Manage.Add.State"]</label>
-                <InputSelect class="form-control col-sm-8" Value="@State" ValueChanged="@((ResultAddModel.ResultState state) => RaceStateChanged(state))" ValueExpression="() => State">
-                    <option value="@ResultAddModel.ResultState.NotValid">@Localizer["Results.Manage.Add.State.Choose"]</option>
-                    <option value="@ResultAddModel.ResultState.NotStarted">@Localizer["Results.Manage.Add.State.NotStarted"]</option>
-                    <option value="@ResultAddModel.ResultState.Started">@Localizer["Results.Manage.Add.State.Started"]</option>
-                    <option value="@ResultAddModel.ResultState.Finished">@Localizer["Results.Manage.Add.State.Finished"]</option>
-                    <option value="@ResultAddModel.ResultState.DidNotFinished">@Localizer["Results.Manage.Add.State.DidNotFinished"]</option>
-                    <option value="@ResultAddModel.ResultState.Disqualified">@Localizer["Results.Manage.Add.State.Disqualified"]</option>
+                <InputSelect class="form-control col-sm-8" Value="@State" ValueChanged="@((ResultsModel.ResultState state) => RaceStateChanged(state))" ValueExpression="() => State">
+                    <option value="@ResultsModel.ResultState.NotValid">@Localizer["Results.Manage.Add.State.Choose"]</option>
+                    <option value="@ResultsModel.ResultState.NotStarted">@Localizer["Results.Manage.Add.State.NotStarted"]</option>
+                    <option value="@ResultsModel.ResultState.Started">@Localizer["Results.Manage.Add.State.Started"]</option>
+                    <option value="@ResultsModel.ResultState.Finished">@Localizer["Results.Manage.Add.State.Finished"]</option>
+                    <option value="@ResultsModel.ResultState.DidNotFinished">@Localizer["Results.Manage.Add.State.DidNotFinished"]</option>
+                    <option value="@ResultsModel.ResultState.Disqualified">@Localizer["Results.Manage.Add.State.Disqualified"]</option>
                 </InputSelect>
             </div>
             <div class="form-group row" hidden="@(IsStartShown == false)">
