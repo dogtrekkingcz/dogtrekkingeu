@@ -33,7 +33,7 @@
             <div class="form-group row">
                 <label class="col-sm-3">@Localizer["Results.Manage.Add.State"]</label>
                 <InputSelect class="form-control col-sm-8" Value="@State" ValueChanged="@((ActionModel.RaceState state) => RaceStateChanged(state))" ValueExpression="() => State">
-                    <option value="">@Localizer["Results.Manage.Add.State.Choose"]</option>
+                    <option value="@ActionModel.RaceState.NotValid">@Localizer["Results.Manage.Add.State.Choose"]</option>
                     <option value="@ActionModel.RaceState.NotStarted">@Localizer["Results.Manage.Add.State.NotStarted"]</option>
                     <option value="@ActionModel.RaceState.Started">@Localizer["Results.Manage.Add.State.Started"]</option>
                     <option value="@ActionModel.RaceState.Finished">@Localizer["Results.Manage.Add.State.Finished"]</option>
@@ -81,7 +81,7 @@
     private DateTimeOffset Start { get; set; }
     private DateTimeOffset Finish { get; set; }
 
-    private ActionModel.RaceState State { get; set; }
+    private ActionModel.RaceState State { get; set; } = ActionModel.RaceState.NotValid;
 
     private bool IsStartShown => (new List<ActionModel.RaceState>() 
                                     { 
@@ -205,6 +205,7 @@
 
     private void RaceStateChanged(ActionModel.RaceState state)
     {
+        State = state;
         Model.State = state;
 
         StateHasChanged();
