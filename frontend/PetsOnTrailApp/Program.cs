@@ -15,6 +15,8 @@ using SharedLib.Extensions;
 using SharedLib.Providers;
 using AppTokenProvider = PetsOnTrailApp.Providers.AppTokenProvider;
 using TokenStorage = PetsOnTrailApp.Providers.TokenStorage;
+using PetsOnTrailApp.Components;
+using PetsOnTrailApp.Pages;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -37,7 +39,9 @@ builder.Services
     .AddSingleton<IUserProfileService, UserProfileService>()
     .AddBlazoredLocalStorage()
     .AddScoped<TokenStorage>()
-    .AddScoped<ITokenProvider, AppTokenProvider>();
+    .AddScoped<ITokenProvider, AppTokenProvider>()
+    .AddComponents()
+    .AddPages();
 
 builder.Services.AddSingleton(services =>
 {

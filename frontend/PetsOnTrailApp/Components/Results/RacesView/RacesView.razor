@@ -1,0 +1,23 @@
+﻿@page "/results/{ActionId}"
+
+@inherits RacesViewBase
+
+@inject IStringLocalizer<Resource> Localizer
+
+<h1>@Localizer["Results"]</h1>
+
+@if (Model == null)
+{
+    <p>
+        <em>@Localizer["Loading ..."]</em>
+    </p>
+}
+else
+{
+    foreach (var race in Model.Races)
+    {
+        <div>
+            
+        </div>
+    }
+}

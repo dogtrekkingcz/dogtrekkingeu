@@ -1,13 +1,17 @@
-﻿@using MapsterMapper
-@using Protos.Results
-@using PetsOnTrailApp.Shared
-@using SharedLib.Models
+﻿@page "/results/{ActionId}/{RaceId}/{CategoryId}"
 
-@inject IStringLocalizer<Resource> Localizer
-@inject IMapper Mapper
-@inject Protos.Results.Results.ResultsClient ResultsClient
+@inherits ResultsCategoryViewBase
 
-<h3>@Race.Name - @Category.Name</h3>
+<h3>@Action.Name - @Race.Name - @Category.Name</h3>
+
+<ResultsAdd 
+    ActionId="@ActionId" 
+    RaceId="@race.Id"
+    RaceBegin="@actionRace.Begin"
+    RaceEnd="@actionRace.End"
+    CategoryId="@category.Id"
+    OnResultAddedCallback="(args) => ResultAdded(args.Item1, args.Item2, args.Item3)" />
+<hr />
 
 <table class="table">
     <thead>
@@ -65,9 +69,3 @@
     }
     </tbody>
 </table>
-
-@code {
-    [Parameter] public string ActionId { get; set; }
-    [Parameter] public ActionResultsModel.RaceResultsDto Race { get; set; }
-    [Parameter] public ActionResultsModel.CategoryResultsDto Category { get; set; }
-}
