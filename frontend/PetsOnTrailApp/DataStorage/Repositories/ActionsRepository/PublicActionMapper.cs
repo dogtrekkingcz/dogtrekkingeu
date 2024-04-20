@@ -4,7 +4,7 @@ using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
 using SharedLib.Extensions;
 
-namespace PetsOnTrailApp.DataStorage.Mappers;
+namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
 public static class PublicActionMapper
 {
@@ -18,7 +18,7 @@ public static class PublicActionMapper
                 Races = MapFromProtoRaces(src.Actions[0].Races)
             });
 
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.RaceDto, CategoriesModel>()
+        typeAdapterConfig.NewConfig<RaceDto, CategoriesModel>()
             .MapWith((src) => new CategoriesModel
             {
                 SynchronizedAt = DateTime.Now,
@@ -31,7 +31,7 @@ public static class PublicActionMapper
                 }).ToList()
             });
 
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.CategoryDto, ResultsModel>()
+        typeAdapterConfig.NewConfig<CategoryDto, ResultsModel>()
             .MapWith((category) => new ResultsModel
             {
                 SynchronizedAt = DateTime.Now,
@@ -42,7 +42,7 @@ public static class PublicActionMapper
         return typeAdapterConfig;
     }
 
-    private static List<ResultsModel.ResultDto> MapFromProtoResults(RepeatedField<Protos.Actions.GetSelectedPublicActionsList.RacerDto> racers)
+    private static List<ResultsModel.ResultDto> MapFromProtoResults(RepeatedField<RacerDto> racers)
     {
         var result = new List<ResultsModel.ResultDto>();
 
@@ -58,11 +58,11 @@ public static class PublicActionMapper
                 Pets = racer.Pets.Select(pet => pet.Name).ToList(),
                 State = racer.State switch
                 {
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.NotStarted => ResultsModel.ResultState.NotStarted,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Started => ResultsModel.ResultState.Started,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Finished => ResultsModel.ResultState.Finished,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.DidNotFinished => ResultsModel.ResultState.DidNotFinished,
-                    Protos.Actions.GetSelectedPublicActionsList.RaceState.Disqualified => ResultsModel.ResultState.Disqualified,
+                    RaceState.NotStarted => ResultsModel.ResultState.NotStarted,
+                    RaceState.Started => ResultsModel.ResultState.Started,
+                    RaceState.Finished => ResultsModel.ResultState.Finished,
+                    RaceState.DidNotFinished => ResultsModel.ResultState.DidNotFinished,
+                    RaceState.Disqualified => ResultsModel.ResultState.Disqualified,
                     _ => ResultsModel.ResultState.NotValid
                 }
             });
@@ -77,15 +77,15 @@ public static class PublicActionMapper
 
         foreach (var race in races)
         {
-               result.Add(new RacesModel.RaceDto
-               {
-                    Id = Guid.Parse(race.Id),
-                    Name = race.Name,
-                    Begin = race.Begin.ToDateTimeOffset()?.DateTime ?? DateTime.MinValue,
-                    End = race.End.ToDateTimeOffset()?.DateTime ?? DateTime.MaxValue,
-                    Distance = race.Distance,
-                    Incline = race.Incline
-                });
+            result.Add(new RacesModel.RaceDto
+            {
+                Id = Guid.Parse(race.Id),
+                Name = race.Name,
+                Begin = race.Begin.ToDateTimeOffset()?.DateTime ?? DateTime.MinValue,
+                End = race.End.ToDateTimeOffset()?.DateTime ?? DateTime.MaxValue,
+                Distance = race.Distance,
+                Incline = race.Incline
+            });
         }
 
         return result;

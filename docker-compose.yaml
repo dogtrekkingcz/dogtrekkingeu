@@ -44,8 +44,6 @@ services:
     build:
       context: .
       dockerfile: frontend/PetsOnTrailApp/Dockerfile
-    environment:
-      - CERTBOT_EMAIL=rdk.kotesovec@gmail.com
     env_file:
       - ./nginx-certbot.env
     ports:
@@ -54,11 +52,14 @@ services:
     networks:
       - frontend
       - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cert_password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
-      - /petsontrail_data/nginx_secrets:/etc/letsencrypt
-      - /petsontrail_data/user_conf.d:/etc/nginx/user_conf.d:ro
-      - /petsontrail_data/certbot/conf/live/petsontrail.eu:/etc/nginx/ssl/live/petsontrail.eu:ro
-      - /petsontrail_data/PetsOnTrail.App/appsettings.json:/usr/share/nginx/html/appsettings.json
+      - ~/.aspnet/https:/https:ro
+      - ~/backup:/backup
       
   dtdata_db:
     image: mongo:latest

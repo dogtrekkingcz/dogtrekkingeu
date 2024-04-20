@@ -15,6 +15,7 @@
     <ItemGroup>
         <PackageReference Include="Blazor.Bootstrap" Version="2.1.0" />
         <PackageReference Include="BlazorDateRangePicker" Version="5.2.0" />
+        <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
         <PackageReference Include="Blazored.Modal" Version="7.3.1" />
         <PackageReference Include="bootstrap" Version="5.3.3" />
         <PackageReference Include="Google.Protobuf" Version="3.26.1" />
@@ -28,6 +29,7 @@
         <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.4" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.4" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
@@ -90,6 +92,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="DataStorage\Mappers\" />
       <Folder Include="Events" />
       <Folder Include="Pages\Actions\Results\" />
       <Folder Include="Pages\Actions\View" />

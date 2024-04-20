@@ -1,14 +1,8 @@
-﻿using PetsOnTrailApp.Models;
+﻿using Protos.Actions.GetSelectedPublicActionsList;
 
 namespace PetsOnTrailApp.DataStorage;
 
 public interface IDataStorageService
 {
-    Task<RacesModel> GetRacesForActionAsync(Guid actionId);
-
-    Task<CategoriesModel> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId);
-
-    Task<ResultsModel> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId);
-
-    Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result);
+    GetSelectedPublicActionsListResponse GetSelectedPublicActionsListAsync(List<Guid> ids);
 }
