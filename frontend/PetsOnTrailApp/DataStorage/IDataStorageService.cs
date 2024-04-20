@@ -2,7 +2,7 @@
 
 namespace PetsOnTrailApp.DataStorage;
 
-public interface IDataStorageService
+public interface IDataStorageService<Client, FunctionName, ReturnType>
 {
-    GetSelectedPublicActionsListResponse GetSelectedPublicActionsListAsync(List<Guid> ids);
+    Task<ReturnType> GetListAsync(List<Guid> ids);
 }

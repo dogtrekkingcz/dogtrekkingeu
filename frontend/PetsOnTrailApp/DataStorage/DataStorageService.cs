@@ -1,33 +1,45 @@
-﻿using MapsterMapper;
+﻿using Google.Protobuf.Collections;
+using MapsterMapper;
 using Protos.Actions.GetSelectedPublicActionsList;
+using System.Reflection;
 using static Protos.Actions.Actions;
 
 namespace PetsOnTrailApp.DataStorage;
 
-public class DataStorageService : IDataStorageService
+public class DataStorageService<Client, FunctionName, Parameter, ReturnType> : IDataStorageService<Client, FunctionName, Parameter, ReturnType>
 {
-    private readonly ActionsClient _actionsClient;
+    public readonly string _functionName;
+    private readonly Client _client;
+    private readonly IMapper _mapper;
     private readonly Blazored.LocalStorage.ILocalStorageService _localStorage;
 
-    public DataStorageService(ActionsClient actionsClient, IMapper mapper, Blazored.LocalStorage.ILocalStorageService localStorage)
+    public DataStorageService(Client client, IMapper mapper, Blazored.LocalStorage.ILocalStorageService localStorage)
     {
-        _actionsClient = actionsClient;
+        _client = client;
         _localStorage = localStorage;
+        _mapper = mapper;
     }
 
-    public async Task<GetSelectedPublicActionsListResponse> GetSelectedPublicActionsListAsync(List<Guid> ids)
+    public async Task<ReturnType> GetListAsync(List<Guid> ids)
     {
+        MethodInfo method = typeof(Client).GetMethod(_functionName);
+        MethodInfo generic = method.MakeGenericMethod(typeof(Parameter));
+
+        var param = new object[] { _mapper.Map<Parameter>(ids) };
+        var task = (Task) generic.Invoke(_client, param);
+
+        await task.ConfigureAwait(false);
+
+        var resultProperty = task.GetType().GetProperty("Result");
         
-        
-        var actions = await _actionsClient.getSelectedPublicActionsListAsync(
-                        new Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest() { Ids = { ids.Select(id => id.ToString()) } });
+        var values = (ReturnType) resultProperty.GetValue(task);
 
         foreach (var action in actions.Actions)
         {
-            await localStorage.SetItemAsync("name", "John Smith");
-            var name = await localStorage.GetItemAsync<string>("name");
+            await _localStorage.SetItemAsync("name", "John Smith");
+            // var name = await _localStorage.GetItemAsync<string>("name");
         }
 
-        return actions;
+        return values;
     }    
 }
