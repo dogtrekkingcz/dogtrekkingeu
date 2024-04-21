@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PetsOnTrailApp.DataStorage;
+using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using PetsOnTrailApp.Models;
 
 namespace PetsOnTrailApp.Components.Results.RacesView;
@@ -8,7 +9,7 @@ public class RacesViewBase : ComponentBase
 {
     [Parameter] public string ActionId { get; set; }
 
-    [Inject] private IDataStorageService _dataStorageService { get; set; }
+    [Inject] private IActionsRepository _actionsRepository { get; set; }
 
 
     public RacesModel Model = null;
@@ -17,6 +18,6 @@ public class RacesViewBase : ComponentBase
     {
         base.OnInitializedAsync();
 
-        Model = await _dataStorageService.GetRacesForActionAsync(Guid.Parse(ActionId));
+        Model = await _actionsRepository.GetRacesForActionAsync(Guid.Parse(ActionId));
     }
 }

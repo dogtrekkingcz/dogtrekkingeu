@@ -3,14 +3,14 @@
 public class DataStorageService<T> : IDataStorageService<T> where T : class
 {
     private readonly Blazored.LocalStorage.ILocalStorageService _localStorage;
-    private Func<Guid, T> _function;
+    private Func<Guid, Task<T>> _function;
 
     public DataStorageService(Blazored.LocalStorage.ILocalStorageService localStorage)
     {
         _localStorage = localStorage;
     }
 
-    public void InitWithFunction(Func<Guid, T> function)
+    public void InitWithFunction(Func<Guid, Task<T>> function)
     {
         _function = function;
     }
@@ -21,7 +21,7 @@ public class DataStorageService<T> : IDataStorageService<T> where T : class
 
         if (data == null)
         {
-            var loadedData = _function.Invoke(id);
+            var loadedData = await _function.Invoke(id);
 
             data = new DataStorageModel<T>()
             {

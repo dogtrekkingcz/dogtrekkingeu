@@ -63,15 +63,15 @@ public class ActionsRepository : IRepository<ActionsClient>
 
             try
             {
-                _races[actionId] = _mapper.Map<RacesModel>(action);
+                _races[actionId] = _mapper.Map<RacesModel>(action.Data);
 
-                foreach (var race in action.Actions[0].Races)
+                foreach (var race in action.Data.Actions[0].Races)
                 {
                     var raceId = Guid.Parse(race.Id);
 
                     _categories[(actionId, raceId)] = _mapper.Map<CategoriesModel>(race) with
                     {
-                        ActionId = Guid.Parse(action.Actions[0].Id),
+                        ActionId = Guid.Parse(action.Data.Actions[0].Id),
                         SynchronizedAt = DateTime.Now,
                     };
 
