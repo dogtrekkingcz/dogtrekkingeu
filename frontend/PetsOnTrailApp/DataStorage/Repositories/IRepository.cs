@@ -1,5 +1,5 @@
 ﻿namespace PetsOnTrailApp.DataStorage.Repositories;
 
-public interface IRepository<T>
+public interface IRepository<Client>
 {
 }

@@ -1,45 +1,36 @@
-﻿using Google.Protobuf.Collections;
-using MapsterMapper;
-using Protos.Actions.GetSelectedPublicActionsList;
-using System.Reflection;
-using static Protos.Actions.Actions;
+﻿namespace PetsOnTrailApp.DataStorage;
 
-namespace PetsOnTrailApp.DataStorage;
-
-public class DataStorageService<Client, FunctionName, Parameter, ReturnType> : IDataStorageService<Client, FunctionName, Parameter, ReturnType>
+public class DataStorageService<T> : IDataStorageService<T>
 {
-    public readonly string _functionName;
-    private readonly Client _client;
-    private readonly IMapper _mapper;
     private readonly Blazored.LocalStorage.ILocalStorageService _localStorage;
+    private Func<Guid, Task<T>> _function;
 
-    public DataStorageService(Client client, IMapper mapper, Blazored.LocalStorage.ILocalStorageService localStorage)
+    public DataStorageService(Blazored.LocalStorage.ILocalStorageService localStorage)
     {
-        _client = client;
         _localStorage = localStorage;
-        _mapper = mapper;
     }
 
-    public async Task<ReturnType> GetListAsync(List<Guid> ids)
+    public void InitWithFunction(Func<Guid, Task<T>> action)
     {
-        MethodInfo method = typeof(Client).GetMethod(_functionName);
-        MethodInfo generic = method.MakeGenericMethod(typeof(Parameter));
+        _function = action;
+    }
 
-        var param = new object[] { _mapper.Map<Parameter>(ids) };
-        var task = (Task) generic.Invoke(_client, param);
+    public async Task<T> GetAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var data = await _localStorage.GetItemAsync<T>(id.ToString(), cancellationToken);
 
-        await task.ConfigureAwait(false);
-
-        var resultProperty = task.GetType().GetProperty("Result");
-        
-        var values = (ReturnType) resultProperty.GetValue(task);
-
-        foreach (var action in actions.Actions)
+        if (data == null)
         {
-            await _localStorage.SetItemAsync("name", "John Smith");
-            // var name = await _localStorage.GetItemAsync<string>("name");
+            data = _function.Invoke(id);
+
+            await _localStorage.SetItemAsync(id.ToString(), data, cancellationToken);
         }
 
-        return values;
-    }    
+        return data;
+    }
+
+    public async Task PutAsync(Guid id, T value, CancellationToken cancellationToken)
+    {
+        await _localStorage.SetItemAsync(id.ToString(), value, cancellationToken);
+    }
 }

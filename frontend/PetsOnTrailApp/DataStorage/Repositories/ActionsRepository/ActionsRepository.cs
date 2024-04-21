@@ -1,23 +1,28 @@
-﻿using MapsterMapper;
+﻿using Google.Protobuf.Collections;
+using MapsterMapper;
 using PetsOnTrailApp.Models;
+using Protos.Actions.GetSelectedPublicActionsList;
 using static Protos.Actions.Actions;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
-public class ActionsRepository<ActionsClient> : IRepository<ActionsClient>
+public class ActionsRepository : IRepository<ActionsClient>
 {
-    private readonly IDataStorageService _dataStorageService;
+    private readonly IDataStorageService<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse> _dataStorageServicePublicActions;
     private readonly IMapper _mapper;
 
+    private readonly ActionsClient _actionsClient;
+    
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
     private Dictionary<Guid, RacesModel> _races = new Dictionary<Guid, RacesModel>();
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
 
-    public ActionsRepository(IDataStorageService dataStorageService, IMapper mapper)
+    public ActionsRepository(IDataStorageService<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse> dataStorageService, IMapper mapper, ActionsClient actionsClient)
     {
-        _dataStorageService = dataStorageService;
+        _actionsClient = actionsClient;
+        _dataStorageServicePublicActions = dataStorageService;
         _mapper = mapper;
     }
 
@@ -48,10 +53,9 @@ public class ActionsRepository<ActionsClient> : IRepository<ActionsClient>
         return await Task.FromResult(_results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel)));
     }
 
-    private async Task LoadAndParseActionAsync(Guid actionId)
+    private async Task LoadAndParseActionAsync(Guid actionId, CancellationToken cancellationToken)
     {
-        var action = await _actionsClient.getSelectedPublicActionsListAsync(
-            new Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListRequest() { Ids = { actionId.ToString() } });
+        var action = await _dataStorageServicePublicActions.GetAsync(actionId, cancellationToken);
 
         if (action != null)
         {
