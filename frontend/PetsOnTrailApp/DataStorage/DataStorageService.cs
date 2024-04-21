@@ -1,27 +1,34 @@
 ﻿namespace PetsOnTrailApp.DataStorage;
 
-public class DataStorageService<T> : IDataStorageService<T>
+public class DataStorageService<T> : IDataStorageService<T> where T : class
 {
     private readonly Blazored.LocalStorage.ILocalStorageService _localStorage;
-    private Func<Guid, Task<T>> _function;
+    private Func<Guid, T> _function;
 
     public DataStorageService(Blazored.LocalStorage.ILocalStorageService localStorage)
     {
         _localStorage = localStorage;
     }
 
-    public void InitWithFunction(Func<Guid, Task<T>> action)
+    public void InitWithFunction(Func<Guid, T> function)
     {
-        _function = action;
+        _function = function;
     }
 
-    public async Task<T> GetAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<DataStorageModel<T>> GetAsync(Guid id, CancellationToken cancellationToken)
     {
-        var data = await _localStorage.GetItemAsync<T>(id.ToString(), cancellationToken);
+        var data = await _localStorage.GetItemAsync<DataStorageModel<T>>(id.ToString(), cancellationToken);
 
         if (data == null)
         {
-            data = _function.Invoke(id);
+            var loadedData = _function.Invoke(id);
+
+            data = new DataStorageModel<T>()
+            {
+                Data = loadedData,
+                Created = DateTime.UtcNow,
+                Id = id
+            };
 
             await _localStorage.SetItemAsync(id.ToString(), data, cancellationToken);
         }

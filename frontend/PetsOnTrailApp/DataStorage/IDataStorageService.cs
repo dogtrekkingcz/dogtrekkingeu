@@ -2,11 +2,11 @@
 
 namespace PetsOnTrailApp.DataStorage;
 
-public interface IDataStorageService<T>
+public interface IDataStorageService<T> where T : class
 {
     void InitWithFunction(Func<Guid, T> action);
 
-    Task<T> GetAsync(Guid id, CancellationToken cancellationToken);
+    Task<DataStorageModel<T>> GetAsync(Guid id, CancellationToken cancellationToken);
 
     Task PutAsync(Guid id, T value, CancellationToken cancellationToken);
 }

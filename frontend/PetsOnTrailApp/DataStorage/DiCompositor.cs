@@ -13,7 +13,7 @@ public static class DiCompositor
             .AddSingleton<IDataStorageService<GetSelectedPublicActionsListResponse>>((serviceProvider) =>
             {
                 var obj = new DataStorageService<GetSelectedPublicActionsListResponse>(serviceProvider.GetRequiredService<ILocalStorageService>());
-                obj.InitWithFunction(async (id, Task<GetSelectedPublicActionsListResponse>) =>
+                obj.InitWithFunction(async (id) =>
                 {
                     var actionsClient = serviceProvider.GetRequiredService<ActionsClient>();
 
