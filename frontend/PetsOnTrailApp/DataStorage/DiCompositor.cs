@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using Mapster;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using Protos.Actions.GetSelectedPublicActionsList;
 using static Protos.Actions.Actions;
@@ -30,5 +31,13 @@ public static class DiCompositor
             });
 
         return services;
+    }
+
+    public static TypeAdapterConfig AddDataStorageMapping(this TypeAdapterConfig typeAdapterConfig)
+    {
+        typeAdapterConfig
+            .AddPublicActionMapping();
+
+        return typeAdapterConfig;
     }
 }

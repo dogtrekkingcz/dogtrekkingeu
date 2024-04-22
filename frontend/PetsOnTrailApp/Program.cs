@@ -33,6 +33,8 @@ builder.Services.AddBlazoredModal();
 builder.Services.AddBlazorBootstrap();
 
 var typeAdapterConfig = SharedLib.Mapping.CreateFrontendMapping();
+typeAdapterConfig
+    .AddDataStorageMapping();
 
 builder.Services
     .AddSingleton(typeAdapterConfig)
