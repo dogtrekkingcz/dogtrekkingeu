@@ -1,8 +1,6 @@
-﻿using Google.Protobuf.Collections;
-using MapsterMapper;
+﻿using MapsterMapper;
 using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
-using static Protos.Actions.Actions;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
@@ -11,17 +9,14 @@ public class ActionsRepository : IActionsRepository
     private readonly IDataStorageService<GetSelectedPublicActionsListResponse> _dataStorageServicePublicActions;
     private readonly IMapper _mapper;
 
-    private readonly ActionsClient _actionsClient;
-    
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
     private Dictionary<Guid, RacesModel> _races = new Dictionary<Guid, RacesModel>();
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
 
-    public ActionsRepository(IDataStorageService<GetSelectedPublicActionsListResponse> dataStorageService, IMapper mapper, ActionsClient actionsClient)
+    public ActionsRepository(IDataStorageService<GetSelectedPublicActionsListResponse> dataStorageService, IMapper mapper)
     {
-        _actionsClient = actionsClient;
         _dataStorageServicePublicActions = dataStorageService;
         _mapper = mapper;
     }
@@ -111,7 +106,7 @@ public class ActionsRepository : IActionsRepository
 
             try
             {
-                _races[actionId] = _mapper.Map<RacesModel>(action.Data);
+                _races[actionId] = _mapper.Map<RacesModel>(action);
 
                 foreach (var race in action.Data.Actions[0].Races)
                 {

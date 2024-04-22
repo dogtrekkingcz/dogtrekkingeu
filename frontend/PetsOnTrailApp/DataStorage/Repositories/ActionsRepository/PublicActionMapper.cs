@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.Collections;
 using Mapster;
+using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
 using SharedLib.Extensions;
@@ -10,12 +11,12 @@ public static class PublicActionMapper
 {
     public static TypeAdapterConfig AddPublicActionMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse, RacesModel>()
+        typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponse>, RacesModel>()
             .MapWith((src) => new RacesModel
             {
-                SynchronizedAt = DateTime.Now,
-                ActionId = Guid.Parse(src.Actions[0].Id),
-                Races = MapFromProtoRaces(src.Actions[0].Races)
+                SynchronizedAt = src.Created,
+                ActionId = Guid.Parse(src.Data.Actions[0].Id),
+                Races = MapFromProtoRaces(src.Data.Actions[0].Races)
             });
 
         typeAdapterConfig.NewConfig<RaceDto, CategoriesModel>()
@@ -77,6 +78,8 @@ public static class PublicActionMapper
 
         foreach (var race in races)
         {
+            Console.WriteLine($"Mapping from race to racemodel: {race.Dump()}");
+
             result.Add(new RacesModel.RaceDto
             {
                 Id = Guid.Parse(race.Id),

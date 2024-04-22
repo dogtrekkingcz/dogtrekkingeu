@@ -18,6 +18,7 @@ public class DataStorageService<T> : IDataStorageService<T> where T : class
     public async Task<DataStorageModel<T>> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var data = await _localStorage.GetItemAsync<DataStorageModel<T>>(id.ToString(), cancellationToken);
+        Console.WriteLine($"DataStorageService.GetAsync: {id} => {data}");
 
         if (data == null)
         {
@@ -29,6 +30,8 @@ public class DataStorageService<T> : IDataStorageService<T> where T : class
                 Created = DateTime.UtcNow,
                 Id = id
             };
+
+            Console.WriteLine($"DataStorageService.SetAsync: {id} => {data}");
 
             await _localStorage.SetItemAsync(id.ToString(), data, cancellationToken);
         }

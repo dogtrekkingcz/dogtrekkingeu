@@ -54,6 +54,8 @@ public sealed record CreateActionRequest
         public int MaxNumberOfCompetitors = Int32.MaxValue;
         
         public DateTimeOffset Begin = DateTimeOffset.Now;
+
+        public DateTimeOffset End = DateTimeOffset.Now.AddYears(1);
         
         public IList<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
