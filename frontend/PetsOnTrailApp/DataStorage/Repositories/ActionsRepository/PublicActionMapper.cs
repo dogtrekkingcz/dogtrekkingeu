@@ -96,13 +96,14 @@ public static class PublicActionMapper
 
         foreach (var racer in racers)
         {
+            var start = racer.Start;
             result.Add(new ResultsModel.ResultDto
             {
                 Id = racer.Id,
                 FirstName = racer.FirstName,
                 LastName = racer.LastName,
-                Start = racer.Start?.DateTime ?? DateTime.MinValue,
-                Finish = racer.Finish?.DateTime ?? DateTime.MinValue,
+                Start = racer.Start?.DateTime,
+                Finish = racer.Finish?.DateTime,
                 Pets = racer.Pets.Select(pet => pet.Name).ToList(),
                 State = racer.State switch
                 {
