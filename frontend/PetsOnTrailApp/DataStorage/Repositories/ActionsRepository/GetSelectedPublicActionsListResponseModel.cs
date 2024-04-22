@@ -1,30 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Protos.Actions.GetPublicActionsList;
+using System.ComponentModel.DataAnnotations;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
 public class GetSelectedPublicActionsListResponseModel
 {
-    public Guid Id { get; set; }
+    public List<ActionDto> Actions { get; set; } = new List<ActionDto>();
 
-    public DateTimeOffset Created { get; set; }
+    public sealed record ActionDto
+    {
+        public Guid Id { get; set; }
 
-    public ActionType Type { get; set; } = ActionType.Unspecified;
+        public DateTimeOffset Created { get; set; }
 
-    public string Name { get; set; } = string.Empty;
+        public ActionType Type { get; set; } = ActionType.Unspecified;
 
-    public string Description { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-    public string ContactMail { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
-    public TermDto Term { get; set; } = new();
+        public string ContactMail { get; set; } = string.Empty;
 
-    public AddressDto Address { get; set; } = new();
+        public TermDto Term { get; set; } = new();
 
-    public List<RaceDto> Races { get; set; } = new List<RaceDto>();
+        public AddressDto Address { get; set; } = new();
 
-    public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
+        public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 
-    public ActionSaleDto Sale { get; set; } = new();
+        public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
+
+        public ActionSaleDto Sale { get; set; } = new();
+    }
 
     public enum ActionType
     {

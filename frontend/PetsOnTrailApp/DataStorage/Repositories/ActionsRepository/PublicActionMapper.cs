@@ -2,6 +2,7 @@
 using Mapster;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
+using PetsOnTrailApp.Shared.ResourceFiles;
 using Protos.Actions.GetSelectedPublicActionsList;
 using SharedLib.Extensions;
 
@@ -11,8 +12,9 @@ public static class PublicActionMapper
 {
     public static TypeAdapterConfig AddPublicActionMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionDto, GetSelectedPublicActionsListResponseModel>()
-                    .Ignore(d => d.Created);
+        typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionDto, GetSelectedPublicActionsListResponseModel.ActionDto>()
+            .Ignore(d => d.Created);
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionType, GetSelectedPublicActionsListResponseModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RacerDto, GetSelectedPublicActionsListResponseModel.RacerDto>()
             .Ignore(d => d.Phone)
