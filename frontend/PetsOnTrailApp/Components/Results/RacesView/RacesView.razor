@@ -1,10 +1,10 @@
-﻿@page "/categories/{ActionId}/{RaceId}"
+﻿@page "/races/{ActionId}"
 
 @inherits RacesViewBase
 
 @inject IStringLocalizer<Resource> Localizer
 
-<h1>@Localizer["Results"]</h1>
+<h1>@Localizer["Races"]</h1>
 
 @if (Model == null)
 {
