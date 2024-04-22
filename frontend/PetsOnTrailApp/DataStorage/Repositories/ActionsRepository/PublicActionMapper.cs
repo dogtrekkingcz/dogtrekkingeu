@@ -14,7 +14,7 @@ public static class PublicActionMapper
     {
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.ActionDto, GetSelectedPublicActionsListResponseModel.ActionDto>()
-            .Ignore(d => d.Created);
+           .Ignore(d => d.Created);
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.ActionType, GetSelectedPublicActionsListResponseModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.RacerDto, GetSelectedPublicActionsListResponseModel.RacerDto>()
             .Ignore(d => d.Phone)
@@ -25,7 +25,9 @@ public static class PublicActionMapper
             .Ignore(d => d.Notes)
             .Ignore(d => d.RequestedPayments)
             .Ignore(d => d.Merchandize)
-            .Ignore(d => d.Address);
+            .Ignore(d => d.Address)
+            .Map(d => d.Start, s => s.Start.ToDateTimeOffset())
+            .Map(d => d.Finish, s => s.Finish.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.AddressDto, GetSelectedPublicActionsListResponseModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.CategoryDto, GetSelectedPublicActionsListResponseModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.PetDto, GetSelectedPublicActionsListResponseModel.PetDto>()
