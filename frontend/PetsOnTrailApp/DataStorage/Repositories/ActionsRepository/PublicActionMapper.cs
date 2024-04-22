@@ -56,8 +56,8 @@ public static class PublicActionMapper
             .MapWith((src) => new RacesModel
             {
                 SynchronizedAt = src.Created,
-                ActionId = src.Data.Id,
-                Races = MapFromProtoRaces(src.Data.Races)
+                ActionId = src.Data.Actions[0].Id,
+                Races = MapFromProtoRaces(src.Data.Actions[0].Races)
             });
 
         typeAdapterConfig.NewConfig<RaceDto, CategoriesModel>()

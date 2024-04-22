@@ -145,13 +145,13 @@ public class ActionsRepository : IActionsRepository
                 Console.WriteLine($"{_races[actionId].Races.Count} mapped");
 
 
-                foreach (var race in action.Data.Races)
+                foreach (var race in action.Data.Actions[0].Races)
                 {
                     var raceId = race.Id;
 
                     _categories[(actionId, raceId)] = _mapper.Map<CategoriesModel>(race) with
                     {
-                        ActionId = action.Data.Id,
+                        ActionId = action.Data.Actions[0].Id,
                         SynchronizedAt = DateTime.Now,
                     };
 
