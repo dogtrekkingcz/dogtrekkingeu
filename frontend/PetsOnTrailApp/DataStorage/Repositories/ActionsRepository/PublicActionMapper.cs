@@ -48,6 +48,12 @@ public static class PublicActionMapper
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.CheckpointDto, GetSelectedPublicActionsListResponseModel.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.PassedCheckpointDto, GetSelectedPublicActionsListResponseModel.PassedCheckpointDto>()
             .Map(d => d.Passed, s => s.Passed.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Google.Type.LatLng, GetSelectedPublicActionsListResponseModel.LatLngDto>()
+            .MapWith((src) => new GetSelectedPublicActionsListResponseModel.LatLngDto
+            {
+                Latitude = src.Latitude,
+                Longitude = src.Longitude,
+            });
 
 
 
