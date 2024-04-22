@@ -27,11 +27,20 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         if (await _localStorage.ContainKeyAsync(id.ToString()))
             data = await _localStorage.GetItemAsync<DataStorageModel<R>>(id.ToString(), cancellationToken);
 
-        Console.WriteLine($"DataStorageService - got data from localstorage: {id} => {data} -> {data.Data}");
+        if (data != null)
+            Console.WriteLine($"DataStorageService - got data from localstorage: {id} => {data} -> {data.Data}");
+        else
+            Console.WriteLine("DataStorageService - no data in localstorage or data is outdated, fetching from server...");
+
         if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
         {
+            Console.WriteLine("Fetching data from server...");
             var loadedData = await _function.Invoke(id);
+
+            Console.WriteLine($"DataStorageService.GetAsync: {id} => {loadedData}, mapping");
             var model = _mapper.Map<R>(loadedData);
+
+            Console.WriteLine("Mapped, saving to localstorage...");
 
             data = new DataStorageModel<R>()
             {
