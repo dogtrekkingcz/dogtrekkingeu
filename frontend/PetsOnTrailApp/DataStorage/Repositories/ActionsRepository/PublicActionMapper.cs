@@ -2,7 +2,6 @@
 using Mapster;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
-using PetsOnTrailApp.Shared.ResourceFiles;
 using Protos.Actions.GetSelectedPublicActionsList;
 using SharedLib.Extensions;
 
@@ -12,12 +11,51 @@ public static class PublicActionMapper
 {
     public static TypeAdapterConfig AddPublicActionMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponse>, RacesModel>()
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionDto, GetSelectedPublicActionsListResponseModel>()
+                    .Ignore(d => d.Created);
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionType, GetSelectedPublicActionsListResponseModel.ActionType>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RacerDto, GetSelectedPublicActionsListResponseModel.RacerDto>()
+            .Ignore(d => d.Phone)
+            .Ignore(d => d.Email)
+            .Ignore(d => d.Accepted)
+            .Ignore(d => d.Payed)
+            .Ignore(d => d.Payments)
+            .Ignore(d => d.Notes)
+            .Ignore(d => d.RequestedPayments)
+            .Ignore(d => d.Merchandize)
+            .Ignore(d => d.Address);
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.AddressDto, GetSelectedPublicActionsListResponseModel.AddressDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.CategoryDto, GetSelectedPublicActionsListResponseModel.CategoryDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.PetDto, GetSelectedPublicActionsListResponseModel.PetDto>()
+            .Ignore(d => d.Decease)
+            .Ignore(d => d.Contact)
+            .Ignore(d => d.Vaccinations);
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.LimitsDto, GetSelectedPublicActionsListResponseModel.LimitsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RaceDto, GetSelectedPublicActionsListResponseModel.RaceDto>()
+            .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset())
+            .Map(d => d.EnteringFrom, s => s.EnteringFrom.ToDateTimeOffset())
+            .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RaceState, GetSelectedPublicActionsListResponseModel.RaceState>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.TermDto, GetSelectedPublicActionsListResponseModel.TermDto>()
+            .Map(d => d.From, s => s.From.ToDateTimeOffset())
+            .Map(d => d.To, s => s.To.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionSaleDto, GetSelectedPublicActionsListResponseModel.ActionSaleDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.PaymentDefinitionDto, GetSelectedPublicActionsListResponseModel.PaymentDefinitionDto>()
+            .Map(d => d.From, s => s.From.ToDateTimeOffset())
+            .Map(d => d.To, s => s.To.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionSaleItemDto, GetSelectedPublicActionsListResponseModel.ActionSaleItemDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.CheckpointDto, GetSelectedPublicActionsListResponseModel.CheckpointDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.PassedCheckpointDto, GetSelectedPublicActionsListResponseModel.PassedCheckpointDto>()
+            .Map(d => d.Passed, s => s.Passed.ToDateTimeOffset());
+
+
+
+        typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponseModel>, RacesModel>()
             .MapWith((src) => new RacesModel
             {
                 SynchronizedAt = src.Created,
-                ActionId = Guid.Parse(src.Data.Actions[0].Id),
-                Races = MapFromProtoRaces(src.Data.Actions[0].Races)
+                ActionId = src.Data.Id,
+                Races = MapFromProtoRaces(src.Data.Races)
             });
 
         typeAdapterConfig.NewConfig<RaceDto, CategoriesModel>()
@@ -73,7 +111,7 @@ public static class PublicActionMapper
         return result;
     }
 
-    private static List<RacesModel.RaceDto> MapFromProtoRaces(RepeatedField<RaceDto> races)
+    private static List<RacesModel.RaceDto> MapFromProtoRaces(List<GetSelectedPublicActionsListResponseModel.RaceDto> races)
     {
         var result = new List<RacesModel.RaceDto>();
 
@@ -83,12 +121,12 @@ public static class PublicActionMapper
 
             result.Add(new RacesModel.RaceDto
             {
-                Id = Guid.Parse(race.Id),
+                Id = race.Id,
                 Name = race.Name,
-                Begin = race.Begin.ToDateTimeOffset()?.DateTime ?? DateTime.MinValue,
-                End = race.End.ToDateTimeOffset()?.DateTime ?? DateTime.MaxValue,
-                Distance = race.Distance,
-                Incline = race.Incline
+                Begin = race.Begin.DateTime,
+                End = race.End.DateTime,
+                Distance = race.Distance ?? 0,
+                Incline = race.Incline ?? 0
             });
         }
 

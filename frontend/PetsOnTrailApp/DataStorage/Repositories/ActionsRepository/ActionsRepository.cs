@@ -6,7 +6,7 @@ namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
 public class ActionsRepository : IActionsRepository
 {
-    private readonly IDataStorageService<GetSelectedPublicActionsListResponse> _dataStorageServicePublicActions;
+    private readonly IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> _dataStorageServicePublicActions;
     private readonly IMapper _mapper;
 
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
@@ -15,7 +15,7 @@ public class ActionsRepository : IActionsRepository
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
 
-    public ActionsRepository(IDataStorageService<GetSelectedPublicActionsListResponse> dataStorageService, IMapper mapper)
+    public ActionsRepository(IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> dataStorageService, IMapper mapper)
     {
         _dataStorageServicePublicActions = dataStorageService;
         _mapper = mapper;
@@ -145,19 +145,19 @@ public class ActionsRepository : IActionsRepository
                 Console.WriteLine($"{_races[actionId].Races.Count} mapped");
 
 
-                foreach (var race in action.Data.Actions[0].Races)
+                foreach (var race in action.Data.Races)
                 {
-                    var raceId = Guid.Parse(race.Id);
+                    var raceId = race.Id;
 
                     _categories[(actionId, raceId)] = _mapper.Map<CategoriesModel>(race) with
                     {
-                        ActionId = Guid.Parse(action.Data.Actions[0].Id),
+                        ActionId = action.Data.Id,
                         SynchronizedAt = DateTime.Now,
                     };
 
                     foreach (var category in race.Categories)
                     {
-                        _results[(actionId, raceId, Guid.Parse(category.Id))] = _mapper.Map<ResultsModel>(category);
+                        _results[(actionId, raceId, category.Id)] = _mapper.Map<ResultsModel>(category);
                     }
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Mapster;
+using MapsterMapper;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using Protos.Actions.GetSelectedPublicActionsList;
 using static Protos.Actions.Actions;
@@ -13,9 +14,13 @@ public static class DiCompositor
         services
             .AddBlazoredLocalStorage()
             .AddSingleton<IActionsRepository, ActionsRepository>()
-            .AddSingleton<IDataStorageService<GetSelectedPublicActionsListResponse>>((serviceProvider) =>
+            .AddSingleton<IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel>>((serviceProvider) =>
             {
-                var obj = new DataStorageService<GetSelectedPublicActionsListResponse>(serviceProvider.GetRequiredService<ILocalStorageService>());
+                var obj = new DataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel>(
+                    serviceProvider.GetRequiredService<ILocalStorageService>(), 
+                    serviceProvider.GetRequiredService<IMapper>()
+                );
+
                 obj.InitWithFunction(async (id) =>
                 {
                     var actionsClient = serviceProvider.GetRequiredService<ActionsClient>();
