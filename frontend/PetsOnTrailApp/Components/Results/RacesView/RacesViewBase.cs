@@ -16,7 +16,7 @@ public class RacesViewBase : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        base.OnInitializedAsync();
+        await base.OnInitializedAsync();
 
         Model = await _actionsRepository.GetRacesForActionAsync(Guid.Parse(ActionId));
     }
