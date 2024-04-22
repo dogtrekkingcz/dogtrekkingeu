@@ -9,7 +9,7 @@
 else
 {
     <div>
-        <b>@Model.Name</b> - @Model.Begin - @Model.End (@Model.City) - Data from: <i>@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</i>
+        <b>@Model.Name</b> - @Model.Begin.ToString("dd.MM.yyyy") - @Model.End.ToString("dd.MM.yyyy") (@Model.City) - Data from: <i>@Model.SynchronizedAt.ToString("dd.MM.yyyy HH:mm")</i>
     </div>
     <hr />
 }
