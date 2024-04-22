@@ -22,10 +22,7 @@ public class DataStorageService<T> : IDataStorageService<T> where T : class
 
         if (await _localStorage.ContainKeyAsync(id.ToString()))
             data = await _localStorage.GetItemAsync<DataStorageModel<T>>(id.ToString(), cancellationToken);
-
-        Console.WriteLine($"DataStorageService.GetAsync: {id} => {data} -> {data.Data}");
-
-        if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
+        else if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
         {
             var loadedData = await _function.Invoke(id);
 
