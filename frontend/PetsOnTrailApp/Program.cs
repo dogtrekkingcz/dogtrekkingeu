@@ -17,6 +17,7 @@ using AppTokenProvider = PetsOnTrailApp.Providers.AppTokenProvider;
 using TokenStorage = PetsOnTrailApp.Providers.TokenStorage;
 using PetsOnTrailApp.Components;
 using PetsOnTrailApp.Pages;
+using PetsOnTrailApp.DataStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -41,7 +42,8 @@ builder.Services
     .AddScoped<TokenStorage>()
     .AddScoped<ITokenProvider, AppTokenProvider>()
     .AddComponents()
-    .AddPages();
+    .AddPages()
+    .AddDataStorage();
 
 builder.Services.AddSingleton(services =>
 {
