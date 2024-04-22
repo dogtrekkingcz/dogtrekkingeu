@@ -3,6 +3,7 @@
 @inherits RacesViewBase
 
 @inject IStringLocalizer<Resource> Localizer
+@inject NavigationManager Navigation
 
 <h1>@Localizer["Races"]</h1>
 
@@ -14,8 +15,8 @@ else
 {
     foreach (var race in Model.Races)
     {
-        <div>
-            <span>@race.Name</span>
-        </div>
+        <button class="btn btn-primary" @onclick="(() => NavigateToCategoriesOf(race.Id))">
+            @race.Name
+        </button>
     }
 }

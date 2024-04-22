@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PetsOnTrailApp.DataStorage;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using PetsOnTrailApp.Models;
 
@@ -10,7 +9,7 @@ public class RacesViewBase : ComponentBase
     [Parameter] public string ActionId { get; set; }
 
     [Inject] private IActionsRepository _actionsRepository { get; set; }
-
+    [Inject] private NavigationManager Navigation { get; set; }
 
     public RacesModel Model = null;
 
@@ -19,5 +18,10 @@ public class RacesViewBase : ComponentBase
         await base.OnInitializedAsync();
 
         Model = await _actionsRepository.GetRacesForActionAsync(Guid.Parse(ActionId));
+    }
+
+    protected void NavigateToCategoriesOf(Guid raceId)
+    {
+        Navigation.NavigateTo($"categories/{ActionId}/{raceId.ToString()}");
     }
 }
