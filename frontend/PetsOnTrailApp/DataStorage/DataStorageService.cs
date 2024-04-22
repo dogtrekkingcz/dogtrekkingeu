@@ -4,6 +4,7 @@ public class DataStorageService<T> : IDataStorageService<T> where T : class
 {
     private readonly Blazored.LocalStorage.ILocalStorageService _localStorage;
     private Func<Guid, Task<T>> _function;
+    private const int DATA_VALID_TIMEOUT = 5;
 
     public DataStorageService(Blazored.LocalStorage.ILocalStorageService localStorage)
     {
@@ -18,9 +19,9 @@ public class DataStorageService<T> : IDataStorageService<T> where T : class
     public async Task<DataStorageModel<T>> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var data = await _localStorage.GetItemAsync<DataStorageModel<T>>(id.ToString(), cancellationToken);
-        Console.WriteLine($"DataStorageService.GetAsync: {id} => {data}");
+        Console.WriteLine($"DataStorageService.GetAsync: {id} => {data} -> {data.Data}");
 
-        if (data == null)
+        if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
         {
             var loadedData = await _function.Invoke(id);
 
@@ -31,7 +32,7 @@ public class DataStorageService<T> : IDataStorageService<T> where T : class
                 Id = id
             };
 
-            Console.WriteLine($"DataStorageService.SetAsync: {id} => {data}");
+            Console.WriteLine($"DataStorageService.SetAsync: {id} => {data} -> {data.Data}");
 
             await _localStorage.SetItemAsync(id.ToString(), data, cancellationToken);
         }
