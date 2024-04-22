@@ -216,7 +216,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
-                                Id = IdLongDtm1
+                                Id = IdLongDtm1,
                                 Name = "DTM1",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
                                 {
