@@ -2,6 +2,7 @@
 using Mapster;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
+using PetsOnTrailApp.Shared.ResourceFiles;
 using Protos.Actions.GetSelectedPublicActionsList;
 using SharedLib.Extensions;
 
@@ -65,31 +66,31 @@ public static class PublicActionMapper
                 Races = MapFromProtoRaces(src.Data.Actions[0].Races)
             });
 
-        typeAdapterConfig.NewConfig<RaceDto, CategoriesModel>()
+        typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponseModel.RaceDto, CategoriesModel>()
             .MapWith((src) => new CategoriesModel
             {
                 SynchronizedAt = DateTime.Now,
-                RaceId = Guid.Parse(src.Id),
+                RaceId = src.Id,
                 Categories = src.Categories.Select(category => new CategoriesModel.CategoryDto
                 {
-                    Id = Guid.Parse(category.Id),
+                    Id = category.Id,
                     Name = category.Name,
                     Description = category.Description
                 }).ToList()
             });
 
-        typeAdapterConfig.NewConfig<CategoryDto, ResultsModel>()
+        typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponseModel.CategoryDto, ResultsModel>()
             .MapWith((category) => new ResultsModel
             {
                 SynchronizedAt = DateTime.Now,
-                CategoryId = Guid.Parse(category.Id),
-                Results = MapFromProtoResults(category.Racers)
+                CategoryId = category.Id,
+                Results = MapFromModelResults(category.Racers)
             });
 
         return typeAdapterConfig;
     }
 
-    private static List<ResultsModel.ResultDto> MapFromProtoResults(RepeatedField<RacerDto> racers)
+    private static List<ResultsModel.ResultDto> MapFromModelResults(IList<GetSelectedPublicActionsListResponseModel.RacerDto> racers)
     {
         var result = new List<ResultsModel.ResultDto>();
 
@@ -97,19 +98,19 @@ public static class PublicActionMapper
         {
             result.Add(new ResultsModel.ResultDto
             {
-                Id = Guid.Parse(racer.Id),
+                Id = racer.Id,
                 FirstName = racer.FirstName,
                 LastName = racer.LastName,
-                Start = racer.Start.ToDateTimeOffset()?.DateTime ?? DateTime.MinValue,
-                Finish = racer.Finish.ToDateTimeOffset()?.DateTime ?? DateTime.MinValue,
+                Start = racer.Start?.DateTime ?? DateTime.MinValue,
+                Finish = racer.Finish?.DateTime ?? DateTime.MinValue,
                 Pets = racer.Pets.Select(pet => pet.Name).ToList(),
                 State = racer.State switch
                 {
-                    RaceState.NotStarted => ResultsModel.ResultState.NotStarted,
-                    RaceState.Started => ResultsModel.ResultState.Started,
-                    RaceState.Finished => ResultsModel.ResultState.Finished,
-                    RaceState.DidNotFinished => ResultsModel.ResultState.DidNotFinished,
-                    RaceState.Disqualified => ResultsModel.ResultState.Disqualified,
+                    GetSelectedPublicActionsListResponseModel.RaceState.NotStarted => ResultsModel.ResultState.NotStarted,
+                    GetSelectedPublicActionsListResponseModel.RaceState.Started => ResultsModel.ResultState.Started,
+                    GetSelectedPublicActionsListResponseModel.RaceState.Finished => ResultsModel.ResultState.Finished,
+                    GetSelectedPublicActionsListResponseModel.RaceState.DidNotFinished => ResultsModel.ResultState.DidNotFinished,
+                    GetSelectedPublicActionsListResponseModel.RaceState.Disqualified => ResultsModel.ResultState.Disqualified,
                     _ => ResultsModel.ResultState.NotValid
                 }
             });
