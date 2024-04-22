@@ -161,8 +161,6 @@ public static class PublicActionMapper
 
         foreach (var race in races)
         {
-            Console.WriteLine($"Mapping from race to racemodel: {race.Dump()}");
-
             result.Add(new RacesModel.RaceDto
             {
                 Id = race.Id,
