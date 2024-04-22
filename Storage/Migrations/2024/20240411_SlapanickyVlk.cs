@@ -40,9 +40,15 @@ internal class _20240411_SlapanickyVlk : M_00_MigrationBase
                     new Entities.Actions.CreateActionInternalStorageRequest.RaceDto
                     {
                         Id = IdLong,
-                        Name = "Long",
+                        Name = "Dogtrekking",
                         Begin = new DateTime(2024, 4, 12, 7, 0, 0),
                         End = new DateTime(2024, 4, 14, 12, 0, 0),
+                        Limits = new Entities.Actions.CreateActionInternalStorageRequest.LimitsDto
+                        {
+                            WithPets = true,
+                            MinimalAgeOfRacerInDayes = 0,
+                            MinimalAgeOfThePetInDayes = 18 * 30,
+                        },
                         Distance = 92,
                         Categories = new List<Entities.Actions.CreateActionInternalStorageRequest.CategoryDto>
                         {
@@ -189,6 +195,12 @@ internal class _20240411_SlapanickyVlk : M_00_MigrationBase
                         Name = "Mid",
                         Begin = new DateTime(2024, 4, 13, 7, 0, 0),
                         End = new DateTime(2024, 4, 14, 12, 0, 0),
+                        Limits = new Entities.Actions.CreateActionInternalStorageRequest.LimitsDto
+                        {
+                            WithPets = true,
+                            MinimalAgeOfRacerInDayes = 0,
+                            MinimalAgeOfThePetInDayes = 18 * 30,
+                        },
                         Distance = 46,
                         Categories = new List<Entities.Actions.CreateActionInternalStorageRequest.CategoryDto>
                         {

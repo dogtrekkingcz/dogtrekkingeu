@@ -5,6 +5,17 @@ namespace Storage.Migrations._2024;
 internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
 {
     protected override Guid Id { get; init; } = Guid.Parse("e155cf24-1147-453a-8d08-0010a1dfceb7");
+    protected Guid IdLong { get; init; } = Guid.Parse("33d23dca-4c48-428a-9cfd-fbc904d1fb18");
+    protected Guid IdLongDtw1 { get; init; } = Guid.Parse("d12361b8-9d45-46a1-b3ed-9b744bd6ce6b");
+    protected Guid IdLongDtm1 { get; init; } = Guid.Parse("bdda20ff-a97d-4de3-ac32-0ac23d4fce7f");
+    protected Guid IdLongDtw2 { get; init; } = Guid.Parse("6b510642-0c64-4d63-874b-6e3f0fae9ad5");
+    protected Guid IdLongDtm2 { get; init; } = Guid.Parse("89c34c52-23bf-4bd6-9550-ab93b7db99f3");
+    protected Guid IdMid { get; init; } = Guid.Parse("58b23d8b-a700-4e33-9ac0-f957b3d1ee13");
+    protected Guid IdMidDmw1 { get; init; } = Guid.Parse("abc137d7-5093-4495-9ad4-b13e473add93");
+    protected Guid IdMidDmw2 { get; init; } = Guid.Parse("fc2819a3-7a95-48c3-b63f-76b478f08142");
+    protected Guid IdMidDmm1 { get; init; } = Guid.Parse("73dfe2b0-f3ae-45ad-ac41-5bbc2921cdaa");
+    protected Guid IdMidDmm2 { get; init; } = Guid.Parse("abbdb3a4-cd3a-4bac-9716-a0ee7a27c7d5");
+
     protected override string Name { get; init; } = nameof(_20240328_ZdeJsouLvi);
 
     public _20240328_ZdeJsouLvi(IServiceProvider serviceProvider) : base(serviceProvider) 
@@ -28,6 +39,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                 Races = new List<Entities.Actions.CreateActionInternalStorageRequest.RaceDto> {
                     new RaceDto
                     {
+                        Id = IdLong,
                         Name = "Dogtrekking",
                         EnteringFrom = new DateTime(2024, 3, 28, 17, 0, 0),
                         EnteringTo = new DateTime(2024, 4, 28, 17, 30, 0),
@@ -43,6 +55,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = IdLongDtw1,
                                 Name = "DTW1",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
                                 {
@@ -203,6 +216,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = IdLongDtm1
                                 Name = "DTM1",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
                                 {
@@ -358,6 +372,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = IdLongDtw2,
                                 Name = "DTW2",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
                                 {
@@ -526,6 +541,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = IdLongDtm2,
                                 Name = "DTM2",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
                                 {
@@ -721,11 +737,13 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                     },
                     new RaceDto
                     {
+                        Id = IdMid,
                         Name = "DogMid",
                         Categories = new List<CategoryDto>
                         {
                             new CategoryDto
                             {
+                                Id = IdMidDmw1,
                                 Name = "DMW1",
                                 Racers = new List<RacerDto>
                                 { 
@@ -747,6 +765,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             },
                             new CategoryDto
                             {
+                                Id = IdMidDmw2,
                                 Name = "DMW2",
                                 Racers = new List<RacerDto>
                                 { 
@@ -768,6 +787,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             },
                             new CategoryDto
                             {
+                                Id = IdMidDmm1,
                                 Name = "DMM1",
                                 Racers = new List<RacerDto>
                                 { 
@@ -789,6 +809,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                             },
                             new CategoryDto
                             {
+                                Id = IdMidDmm2,
                                 Name = "DMM2",
                                 Racers = new List<RacerDto>
                                 { 
