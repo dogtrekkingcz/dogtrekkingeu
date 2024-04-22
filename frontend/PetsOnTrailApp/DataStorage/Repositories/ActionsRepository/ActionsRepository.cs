@@ -29,17 +29,28 @@ public class ActionsRepository : IActionsRepository
         try
         {
             result = _races.GetValueOrDefault(actionId, default(RacesModel));
-
-            if (result == null)
-            {
-                await LoadAndParseActionAsync(actionId, CancellationToken.None);
-                result = _races.GetValueOrDefault(actionId, default(RacesModel));
-            }
         }
         finally
         {
             semaphoreSlim.Release();
         }
+
+        if (result == null)
+        {
+            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+        }
+
+
+        await semaphoreSlim.WaitAsync();
+        try
+        {
+            result = _races.GetValueOrDefault(actionId, default(RacesModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
+
 
         return result;
     }
@@ -52,12 +63,21 @@ public class ActionsRepository : IActionsRepository
         try
         {
             result = _categories.GetValueOrDefault((actionId, raceId), default(CategoriesModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
 
-            if (result == null)
-            {
-                await LoadAndParseActionAsync(actionId, CancellationToken.None);
-                result = _categories.GetValueOrDefault((actionId, raceId), default(CategoriesModel));
-            }
+        if (result == null)
+        {
+            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+        }
+
+        await semaphoreSlim.WaitAsync();
+        try
+        {
+            result = _categories.GetValueOrDefault((actionId, raceId), default(CategoriesModel));
         }
         finally
         {
@@ -76,12 +96,24 @@ public class ActionsRepository : IActionsRepository
         try
         {
             result = _results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
 
-            if (result == null)
-            {
-                await LoadAndParseActionAsync(actionId, CancellationToken.None);
-                result = _results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel));
-            }
+        if (result == null)
+        {
+            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+        }
+
+
+
+        await semaphoreSlim.WaitAsync();
+
+        try
+        {
+            result = _results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel));
         }
         finally
         {
