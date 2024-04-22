@@ -6,7 +6,7 @@ using static Protos.Actions.Actions;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
-public class ActionsRepository : IRepository<ActionsClient>
+public class ActionsRepository : IActionsRepository
 {
     private readonly IDataStorageService<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse> _dataStorageServicePublicActions;
     private readonly IMapper _mapper;
@@ -51,6 +51,11 @@ public class ActionsRepository : IRepository<ActionsClient>
     public async Task<ResultsModel> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId)
     {
         return await Task.FromResult(_results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel)));
+    }
+
+    public Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result)
+    {
+        throw new NotImplementedException();
     }
 
     private async Task LoadAndParseActionAsync(Guid actionId, CancellationToken cancellationToken)
