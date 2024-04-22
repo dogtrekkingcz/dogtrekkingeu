@@ -99,6 +99,7 @@ public class ActionsRepository : IActionsRepository
     private async Task LoadAndParseActionAsync(Guid actionId, CancellationToken cancellationToken)
     {
         var action = await _dataStorageServicePublicActions.GetAsync(actionId, cancellationToken);
+        Console.WriteLine($"LoadAndParseActionAsync: {actionId} => {action} -> {action.Data}");
 
         if (action != null)
         {
@@ -106,7 +107,11 @@ public class ActionsRepository : IActionsRepository
 
             try
             {
+                Console.WriteLine($"Mapping action {action} to RacesModel...");
                 _races[actionId] = _mapper.Map<RacesModel>(action);
+
+                Console.WriteLine($"{_races[actionId].Races.Count} mapped");
+
 
                 foreach (var race in action.Data.Actions[0].Races)
                 {
