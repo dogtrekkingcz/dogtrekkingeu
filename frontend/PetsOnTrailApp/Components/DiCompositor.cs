@@ -16,7 +16,7 @@ internal static class DiCompositor
             .AddTransient<LoadingBase>()
             .AddTransient<CategoriesViewBase>()
             .AddTransient<RacesViewBase>()
-            .AddTransient<ResultsCategoryViewBase>();
+            .AddTransient<CategoryViewBase>();
 
         return services;
     }

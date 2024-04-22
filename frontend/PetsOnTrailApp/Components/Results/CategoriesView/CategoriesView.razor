@@ -12,10 +12,22 @@
 }
 else
 {
-    foreach (var category in Model.Categories)
-    {
-        <div>
-            <span>@category.Name</span>
-        </div>
+    <div class="vh-100 d-flex flex-column align-items-stretch">
+
+    @{
+        bool isEven = true;
     }
+
+    @foreach (var category in Model.Categories)
+    {
+        var color = isEven ? "btn-primary" : "btn-info";
+
+        <button class="btn @color" @onclick="(() => NavigateToCategoryOf(category.Id))">
+            @category.Name
+        </button>
+
+        isEven = !isEven;
+    }
+
+    </div>
 }

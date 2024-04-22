@@ -107,6 +107,6 @@
       <AdditionalFiles Include="Components\Results\CategoriesView\CategoriesView.razor" />
       <AdditionalFiles Include="Components\Results\RacesView\RacesView.razor" />
       <AdditionalFiles Include="Components\Results\ResultsAdd\ResultsAdd.razor" />
-      <AdditionalFiles Include="Components\Results\CategoryView\ResultsCategoryView.razor" />
+      <AdditionalFiles Include="Components\Results\CategoryView\CategoryView.razor" />
     </ItemGroup>
 </Project>

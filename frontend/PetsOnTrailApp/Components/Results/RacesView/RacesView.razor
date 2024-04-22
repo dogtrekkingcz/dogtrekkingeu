@@ -3,7 +3,6 @@
 @inherits RacesViewBase
 
 @inject IStringLocalizer<Resource> Localizer
-@inject NavigationManager Navigation
 
 <h1>@Localizer["Races"]</h1>
 
@@ -13,10 +12,21 @@
 }
 else
 {
-    foreach (var race in Model.Races)
+    <div class="vh-100 d-flex flex-column align-items-stretch">
+
+    @{
+        bool isEven = true;
+    }
+    @foreach (var race in Model.Races)
     {
-        <button class="btn btn-primary" @onclick="(() => NavigateToCategoriesOf(race.Id))">
+        var color = isEven ? "btn-primary" : "btn-info";
+
+        <button class="btn @color" @onclick="(() => NavigateToCategoriesOf(race.Id))">
             @race.Name
         </button>
+
+        isEven = !isEven;
     }
+
+    </div>
 }

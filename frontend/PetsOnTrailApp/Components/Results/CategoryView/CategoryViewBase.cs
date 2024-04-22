@@ -5,7 +5,7 @@ using PetsOnTrailApp.Models;
 
 namespace PetsOnTrailApp.Components.Results.CategoryView;
 
-public class ResultsCategoryViewBase : ComponentBase
+public class CategoryViewBase : ComponentBase
 {
     [Parameter] public string ActionId { get; set; } = string.Empty;
     [Parameter] public string RaceId { get; set; } = string.Empty;
