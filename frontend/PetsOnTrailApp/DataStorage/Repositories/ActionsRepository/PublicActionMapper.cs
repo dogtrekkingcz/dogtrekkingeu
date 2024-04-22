@@ -58,7 +58,17 @@ public static class PublicActionMapper
                 Longitude = src.Longitude,
             });
 
-
+        typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponseModel>, ActionModel>()
+            .MapWith((src) => new ActionModel
+            {
+                SynchronizedAt = src.Created,
+                Id = src.Data.Actions[0].Id,
+                Name = src.Data.Actions[0].Name,
+                Description = src.Data.Actions[0].Description,
+                Begin = src.Data.Actions[0].Term.From.DateTime,
+                End = src.Data.Actions[0].Term.To.DateTime,
+                Type = ResolveActionType(src)
+            });
 
         typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponseModel>, RacesModel>()
             .MapWith((src) => new RacesModel
@@ -90,6 +100,29 @@ public static class PublicActionMapper
             });
 
         return typeAdapterConfig;
+    }
+
+    private static ActionModel.ActionType ResolveActionType(DataStorageModel<GetSelectedPublicActionsListResponseModel> src)
+    {
+        return src.Data.Actions[0].Type switch
+        {
+            GetSelectedPublicActionsListResponseModel.ActionType.Agility => ActionModel.ActionType.Agility,
+            //GetSelectedPublicActionsListResponseModel.ActionType.Bikejoring => ActionModel.ActionType.Bikejoring,
+            //GetSelectedPublicActionsListResponseModel.ActionType.Canicross => ActionModel.ActionType.Canicross,
+            GetSelectedPublicActionsListResponseModel.ActionType.Dogtrekking => ActionModel.ActionType.Dogtrekking,
+            //GetSelectedPublicActionsListResponseModel.ActionType.Scooter => ActionModel.ActionType.Scooter,
+            //GetSelectedPublicActionsListResponseModel.ActionType.Skijoring => ActionModel.ActionType.Skijoring,
+            //GetSelectedPublicActionsListResponseModel.ActionType.Sleddog => ActionModel.ActionType.Sleddog,
+            //GetSelectedPublicActionsListResponseModel.ActionType.Trail => ActionModel.ActionType.Trail,
+            GetSelectedPublicActionsListResponseModel.ActionType.Obedience => ActionModel.ActionType.Obedience,
+            GetSelectedPublicActionsListResponseModel.ActionType.RallyObedience => ActionModel.ActionType.RallyObedience,
+            //GetSelectedPublicActionsListResponseModel.ActionType.Flyball => ActionModel.ActionType.Flyball,
+            //GetSelectedPublicActionsListResponseModel.ActionType.DogDance => ActionModel.ActionType.DogDance,
+            //GetSelectedPublicActionsListResponseModel.ActionType.DogFrisbee => ActionModel.ActionType.DogFrisbee,
+            //GetSelectedPublicActionsListResponseModel.ActionType.DogJumping => ActionModel.ActionType.DogJumping,
+            GetSelectedPublicActionsListResponseModel.ActionType.Trip => ActionModel.ActionType.Trip,
+            _ => ActionModel.ActionType.Unspecified
+        };
     }
 
     private static List<ResultsModel.ResultDto> MapFromModelResults(IList<GetSelectedPublicActionsListResponseModel.RacerDto> racers)

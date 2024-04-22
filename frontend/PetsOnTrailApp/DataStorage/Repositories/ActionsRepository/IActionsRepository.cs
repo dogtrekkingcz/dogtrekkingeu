@@ -4,6 +4,8 @@ namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
 public interface IActionsRepository
 {
+    Task <ActionModel> GetActionModelAsync(Guid actionId);
+
     Task<RacesModel> GetRacesForActionAsync(Guid actionId);
 
     Task<CategoriesModel> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId);

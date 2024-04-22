@@ -11,6 +11,7 @@ public class ActionsRepository : IActionsRepository
 
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
+    private Dictionary<Guid, ActionModel> _actions = new Dictionary<Guid, ActionModel>();
     private Dictionary<Guid, RacesModel> _races = new Dictionary<Guid, RacesModel>();
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
@@ -123,6 +124,40 @@ public class ActionsRepository : IActionsRepository
         return result;
     }
 
+    public async Task<ActionModel> GetActionModelAsync(Guid actionId)
+    {
+        var result = null as ActionModel;
+
+        await semaphoreSlim.WaitAsync();
+
+        try
+        {
+            result = _actions.GetValueOrDefault(actionId, default(ActionModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
+
+        if (result == null)
+        {
+            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+        }
+
+        await semaphoreSlim.WaitAsync();
+
+        try
+        {
+            result = _actions.GetValueOrDefault(actionId, default(ActionModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
+
+        return result;
+    }
+
     public Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result)
     {
         throw new NotImplementedException();
@@ -131,7 +166,6 @@ public class ActionsRepository : IActionsRepository
     private async Task LoadAndParseActionAsync(Guid actionId, CancellationToken cancellationToken)
     {
         var action = await _dataStorageServicePublicActions.GetAsync(actionId, cancellationToken);
-        Console.WriteLine($"LoadAndParseActionAsync: {actionId} => {action} -> {action.Data}");
 
         if (action != null)
         {
@@ -139,11 +173,9 @@ public class ActionsRepository : IActionsRepository
 
             try
             {
-                Console.WriteLine($"Mapping action {action} to RacesModel...");
+                _actions[actionId] = _mapper.Map<ActionModel>(action);
+
                 _races[actionId] = _mapper.Map<RacesModel>(action);
-
-                Console.WriteLine($"{_races[actionId].Races.Count} mapped");
-
 
                 foreach (var race in action.Data.Actions[0].Races)
                 {
@@ -152,12 +184,15 @@ public class ActionsRepository : IActionsRepository
                     _categories[(actionId, raceId)] = _mapper.Map<CategoriesModel>(race) with
                     {
                         ActionId = action.Data.Actions[0].Id,
-                        SynchronizedAt = DateTime.Now,
+                        SynchronizedAt = action.Created
                     };
 
                     foreach (var category in race.Categories)
                     {
-                        _results[(actionId, raceId, category.Id)] = _mapper.Map<ResultsModel>(category);
+                        _results[(actionId, raceId, category.Id)] = _mapper.Map<ResultsModel>(category) with
+                        {
+                            SynchronizedAt = action.Created
+                        };
                     }
                 }
             }

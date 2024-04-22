@@ -1,0 +1,15 @@
+﻿@inherits ActionViewBase
+
+@inject IStringLocalizer<Resource> Localizer
+
+@if (Model == null)
+{
+    <Loading />
+}
+else
+{
+    <div>
+        <b>@Model.Name</b> - @Model.Begin - @Model.End (@Model.City) - Data from: <i>@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</i>
+    </div>
+    <hr />
+}

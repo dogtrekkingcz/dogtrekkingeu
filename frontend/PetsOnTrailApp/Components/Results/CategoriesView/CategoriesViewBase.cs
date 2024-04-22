@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Localization;
-using Microsoft.Maui.Controls;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using PetsOnTrailApp.Models;
 
@@ -25,6 +23,6 @@ public class CategoriesViewBase : ComponentBase
 
     protected void NavigateToCategoryOf(Guid categoryId)
     {
-        Navigation.NavigateTo($"category/{ActionId}/{RaceId}/{categoryId.ToString()}");
+        Navigation.NavigateTo($"category/{ActionId}/{RaceId}/{categoryId}");
     }
 }
