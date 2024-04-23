@@ -4,9 +4,9 @@ namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
 public interface IActionsRepository
 {
-    Task<IList<ActionModel>> GetAllActionsByTypeAsync(Guid typeId);
+    Task<IList<SimpleActionModel>> GetAllActionsByTypeAsync(Guid typeId, CancellationToken cancellationToken);
 
-    Task <ActionModel> GetActionModelAsync(Guid actionId);
+    Task <SimpleActionModel> GetActionModelAsync(Guid actionId, CancellationToken cancellationToken);
 
     Task<RacesModel> GetRacesForActionAsync(Guid actionId);
 

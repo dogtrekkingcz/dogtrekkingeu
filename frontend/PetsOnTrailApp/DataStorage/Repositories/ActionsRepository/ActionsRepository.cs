@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using Microsoft.Extensions.Options;
 using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Results;
@@ -13,8 +14,7 @@ public class ActionsRepository : IActionsRepository
 
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
-    private Dictionary<Guid, ActionSimpleModel> _actionsSimple = new Dictionary<Guid, ActionSimpleModel>();
-    private Dictionary<Guid, ActionModel> _actions = new Dictionary<Guid, ActionModel>();
+    private Dictionary<Guid, IList<SimpleActionModel>> _actionsSimple = new Dictionary<Guid, IList<SimpleActionModel>>();
     private Dictionary<Guid, RacesModel> _races = new Dictionary<Guid, RacesModel>();
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
@@ -25,14 +25,14 @@ public class ActionsRepository : IActionsRepository
         _mapper = mapper;
     }
 
-    public async Task<IList<ActionModel>> GetAllActionsByTypeAsync(Guid typeId)
+    public async Task<IList<SimpleActionModel>> GetAllActionsByTypeAsync(Guid typeId, CancellationToken cancellationToken)
     {
-        var actions = new List<ActionModel>();
+        IList<SimpleActionModel> result = null;
 
         await semaphoreSlim.WaitAsync();
         try
         {
-            result = _actionsSimple.GetValueOrDefault(typeId, default(ActionSimpleModel));
+            result = _actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>));
         }
         finally
         {
@@ -41,21 +41,21 @@ public class ActionsRepository : IActionsRepository
 
         if (result == null)
         {
-            await LoadAndParseActionsSimpleAsync(typeId, CancellationToken.None);
+            await LoadAndParseActionsSimpleAsync(typeId, cancellationToken);
         }
 
 
         await semaphoreSlim.WaitAsync();
         try
         {
-            result = _actionsSimple.GetValueOrDefault(typeId, default(ActionSimpleModel));
+            result = _actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>));
         }
         finally
         {
             semaphoreSlim.Release();
         }
 
-        return actions;
+        return result;
     }
 
     public async Task<RacesModel> GetRacesForActionAsync(Guid actionId)
@@ -160,15 +160,16 @@ public class ActionsRepository : IActionsRepository
         return result;
     }
 
-    public async Task<ActionModel> GetActionModelAsync(Guid actionId)
+    public async Task<SimpleActionModel> GetActionModelAsync(Guid actionId, CancellationToken cancellationToken)
     {
-        var result = null as ActionModel;
+        var result = null as SimpleActionModel;
 
         await semaphoreSlim.WaitAsync();
 
         try
         {
-            result = _actions.GetValueOrDefault(actionId, default(ActionModel));
+            // TODO validate it!!!
+            result = _actionsSimple.FirstOrDefault(it => it.Value.Any(i => i.Id == actionId)).Value[0];
         }
         finally
         {
@@ -184,7 +185,7 @@ public class ActionsRepository : IActionsRepository
 
         try
         {
-            result = _actions.GetValueOrDefault(actionId, default(ActionModel));
+            result = _actionsSimple.GetValueOrDefault(actionId, default(SimpleActionModel));
         }
         finally
         {
