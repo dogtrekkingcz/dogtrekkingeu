@@ -1,4 +1,6 @@
-﻿namespace Storage.Migrations._2024;
+﻿using Constants;
+
+namespace Storage.Migrations._2024;
 
 internal class _20240425_KrusnohorskyDogtrekking : M_00_MigrationBase
 {
@@ -12,6 +14,7 @@ internal class _20240425_KrusnohorskyDogtrekking : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "Krušnohorský dogtrekking",
+                Type = ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Kemp Stebnice, obec Lipová u Chebu"

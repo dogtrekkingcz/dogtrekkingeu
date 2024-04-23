@@ -33,7 +33,7 @@ internal static class DogtrekkingCzMapping
                     ZipCode = string.Empty
                 },
                 Description = s.Description ?? string.Empty,
-                Type = CreateActionInternalStorageRequest.ActionType.Dogtrekking,
+                Type = string.Empty,
                 ContactMail = s.ContactMail ?? string.Empty,
                 Checkpoints = new List<CreateActionInternalStorageRequest.CheckpointDto>(),
                 Sale = new CreateActionInternalStorageRequest.ActionSaleDto

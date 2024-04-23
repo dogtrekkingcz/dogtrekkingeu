@@ -27,6 +27,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "ZDE JSOU LVI",
+                Type = Constants.ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Rychta a fara v Úvalně"

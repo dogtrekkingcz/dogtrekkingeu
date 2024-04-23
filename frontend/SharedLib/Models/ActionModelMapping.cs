@@ -8,7 +8,6 @@ namespace SharedLib.Models;
     internal static TypeAdapterConfig AddActionModelMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.CreateAction.CreateActionRequest>();
-        typeAdapterConfig.NewConfig<ActionModel.ActionType, Protos.Actions.CreateAction.ActionType>();
         typeAdapterConfig.NewConfig<ActionModel.RacerDto, Protos.Actions.CreateAction.RacerDto>();
         typeAdapterConfig.NewConfig<ActionModel.NoteDto, Protos.Actions.CreateAction.NoteDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDto, Protos.Actions.CreateAction.PaymentDto>();
@@ -33,7 +32,6 @@ namespace SharedLib.Models;
             .Map(d => d.Passed, s => s.Passed.ToGoogleDateTime());
         
         typeAdapterConfig.NewConfig<ActionModel, Protos.Actions.UpdateAction.UpdateActionRequest>();
-        typeAdapterConfig.NewConfig<ActionModel.ActionType, Protos.Actions.UpdateAction.ActionType>();
         typeAdapterConfig.NewConfig<ActionModel.RacerDto, Protos.Actions.UpdateAction.RacerDto>();
         typeAdapterConfig.NewConfig<ActionModel.NoteDto, Protos.Actions.UpdateAction.NoteDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDto, Protos.Actions.UpdateAction.PaymentDto>();
@@ -58,7 +56,6 @@ namespace SharedLib.Models;
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionResponse, ActionModel>()
             .Map(d => d.Created, s => s.Created.ToDateTimeOffset());
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RacerDto, ActionModel.RacerDto>()
             .Map(d => d.Finish, s => s.Finish.ToDateTimeOffset())
             .Map(d => d.Start, s => s.Start.ToDateTimeOffset());
@@ -99,7 +96,6 @@ namespace SharedLib.Models;
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.Action, ActionModel>()
             .Ignore(d => d.Checkpoints);
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RacerDto, ActionModel.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.NoteDto, ActionModel.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.PaymentDto, ActionModel.PaymentDto>();
@@ -123,7 +119,6 @@ namespace SharedLib.Models;
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionDto, ActionModel>()
             .Ignore(d => d.Created);
-        typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RacerDto, ActionModel.RacerDto>()
             .Ignore(d => d.Phone)
             .Ignore(d => d.Email)
@@ -160,7 +155,6 @@ namespace SharedLib.Models;
         
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.ActionDto, ActionModel>()
             .Ignore(d => d.Created);
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.RacerDto, ActionModel.RacerDto>()
             .Ignore(d => d.Phone)
             .Ignore(d => d.Email)
@@ -196,7 +190,6 @@ namespace SharedLib.Models;
             .Map(d => d.Passed, s => s.Passed.ToDateTimeOffset());
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.Action, ActionModel>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionType, ActionModel.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RacerDto, ActionModel.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.NoteDto, ActionModel.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PaymentDto, ActionModel.PaymentDto>();

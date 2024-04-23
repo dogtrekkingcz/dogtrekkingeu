@@ -14,18 +14,5 @@ public sealed record ActionModel : BaseSynchronizedModel
 
     public DateTime End { get; init; }
 
-    public ActionType Type { get; init; }
-
-
-    public enum ActionType
-    {
-        Unspecified = 0,
-        Trip = 1,
-        Dogtrekking = 2,
-        RallyObedience = 3,
-        Obedience = 4,
-        Agility = 5,
-        Mushing = 6,
-        HorseMountainTrail = 7
-    }
+    public string Type { get; init; }
 }

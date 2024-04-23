@@ -12,6 +12,7 @@ internal class _20240905_FrystackyDogtrekking : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "Fryštácký dogtrekking",
+                Type = Constants.ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Ranč kemp Bystřička"

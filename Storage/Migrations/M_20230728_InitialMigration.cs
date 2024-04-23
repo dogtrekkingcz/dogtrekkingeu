@@ -89,12 +89,194 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 }
             }, CancellationToken.None))
 
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Dogtrekking,
+                Name = "Dogtrekking",
+                Description = "Dogtrekking",
+                AdapterPrefix = "dogtrekking",
+                IconPath = "/icons/activity_types/dogtrekking.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Obedience,
+                Name = "Obedience",
+                Description = "Obedience",
+                AdapterPrefix = "obedience",
+                IconPath = "/icons/activity_types/obedience.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = true
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.RallyObedience,
+                Name = "Rally Obedience",
+                Description = "Rally Obedience",
+                AdapterPrefix = "rallyobedience",
+                IconPath = "/icons/activity_types/rallyobedience.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = true
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Agility,
+                Name = "Agility",
+                Description = "Agility",
+                AdapterPrefix = "agility",
+                IconPath = "/icons/activity_types/agility.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = true
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Canicross,
+                Name = "Canicross",
+                Description = "Canicross",
+                AdapterPrefix = "canicross",
+                IconPath = "/icons/activity_types/canicross.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Bikejoring,
+                Name = "Bikejoring",
+                Description = "Bikejoring",
+                AdapterPrefix = "bikejoring",
+                IconPath = "/icons/activity_types/bikejoring.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Skijoring,
+                Name = "Skijoring",
+                Description = "Skijoring",
+                AdapterPrefix = "skijoring",
+                IconPath = "/icons/activity_types/skijoring.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.SledDog,
+                Name = "Sled Dog",
+                Description = "Sled Dog",
+                AdapterPrefix = "sleddog",
+                IconPath = "/icons/activity_types/sleddog.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.DogDancing,
+                Name = "Dog Dancing",
+                Description = "Dog Dancing",
+                AdapterPrefix = "dogdancing",
+                IconPath = "/icons/activity_types/dogdancing.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Frisbee,
+                Name = "Frisbee",
+                Description = "Frisbee",
+                AdapterPrefix = "frisbee",
+                IconPath = "/icons/activity_types/frisbee.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Flyball,
+                Name = "Flyball",
+                Description = "Flyball",
+                AdapterPrefix = "flyball",
+                IconPath = "/icons/activity_types/flyball.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.DiscDog,
+                Name = "Disc Dog",
+                Description = "Disc Dog",
+                AdapterPrefix = "discdog",
+                IconPath = "/icons/activity_types/discdog.png",
+                TimeTracking = true,
+                DistanceTracking = false,
+                SpeedTracking = false,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.DogHiking,
+                Name = "Dog Hiking",
+                Description = "Dog Hiking",
+                AdapterPrefix = "doghiking",
+                IconPath = "/icons/activity_types/doghiking.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
             // ------------------------------------------------------------------------------------------------------------
 
             .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdRadekKotesovec }, CancellationToken.None))
             .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdAdmin }, CancellationToken.None))
             .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalAdministrator.Id.ToString(), CancellationToken.None))
             .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalUser.Id.ToString(), CancellationToken.None))
-            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.ExternalUser.Id.ToString(), CancellationToken.None));
+            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.ExternalUser.Id.ToString(), CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Dogtrekking, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Obedience, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.RallyObedience, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Agility, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Canicross, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Bikejoring, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Skijoring, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.SledDog, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DogDancing, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Frisbee, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Flyball, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DiscDog, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DogHiking, CancellationToken.None));
     }
 }

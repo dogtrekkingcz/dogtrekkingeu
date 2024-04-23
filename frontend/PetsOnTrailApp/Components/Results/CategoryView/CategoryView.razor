@@ -62,8 +62,8 @@
             <td>
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">@Localizer["Results.Start"]: @racer.Start?.ToString("dd HH:mm:ss")</div>
-                        <div class="col-12">@Localizer["Results.Finish"]: @racer.Finish?.ToString("dd HH:mm:ss")</div>
+                        <div class="col-12">@Localizer["Results.Start"]: @racer.Start?.ToString("dd HH:mm:ss") ?? "-- --:--:--"</div>
+                        <div class="col-12">@Localizer["Results.Finish"]: @racer.Finish?.ToString("dd HH:mm:ss") ?? "-- --:--:--"</div>
                         <hr />
                         <div class="col-12"><b>@time</b></div>
                     </div>

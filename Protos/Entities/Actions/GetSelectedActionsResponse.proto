@@ -22,18 +22,7 @@ message Action {
   repeated CheckpointDto Checkpoints = 8;
   repeated RaceDto Races = 9;
   ActionSaleDto Sale = 10;
-  ActionType Type = 11;
-}
-
-enum ActionType {
-  Unspecified = 0;
-  Trip = 1;
-  Dogtrekking = 2;
-  RallyObedience = 3;
-  Obedience = 4;
-  Agility = 5;
-  Mushing = 6;
-  HorseMountainTrail = 7;
+  string Type = 11;
 }
 
 message CheckpointDto {

@@ -1,27 +1,29 @@
 syntax = "proto3";
 
-option csharp_namespace = "Protos.Actions.GetPublicActionsList";
+option csharp_namespace = "Protos.Actions.GetSimpleActionsList";
 
-package getpublicactionslist;
+package getsimpleactionslist;
 
 import "google/type/datetime.proto";
 import "google/type/latlng.proto";
 
-message GetPublicActionsListResponse {
-  repeated ActionDto Actions = 1;
+message GetSimpleActionsListResponse {
+  repeated SimpleActionDto Actions = 1;
 }
 
-message ActionDto {
+message SimpleActionDto {
   string Id = 1;
-  string Type = 2;
+  string IdTypeOfAction = 2;
   string Name = 3;
   string Description = 4;
-  string ContactMail = 5;
-  TermDto Term = 6;
-  AddressDto Address = 7;
-  repeated CheckpointDto Checkpoints = 8;
-  repeated RaceDto Races = 9;
-  ActionSaleDto Sale = 10;
+  string Organizator = 5;
+  string ContactMail = 6;
+  google.type.DateTime Begin = 7;
+  google.type.DateTime End = 8;
+  string City = 9;
+  string Street = 10;
+  repeated RaceDto Races = 11;
+  string Type = 12;
 }
 
 message CheckpointDto {

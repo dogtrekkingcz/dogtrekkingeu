@@ -15,7 +15,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.GetAllActionsRequest, GetAllActionsRequest>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse, Protos.Actions.GetAllActions.GetAllActionsResponse>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.ActionDto, Protos.Actions.GetAllActions.Action>();
-        typeAdapterConfig.NewConfig<GetAllActionsResponse.ActionType, Protos.Actions.GetAllActions.ActionType>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.RacerDto, Protos.Actions.GetAllActions.RacerDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.NoteDto, Protos.Actions.GetAllActions.NoteDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.PaymentDto, Protos.Actions.GetAllActions.PaymentDto>();
@@ -41,7 +40,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.GetSelectedActionsRequest, GetSelectedActionsRequest>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse, Protos.Actions.GetSelectedActions.GetSelectedActionsResponse>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.ActionDto, Protos.Actions.GetSelectedActions.Action>();
-        typeAdapterConfig.NewConfig<GetSelectedActionsResponse.ActionType, Protos.Actions.GetSelectedActions.ActionType>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.RacerDto, Protos.Actions.GetSelectedActions.RacerDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.NoteDto, Protos.Actions.GetSelectedActions.NoteDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.PaymentDto, Protos.Actions.GetSelectedActions.PaymentDto>();
@@ -66,7 +64,6 @@ internal static class ActionsServiceMapping
         
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.GetActionRequest, GetActionRequest>();
         typeAdapterConfig.NewConfig<GetActionResponse, Protos.Actions.GetAction.GetActionResponse>();
-        typeAdapterConfig.NewConfig<GetActionResponse.ActionType, Protos.Actions.GetAction.ActionType>();
         typeAdapterConfig.NewConfig<GetActionResponse.RacerDto, Protos.Actions.GetAction.RacerDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.NoteDto, Protos.Actions.GetAction.NoteDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.PaymentDto, Protos.Actions.GetAction.PaymentDto>();
@@ -90,7 +87,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionResponse.LatLngDto, Google.Type.LatLng>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.CreateActionRequest, CreateActionRequest>();
-        typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.ActionType, CreateActionRequest.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.RacerDto, CreateActionRequest.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.NoteDto, CreateActionRequest.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.PaymentDto, CreateActionRequest.PaymentDto>();
@@ -116,7 +112,6 @@ internal static class ActionsServiceMapping
 
 
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.UpdateActionRequest, UpdateActionRequest>();
-        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.ActionType, UpdateActionRequest.ActionType>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RacerDto, UpdateActionRequest.RacerDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.NoteDto, UpdateActionRequest.NoteDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.PaymentDto, UpdateActionRequest.PaymentDto>();
@@ -142,7 +137,6 @@ internal static class ActionsServiceMapping
         
 
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse, Protos.Actions.GetActionEntrySettings.GetActionEntrySettingsResponse>();
-        typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.ActionType, Protos.Actions.GetActionEntrySettings.ActionType>();
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.RaceDto, Protos.Actions.GetActionEntrySettings.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.CategoryDto, Protos.Actions.GetActionEntrySettings.CategoryDto>();
         typeAdapterConfig.NewConfig<GetActionEntrySettingsResponse.RaceLimits, Protos.Actions.GetActionEntrySettings.RaceLimitsDto>();
@@ -184,7 +178,6 @@ internal static class ActionsServiceMapping
         
         typeAdapterConfig.NewConfig<GetPublicActionsListResponse, Protos.Actions.GetPublicActionsList.GetPublicActionsListResponse>();
         typeAdapterConfig.NewConfig<GetPublicActionsListResponse.ActionDto, Protos.Actions.GetPublicActionsList.ActionDto>();
-        typeAdapterConfig.NewConfig<GetPublicActionsListResponse.ActionType, Protos.Actions.GetPublicActionsList.ActionType>();
         typeAdapterConfig.NewConfig<GetPublicActionsListResponse.RacerDto, Protos.Actions.GetPublicActionsList.RacerDto>();
         typeAdapterConfig.NewConfig<GetPublicActionsListResponse.AddressDto, Protos.Actions.GetPublicActionsList.AddressDto>();
         typeAdapterConfig.NewConfig<GetPublicActionsListResponse.CategoryDto, Protos.Actions.GetPublicActionsList.CategoryDto>();
@@ -202,7 +195,6 @@ internal static class ActionsServiceMapping
         
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse, Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse>();
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.ActionDto, Protos.Actions.GetSelectedPublicActionsList.ActionDto>();
-        typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.ActionType, Protos.Actions.GetSelectedPublicActionsList.ActionType>();
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.RacerDto, Protos.Actions.GetSelectedPublicActionsList.RacerDto>();
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.AddressDto, Protos.Actions.GetSelectedPublicActionsList.AddressDto>();
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.CategoryDto, Protos.Actions.GetSelectedPublicActionsList.CategoryDto>();

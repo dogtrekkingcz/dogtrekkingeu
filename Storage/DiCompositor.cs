@@ -84,6 +84,9 @@ public static class DiCompositor
             
             .AddSingleton<IStorageService<MigrationRecord>, StorageService<MigrationRecord>>()
             .AddScoped<IMigrationsRepositoryService, MigrationsRepositoryService>()
+
+            .AddSingleton<IStorageService<ActivityTypeRecord>, StorageService<ActivityTypeRecord>>()
+            .AddScoped<IActivityTypeRepositoryService, ActivityTypeRepositoryService>()
             
             .AddScoped<IMigrationsService, MigrationsService>();
         
@@ -106,7 +109,8 @@ public static class DiCompositor
             .AddCheckpointsRepositoryMapping()
             .AddActivitiesRepositoryMapping()
             .AddMigrationsRepositoryMapping()
-            .AddAuthorizationRolesRepositoryMapping();
+            .AddAuthorizationRolesRepositoryMapping()
+            .AddActivityTypeRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
         BsonClassMap.RegisterClassMap<UserProfileRecord>();
@@ -117,6 +121,7 @@ public static class DiCompositor
         BsonClassMap.RegisterClassMap<CheckpointRecord>();
         BsonClassMap.RegisterClassMap<ActivityRecord>();
         BsonClassMap.RegisterClassMap<MigrationRecord>();
+        BsonClassMap.RegisterClassMap<ActivityTypeRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
 
@@ -160,6 +165,10 @@ public static class DiCompositor
         {
             db.CreateCollection("Migrations");
         }
+        if (listOfCollections.Contains("ActivityTypes") == false)
+        {
+            db.CreateCollection("ActivityTypes");
+        }
 
         Console.WriteLine($"MongoDb.PetsOnTrail.Collections with initialized collections: {db.ListCollectionNames()}");
         
@@ -172,6 +181,7 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IMongoCollection<EntryRecord>>(db.GetCollection<EntryRecord>("Entries"));
         serviceProvider.AddSingleton<IMongoCollection<ActivityRecord>>(db.GetCollection<ActivityRecord>("Activities"));
         serviceProvider.AddSingleton<IMongoCollection<MigrationRecord>>(db.GetCollection<MigrationRecord>("Migrations"));
+        serviceProvider.AddSingleton<IMongoCollection<ActivityTypeRecord>>(db.GetCollection<ActivityTypeRecord>("ActivityTypes"));
 
         return serviceProvider;
     }   

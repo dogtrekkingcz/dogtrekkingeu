@@ -12,6 +12,7 @@ internal class _20240613_DTKrajemBridlice : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "DT Krajem břidlice",
+                Type = Constants.ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Šternberk"

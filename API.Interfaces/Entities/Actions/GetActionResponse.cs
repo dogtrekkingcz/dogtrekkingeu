@@ -6,7 +6,7 @@ public sealed record GetActionResponse
     
     public DateTimeOffset Created { get; set; }
 
-    public ActionType Type { get; set; } = ActionType.Unspecified;
+    public string Type { get; set; } = string.Empty;
     
     public string Name { get; set; } = string.Empty;
 
@@ -24,18 +24,6 @@ public sealed record GetActionResponse
 
     public ActionSaleDto Sale { get; set; } = new();
     
-    public enum ActionType
-    {
-        Unspecified = 0,
-        Trip = 1,
-        Dogtrekking = 2,
-        RallyObedience = 3,
-        Obedience = 4,
-        Agility = 5,
-        Mushing = 6,
-        HorseMountainTrail = 7
-    }
-
     public sealed record CheckpointDto
     {
         public Guid Id { get; set; } = default(Guid);

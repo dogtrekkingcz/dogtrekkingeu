@@ -8,7 +8,7 @@ public sealed record CreateActionInternalStorageRequest
     
     public DateTimeOffset Created { get; set; }
     
-    public ActionType Type { get; set; }
+    public string Type { get; set; }
 
     public string Name { get; set; } = string.Empty;
 
@@ -25,19 +25,6 @@ public sealed record CreateActionInternalStorageRequest
     public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 
     public ActionSaleDto Sale { get; set; } = new();
-    
-    public enum ActionType
-    {
-        Unspecified = 0,
-        Trip = 1,
-        Dogtrekking = 2,
-        RallyObedience = 3,
-        Obedience = 4,
-        Agility = 5,
-        Mushing = 6,
-        HorseMountainTrail = 7
-    }
-
     
     public sealed record CheckpointDto
     {

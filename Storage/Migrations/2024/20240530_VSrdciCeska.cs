@@ -12,6 +12,7 @@ internal class _20240530_VSrdciCeska : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "V srdci Česka",
+                Type = Constants.ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Kemp MOŘE, rybník ŘEKA, Krucemburk"
