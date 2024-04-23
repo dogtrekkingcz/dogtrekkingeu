@@ -423,5 +423,12 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             
             return _mapper.Map<GetSelectedPublicActionsListResponse>(actions);
         }
+
+        public async Task<GetSimpleActionsListByTypeResponse> GetSimpleActionsListByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
+        {
+            var actions = await _actionsRepositoryService.GetSimpleActionsListByTypeAsync(typeIds, cancellationToken);
+
+            return _mapper.Map<GetSimpleActionsListByTypeResponse>(actions);
+        }
     }
 }

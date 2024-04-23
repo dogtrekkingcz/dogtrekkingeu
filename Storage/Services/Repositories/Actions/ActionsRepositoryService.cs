@@ -134,5 +134,17 @@ namespace Storage.Services.Repositories.Actions
             
             return response;
         }
+
+        public async Task<GetSimpleActionsListByTypeInternalStorageResponse> GetSimpleActionsListByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
+        {
+            var actions = await _actionsStorageService.GetSelectedListAsync("type", typeIds.Select(id => id.ToString()).ToList(), cancellationToken);
+
+            var response = new GetSimpleActionsListByTypeInternalStorageResponse
+            {
+                Actions = actions.Select(action => _mapper.Map<GetSimpleActionsListByTypeInternalStorageResponse.ActionDto>(action)).ToList()
+            };
+
+            return response;
+        }
     }
 }

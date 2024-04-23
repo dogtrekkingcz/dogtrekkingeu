@@ -171,6 +171,21 @@ namespace Storage.Services.Repositories.Actions
                 .Ignore(d => d.UriToPhoto)
                 .Ignore(d => d.Contact);
 
+            typeAdapterConfig.NewConfig<ActionRecord, GetSimpleActionsListByTypeInternalStorageResponse.ActionDto>()
+                .MapWith((src) => new GetSimpleActionsListByTypeInternalStorageResponse.ActionDto
+                {
+                    Id = Guid.Parse(src.Id),
+                    Begin = src.Term.From.DateTime,
+                    End = src.Term.To.DateTime,
+                    City = src.Address.City,
+                    Name = src.Name,
+                    Type = src.Type,
+                    Description = src.Description,
+                    Races = src.Races
+                                .Select(race => new GetSimpleActionsListByTypeInternalStorageResponse.RaceDto { Id = race.Id, Name = race.Name })
+                                .ToList()
+                });
+
             return typeAdapterConfig;
         }
     }

@@ -1,16 +1,19 @@
 ﻿using MapsterMapper;
 using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
+using Protos.Results;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
 public class ActionsRepository : IActionsRepository
 {
     private readonly IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> _dataStorageServicePublicActions;
+    private readonly IDataStorageService<GetSimpleActionsListByTypeResponse, GetSimpleActionsListByTypeResponseModel> _dataStorageServiceActionsByType;
     private readonly IMapper _mapper;
 
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
+    private Dictionary<Guid, ActionSimpleModel> _actionsSimple = new Dictionary<Guid, ActionSimpleModel>();
     private Dictionary<Guid, ActionModel> _actions = new Dictionary<Guid, ActionModel>();
     private Dictionary<Guid, RacesModel> _races = new Dictionary<Guid, RacesModel>();
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
@@ -20,6 +23,39 @@ public class ActionsRepository : IActionsRepository
     {
         _dataStorageServicePublicActions = dataStorageService;
         _mapper = mapper;
+    }
+
+    public async Task<IList<ActionModel>> GetAllActionsByTypeAsync(Guid typeId)
+    {
+        var actions = new List<ActionModel>();
+
+        await semaphoreSlim.WaitAsync();
+        try
+        {
+            result = _actionsSimple.GetValueOrDefault(typeId, default(ActionSimpleModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
+
+        if (result == null)
+        {
+            await LoadAndParseActionsSimpleAsync(typeId, CancellationToken.None);
+        }
+
+
+        await semaphoreSlim.WaitAsync();
+        try
+        {
+            result = _actionsSimple.GetValueOrDefault(typeId, default(ActionSimpleModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
+
+        return actions;
     }
 
     public async Task<RacesModel> GetRacesForActionAsync(Guid actionId)

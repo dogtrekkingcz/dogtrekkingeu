@@ -261,7 +261,12 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.PaymentDefinitionDto, GetSelectedPublicActionsListResponse.PaymentDefinitionDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionSaleItemDto, GetSelectedPublicActionsListResponse.ActionSaleItemDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.PassedCheckpointDto, GetSelectedPublicActionsListResponse.PassedCheckpointDto>();
-        
+
+
+        typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeInternalStorageResponse, GetSimpleActionsListByTypeResponse>();
+        typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeInternalStorageResponse.ActionDto, GetSimpleActionsListByTypeResponse.ActionDto>();
+        typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeInternalStorageResponse.RaceDto, GetSimpleActionsListByTypeResponse.RaceDto>();
+
         return typeAdapterConfig;
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace PetsOnTrailApp.Models;
+﻿using Protos.Actions.CreateAction;
 
-public sealed record ActionModel : BaseSynchronizedModel
+namespace PetsOnTrailApp.Models;
+
+public sealed record SimpleActionModel : BaseSynchronizedModel
 {
     public Guid Id { get; init; }
 
@@ -15,4 +17,13 @@ public sealed record ActionModel : BaseSynchronizedModel
     public DateTime End { get; init; }
 
     public string Type { get; init; }
+
+    public IList<RaceDto> Races { get; init; }
+
+    public sealed record RaceDto
+    {
+        public Guid Id { get; init; }
+
+        public string Name { get; init; }
+    }
 }

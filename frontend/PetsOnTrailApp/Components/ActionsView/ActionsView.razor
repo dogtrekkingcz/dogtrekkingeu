@@ -1,0 +1,75 @@
+﻿@page "/actions/{TypeId}"
+
+@inherits ActionsViewBase
+
+@inject IStringLocalizer<Resource> localizer
+
+
+@if (Model  == null)
+{
+    <Loading />
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@localizer["Actions.Term&AddressOfAction"]</th>
+            <th>@localizer["Actions.Name&DescriptionOfAction"]</th>
+            <th>@localizer["Actions.EnrolledRaces"]</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var action in Model)
+        {
+            <tr>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">@action.Term?.From.ToString("d.M. yyyy") - @action.Term?.To.ToString("d.M. yyyy")</div>
+                            <div class="col-12">@action.Address?.Country, @action.Address?.Region, @action.Address?.City</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">@action.Name</div>
+                            <div class="col-12">@action.Description</div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <div class="row">
+                            @foreach (var race in @action.Races)
+                            {
+                                <div class="col-12">
+                                    @race.Name
+                                    
+                                    @{
+                                        var isFirst = true;
+
+                                        var categoriesPerRace = "";
+                                        foreach (var ctg in race.Categories)
+                                        {
+                                            if (isFirst == false)
+                                                categoriesPerRace += ", ";
+
+                                            categoriesPerRace += ctg.Name;
+
+                                            isFirst = false;
+                                        }
+                                    }
+
+                                    [ @categoriesPerRace ]
+                                </div>    
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

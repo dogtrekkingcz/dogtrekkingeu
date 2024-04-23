@@ -39,5 +39,7 @@ namespace PetsOnTrail.Interfaces.Actions.Services
         Task<GetPublicActionsListResponse> GetPublicActionsListAsync(GetPublicActionsListRequest request, CancellationToken cancellationToken);
         
         Task<GetSelectedPublicActionsListResponse> GetSelectedPublicActionsListAsync(GetSelectedPublicActionsListRequest request, CancellationToken cancellationToken);
+
+        Task<GetSimpleActionListByTypeResponse> GetSimpleActionsListByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken);
     }
 }
