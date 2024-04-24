@@ -10,12 +10,12 @@ public class ActionViewBase : ComponentBase
 
     [Inject] private IActionsRepository _actionsRepository { get; set; }
     
-    public ActionModel Model = null;
+    public SimpleActionModel Model = null;
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
-        Model = await _actionsRepository.GetActionModelAsync(Guid.Parse(ActionId));
+        Model = await _actionsRepository.GetActionModelAsync(Guid.Parse(ActionId), CancellationToken.None);
     }
 }

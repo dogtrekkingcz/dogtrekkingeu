@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
+using Protos.Actions.GetSimpleActionsList;
 using Protos.Results;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
@@ -9,7 +10,7 @@ namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 public class ActionsRepository : IActionsRepository
 {
     private readonly IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> _dataStorageServicePublicActions;
-    private readonly IDataStorageService<GetSimpleActionsListByTypeResponse, GetSimpleActionsListByTypeResponseModel> _dataStorageServiceActionsByType;
+    private readonly IDataStorageService<GetSimpleActionsListResponse, GetSimpleActionsListResponseModel> _dataStorageServiceActionsByType;
     private readonly IMapper _mapper;
 
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
@@ -25,14 +26,17 @@ public class ActionsRepository : IActionsRepository
         _mapper = mapper;
     }
 
-    public async Task<IList<SimpleActionModel>> GetAllActionsByTypeAsync(Guid typeId, CancellationToken cancellationToken)
+    public async Task<IList<SimpleActionModel>> GetAllActionsByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
     {
-        IList<SimpleActionModel> result = null;
+        List<SimpleActionModel> result = new List<SimpleActionModel>();
 
         await semaphoreSlim.WaitAsync();
         try
         {
-            result = _actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>));
+            foreach (var typeId in typeIds)
+            {
+                result.AddRange(_actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>)));
+            }
         }
         finally
         {
@@ -41,14 +45,17 @@ public class ActionsRepository : IActionsRepository
 
         if (result == null)
         {
-            await LoadAndParseActionsSimpleAsync(typeId, cancellationToken);
+            await LoadAndParseActionsSimpleAsync(typeIds, cancellationToken);
         }
 
 
         await semaphoreSlim.WaitAsync();
         try
         {
-            result = _actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>));
+            foreach (var typeId in typeIds)
+            {
+                result.AddRange(_actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>)));
+            }
         }
         finally
         {
@@ -210,8 +217,6 @@ public class ActionsRepository : IActionsRepository
 
             try
             {
-                _actions[actionId] = _mapper.Map<ActionModel>(action);
-
                 _races[actionId] = _mapper.Map<RacesModel>(action);
 
                 foreach (var race in action.Data.Actions[0].Races)
@@ -230,6 +235,34 @@ public class ActionsRepository : IActionsRepository
                         {
                             SynchronizedAt = action.Created
                         };
+                    }
+                }
+            }
+            finally
+            {
+                semaphoreSlim.Release();
+            }
+        }
+    }
+
+    private async Task LoadAndParseActionsSimpleAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
+    {
+        var actionsInDataStorage = await _dataStorageServiceActionsByType.GetListAsync(typeIds, cancellationToken);
+
+        if (_actionsSimple != null)
+        {
+            await semaphoreSlim.WaitAsync();
+
+            try
+            {
+                foreach (var actionInDataStorage in actionsInDataStorage)
+                {
+                    foreach (var action in actionInDataStorage.Actions) 
+                    { 
+                        if (_actionsSimple.TryGetValue(action.TypeId, out var tmp) == false)
+                            _actionsSimple[action.TypeId] = new List<SimpleActionModel>();
+
+                        _actionsSimple[action.TypeId].Add(_mapper.Map<SimpleActionModel>(action.Actions));
                     }
                 }
             }

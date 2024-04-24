@@ -193,4 +193,11 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         return _mapper.Map<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse>(actions);
     }
+
+    public async override Task<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse> getSimpleActionsList(IdsRequest request, ServerCallContext context)
+    {
+        var actions = await _actionsService.GetSimpleActionsListByTypeAsync(request.Ids.Select(id => Guid.Parse(id)).ToList(), context.CancellationToken);
+    
+        return _mapper.Map<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse>(actions);
+    }
 }

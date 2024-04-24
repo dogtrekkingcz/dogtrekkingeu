@@ -18,6 +18,7 @@ using MapsterMapper;
 using Storage;
 using Storage.Options;
 using System.Security.Cryptography.X509Certificates;
+using Protos.Actions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -124,6 +125,12 @@ typeAdapterConfig.NewConfig<DateTimeOffset, Google.Type.DateTime>()
             
 typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
     .MapWith(s => s != null ? s.ToDateTimeOffset() : null);
+
+typeAdapterConfig.NewConfig<IList<string>, IdsRequest>()
+    .MapWith(s => new IdsRequest { Ids = { s } });
+
+typeAdapterConfig.NewConfig<IList<Guid>, IdsRequest>()
+    .MapWith(s => new IdsRequest { Ids = { s.Select(x => x.ToString()) } });
 
 typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset>()
     .MapWith(s => s.ToDateTimeOffset() ?? DateTimeOffset.MinValue);

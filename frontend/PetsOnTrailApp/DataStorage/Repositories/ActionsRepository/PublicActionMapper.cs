@@ -57,8 +57,8 @@ public static class PublicActionMapper
                 Longitude = src.Longitude,
             });
 
-        typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponseModel>, ActionModel>()
-            .MapWith((src) => new ActionModel
+        typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponseModel>, SimpleActionModel>()
+            .MapWith((src) => new SimpleActionModel
             {
                 SynchronizedAt = src.Created,
                 Id = src.Data.Actions[0].Id,
@@ -66,7 +66,13 @@ public static class PublicActionMapper
                 Description = src.Data.Actions[0].Description,
                 Begin = src.Data.Actions[0].Term.From.DateTime,
                 End = src.Data.Actions[0].Term.To.DateTime,
-                Type = src.Data.Actions[0].Type
+                Type = src.Data.Actions[0].Type,
+                City = src.Data.Actions[0].Address.City,
+                Races = src.Data.Actions[0].Races.Select(race => new SimpleActionModel.RaceDto
+                { 
+                    Id = race.Id,
+                    Name = race.Name,
+                }).ToList()
             });
 
         typeAdapterConfig.NewConfig<DataStorageModel<GetSelectedPublicActionsListResponseModel>, RacesModel>()

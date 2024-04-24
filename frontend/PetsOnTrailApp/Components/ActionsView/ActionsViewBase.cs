@@ -10,7 +10,7 @@ public class ActionsViewBase : ComponentBase
 
     [Inject] private IActionsRepository _actionsRepository { get; set; }
 
-    public IList<ActionModel> Model = null;
+    public IList<SimpleActionModel> Model = null;
 
     protected override async Task OnInitializedAsync()
     {

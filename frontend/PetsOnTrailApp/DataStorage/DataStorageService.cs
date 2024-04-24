@@ -47,6 +47,16 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         return data;
     }
 
+    public async Task<IList<DataStorageModel<R>>> GetListAsync(IList<Guid> ids, CancellationToken cancellationToken)
+    {
+        var response = new List<DataStorageModel<R>>();
+
+        if (await _localStorage.ContainKeyAsync(id.ToString()))
+            response = await _localStorage.GetItemAsync<DataStorageModel<R>>(id.ToString(), cancellationToken);
+
+        return response;
+    }
+
     public async Task PutAsync(Guid id, R value, CancellationToken cancellationToken)
     {
         await _localStorage.SetItemAsync(id.ToString(), value, cancellationToken);
