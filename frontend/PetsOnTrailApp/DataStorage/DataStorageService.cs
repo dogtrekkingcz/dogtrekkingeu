@@ -51,8 +51,11 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
     {
         var response = new List<DataStorageModel<R>>();
 
-        if (await _localStorage.ContainKeyAsync(id.ToString()))
-            response = await _localStorage.GetItemAsync<DataStorageModel<R>>(id.ToString(), cancellationToken);
+        foreach (var id in ids) 
+        { 
+            if (await _localStorage.ContainKeyAsync(id.ToString()))
+                response.Add(await _localStorage.GetItemAsync<DataStorageModel<R>>(id.ToString(), cancellationToken));
+        }
 
         return response;
     }

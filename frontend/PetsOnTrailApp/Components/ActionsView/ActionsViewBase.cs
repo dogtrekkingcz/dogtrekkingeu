@@ -6,7 +6,7 @@ namespace PetsOnTrailApp.Components.ActionsView;
 
 public class ActionsViewBase : ComponentBase
 {
-    [Parameter] public string TypeId { get; set; }
+    [Parameter] public string? TypeId { get; set; }
 
     [Inject] private IActionsRepository _actionsRepository { get; set; }
 
@@ -16,6 +16,6 @@ public class ActionsViewBase : ComponentBase
     {
         await base.OnInitializedAsync();
 
-        Model = await _actionsRepository.GetAllActionsByTypeAsync(Guid.Parse(TypeId));
+        Model = await _actionsRepository.GetAllActionsByTypeAsync(new List<Guid> { Guid.Parse(TypeId) }, CancellationToken.None);
     }
 }

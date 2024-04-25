@@ -192,7 +192,7 @@ public class ActionsRepository : IActionsRepository
 
         try
         {
-            result = _actionsSimple.GetValueOrDefault(actionId, default(SimpleActionModel));
+            result = _actionsSimple.FirstOrDefault(it => it.Value.Any(i => i.Id == actionId)).Value[0];
         }
         finally
         {
@@ -255,16 +255,18 @@ public class ActionsRepository : IActionsRepository
 
             try
             {
-                foreach (var actionInDataStorage in actionsInDataStorage)
-                {
-                    foreach (var action in actionInDataStorage.Actions) 
-                    { 
-                        if (_actionsSimple.TryGetValue(action.TypeId, out var tmp) == false)
-                            _actionsSimple[action.TypeId] = new List<SimpleActionModel>();
+                // TODO: Check over fn above
 
-                        _actionsSimple[action.TypeId].Add(_mapper.Map<SimpleActionModel>(action.Actions));
-                    }
-                }
+                //foreach (var actionInDataStorage in actionsInDataStorage)
+                //{
+                //    foreach (var action in actionInDataStorage.Data.Actions) 
+                //    { 
+                //        if (_actionsSimple.TryGetValue(Guid.Parse(action.Type), out var tmp) == false)
+                //            _actionsSimple[Guid.Parse(action.Type)] = new List<SimpleActionModel>();
+
+                //        _actionsSimple[Guid.Parse(action.Type)].Add(_mapper.Map<SimpleActionModel>(action.Actions));
+                //    }
+                //}
             }
             finally
             {
