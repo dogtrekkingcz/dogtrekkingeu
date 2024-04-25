@@ -185,7 +185,8 @@ public class ActionsRepository : IActionsRepository
 
         if (result == null)
         {
-            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+            // TODO: now get all known; should be optimized by user settings
+            await LoadAndParseActionsSimpleAsync(Constants.ActivityType.All, CancellationToken.None);
         }
 
         await semaphoreSlim.WaitAsync();
@@ -255,18 +256,16 @@ public class ActionsRepository : IActionsRepository
 
             try
             {
-                // TODO: Check over fn above
+                foreach (var actionInDataStorage in actionsInDataStorage)
+                {
+                    foreach (var action in actionInDataStorage.Data.Actions)
+                    {
+                        if (_actionsSimple.TryGetValue(Guid.Parse(action.Type), out var tmp) == false)
+                            _actionsSimple[Guid.Parse(action.Type)] = new List<SimpleActionModel>();
 
-                //foreach (var actionInDataStorage in actionsInDataStorage)
-                //{
-                //    foreach (var action in actionInDataStorage.Data.Actions) 
-                //    { 
-                //        if (_actionsSimple.TryGetValue(Guid.Parse(action.Type), out var tmp) == false)
-                //            _actionsSimple[Guid.Parse(action.Type)] = new List<SimpleActionModel>();
-
-                //        _actionsSimple[Guid.Parse(action.Type)].Add(_mapper.Map<SimpleActionModel>(action.Actions));
-                //    }
-                //}
+                        _actionsSimple[Guid.Parse(action.Type)].Add(action);
+                    }
+                }
             }
             finally
             {

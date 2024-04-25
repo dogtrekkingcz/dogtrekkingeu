@@ -1,4 +1,6 @@
-﻿namespace Constants;
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace Constants;
 
 public static class ActivityType
 {
@@ -15,4 +17,31 @@ public static class ActivityType
     public const string Flyball = "ad1d65ed-a5a8-4d6e-aafe-9feeb9996d22";
     public const string DiscDog = "c507f081-f72d-4d20-9945-69c5d8bcef0b";
     public const string DogHiking = "bdf01b39-02a6-4a34-b434-18711660fa74";
+    public const string Tracking = "d52e3bfc-6c59-4361-9579-c24d3dd8a4c1";
+    public const string IPO = "14990dcf-24c2-40e1-9d32-a30ded374213";
+    public const string Scooter = "f4f44850-c10e-4c40-997e-65492665ff12";
+    public const string EScooter = "2b17494c-faec-4dda-8ed3-29acc94dde90";
+    public const string DogTrekking = "f9101c55-532f-4eb2-823f-96130b6ecab4";
+
+    public static List<Guid> All => new List<Guid>
+    {
+        Guid.Parse(Dogtrekking),
+        Guid.Parse(Obedience),
+        Guid.Parse(RallyObedience),
+        Guid.Parse(Agility),
+        Guid.Parse(Canicross),
+        Guid.Parse(Bikejoring),
+        Guid.Parse(Skijoring),
+        Guid.Parse(SledDog),
+        Guid.Parse(DogDancing),
+        Guid.Parse(Frisbee),
+        Guid.Parse(Flyball),
+        Guid.Parse(DiscDog),
+        Guid.Parse(DogHiking),
+        Guid.Parse(Tracking),
+        Guid.Parse(IPO),
+        Guid.Parse(Scooter),
+        Guid.Parse(EScooter),
+        Guid.Parse(DogTrekking)
+    };
 }
