@@ -26,8 +26,8 @@ else
                 <td>
                     <div class="container">
                         <div class="row">
-                            <div class="col-12">@action.Term?.From.ToString("d.M. yyyy") - @action.Term?.To.ToString("d.M. yyyy")</div>
-                            <div class="col-12">@action.Address?.Country, @action.Address?.Region, @action.Address?.City</div>
+                            <div class="col-12">@action.Begin.ToString("d.M. yyyy") - @action.End.ToString("d.M. yyyy")</div>
+                            <div class="col-12">@action.City</div>
                         </div>
                     </div>
                 </td>
@@ -46,24 +46,7 @@ else
                             {
                                 <div class="col-12">
                                     @race.Name
-                                    
-                                    @{
-                                        var isFirst = true;
-
-                                        var categoriesPerRace = "";
-                                        foreach (var ctg in race.Categories)
-                                        {
-                                            if (isFirst == false)
-                                                categoriesPerRace += ", ";
-
-                                            categoriesPerRace += ctg.Name;
-
-                                            isFirst = false;
-                                        }
-                                    }
-
-                                    [ @categoriesPerRace ]
-                                </div>    
+                                </div>
                             }
                         </div>
                     </div>
