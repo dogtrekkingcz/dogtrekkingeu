@@ -35,7 +35,10 @@ public class ActionsRepository : IActionsRepository
         {
             foreach (var typeId in typeIds)
             {
-                result.AddRange(_actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>)));
+                var data = _actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>));
+                
+                if (data is not null)
+                    result.AddRange(data);
             }
         }
         finally
@@ -54,7 +57,10 @@ public class ActionsRepository : IActionsRepository
         {
             foreach (var typeId in typeIds)
             {
-                result.AddRange(_actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>)));
+                var data = _actionsSimple.GetValueOrDefault(typeId, default(IList<SimpleActionModel>));
+
+                if (data is not null)
+                    result.AddRange(data);
             }
         }
         finally
