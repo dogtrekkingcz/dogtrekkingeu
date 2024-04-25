@@ -46,11 +46,8 @@ public class ActionsRepository : IActionsRepository
             semaphoreSlim.Release();
         }
 
-        if (result == null)
-        {
-            await LoadAndParseActionsSimpleAsync(typeIds, cancellationToken);
-        }
 
+        await LoadAndParseActionsSimpleAsync(typeIds, cancellationToken);
 
         await semaphoreSlim.WaitAsync();
         try

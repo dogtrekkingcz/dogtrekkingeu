@@ -6,6 +6,7 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
 {
     private readonly Blazored.LocalStorage.ILocalStorageService _localStorage;
     private Func<Guid, Task<T>> _function;
+    private Func<IList<Guid>, Task<T>> _functionByList;
     private const int DATA_VALID_TIMEOUT = 5;
     private readonly IMapper _mapper;
 
@@ -18,6 +19,11 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
     public void InitWithFunction(Func<Guid, Task<T>> function)
     {
         _function = function;
+    }
+
+    public void InitWithFunction(Func<IList<Guid>, Task<T>> function)
+    {
+        _functionByList = function;
     }
 
     public async Task<DataStorageModel<R>> GetAsync(Guid id, CancellationToken cancellationToken)

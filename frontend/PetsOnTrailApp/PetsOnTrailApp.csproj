@@ -9,6 +9,7 @@
         <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
         <RunAOTCompilation>false</RunAOTCompilation> <!-- TODO: here it shoul be true, but in such case-cannot build it on linux-->
         <SelfContained>false</SelfContained>
+        <DebuggerSupport Condition="'$(Configuration)' == 'DebugCustom'">true</DebuggerSupport>
     </PropertyGroup>
 
     <ItemGroup>
