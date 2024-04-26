@@ -118,6 +118,12 @@ typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Duration, Google.Prot
 typeAdapterConfig.NewConfig<Google.Type.TimeZone, Google.Type.TimeZone>();
 typeAdapterConfig.NewConfig<Google.Type.LatLng, Google.Type.LatLng>();
 
+typeAdapterConfig.NewConfig<DateTime, Google.Type.DateTime>()
+    .MapWith(s => new DateTimeOffset(s).ToGoogleDateTime());
+
+typeAdapterConfig.NewConfig<DateTime?, Google.Type.DateTime>()
+    .MapWith(s => s != null ? new DateTimeOffset(s.Value).ToGoogleDateTime() : null);
+
 typeAdapterConfig.NewConfig<DateTimeOffset?, Google.Type.DateTime>()
     .MapWith(s => s != null ? s.ToGoogleDateTime() : null);
 typeAdapterConfig.NewConfig<DateTimeOffset, Google.Type.DateTime>()
