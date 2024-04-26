@@ -20,9 +20,13 @@ public class ActionsRepository : IActionsRepository
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
 
-    public ActionsRepository(IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> dataStorageService, IMapper mapper)
+    public ActionsRepository(
+        IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> dataStorageServicePublicActions,
+        IDataStorageService<GetSimpleActionsListResponse, GetSimpleActionsListResponseModel> dataStorageServiceActionsByType,
+        IMapper mapper)
     {
-        _dataStorageServicePublicActions = dataStorageService;
+        _dataStorageServicePublicActions = dataStorageServicePublicActions;
+        _dataStorageServiceActionsByType = dataStorageServiceActionsByType;
         _mapper = mapper;
     }
 
