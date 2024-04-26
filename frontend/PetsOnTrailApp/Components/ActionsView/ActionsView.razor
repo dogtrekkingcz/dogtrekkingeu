@@ -34,7 +34,7 @@ else
                 <td>
                     <div class="container">
                         <div class="row">
-                            <div class="col-12">@action.Name</div>
+                            <div class="col-12"><button class="btn btn-info" @onclick="(() => NavigateToAction(@action.Id))">@action.Name</button></div>
                             <div class="col-12">@action.Description</div>
                         </div>
                     </div>

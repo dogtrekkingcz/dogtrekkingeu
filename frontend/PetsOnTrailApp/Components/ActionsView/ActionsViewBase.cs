@@ -7,6 +7,7 @@ namespace PetsOnTrailApp.Components.ActionsView;
 public class ActionsViewBase : ComponentBase
 {
     [Inject] private IActionsRepository _actionsRepository { get; set; }
+    [Inject] private NavigationManager Navigation { get; set; }
 
     public IList<SimpleActionModel> Model = null;
 
@@ -16,4 +17,6 @@ public class ActionsViewBase : ComponentBase
 
         Model = await _actionsRepository.GetAllActionsByTypeAsync(Constants.ActivityType.All, CancellationToken.None);
     }
+
+    protected void NavigateToAction(Guid actionId) => Navigation.NavigateTo($"/action/{actionId.ToString()}");
 }
