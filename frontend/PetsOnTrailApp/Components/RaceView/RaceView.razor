@@ -4,7 +4,7 @@
 
 @inject IStringLocalizer<Resource> Localizer
 
-<h3>ActionView</h3>
+<h3>RaceView</h3>
 
 @if (Model == null)
 {
@@ -15,7 +15,8 @@ else
     <div>
         <h3>@Localizer["Race"]</h3>
         <hr />
-        <button class="btn btn-info" @onclick="(() => NavigateToCategories())">@Localizer["Categories"]</button>
     </div>
 }
+
+<button class="btn btn-info" @onclick="(() => NavigateToCategories())">@Localizer["Categories"]</button>
 
