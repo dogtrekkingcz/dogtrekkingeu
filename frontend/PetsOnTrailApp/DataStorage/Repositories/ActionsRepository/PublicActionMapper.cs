@@ -1,8 +1,5 @@
-﻿using Google.Protobuf.Collections;
-using Mapster;
-using PetsOnTrailApp.Extensions;
+﻿using Mapster;
 using PetsOnTrailApp.Models;
-using PetsOnTrailApp.Shared.ResourceFiles;
 using Protos.Actions.GetSelectedPublicActionsList;
 using SharedLib.Extensions;
 
@@ -103,6 +100,11 @@ public static class PublicActionMapper
                 CategoryId = category.Id,
                 Results = MapFromModelResults(category.Racers)
             });
+
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse, GetSimpleActionsListResponseModel>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.SimpleActionDto, SimpleActionModel>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.RaceDto, SimpleActionModel.RaceDto>();
+
 
         return typeAdapterConfig;
     }
