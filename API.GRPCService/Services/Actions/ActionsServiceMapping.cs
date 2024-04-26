@@ -1,6 +1,8 @@
 ﻿using PetsOnTrail.Interfaces.Actions.Entities.Actions;
 using Google.Protobuf.Collections;
 using Mapster;
+using Amazon.Auth.AccessControlPolicy;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace API.GRPCService.Services.Actions;
 
@@ -209,6 +211,11 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.PassedCheckpointDto, Protos.Actions.GetSelectedPublicActionsList.PassedCheckpointDto>();
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.CheckpointDto, Protos.Actions.GetSelectedPublicActionsList.CheckpointDto>();
         typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponse.LatLngDto, Google.Type.LatLng>();
+
+        typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeResponse, Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse>();
+        typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeResponse.RaceDto, Protos.Actions.GetSimpleActionsList.RaceDto>();
+        typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeResponse.ActionDto, Protos.Actions.GetSimpleActionsList.SimpleActionDto>();
+
 
         return typeAdapterConfig;
     }
