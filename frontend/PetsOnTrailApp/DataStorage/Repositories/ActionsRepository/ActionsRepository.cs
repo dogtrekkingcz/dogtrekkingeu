@@ -259,15 +259,12 @@ public class ActionsRepository : IActionsRepository
 
             try
             {
-                foreach (var actionInDataStorage in actionsInDataStorage)
+                foreach (var action in actionsInDataStorage.Data.Actions)
                 {
-                    foreach (var action in actionInDataStorage.Data.Actions)
-                    {
-                        if (_actionsSimple.TryGetValue(Guid.Parse(action.Type), out var tmp) == false)
-                            _actionsSimple[Guid.Parse(action.Type)] = new List<SimpleActionModel>();
+                    if (_actionsSimple.TryGetValue(Guid.Parse(action.Type), out var tmp) == false)
+                        _actionsSimple[Guid.Parse(action.Type)] = new List<SimpleActionModel>();
 
-                        _actionsSimple[Guid.Parse(action.Type)].Add(action);
-                    }
+                    _actionsSimple[Guid.Parse(action.Type)].Add(action);
                 }
             }
             finally

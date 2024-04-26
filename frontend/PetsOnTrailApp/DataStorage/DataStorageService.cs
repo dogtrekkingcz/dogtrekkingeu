@@ -16,12 +16,12 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         _mapper = mapper;
     }
 
-    public void InitWithFunction(Func<Guid, Task<T>> function)
+    public void InitWithItemFunction(Func<Guid, Task<T>> function)
     {
         _function = function;
     }
 
-    public void InitWithFunction(Func<IList<Guid>, Task<T>> function)
+    public void InitWithListFunction(Func<IList<Guid>, Task<T>> function)
     {
         _functionByList = function;
     }
@@ -47,23 +47,33 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
             };
 
             await _localStorage.SetItemAsync(id.ToString(), data, cancellationToken);
-        }
-               
+        }               
 
         return data;
     }
 
-    public async Task<IList<DataStorageModel<R>>> GetListAsync(IList<Guid> ids, CancellationToken cancellationToken)
+    public async Task<DataStorageModel<R>> GetListAsync(IList<Guid> ids, CancellationToken cancellationToken)
     {
-        var response = new List<DataStorageModel<R>>();
+        try
+        {
+            var loadedData = await _functionByList.Invoke(ids);
+            var model = _mapper.Map<R>(loadedData);
 
-        foreach (var id in ids) 
-        { 
-            if (await _localStorage.ContainKeyAsync(id.ToString()))
-                response.Add(await _localStorage.GetItemAsync<DataStorageModel<R>>(id.ToString(), cancellationToken));
+            var data = new DataStorageModel<R>()
+            {
+                Data = model,
+                Created = DateTime.UtcNow,
+                Id = ids[0]
+            };
+
+            await _localStorage.SetItemAsync(nameof(R), data, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            // do nothing, returning the cached values...
         }
 
-        return response;
+        return await _localStorage.GetItemAsync<DataStorageModel<R>>(nameof(R), cancellationToken);
     }
 
     public async Task PutAsync(Guid id, R value, CancellationToken cancellationToken)

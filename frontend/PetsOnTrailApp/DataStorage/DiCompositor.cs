@@ -2,6 +2,7 @@
 using Mapster;
 using MapsterMapper;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
+using Protos.Actions;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
 using static Protos.Actions.Actions;
@@ -22,7 +23,7 @@ public static class DiCompositor
                     serviceProvider.GetRequiredService<IMapper>()
                 );
 
-                obj.InitWithFunction(async (id) =>
+                obj.InitWithItemFunction(async (id) =>
                 {
                     var actionsClient = serviceProvider.GetRequiredService<ActionsClient>();
 
@@ -42,11 +43,11 @@ public static class DiCompositor
                     serviceProvider.GetRequiredService<IMapper>()
                 );
 
-                obj.InitWithFunction(async (ids) =>
+                obj.InitWithListFunction(async (ids) =>
                 {
                     var actionsClient = serviceProvider.GetRequiredService<ActionsClient>();
 
-                    return await actionsClient.getSimpleActionsListAsync(ids);
+                    return await actionsClient.getSimpleActionsListAsync(new IdsRequest { Ids = { ids.Select(id => id.ToString()) } });
                 });
 
                 return obj;
