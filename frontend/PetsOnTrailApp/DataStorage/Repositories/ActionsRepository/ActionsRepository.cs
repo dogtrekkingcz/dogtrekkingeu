@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using Microsoft.Extensions.Options;
+using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
@@ -255,14 +256,19 @@ public class ActionsRepository : IActionsRepository
 
     private async Task LoadAndParseActionsSimpleAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
     {
+        Console.WriteLine($"LoadAndParseActionsSimpleAsync -> dataStorage: {_dataStorageServiceActionsByType}");
         var actionsInDataStorage = await _dataStorageServiceActionsByType.GetListAsync(typeIds, cancellationToken);
 
-        if (_actionsSimple != null)
+        Console.WriteLine($"actionsInDataStorage: {actionsInDataStorage.Dump()}");
+
+        if (_actionsSimple != null && actionsInDataStorage != null)
         {
             await semaphoreSlim.WaitAsync();
 
             try
             {
+                Console.WriteLine($"actionsInDataStorage.Data.Actions: {actionsInDataStorage.Data.Actions.Dump()}");
+
                 foreach (var action in actionsInDataStorage.Data.Actions)
                 {
                     if (_actionsSimple.TryGetValue(Guid.Parse(action.Type), out var tmp) == false)

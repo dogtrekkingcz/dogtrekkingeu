@@ -36,7 +36,7 @@ public static class DiCompositor
 
                 return obj;
             })
-            .AddSingleton<IDataStorageService< GetSimpleActionsListResponse, GetSimpleActionsListResponseModel>>((serviceProvider) =>
+            .AddSingleton<IDataStorageService<GetSimpleActionsListResponse, GetSimpleActionsListResponseModel>>((serviceProvider) =>
             {
                 var obj = new DataStorageService<GetSimpleActionsListResponse, GetSimpleActionsListResponseModel>(
                     serviceProvider.GetRequiredService<ILocalStorageService>(), 
