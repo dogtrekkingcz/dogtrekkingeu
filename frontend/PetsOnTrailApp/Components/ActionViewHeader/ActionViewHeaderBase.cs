@@ -23,15 +23,15 @@ public class ActionViewHeaderBase : ComponentBase
         Model = await _actionsRepository.GetSimpleActionModelAsync(Guid.Parse(ActionId), CancellationToken.None);
     }
 
-    protected void NavigateToActions() => Navigation.NavigateTo($"actions");
+    protected void NavigateToActions() => Navigation.NavigateTo($"/actions");
 
-    protected void NavigateToAction() => Navigation.NavigateTo($"action/{ActionId}");
+    protected void NavigateToAction() => Navigation.NavigateTo($"/action/{ActionId}");
 
-    protected void NavigateToRaces() => Navigation.NavigateTo($"races/{ActionId}");
+    protected void NavigateToRaces() => Navigation.NavigateTo($"/races/{ActionId}");
 
-    protected void NavigateToRace() => Navigation.NavigateTo($"race/{ActionId}/{RaceId}");
+    protected void NavigateToRace() => Navigation.NavigateTo($"/race/{ActionId}/{RaceId}");
 
-    protected void NavigateToCategories() => Navigation.NavigateTo($"categories/{ActionId}/{RaceId}");
+    protected void NavigateToCategories() => Navigation.NavigateTo($"/categories/{ActionId}/{RaceId}");
 
-    protected void NavigateToCategory() => Navigation.NavigateTo($"category/{ActionId}/{RaceId}/{CategoryId}");
+    protected void NavigateToCategory() => Navigation.NavigateTo($"/category/{ActionId}/{RaceId}/{CategoryId}");
 }

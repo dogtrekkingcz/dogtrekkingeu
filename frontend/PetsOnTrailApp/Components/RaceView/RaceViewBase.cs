@@ -20,4 +20,6 @@ public class RaceViewBase : ComponentBase
 
         Model = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
     }
+
+    protected void NavigateToCategories() =>  Navigation.NavigateTo($"/categories/{ActionId}/{RaceId}");
 }
