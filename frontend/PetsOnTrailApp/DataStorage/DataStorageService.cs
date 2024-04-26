@@ -56,8 +56,14 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
     {
         try
         {
+            Console.WriteLine($"GetListAsync -> ids: {ids}, function: {_functionByList}");
             var loadedData = await _functionByList.Invoke(ids);
+
+            Console.WriteLine($"GetListAsync -> loadedData: {loadedData}");
+
             var model = _mapper.Map<R>(loadedData);
+
+            Console.WriteLine($"GetListAsync -> model: {model}");
 
             var data = new DataStorageModel<R>()
             {
@@ -70,7 +76,7 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         }
         catch (Exception ex)
         {
-            // do nothing, returning the cached values...
+            Console.WriteLine(ex.Message);
         }
 
         return await _localStorage.GetItemAsync<DataStorageModel<R>>(nameof(R), cancellationToken);
