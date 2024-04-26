@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using PetsOnTrailApp.Models;
+using PetsOnTrailApp.Shared.ResourceFiles;
 using Protos.Actions.GetSelectedPublicActionsList;
 using SharedLib.Extensions;
 
@@ -63,7 +64,7 @@ public static class PublicActionMapper
                 Description = src.Data.Actions[0].Description,
                 Begin = src.Data.Actions[0].Term.From.DateTime,
                 End = src.Data.Actions[0].Term.To.DateTime,
-                Type = src.Data.Actions[0].Type,
+                Type = Guid.Parse(src.Data.Actions[0].Type),
                 City = src.Data.Actions[0].Address.City,
                 Races = src.Data.Actions[0].Races.Select(race => new SimpleActionModel.RaceDto
                 { 
@@ -101,9 +102,21 @@ public static class PublicActionMapper
                 Results = MapFromModelResults(category.Racers)
             });
 
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse, GetSimpleActionsListResponseModel>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.SimpleActionDto, SimpleActionModel>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.RaceDto, SimpleActionModel.RaceDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse, GetSimpleActionsListResponseModel>()
+            .MapWith((src) => new GetSimpleActionsListResponseModel
+            {
+                Actions = src.Actions.Select(action => new GetSimpleActionsListResponseModel.SimpleActionDto
+                {
+                    Id = Guid.Parse(action.Id),
+                    Name = action.Name,
+                    Description = action.Description,
+                    Type = Guid.Parse(action.Type),
+                    Begin = action.Begin.ToDateTimeOffset().Value.DateTime,
+                    End = action.End.ToDateTimeOffset().Value.DateTime,
+                    City = action.City,
+                    Races = action.Races.Select(race => new GetSimpleActionsListResponseModel.RaceDto { Id = Guid.Parse(race.Id), Name = race.Name }).ToList()
+                }).ToList()
+            });
 
 
         return typeAdapterConfig;

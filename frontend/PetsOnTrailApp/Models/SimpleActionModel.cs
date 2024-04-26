@@ -16,7 +16,7 @@ public sealed record SimpleActionModel : BaseSynchronizedModel
 
     public DateTime End { get; init; }
 
-    public string Type { get; init; }
+    public Guid Type { get; init; }
 
     public IList<RaceDto> Races { get; init; }
 

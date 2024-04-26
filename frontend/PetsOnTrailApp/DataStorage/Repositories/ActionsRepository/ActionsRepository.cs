@@ -271,10 +271,20 @@ public class ActionsRepository : IActionsRepository
 
                 foreach (var action in actionsInDataStorage.Data.Actions)
                 {
-                    if (_actionsSimple.TryGetValue(Guid.Parse(action.Type), out var tmp) == false)
-                        _actionsSimple[Guid.Parse(action.Type)] = new List<SimpleActionModel>();
+                    if (_actionsSimple.TryGetValue(action.Type, out var tmp) == false)
+                        _actionsSimple[action.Type] = new List<SimpleActionModel>();
 
-                    _actionsSimple[Guid.Parse(action.Type)].Add(action);
+                    _actionsSimple[action.Type].Add(new SimpleActionModel
+                    {
+                        Id = action.Id,
+                        Name = action.Name,
+                        Description = action.Description,
+                        Type = action.Type,
+                        Begin = action.Begin,
+                        End = action.End,
+                        City = action.City,
+                        Races = action.Races.Select(race => new SimpleActionModel.RaceDto { Id = race.Id, Name = race.Name}).ToList()
+                    });
                 }
             }
             finally
