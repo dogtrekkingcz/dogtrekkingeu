@@ -193,11 +193,22 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         return _mapper.Map<Protos.Actions.GetSelectedPublicActionsList.GetSelectedPublicActionsListResponse>(actions);
     }
-
+    
     public async override Task<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse> getSimpleActionsList(IdsRequest request, ServerCallContext context)
     {
-        var actions = await _actionsService.GetSimpleActionsListByTypeAsync(request.Ids.Select(id => Guid.Parse(id)).ToList(), context.CancellationToken);
+        _logger.LogInformation($"{nameof(getSimpleActionsList)}: Getting simple actions list for ids: '{request.Ids}'");
+
+        try
+        { 
+            var actions = await _actionsService.GetSimpleActionsListByTypeAsync(request.Ids.Select(id => Guid.Parse(id)).ToList(), context.CancellationToken);
+            _logger.LogInformation($"{nameof(getSimpleActionsList)}: Simple actions list has been retrieved: '{actions.Dump()}'");
     
-        return _mapper.Map<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse>(actions);
+            return _mapper.Map<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse>(actions);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, $"{nameof(getSimpleActionsList)}: Error while getting simple actions list");
+            throw;
+        }
     }
 }

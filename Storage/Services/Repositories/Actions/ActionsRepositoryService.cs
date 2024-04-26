@@ -137,12 +137,16 @@ namespace Storage.Services.Repositories.Actions
 
         public async Task<GetSimpleActionsListByTypeInternalStorageResponse> GetSimpleActionsListByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
         {
-            var actions = await _actionsStorageService.GetSelectedListAsync("type", typeIds.Select(id => id.ToString()).ToList(), cancellationToken);
+            Console.WriteLine($"{nameof(GetSimpleActionsListByTypeAsync)} - typeIds: '{typeIds?.Dump()}'");
+
+            var actions = await _actionsStorageService.GetSelectedListAsync("Type", typeIds.Select(id => id.ToString()).ToList(), cancellationToken);
 
             var response = new GetSimpleActionsListByTypeInternalStorageResponse
             {
                 Actions = actions.Select(action => _mapper.Map<GetSimpleActionsListByTypeInternalStorageResponse.ActionDto>(action)).ToList()
             };
+
+            Console.WriteLine($"{nameof(GetSimpleActionsListByTypeAsync)} - response: '{response?.Dump()}'");
 
             return response;
         }
