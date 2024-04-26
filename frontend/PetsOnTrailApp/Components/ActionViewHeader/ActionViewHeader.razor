@@ -1,0 +1,36 @@
+﻿@inherits ActionViewHeaderBase
+
+@inject IStringLocalizer<Resource> Localizer
+
+@if (Model == null)
+{
+    <Loading />
+}
+else
+{
+    <div>
+        <span><button class="btn btn-info" @onclick="(() => NavigateToActions())">@Localizer["Actions"]</button></span>
+        <sspan>-> <button class="btn btn-info" @onclick="(() => NavigateToAction())">@Localizer["Action"]</button></sspan>
+
+        @if (string.IsNullOrWhiteSpace(ActionId) == false)
+        {
+            <span>-> <button class="btn btn-info" @onclick="(() => NavigateToRaces())">@Localizer["Races"]</button></span>
+        }
+
+        @if (string.IsNullOrWhiteSpace(RaceId) == false)
+        {
+            <span>-> <button class="btn btn-info" @onclick="(() => NavigateToRace())">@Localizer["Race"]</button></span>
+            <span>-> <button class="btn btn-info" @onclick="(() => NavigateToCategories())">@Localizer["Categories"]</button></span>
+        }
+
+        @if (string.IsNullOrWhiteSpace(CategoryId) == false)
+        {
+            <span>-> <button class="btn btn-info" @onclick="(() => NavigateToCategory())">@Localizer["Category"]</button></span>
+        }
+
+    </div>
+    <div>
+        <b>@Model.Name</b> - @Model.Begin.ToString("dd.MM.yyyy") - @Model.End.ToString("dd.MM.yyyy") (@Model.City) - Data from: <i>@Model.SynchronizedAt.ToString("dd.MM.yyyy HH:mm")</i>
+    </div>
+    <hr />
+}

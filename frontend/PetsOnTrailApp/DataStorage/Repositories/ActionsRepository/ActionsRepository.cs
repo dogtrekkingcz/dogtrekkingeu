@@ -16,6 +16,7 @@ public class ActionsRepository : IActionsRepository
 
     private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
+    private Dictionary<Guid, ActionModel> _actions = new Dictionary<Guid, ActionModel>();
     private Dictionary<Guid, IList<SimpleActionModel>> _actionsSimple = new Dictionary<Guid, IList<SimpleActionModel>>();
     private Dictionary<Guid, RacesModel> _races = new Dictionary<Guid, RacesModel>();
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
@@ -107,6 +108,11 @@ public class ActionsRepository : IActionsRepository
         return result;
     }
 
+    public async Task<RaceModel> GetRaceForActionAsync(Guid actionId, Guid raceId, CancellationToken cancellationToken)
+    {
+        return null;
+    }
+
     public async Task<CategoriesModel> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId)
     {
         var result = null as CategoriesModel;
@@ -175,7 +181,12 @@ public class ActionsRepository : IActionsRepository
         return result;
     }
 
-    public async Task<SimpleActionModel> GetActionModelAsync(Guid actionId, CancellationToken cancellationToken)
+    public async Task<ActionModel> GetActionModelAsync(Guid actionId, CancellationToken cancellationToken)
+    {
+        return null;
+    }
+
+    public async Task<SimpleActionModel> GetSimpleActionModelAsync(Guid actionId, CancellationToken cancellationToken)
     {
         var result = null as SimpleActionModel;
 

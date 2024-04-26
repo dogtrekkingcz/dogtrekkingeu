@@ -6,9 +6,13 @@ public interface IActionsRepository
 {
     Task<IList<SimpleActionModel>> GetAllActionsByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken);
 
-    Task <SimpleActionModel> GetActionModelAsync(Guid actionId, CancellationToken cancellationToken);
+    Task<ActionModel> GetActionModelAsync(Guid actionId, CancellationToken cancellationToken);
+
+    Task <SimpleActionModel> GetSimpleActionModelAsync(Guid actionId, CancellationToken cancellationToken);
 
     Task<RacesModel> GetRacesForActionAsync(Guid actionId);
+
+    Task<RaceModel> GetRaceForActionAsync(Guid actionId, Guid raceId, CancellationToken cancellationToken);
 
     Task<CategoriesModel> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId);
 

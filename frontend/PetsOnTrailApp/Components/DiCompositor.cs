@@ -1,6 +1,9 @@
 ﻿using Mapster;
+using PetsOnTrailApp.Components.ActionsView;
 using PetsOnTrailApp.Components.ActionView;
+using PetsOnTrailApp.Components.ActionViewHeader;
 using PetsOnTrailApp.Components.Loading;
+using PetsOnTrailApp.Components.RaceView;
 using PetsOnTrailApp.Components.Results.CategoriesView;
 using PetsOnTrailApp.Components.Results.CategoryView;
 using PetsOnTrailApp.Components.Results.RacesView;
@@ -13,12 +16,15 @@ internal static class DiCompositor
     internal static IServiceCollection AddComponents(this IServiceCollection services)
     {
         services
-            .AddTransient<ResultsAddBase>()
+            .AddTransient<ActionViewHeaderBase>()
             .AddTransient<LoadingBase>()
-            .AddTransient<CategoriesViewBase>()
+            .AddTransient<ActionsViewBase>()
+            .AddTransient<ActionViewBase>()
             .AddTransient<RacesViewBase>()
+            .AddTransient<RaceViewBase>()
+            .AddTransient<CategoriesViewBase>()
             .AddTransient<CategoryViewBase>()
-            .AddTransient<ActionViewBase>();
+            .AddTransient<ResultsAddBase>();
 
         return services;
     }
