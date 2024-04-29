@@ -14,10 +14,11 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
     private readonly IStorageService<ActivityRecord> _activitiesService;
     private readonly IStorageService<UserProfileRecord> _profilesService;
 
-    public ActivitiesRepositoryService(IMapper mapper, IStorageService<ActivityRecord> activitiesService)
+    public ActivitiesRepositoryService(IMapper mapper, IStorageService<ActivityRecord> activitiesService, IStorageService<UserProfileRecord> profilesService)
     {
         _mapper = mapper;
         _activitiesService = activitiesService;
+        _profilesService = profilesService;
     }
 
     public async Task<CreateActivityInternalStorageResponse> CreateActivityAsync(CreateActivityInternalStorageRequest request, CancellationToken cancellationToken)
