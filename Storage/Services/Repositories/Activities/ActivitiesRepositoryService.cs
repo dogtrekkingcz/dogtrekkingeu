@@ -29,7 +29,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
             
         var addRequest = _mapper.Map<ActivityRecord>(request);
         
-        if (request.UserId is null)
+        if (string.IsNullOrWhiteSpace(request.UserId) == false)
         {
             var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
             response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
