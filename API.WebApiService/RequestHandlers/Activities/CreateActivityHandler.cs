@@ -2,6 +2,7 @@
 using PetsOnTrail.Interfaces.Actions.Services;
 using MapsterMapper;
 using Mediator;
+using PetsOnTrail.Actions.Extensions;
 
 namespace API.WebApiService.RequestHandlers.Activities;
 
@@ -10,12 +11,14 @@ public sealed class CreateActivityHandler : IRequestHandler<CreateActivityReques
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly IMapper _mapper;
     private readonly IActivitiesService _activitiesService;
+    private readonly ILogger<CreateActivityHandler> _logger;
 
-    public CreateActivityHandler(IServiceScopeFactory serviceScopeFactory, IMapper mapper, IActivitiesService activitiesService)
+    public CreateActivityHandler(IServiceScopeFactory serviceScopeFactory, IMapper mapper, IActivitiesService activitiesService, ILogger<CreateActivityHandler> logger)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _mapper = mapper;
         _activitiesService = activitiesService;
+        _logger = logger;
     }
 
     public async ValueTask<CreateActivityResponse> Handle(CreateActivityRequest request, CancellationToken cancellationToken)
@@ -26,8 +29,12 @@ public sealed class CreateActivityHandler : IRequestHandler<CreateActivityReques
 
            // var activitiesService = scope.ServiceProvider.GetRequiredService<IActivitiesService>();
 
+            _logger.LogInformation($"WebApi: CreateActivityHandler: {request.Dump()}");
+
             var createActivitiesRequest =
                 _mapper.Map<PetsOnTrail.Interfaces.Actions.Entities.Activities.CreateActivityRequest>(request);
+
+            _logger.LogInformation($"WebApi: CreateActivityHandler: {createActivitiesRequest.Dump()}");
 
             var newEntry = await _activitiesService.CreateActivityAsync(createActivitiesRequest, cancellationToken);
 
