@@ -16,18 +16,18 @@ public class JwtTokenService : IJwtTokenService
         _currentUserIdService = currentUserIdService;
     }
 
-    public void Parse(string token)
+    public string Parse(string token)
     {
         var handler = new JwtSecurityTokenHandler();
 
         if (token is null)
-            return;
+            return string.Empty;
 
         var pos = token.IndexOf("Bearer ");
         if (pos < 0)
         {
             _logger.LogInformation($"{nameof(Parse)}: Token is not a Bearer token");
-            return;
+            return string.Empty;
         }
 
         token = token.Substring(pos + 7);
@@ -49,6 +49,8 @@ public class JwtTokenService : IJwtTokenService
         }
 
         _logger.LogInformation($"'{nameof(Parse)}': userId: '{_userId}'");
+
+        return _userId;
     }
 
     public string GetUserId()

@@ -2,7 +2,7 @@
 using API.WebApiService.Interceptors;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
-using PetsOnTrail.Interfaces.Actions.Services;
+using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 
 namespace API.WebApiService.Controllers
 {
@@ -12,19 +12,19 @@ namespace API.WebApiService.Controllers
     public class ActivitiesController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ICurrentUserIdService _currentUserIdService;
+        private readonly IJwtTokenService _jwtTokenService;
 
-        public ActivitiesController(IMediator mediator, ICurrentUserIdService currentUserIdService)
+        public ActivitiesController(IMediator mediator, IJwtTokenService jwtTokenService)
         {
             _mediator = mediator;
-            _currentUserIdService = currentUserIdService;
+            _jwtTokenService = jwtTokenService;
         }
 
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateActivity([FromBody] CreateActivityRequest request)
         {
-            request.UserId = _currentUserIdService.GetUserId();
+            request.UserId = _jwtTokenService.Parse(HttpContext.Request.Headers["authorization"].FirstOrDefault() ?? string.Empty);
 
             var createActivityResponse = await _mediator.Send(request);
 

@@ -2,7 +2,7 @@
 
 public interface IJwtTokenService
 {
-    public void Parse(string token);
+    public string Parse(string token);
 
     public string GetUserId();
 }
