@@ -37,6 +37,15 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
         else
         {
             var user = await _profilesService.GetAsync(request.UserId.ToString(), cancellationToken);
+            if (user == null)
+            {
+                user = new UserProfileRecord
+                {
+                    Id = request.UserId.ToString(),
+                    UserId = request.UserId.ToString(),
+                    Roles = new List<Guid> { Guid.Parse(Constants.Roles.InternalUser.Id) },
+                };
+            }
 
             var activity = _mapper.Map<UserProfileRecord.ActivityDto>(request);
             user.Activities.Add(activity);
