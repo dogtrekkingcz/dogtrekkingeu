@@ -2,6 +2,7 @@
 using API.WebApiService.Interceptors;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
+using PetsOnTrail.Interfaces.Actions.Services;
 
 namespace API.WebApiService.Controllers
 {
@@ -11,16 +12,20 @@ namespace API.WebApiService.Controllers
     public class ActivitiesController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly ICurrentUserIdService _currentUserIdService;
 
-        public ActivitiesController(IMediator mediator)
+        public ActivitiesController(IMediator mediator, ICurrentUserIdService currentUserIdService)
         {
             _mediator = mediator;
+            _currentUserIdService = currentUserIdService;
         }
 
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateActivity([FromBody] CreateActivityRequest request)
         {
+            request.UserId = _currentUserIdService.GetUserId();
+
             var createActivityResponse = await _mediator.Send(request);
 
             return Ok(createActivityResponse);

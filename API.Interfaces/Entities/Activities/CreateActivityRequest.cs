@@ -4,6 +4,8 @@ public sealed record CreateActivityRequest
 {
     public Guid? Id { get; set; } = Guid.NewGuid();
 
+    public Guid UserId { get; set; } = Guid.Empty;
+
     public Guid ActionId { get; set; } = Guid.Empty;
 
     public Guid RaceId { get; set; } = Guid.Empty;
