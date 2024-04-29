@@ -58,6 +58,13 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
         };
     }
 
+    public async override Task<Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse> getActivityByUserIdAndActivityId(Protos.Activities.UserIdAndActivityId request, ServerCallContext context)
+    {
+        var result = await _activitiesService.GetActivityByUserIdAndActivityIdAsync(Guid.Parse(request.UserId), Guid.Parse(request.ActivityId), context.CancellationToken);
+
+        return _mapper.Map<Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse>(result);
+    }
+
     public async override Task<Protos.Activities.GetActivities.GetActivitiesResponse> getActivities(Google.Protobuf.WellKnownTypes.Empty _, ServerCallContext context)
     {
         var result = await _activitiesService.GetActivitiesAsync(context.CancellationToken);

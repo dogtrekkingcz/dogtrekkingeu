@@ -1,6 +1,7 @@
 ﻿using PetsOnTrail.Interfaces.Actions.Entities.Activities;
 using PetsOnTrail.Interfaces.Actions.Entities.Checkpoints;
 using Mapster;
+using Storage.Entities.Activities;
 
 namespace API.GRPCService.Services.Checkpoints;
 
@@ -28,6 +29,10 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetActivitiesResponse.ActivityDto, Protos.Activities.GetActivities.ActivityDto>();
         typeAdapterConfig.NewConfig<GetActivitiesResponse.PetDto, Protos.Activities.GetActivities.PetDto>();
         typeAdapterConfig.NewConfig<GetActivitiesResponse.PositionDto, Protos.Activities.GetActivities.PositionDto>();
+
+        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponse, Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse>();
+        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponse.PetDto, Protos.Activities.GetActivityByUserIdAndActivityId.PetDto>();
+        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponse.PositionDto, Protos.Activities.GetActivityByUserIdAndActivityId.PositionDto>();
 
         return typeAdapterConfig;
     }

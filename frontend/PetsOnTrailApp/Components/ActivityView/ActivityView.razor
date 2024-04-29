@@ -1,0 +1,21 @@
+﻿@page "/activity/{UserId}/{ActivityId}"
+
+@inherits ActivityViewBase
+
+@inject IStringLocalizer<Resource> Localizer
+
+<h3>ActivityView</h3>
+
+@if (Model == null)
+{
+    <Loading />
+}
+else
+{
+    <div>
+        <h3>@Localizer["Activity"]</h3>
+        <hr />
+        
+    </div>
+}
+
