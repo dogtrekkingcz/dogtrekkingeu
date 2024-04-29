@@ -29,7 +29,7 @@ internal class ActivitiesService : IActivitiesService
         var createInternalStorageRequest = _mapper.Map<CreateActivityInternalStorageRequest>(request) with
         {
             Id = request.Id is null ? Guid.NewGuid() : request.Id.Value,
-            UserId = _currentUserIdService.GetUserId()
+            UserId = request.UserId
         };
 
         var response = await _activitiesRepositoryService.CreateActivityAsync(createInternalStorageRequest, cancellationToken);

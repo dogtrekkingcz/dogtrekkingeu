@@ -4,7 +4,7 @@ public sealed record CreateActivityInternalStorageRequest
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 
-    public string UserId { get; set; } = string.Empty;
+    public Guid UserId { get; set; } = Guid.Empty;
 
     public Guid ActionId { get; set; } = Guid.Empty;
 
