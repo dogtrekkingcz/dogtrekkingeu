@@ -62,7 +62,13 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
     {
         var result = await _activitiesService.GetActivityByUserIdAndActivityIdAsync(Guid.Parse(request.UserId), Guid.Parse(request.ActivityId), context.CancellationToken);
 
-        return _mapper.Map<Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse>(result);
+        _logger.LogInformation($"GetActivityByUserIdAndActivityId: {result.Dump()}");
+
+        var response = _mapper.Map<Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse>(result);
+
+        _logger.LogInformation($"GetActivityByUserIdAndActivityId: {response.Dump()}");
+
+        return response;
     }
 
     public async override Task<Protos.Activities.GetActivities.GetActivitiesResponse> getActivities(Google.Protobuf.WellKnownTypes.Empty _, ServerCallContext context)
