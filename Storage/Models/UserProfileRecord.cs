@@ -115,9 +115,9 @@ internal sealed record UserProfileRecord : IRecord
 
         public bool IsPublic { get; set; } = true;
 
-        public List<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
+        public List<PositionDto> Positions { get; set; } = new List<PositionDto>();
 
-        public List<ActivityPetDto> Pets { get; set; } = new List<ActivityPetDto>(0);
+        public List<ActivityPetDto> Pets { get; set; } = new List<ActivityPetDto>();
     }
     public sealed record PositionDto
     {

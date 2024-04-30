@@ -1,7 +1,6 @@
 ﻿using MapsterMapper;
-using MongoDB.Bson;
+using Microsoft.Extensions.Logging;
 using Storage.Entities.Activities;
-using Storage.Entities.Checkpoints;
 using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
@@ -10,15 +9,17 @@ namespace Storage.Services.Repositories.Activities;
 
 internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 {
+    private readonly ILogger<ActivitiesRepositoryService> _logger;
     private readonly IMapper _mapper;
     private readonly IStorageService<ActivityRecord> _activitiesService;
     private readonly IStorageService<UserProfileRecord> _profilesService;
 
-    public ActivitiesRepositoryService(IMapper mapper, IStorageService<ActivityRecord> activitiesService, IStorageService<UserProfileRecord> profilesService)
+    public ActivitiesRepositoryService(IMapper mapper, IStorageService<ActivityRecord> activitiesService, IStorageService<UserProfileRecord> profilesService, ILogger<ActivitiesRepositoryService> logger)
     {
         _mapper = mapper;
         _activitiesService = activitiesService;
         _profilesService = profilesService;
+        _logger = logger;
     }
 
     public async Task<CreateActivityInternalStorageResponse> CreateActivityAsync(CreateActivityInternalStorageRequest request, CancellationToken cancellationToken)
@@ -81,7 +82,10 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
     {
         var profile = await _profilesService.GetAsync(userId, cancellationToken);
 
-        return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(profile.Activities.FirstOrDefault(a => a.Id == activityId));
+        var activity = profile.Activities.FirstOrDefault(a => a.Id == activityId);
+        _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activity.Dump()}");
+
+        return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activity);
     }
 
     public async Task<GetActivitiesInternalStorageResponse> GetActivitiesAsync(CancellationToken cancellationToken)
