@@ -67,7 +67,9 @@ builder.Services
     .AddAuthorizedGrpcOverWebClient<Protos.Pets.Pets.PetsClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcOverWebClient<Protos.Results.Results.ResultsClient>(builder.Configuration["GrpcServerUri"])
     .AddAuthorizedGrpcOverWebClient<Protos.LiveUpdatesSubscription.LiveUpdatesSubscription.LiveUpdatesSubscriptionClient>(builder.Configuration["GrpcServerUri"])
-    .AddAuthorizedGrpcOverWebClient<Protos.Checkpoints.Checkpoints.CheckpointsClient>(builder.Configuration["GrpcServerUri"]);
+    .AddAuthorizedGrpcOverWebClient<Protos.Checkpoints.Checkpoints.CheckpointsClient>(builder.Configuration["GrpcServerUri"])
+    .AddAuthorizedGrpcOverWebClient<Protos.Activities.Activities.ActivitiesClient>(builder.Configuration["GrpcServerUri"]);
+
 
 builder.Services.AddLocalization();
 
