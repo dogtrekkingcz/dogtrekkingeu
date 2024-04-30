@@ -30,13 +30,15 @@ public static class Mapping
 
 
         typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
-        .Map(d => d, s => s.ToDateTimeOffset());
+            .Map(d => d, s => s.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset>()
-        .Map(d => d, s => s.ToDateTimeOffset());
+            .Map(d => d, s => s.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<DateTimeOffset, Google.Type.DateTime>()
-        .Map(d => d, s => s.ToGoogleDateTime());
+            .Map(d => d, s => s.ToGoogleDateTime());
         typeAdapterConfig.NewConfig<DateTimeOffset?, Google.Type.DateTime>()
-        .Map(d => d, s => s.ToGoogleDateTime());
+            .Map(d => d, s => s.ToGoogleDateTime());
+        typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTime>()
+            .Map(d => d, s => s.ToDateTimeOffset().Value.DateTime);
 
         typeAdapterConfig.NewConfig<Google.Type.Interval, Google.Type.Interval>();
         typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp>();
