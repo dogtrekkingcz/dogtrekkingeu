@@ -2,10 +2,13 @@
 using Mapster;
 using MapsterMapper;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
+using PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 using Protos.Actions;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
+using Protos.Activities.GetActivityByUserIdAndActivityId;
 using static Protos.Actions.Actions;
+using static Protos.Activities.Activities;
 
 namespace PetsOnTrailApp.DataStorage;
 
@@ -16,6 +19,8 @@ public static class DiCompositor
         services
             .AddBlazoredLocalStorage()
             .AddSingleton<IActionsRepository, ActionsRepository>()
+            .AddSingleton<IActivityRepository, ActivityRepository>()
+
             .AddSingleton<IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel>>((serviceProvider) =>
             {
                 var obj = new DataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel>(
@@ -51,6 +56,22 @@ public static class DiCompositor
                 });
 
                 return obj;
+            })
+            .AddSingleton<IDataStorageService<GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel>>((serviceProvider) =>
+            {
+                var obj = new DataStorageService<GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel>(
+                                       serviceProvider.GetRequiredService<ILocalStorageService>(), 
+                                                          serviceProvider.GetRequiredService<IMapper>()
+                                                                         );
+
+                obj.InitWithListFunction(async (guidList) =>
+                {
+                    var activitiesClient = serviceProvider.GetRequiredService<ActivitiesClient>();
+
+                    return await activitiesClient.getActivityByUserIdAndActivityIdAsync(new Protos.Activities.UserIdAndActivityId { UserId = guidList[0].ToString(), ActivityId = guidList[1].ToString() });
+                });
+
+                return obj;
             });
 
         return services;
@@ -59,7 +80,8 @@ public static class DiCompositor
     public static TypeAdapterConfig AddDataStorageMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig
-            .AddPublicActionMapping();
+            .AddPublicActionMapping()
+            .AddActivityMapping();
 
         return typeAdapterConfig;
     }

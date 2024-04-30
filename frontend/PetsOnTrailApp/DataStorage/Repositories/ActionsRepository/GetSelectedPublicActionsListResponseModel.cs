@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
-public class GetSelectedPublicActionsListResponseModel
+public sealed record GetSelectedPublicActionsListResponseModel
 {
     public List<ActionDto> Actions { get; set; } = new List<ActionDto>();
 

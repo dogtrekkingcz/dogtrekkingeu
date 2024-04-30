@@ -22,7 +22,8 @@ public class ActivityRepository : IActivityRepository
         await semaphoreSlim.WaitAsync();
         try
         {
-            var data = _dataStorageServiceActivityByUserIdAndActivityId.GetValueOrDefault(userIdAndActivityId, default(ActivityModel));
+            var activities = await _dataStorageServiceActivityByUserIdAndActivityId.GetListAsync(new List<Guid> { Guid.Parse(userIdAndActivityId.UserId), Guid.Parse(userIdAndActivityId.ActivityId) }, cancellationToken);
+            return _mapper.Map<ActivityModel>(activities.Data);
         }
         finally
         {
