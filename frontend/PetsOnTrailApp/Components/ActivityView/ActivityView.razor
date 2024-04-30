@@ -15,7 +15,21 @@ else
     <div>
         <h3>@Localizer["Activity"]</h3>
         <hr />
-        
+        <p>@Localizer["ActivityId"] : @Model.Id</p>
+        <p>@Localizer["Name"] : @Model.Name</p>
+        <p>@Localizer["Description"] : @Model.Description</p>
+        <p>@Localizer["StartTime"] : @Model.Start</p>
+        <p>@Localizer["EndTime"] : @Model.End</p>
+        <hr />
+
+        @foreach (var pos in Model.Positions.OrderByDescending(p => p.Time).ToList())
+        {
+            <div>
+                <p>@pos.Time</p>
+                <p>@pos.Latitude</p>
+                <p>@pos.Longitude</p>
+            </div>
+        }
     </div>
 }
 
