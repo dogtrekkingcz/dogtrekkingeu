@@ -55,32 +55,30 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
 
     public async Task<DataStorageModel<R>> GetListAsync(IList<Guid> ids, CancellationToken cancellationToken)
     {
-        try
-        {
-            Console.WriteLine($"GetListAsync -> ids: {ids}, function: {_functionByList}");
-            var loadedData = await _functionByList.Invoke(ids);
+        DataStorageModel<R> data = null;
 
-            Console.WriteLine($"GetListAsync -> loadedData: {loadedData}");
+        var id = string.Join(":", ids.Select(id => id.ToString()));
+
+        if (await _localStorage.ContainKeyAsync(id))
+            data = await _localStorage.GetItemAsync<DataStorageModel<R>>(id, cancellationToken);
+
+        if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
+        {
+            var loadedData = await _functionByList.Invoke(ids);
 
             var model = _mapper.Map<R>(loadedData);
 
-            Console.WriteLine($"GetListAsync -> model: {model.Dump()}");
-
-            var data = new DataStorageModel<R>()
+            data = new DataStorageModel<R>()
             {
                 Data = model,
                 Created = DateTime.UtcNow,
                 Id = ids[0]
             };
 
-            await _localStorage.SetItemAsync(string.Join(":", ids.Select(id => id.ToString())), data, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
+            await _localStorage.SetItemAsync(id, data, cancellationToken);
         }
 
-        return await _localStorage.GetItemAsync<DataStorageModel<R>>(string.Join(":", ids.Select(id => id.ToString())), cancellationToken);
+        return await _localStorage.GetItemAsync<DataStorageModel<R>>(id, cancellationToken);
     }
 
     public async Task PutAsync(Guid id, R value, CancellationToken cancellationToken)
