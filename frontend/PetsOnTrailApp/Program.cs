@@ -1,13 +1,10 @@
-using BlazorBootstrap;
 using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Web;
 using PetsOnTrailApp;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Services;
-using Google.Protobuf.Collections;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
-using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Blazored.LocalStorage;
