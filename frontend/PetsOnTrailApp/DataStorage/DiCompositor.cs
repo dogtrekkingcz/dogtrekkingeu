@@ -7,6 +7,7 @@ using Protos.Actions;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
 using Protos.Activities.GetActivityByUserIdAndActivityId;
+using SharedLib.Extensions;
 using static Protos.Actions.Actions;
 using static Protos.Activities.Activities;
 
@@ -68,7 +69,38 @@ public static class DiCompositor
                 {
                     var activitiesClient = serviceProvider.GetRequiredService<ActivitiesClient>();
 
-                    return await activitiesClient.getActivityByUserIdAndActivityIdAsync(new Protos.Activities.UserIdAndActivityId { UserId = guidList[0].ToString(), ActivityId = guidList[1].ToString() });
+                    var activityRawData = await activitiesClient.getActivityByUserIdAndActivityIdAsync(new Protos.Activities.UserIdAndActivityId { UserId = guidList[0].ToString(), ActivityId = guidList[1].ToString() });
+
+                    List<PositionDto> filteredPositions = new List<PositionDto>();
+
+                    // filter positions for one item per one second only
+                    var latestTime = DateTimeOffset.MinValue;
+                    foreach (var position in activityRawData.Positions)
+                    {
+                        if (position.Time.ToDateTimeOffset() > latestTime.AddSeconds(1))
+                        {
+                            filteredPositions.Add(position);
+                            latestTime = position.Time.ToDateTimeOffset().Value;
+                        }
+                    }
+
+                    var filteredData = new GetActivityByUserIdAndActivityIdResponse
+                    {
+                        Id = activityRawData.Id,
+                        ActionId = activityRawData.ActionId,
+                        RaceId = activityRawData.RaceId,
+                        CategoryId = activityRawData.CategoryId,
+                        Name = activityRawData.Name,
+                        Description = activityRawData.Description,
+                        Start = activityRawData.Start,
+                        End = activityRawData.End,
+                        IsPublic = activityRawData.IsPublic,
+                        
+                        Positions = { filteredPositions },
+                        Pets = { activityRawData.Pets }
+                    };
+
+                    return filteredData;
                 });
 
                 return obj;

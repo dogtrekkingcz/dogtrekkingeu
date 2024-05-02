@@ -1,4 +1,6 @@
-﻿namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
+﻿using System.Text.Json.Serialization;
+
+namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 
 public sealed record GetActivityByUserIdAndActivityIdResponseModel
 {
@@ -16,15 +18,30 @@ public sealed record GetActivityByUserIdAndActivityIdResponseModel
 
     public sealed record PositionDto
     {
+        [JsonPropertyName("id")]
         public Guid Id { get; init; } = Guid.Empty;
+
+        [JsonPropertyName("_t")]
         public DateTime Time { get; init; }
+
+        [JsonPropertyName("la")]
         public double Latitude { get; init; }
+
+        [JsonPropertyName("lo")]
         public double Longitude { get; init; }
+
+        [JsonPropertyName("alt")]
         public double Altitude { get; init; }
+
+        [JsonPropertyName("acc")]
         public double Accuracy { get; init; }
+
+        [JsonPropertyName("_c")]
         public double Course { get; init; }
+
+        [JsonPropertyName("_n")]
         public string Note { get; init; }
-        public IList<string> PhotoUris { get; init; } = new List<string>(0);
+        // public IList<string> PhotoUris { get; init; } = new List<string>(0);
     }
 
     public sealed record PetDto
