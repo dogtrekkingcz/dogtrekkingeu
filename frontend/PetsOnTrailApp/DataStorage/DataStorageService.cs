@@ -72,14 +72,14 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
                 Id = ids[0]
             };
 
-            await _localStorage.SetItemAsync(nameof(R), data, cancellationToken);
+            await _localStorage.SetItemAsync(string.Join(":", ids.Select(id => id.ToString())), data, cancellationToken);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
 
-        return await _localStorage.GetItemAsync<DataStorageModel<R>>(nameof(R), cancellationToken);
+        return await _localStorage.GetItemAsync<DataStorageModel<R>>(string.Join(":", ids.Select(id => id.ToString())), cancellationToken);
     }
 
     public async Task PutAsync(Guid id, R value, CancellationToken cancellationToken)
