@@ -38,17 +38,31 @@ public sealed record GetActivityByUserIdAndActivityIdResponseModel
 
         [JsonPropertyName("_n")]
         public string Note { get; init; }
-        // public IList<string> PhotoUris { get; init; } = new List<string>(0);
+
+        [JsonPropertyName("phs")]
+        public IList<string> PhotoUris { get; init; } = new List<string>(0);
     }
 
     public sealed record PetDto
     {
         public Guid Id { get; init; } = Guid.Empty;
+
+        [JsonPropertyName("ch")]
         public string Chip { get; init; }
+
+        [JsonPropertyName("nm")]
         public string Name { get; init; }
+
+        [JsonPropertyName("br")]
         public string Breed { get; init; }
+
+        [JsonPropertyName("clr")]
         public string Color { get; init; }
+
+        [JsonPropertyName("knl")]
         public string Kennel { get; init; }
+
+        [JsonPropertyName("bd")]
         public DateTime BirthDate { get; init; }
     }
 }

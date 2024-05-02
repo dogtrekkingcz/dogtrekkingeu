@@ -20,7 +20,8 @@ public static class ActivityMapper
 
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel, ActivityModel>()
             .Map(d => d.SynchronizedAt, s => DateTime.Now);
-        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel.PositionDto, ActivityModel.PositionDto>();
+        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel.PositionDto, ActivityModel.PositionDto>()
+            .Ignore(d => d.Course);
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel.PetDto, ActivityModel.PetDto>();
 
         return typeAdapterConfig;
