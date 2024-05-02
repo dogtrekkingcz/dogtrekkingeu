@@ -36,9 +36,6 @@ public sealed record GetActivityByUserIdAndActivityIdResponseModel
         [JsonPropertyName("acc")]
         public double Accuracy { get; init; }
 
-        [JsonPropertyName("_c")]
-        public double Course { get; init; }
-
         [JsonPropertyName("_n")]
         public string Note { get; init; }
         // public IList<string> PhotoUris { get; init; } = new List<string>(0);
