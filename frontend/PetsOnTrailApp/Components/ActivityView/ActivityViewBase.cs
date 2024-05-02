@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
+using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
 
 namespace PetsOnTrailApp.Components.ActivityView;
@@ -19,5 +20,9 @@ public class ActivityViewBase : ComponentBase
         base.OnInitialized();
 
         Model = await _activityRepository.GetActivityByUserIdAndActivityId(new Protos.Activities.UserIdAndActivityId { UserId = UserId, ActivityId = ActivityId }, CancellationToken.None);
+
+        Console.WriteLine($"ActivityViewBase.OnInitialized: Model is: {Model.Dump()}");
+
+        StateHasChanged();
     }
 }
