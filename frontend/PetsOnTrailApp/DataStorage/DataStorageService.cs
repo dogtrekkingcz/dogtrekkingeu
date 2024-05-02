@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using PetsOnTrailApp.Extensions;
 
 namespace PetsOnTrailApp.DataStorage;
 
@@ -63,7 +64,7 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
 
             var model = _mapper.Map<R>(loadedData);
 
-            Console.WriteLine($"GetListAsync -> model: {model}");
+            Console.WriteLine($"GetListAsync -> model: {model.Dump()}");
 
             var data = new DataStorageModel<R>()
             {
