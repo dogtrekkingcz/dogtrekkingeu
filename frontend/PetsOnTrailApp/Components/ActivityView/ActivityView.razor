@@ -28,28 +28,8 @@ else
         <p>@Localizer["EndTime"] : @Model.End</p>
         <hr />
 
-@*         <table>
-            <thead>
-                <tr>
-                    <th>@Localizer["Time"]</th>
-                    <th>@Localizer["Latitude"]</th>
-                    <th>@Localizer["Longitude"]</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach (var pos in Model.Positions.OrderByDescending(p => p.Time).ToList())
-            {
-                <tr>
-                    <td>@pos.Time</td>
-                    <td>@pos.Latitude</td>
-                    <td>@pos.Longitude</td>
-                </tr>
-            }
-            </tbody>
-        </table> *@
+        <button class="btn btn-info" @onclick="(async () => await LoadAsync())">@Localizer["Race"]</button>
+        <Map @ref="mapRef" MapOptions="@mapOptions"></Map>
     </div>
 }
-
-<button class="btn btn-info" @onclick="(async () => await LoadAsync())">@Localizer["Race"]</button>
-<Map @ref="mapRef" MapOptions="@mapOptions"></Map>
 
