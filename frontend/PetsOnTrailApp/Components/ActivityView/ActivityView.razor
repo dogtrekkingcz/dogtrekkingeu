@@ -28,8 +28,6 @@ else
         <p>@Localizer["EndTime"] : @Model.End</p>
         <hr />
 
-        <Map @ref="mapRef" MapOptions="@mapOptions"></Map>
-
 @*         <table>
             <thead>
                 <tr>
@@ -51,4 +49,6 @@ else
         </table> *@
     </div>
 }
+
+<Map @ref="mapRef" MapOptions="@mapOptions"></Map>
 
