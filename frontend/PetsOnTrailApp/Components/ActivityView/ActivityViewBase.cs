@@ -30,11 +30,6 @@ public class ActivityViewBase : ComponentBase
 
         Model = await _activityRepository.GetActivityByUserIdAndActivityId(new Protos.Activities.UserIdAndActivityId { UserId = UserId, ActivityId = ActivityId }, CancellationToken.None);
 
-        StateHasChanged();
-    }
-
-    protected async Task LoadAsync()
-    {
         var left = Model.Positions.Min(p => p.Latitude);
         var right = Model.Positions.Max(p => p.Latitude);
         var top = Model.Positions.Max(p => p.Longitude);
@@ -57,7 +52,11 @@ public class ActivityViewBase : ComponentBase
             }
         };
 
+        StateHasChanged();
+    }
 
+    protected async Task LoadAsync()
+    {
         //Model.Positions.Select(async p =>
         //    await MarkerFactory.CreateAndAddToMap(new LatLng(p.Latitude, p.Longitude), mapRef)
         //);
