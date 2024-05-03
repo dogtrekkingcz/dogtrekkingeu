@@ -1,5 +1,6 @@
 ﻿using FisSst.BlazorMaps;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Maui.ApplicationModel;
 using PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
@@ -15,6 +16,8 @@ public class ActivityViewBase : ComponentBase
     [Inject] private NavigationManager Navigation { get; set; }
 
     [Inject] private IMarkerFactory MarkerFactory { get; init; }
+    [Inject] private IPolygonFactory PolygonFactory { get; init; }
+
 
     protected FisSst.BlazorMaps.Map mapRef;
     protected MapOptions mapOptions = new MapOptions()
@@ -40,7 +43,29 @@ public class ActivityViewBase : ComponentBase
 
         Model = await _activityRepository.GetActivityByUserIdAndActivityId(new Protos.Activities.UserIdAndActivityId { UserId = UserId, ActivityId = ActivityId }, CancellationToken.None);
 
-        Console.WriteLine($"ActivityViewBase.OnInitialized: Model is: {Model.Dump()}");
+        var left = Model.Positions.Min(p => p.Latitude);
+        var right = Model.Positions.Max(p => p.Latitude);
+        var top = Model.Positions.Max(p => p.Longitude);
+        var bottom = Model.Positions.Min(p => p.Longitude);
+
+        var center = new LatLng((left + right) / 2, (top + bottom) / 2);
+
+        mapOptions = new MapOptions()
+        {
+            DivId = "mapId",
+            Center = center,
+            Zoom = 13,
+            UrlTileLayer = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            SubOptions = new MapSubOptions()
+            {
+                Attribution = "&copy; <a lhref='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+                TileSize = 512,
+                ZoomOffset = -1,
+                MaxZoom = 19,
+            }
+        };
+
+        await PolygonFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
 
         StateHasChanged();
     }
