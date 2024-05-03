@@ -50,5 +50,6 @@ else
     </div>
 }
 
+<button class="btn btn-info" @onclick="(async () => await LoadAsync())">@Localizer["Race"]</button>
 <Map @ref="mapRef" MapOptions="@mapOptions"></Map>
 
