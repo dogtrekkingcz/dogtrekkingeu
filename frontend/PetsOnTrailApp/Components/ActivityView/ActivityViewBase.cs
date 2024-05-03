@@ -15,8 +15,8 @@ public class ActivityViewBase : ComponentBase
     [Inject] private IActivityRepository _activityRepository { get; set; }
     [Inject] private NavigationManager Navigation { get; set; }
 
-    [Inject] private IMarkerFactory MarkerFactory { get; init; }
-    [Inject] private IPolygonFactory PolygonFactory { get; init; }
+    //[Inject] private IMarkerFactory MarkerFactory { get; init; }
+    [Inject] private IPolylineFactory PolylineFactory { get; init; }
 
 
     protected FisSst.BlazorMaps.Map mapRef;
@@ -53,9 +53,11 @@ public class ActivityViewBase : ComponentBase
         };
 
 
-        Model.Positions.Select(async p =>
-            await MarkerFactory.CreateAndAddToMap(new LatLng(p.Latitude, p.Longitude), mapRef)
-        );
+        //Model.Positions.Select(async p =>
+        //    await MarkerFactory.CreateAndAddToMap(new LatLng(p.Latitude, p.Longitude), mapRef)
+        //);
+
+        await PolylineFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
 
         StateHasChanged();
     }
