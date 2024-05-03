@@ -20,20 +20,7 @@ public class ActivityViewBase : ComponentBase
 
 
     protected FisSst.BlazorMaps.Map mapRef;
-    protected MapOptions mapOptions = new MapOptions()
-    {
-        DivId = "mapId",
-        Center = new LatLng(50.279133, 18.685578),
-        Zoom = 13,
-        UrlTileLayer = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        SubOptions = new MapSubOptions()
-        {
-            Attribution = "&copy; <a lhref='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
-            TileSize = 512,
-            ZoomOffset = -1,
-            MaxZoom = 19,
-        }
-    };
+    protected MapOptions mapOptions;
 
     public ActivityModel Model = null;
 
@@ -65,7 +52,10 @@ public class ActivityViewBase : ComponentBase
             }
         };
 
-        await PolygonFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
+
+        Model.Positions.Select(async p =>
+            await MarkerFactory.CreateAndAddToMap(new LatLng(p.Latitude, p.Longitude), mapRef)
+        );
 
         StateHasChanged();
     }
