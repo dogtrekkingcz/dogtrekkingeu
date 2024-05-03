@@ -15,6 +15,7 @@ using TokenStorage = PetsOnTrailApp.Providers.TokenStorage;
 using PetsOnTrailApp.Components;
 using PetsOnTrailApp.Pages;
 using PetsOnTrailApp.DataStorage;
+using FisSst.BlazorMaps.DependencyInjection;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 builder.Services.AddBlazoredModal();
 builder.Services.AddBlazorBootstrap();
+builder.Services.AddBlazorLeafletMaps();
 
 var typeAdapterConfig = SharedLib.Mapping.CreateFrontendMapping();
 typeAdapterConfig

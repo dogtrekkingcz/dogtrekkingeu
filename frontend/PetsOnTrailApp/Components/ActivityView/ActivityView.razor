@@ -6,6 +6,12 @@
 
 <h3>ActivityView</h3>
 
+<style>
+    #mapId {
+        height: 400px;
+    }
+</style>
+
 @if (Model == null)
 {
     <Loading />
@@ -21,6 +27,8 @@ else
         <p>@Localizer["StartTime"] : @Model.Start</p>
         <p>@Localizer["EndTime"] : @Model.End</p>
         <hr />
+
+        <Map @ref="mapRef" MapOptions="@mapOptions"></Map>
 
         <table>
             <thead>
