@@ -19,11 +19,11 @@ message CreateEntryRequest {
   string RaceId = 11;
   string CategoryId = 12;
   Address Address = 13;
-  optional google.type.DateTime Birthday = 14;
+  google.type.DateTime Birthday = 14;
   string LanguageCode = 15;
   repeated MerchandizeItem Merchandize = 16;
   bool Accepted = 17;
-  optional google.type.DateTime AcceptedDate = 18;
+  google.type.DateTime AcceptedDate = 18;
 }
 
 message Address {
@@ -36,7 +36,7 @@ message Address {
 }
 
 message Pet {
-  optional string Id = 1;
+  string Id = 1;
   string Name = 2;
   string Pedigree = 3;
   string Chip = 4;
@@ -58,8 +58,8 @@ message MerchandizeItem {
 }
 
 message Vaccination {
-  optional google.type.DateTime Date = 1;
-  optional google.type.DateTime ValidUntil = 2;
+  google.type.DateTime Date = 1;
+  google.type.DateTime ValidUntil = 2;
   VaccinationType Type = 3;
   string Note = 4;
   string UriToPhoto = 5;

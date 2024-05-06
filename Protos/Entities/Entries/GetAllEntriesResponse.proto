@@ -26,11 +26,11 @@ message Entry {
   string RaceId = 12;
   string CategoryId = 13;
   Address Address = 14;
-  optional google.type.DateTime Birthday = 15;
+  google.type.DateTime Birthday = 15;
   string LanguageCode = 16;
   repeated MerchandizeItem Merchandize = 17;
   bool Accepted = 18;
-  optional google.type.DateTime AcceptedDate = 19;
+  google.type.DateTime AcceptedDate = 19;
   EntryState State = 20;
 }
 
@@ -74,8 +74,8 @@ message MerchandizeItem {
 }
 
 message Vaccination {
-  optional google.type.DateTime Date = 1;
-  optional google.type.DateTime ValidUntil = 2;
+  google.type.DateTime Date = 1;
+  google.type.DateTime ValidUntil = 2;
   VaccinationType Type = 3;
   string Note = 4;
   string UriToPhoto = 5;

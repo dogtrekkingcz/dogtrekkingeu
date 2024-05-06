@@ -68,8 +68,8 @@ message RacerDto {
   string FirstName = 4;
   string LastName = 5;
   repeated PetDto Pets = 6;
-  optional google.type.DateTime Start = 7;
-  optional google.type.DateTime Finish = 8;
+  google.type.DateTime Start = 7;
+  google.type.DateTime Finish = 8;
   RaceState State = 9;
   repeated PassedCheckpointDto PassedCheckpoints = 10;
 }

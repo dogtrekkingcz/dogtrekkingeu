@@ -14,7 +14,7 @@ message GetActivityByUserIdAndActivityIdResponse {
   string Name = 5;
   string Description = 6;
   google.type.DateTime Start = 7;
-  optional google.type.DateTime End = 8;
+  google.type.DateTime End = 8;
   bool IsPublic = 9;
   repeated PositionDto Positions = 10;
   repeated PetDto Pets = 11;
@@ -34,10 +34,10 @@ message PositionDto {
 
 message PetDto {
   string Id = 1;
-  optional string Chip = 2;
-  optional string Name = 3;
-  optional string Breed = 4;
-  optional string Color = 5;
-  optional string Kennel = 6;
-  optional google.type.DateTime BirthDate = 7;
+  string Chip = 2;
+  string Name = 3;
+  string Breed = 4;
+  string Color = 5;
+  string Kennel = 6;
+  google.type.DateTime BirthDate = 7;
 }

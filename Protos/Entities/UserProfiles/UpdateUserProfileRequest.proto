@@ -44,16 +44,16 @@ message Pet {
   string Kennel = 5;
   string Pedigree = 6;
   string Chip = 7;
-  optional google.type.DateTime Birthday = 8;
-  optional google.type.DateTime Decease = 9;
+  google.type.DateTime Birthday = 8;
+  google.type.DateTime Decease = 9;
   string UriToPhoto = 10;
 
   repeated Vaccination Vaccinations = 11;
 }
 
 message Vaccination {
-  optional google.type.DateTime Date = 1;
-  optional google.type.DateTime ValidUntil = 2;
+  google.type.DateTime Date = 1;
+  google.type.DateTime ValidUntil = 2;
   VaccinationType Type = 3;
   string Note = 4;
   string UriToPhoto = 5;
@@ -81,7 +81,7 @@ message Activity {
   string Name = 5;
   string Description = 6;
   google.type.DateTime Start = 7;
-  optional google.type.DateTime End = 8;
+  google.type.DateTime End = 8;
   bool IsPublic = 9;
   repeated Position Positions = 10;
   repeated ActivityPet Pets = 11;
@@ -101,10 +101,10 @@ message Position {
 
 message ActivityPet {
   string Id = 1;
-  optional string Chip = 2;
-  optional string Name = 3;
-  optional string Breed = 4;
-  optional string Color = 5;
-  optional string Kennel = 6;
-  optional google.type.DateTime BirthDate = 7;
+  string Chip = 2;
+  string Name = 3;
+  string Breed = 4;
+  string Color = 5;
+  string Kennel = 6;
+  google.type.DateTime BirthDate = 7;
 }
