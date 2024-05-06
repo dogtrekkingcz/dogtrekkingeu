@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_graph"
+    app:startDestination="@id/activityFragment">
+
+    <fragment
+        android:id="@+id/activityFragment"
+        android:name="eu.petsontrail.tracker.ActivityFragment"
+        android:label="fragment_activity"
+        tools:layout="@layout/fragment_activity" >
+        <action
+            android:id="@+id/action_activityFragment_to_createActivityFragment"
+            app:destination="@id/createActivityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createActivityFragment"
+        android:name="eu.petsontrail.tracker.CreateActivityFragment"
+        android:label="fragment_create_activity"
+        tools:layout="@layout/fragment_create_activity" >
+        <action
+            android:id="@+id/action_createActivityFragment_to_activityFragment"
+            app:destination="@id/activityFragment" />
+    </fragment>
+</navigation>

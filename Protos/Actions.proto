@@ -25,7 +25,7 @@ import "Entities/Actions/DeleteActionRequest.proto";
 import "Entities/Actions/DeleteActionResponse.proto";
 import "Entities/Actions/GetResultsForActionRequest.proto";
 import "Entities/Actions/GetResultsForActionResponse.proto";
-// import "Entities/Actions/AcceptCheckpointRequest.proto";
+import "Entities/Actions/AcceptCheckpointRequest.proto";
 import "Entities/Actions/GetPublicActionsListResponse.proto";
 import "Entities/Actions/GetSelectedPublicActionsListRequest.proto";
 import "Entities/Actions/GetSelectedPublicActionsListResponse.proto";
@@ -41,7 +41,7 @@ service Actions {
   rpc getSelectedActions (getselectedactions.GetSelectedActionsRequest) returns (getselectedactions.GetSelectedActionsResponse);
   rpc deleteAction (deleteaction.DeleteActionRequest) returns (deleteaction.DeleteActionResponse);
   rpc getResultsForAction (getresultsforaction.GetResultsForActionRequest) returns (getresultsforaction.GetResultsForActionResponse);
-  // rpc acceptCheckpoint (acceptcheckpoint.AcceptCheckpointRequest) returns (google.protobuf.Empty);
+  rpc acceptCheckpoint (acceptcheckpoint.AcceptCheckpointRequest) returns (google.protobuf.Empty);
   rpc getPublicActionsList (google.protobuf.Empty) returns (getpublicactionslist.GetPublicActionsListResponse);
   rpc getSelectedPublicActionsList (getselectedpublicactionslist.GetSelectedPublicActionsListRequest) returns (getselectedpublicactionslist.GetSelectedPublicActionsListResponse);
   rpc getSimpleActionsList (IdsRequest) returns (getsimpleactionslist.GetSimpleActionsListResponse);

@@ -10,14 +10,29 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import eu.petsontrail.tracker.databinding.ActivityMainBinding
+import eu.petsontrail.tracker.db.AppDatabase
+import eu.petsontrail.tracker.db.DbHelper
+import eu.petsontrail.tracker.db.model.UserSettingsDto
+import kotlinx.coroutines.runBlocking
+import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        db = DbHelper().InitializeDatabase(applicationContext)
+
+        runBlocking {
+            if (db.userSettingsDao().getAll().size == 0) {
+                val userSettings = UserSettingsDto(UUID.randomUUID(), null, null, null, null, null, "")
+                db.userSettingsDao().insertOne(userSettings)
+            }
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
