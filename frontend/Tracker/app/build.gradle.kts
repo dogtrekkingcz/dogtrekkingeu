@@ -42,13 +42,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    sourceSets {
-        getByName("main") {
-            proto {
-                java.srcDir("../../../Protos/")
-            }
-        }
-    }
 }
 
 dependencies {
@@ -62,8 +55,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.protobuf.java)
-    implementation(libs.protobuf.kotlin)
     implementation(libs.grpc.stub)
     implementation(libs.grpc.protobuf)
 
@@ -82,8 +73,6 @@ protobuf {
         artifact = "com.google.protobuf:protoc:3.12.4"
     }
 
-
-
     generateProtoTasks {
         all().forEach { task ->
             task.plugins {
@@ -93,13 +82,4 @@ protobuf {
             }
         }
     }
-}
-
-fun AndroidSourceSet.proto(action: SourceDirectorySet.() -> Unit) {
-    (this as? ExtensionAware)
-        ?.extensions
-        ?.getByName("proto")
-        ?.let { it as? SourceDirectorySet }
-        ?.apply(action)
-
 }
