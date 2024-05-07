@@ -34,6 +34,7 @@ import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.toLocationDto
 import kotlinx.coroutines.*
+import java.io.Console
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -49,8 +50,6 @@ class LocationTrackerService : Service() {
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var notification: Notification
     private lateinit var notificationManager: NotificationManager
-
-    // private lateinit var locationUpdateListener: LocationUpdateListener
 
     private lateinit var db: AppDatabase
     private var currentActivityId: UUID? = null
@@ -68,6 +67,7 @@ class LocationTrackerService : Service() {
         db = DbHelper().InitializeDatabase(applicationContext)
 
         runBlocking {
+            Log.d("Position", "getting active activity...")
             var active = db.activityDao().getActive()
             currentActivityId = active?.uid
             currentActivityName = active?.name
@@ -215,11 +215,13 @@ class LocationTrackerService : Service() {
             }
         }
         else {
-            // defaultly start the service immediately
-            //if (action == 1001) {
+            Log.d("fusedLocationProvider", "getting ...")
             locationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
+            Log.d("fusedLocationProvider", locationClient.toString())
+
+
             getLocation()
-            //}
+            Log.d("fusedLocationProvider", "getLocation after")
         }
 
         return START_STICKY
@@ -237,13 +239,8 @@ class LocationTrackerService : Service() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            Log.d("permission", "no permission for locations is configured")
+
             return
         }
 
