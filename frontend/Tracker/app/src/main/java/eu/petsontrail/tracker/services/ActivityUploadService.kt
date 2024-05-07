@@ -26,7 +26,6 @@ import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.db.model.PetDto
-import io.grpc.ManagedChannel
 import kotlinx.coroutines.runBlocking
 import java.time.Instant
 import java.time.LocalDateTime

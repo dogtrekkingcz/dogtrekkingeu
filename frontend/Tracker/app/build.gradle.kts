@@ -74,17 +74,13 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")//KTX Extensions/Coroutines for Room
     ksp("androidx.room:room-compiler:$room_version")
 
-    implementation(libs.grpc.stub)
-    implementation(libs.grpc.protobuf)
-    implementation(libs.protobuf.java)
+    implementation("com.google.protobuf:protobuf-javalite:4.26.1")
 
     if (JavaVersion.current().isJava9Compatible()) {
         // Workaround for @javax.annotation.Generated
         // see: https://github.com/grpc/grpc-java/issues/3633
         implementation("javax.annotation:javax.annotation-api:1.3.1")
     }
-
-    api(libs.protobuf.kotlin)
 /*
     protobuf(files("../../../Protos/Entities/ActionRights/"))
     protobuf(files("../../../Protos/Entities/Actions/"))
@@ -108,7 +104,9 @@ protobuf {
     generateProtoTasks {
         all().forEach {
             it.builtins {
-                register("java")
+                create("java") {
+                    option("lite")
+                }
             }
         }
     }
