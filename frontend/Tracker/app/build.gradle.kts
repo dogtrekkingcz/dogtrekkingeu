@@ -88,16 +88,25 @@ dependencies {
 
 protobuf {
     protoc {
-        // The artifact spec for the Protobuf Compiler
-        artifact = "com.google.protobuf:protoc:3.12.4"
+        artifact = "com.google.protobuf:protoc:3.21.6"
     }
-
+    plugins {
+        id("grpc") {
+            artifact = "com.google.protobuf:protoc:3.21.6"
+        }
+        id("grpckt") {
+            artifact = "com.google.protobuf:protoc:3.21.6"
+        }
+    }
     generateProtoTasks {
-        all().forEach { task ->
-            task.plugins {
-                create("java") {
-                    option("lite")
-                }
+        all().forEach {
+            if (it.name.startsWith("generateTestProto")) {
+                it.dependsOn("jar")
+            }
+
+            it.plugins {
+                id("grpc")
+                id("grpckt")
             }
         }
     }
