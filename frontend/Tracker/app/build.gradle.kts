@@ -96,6 +96,7 @@ dependencies {
     protobuf(files("../../../Protos/Entities/UserProfiles/"))
 
  */
+    protobuf(files("../../../Protos.Java/"))
     protobuf(files("../../../Protos/"))
 }
 
