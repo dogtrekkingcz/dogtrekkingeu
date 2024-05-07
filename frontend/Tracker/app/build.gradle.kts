@@ -76,6 +76,7 @@ dependencies {
 
     implementation(libs.grpc.stub)
     implementation(libs.grpc.protobuf)
+    implementation(libs.protobuf.java)
 
     if (JavaVersion.current().isJava9Compatible()) {
         // Workaround for @javax.annotation.Generated
@@ -83,30 +84,30 @@ dependencies {
         implementation("javax.annotation:javax.annotation-api:1.3.1")
     }
 
+    api(libs.protobuf.kotlin)
+/*
+    protobuf(files("../../../Protos/Entities/ActionRights/"))
+    protobuf(files("../../../Protos/Entities/Actions/"))
+    protobuf(files("../../../Protos/Entities/Activities/"))
+    protobuf(files("../../../Protos/Entities/Checkpoints/"))
+    protobuf(files("../../../Protos/Entities/LiveUpdatesSubscription/"))
+    protobuf(files("../../../Protos/Entities/Pets/"))
+    protobuf(files("../../../Protos/Entities/Results/"))
+    protobuf(files("../../../Protos/Entities/UserProfiles/"))
+
+ */
     protobuf(files("../../../Protos/"))
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.21.6"
+        artifact = "com.google.protobuf:protoc:4.26.1"
     }
-    plugins {
-        id("grpc") {
-            artifact = "com.google.protobuf:protoc:3.21.6"
-        }
-        id("grpckt") {
-            artifact = "com.google.protobuf:protoc:3.21.6"
-        }
-    }
+
     generateProtoTasks {
         all().forEach {
-            if (it.name.startsWith("generateTestProto")) {
-                it.dependsOn("jar")
-            }
-
-            it.plugins {
-                id("grpc")
-                id("grpckt")
+            it.builtins {
+                register("java")
             }
         }
     }
