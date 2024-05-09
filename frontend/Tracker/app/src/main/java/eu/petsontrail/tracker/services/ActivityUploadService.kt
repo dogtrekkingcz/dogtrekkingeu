@@ -1,5 +1,6 @@
 package eu.petsontrail.tracker.services
 
+import activities.ActivitiesGrpc
 import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
@@ -9,16 +10,15 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
-import android.os.AsyncTask
 import android.os.Build
 import android.os.IBinder
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
+import createactivity.CreateActivityRequestOuterClass.CreateActivityRequest
 import eu.petsontrail.tracker.MainActivity
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.db.AppDatabase
@@ -26,7 +26,10 @@ import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.db.model.PetDto
+import io.grpc.ManagedChannel
+import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
+import java.lang.ref.WeakReference
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -41,6 +44,9 @@ class ActivityUploadService : Service() {
     private lateinit var notification: Notification
     private lateinit var notificationManager: NotificationManager
 
+    private lateinit var channel: ManagedChannel
+    private val HOST: String = "https://petsontrail.eu"
+    private val PORT: Int = 4443
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -55,6 +61,8 @@ class ActivityUploadService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun startForeground() {
+        channel = ManagedChannelBuilder.forAddress(HOST, PORT).usePlaintext().build();
+
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.INTERNET
@@ -168,6 +176,13 @@ class ActivityUploadService : Service() {
                 activityPetsIds.add(ap.petId)
             }
             val pets = db.petDao().loadAllByIds(activityPetsIds.toTypedArray())
+
+            var stub = ActivitiesGrpc.newBlockingStub(channel)
+            var request: CreateActivityRequest = CreateActivityRequest.newBuilder()
+                    .setId(activity.uid.toString())
+                    .setName(activity.name)
+                .build()
+            stub.createActivity(request)
         }
     }
 
