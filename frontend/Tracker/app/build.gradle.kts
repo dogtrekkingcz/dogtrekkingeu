@@ -78,9 +78,6 @@ dependencies {
     implementation("io.grpc:grpc-stub:1.63.0")
     implementation("org.apache.tomcat:annotations-api:6.0.53")
 
-
-
-    protobuf(files("../../../Protos.Java/"))
     protobuf(files("../../../Protos/"))
 }
 

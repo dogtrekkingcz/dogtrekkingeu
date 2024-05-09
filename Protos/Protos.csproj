@@ -7,6 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="google\**" />
+      <EmbeddedResource Remove="google\**" />
+      <None Remove="google\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Protobuf Include="Actions.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -670,91 +676,6 @@
       <None Remove="Entities\Racer.proto" />
       <None Remove="Entities\RaceSimple.proto" />
       <None Remove="Entities\UserProfile.proto" />
-      <None Remove="google\type\calendar_period.proto" />
-      <Protobuf Include="google\type\calendar_period.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\color.proto" />
-      <Protobuf Include="google\type\color.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\date.proto" />
-      <Protobuf Include="google\type\date.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\datetime.proto" />
-      <Protobuf Include="google\type\datetime.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\dayofweek.proto" />
-      <Protobuf Include="google\type\dayofweek.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\decimal.proto" />
-      <Protobuf Include="google\type\decimal.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\expr.proto" />
-      <Protobuf Include="google\type\expr.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\fraction.proto" />
-      <Protobuf Include="google\type\fraction.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\interval.proto" />
-      <Protobuf Include="google\type\interval.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\latlng.proto" />
-      <Protobuf Include="google\type\latlng.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\localized_text.proto" />
-      <Protobuf Include="google\type\localized_text.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\money.proto" />
-      <Protobuf Include="google\type\money.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\month.proto" />
-      <Protobuf Include="google\type\month.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\phone_number.proto" />
-      <Protobuf Include="google\type\phone_number.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\postal_address.proto" />
-      <Protobuf Include="google\type\postal_address.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\quaternion.proto" />
-      <Protobuf Include="google\type\quaternion.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <None Remove="google\type\timeofday.proto" />
-      <Protobuf Include="google\type\timeofday.proto">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <None Remove="Authorization.proto" />
       <None Remove="ActionRights.proto" />
       <Protobuf Include="ActionRights.proto">
@@ -764,9 +685,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Google.Protobuf" Version="3.25.3" />
-      <PackageReference Include="Grpc.Net.Client" Version="2.60.0" />
-      <PackageReference Include="Grpc.Tools" Version="2.61.0">
+      <PackageReference Include="Google.Api.CommonProtos" Version="2.15.0" />
+      <PackageReference Include="Google.Protobuf" Version="3.26.1" />
+      <PackageReference Include="Grpc.Net.Client" Version="2.62.0" />
+      <PackageReference Include="Grpc.Tools" Version="2.63.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
