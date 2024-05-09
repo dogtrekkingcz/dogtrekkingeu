@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var channel = ManagedChannelBuilder.forTarget("dns:///petsontrail.eu:4443").usePlaintext().build()
+        var channel = ManagedChannelBuilder.forTarget("dns:///petsontrail.eu:4443").build()
         var state = channel.getState(true)
 
         Log.d("Service status", state.toString())

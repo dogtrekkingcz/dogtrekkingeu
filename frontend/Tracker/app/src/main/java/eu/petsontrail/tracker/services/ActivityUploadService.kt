@@ -178,7 +178,7 @@ class ActivityUploadService : Service() {
             }
             val pets = db.petDao().loadAllByIds(activityPetsIds.toTypedArray())
 
-            channel = ManagedChannelBuilder.forTarget("dns:///petsontrail.eu:4443").usePlaintext().build()
+            channel = ManagedChannelBuilder.forTarget("dns:///petsontrail.eu:4443").build()
             var state = channel.getState(true)
 
             Log.d("Service status", state.toString())
