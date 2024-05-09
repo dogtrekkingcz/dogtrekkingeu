@@ -68,30 +68,18 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // ROOM database implementation
-    val room_version = "2.6.1"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")//KTX Extensions/Coroutines for Room
-    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")//KTX Extensions/Coroutines for Room
+    ksp("androidx.room:room-compiler:2.6.1")
 
-    implementation("com.google.protobuf:protobuf-javalite:4.26.1")
+    implementation("io.grpc:grpc-okhttp:1.63.0")
+    implementation("io.grpc:grpc-protobuf-lite:1.63.0")
+    implementation("io.grpc:grpc-stub:1.63.0")
+    implementation("org.apache.tomcat:annotations-api:6.0.53")
 
-    if (JavaVersion.current().isJava9Compatible()) {
-        // Workaround for @javax.annotation.Generated
-        // see: https://github.com/grpc/grpc-java/issues/3633
-        implementation("javax.annotation:javax.annotation-api:1.3.1")
-    }
-/*
-    protobuf(files("../../../Protos/Entities/ActionRights/"))
-    protobuf(files("../../../Protos/Entities/Actions/"))
-    protobuf(files("../../../Protos/Entities/Activities/"))
-    protobuf(files("../../../Protos/Entities/Checkpoints/"))
-    protobuf(files("../../../Protos/Entities/LiveUpdatesSubscription/"))
-    protobuf(files("../../../Protos/Entities/Pets/"))
-    protobuf(files("../../../Protos/Entities/Results/"))
-    protobuf(files("../../../Protos/Entities/UserProfiles/"))
 
- */
+
     protobuf(files("../../../Protos.Java/"))
     protobuf(files("../../../Protos/"))
 }
@@ -101,12 +89,19 @@ protobuf {
         artifact = "com.google.protobuf:protoc:4.26.1"
     }
 
+    plugins {
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.63.0"
+        }
+    }
+
     generateProtoTasks {
         all().forEach {
             it.builtins {
-                create("java") {
-                    option("lite")
-                }
+                id("java") { option("lite") }
+            }
+            it.plugins {
+                id("grpc") { option("lite") }
             }
         }
     }
