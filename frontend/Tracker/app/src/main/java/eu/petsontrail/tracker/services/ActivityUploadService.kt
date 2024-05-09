@@ -1,5 +1,6 @@
 package eu.petsontrail.tracker.services
 
+import actions.ActionsGrpc
 import activities.ActivitiesGrpc
 import android.Manifest
 import android.app.Notification
@@ -18,6 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
+import com.google.protobuf.Empty
 import createactivity.CreateActivityRequestOuterClass.CreateActivityRequest
 import eu.petsontrail.tracker.MainActivity
 import eu.petsontrail.tracker.R
@@ -45,7 +47,7 @@ class ActivityUploadService : Service() {
     private lateinit var notificationManager: NotificationManager
 
     private lateinit var channel: ManagedChannel
-    private val HOST: String = "https://petsontrail.eu"
+    private val HOST: String = "194.182.90.15"
     private val PORT: Int = 4443
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -61,8 +63,6 @@ class ActivityUploadService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun startForeground() {
-        channel = ManagedChannelBuilder.forAddress(HOST, PORT).usePlaintext().build();
-
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.INTERNET
@@ -138,9 +138,10 @@ class ActivityUploadService : Service() {
             var activitiesToSynchronize = db.activityDao().getActivitiesToSynchronize()
 
             for (activity in activitiesToSynchronize) {
-                if (activity.isSynchronized == false) {
+                Log.d("Service status", "Sending request to createorupdateactivity ...")
+                //if (activity.isSynchronized == false) {
                     CreateOrUpdateActivity(activity)
-                }
+                //}
             }
         }
 
@@ -177,12 +178,24 @@ class ActivityUploadService : Service() {
             }
             val pets = db.petDao().loadAllByIds(activityPetsIds.toTypedArray())
 
-            var stub = ActivitiesGrpc.newBlockingStub(channel)
+            channel = ManagedChannelBuilder.forTarget("dns:///petsontrail.eu:4443").usePlaintext().build()
+            var state = channel.getState(true)
+
+            Log.d("Service status", state.toString())
+
+            var actionsClient = ActionsGrpc.newBlockingStub(channel)
+
+            var publicActions = actionsClient.getPublicActionsList(Empty.newBuilder().build())
+            Log.d("public actions", publicActions.toString())
+
+            var client = ActivitiesGrpc.newBlockingStub(channel)
             var request: CreateActivityRequest = CreateActivityRequest.newBuilder()
                     .setId(activity.uid.toString())
                     .setName(activity.name)
                 .build()
-            stub.createActivity(request)
+            Log.d("Service status", "sending request")
+            var resposne = client.createActivity(request)
+            Log.d("Service status", "done")
         }
     }
 

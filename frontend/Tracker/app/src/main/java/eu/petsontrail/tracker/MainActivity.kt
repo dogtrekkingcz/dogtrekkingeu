@@ -1,6 +1,8 @@
 package eu.petsontrail.tracker
 
+import actions.ActionsGrpc
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,10 +11,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.google.protobuf.Empty
 import eu.petsontrail.tracker.databinding.ActivityMainBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.UserSettingsDto
+import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
 import java.util.UUID
 
@@ -24,6 +28,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        var channel = ManagedChannelBuilder.forTarget("dns:///petsontrail.eu:4443").usePlaintext().build()
+        var state = channel.getState(true)
+
+        Log.d("Service status", state.toString())
+
+        var actionsClient = ActionsGrpc.newBlockingStub(channel)
+
+        var publicActions = actionsClient.getPublicActionsList(Empty.newBuilder().build())
+        Log.d("public actions", publicActions.toString())
 
         db = DbHelper().InitializeDatabase(applicationContext)
 

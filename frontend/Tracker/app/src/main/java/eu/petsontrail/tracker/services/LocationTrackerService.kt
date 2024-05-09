@@ -88,10 +88,10 @@ class LocationTrackerService : Service() {
                     // notificationManager.notify(100, notificationBuilder.build())
 
                     runBlocking {
-                        if (currentActivityId != null) {
-                            db.locationDao().insertOne(location.toLocationDto(currentActivityId!!))
-                            Log.d("ActivityId", currentActivityId.toString())
-                        }
+                        if (currentActivityId == null)
+                            createNewActivity()
+
+                        db.locationDao().insertOne(location.toLocationDto(currentActivityId!!))
                     }
                 }
             }

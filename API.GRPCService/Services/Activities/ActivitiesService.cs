@@ -23,6 +23,8 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
     
     public async override Task<Protos.Activities.CreateActivity.CreateActivityResponse> createActivity(Protos.Activities.CreateActivity.CreateActivityRequest request, ServerCallContext context)
     {
+        _logger.LogInformation($"CreateActivity: {request.Dump()}");
+
         var apiRequest = _mapper.Map<CreateActivityRequest>(request);
 
         var response = await _activitiesService.CreateActivityAsync(apiRequest, context.CancellationToken);

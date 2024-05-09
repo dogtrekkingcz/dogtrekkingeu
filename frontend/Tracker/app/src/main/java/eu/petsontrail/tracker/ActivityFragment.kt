@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
+import eu.petsontrail.tracker.services.ActivityUploadService
 import eu.petsontrail.tracker.services.LocationTrackerService
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.runBlocking
@@ -63,6 +64,9 @@ class ActivityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonCreateNewActivity.setOnClickListener {
+            val intent = Intent(this.context, ActivityUploadService::class.java)
+            this.context?.startForegroundService(intent)
+
             findNavController().navigate(R.id.action_activityFragment_to_createActivityFragment)
         }
 
