@@ -10,9 +10,15 @@ internal static class ActivitiesServiceMapping
     internal static TypeAdapterConfig AddCActivitiesServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.CreateActivityRequest, CreateActivityRequest>()
-            .Ignore(d => d.Id);
-        typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.PositionDto, CreateActivityRequest.PositionDto>();
-        typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.PetDto, CreateActivityRequest.PetDto>();
+            .Map(d => d.Id, s => Guid.Parse(s.Id))
+            .Map(d => d.ActionId, s => Guid.Parse(s.ActionId))
+            .Map(d => d.RaceId, s => Guid.Parse(s.RaceId))
+            .Map(d => d.CategoryId, s => Guid.Parse(s.CategoryId))
+            .Ignore(d => d.UserId);
+        typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.PositionDto, CreateActivityRequest.PositionDto>()
+            .Map(d => d.Id, s => Guid.Parse(s.Id));
+        typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.PetDto, CreateActivityRequest.PetDto>()
+            .Map(d => d.Id, s => Guid.Parse(s.Id));
 
         typeAdapterConfig.NewConfig<CreateActivityResponse, Protos.Activities.CreateActivity.CreateActivityResponse>();
 
