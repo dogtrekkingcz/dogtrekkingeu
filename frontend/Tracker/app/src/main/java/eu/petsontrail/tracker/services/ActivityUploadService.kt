@@ -189,6 +189,8 @@ class ActivityUploadService : Service() {
             Log.d("public actions", publicActions.toString())
 
             var client = ActivitiesGrpc.newBlockingStub(channel)
+                // .withCallCredentials()
+
             var request: CreateActivityRequest = CreateActivityRequest.newBuilder()
                     .setId(activity.uid.toString())
                     .setName(activity.name)

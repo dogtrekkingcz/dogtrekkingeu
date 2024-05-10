@@ -30,6 +30,8 @@ android {
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
+
+        manifestPlaceholders["appAuthRedirectScheme"] = "net.openid.petsontrail"
     }
 
     buildTypes {
@@ -63,6 +65,9 @@ dependencies {
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,6 +82,9 @@ dependencies {
     implementation("io.grpc:grpc-protobuf-lite:1.63.0")
     implementation("io.grpc:grpc-stub:1.63.0")
     implementation("org.apache.tomcat:annotations-api:6.0.53")
+
+    // OAuth authentication
+    implementation("net.openid:appauth:0.11.1")
 
     protobuf(files("../../../Protos/"))
 }
