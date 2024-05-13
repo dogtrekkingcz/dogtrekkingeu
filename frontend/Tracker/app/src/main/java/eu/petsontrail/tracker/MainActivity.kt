@@ -1,6 +1,7 @@
 package eu.petsontrail.tracker
 
 import actions.ActionsGrpc
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import com.google.protobuf.Empty
 import eu.petsontrail.tracker.databinding.ActivityMainBinding
 import eu.petsontrail.tracker.db.AppDatabase
@@ -62,6 +64,12 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }
+
+        //val btnLogin: Button = binding.btnUserLogin
+        //btnLogin.setOnClickListener {
+            val intent = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(intent)
+        //}
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
