@@ -4,7 +4,7 @@ option csharp_namespace = "Protos.Activities.CreateActivity";
 
 package createactivity;
 
-import "google/type/datetime.proto";
+import "google/protobuf/timestamp.proto";
 
 message CreateActivityRequest {
   string Id = 1;
@@ -13,8 +13,8 @@ message CreateActivityRequest {
   string CategoryId = 4;
   string Name = 5;
   string Description = 6;
-  google.type.DateTime Start = 7;
-  google.type.DateTime End = 8;
+  google.protobuf.Timestamp Start = 7;
+  google.protobuf.Timestamp End = 8;
   bool IsPublic = 9;
   repeated PositionDto Positions = 10;
   repeated PetDto Pets = 11;
@@ -22,7 +22,7 @@ message CreateActivityRequest {
 
 message PositionDto {
   string Id = 1;
-  google.type.DateTime Time = 2;
+  google.protobuf.Timestamp Time = 2;
   double Latitude = 3;
   double Longitude = 4;
   double Altitude = 5;
@@ -39,5 +39,5 @@ message PetDto {
   string Breed = 4;
   string Color = 5;
   string Kennel = 6;
-  google.type.DateTime BirthDate = 7;
+  google.protobuf.Timestamp BirthDate = 7;
 }

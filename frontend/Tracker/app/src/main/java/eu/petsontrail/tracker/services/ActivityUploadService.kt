@@ -20,7 +20,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import com.google.protobuf.Empty
+import com.google.protobuf.Timestamp
+import com.google.type.DateTime
 import createactivity.CreateActivityRequestOuterClass.CreateActivityRequest
+import eu.petsontrail.tracker.Constants
 import eu.petsontrail.tracker.MainActivity
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.db.AppDatabase
@@ -36,6 +39,8 @@ import kotlinx.coroutines.runBlocking
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.ZoneOffset
+import java.util.Date
 import java.util.UUID
 import java.util.concurrent.Executor
 
@@ -201,8 +206,15 @@ class ActivityUploadService : Service() {
                 .withCallCredentials(AuthenticationCallCredentials(token))
 
             var request: CreateActivityRequest = CreateActivityRequest.newBuilder()
-                    .setId(activity.uid.toString())
-                    .setName(activity.name)
+                .setId(activity.uid.toString())
+                .setActionId(Constants.UUID_EMPTY)
+                .setRaceId(Constants.UUID_EMPTY)
+                .setCategoryId(Constants.UUID_EMPTY)
+                .setIsPublic(true)
+                .setStart(Timestamp.newBuilder().setSeconds(activity.start!!))
+                .setEnd(Timestamp.newBuilder().setSeconds(activity.end!!))
+                .setDescription(activity.description)
+                .setName(activity.name)
                 .build()
             Log.d("Service status", "sending request")
             var resposne = client.createActivity(request)
