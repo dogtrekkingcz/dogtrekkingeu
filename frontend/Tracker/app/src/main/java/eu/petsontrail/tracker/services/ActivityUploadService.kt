@@ -28,14 +28,16 @@ import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.db.model.PetDto
+import io.grpc.CallCredentials
+import io.grpc.ChannelCredentials
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
-import java.lang.ref.WeakReference
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.UUID
+import java.util.concurrent.Executor
 
 
 class ActivityUploadService : Service() {
@@ -178,18 +180,25 @@ class ActivityUploadService : Service() {
             }
             val pets = db.petDao().loadAllByIds(activityPetsIds.toTypedArray())
 
-            channel = ManagedChannelBuilder.forTarget("dns:///petsontrail.eu:4443").build()
+            channel = ManagedChannelBuilder
+                        .forTarget("dns:///petsontrail.eu:4443")
+                        .build()
             var state = channel.getState(true)
 
             Log.d("Service status", state.toString())
-
-            var actionsClient = ActionsGrpc.newBlockingStub(channel)
+/*
+            var actionsClient = ActionsGrpc
+                .newBlockingStub(channel)
+                .withCallCredentials(AuthenticationCallCredentials(token))
 
             var publicActions = actionsClient.getPublicActionsList(Empty.newBuilder().build())
             Log.d("public actions", publicActions.toString())
+            */
 
-            var client = ActivitiesGrpc.newBlockingStub(channel)
-                // .withCallCredentials()
+
+            var client = ActivitiesGrpc
+                .newBlockingStub(channel)
+                .withCallCredentials(AuthenticationCallCredentials(token))
 
             var request: CreateActivityRequest = CreateActivityRequest.newBuilder()
                     .setId(activity.uid.toString())

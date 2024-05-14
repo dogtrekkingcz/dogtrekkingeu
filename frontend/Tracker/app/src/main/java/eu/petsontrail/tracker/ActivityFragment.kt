@@ -81,7 +81,15 @@ class ActivityFragment : Fragment() {
             ) {
                 Log.d("permission", "no permission for locations is configured")
 
-                val requestedPermissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION )
+                val requestedPermissions = arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                    Manifest.permission.FOREGROUND_SERVICE,
+                    Manifest.permission.FOREGROUND_SERVICE_LOCATION,
+                    Manifest.permission.INTERNET,
+                    Manifest.permission.POST_NOTIFICATIONS,
+                    Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC)
                 ActivityCompat.requestPermissions(
                     this.requireActivity(),
                     requestedPermissions,

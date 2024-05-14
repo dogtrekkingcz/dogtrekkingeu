@@ -73,19 +73,20 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // ROOM database implementation
-    implementation("androidx.room:room-runtime:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")//KTX Extensions/Coroutines for Room
-    ksp("androidx.room:room-compiler:2.6.1")
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)//KTX Extensions/Coroutines for Room
+    ksp(libs.androidx.room.compiler)
 
-    implementation("io.grpc:grpc-okhttp:1.63.0")
-    implementation("io.grpc:grpc-protobuf-lite:1.63.0")
-    implementation("io.grpc:grpc-stub:1.63.0")
-    implementation("org.apache.tomcat:annotations-api:6.0.53")
+    implementation(libs.grpc.okhttp)
+    implementation(libs.grpc.protobuf.lite)
+    implementation(libs.grpc.stub)
+    implementation(libs.grpc.auth)
+    implementation(libs.annotations.api)
 
     // OAuth authentication
-    implementation("net.openid:appauth:0.11.1")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation(libs.appauth)
+    implementation(libs.okhttp)
 
     protobuf(files("../../../Protos/"))
 }
