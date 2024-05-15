@@ -52,6 +52,11 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
             user.Activities.Add(activity);
 
             var createdActivityRecord = await _profilesService.AddOrUpdateAsync(user, cancellationToken);
+
+            response = new CreateActivityInternalStorageResponse
+            {
+                Id = Guid.Parse(activity.Id)
+            };
         }
 
         return response;

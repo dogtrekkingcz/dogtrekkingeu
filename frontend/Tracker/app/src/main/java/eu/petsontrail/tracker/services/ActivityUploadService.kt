@@ -37,6 +37,7 @@ import io.grpc.ChannelCredentials
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
+import okhttp3.internal.wait
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -241,7 +242,11 @@ class ActivityUploadService : Service() {
                 })
                 .build()
             Log.d("Service status", "sending request")
-            var response = client.createActivity(request)
+
+            runBlocking {
+                var response = client.createActivity(request).
+            }
+
             Log.d("Service status", "done")
         }
     }
