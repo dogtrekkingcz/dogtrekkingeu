@@ -4,6 +4,6 @@ public interface IJwtTokenService
 {
     public string Parse(string token);
 
-    public string GetUserId();
+    public Guid GetUserId();
 }
 

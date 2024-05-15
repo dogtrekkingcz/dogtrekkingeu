@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("Service status", state.toString())
 
-        var actionsClient = ActionsGrpc.newBlockingStub(channel)
+//        var actionsClient = ActionsGrpc.newBlockingStub(channel)
 
-        var publicActions = actionsClient.getPublicActionsList(Empty.newBuilder().build())
-        Log.d("public actions", publicActions.toString())
+//        var publicActions = actionsClient.getPublicActionsList(Empty.newBuilder().build())
+//        Log.d("public actions", publicActions.toString())
 
         db = DbHelper().InitializeDatabase(applicationContext)
 
@@ -65,11 +65,11 @@ class MainActivity : AppCompatActivity() {
                 .setAnchorView(R.id.fab).show()
         }
 
-        //val btnLogin: Button = binding.btnUserLogin
-        //btnLogin.setOnClickListener {
-//            val intent = Intent(applicationContext, LoginActivity::class.java)
-//            startActivity(intent)
-        //}
+        val btnLogin: Button = binding.btnLogin
+        btnLogin.setOnClickListener {
+            val intent = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

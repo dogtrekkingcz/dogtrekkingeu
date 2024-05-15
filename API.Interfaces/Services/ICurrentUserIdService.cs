@@ -2,7 +2,7 @@
 
 public interface ICurrentUserIdService
 {
-    void SetUserId(string userId);
+    void SetUserId(Guid userId);
     
-    string GetUserId();
+    Guid GetUserId();
 }

@@ -5,6 +5,7 @@ using Grpc.Core;
 using MapsterMapper;
 using Protos.Activities.GetMyActivities;
 using GetMyActivitiesRequest = PetsOnTrail.Interfaces.Actions.Entities.Activities.GetMyActivitiesRequest;
+using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 
 namespace API.GRPCService.Services.Activities;
 
@@ -13,19 +14,24 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IActivitiesService _activitiesService;
+    private readonly IJwtTokenService _jwtTokenService;
 
-    public ActivitiesService(ILogger<ActivitiesService> logger, IMapper mapper, IActivitiesService activitiesService)
+    public ActivitiesService(ILogger<ActivitiesService> logger, IMapper mapper, IActivitiesService activitiesService, IJwtTokenService jwtTokenService)
     {
         _logger = logger;
         _mapper = mapper;
         _activitiesService = activitiesService;
+        _jwtTokenService = jwtTokenService;
     }
     
     public async override Task<Protos.Activities.CreateActivity.CreateActivityResponse> createActivity(Protos.Activities.CreateActivity.CreateActivityRequest request, ServerCallContext context)
     {
         _logger.LogInformation($"CreateActivity: {request.Dump()}");
 
-        var apiRequest = _mapper.Map<CreateActivityRequest>(request);
+        var apiRequest = _mapper.Map<CreateActivityRequest>(request)with
+        {
+            UserId = _jwtTokenService.GetUserId()
+        };
 
         var response = await _activitiesService.CreateActivityAsync(apiRequest, context.CancellationToken);
         

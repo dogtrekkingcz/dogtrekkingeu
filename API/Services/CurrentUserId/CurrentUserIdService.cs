@@ -4,14 +4,14 @@ namespace PetsOnTrail.Actions.Services.CurrentUserId;
 
 public class CurrentUserIdService : ICurrentUserIdService
 {
-    private string _currentUserId = String.Empty;
+    private Guid _currentUserId = Guid.Empty;
     
-    public void SetUserId(string userId)
+    public void SetUserId(Guid userId)
     {
         _currentUserId = userId;
     }
     
-    public string GetUserId()
+    public Guid GetUserId()
     {
         return _currentUserId;
     }

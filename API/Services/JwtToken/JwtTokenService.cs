@@ -6,7 +6,7 @@ namespace PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 
 public class JwtTokenService : IJwtTokenService
 {
-    private string _userId = "";
+    private Guid _userId = Guid.Empty;
     private readonly ILogger _logger;
     private readonly ICurrentUserIdService _currentUserIdService;
 
@@ -41,7 +41,9 @@ public class JwtTokenService : IJwtTokenService
             if (jsonToken != null)
             { 
                 var securityToken = jsonToken as JwtSecurityToken;
-                _userId = securityToken?.Claims?.FirstOrDefault(c => c.Type == "sub")?.Value ?? "";
+                var userId = securityToken?.Claims?.FirstOrDefault(c => c.Type == "sub")?.Value ?? Guid.Empty.ToString();
+                _userId = Guid.Parse(userId);
+
                 _currentUserIdService.SetUserId(_userId);
 
                 _logger.LogInformation($"{securityToken?.Claims}");
@@ -50,10 +52,10 @@ public class JwtTokenService : IJwtTokenService
 
         _logger.LogInformation($"'{nameof(Parse)}': userId: '{_userId}'");
 
-        return _userId;
+        return _userId.ToString();
     }
 
-    public string GetUserId()
+    public Guid GetUserId()
     {
         return _userId;
     }
