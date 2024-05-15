@@ -141,6 +141,9 @@ typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>()
 typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, DateTimeOffset?>()
     .MapWith(s => s != null ? s.ToDateTimeOffset() : null);
 
+typeAdapterConfig.NewConfig<Google.Protobuf.WellKnownTypes.Timestamp, DateTimeOffset>()
+    .MapWith(s => s.ToDateTimeOffset());
+
 typeAdapterConfig.NewConfig<IList<string>, IdsRequest>()
     .MapWith(s => new IdsRequest { Ids = { s } });
 
