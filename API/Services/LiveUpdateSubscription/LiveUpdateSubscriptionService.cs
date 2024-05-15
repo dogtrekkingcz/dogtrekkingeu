@@ -28,7 +28,7 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
                 .ToList());
         }
 
-        if (string.IsNullOrWhiteSpace(request.ToUser) == false)
+        if (request.ToUser == Guid.Empty)
         {
             targetedPeers.AddRange(Repository
                 .Where(rep => rep.Value.Settings.User == request.ToUser)
@@ -39,7 +39,7 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
         targetedPeers.ForEach(peer => 
             Repository[peer].Items.Add(new LiveUpdateSubscriptionData.LiveUpdateSubscriptionItemDto
             {
-                From = "Server",
+                From = Constants.LiveUpdateSections.ServerId,
                 ServerTime = DateTimeOffset.Now,
                 Section = request.FromSection,
                 User = request.FromUser,
@@ -70,7 +70,7 @@ public class LiveUpdateSubscriptionService : ILiveUpdateSubscriptionService
         
         Repository[request.Peer].Items.Add(new LiveUpdateSubscriptionData.LiveUpdateSubscriptionItemDto
         {
-            From = "Server",
+            From = Constants.LiveUpdateSections.ServerId,
             ServerTime = DateTimeOffset.Now,
             Section = request.Section,
             User = currentUserIdService.GetUserId(),

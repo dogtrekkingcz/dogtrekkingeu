@@ -39,13 +39,15 @@ namespace PetsOnTrail.Actions.Services.EntriesManage
         public async Task<CreateEntryResponse> CreateEntryAsync(CreateEntryRequest request, CancellationToken cancellationToken)
         {
             Console.WriteLine($"Received createEntry request: '{request.Dump()}'");
-            
-            var createEntryInternalStorageRequest = _mapper.Map<CreateEntryInternalStorageRequest>(request);
-            createEntryInternalStorageRequest.Id = Guid.NewGuid();
-            createEntryInternalStorageRequest.Created = DateTimeOffset.Now;
-            createEntryInternalStorageRequest.State = CreateEntryInternalStorageRequest.EntryState.Entered;
-            createEntryInternalStorageRequest.UserId = _currentUserIdService.GetUserId();
-            
+
+            var createEntryInternalStorageRequest = _mapper.Map<CreateEntryInternalStorageRequest>(request) with
+            {
+                Id = Guid.NewGuid(),
+                Created = DateTimeOffset.Now,
+                State = CreateEntryInternalStorageRequest.EntryState.Entered,
+                UserId = _currentUserIdService.GetUserId()
+            };
+
             var response = await _entriesRepositoryService.CreateEntryAsync(createEntryInternalStorageRequest, cancellationToken);
 
             var emailRequest = _mapper.Map<NewActionRegistrationEmailRequest>(request);

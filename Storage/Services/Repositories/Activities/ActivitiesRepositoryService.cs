@@ -71,16 +71,16 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
         };
     }
 
-    public async Task<GetActivitiesByUserIdInternalStorageResponse> GetActivitiesByUserId(string userId, CancellationToken cancellationToken)
+    public async Task<GetActivitiesByUserIdInternalStorageResponse> GetActivitiesByUserId(Guid userId, CancellationToken cancellationToken)
     {
-        var activities = await _activitiesService.GetByUserId(userId, cancellationToken);
+        var activities = await _activitiesService.GetByUserId(userId.ToString(), cancellationToken);
 
         return _mapper.Map<GetActivitiesByUserIdInternalStorageResponse>(activities);
     }
 
-    public async Task<GetActivityByUserIdAndActivityIdInternalStorageResponse> GetActivityByUserIdAndActivityId(string userId, string activityId, CancellationToken cancellationToken)
+    public async Task<GetActivityByUserIdAndActivityIdInternalStorageResponse> GetActivityByUserIdAndActivityId(Guid userId, string activityId, CancellationToken cancellationToken)
     {
-        var profile = await _profilesService.GetAsync(userId, cancellationToken);
+        var profile = await _profilesService.GetAsync(userId.ToString(), cancellationToken);
 
         var activity = profile.Activities.FirstOrDefault(a => a.Id == activityId);
         _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activity.Dump()}");

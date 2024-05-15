@@ -2,6 +2,6 @@
 {
     public sealed record GetAllRightsInternalStorageRequest
     {
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

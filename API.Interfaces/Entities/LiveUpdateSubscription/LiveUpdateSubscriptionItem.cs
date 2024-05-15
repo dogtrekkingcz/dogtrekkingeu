@@ -8,7 +8,7 @@ public sealed record LiveUpdateSubscriptionData
 
     public sealed record LiveUpdateSubscriptionSettingsDto
     {
-        public string? User { get; set; }
+        public Guid? User { get; set; }
         
         public string? Section { get; set; }
         
@@ -23,9 +23,9 @@ public sealed record LiveUpdateSubscriptionData
 
         public string? Section { get; set; }
 
-        public string? User { get; set; }
+        public Guid? User { get; set; }
 
-        public string From { get; set; }
+        public Guid From { get; set; }
 
         public string Message { get; set; }
     }

@@ -65,7 +65,7 @@ internal class ActivitiesService : IActivitiesService
 
     public async Task<GetActivityByUserIdAndActivityIdResponse> GetActivityByUserIdAndActivityIdAsync(Guid userId, Guid activityId, CancellationToken cancellationToken)
     {
-        var response = await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(userId.ToString(), activityId.ToString(), cancellationToken);
+        var response = await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(userId, activityId.ToString(), cancellationToken);
 
         return _mapper.Map<GetActivityByUserIdAndActivityIdResponse>(response);
     }

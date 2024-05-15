@@ -47,10 +47,12 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
 
         public async Task<CreateActionResponse> CreateActionAsync(CreateActionRequest request, CancellationToken cancellationToken)
         {
-            var addActionRequest = _mapper.Map<CreateActionInternalStorageRequest>(request);
-            addActionRequest.Id = Guid.NewGuid();
-            addActionRequest.UserId = _currentUserIdService.GetUserId();
-            addActionRequest.Created = DateTimeOffset.Now;
+            var addActionRequest = _mapper.Map<CreateActionInternalStorageRequest>(request) with
+            {
+                Id = Guid.NewGuid(),
+                UserId = _currentUserIdService.GetUserId(),
+                Created = DateTimeOffset.Now
+            };            
 
             foreach (var race in addActionRequest.Races)
             {

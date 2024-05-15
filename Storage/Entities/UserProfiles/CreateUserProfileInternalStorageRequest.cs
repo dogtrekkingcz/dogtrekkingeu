@@ -4,7 +4,9 @@ public sealed record CreateUserProfileInternalStorageRequest
 {
     public string? Id { get; set; } = string.Empty;
 
-    public string UserId { get; set; } = string.Empty;
+    public Guid UserId { get; set; } = Guid.Empty;
+
+    public string Email { get; set; } = string.Empty;
 
     public Guid CompetitorId { get; set; } = default(Guid);
 

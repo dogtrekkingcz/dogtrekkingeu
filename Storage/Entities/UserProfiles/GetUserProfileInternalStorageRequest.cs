@@ -2,5 +2,5 @@
 
 public sealed record GetUserProfileInternalStorageRequest
 {
-    public required string UserId { get; set; }
+    public required Guid UserId { get; set; }
 }

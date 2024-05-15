@@ -6,7 +6,7 @@ public sealed record CreateEntryInternalStorageRequest
 
     public EntryState State { get; set; } = EntryState.Unspecified;
 
-    public string UserId { get; set; } = "";
+    public Guid UserId { get; set; } = Guid.Empty;
     
     public string CompetitorId { get; set; } = "";
 

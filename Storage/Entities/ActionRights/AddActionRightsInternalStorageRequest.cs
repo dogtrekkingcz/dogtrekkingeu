@@ -4,7 +4,7 @@
     {
         public Guid Id { get; init; } = Guid.Empty;
 
-        public string UserId { get; init; } = string.Empty;
+        public Guid UserId { get; init; } = Guid.Empty;
 
         public string ActionId { get; init; } = string.Empty;
     

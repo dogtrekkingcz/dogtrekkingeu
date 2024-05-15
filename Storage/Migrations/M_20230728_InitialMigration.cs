@@ -58,6 +58,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddUpAction(() => UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
             {
                 Id = _userIdAdmin,
+                UserId = Guid.Parse(_userIdAdmin),
                 FirstName = "Admin",
                 LastName = "Admin",
                 Contact = new CreateUserProfileInternalStorageRequest.ContactDto
@@ -65,7 +66,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                     EmailAddress = "admin@petsontrail.eu",
                     PhoneNumber = "+420 728 245 996"
                 },
-                UserId = "admin@petsontrail.eu",
+                Email = "admin@petsontrail.eu",
                 Roles = new List<string>
                 {
                     Constants.Roles.InternalAdministrator.Id
@@ -75,6 +76,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddUpAction(() => UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
             {
                 Id = _userIdRadekKotesovec,
+                UserId = Guid.Parse(_userIdRadekKotesovec),
                 FirstName = "Radek",
                 LastName = "Kotěšovec",
                 Contact = new CreateUserProfileInternalStorageRequest.ContactDto
@@ -82,7 +84,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                     EmailAddress = "radek.kotesovec@dogtrekking.cz",
                     PhoneNumber = "+420 728 245 996"
                 },
-                UserId = "radek.kotesovec@dogtrekking.cz",
+                Email = "radek.kotesovec@dogtrekking.cz",
                 Roles = new List<string>
                 {
                     Constants.Roles.InternalAdministrator.Id

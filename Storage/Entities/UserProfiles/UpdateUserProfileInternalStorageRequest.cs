@@ -59,7 +59,7 @@ public sealed record UpdateUserProfileInternalStorageRequest
     {
         public Guid Id { get; set; } = Guid.Empty;
 
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
 
         public string Name { get; set; } = string.Empty;
 

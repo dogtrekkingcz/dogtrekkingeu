@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
 
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
 
         public string Name { get; set; } = string.Empty;
 
