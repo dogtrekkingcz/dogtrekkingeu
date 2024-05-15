@@ -12,6 +12,8 @@ namespace Storage.Services.Repositories.Migrations
             typeAdapterConfig.NewConfig<CreateMigrationInternalStorageRequest, MigrationRecord>();
             typeAdapterConfig.NewConfig<MigrationRecord, CreateMigrationInternalStorageResponse>();
 
+            typeAdapterConfig.NewConfig<MigrationRecord, GetMigrationInternalStorageResponse>();
+
             return typeAdapterConfig;
         }
     }
