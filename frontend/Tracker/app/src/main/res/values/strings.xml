@@ -59,4 +59,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_login">Login</string>
     <string name="login">Login</string>
+    <string name="activity_name">Name</string>
+    <string name="activity_description">Description</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
 </resources>

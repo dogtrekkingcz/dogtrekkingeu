@@ -244,7 +244,7 @@ class ActivityUploadService : Service() {
             Log.d("Service status", "sending request")
 
             runBlocking {
-                var response = client.createActivity(request).
+                var response = client.createActivity(request)
             }
 
             Log.d("Service status", "done")
