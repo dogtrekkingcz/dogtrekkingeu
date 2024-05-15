@@ -7,7 +7,7 @@ import java.util.concurrent.Executor
 
 
 var META_DATA_KEY: Metadata.Key<String> =
-    Metadata.Key.of("Authentication", Metadata.ASCII_STRING_MARSHALLER)
+    Metadata.Key.of("authorization", Metadata.ASCII_STRING_MARSHALLER)
 
 class AuthenticationCallCredentials(private val token: String) : CallCredentials() {
     override fun applyRequestMetadata(
