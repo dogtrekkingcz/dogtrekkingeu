@@ -34,13 +34,9 @@ namespace Storage.Services.Repositories.UserProfiles
 
         public async Task<UpdateUserProfileInternalStorageResponse> UpdateUserProfileAsync(UpdateUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"'{nameof(UpdateUserProfileAsync)}': Request: '{request.Dump()}'");
-            
             var updateRequest = _mapper.Map<UserProfileRecord>(request);
             
             var result = await _userProfileStorageService.AddOrUpdateAsync(updateRequest, cancellationToken);
-            
-            _logger.LogInformation($"'{nameof(UpdateUserProfileAsync)}': Response: '{result.Dump()}'");
 
             return _mapper.Map<UpdateUserProfileInternalStorageResponse>(result);
         }
@@ -52,12 +48,8 @@ namespace Storage.Services.Repositories.UserProfiles
 
         public async Task<GetUserProfileInternalStorageResponse> GetUserProfileAsync(GetUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"'{nameof(GetUserProfileAsync)}': Request: '{request.Dump()}'");
-
             var filter = new List<(string key, Type typeOfValue, object value)> { ("UserId", typeof(string), request.UserId) };
             var result = await _userProfileStorageService.GetByFilterAsync(filter, cancellationToken);
-
-            _logger.LogInformation($"'{nameof(GetUserProfileAsync)}': Response: '{result.Dump()}'");
 
             if (result == null || result.Count == 0)
                 return null;
@@ -69,8 +61,6 @@ namespace Storage.Services.Repositories.UserProfiles
 
         public async Task<GetSelectedUserProfilesInternalStorageResponse> GetSelectedUserProfiles(GetSelectedUserProfilesInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"'{nameof(GetSelectedUserProfiles)}': Request: '{request.Dump()}'");
-            
             var selectedUsers = await _userProfileStorageService.GetSelectedListAsync("UserId", request.Ids, cancellationToken);
 
             var response = new GetSelectedUserProfilesInternalStorageResponse
@@ -78,8 +68,6 @@ namespace Storage.Services.Repositories.UserProfiles
                 Items = selectedUsers.Select(su =>
                     _mapper.Map<GetSelectedUserProfilesInternalStorageResponse.UserProfileDto>(su)).ToList()
             };
-            
-            _logger.LogInformation($"'{nameof(GetSelectedUserProfiles)}': Response: '{response.Dump()}'");
 
             return response;
         }

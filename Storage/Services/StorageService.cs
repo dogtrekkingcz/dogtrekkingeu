@@ -22,8 +22,6 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
     }
     public async Task<T> AddOrUpdateAsync(T request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation($"StorageService:AddAsync(): {request.Dump()}");
-
         var filter = Builders<T>.Filter.Eq(x => x.Id, request.Id);
         if (string.IsNullOrEmpty(request.Id))
             request.Id = Guid.NewGuid().ToString();
@@ -84,11 +82,6 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
             .Find(filter)
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);
         
-        if (document != null)
-            Console.WriteLine($"StorageService:GetAsync(): {document.Dump()}");
-        else
-            Console.WriteLine($"StorageService:GetAsync(): document with ID:'{id}' not found");
-
         return document;
     }
 

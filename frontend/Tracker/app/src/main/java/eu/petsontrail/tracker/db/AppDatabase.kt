@@ -44,7 +44,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userSettingsDao(): UserSettingsDao
 
     companion object {
-        public const val DatabaseName = "PetsOnTrail.DB.v1"
+        public const val DatabaseName = "PetsOnTrail.DB.v2"
         public const val LATEST_VERSION = 1
     }
 }

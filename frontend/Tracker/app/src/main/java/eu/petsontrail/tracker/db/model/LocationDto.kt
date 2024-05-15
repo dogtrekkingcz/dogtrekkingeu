@@ -22,5 +22,6 @@ data class LocationDto(
     @ColumnInfo(name = "speed_meters_per_second") val speedMetersPerSecond: Float?,
     @ColumnInfo(name = "bearing_degrees") val bearingDegrees: Float?,
     @ColumnInfo(name = "bearing_accuracy_degrees") val bearingAccuracyDegrees: Float?,
-    @ColumnInfo(name = "is_synchronized", defaultValue = "false") val isSynchronized: Boolean = false
+    @ColumnInfo(name = "is_synchronized", defaultValue = "false") val isSynchronized: Boolean = false,
+    @ColumnInfo(name = "note") val note: String?
 )

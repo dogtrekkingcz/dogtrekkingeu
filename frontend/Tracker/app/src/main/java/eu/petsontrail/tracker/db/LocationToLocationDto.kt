@@ -22,5 +22,6 @@ fun Location.toLocationDto(activityId: UUID) = LocationDto(
     altitudeMeters = this.altitude,
     speedMetersPerSecond = this.speed,
     bearingDegrees = this.bearing,
-    bearingAccuracyDegrees = this.bearingAccuracyDegrees
+    bearingAccuracyDegrees = this.bearingAccuracyDegrees,
+    note = ""
 )

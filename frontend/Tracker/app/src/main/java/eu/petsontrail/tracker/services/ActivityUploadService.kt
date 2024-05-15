@@ -22,6 +22,7 @@ import androidx.core.app.ServiceCompat
 import com.google.protobuf.Empty
 import com.google.protobuf.Timestamp
 import com.google.type.DateTime
+import createactivity.CreateActivityRequestOuterClass
 import createactivity.CreateActivityRequestOuterClass.CreateActivityRequest
 import eu.petsontrail.tracker.Constants
 import eu.petsontrail.tracker.MainActivity
@@ -215,9 +216,32 @@ class ActivityUploadService : Service() {
                 .setEnd(Timestamp.newBuilder().setSeconds(activity.end!!))
                 .setDescription(activity.description)
                 .setName(activity.name)
+                .addAllPets(pets.map { pet ->
+                    CreateActivityRequestOuterClass.PetDto.newBuilder()
+                        .setId(pet.uid.toString())
+                        .setChip(pet.chip)
+                        .setName(pet.name)
+                        .setBreed(pet.breed)
+                        .setColor(pet.color)
+                        .setKennel(pet.kennel)
+                        .setBirthDate(Timestamp.newBuilder().setSeconds(pet.birthday!!))
+                        .build()
+                })
+                .addAllPositions(positions.map { position ->
+                    CreateActivityRequestOuterClass.PositionDto.newBuilder()
+                        .setId(position.uid.toString())
+                        .setTime(Timestamp.newBuilder().setSeconds(position.time))
+                        .setLatitude(position.latitudeDegrees!!)
+                        .setLongitude(position.longitudeDegrees!!)
+                        .setAltitude(position.altitudeMeters!!)
+                        .setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
+                        .setCourse(position.bearingDegrees!!.toDouble())
+                        .setNote(position.note)
+                        .build()
+                })
                 .build()
             Log.d("Service status", "sending request")
-            var resposne = client.createActivity(request)
+            var response = client.createActivity(request)
             Log.d("Service status", "done")
         }
     }
