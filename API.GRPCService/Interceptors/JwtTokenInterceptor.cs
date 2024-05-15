@@ -22,7 +22,7 @@ namespace API.GRPCService.Interceptors
             ServerCallContext context,
             UnaryServerMethod<TRequest, TResponse> continuation)
         {
-            _logger.LogInformation($"{nameof(JwtTokenInterceptor)}: running unary server handler with request: '{request}'/context: '{context.Dump()}'");
+            _logger.LogInformation($"{nameof(JwtTokenInterceptor)}: running unary server handler with request: '{request}'/context headers: '{context.RequestHeaders.Dump()}'");
 
             var tokenSource = context.RequestHeaders.Get("authorization");
             if (tokenSource is not null)
