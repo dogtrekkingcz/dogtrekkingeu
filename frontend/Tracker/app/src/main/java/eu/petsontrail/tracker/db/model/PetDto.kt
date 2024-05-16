@@ -18,19 +18,4 @@ data class PetDto(
     @ColumnInfo(name = "birthday") val birthday: Long?,
     @ColumnInfo(name = "breed") val breed: String?,
     @ColumnInfo(name = "color") val color: String?
-) {
-    companion object {
-        fun toCreateOrUpdateActivityPetDto(pet: PetDto): CreateOrUpdateActivityPetDto {
-            val response: CreateOrUpdateActivityPetDto = CreateOrUpdateActivityPetDto(
-                id = pet.uid,
-                name = pet.name,
-                kennel = pet.kennel,
-                chip = pet.chip,
-                birthDate = Date(pet.birthday!!).toString(),
-                breed = pet.breed,
-                color = pet.color)
-
-            return response
-        }
-    }
-}
+)
