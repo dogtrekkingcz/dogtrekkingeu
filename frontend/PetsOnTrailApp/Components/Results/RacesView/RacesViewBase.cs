@@ -22,6 +22,6 @@ public class RacesViewBase : ComponentBase
 
     protected void NavigateToCategoriesOf(Guid raceId)
     {
-        Navigation.NavigateTo($"categories/{ActionId}/{raceId.ToString()}");
+        Navigation.NavigateTo($"categories/{ActionId}/{raceId}");
     }
 }

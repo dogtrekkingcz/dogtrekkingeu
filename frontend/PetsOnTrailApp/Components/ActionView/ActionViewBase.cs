@@ -20,5 +20,5 @@ public class ActionViewBase : ComponentBase
         Model = await _actionsRepository.GetActionModelAsync(Guid.Parse(ActionId), CancellationToken.None);
     }
 
-    protected void NavigateToRaces() => Navigation.NavigateTo("/races/{ActionId}");
+    protected void NavigateToRaces() => Navigation.NavigateTo($"/races/{ActionId}");
 }
