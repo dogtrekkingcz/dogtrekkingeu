@@ -57,6 +57,8 @@ internal static class PetsServiceMapping
         typeAdapterConfig.NewConfig<UpdatePetRequest.PetWasSeenDto, UpdatePetInternalStorageRequest.PetWasSeenDto>();
         typeAdapterConfig.NewConfig<UpdatePetInternalStorageResponse, UpdatePetResponse>();
 
+        typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PetDto, GetMyPetsResponse.MyPetDto>();
+
         return typeAdapterConfig;
     }
 }

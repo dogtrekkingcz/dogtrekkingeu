@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPetsFragment"
-        android:name="eu.petsontrail.tracker.MyPetsFragment"
+        android:name="eu.petsontrail.tracker.ui.pets.MyPetsFragment"
         android:label="MyPetsFragment" >
         <action
             android:id="@+id/action_myPetsFragment_to_createActivityFragment"

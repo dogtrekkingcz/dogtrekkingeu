@@ -1,4 +1,4 @@
-package eu.petsontrail.tracker
+package eu.petsontrail.tracker.ui.pets
 
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +13,7 @@ import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.databinding.FragmentMyPetsBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
+import eu.petsontrail.tracker.dtos.MyPetDto
 
 class MyPetsFragment : Fragment() {
     private var _binding: FragmentMyPetsBinding? = null
@@ -39,15 +40,14 @@ class MyPetsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val arrayAdapter: ArrayAdapter<*>
-        val myPets = arrayOf(
-            "Virat Kohli", "Rohit Sharma", "Steve Smith",
-            "Kane Williamson", "Ross Taylor"
-        )
 
-        // access the listView from xml file
-        var mListView = binding.mypetslist
-        arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_list_item_1, myPets)
-        mListView.adapter = arrayAdapter
+        var myPetsLists: ArrayList<MyPetDto> = ArrayList()
+        var adapter: MyPetsAdapter? = null
+
+        myPetsLists.add(MyPetDto(1, " Mashu", "987576443"))
+        myPetsLists.add(MyPetDto(2, " Azhar", "8787576768"))
+        myPetsLists.add(MyPetDto(3, " Niyaz", "65757657657"))
+        adapter = MyPetsAdapter(this.requireContext(), myPetsLists)
+        binding.mypetslist.adapter = adapter
     }
 }
