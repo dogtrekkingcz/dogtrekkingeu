@@ -1,5 +1,6 @@
 package eu.petsontrail.tracker
 
+import addmypet.AddMyPetRequestOuterClass
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
