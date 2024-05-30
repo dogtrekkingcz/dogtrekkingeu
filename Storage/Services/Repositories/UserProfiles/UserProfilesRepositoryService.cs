@@ -48,7 +48,7 @@ namespace Storage.Services.Repositories.UserProfiles
 
         public async Task<GetUserProfileInternalStorageResponse> GetUserProfileAsync(GetUserProfileInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var filter = new List<(string key, Type typeOfValue, object value)> { ("UserId", typeof(string), request.UserId) };
+            var filter = new List<(string key, Type typeOfValue, object value)> { ("UserId", typeof(Guid), request.UserId) };
             var result = await _userProfileStorageService.GetByFilterAsync(filter, cancellationToken);
 
             if (result == null || result.Count == 0)
