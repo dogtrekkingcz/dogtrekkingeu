@@ -117,9 +117,10 @@ services:
       - backend
     restart: always
       
-  mail:
-    image: bytemark/smtp
-    restart: always
+# will be used official petsontrail paid mailserver
+#  mail:
+#    image: bytemark/smtp
+#    restart: always
 
   # MessageQueue not necessary yet
   #mq:
