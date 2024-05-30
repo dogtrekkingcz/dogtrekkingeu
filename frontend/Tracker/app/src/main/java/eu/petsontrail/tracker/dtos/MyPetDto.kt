@@ -1,7 +1,9 @@
 package eu.petsontrail.tracker.dtos
 
+import java.util.UUID
+
 data class MyPetDto(
-    val id: Int,
+    val id: UUID,
     val name: String,
-    val contactNumber: String
+    val chip: String
 )

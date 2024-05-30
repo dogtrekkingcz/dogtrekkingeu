@@ -12,7 +12,7 @@ import eu.petsontrail.tracker.dtos.MyPetDto
 class MyPetsAdapter(private val context: Context, private val arrayList: java.util.ArrayList<MyPetDto>) : BaseAdapter() {
     private lateinit var serialNum: TextView
     private lateinit var name: TextView
-    private lateinit var contactNum: TextView
+    private lateinit var chip: TextView
     override fun getCount(): Int {
         return arrayList.size
     }
@@ -27,10 +27,10 @@ class MyPetsAdapter(private val context: Context, private val arrayList: java.ut
         convertView = LayoutInflater.from(context).inflate(R.layout.layout_my_pets_row, parent, false)
         serialNum = convertView.findViewById(R.id.serialNumber)
         name = convertView.findViewById(R.id.studentName)
-        contactNum = convertView.findViewById(R.id.mobileNum)
-        serialNum.text = " " + arrayList[position].id
+        chip = convertView.findViewById(R.id.chip)
+        serialNum.text = arrayList[position].id.toString()
         name.text = arrayList[position].name
-        contactNum.text = arrayList[position].contactNumber
+        chip.text = arrayList[position].chip
         return convertView
     }
 }

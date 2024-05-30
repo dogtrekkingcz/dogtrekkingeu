@@ -20,6 +20,7 @@ import getmypets.GetMyPetsRequestOuterClass
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
 import pets.PetsGrpc
+import java.util.UUID
 
 class MyPetsFragment : Fragment() {
     private var _binding: FragmentMyPetsBinding? = null
@@ -61,9 +62,9 @@ class MyPetsFragment : Fragment() {
 
             var response = client.getMyPets(GetMyPetsRequestOuterClass.GetMyPetsRequest.newBuilder().build())
 
-            myPetsLists.add(MyPetDto(1, " Mashu", "987576443"))
-            myPetsLists.add(MyPetDto(2, " Azhar", "8787576768"))
-            myPetsLists.add(MyPetDto(3, " Niyaz", "65757657657"))
+            for (pet in response.petsList) {
+                myPetsLists.add(MyPetDto(UUID.fromString(pet.id), pet.name, pet.chip))
+            }
         }
 
         val adapter = MyPetsAdapter(this.requireContext(), myPetsLists)
