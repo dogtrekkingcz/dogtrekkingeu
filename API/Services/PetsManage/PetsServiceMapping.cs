@@ -38,6 +38,7 @@ internal static class PetsServiceMapping
         typeAdapterConfig.NewConfig<UpdatePetInternalStorageResponse, UpdatePetResponse>();
 
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PetDto, GetMyPetsResponse.MyPetDto>();
+        typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.VaccinationDto, GetMyPetsResponse.VaccinationDto>();
 
         typeAdapterConfig.NewConfig<AddMyPetRequest, UpdateUserProfileInternalStorageRequest.PetDto>();
         typeAdapterConfig.NewConfig<AddMyPetRequest.VaccinationDto, UpdateUserProfileInternalStorageRequest.VaccinationDto>();
