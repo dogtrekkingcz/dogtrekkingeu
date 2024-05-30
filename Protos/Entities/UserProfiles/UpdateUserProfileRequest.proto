@@ -47,30 +47,17 @@ message Pet {
   google.type.DateTime Birthday = 8;
   google.type.DateTime Decease = 9;
   string UriToPhoto = 10;
+  string PetType = 11;
 
-  repeated Vaccination Vaccinations = 11;
+  repeated Vaccination Vaccinations = 12;
 }
 
 message Vaccination {
   google.type.DateTime Date = 1;
   google.type.DateTime ValidUntil = 2;
-  VaccinationType Type = 3;
+  string VaccinationType = 3;
   string Note = 4;
   string UriToPhoto = 5;
-}
-
-enum VaccinationType {
-  VaccinationType_Unspecified = 0;
-  Rabies = 1; // vzteklina
-  Psinka = 2;
-  Parvoviroza = 3;
-  HepatitidaContagiosaCanis = 4;
-  Leptospiroza = 5;
-  Parainfluenza = 6;
-  LymskaBorelioza = 7;
-  Babesioza = 8;
-  PlisnoveInfekce = 9;
-  Leishmanioza = 10;
 }
 
 message Activity {
@@ -106,5 +93,6 @@ message ActivityPet {
   string Breed = 4;
   string Color = 5;
   string Kennel = 6;
-  google.type.DateTime BirthDate = 7;
+  string PetType = 7;
+  google.type.DateTime BirthDate = 8;
 }

@@ -8,11 +8,10 @@ internal static class UserProfilesServiceMapping
     internal static TypeAdapterConfig AddUserProfilesServiceMapping(this TypeAdapterConfig typeAdapterConfig)
     {
         typeAdapterConfig.NewConfig<GetUserProfileResponse, Protos.UserProfiles.GetUserProfile.GetUserProfileResponse>();
-        typeAdapterConfig.NewConfig<GetUserProfileResponse.VaccinationType, Protos.UserProfiles.GetUserProfile.VaccinationType>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.AddressDto, Protos.UserProfiles.GetUserProfile.Address>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.ContactDto, Protos.UserProfiles.GetUserProfile.Contact>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.PetDto, Protos.UserProfiles.GetUserProfile.Pet>();
-        typeAdapterConfig.NewConfig<GetUserProfileResponse.VaccinationDto, Protos.UserProfiles.GetUserProfile.Vaccination>();
+        typeAdapterConfig.NewConfig<GetUserProfileResponse.VaccinationDto, Protos.UserProfiles.GetUserProfile.VaccinationDto>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.LatLngDto, Google.Type.LatLng>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.ActivityDto, Protos.UserProfiles.GetUserProfile.Activity>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.PositionDto, Protos.UserProfiles.GetUserProfile.Position>();
@@ -20,7 +19,6 @@ internal static class UserProfilesServiceMapping
 
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest, CreateUserProfileRequest>()
             .Ignore(d => d.Roles);
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.VaccinationType, CreateUserProfileRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Address, CreateUserProfileRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Contact, CreateUserProfileRequest.ContactDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Pet, CreateUserProfileRequest.PetDto>();
@@ -32,7 +30,6 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<CreateUserProfileResponse, Protos.UserProfiles.CreateUserProfile.CreateUserProfileResponse>();
         
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileRequest, UpdateUserProfileRequest>();
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.VaccinationType, UpdateUserProfileRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Address, UpdateUserProfileRequest.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Contact, UpdateUserProfileRequest.ContactDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Pet, UpdateUserProfileRequest.PetDto>();

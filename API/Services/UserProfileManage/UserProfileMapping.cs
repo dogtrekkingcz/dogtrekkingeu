@@ -11,7 +11,6 @@ internal static class UserProfileMapping
         typeAdapterConfig.NewConfig<GetUserProfileRequest, GetUserProfileInternalStorageRequest>();
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse, GetUserProfileResponse>();
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.AddressDto, GetUserProfileResponse.AddressDto>();
-        typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.VaccinationType, GetUserProfileResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.VaccinationDto, GetUserProfileResponse.VaccinationDto>();
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PetDto, GetUserProfileResponse.PetDto>();
         typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ContactDto, GetUserProfileResponse.ContactDto>();
@@ -22,7 +21,6 @@ internal static class UserProfileMapping
 
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest, UpdateUserProfileInternalStorageRequest>();
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.AddressDto, UpdateUserProfileInternalStorageRequest.AddressDto>();
-        typeAdapterConfig.NewConfig<UpdateUserProfileRequest.VaccinationType, UpdateUserProfileInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.VaccinationDto, UpdateUserProfileInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.PetDto, UpdateUserProfileInternalStorageRequest.PetDto>();
         typeAdapterConfig.NewConfig<UpdateUserProfileRequest.ContactDto, UpdateUserProfileInternalStorageRequest.ContactDto>();
@@ -34,7 +32,6 @@ internal static class UserProfileMapping
 
         typeAdapterConfig.NewConfig<CreateUserProfileRequest, CreateUserProfileInternalStorageRequest>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.AddressDto, CreateUserProfileInternalStorageRequest.AddressDto>();
-        typeAdapterConfig.NewConfig<CreateUserProfileRequest.VaccinationType, CreateUserProfileInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.VaccinationDto, CreateUserProfileInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.PetDto, CreateUserProfileInternalStorageRequest.PetDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.ContactDto, CreateUserProfileInternalStorageRequest.ContactDto>();

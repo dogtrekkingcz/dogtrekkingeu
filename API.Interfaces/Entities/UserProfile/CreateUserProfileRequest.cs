@@ -77,13 +77,9 @@ public sealed record CreateUserProfileRequest
 
         public string Contact { get; init; } = string.Empty;
 
-        public List<VaccinationDto> Vaccinations { get; init; } = new List<VaccinationDto>
-        {
-            new VaccinationDto
-            {
-                Type = VaccinationType.Rabies
-            }
-        };
+        public Guid PetType { get; init; } = Guid.Empty;
+
+        public List<VaccinationDto> Vaccinations { get; init; } = new List<VaccinationDto>();
     }
     
     public sealed record VaccinationDto
@@ -92,26 +88,11 @@ public sealed record CreateUserProfileRequest
 
         public DateTimeOffset? ValidUntil { get; init; } = DateTimeOffset.Now;
 
-        public VaccinationType Type { get; init; } = VaccinationType.NotValid;
+        public Guid VaccinationType { get; init; } = Guid.Empty;
 
         public string UriToPhoto { get; init; } = string.Empty;
 
         public string Note { get; init; } = string.Empty;
-    }
-
-    public enum VaccinationType
-    {
-        NotValid = 0,
-        Rabies = 1, // Vzteklina
-        Psinka = 2,
-        Parvoviroza = 3,
-        HepatitidaContagiosaCanis = 4,
-        Leptospiroza = 5,
-        Parainfluenza = 6,
-        LymskaBorelioza = 7,
-        Babesioza = 8,
-        PlisnoveInfekce = 9,
-        Leishmanioza = 10
     }
 
     public sealed record ActivityDto

@@ -11,7 +11,6 @@ namespace Storage.Services.Repositories.UserProfiles
         internal static TypeAdapterConfig AddUserProfilesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest, UserProfileRecord>();
-            typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.VaccinationType, UserProfileRecord.VaccinationType>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.AddressDto, UserProfileRecord.AddressDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.ContactDto, UserProfileRecord.ContactDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.VaccinationDto, UserProfileRecord.VaccinationDto>();
@@ -23,7 +22,6 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord, CreateUserProfileInternalStorageResponse>();
             
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest, UserProfileRecord>();
-            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.VaccinationType, UserProfileRecord.VaccinationType>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.AddressDto, UserProfileRecord.AddressDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.ContactDto, UserProfileRecord.ContactDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.VaccinationDto, UserProfileRecord.VaccinationDto>();
@@ -36,7 +34,6 @@ namespace Storage.Services.Repositories.UserProfiles
                 .Map(d => d.Id, s => s.Id.ToGuid());
 
             typeAdapterConfig.NewConfig<UserProfileRecord, GetUserProfileInternalStorageResponse>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationType, GetUserProfileInternalStorageResponse.VaccinationType>();
             typeAdapterConfig.NewConfig<UserProfileRecord.AddressDto, GetUserProfileInternalStorageResponse.AddressDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.ContactDto, GetUserProfileInternalStorageResponse.ContactDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationDto, GetUserProfileInternalStorageResponse.VaccinationDto>();
@@ -47,7 +44,6 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord.ActivityPetDto, GetUserProfileInternalStorageResponse.ActivityPetDto>();
 
             typeAdapterConfig.NewConfig<UserProfileRecord, GetSelectedUserProfilesInternalStorageResponse.UserProfileDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationType, GetSelectedUserProfilesInternalStorageResponse.VaccinationType>();
             typeAdapterConfig.NewConfig<UserProfileRecord.AddressDto, GetSelectedUserProfilesInternalStorageResponse.AddressDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.ContactDto, GetSelectedUserProfilesInternalStorageResponse.ContactDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.VaccinationDto, GetSelectedUserProfilesInternalStorageResponse.VaccinationDto>();
@@ -58,7 +54,6 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord.ActivityPetDto, GetSelectedUserProfilesInternalStorageResponse.ActivityPetDto>();
 
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse,  UpdateUserProfileInternalStorageRequest>();
-            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.VaccinationType, UpdateUserProfileInternalStorageRequest.VaccinationType>();
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.AddressDto,  UpdateUserProfileInternalStorageRequest.AddressDto>();
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ContactDto, UpdateUserProfileInternalStorageRequest.ContactDto>();
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.VaccinationDto, UpdateUserProfileInternalStorageRequest.VaccinationDto>();
