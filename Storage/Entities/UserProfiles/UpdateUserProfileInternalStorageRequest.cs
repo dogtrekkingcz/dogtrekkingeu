@@ -77,6 +77,8 @@ public sealed record UpdateUserProfileInternalStorageRequest
 
         public string Contact { get; set; } = string.Empty;
 
+        public Guid PetType { get; set; } = Guid.Empty;
+
         public List<VaccinationDto> Vaccinations { get; set; } = new List<VaccinationDto>();
     }
 
@@ -86,26 +88,11 @@ public sealed record UpdateUserProfileInternalStorageRequest
 
         public DateTimeOffset? ValidUntil { get; set; } = DateTimeOffset.Now;
 
-        public VaccinationType Type { get; set; } = VaccinationType.NotValid;
+        public Guid VaccinationType { get; set; } = Guid.Empty;
 
         public string UriToPhoto { get; set; } = string.Empty;
 
         public string Note { get; set; } = string.Empty;
-    }
-
-    public enum VaccinationType
-    {
-        NotValid = 0,
-        Rabies = 1, // Vzteklina
-        Psinka = 2,
-        Parvoviroza = 3,
-        HepatitidaContagiosaCanis = 4,
-        Leptospiroza = 5,
-        Parainfluenza = 6,
-        LymskaBorelioza = 7,
-        Babesioza = 8,
-        PlisnoveInfekce = 9,
-        Leishmanioza = 10
     }
 
     public sealed record ActivityDto

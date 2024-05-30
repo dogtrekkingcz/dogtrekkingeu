@@ -23,6 +23,7 @@ internal abstract class M_00_MigrationBase : IMigration
     protected readonly IUserProfilesRepositoryService UserProfilesRepositoryService;
     protected readonly IMigrationsRepositoryService MigrationsRepositoryService;
     protected readonly IActivityTypeRepositoryService ActivityTypeRepositoryService;
+    protected readonly IVaccinationTypeRepositoryService VaccinationTypeRepositoryService;
 
     public M_00_MigrationBase(IServiceProvider serviceProvider)
     {
@@ -36,6 +37,7 @@ internal abstract class M_00_MigrationBase : IMigration
         UserProfilesRepositoryService = serviceProvider.GetRequiredService<IUserProfilesRepositoryService>();
         MigrationsRepositoryService = serviceProvider.GetRequiredService<IMigrationsRepositoryService>();
         ActivityTypeRepositoryService = serviceProvider.GetRequiredService<IActivityTypeRepositoryService>();
+        VaccinationTypeRepositoryService = serviceProvider.GetRequiredService<IVaccinationTypeRepositoryService>();
     }
 
     public M_00_MigrationBase AddUpAction(Func<Task> action)

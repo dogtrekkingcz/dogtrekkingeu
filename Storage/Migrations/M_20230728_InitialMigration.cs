@@ -2,6 +2,7 @@
 using Storage.Entities.AuthorizationRoles;
 using Storage.Entities.UserProfiles;
 using Storage.Migrations._2024;
+using Storage.Services.Repositories.Actions;
 
 namespace Storage.Migrations;
 
@@ -260,6 +261,14 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 PointTracking = false
             }, CancellationToken.None))
 
+            .AddUpAction(() => VaccinationTypeRepositoryService.AddAsync(new Entities.VaccinationTypes.AddVaccinationTypeInternalStorageRequest
+            {
+                Id = Constants.VaccinationType.Rabies,
+                UserId = _userIdAdmin,
+                Name = "Rabies",
+                Description = "Rabies"
+            }, CancellationToken.None))
+
             // ------------------------------------------------------------------------------------------------------------
 
             .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdRadekKotesovec }, CancellationToken.None))
@@ -279,6 +288,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Frisbee, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Flyball, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DiscDog, CancellationToken.None))
-            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DogHiking, CancellationToken.None));
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DogHiking, CancellationToken.None))
+            .AddDownAction(() => VaccinationTypeRepositoryService.DeleteAsync(Constants.VaccinationType.Rabies, CancellationToken.None));
     }
 }
