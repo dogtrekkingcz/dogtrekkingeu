@@ -71,6 +71,26 @@ internal class PetsService : IPetsService
         return response;
     }
 
+    public async Task<AddMyPetResponse> AddMyPetAsync(AddMyPetRequest request, CancellationToken cancellationToken)
+    {
+        var userProfile = await _userProfileRepositoryService.GetUserProfileAsync(
+                       new GetUserProfileInternalStorageRequest { UserId = _currentUserIdService.GetUserId() }, cancellationToken);
+
+        var updateUserProfileRequest = _mapper.Map<UpdateUserProfileInternalStorageRequest>(userProfile);
+
+        var petRequest = _mapper.Map<UpdateUserProfileInternalStorageRequest.PetDto>(request)
+            with
+        {
+            Id = Guid.NewGuid(),
+            UserId = _currentUserIdService.GetUserId()
+        };
+        updateUserProfileRequest.Pets.Add(petRequest);
+
+        await _userProfileRepositoryService.UpdateUserProfileAsync(updateUserProfileRequest, cancellationToken);
+
+        return new AddMyPetResponse { Id = petRequest.Id };
+    }
+
     public async Task<GetAllPetsResponse> GetAllPetsAsync(GetAllPetsRequest request, CancellationToken cancellationToken)
     {
         var result = await _petsRepositoryService.GetAllAsync(cancellationToken);

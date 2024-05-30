@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets.AddMyPet";
+
+import "google/type/datetime.proto";
+
+package addmypet;
+
+message AddMyPetRequest {
+  string Id = 1;
+  string UserId = 2;
+  string Contact = 3;
+  string Name = 4;
+  string Kennel = 5;
+  string Pedigree = 6;
+  string Chip = 7;
+  google.type.DateTime Birthday = 8;
+  google.type.DateTime Decease = 9;
+  string UriToPhoto = 10;
+  string PetType = 11;
+
+  repeated VaccinationDto Vaccinations = 12;
+}
+
+message VaccinationDto {
+  google.type.DateTime Date = 1;
+  google.type.DateTime ValidUntil = 2;
+  string VaccinationType = 3;
+  string Note = 4;
+  string UriToPhoto = 5;
+}

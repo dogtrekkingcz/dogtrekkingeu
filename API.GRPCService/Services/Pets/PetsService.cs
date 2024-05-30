@@ -89,4 +89,16 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
 
         return _mapper.Map<Protos.Pets.GetMyPets.GetMyPetsResponse>(response);
     }
+
+    public async override Task<Protos.Pets.AddMyPet.AddMyPetResponse> addMyPet(Protos.Pets.AddMyPet.AddMyPetRequest request, ServerCallContext context)
+    {
+        var apiRequest = _mapper.Map<AddMyPetRequest>(request) with
+        {
+            UserId = _jwtTokenService.GetUserId()
+        };
+
+        var response = await _petsService.AddMyPetAsync(apiRequest, context.CancellationToken);
+
+        return _mapper.Map<Protos.Pets.AddMyPet.AddMyPetResponse>(response);
+    }
 }

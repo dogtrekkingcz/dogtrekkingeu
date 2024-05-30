@@ -14,6 +14,13 @@ import eu.petsontrail.tracker.databinding.FragmentAddMyPetBinding
 import eu.petsontrail.tracker.databinding.FragmentCreateActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
+import eu.petsontrail.tracker.dtos.MyPetDto
+import eu.petsontrail.tracker.services.AuthenticationCallCredentials
+import getmypets.GetMyPetsRequestOuterClass
+import io.grpc.ManagedChannelBuilder
+import kotlinx.coroutines.runBlocking
+import pets.PetsGrpc
+import java.util.UUID
 
 class AddMyPetFragment : Fragment() {
     private var _binding: FragmentAddMyPetBinding? = null
@@ -39,6 +46,25 @@ class AddMyPetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.addMyPet.setOnClickListener {
+            runBlocking {
+                val token = _db.userSettingsDao().getAccessToken()
+
+                val channel = ManagedChannelBuilder
+                    .forTarget("dns:///petsontrail.eu:4443")
+                    .build()
+
+                var client = PetsGrpc
+                    .newBlockingStub(channel)
+                    .withCallCredentials(AuthenticationCallCredentials(token))
+
+                client.addMyPet(
+                    AddMyPetRequestOuterClass.AddMyPetRequest.newBuilder()
+                        .setName(binding.editTextPetName.text.toString())
+                        .setChip(binding.editTextPetChip.text.toString())
+                        .build()
+                )
+            }
+
             findNavController().navigate(R.id.action_addMyPetFragment_to_myPetsFragment)
         }
     }

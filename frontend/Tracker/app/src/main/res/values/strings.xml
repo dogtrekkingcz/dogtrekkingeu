@@ -70,4 +70,5 @@
     <string name="id">Id</string>
     <string name="Synchronize">Synchronize</string>
     <string name="add_my_pet">Add My Pet</string>
+    <string name="pet_chip">Chip Number</string>
 </resources>
