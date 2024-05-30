@@ -6,6 +6,8 @@ public sealed record UpdateUserProfileInternalStorageRequest
 
     public string UserId { get; set; } = string.Empty;
 
+    public string Email { get; set; } = string.Empty;
+
     public Guid CompetitorId { get; set; } = default(Guid);
 
     public string FirstName { get; set; } = string.Empty;

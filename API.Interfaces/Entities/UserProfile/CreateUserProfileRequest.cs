@@ -6,6 +6,8 @@ public sealed record CreateUserProfileRequest
 
     public string UserId { get; init; } = string.Empty;
 
+    public string Email { get; set; } = string.Empty;
+
     public Guid CompetitorId { get; init; } = default(Guid);
 
     public string FirstName { get; init; } = string.Empty;

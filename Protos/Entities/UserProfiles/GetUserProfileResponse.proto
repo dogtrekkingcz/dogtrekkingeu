@@ -10,16 +10,17 @@ import "google/type/latlng.proto";
 message GetUserProfileResponse {
   string Id = 1;
   string UserId = 2;
-  string CompetitorId = 3;
-  string FirstName = 4;
-  string LastName = 5;
-  string Nickname = 6;
-  google.type.DateTime Birthday = 7;
-  Address Address = 8;
-  Contact Contact = 9;
-  repeated Pet Pets = 10;
-  repeated string Roles = 11;
-  repeated Activity Activities = 12;
+  string Email = 3;
+  string CompetitorId = 4;
+  string FirstName = 5;
+  string LastName = 6;
+  string Nickname = 7;
+  google.type.DateTime Birthday = 8;
+  Address Address = 9;
+  Contact Contact = 10;
+  repeated Pet Pets = 11;
+  repeated string Roles = 12;
+  repeated Activity Activities = 13;
 }
 
 message Address {
