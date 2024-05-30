@@ -166,6 +166,12 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Entities\Pets\GetMyPetsRequest.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
       <Protobuf Include="Entities\Pets\GetPetRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -174,6 +180,12 @@
         <OutputDir>obj\Debug\net7.0\</OutputDir>
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Pets\GetMyPetsResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
       </Protobuf>
       <Protobuf Include="Entities\Pets\GetPetResponse.proto">
         <GrpcServices>Both</GrpcServices>
@@ -672,6 +684,8 @@
       <None Remove="Entities\Contact.proto" />
       <None Remove="Entities\Dog.proto" />
       <None Remove="Entities\Note.proto" />
+      <None Remove="Entities\Pets\GetMyPetsRequest.proto" />
+      <None Remove="Entities\Pets\GetMyPetsResponse.proto" />
       <None Remove="Entities\RaceDetail.proto" />
       <None Remove="Entities\Racer.proto" />
       <None Remove="Entities\RaceSimple.proto" />

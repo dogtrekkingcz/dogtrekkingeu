@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets.GetMyPets";
+
+package getmypets;
+
+import "google/type/datetime.proto";
+
+message GetMyPetsResponse {
+  repeated MyPet Pets = 1;
+}
+
+message MyPet {
+  string Id = 1;
+  string UserId = 2;
+  string Contact = 3;
+  string Name = 4;
+  string Kennel = 5;
+  string Pedigree = 6;
+  string Chip = 7;
+  google.type.DateTime Birthday = 8;
+  google.type.DateTime Decease = 9;
+  string UriToPhoto = 10;
+}

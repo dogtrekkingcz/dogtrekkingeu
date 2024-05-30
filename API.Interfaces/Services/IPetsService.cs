@@ -15,4 +15,6 @@ public interface IPetsService
     Task<GetPetResponse> GetPetAsync(GetPetRequest request, CancellationToken cancellationToken);
 
     Task<UpdatePetResponse> UpdatePetAsync(UpdatePetRequest request, CancellationToken cancellationToken);
+
+    Task<GetMyPetsResponse> GetMyPetsAsync(GetMyPetsRequest request, CancellationToken cancellationToken);
 }

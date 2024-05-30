@@ -3,6 +3,7 @@ using PetsOnTrail.Interfaces.Actions.Entities.Pets;
 using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
+using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 
 namespace API.GRPCService.Services.Pets;
 
@@ -11,12 +12,14 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
     private readonly IPetsService _petsService;
+    private readonly IJwtTokenService _jwtTokenService;
 
-    public PetsService(ILogger<PetsService> logger, IMapper mapper, IPetsService petsService)
+    public PetsService(ILogger<PetsService> logger, IMapper mapper, IPetsService petsService, IJwtTokenService jwtTokenService)
     {
         _logger = logger;
         _mapper = mapper;
         _petsService = petsService;
+        _jwtTokenService = jwtTokenService;
     }
 
     public async override Task<Protos.Pets.CreatePet.CreatePetResponse> createPet(Protos.Pets.CreatePet.CreatePetRequest request, ServerCallContext context)
@@ -73,5 +76,17 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
         var response = await _petsService.UpdatePetAsync(updateRequest, context.CancellationToken);
 
         return _mapper.Map<Protos.Pets.UpdatePet.UpdatePetResponse>(response);
+    }
+
+    public async override Task<Protos.Pets.GetMyPets.GetMyPetsResponse> getMyPets(Protos.Pets.GetMyPets.GetMyPetsRequest request, ServerCallContext context)
+    {
+        var apiRequest = _mapper.Map<GetMyPetsRequest>(request) with
+        {
+            UserId = _jwtTokenService.GetUserId()
+        };
+
+        var response = await _petsService.GetMyPetsAsync(apiRequest, context.CancellationToken);
+
+        return _mapper.Map<Protos.Pets.GetMyPets.GetMyPetsResponse>(response);
     }
 }

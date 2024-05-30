@@ -16,6 +16,8 @@ import "Entities/Pets/GetPetRequest.proto";
 import "Entities/Pets/GetPetResponse.proto";
 import "Entities/Pets/UpdatePetRequest.proto";
 import "Entities/Pets/UpdatePetResponse.proto";
+import "Entities/Pets/GetMyPetsRequest.proto";
+import "Entities/Pets/GetMyPetsResponse.proto";
 
 service Pets {
   rpc getAllPets (getallpets.GetAllPetsRequest) returns (getallpets.GetAllPetsResponse);
@@ -24,4 +26,5 @@ service Pets {
   rpc deletePet (deletepet.DeletePetRequest) returns (deletepet.DeletePetResponse);
   rpc getPet (getpet.GetPetRequest) returns (getpet.GetPetResponse);
   rpc updatePet (updatepet.UpdatePetRequest) returns (updatepet.UpdatePetResponse);
+  rpc getMyPets (getmypets.GetMyPetsRequest) returns (getmypets.GetMyPetsResponse);
 }

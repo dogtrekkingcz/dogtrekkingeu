@@ -57,6 +57,20 @@ internal class PetsService : IPetsService
         return response;
     }
 
+    public async Task<GetMyPetsResponse> GetMyPetsAsync(GetMyPetsRequest request, CancellationToken cancellationToken)
+    {
+        var userProfile = await _userProfileRepositoryService.GetUserProfileAsync(
+                       new GetUserProfileInternalStorageRequest { UserId = _currentUserIdService.GetUserId() }, cancellationToken);
+
+        var response = new GetMyPetsResponse();
+        foreach (var pet in userProfile.Pets)
+        {
+            response.Pets.Add(_mapper.Map<GetMyPetsResponse.MyPetDto>(pet));
+        }
+
+        return response;
+    }
+
     public async Task<GetAllPetsResponse> GetAllPetsAsync(GetAllPetsRequest request, CancellationToken cancellationToken)
     {
         var result = await _petsRepositoryService.GetAllAsync(cancellationToken);

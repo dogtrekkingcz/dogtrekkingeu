@@ -2,4 +2,5 @@
 
 public sealed record GetMyPetsRequest
 {
+    public Guid UserId { get; init; }
 }

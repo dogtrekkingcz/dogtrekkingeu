@@ -1,5 +1,6 @@
 ﻿using PetsOnTrail.Interfaces.Actions.Entities.Pets;
 using Mapster;
+using API.GRPCService.Extensions;
 
 namespace API.GRPCService.Services.Pets;
 
@@ -47,6 +48,28 @@ internal static class PetsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Pets.UpdatePet.VaccinationType, UpdatePetRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Pets.UpdatePet.PetType, UpdatePetRequest.PetType>();
         typeAdapterConfig.NewConfig<UpdatePetResponse, Protos.Pets.UpdatePet.UpdatePetResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Pets.GetMyPets.GetMyPetsRequest, GetMyPetsRequest>();
+        typeAdapterConfig.NewConfig<GetMyPetsResponse, Protos.Pets.GetMyPets.GetMyPetsResponse>()
+            .MapWith(s => new Protos.Pets.GetMyPets.GetMyPetsResponse
+            {
+                Pets = 
+                { 
+                    s.Pets.Select(p => new Protos.Pets.GetMyPets.MyPet
+                    {
+                        Id = p.Id.ToString(),
+                        Name = p.Name,
+                        Chip = p.Chip,
+                        Birthday = p.Birthday.ToGoogleDateTime(),
+                        Contact = p.Contact,
+                        Decease = p.Decease.ToGoogleDateTime(),
+                        Kennel = p.Kennel,
+                        Pedigree = p.Pedigree,
+                        UriToPhoto = p.UriToPhoto,
+                        UserId = p.UserId
+                    }).ToList()
+                }
+            });
         
         return typeAdapterConfig;
     }
