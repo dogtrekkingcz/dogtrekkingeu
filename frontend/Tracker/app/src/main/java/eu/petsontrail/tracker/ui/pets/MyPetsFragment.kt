@@ -16,6 +16,7 @@ import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.dtos.MyPetDto
 import eu.petsontrail.tracker.services.AuthenticationCallCredentials
+import getmypets.GetMyPetsRequestOuterClass
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
 import pets.PetsGrpc
@@ -58,7 +59,7 @@ class MyPetsFragment : Fragment() {
                 .newBlockingStub(channel)
                 .withCallCredentials(AuthenticationCallCredentials(token))
 
-            var response = client.getMyPets(pets.GetMyPetsRequest.newBuilder().build())
+            var response = client.getMyPets(GetMyPetsRequestOuterClass.GetMyPetsRequest.newBuilder().build())
 
             myPetsLists.add(MyPetDto(1, " Mashu", "987576443"))
             myPetsLists.add(MyPetDto(2, " Azhar", "8787576768"))

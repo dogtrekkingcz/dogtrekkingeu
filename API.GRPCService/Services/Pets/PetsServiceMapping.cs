@@ -49,7 +49,8 @@ internal static class PetsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Pets.UpdatePet.PetType, UpdatePetRequest.PetType>();
         typeAdapterConfig.NewConfig<UpdatePetResponse, Protos.Pets.UpdatePet.UpdatePetResponse>();
 
-        typeAdapterConfig.NewConfig<Protos.Pets.GetMyPets.GetMyPetsRequest, GetMyPetsRequest>();
+        typeAdapterConfig.NewConfig<Protos.Pets.GetMyPets.GetMyPetsRequest, GetMyPetsRequest>()
+            .Ignore(d => d.UserId);
         typeAdapterConfig.NewConfig<GetMyPetsResponse, Protos.Pets.GetMyPets.GetMyPetsResponse>()
             .MapWith(s => new Protos.Pets.GetMyPets.GetMyPetsResponse
             {
