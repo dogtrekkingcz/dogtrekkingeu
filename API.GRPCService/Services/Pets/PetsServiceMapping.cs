@@ -67,8 +67,12 @@ internal static class PetsServiceMapping
                 }
             });
 
-        typeAdapterConfig.NewConfig<Protos.Pets.AddMyPet.AddMyPetRequest, AddMyPetRequest>();
-        typeAdapterConfig.NewConfig<Protos.Pets.AddMyPet.VaccinationDto, AddMyPetRequest.VaccinationDto>();
+        typeAdapterConfig.NewConfig<Protos.Pets.AddMyPet.AddMyPetRequest, AddMyPetRequest>()
+            .Ignore(d => d.Id)
+            .Ignore(d => d.UserId)
+            .Ignore(d => d.PetType);
+        typeAdapterConfig.NewConfig<Protos.Pets.AddMyPet.VaccinationDto, AddMyPetRequest.VaccinationDto>()
+            .Ignore(d => d.VaccinationType);
         typeAdapterConfig.NewConfig<AddMyPetResponse, Protos.Pets.AddMyPet.AddMyPetResponse>();
         
         return typeAdapterConfig;

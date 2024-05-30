@@ -94,7 +94,9 @@ internal class PetsService : Protos.Pets.Pets.PetsBase
     {
         var apiRequest = _mapper.Map<AddMyPetRequest>(request) with
         {
-            UserId = _jwtTokenService.GetUserId()
+            Id = request.Id?.ToGuid() ?? Guid.NewGuid(),
+            UserId = _jwtTokenService.GetUserId(),
+            PetType = request.PetType?.ToGuid() ?? Guid.Empty
         };
 
         var response = await _petsService.AddMyPetAsync(apiRequest, context.CancellationToken);

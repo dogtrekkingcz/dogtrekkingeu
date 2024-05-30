@@ -60,8 +60,10 @@ class AddMyPetFragment : Fragment() {
 
                 client.addMyPet(
                     AddMyPetRequestOuterClass.AddMyPetRequest.newBuilder()
+                        .setId(UUID.randomUUID().toString())
                         .setName(binding.editTextPetName.text.toString())
                         .setChip(binding.editTextPetChip.text.toString())
+                        .setPetType(UUID.randomUUID().toString())
                         .build()
                 )
             }
