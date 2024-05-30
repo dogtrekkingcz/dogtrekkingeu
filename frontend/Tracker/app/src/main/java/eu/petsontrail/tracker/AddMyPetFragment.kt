@@ -63,7 +63,7 @@ class AddMyPetFragment : Fragment() {
                         .setId(UUID.randomUUID().toString())
                         .setName(binding.editTextPetName.text.toString())
                         .setChip(binding.editTextPetChip.text.toString())
-                        .setPetType(UUID.randomUUID().toString())
+                        .setPetType(UUID.randomUUID().toString()) // TODO: get from backend
                         .build()
                 )
             }
