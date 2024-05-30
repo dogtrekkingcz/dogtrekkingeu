@@ -64,9 +64,6 @@ class ActivityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonCreateNewActivity.setOnClickListener {
-            val intent = Intent(this.context, ActivityUploadService::class.java)
-            this.context?.startForegroundService(intent)
-
             findNavController().navigate(R.id.action_activityFragment_to_createActivityFragment)
         }
 

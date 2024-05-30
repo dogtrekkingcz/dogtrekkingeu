@@ -70,5 +70,10 @@ class MyPetsFragment : Fragment() {
         val adapter = MyPetsAdapter(this.requireContext(), myPetsLists)
 
         binding.mypetslist.adapter = adapter
+
+//        binding.buttonAddPet.setOnClickListener {
+ //           val action = MyPetsFragmentDirections.actionMyPetsFragmentToCreatePetFragment()
+//            findNavController().navigate(action)
+//        }
     }
 }

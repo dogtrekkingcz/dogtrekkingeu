@@ -2,6 +2,7 @@ package eu.petsontrail.tracker
 
 import actions.ActionsGrpc
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
@@ -13,11 +14,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import com.google.protobuf.Empty
 import eu.petsontrail.tracker.databinding.ActivityMainBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.UserSettingsDto
+import eu.petsontrail.tracker.services.ActivityUploadService
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
 import java.util.UUID
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var db: AppDatabase
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,16 +63,23 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        /*
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }
+        */
 
         val btnLogin: Button = binding.btnLogin
         btnLogin.setOnClickListener {
             val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnSynchronize.setOnClickListener {
+            val intent = Intent(applicationContext, ActivityUploadService::class.java)
+            applicationContext.startForegroundService(intent)
         }
     }
 

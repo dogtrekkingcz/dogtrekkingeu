@@ -67,4 +67,6 @@
     <string name="Chip">Chip</string>
     <string name="PetName">Pet Name</string>
     <string name="id">Id</string>
+    <string name="Synchronize">Synchronize</string>
+    <string name="add_my_pet">Add My Pet</string>
 </resources>

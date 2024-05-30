@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/activityFragment"
         android:name="eu.petsontrail.tracker.ActivityFragment"
-        android:label="fragment_activity"
+        android:label="Activity"
         tools:layout="@layout/fragment_activity" >
         <action
             android:id="@+id/action_activityFragment_to_createActivityFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/createActivityFragment"
         android:name="eu.petsontrail.tracker.CreateActivityFragment"
-        android:label="fragment_create_activity"
+        android:label="Create activity"
         tools:layout="@layout/fragment_create_activity" >
         <action
             android:id="@+id/action_createActivityFragment_to_activityFragment"
@@ -29,9 +29,21 @@
     <fragment
         android:id="@+id/myPetsFragment"
         android:name="eu.petsontrail.tracker.ui.pets.MyPetsFragment"
-        android:label="MyPetsFragment" >
+        android:label="MyPets">
         <action
             android:id="@+id/action_myPetsFragment_to_createActivityFragment"
             app:destination="@id/createActivityFragment" />
+        <action
+            android:id="@+id/action_myPetsFragment_to_addMyPetFragment"
+            app:destination="@id/addMyPetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMyPetFragment"
+        android:name="eu.petsontrail.tracker.AddMyPetFragment"
+        android:label="fragment_add_my_pet"
+        tools:layout="@layout/fragment_add_my_pet" >
+        <action
+            android:id="@+id/action_addMyPetFragment_to_myPetsFragment"
+            app:destination="@id/myPetsFragment" />
     </fragment>
 </navigation>
