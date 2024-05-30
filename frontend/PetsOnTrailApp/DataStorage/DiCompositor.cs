@@ -3,11 +3,11 @@ using Mapster;
 using MapsterMapper;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
+using PetsOnTrailApp.Extensions;
 using Protos.Actions;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
 using Protos.Activities.GetActivityByUserIdAndActivityId;
-using SharedLib.Extensions;
 using static Protos.Actions.Actions;
 using static Protos.Activities.Activities;
 

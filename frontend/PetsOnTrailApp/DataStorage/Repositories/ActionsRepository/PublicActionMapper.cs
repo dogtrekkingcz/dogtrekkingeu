@@ -1,8 +1,8 @@
 ﻿using Mapster;
+using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
 using PetsOnTrailApp.Shared.ResourceFiles;
 using Protos.Actions.GetSelectedPublicActionsList;
-using SharedLib.Extensions;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 

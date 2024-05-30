@@ -51,9 +51,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SharedLib\SharedLib.csproj" />
       <ProjectReference Include="..\..\Protos\Protos.csproj" />
       <ProjectReference Include="..\..\Shared\Constants\Constants.csproj" />
+      <ProjectReference Include="..\SharedLib\SharedLib.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -95,8 +95,6 @@
     <ItemGroup>
       <Folder Include="DataStorage\Mappers\" />
       <Folder Include="Events" />
-      <Folder Include="Pages\Actions\Results\" />
-      <Folder Include="Pages\Actions\View" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,8 +1,8 @@
 ﻿using Mapster;
 using PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
+using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
 using Protos.Activities.GetActivityByUserIdAndActivityId;
-using SharedLib.Extensions;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
