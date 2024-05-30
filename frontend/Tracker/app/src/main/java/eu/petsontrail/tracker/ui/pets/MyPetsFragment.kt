@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
+import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.databinding.FragmentMyPetsBinding
 import eu.petsontrail.tracker.db.AppDatabase
@@ -71,9 +73,8 @@ class MyPetsFragment : Fragment() {
 
         binding.mypetslist.adapter = adapter
 
-//        binding.buttonAddPet.setOnClickListener {
- //           val action = MyPetsFragmentDirections.actionMyPetsFragmentToCreatePetFragment()
-//            findNavController().navigate(action)
-//        }
+        binding.buttonAddPet.setOnClickListener {
+            findNavController().navigate(R.id.action_myPetsFragment_to_addMyPetFragment)
+        }
     }
 }
