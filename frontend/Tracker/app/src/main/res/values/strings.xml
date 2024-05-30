@@ -63,7 +63,7 @@
     <string name="activity_description">Description</string>
     <string name="create">Create</string>
     <string name="cancel">Cancel</string>
-    <string name="add_pet">Add pet</string>
+    <string name="add_new_pet">Add new pet</string>
     <string name="Chip">Chip</string>
     <string name="PetName">Pet Name</string>
     <string name="id">Id</string>
