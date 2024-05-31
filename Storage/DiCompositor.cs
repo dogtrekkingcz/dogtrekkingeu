@@ -113,7 +113,8 @@ public static class DiCompositor
             .AddActivitiesRepositoryMapping()
             .AddMigrationsRepositoryMapping()
             .AddAuthorizationRolesRepositoryMapping()
-            .AddActivityTypeRepositoryMapping();
+            .AddActivityTypeRepositoryMapping()
+            .AddVaccinationTypeRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
         BsonClassMap.RegisterClassMap<UserProfileRecord>();
