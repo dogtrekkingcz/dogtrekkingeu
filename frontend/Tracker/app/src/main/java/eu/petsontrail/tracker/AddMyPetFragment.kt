@@ -19,7 +19,10 @@ import eu.petsontrail.tracker.databinding.FragmentCreateActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.dtos.MyPetDto
+import eu.petsontrail.tracker.dtos.PetTypeDto
 import eu.petsontrail.tracker.services.AuthenticationCallCredentials
+import eu.petsontrail.tracker.ui.pets.MyPetsAdapter
+import eu.petsontrail.tracker.ui.pets.PetTypesAdapter
 import getmypets.GetMyPetsRequestOuterClass
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
@@ -69,13 +72,13 @@ class AddMyPetFragment : Fragment() {
                     .build()
             )
 
-            binding.editTextPetType.setAdapter(
-                ArrayAdapter(
-                    requireContext(),
-                    android.R.layout.simple_list_item_1,
-                    petTypes.petTypesList.map { it -> it.name }
-                )
-            )
+            val petTypeList: ArrayList<PetTypeDto> = ArrayList()
+            for (petType in petTypes.petTypesList) {
+                petTypeList.add(PetTypeDto(UUID.fromString(petType.id), petType.name, petType.description))
+            }
+
+            val adapter = PetTypesAdapter(requireContext(), petTypeList)
+            //binding.editTextPetType.setAdapter(adapter)
         }
 
         binding.editTextPetBirthday.setOnClickListener {

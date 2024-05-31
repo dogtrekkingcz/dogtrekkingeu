@@ -8,8 +8,9 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.dtos.MyPetDto
+import eu.petsontrail.tracker.dtos.PetTypeDto
 
-class MyPetsAdapter(private val context: Context, private val arrayList: java.util.ArrayList<MyPetDto>) : BaseAdapter() {
+class PetTypesAdapter(private val context: Context, private val arrayList: java.util.ArrayList<PetTypeDto>) : BaseAdapter() {
     private lateinit var serialNum: TextView
     private lateinit var name: TextView
     private lateinit var chip: TextView
@@ -30,7 +31,8 @@ class MyPetsAdapter(private val context: Context, private val arrayList: java.ut
         chip = convertView.findViewById(R.id.chip)
         serialNum.text = arrayList[position].id.toString()
         name.text = arrayList[position].name
-        chip.text = arrayList[position].chip
+        chip.text = arrayList[position].description
+
         return convertView
     }
 }
