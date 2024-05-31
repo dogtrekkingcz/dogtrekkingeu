@@ -55,6 +55,14 @@ class ActivityFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentActivityBinding.inflate(inflater, container, false)
+        _db = DbHelper().InitializeDatabase(this.requireContext())
 
         runBlocking {
             val observerActivityGeneral = Observer<ActivityDto?> {
@@ -63,7 +71,7 @@ class ActivityFragment : Fragment() {
 
                     if (it.start != null) {
                         val now = System.currentTimeMillis()
-                        _duration = (now - it.start)/1000 as Double
+                        _duration = (now - it.start)/ 1000.toDouble()
                     }
 
                     binding.textViewActivityDuration.text = _duration.toString()
@@ -85,14 +93,6 @@ class ActivityFragment : Fragment() {
 
             _db.activityDao().getLiveActive().observe(viewLifecycleOwner, observerActivityGeneral)
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentActivityBinding.inflate(inflater, container, false)
-        _db = DbHelper().InitializeDatabase(this.requireContext())
 
         return binding.root
     }

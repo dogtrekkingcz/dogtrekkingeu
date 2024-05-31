@@ -14,6 +14,13 @@ import eu.petsontrail.tracker.databinding.FragmentCreateActivityBinding
 import eu.petsontrail.tracker.databinding.FragmentMyPetsBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
+import eu.petsontrail.tracker.db.model.ActivityDto
+import kotlinx.coroutines.runBlocking
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import java.util.UUID
 
 class CreateActivityFragment : Fragment() {
     private var _binding: FragmentCreateActivityBinding? = null
@@ -32,44 +39,6 @@ class CreateActivityFragment : Fragment() {
         _binding = FragmentCreateActivityBinding.inflate(inflater, container, false)
         _db = DbHelper().InitializeDatabase(this.requireContext())
 
-
-        /*
-                    runBlocking {
-                if (_db.activityDao().getActive() == null) {
-                    var nameOfActivity: String? = null
-
-                    val editTextNameOfActivity: EditText = binding.editTextNameOfActivity
-                    if (editTextNameOfActivity.text.isEmpty()) {
-                        nameOfActivity = LocalDateTime.now()
-                            .format(
-                                DateTimeFormatter.ofPattern(
-                                    "yyyy-MM-dd HH:mm:ss",
-                                    Locale.ENGLISH
-                                )
-                            )
-
-                        editTextNameOfActivity.setText(nameOfActivity)
-                    }
-                    else {
-                        nameOfActivity = editTextNameOfActivity.text.toString()
-                    }
-
-                    var newActivity = ActivityDto(
-                        uid = UUID.randomUUID(),
-                        time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
-                        name = nameOfActivity,
-                        active = 1,
-                        description = "",
-                        start = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
-                        end = null
-                    )
-
-                    db.activityDao().insertOne(newActivity)
-                }
-            }
-         */
-
-        // Inflate the layout for this fragment
         return binding.root
     }
 
@@ -90,6 +59,42 @@ class CreateActivityFragment : Fragment() {
 
         binding.buttonAddPet.setOnClickListener {
             findNavController().navigate(R.id.action_createActivityFragment_to_myPetsFragment)
+        }
+
+        binding.buttonActivityCreate.setOnClickListener {
+            runBlocking {
+                if (_db.activityDao().getActive() != null) {
+                    _db.activityDao().resetActiveActivities()
+                }
+
+                var nameOfActivity: String? = null
+
+                if (binding.createActivityNameOfActivity.text!!.isEmpty()) {
+                    nameOfActivity = LocalDateTime.now()
+                        .format(
+                            DateTimeFormatter.ofPattern(
+                                "yyyy-MM-dd HH:mm:ss",
+                                Locale.ENGLISH
+                            )
+                        )
+
+                    binding.createActivityNameOfActivity.setText(nameOfActivity)
+                } else {
+                    nameOfActivity = binding.createActivityNameOfActivity.text.toString()
+                }
+
+                var newActivity = ActivityDto(
+                    uid = UUID.randomUUID(),
+                    time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                    name = nameOfActivity,
+                    active = 1,
+                    description = "",
+                    start = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                    end = null
+                )
+
+                _db.activityDao().insertOne(newActivity)
+            }
         }
     }
 }
