@@ -84,7 +84,7 @@ class ActivityFragment : Fragment() {
                 binding.textViewActivitySpeed.text = speed.toString()
             }
 
-            _db.activityDao().getActive().observe(viewLifecycleOwner, observerActivityGeneral)
+            _db.activityDao().getLiveActive().observe(viewLifecycleOwner, observerActivityGeneral)
         }
     }
 
@@ -139,7 +139,7 @@ class ActivityFragment : Fragment() {
 
             if (_activityId != null && _observerActivityRunning != null) {
                 runBlocking {
-                    _db.locationDao().findByActivityId(_activityId!!).observe(viewLifecycleOwner, _observerActivityRunning!!)
+                    _db.locationDao().findByActivityIdLive(_activityId!!).observe(viewLifecycleOwner, _observerActivityRunning!!)
                 }
             }
         }
