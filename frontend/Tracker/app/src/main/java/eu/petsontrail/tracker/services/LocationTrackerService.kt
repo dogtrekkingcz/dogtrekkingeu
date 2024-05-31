@@ -31,6 +31,7 @@ import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.toLocationDto
+import eu.petsontrail.tracker.viewmodels.LocationViewModel
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -38,6 +39,8 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 import java.util.UUID
 import kotlin.properties.Delegates
+import androidx.lifecycle.ViewModelProvider
+import eu.petsontrail.tracker.repositories.LocationRepository
 
 
 class LocationTrackerService : Service() {
@@ -52,6 +55,8 @@ class LocationTrackerService : Service() {
     private var currentActivityName: String? = null
     private var _startId by Delegates.notNull<Int>()
 
+    private val serviceScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
+
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
@@ -61,7 +66,7 @@ class LocationTrackerService : Service() {
         super.onCreate()
 
         runBlocking {
-            var active = AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().getActive()
+            val active = AppDatabase.getActivityDao(this@LocationTrackerService, serviceScope).getActive()
 
             currentActivityId = active?.uid
             currentActivityName = active?.name
@@ -74,11 +79,12 @@ class LocationTrackerService : Service() {
                         "Position",
                         "Current LocationNN = [lat : ${location.latitude}, lng : ${location.longitude}]")
 
-                    runBlocking {
-                        if (currentActivityId == null)
-                            createNewActivity()
 
-                        AppDatabase.getDatabase(this@LocationTrackerService, this).locationDao().insertOne(location.toLocationDto(currentActivityId!!))
+                    if (currentActivityId == null)
+                        createNewActivity()
+
+                    runBlocking {
+                        AppDatabase.getLocationDao(this@LocationTrackerService, serviceScope).insertOne(location.toLocationDto(currentActivityId!!))
                     }
                 }
             }
@@ -196,7 +202,7 @@ class LocationTrackerService : Service() {
         }
         else if (action == 1003) {
             runBlocking {
-                AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().resetActiveActivities()
+                AppDatabase.getActivityDao(this@LocationTrackerService, serviceScope).resetActiveActivities()
 
                 prepareToStopService()
             }
@@ -290,6 +296,9 @@ class LocationTrackerService : Service() {
             Toast.LENGTH_SHORT
         ).show()
         Log.d("Stopped","Service Stopped")
+
+        serviceScope.cancel()
+
         super.onDestroy()
     }
 
@@ -299,7 +308,7 @@ class LocationTrackerService : Service() {
         currentActivityId = UUID.randomUUID()
 
         runBlocking {
-            AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().resetActiveActivities()
+            AppDatabase.getActivityDao(this@LocationTrackerService, serviceScope).resetActiveActivities()
 
             var newActivity = ActivityDto(
                 uid = currentActivityId!!,
@@ -311,9 +320,9 @@ class LocationTrackerService : Service() {
                 description = ""
             )
 
-            AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().insertOne(newActivity)
+            AppDatabase.getActivityDao(this@LocationTrackerService, serviceScope).insertOne(newActivity)
 
-            currentActivityId = AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().getActive()?.uid!!
+            currentActivityId = AppDatabase.getActivityDao(this@LocationTrackerService, serviceScope).getActive()?.uid!!
         }
     }
 }

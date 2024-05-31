@@ -16,6 +16,9 @@ interface ActivityDao {
     fun getLiveActive(): LiveData<ActivityDto?>
 
     @Query("SELECT * FROM my_activities WHERE active=1 LIMIT 1")
+    fun getActiveNoSuspend(): ActivityDto?
+
+    @Query("SELECT * FROM my_activities WHERE active=1 LIMIT 1")
     suspend fun getActive(): ActivityDto?
 
     @Query("SELECT * FROM my_activities WHERE uid IN (:activityIds)")

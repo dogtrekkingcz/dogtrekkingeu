@@ -1,5 +1,6 @@
 package eu.petsontrail.tracker.db
 import android.content.Context
+import android.util.Log
 import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
@@ -51,6 +52,8 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         public const val DatabaseName = "PetsOnTrail.DB.v2"
         public const val LATEST_VERSION = 1
+        private var _activity: ActivityDao? = null
+        private var _location: LocationDao? = null
 
         @Volatile
         private var INSTANCE: AppDatabase? = null
@@ -60,6 +63,7 @@ abstract class AppDatabase : RoomDatabase() {
             if (tempInstance != null) {
                 return tempInstance
             }
+
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -68,8 +72,29 @@ abstract class AppDatabase : RoomDatabase() {
                 ).addCallback(AppDatabaseCallback(scope)).build()
 
                 INSTANCE = instance
+
+                Log.d("AppDatabase", "Database created")
+                _activity = instance.activityDao()
+                _location = instance.locationDao()
+
                 return instance
             }
+        }
+
+        fun getActivityDao(context: Context, scope: CoroutineScope): ActivityDao {
+            if (_activity == null) {
+                getDatabase(context, scope)
+            }
+
+            return _activity!!
+        }
+
+        fun getLocationDao(context: Context, scope: CoroutineScope): LocationDao {
+            if (_location == null) {
+                getDatabase(context, scope)
+            }
+
+            return _location!!
         }
     }
 

@@ -14,12 +14,15 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.helpers.DistanceHelper
 import eu.petsontrail.tracker.services.LocationTrackerService
+import eu.petsontrail.tracker.viewmodels.ActivityViewModel
+import eu.petsontrail.tracker.viewmodels.LocationViewModel
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.runBlocking
 import java.util.UUID
@@ -34,6 +37,9 @@ class ActivityFragment : Fragment() {
     private var _activityId: UUID? = null
     private var _duration = 0.0
 
+    private lateinit var _locationViewModel: LocationViewModel
+    private lateinit var _activityViewModel: ActivityViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -43,33 +49,35 @@ class ActivityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentActivityBinding.inflate(inflater, container, false)
-
-        AppDatabase.getDatabase(this.requireContext(), lifecycleScope).activityDao().getLiveActive().observe( viewLifecycleOwner, Observer {
-            if (it != null) {
-                binding.textViewActivityName.text = it.name
-
-                if (it.start != null) {
-                    val now = System.currentTimeMillis()
-                    _duration = (now - it.start)/ 1000.toDouble()
-                }
-
-                binding.textViewActivityDuration.text = _duration.toString()
-            }
-        })
-
-        AppDatabase.getDatabase(this.requireContext(), lifecycleScope).locationDao().getAllLive().observe(viewLifecycleOwner, Observer {
+        _locationViewModel = ViewModelProvider(this).get(LocationViewModel::class.java)
+        _locationViewModel.setActivityId(_activityId)
+        _locationViewModel.locations.observe(viewLifecycleOwner, Observer { locations ->
             Log.d("location", "location updated")
 
             var distance = 0.0
             var speed = 0.0
 
-            if (it.size > 1) {
-                distance = DistanceHelper().GetDistanceInMeters(it)
+            if (locations.size > 1) {
+                distance = DistanceHelper().GetDistanceInMeters(locations)
                 speed = distance / _duration * 3600
             }
 
             binding.textViewActivityDistance.text = distance.toString()
             binding.textViewActivitySpeed.text = speed.toString()
+        })
+
+        _activityViewModel = ViewModelProvider(this).get(ActivityViewModel::class.java)
+        _activityViewModel.activity.observe(viewLifecycleOwner, Observer { activity ->
+            if (activity != null) {
+                binding.textViewActivityName.text = activity.name
+
+                if (activity.start != null) {
+                    val now = System.currentTimeMillis()
+                    _duration = (now - activity.start)/ 1000.toDouble()
+                }
+
+                binding.textViewActivityDuration.text = _duration.toString()
+            }
         })
 
         return binding.root
@@ -116,6 +124,7 @@ class ActivityFragment : Fragment() {
 
             runBlocking {
                 _activityId = AppDatabase.getDatabase(requireContext(), lifecycleScope).activityDao().getActive()?.uid
+                _locationViewModel.setActivityId(_activityId)
             }
         }
 
