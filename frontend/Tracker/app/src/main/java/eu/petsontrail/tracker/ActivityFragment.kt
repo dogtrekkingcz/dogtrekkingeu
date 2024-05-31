@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
+import eu.petsontrail.tracker.db.dao.ActivityDao
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.helpers.DistanceHelper
@@ -91,7 +92,7 @@ class ActivityFragment : Fragment() {
                 binding.textViewActivitySpeed.text = speed.toString()
             }
 
-            _db.activityDao().getLiveActive().observe(viewLifecycleOwner, observerActivityGeneral)
+            _db.activityDao().getLiveActive().observe( viewLifecycleOwner, observerActivityGeneral )
         }
 
         return binding.root
@@ -136,9 +137,11 @@ class ActivityFragment : Fragment() {
             val intent = Intent(this.context, LocationTrackerService::class.java)
             this.context?.startForegroundService(intent)
 
-            if (_activityId != null && _observerActivityRunning != null) {
-                runBlocking {
-                    _db.locationDao().findByActivityIdLive(_activityId!!).observe(viewLifecycleOwner, _observerActivityRunning!!)
+            runBlocking {
+                _activityId = _db.activityDao().getActive()?.uid
+                if (_observerActivityRunning != null) {
+                    _db.locationDao().findByActivityIdLive(_activityId!!)
+                        .observe(viewLifecycleOwner, _observerActivityRunning!!)
                 }
             }
         }

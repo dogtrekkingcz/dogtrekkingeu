@@ -78,7 +78,7 @@ class LocationTrackerService : Service() {
                 for (location in locationResult.locations) {
                     Log.d(
                         "Position",
-                        "Current Location = [lat : ${location.latitude}, lng : ${location.longitude}]")
+                        "Current LocationNN = [lat : ${location.latitude}, lng : ${location.longitude}]")
 
                     var message = "[lat : ${location.latitude}, lng : ${location.longitude}]"
                     notificationBuilder.setContentText(message);
