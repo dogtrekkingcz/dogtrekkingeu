@@ -13,7 +13,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
 
     private string _userIdAdmin = "29bf10f1-8f4a-43f3-8e1b-448d0fbf7bef";
-    private string _userIdRadekKotesovec = "f6191db1-d1ba-4714-9ddc-09a3325762e3";
+    private string _userIdRadekKotesovec = "fdf633bc-91d0-4f2d-ab78-f01657eca190";
 
     public M_20230728_InitialMigration(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
@@ -91,6 +91,8 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                     Constants.Roles.InternalAdministrator.Id
                 }
             }, CancellationToken.None))
+
+            // ------------------------------------------------------------------------------------------------------------
 
             .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
             {
@@ -261,6 +263,8 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 PointTracking = false
             }, CancellationToken.None))
 
+            // ------------------------------------------------------------------------------------------------------------
+
             .AddUpAction(() => VaccinationTypeRepositoryService.AddAsync(new Entities.VaccinationTypes.AddVaccinationTypeInternalStorageRequest
             {
                 Id = Constants.VaccinationType.Rabies,
@@ -269,7 +273,9 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 Description = "Rabies"
             }, CancellationToken.None))
 
-            .AddUpAction(() =>PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
+            // ------------------------------------------------------------------------------------------------------------
+
+            .AddUpAction(() => PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
             {
                 Id = Constants.PetType.Dog,
                 UserId = _userIdAdmin,
@@ -277,7 +283,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 Description = "Dog"
             }, CancellationToken.None))
 
-            .AddUpAction(() =>PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
+            .AddUpAction(() => PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
             {
                 Id = Constants.PetType.Cat,
                 UserId = _userIdAdmin,
@@ -285,7 +291,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 Description = "Cat"
             }, CancellationToken.None))
 
-            .AddUpAction(() =>PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
+            .AddUpAction(() => PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
             {
                 Id = Constants.PetType.Horse,
                 UserId = _userIdAdmin,
@@ -293,6 +299,8 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 Description = "Horse"
             }, CancellationToken.None))
 
+            // ------------------------------------------------------------------------------------------------------------
+            // ------------------------------------------------------------------------------------------------------------
             // ------------------------------------------------------------------------------------------------------------
 
             .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdRadekKotesovec }, CancellationToken.None))
