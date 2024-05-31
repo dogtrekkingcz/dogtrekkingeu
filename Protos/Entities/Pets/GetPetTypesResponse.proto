@@ -9,5 +9,8 @@ message GetPetTypesResponse {
 }
 
 message PetTypeDto {
-
+  string Id = 1;
+  string UserId = 2;
+  string Name = 3;
+  string Description = 4;
 }

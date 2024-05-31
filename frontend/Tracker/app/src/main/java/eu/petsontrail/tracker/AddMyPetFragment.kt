@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.protobuf.Empty
 import com.google.type.DateTime
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.databinding.FragmentAddMyPetBinding
@@ -51,6 +52,31 @@ class AddMyPetFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        runBlocking {
+            val token = _db.userSettingsDao().getAccessToken()
+
+            val channel = ManagedChannelBuilder
+                .forTarget("dns:///petsontrail.eu:4443")
+                .build()
+
+            var client = PetsGrpc
+                .newBlockingStub(channel)
+                .withCallCredentials(AuthenticationCallCredentials(token))
+
+            val petTypes = client.getPetTypes(
+                Empty.newBuilder()
+                    .build()
+            )
+
+            binding.editTextPetType.setAdapter(
+                ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_list_item_1,
+                    petTypes.petTypesList.map { it -> it.name }
+                )
+            )
+        }
 
         binding.editTextPetBirthday.setOnClickListener {
             val datePicker =
