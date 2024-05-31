@@ -12,47 +12,27 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
-import eu.petsontrail.tracker.db.DbHelper
-import eu.petsontrail.tracker.db.dao.ActivityDao
-import eu.petsontrail.tracker.db.model.ActivityDto
-import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.helpers.DistanceHelper
 import eu.petsontrail.tracker.services.LocationTrackerService
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.runBlocking
 import java.util.UUID
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ActivityFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ActivityFragment : Fragment() {
     private var _binding: FragmentActivityBinding? = null
     private val binding get() = _binding!!
 
     private val model: ActivityViewModel by viewModels()
 
-    private lateinit var _db: AppDatabase
-
     private val REQUEST_PERMISSION_LOCATIONS = 1;
     private var _activityId: UUID? = null
     private var _duration = 0.0
-
-    var _observerActivityRunning: Observer<List<LocationDto>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,37 +43,34 @@ class ActivityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentActivityBinding.inflate(inflater, container, false)
-        _db = DbHelper().InitializeDatabase(this.requireContext())
 
-        runBlocking {
-            val observerActivityGeneral = Observer<ActivityDto?> {
-                if (it != null) {
-                    binding.textViewActivityName.text = it.name
+        AppDatabase.getDatabase(this.requireContext(), lifecycleScope).activityDao().getLiveActive().observe( viewLifecycleOwner, Observer {
+            if (it != null) {
+                binding.textViewActivityName.text = it.name
 
-                    if (it.start != null) {
-                        val now = System.currentTimeMillis()
-                        _duration = (now - it.start)/ 1000.toDouble()
-                    }
-
-                    binding.textViewActivityDuration.text = _duration.toString()
-                }
-            }
-
-            _observerActivityRunning = Observer<List<LocationDto>> {
-                var distance = 0.0
-                var speed = 0.0
-
-                if (it.size > 1) {
-                    distance = DistanceHelper().GetDistanceInMeters(it)
-                    speed = distance / _duration * 3600
+                if (it.start != null) {
+                    val now = System.currentTimeMillis()
+                    _duration = (now - it.start)/ 1000.toDouble()
                 }
 
-                binding.textViewActivityDistance.text = distance.toString()
-                binding.textViewActivitySpeed.text = speed.toString()
+                binding.textViewActivityDuration.text = _duration.toString()
+            }
+        })
+
+        AppDatabase.getDatabase(this.requireContext(), lifecycleScope).locationDao().getAllLive().observe(viewLifecycleOwner, Observer {
+            Log.d("location", "location updated")
+
+            var distance = 0.0
+            var speed = 0.0
+
+            if (it.size > 1) {
+                distance = DistanceHelper().GetDistanceInMeters(it)
+                speed = distance / _duration * 3600
             }
 
-            _db.activityDao().getLiveActive().observe( viewLifecycleOwner, observerActivityGeneral )
-        }
+            binding.textViewActivityDistance.text = distance.toString()
+            binding.textViewActivitySpeed.text = speed.toString()
+        })
 
         return binding.root
     }
@@ -138,11 +115,7 @@ class ActivityFragment : Fragment() {
             this.context?.startForegroundService(intent)
 
             runBlocking {
-                _activityId = _db.activityDao().getActive()?.uid
-                if (_observerActivityRunning != null) {
-                    _db.locationDao().findByActivityIdLive(_activityId!!)
-                        .observe(viewLifecycleOwner, _observerActivityRunning!!)
-                }
+                _activityId = AppDatabase.getDatabase(requireContext(), lifecycleScope).activityDao().getActive()?.uid
             }
         }
 

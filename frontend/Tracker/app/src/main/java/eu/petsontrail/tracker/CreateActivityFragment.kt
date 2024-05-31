@@ -9,11 +9,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
-import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.databinding.FragmentCreateActivityBinding
-import eu.petsontrail.tracker.databinding.FragmentMyPetsBinding
 import eu.petsontrail.tracker.db.AppDatabase
-import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.ActivityDto
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDateTime
@@ -26,8 +23,6 @@ class CreateActivityFragment : Fragment() {
     private var _binding: FragmentCreateActivityBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var _db: AppDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -37,7 +32,6 @@ class CreateActivityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCreateActivityBinding.inflate(inflater, container, false)
-        _db = DbHelper().InitializeDatabase(this.requireContext())
 
         return binding.root
     }
@@ -62,8 +56,8 @@ class CreateActivityFragment : Fragment() {
 
         binding.buttonActivityCreate.setOnClickListener {
             runBlocking {
-                if (_db.activityDao().getActive() != null) {
-                    _db.activityDao().resetActiveActivities()
+                if (AppDatabase.getDatabase(requireContext(), this).activityDao().getActive() != null) {
+                    AppDatabase.getDatabase(requireContext(), this).activityDao().resetActiveActivities()
                 }
 
                 var nameOfActivity: String? = null
@@ -92,7 +86,7 @@ class CreateActivityFragment : Fragment() {
                     end = null
                 )
 
-                _db.activityDao().insertOne(newActivity)
+                AppDatabase.getDatabase(requireContext(), this).activityDao().insertOne(newActivity)
             }
 
             findNavController().navigate(R.id.action_createActivityFragment_to_activityFragment)

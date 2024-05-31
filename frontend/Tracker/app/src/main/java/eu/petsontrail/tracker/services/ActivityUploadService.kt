@@ -1,6 +1,5 @@
 package eu.petsontrail.tracker.services
 
-import actions.ActionsGrpc
 import activities.ActivitiesGrpc
 import android.Manifest
 import android.app.Notification
@@ -19,37 +18,27 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
-import com.google.protobuf.Empty
 import com.google.protobuf.Timestamp
-import com.google.type.DateTime
 import createactivity.CreateActivityRequestOuterClass
 import createactivity.CreateActivityRequestOuterClass.CreateActivityRequest
 import eu.petsontrail.tracker.Constants
 import eu.petsontrail.tracker.MainActivity
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.db.AppDatabase
-import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.db.model.PetDto
-import io.grpc.CallCredentials
-import io.grpc.ChannelCredentials
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
-import okhttp3.internal.wait
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.ZoneOffset
-import java.util.Date
 import java.util.UUID
-import java.util.concurrent.Executor
 
 
 class ActivityUploadService : Service() {
     private val TAG: String = "ActivityUploadService"
-    private lateinit var db: AppDatabase
     private lateinit var notificationBuilder: NotificationCompat.Builder
     private lateinit var notificationChannel: NotificationChannel
     private lateinit var notification: Notification
@@ -141,10 +130,8 @@ class ActivityUploadService : Service() {
         }
         Log.d("Service Status", "Starting Service")
 
-        db = DbHelper().InitializeDatabase(applicationContext)
-
         runBlocking {
-            var activitiesToSynchronize = db.activityDao().getActivitiesToSynchronize()
+            var activitiesToSynchronize = AppDatabase.getDatabase(this@ActivityUploadService, this).activityDao().getActivitiesToSynchronize()
 
             for (activity in activitiesToSynchronize) {
                 Log.d("Service status", "Sending request to createorupdateactivity ...")
@@ -177,15 +164,15 @@ class ActivityUploadService : Service() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun CreateOrUpdateActivity(activity: ActivityDto) {
         runBlocking {
-            val token = db.userSettingsDao().getAccessToken()
-            val activityPets = db.activityPetsDao().loadAllByActivityId(activity.uid)
-            val positions = db.locationDao().findByActivityId(activity.uid)
+            val token = AppDatabase.getDatabase(this@ActivityUploadService, this).userSettingsDao().getAccessToken()
+            val activityPets = AppDatabase.getDatabase(this@ActivityUploadService, this).activityPetsDao().loadAllByActivityId(activity.uid)
+            val positions = AppDatabase.getDatabase(this@ActivityUploadService, this).locationDao().findByActivityId(activity.uid)
 
             val activityPetsIds = ArrayList<UUID>()
             for (ap in activityPets) {
                 activityPetsIds.add(ap.petId)
             }
-            val pets = db.petDao().loadAllByIds(activityPetsIds.toTypedArray())
+            val pets = AppDatabase.getDatabase(this@ActivityUploadService, this).petDao().loadAllByIds(activityPetsIds.toTypedArray())
 
             channel = ManagedChannelBuilder
                         .forTarget("dns:///petsontrail.eu:4443")

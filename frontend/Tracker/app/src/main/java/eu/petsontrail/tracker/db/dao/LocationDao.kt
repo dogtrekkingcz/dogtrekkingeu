@@ -15,14 +15,14 @@ interface LocationDao {
     @Query("SELECT * FROM my_locations")
     suspend fun getAll(): List<LocationDto>
 
+    @Query("SELECT * FROM my_locations")
+    fun getAllLive(): LiveData<List<LocationDto>>
+
     @Query("SELECT * FROM my_locations WHERE uid IN (:locationIds)")
     suspend fun loadAllByIds(locationIds: IntArray): List<LocationDto>
 
     @Query("SELECT * FROM my_locations WHERE id_activity LIKE :activityId")
     suspend fun findByActivityId(activityId: UUID): List<LocationDto>
-
-    @Query("SELECT * FROM my_locations WHERE id_activity LIKE :activityId")
-    fun findByActivityIdLive(activityId: UUID): LiveData<List<LocationDto>>
 
     @Insert
     suspend fun insertOne(vararg location: LocationDto)

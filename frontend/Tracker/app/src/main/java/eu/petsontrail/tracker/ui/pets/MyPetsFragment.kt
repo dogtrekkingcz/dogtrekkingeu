@@ -1,21 +1,16 @@
 package eu.petsontrail.tracker.ui.pets
 
-import activities.ActivitiesGrpc
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import eu.petsontrail.tracker.R
-import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.databinding.FragmentMyPetsBinding
 import eu.petsontrail.tracker.db.AppDatabase
-import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.dtos.MyPetDto
 import eu.petsontrail.tracker.services.AuthenticationCallCredentials
 import getmypets.GetMyPetsRequestOuterClass
@@ -28,12 +23,8 @@ class MyPetsFragment : Fragment() {
     private var _binding: FragmentMyPetsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var _db: AppDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        _db = DbHelper().InitializeDatabase(this.requireContext())
     }
 
     override fun onCreateView(
@@ -52,7 +43,7 @@ class MyPetsFragment : Fragment() {
         val myPetsLists: ArrayList<MyPetDto> = ArrayList()
 
         runBlocking {
-            val token = _db.userSettingsDao().getAccessToken()
+            val token = AppDatabase.getDatabase(requireContext(), this).userSettingsDao().getAccessToken()
 
             val channel = ManagedChannelBuilder
                 .forTarget("dns:///petsontrail.eu:4443")

@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
-import androidx.room.Room
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -31,10 +30,8 @@ import eu.petsontrail.tracker.MainActivity
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.AppDatabase
-import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.toLocationDto
 import kotlinx.coroutines.*
-import java.io.Console
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -51,7 +48,6 @@ class LocationTrackerService : Service() {
     private lateinit var notification: Notification
     private lateinit var notificationManager: NotificationManager
 
-    private lateinit var db: AppDatabase
     private var currentActivityId: UUID? = null
     private var currentActivityName: String? = null
     private var _startId by Delegates.notNull<Int>()
@@ -64,11 +60,9 @@ class LocationTrackerService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        db = DbHelper().InitializeDatabase(applicationContext)
-
         runBlocking {
-            Log.d("Position", "getting active activity...")
-            var active = db.activityDao().getActive()
+            var active = AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().getActive()
+
             currentActivityId = active?.uid
             currentActivityName = active?.name
         }
@@ -80,18 +74,11 @@ class LocationTrackerService : Service() {
                         "Position",
                         "Current LocationNN = [lat : ${location.latitude}, lng : ${location.longitude}]")
 
-                    var message = "[lat : ${location.latitude}, lng : ${location.longitude}]"
-                    notificationBuilder.setContentText(message);
-                    notificationBuilder.setContentTitle(currentActivityName)
-
-                    // this will create notification every second (or oftenly...) - the location in the tray should be anyhow computed for set distance... maybe?
-                    // notificationManager.notify(100, notificationBuilder.build())
-
                     runBlocking {
                         if (currentActivityId == null)
                             createNewActivity()
 
-                        db.locationDao().insertOne(location.toLocationDto(currentActivityId!!))
+                        AppDatabase.getDatabase(this@LocationTrackerService, this).locationDao().insertOne(location.toLocationDto(currentActivityId!!))
                     }
                 }
             }
@@ -209,7 +196,7 @@ class LocationTrackerService : Service() {
         }
         else if (action == 1003) {
             runBlocking {
-                db.activityDao().resetActiveActivities()
+                AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().resetActiveActivities()
 
                 prepareToStopService()
             }
@@ -312,7 +299,7 @@ class LocationTrackerService : Service() {
         currentActivityId = UUID.randomUUID()
 
         runBlocking {
-            db.activityDao().resetActiveActivities()
+            AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().resetActiveActivities()
 
             var newActivity = ActivityDto(
                 uid = currentActivityId!!,
@@ -324,9 +311,9 @@ class LocationTrackerService : Service() {
                 description = ""
             )
 
-            db.activityDao().insertOne(newActivity)
+            AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().insertOne(newActivity)
 
-            currentActivityId = db.activityDao().getActive()?.uid!!
+            currentActivityId = AppDatabase.getDatabase(this@LocationTrackerService, this).activityDao().getActive()?.uid!!
         }
     }
 }

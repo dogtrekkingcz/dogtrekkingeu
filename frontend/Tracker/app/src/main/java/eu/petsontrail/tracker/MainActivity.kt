@@ -1,11 +1,9 @@
 package eu.petsontrail.tracker
 
-import actions.ActionsGrpc
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,10 +13,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import androidx.annotation.RequiresApi
-import com.google.protobuf.Empty
 import eu.petsontrail.tracker.databinding.ActivityMainBinding
 import eu.petsontrail.tracker.db.AppDatabase
-import eu.petsontrail.tracker.db.DbHelper
 import eu.petsontrail.tracker.db.model.UserSettingsDto
 import eu.petsontrail.tracker.services.ActivityUploadService
 import io.grpc.ManagedChannelBuilder
@@ -29,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var db: AppDatabase
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,14 +40,15 @@ class MainActivity : AppCompatActivity() {
 //        var publicActions = actionsClient.getPublicActionsList(Empty.newBuilder().build())
 //        Log.d("public actions", publicActions.toString())
 
-        db = DbHelper().InitializeDatabase(applicationContext)
 
         runBlocking {
-            if (db.userSettingsDao().getAll().size == 0) {
+            val userSettingsDao = AppDatabase.getDatabase(this@MainActivity, this).userSettingsDao()
+            if (userSettingsDao.getAll().size == 0) {
                 val userSettings = UserSettingsDto(UUID.randomUUID(), null, null, null, null, null, "")
-                db.userSettingsDao().insertOne(userSettings)
+                userSettingsDao.insertOne(userSettings)
             }
         }
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

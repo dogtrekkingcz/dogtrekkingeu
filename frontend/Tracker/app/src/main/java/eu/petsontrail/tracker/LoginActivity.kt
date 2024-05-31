@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import eu.petsontrail.tracker.db.AppDatabase
-import eu.petsontrail.tracker.db.DbHelper
 import kotlinx.coroutines.runBlocking
 import net.openid.appauth.AuthState
 import net.openid.appauth.AuthState.AuthStateAction
@@ -22,7 +21,6 @@ import net.openid.appauth.ResponseTypeValues
 import net.openid.appauth.TokenRequest
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.Response
 
 
 class LoginActivity : AppCompatActivity() {
@@ -36,12 +34,8 @@ class LoginActivity : AppCompatActivity() {
     private var authRequiredScopes: String = "openid email profile"
     private var authRedirectUri: String = "petsontrail:/tracker"
 
-    private lateinit var db: AppDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        db = DbHelper().InitializeDatabase(this)
 
         authClientAuthentication = ClientSecretBasic(authClientSecret)
 
@@ -108,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (tokenResponse != null) {
                 runBlocking {
-                    db.userSettingsDao().updateAccessToken(tokenResponse.accessToken!!)
+                    AppDatabase.getDatabase(this@LoginActivity, this).userSettingsDao().updateAccessToken(tokenResponse.refreshToken!!)
                 }
             }
         }

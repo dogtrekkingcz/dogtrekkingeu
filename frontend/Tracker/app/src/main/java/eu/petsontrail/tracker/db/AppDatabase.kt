@@ -1,7 +1,10 @@
 package eu.petsontrail.tracker.db
+import android.content.Context
 import androidx.room.AutoMigration
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import eu.petsontrail.tracker.db.dao.ActivityDao
 import eu.petsontrail.tracker.db.dao.ActivityPetDao
 import eu.petsontrail.tracker.db.dao.LocationDao
@@ -14,6 +17,8 @@ import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.db.model.PetDto
 import eu.petsontrail.tracker.db.model.PetGroupDto
 import eu.petsontrail.tracker.db.model.UserSettingsDto
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Database(
     version = AppDatabase.LATEST_VERSION,
@@ -46,5 +51,62 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         public const val DatabaseName = "PetsOnTrail.DB.v2"
         public const val LATEST_VERSION = 1
+
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    DatabaseName
+                ).addCallback(AppDatabaseCallback(scope)).build()
+
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+
+    private class AppDatabaseCallback(
+        private val scope: CoroutineScope) : RoomDatabase.Callback() {
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+
+            INSTANCE?.let { database ->
+                scope.launch {
+                    populateDatabase(database.activityDao())
+                    populateDatabase(database.locationDao())
+                    populateDatabase(database.petGroupDao())
+                    populateDatabase(database.petDao())
+                    populateDatabase(database.activityPetsDao())
+                    populateDatabase(database.userSettingsDao())
+                }
+            }
+        }
+
+        suspend fun populateDatabase(dao: ActivityDao) {
+            // dao.deleteAll()
+        }
+        suspend fun populateDatabase(dao: LocationDao) {
+            // dao.deleteAll()
+        }
+        suspend fun populateDatabase(dao: PetGroupDao) {
+            // dao.deleteAll()
+        }
+        suspend fun populateDatabase(dao: PetDao) {
+            // dao.deleteAll()
+        }
+        suspend fun populateDatabase(dao: ActivityPetDao) {
+            // dao.deleteAll()
+        }
+        suspend fun populateDatabase(dao: UserSettingsDao) {
+            // dao.deleteAll()
+        }
     }
 }
