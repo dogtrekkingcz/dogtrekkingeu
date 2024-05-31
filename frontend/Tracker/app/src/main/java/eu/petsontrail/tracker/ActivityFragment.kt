@@ -131,6 +131,17 @@ class ActivityFragment : Fragment() {
         binding.buttonActivityStop.setOnClickListener {
             val intent = Intent(this.context, LocationTrackerService::class.java)
             this.context?.stopService(intent)
+
+            runBlocking {
+                AppDatabase.getActivityDao(requireContext(), lifecycleScope).resetActiveActivities()
+                _activityId = null
+                _locationViewModel.setActivityId(_activityId)
+
+                binding.textViewActivityName.text = ""
+                binding.textViewActivityDuration.text = ""
+                binding.textViewActivityDistance.text = ""
+                binding.textViewActivitySpeed.text = ""
+            }
         }
     }
 }
