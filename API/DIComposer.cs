@@ -32,7 +32,8 @@ namespace PetsOnTrail.Api
                 .AddLiveUpdatesSubscription(typeAdapterConfig, options)
                 .AddCheckpoints(typeAdapterConfig, options)
                 .AddActivities(typeAdapterConfig, options)
-                .AddJwtToken(typeAdapterConfig, options);
+                .AddJwtToken(typeAdapterConfig, options)
+                .AddPetTypes(typeAdapterConfig, options);
 
             services.AddScoped<IAuthorizationService, AuthorizationService>();
             

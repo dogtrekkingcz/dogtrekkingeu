@@ -4,6 +4,7 @@ option csharp_namespace = "Protos.Pets";
 
 package pets;
 
+import "google/protobuf/empty.proto";
 import "Entities/Pets/GetAllPetsRequest.proto";
 import "Entities/Pets/GetAllPetsResponse.proto";
 import "Entities/Pets/CreatePetRequest.proto";
@@ -20,6 +21,7 @@ import "Entities/Pets/GetMyPetsRequest.proto";
 import "Entities/Pets/GetMyPetsResponse.proto";
 import "Entities/Pets/AddMyPetRequest.proto";
 import "Entities/Pets/AddMyPetResponse.proto";
+import "Entities/Pets/GetPetTypesResponse.proto";
 
 service Pets {
   rpc getAllPets (getallpets.GetAllPetsRequest) returns (getallpets.GetAllPetsResponse);
@@ -30,4 +32,5 @@ service Pets {
   rpc updatePet (updatepet.UpdatePetRequest) returns (updatepet.UpdatePetResponse);
   rpc getMyPets (getmypets.GetMyPetsRequest) returns (getmypets.GetMyPetsResponse);
   rpc addMyPet (addmypet.AddMyPetRequest) returns (addmypet.AddMyPetResponse);
+  rpc getPetTypes (google.protobuf.Empty) returns (getpettypes.GetPetTypesResponse);
 }

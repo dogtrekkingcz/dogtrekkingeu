@@ -199,6 +199,12 @@
         <CompileOutputs>True</CompileOutputs>
         <Generator>MSBuild:Compile</Generator>
       </Protobuf>
+      <Protobuf Include="Entities\Pets\GetPetTypesResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
       <Protobuf Include="Entities\Pets\GetPetResponse.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -700,6 +706,7 @@
       <None Remove="Entities\Pets\AddMyPetResponse.proto" />
       <None Remove="Entities\Pets\GetMyPetsRequest.proto" />
       <None Remove="Entities\Pets\GetMyPetsResponse.proto" />
+      <None Remove="Entities\Pets\GetPetTypesResponse.proto" />
       <None Remove="Entities\RaceDetail.proto" />
       <None Remove="Entities\Racer.proto" />
       <None Remove="Entities\RaceSimple.proto" />

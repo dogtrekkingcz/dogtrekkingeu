@@ -71,4 +71,8 @@
     <string name="Synchronize">Synchronize</string>
     <string name="add_my_pet">Add My Pet</string>
     <string name="pet_chip">Chip Number</string>
+    <string name="pet_type">Pet Type</string>
+    <string name="pet_pedigree">Pedigree</string>
+    <string name="pet_kennel">Kennel</string>
+    <string name="pet_birthday">Birthday</string>
 </resources>

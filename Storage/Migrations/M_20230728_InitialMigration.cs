@@ -269,6 +269,30 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 Description = "Rabies"
             }, CancellationToken.None))
 
+            .AddUpAction(() =>PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
+            {
+                Id = Constants.PetType.Dog,
+                UserId = _userIdAdmin,
+                Name = "Dog",
+                Description = "Dog"
+            }, CancellationToken.None))
+
+            .AddUpAction(() =>PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
+            {
+                Id = Constants.PetType.Cat,
+                UserId = _userIdAdmin,
+                Name = "Cat",
+                Description = "Cat"
+            }, CancellationToken.None))
+
+            .AddUpAction(() =>PetTypeRepositoryService.AddAsync(new Entities.PetTypes.AddPetTypeInternalStorageRequest
+            {
+                Id = Constants.PetType.Horse,
+                UserId = _userIdAdmin,
+                Name = "Horse",
+                Description = "Horse"
+            }, CancellationToken.None))
+
             // ------------------------------------------------------------------------------------------------------------
 
             .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdRadekKotesovec }, CancellationToken.None))
@@ -289,6 +313,9 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Flyball, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DiscDog, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DogHiking, CancellationToken.None))
-            .AddDownAction(() => VaccinationTypeRepositoryService.DeleteAsync(Constants.VaccinationType.Rabies, CancellationToken.None));
+            .AddDownAction(() => VaccinationTypeRepositoryService.DeleteAsync(Constants.VaccinationType.Rabies, CancellationToken.None))
+            .AddDownAction(() => PetTypeRepositoryService.DeleteAsync(Constants.PetType.Dog, CancellationToken.None))
+            .AddDownAction(() => PetTypeRepositoryService.DeleteAsync(Constants.PetType.Cat, CancellationToken.None))
+            .AddDownAction(() => PetTypeRepositoryService.DeleteAsync(Constants.PetType.Horse, CancellationToken.None));
     }
 }

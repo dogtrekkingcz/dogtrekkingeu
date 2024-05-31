@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Pets.GetPetTypes";
+
+package getpettypes;
+
+message GetPetTypesResponse {
+  repeated PetTypeDto PetTypes = 1;
+}
+
+message PetTypeDto {
+
+}

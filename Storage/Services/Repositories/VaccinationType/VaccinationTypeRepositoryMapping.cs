@@ -1,9 +1,8 @@
-﻿using Amazon.Auth.AccessControlPolicy;
-using Mapster;
+﻿using Mapster;
 using Storage.Entities.VaccinationTypes;
 using Storage.Models;
 
-namespace Storage.Services.Repositories.UserProfiles;
+namespace Storage.Services.Repositories.VaccinationType;
 
 internal static class VaccinationTypeRepositoryMapping
 {

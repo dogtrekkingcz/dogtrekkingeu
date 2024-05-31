@@ -5,7 +5,7 @@ using Storage.Extensions;
 using Storage.Interfaces;
 using Storage.Models;
 
-namespace Storage.Services.Repositories.Actions;
+namespace Storage.Services.Repositories.VaccinationType;
 
 internal class VaccinationTypeRepositoryService : IVaccinationTypeRepositoryService
 {

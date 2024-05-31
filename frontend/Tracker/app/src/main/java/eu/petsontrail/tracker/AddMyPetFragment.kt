@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.type.DateTime
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.databinding.FragmentAddMyPetBinding
 import eu.petsontrail.tracker.databinding.FragmentCreateActivityBinding
@@ -21,11 +23,15 @@ import getmypets.GetMyPetsRequestOuterClass
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
 import pets.PetsGrpc
+import java.time.Instant
+import java.util.Calendar
+import java.util.TimeZone
 import java.util.UUID
 
 class AddMyPetFragment : Fragment() {
     private var _binding: FragmentAddMyPetBinding? = null
     private val binding get() = _binding!!
+    private var _petBirthday: DateTime? = null
 
     private lateinit var _db: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +52,34 @@ class AddMyPetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.editTextPetBirthday.setOnClickListener {
+            val datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Select date")
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+
+            datePicker.addOnPositiveButtonClickListener {
+                val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+                calendar.timeInMillis = it
+
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH) + 1
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+                _petBirthday = DateTime.newBuilder()
+                                        .setYear(year)
+                                        .setMonth(month)
+                                        .setDay(day)
+                                        .build()
+
+
+                binding.editTextPetBirthday.setText("$year-$month-$day")
+            }
+
+            datePicker.show(parentFragmentManager, "datePicker")
+        }
+
         binding.addMyPet.setOnClickListener {
             runBlocking {
                 val token = _db.userSettingsDao().getAccessToken()
@@ -63,6 +97,9 @@ class AddMyPetFragment : Fragment() {
                         .setId(UUID.randomUUID().toString())
                         .setName(binding.editTextPetName.text.toString())
                         .setChip(binding.editTextPetChip.text.toString())
+                        .setPedigree(binding.editTextPetPedigree.text.toString())
+                        .setKennel(binding.editTextPetKennel.text.toString())
+                        .setBirthday(_petBirthday)
                         .setPetType(UUID.randomUUID().toString()) // TODO: get from backend
                         .build()
                 )

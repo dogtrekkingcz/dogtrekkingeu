@@ -18,6 +18,8 @@ using Storage.Services.Repositories.Pets;
 using Storage.Services.Repositories.Entries;
 using Storage.Services.Repositories.Migrations;
 using Storage.Services.Repositories.UserProfiles;
+using Storage.Services.Repositories.VaccinationType;
+using Storage.Services.Repositories.PetType;
 
 namespace Storage;
 
@@ -90,6 +92,9 @@ public static class DiCompositor
 
             .AddSingleton<IStorageService<VaccinationTypeRecord>, StorageService<VaccinationTypeRecord>>()
             .AddScoped<IVaccinationTypeRepositoryService, VaccinationTypeRepositoryService>()
+
+            .AddSingleton<IStorageService<PetTypeRecord>, StorageService<PetTypeRecord>>()
+            .AddScoped<IPetTypeRepositoryService, PetTypeRepositoryService>()
             
             .AddScoped<IMigrationsService, MigrationsService>();
         
@@ -114,7 +119,8 @@ public static class DiCompositor
             .AddMigrationsRepositoryMapping()
             .AddAuthorizationRolesRepositoryMapping()
             .AddActivityTypeRepositoryMapping()
-            .AddVaccinationTypeRepositoryMapping();
+            .AddVaccinationTypeRepositoryMapping()
+            .AddPetTypeRepositoryMapping();
 
         BsonClassMap.RegisterClassMap<ActionRecord>();
         BsonClassMap.RegisterClassMap<UserProfileRecord>();
@@ -127,6 +133,7 @@ public static class DiCompositor
         BsonClassMap.RegisterClassMap<MigrationRecord>();
         BsonClassMap.RegisterClassMap<ActivityTypeRecord>();
         BsonClassMap.RegisterClassMap<VaccinationTypeRecord>();
+        BsonClassMap.RegisterClassMap<PetTypeRecord>();
 
         var client = new MongoClient(options.MongoDbConnectionString);
 
@@ -178,6 +185,10 @@ public static class DiCompositor
         {
             db.CreateCollection("VaccinationTypes");
         }
+        if (listOfCollections.Contains("PetTypes") == false)
+        {
+            db.CreateCollection("PetTypes");
+        }
 
         Console.WriteLine($"MongoDb.PetsOnTrail.Collections with initialized collections: {db.ListCollectionNames()}");
         
@@ -192,6 +203,7 @@ public static class DiCompositor
         serviceProvider.AddSingleton<IMongoCollection<MigrationRecord>>(db.GetCollection<MigrationRecord>("Migrations"));
         serviceProvider.AddSingleton<IMongoCollection<ActivityTypeRecord>>(db.GetCollection<ActivityTypeRecord>("ActivityTypes"));
         serviceProvider.AddSingleton<IMongoCollection<VaccinationTypeRecord>>(db.GetCollection<VaccinationTypeRecord>("VaccinationTypes"));
+        serviceProvider.AddSingleton<IMongoCollection<PetTypeRecord>>(db.GetCollection<PetTypeRecord>("PetTypes"));
 
         return serviceProvider;
     }   
