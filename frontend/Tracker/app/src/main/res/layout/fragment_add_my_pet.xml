@@ -54,7 +54,8 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/editTextPetType"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:completionThreshold="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

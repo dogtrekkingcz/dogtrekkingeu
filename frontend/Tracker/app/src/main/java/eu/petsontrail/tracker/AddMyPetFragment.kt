@@ -36,6 +36,7 @@ class AddMyPetFragment : Fragment() {
     private var _binding: FragmentAddMyPetBinding? = null
     private val binding get() = _binding!!
     private var _petBirthday: DateTime? = null
+    var _petTypeList: ArrayList<PetTypeDto> = ArrayList()
 
     private lateinit var _db: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,13 +73,12 @@ class AddMyPetFragment : Fragment() {
                     .build()
             )
 
-            val petTypeList: ArrayList<PetTypeDto> = ArrayList()
             for (petType in petTypes.petTypesList) {
-                petTypeList.add(PetTypeDto(UUID.fromString(petType.id), petType.name, petType.description))
+                _petTypeList.add(PetTypeDto(UUID.fromString(petType.id), petType.name, petType.description))
             }
 
-            val adapter = PetTypesAdapter(requireContext(), petTypeList)
-            //binding.editTextPetType.setAdapter(adapter)
+            val adapter = PetTypesAdapter(requireContext(), _petTypeList)
+            binding.editTextPetType.setAdapter(adapter)
         }
 
         binding.editTextPetBirthday.setOnClickListener {
@@ -129,7 +129,7 @@ class AddMyPetFragment : Fragment() {
                         .setPedigree(binding.editTextPetPedigree.text.toString())
                         .setKennel(binding.editTextPetKennel.text.toString())
                         .setBirthday(_petBirthday)
-                        .setPetType(UUID.randomUUID().toString()) // TODO: get from backend
+                        .setPetType(_petTypeList[binding.textPetType.id].id.toString())
                         .build()
                 )
             }
