@@ -1,6 +1,7 @@
 package eu.petsontrail.tracker.db.dao
 
 import android.location.Location
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -18,7 +19,7 @@ interface LocationDao {
     suspend fun loadAllByIds(locationIds: IntArray): List<LocationDto>
 
     @Query("SELECT * FROM my_locations WHERE id_activity LIKE :activityId")
-    suspend fun findByActivityId(activityId: UUID): List<LocationDto>
+    suspend fun findByActivityId(activityId: UUID): LiveData<List<LocationDto>>
 
     @Insert
     suspend fun insertOne(vararg location: LocationDto)

@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
         <ImageButton
             android:id="@+id/buttonCreateNewActivity"
@@ -17,6 +18,47 @@
             android:src="@mipmap/ic_pets_with_plus"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewActivityName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/activity_name"
+            android:hint="@string/activity_name"
+            android:padding="10dp">
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewActivitySpeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textViewActivityName"
+            android:text="@string/zero_km_h"
+            android:hint="@string/current_speed_label"
+            android:padding="10dp">
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewActivityDistance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textViewActivitySpeed"
+            android:text="@string/activity_distance"
+            android:hint="@string/activity_distance_label"
+            android:padding="10dp">
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewActivityDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textViewActivityDistance"
+            android:text="@string/activity_duration"
+            android:hint="@string/activity_duration_label"
+            android:padding="10dp">
+        </com.google.android.material.textview.MaterialTextView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

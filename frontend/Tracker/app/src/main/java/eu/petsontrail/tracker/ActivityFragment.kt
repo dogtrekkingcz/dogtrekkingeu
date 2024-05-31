@@ -1,31 +1,34 @@
 package eu.petsontrail.tracker
 
 import android.Manifest
+import android.R
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import eu.petsontrail.tracker.databinding.FragmentActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.DbHelper
-import eu.petsontrail.tracker.services.ActivityUploadService
+import eu.petsontrail.tracker.db.model.ActivityDto
+import eu.petsontrail.tracker.db.model.LocationDto
+import eu.petsontrail.tracker.helpers.DistanceHelper
 import eu.petsontrail.tracker.services.LocationTrackerService
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.runBlocking
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 import java.util.UUID
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,12 +44,48 @@ class ActivityFragment : Fragment() {
     private var _binding: FragmentActivityBinding? = null
     private val binding get() = _binding!!
 
+    private val model: ActivityViewModel by viewModels()
+
     private lateinit var _db: AppDatabase
 
     private val REQUEST_PERMISSION_LOCATIONS = 1;
+    private var _activityId: UUID? = null
+    private var _duration = 0.0
+
+    var _observerActivityRunning: Observer<List<LocationDto>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        runBlocking {
+            val observerActivityGeneral = Observer<ActivityDto?> {
+                if (it != null) {
+                    binding.textViewActivityName.text = it.name
+
+                    if (it.start != null) {
+                        val now = System.currentTimeMillis()
+                        _duration = (now - it.start)/1000 as Double
+                    }
+
+                    binding.textViewActivityDuration.text = _duration.toString()
+                }
+            }
+
+            _observerActivityRunning = Observer<List<LocationDto>> {
+                var distance = 0.0
+                var speed = 0.0
+
+                if (it.size > 1) {
+                    distance = DistanceHelper().GetDistanceInMeters(it)
+                    speed = distance / _duration * 3600
+                }
+
+                binding.textViewActivityDistance.text = distance.toString()
+                binding.textViewActivitySpeed.text = speed.toString()
+            }
+
+            _db.activityDao().getActive().observe(viewLifecycleOwner, observerActivityGeneral)
+        }
     }
 
     override fun onCreateView(
@@ -97,6 +136,12 @@ class ActivityFragment : Fragment() {
 
             val intent = Intent(this.context, LocationTrackerService::class.java)
             this.context?.startForegroundService(intent)
+
+            if (_activityId != null && _observerActivityRunning != null) {
+                runBlocking {
+                    _db.locationDao().findByActivityId(_activityId!!).observe(viewLifecycleOwner, _observerActivityRunning!!)
+                }
+            }
         }
 
         binding.buttonActivityStop.setOnClickListener {

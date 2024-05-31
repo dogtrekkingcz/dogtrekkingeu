@@ -75,4 +75,10 @@
     <string name="pet_pedigree">Pedigree</string>
     <string name="pet_kennel">Kennel</string>
     <string name="pet_birthday">Birthday</string>
+    <string name="zero_km_h">0km/h</string>
+    <string name="activity_distance">0.0km</string>
+    <string name="activity_duration">0:00:00</string>
+    <string name="activity_distance_label">Distance</string>
+    <string name="current_speed_label">Speed</string>
+    <string name="activity_duration_label">Duration</string>
 </resources>

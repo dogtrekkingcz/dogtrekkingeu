@@ -1,5 +1,6 @@
 package eu.petsontrail.tracker.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -12,7 +13,7 @@ interface ActivityDao {
     suspend fun getAll(): List<ActivityDto>
 
     @Query("SELECT * FROM my_activities WHERE active=1 LIMIT 1")
-    suspend fun getActive(): ActivityDto?
+    suspend fun getActive(): LiveData<ActivityDto?>
 
     @Query("SELECT * FROM my_activities WHERE uid IN (:activityIds)")
     suspend fun loadAllByIds(activityIds: IntArray): List<ActivityDto>
