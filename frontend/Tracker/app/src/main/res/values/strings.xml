@@ -81,4 +81,5 @@
     <string name="activity_distance_label">Distance</string>
     <string name="current_speed_label">Speed</string>
     <string name="activity_duration_label">Duration</string>
+    <string name="activity_type">Type of Activity</string>
 </resources>

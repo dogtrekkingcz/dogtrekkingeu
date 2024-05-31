@@ -48,8 +48,7 @@ class CreateActivityFragment : Fragment() {
 
         val arrayAdapter: ArrayAdapter<*>
         val myPets = arrayOf(
-            "Virat Kohli", "Rohit Sharma", "Steve Smith",
-            "Kane Williamson", "Ross Taylor"
+            "Virat Kohli", "Rohit Sharma"
         )
 
         // access the listView from xml file
@@ -95,6 +94,12 @@ class CreateActivityFragment : Fragment() {
 
                 _db.activityDao().insertOne(newActivity)
             }
+
+            findNavController().navigate(R.id.action_createActivityFragment_to_activityFragment)
+        }
+
+        binding.buttonActivityCancel.setOnClickListener {
+            findNavController().navigate(R.id.action_createActivityFragment_to_activityFragment)
         }
     }
 }
