@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,9 @@ import eu.petsontrail.tracker.viewmodels.ActivityViewModel
 import eu.petsontrail.tracker.viewmodels.LocationViewModel
 import kotlinx.coroutines.invoke
 import kotlinx.coroutines.runBlocking
+import java.lang.StringBuilder
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.UUID
 
 class ActivityFragment : Fragment() {
@@ -35,7 +39,7 @@ class ActivityFragment : Fragment() {
 
     private val REQUEST_PERMISSION_LOCATIONS = 1;
     private var _activityId: UUID? = null
-    private var _duration = 0.0
+    private var _duration = 0L
 
     private lateinit var _locationViewModel: LocationViewModel
     private lateinit var _activityViewModel: ActivityViewModel
@@ -72,11 +76,12 @@ class ActivityFragment : Fragment() {
                 binding.textViewActivityName.text = activity.name
 
                 if (activity.start != null) {
-                    val now = System.currentTimeMillis()
-                    _duration = (now - activity.start)/ 1000.toDouble()
+                    val now = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
+                    _duration = now - activity.start
                 }
 
-                binding.textViewActivityDuration.text = _duration.toString()
+                val timeString = DateUtils.formatElapsedTime(StringBuilder(""), _duration)
+                binding.textViewActivityDuration.text = timeString
             }
         })
 
