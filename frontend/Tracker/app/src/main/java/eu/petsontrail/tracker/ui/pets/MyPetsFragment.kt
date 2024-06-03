@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.databinding.FragmentMyPetsBinding
@@ -63,6 +65,10 @@ class MyPetsFragment : Fragment() {
         val adapter = MyPetsAdapter(this.requireContext(), myPetsLists)
 
         binding.mypetslist.adapter = adapter
+        binding.mypetslist.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            val pet = parent.getItemAtPosition(position) as MyPetDto
+            findNavController().navigate(R.id.action_myPetsFragment_to_createActivityFragment, bundleOf("addPetId" to pet.id.toString()))
+        }
 
         binding.buttonAddPet.setOnClickListener {
             findNavController().navigate(R.id.action_myPetsFragment_to_addMyPetFragment)

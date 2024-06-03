@@ -35,8 +35,6 @@ class ActivityFragment : Fragment() {
     private var _binding: FragmentActivityBinding? = null
     private val binding get() = _binding!!
 
-    private val model: ActivityViewModel by viewModels()
-
     private val REQUEST_PERMISSION_LOCATIONS = 1;
     private var _activityId: UUID? = null
     private var _duration = 0L
@@ -48,6 +46,7 @@ class ActivityFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,8 +61,8 @@ class ActivityFragment : Fragment() {
             var speed = 0.0
 
             if (locations.size > 1) {
-                distance = DistanceHelper().GetDistanceInMeters(locations)
-                speed = distance / _duration * 3600
+                distance = DistanceHelper().GetDistanceInMeters(locations) / 1000
+                speed = distance / _duration * 3600 / 1000
             }
 
             binding.textViewActivityDistance.text = distance.toString()
@@ -77,13 +76,40 @@ class ActivityFragment : Fragment() {
 
                 if (activity.start != null) {
                     val now = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
-                    _duration = now - activity.start
+                    _duration = now - activity.start!!
                 }
 
                 val timeString = DateUtils.formatElapsedTime(StringBuilder(""), _duration)
                 binding.textViewActivityDuration.text = timeString
             }
         })
+
+        if (ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.FOREGROUND_SERVICE) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.FOREGROUND_SERVICE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.d("permission", "no permission for locations is configured")
+
+            val requestedPermissions = arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                Manifest.permission.FOREGROUND_SERVICE,
+                Manifest.permission.FOREGROUND_SERVICE_LOCATION,
+                Manifest.permission.INTERNET,
+                Manifest.permission.POST_NOTIFICATIONS,
+                Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC)
+
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                requestedPermissions,
+                REQUEST_PERMISSION_LOCATIONS)
+        }
 
         return binding.root
     }
@@ -97,40 +123,19 @@ class ActivityFragment : Fragment() {
         }
 
         binding.buttonActivityStart.setOnClickListener {
-            if (ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.FOREGROUND_SERVICE) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.FOREGROUND_SERVICE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this.requireContext(), Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC) != PackageManager.PERMISSION_GRANTED
-            ) {
-                Log.d("permission", "no permission for locations is configured")
+            runBlocking {
+                _activityId = AppDatabase.getDatabase(requireContext(), lifecycleScope).activityDao().getActive()?.uid
+                _locationViewModel.setActivityId(_activityId)
 
-                val requestedPermissions = arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                    Manifest.permission.FOREGROUND_SERVICE,
-                    Manifest.permission.FOREGROUND_SERVICE_LOCATION,
-                    Manifest.permission.INTERNET,
-                    Manifest.permission.POST_NOTIFICATIONS,
-                    Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC)
-
-                ActivityCompat.requestPermissions(
-                    this.requireActivity(),
-                    requestedPermissions,
-                    REQUEST_PERMISSION_LOCATIONS)
+                val activity = AppDatabase.getDatabase(requireContext(), lifecycleScope).activityDao().getActive()
+                if (activity != null) {
+                    activity.start = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
+                    AppDatabase.getDatabase(requireContext(), lifecycleScope).activityDao().update(activity)
+                }
             }
 
             val intent = Intent(this.context, LocationTrackerService::class.java)
             this.context?.startForegroundService(intent)
-
-            runBlocking {
-                _activityId = AppDatabase.getDatabase(requireContext(), lifecycleScope).activityDao().getActive()?.uid
-                _locationViewModel.setActivityId(_activityId)
-            }
         }
 
         binding.buttonActivityStop.setOnClickListener {

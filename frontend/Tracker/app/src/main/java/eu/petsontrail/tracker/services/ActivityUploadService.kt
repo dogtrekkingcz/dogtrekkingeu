@@ -286,7 +286,7 @@ class ActivityUploadService : Service() {
         var activityEnd: LocalDateTime = LocalDateTime.now().plusYears(1)
         val zoneId = ZoneId.systemDefault()
         if (activity.start != null) {
-            val instant = Instant.ofEpochSecond(activity.start)
+            val instant = Instant.ofEpochSecond(activity.start!!)
 
             activityStart = instant.atZone(zoneId).toLocalDateTime()
         }

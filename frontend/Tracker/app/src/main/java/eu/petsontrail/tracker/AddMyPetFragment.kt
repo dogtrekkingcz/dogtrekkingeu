@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.annotation.RequiresApi
+import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.protobuf.Empty
@@ -29,6 +31,7 @@ class AddMyPetFragment : Fragment() {
     private val binding get() = _binding!!
     private var _petBirthday: DateTime? = null
     var _petTypeList: ArrayList<PetTypeDto> = ArrayList()
+    var _selectedPetType: PetTypeDto? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +72,10 @@ class AddMyPetFragment : Fragment() {
 
             val adapter = PetTypesAdapter(requireContext(), _petTypeList)
             binding.editTextPetType.setAdapter(adapter)
+
+            binding.editTextPetType.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+                _selectedPetType = parent.getItemAtPosition(position) as PetTypeDto
+            }
         }
 
         binding.editTextPetBirthday.setOnClickListener {
@@ -109,17 +116,29 @@ class AddMyPetFragment : Fragment() {
                     .newBlockingStub(channel)
                     .withCallCredentials(AuthenticationCallCredentials(token))
 
-                client.addMyPet(
-                    AddMyPetRequestOuterClass.AddMyPetRequest.newBuilder()
-                        .setId(UUID.randomUUID().toString())
-                        .setName(binding.editTextPetName.text.toString())
-                        .setChip(binding.editTextPetChip.text.toString())
-                        .setPedigree(binding.editTextPetPedigree.text.toString())
-                        .setKennel(binding.editTextPetKennel.text.toString())
-                        .setBirthday(_petBirthday)
-                        .setPetType(_petTypeList[binding.textPetType.id].id.toString())
-                        .build()
-                )
+                var request = AddMyPetRequestOuterClass.AddMyPetRequest.newBuilder()
+                    .setId(UUID.randomUUID().toString())
+
+                if (_selectedPetType != null) {
+                    request.setPetType(_selectedPetType?.id.toString())
+                }
+                if (_petBirthday != null) {
+                    request.setBirthday(_petBirthday)
+                }
+                if (binding.editTextPetName.text.toString().isNotEmpty()) {
+                    request.setName(binding.editTextPetName.text.toString())
+                }
+                if (binding.editTextPetChip.text.toString().isNotEmpty()) {
+                    request.setChip(binding.editTextPetChip.text.toString())
+                }
+                if (binding.editTextPetPedigree.text.toString().isNotEmpty()) {
+                    request.setPedigree(binding.editTextPetPedigree.text.toString())
+                }
+                if (binding.editTextPetKennel.text.toString().isNotEmpty()) {
+                    request.setKennel(binding.editTextPetKennel.text.toString())
+                }
+
+                client.addMyPet(request.build())
             }
 
             findNavController().navigate(R.id.action_addMyPetFragment_to_myPetsFragment)

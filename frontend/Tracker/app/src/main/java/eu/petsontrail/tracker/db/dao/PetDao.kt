@@ -5,10 +5,8 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import eu.petsontrail.tracker.db.model.ActivityDto
-import eu.petsontrail.tracker.db.model.LocationDto
+import androidx.room.Update
 import eu.petsontrail.tracker.db.model.PetDto
-import eu.petsontrail.tracker.db.model.PetGroupDto
 import java.util.UUID
 
 @Dao
@@ -21,6 +19,9 @@ interface PetDao {
 
     @Insert
     suspend fun insertOne(vararg pet: PetDto)
+
+    @Update(PetDto::class)
+    suspend fun update(obj: PetDto)
 
     @Delete
     suspend fun delete(pet: PetDto)

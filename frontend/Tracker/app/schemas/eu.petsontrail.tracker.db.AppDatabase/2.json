@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "04c1865ceefbeffc6745f82f381d5ee7",
+    "identityHash": "ed9ee069edfd0315ee36bbddb000f525",
     "entities": [
       {
         "tableName": "my_activities",
@@ -373,12 +373,236 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "preparing_activity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` BLOB NOT NULL, `name` TEXT, `description` TEXT, `type` BLOB, `action_id` BLOB, `pet01` BLOB, `pet02` BLOB, `pet03` BLOB, `pet04` BLOB, `pet05` BLOB, `pet06` BLOB, `pet07` BLOB, `pet08` BLOB, `pet09` BLOB, `pet10` BLOB, `pet11` BLOB, `pet12` BLOB, `pet13` BLOB, `pet14` BLOB, `pet15` BLOB, `pet16` BLOB, `pet17` BLOB, `pet18` BLOB, `pet19` BLOB, `pet20` BLOB, `pet21` BLOB, `pet22` BLOB, `pet23` BLOB, `pet24` BLOB, `pet25` BLOB, `pet26` BLOB, `pet27` BLOB, `pet28` BLOB, `pet29` BLOB, `pet30` BLOB, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "BLOB",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "actionId",
+            "columnName": "action_id",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_01",
+            "columnName": "pet01",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_02",
+            "columnName": "pet02",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_03",
+            "columnName": "pet03",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_04",
+            "columnName": "pet04",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_05",
+            "columnName": "pet05",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_06",
+            "columnName": "pet06",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_07",
+            "columnName": "pet07",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_08",
+            "columnName": "pet08",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_09",
+            "columnName": "pet09",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_10",
+            "columnName": "pet10",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_11",
+            "columnName": "pet11",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_12",
+            "columnName": "pet12",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_13",
+            "columnName": "pet13",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_14",
+            "columnName": "pet14",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_15",
+            "columnName": "pet15",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_16",
+            "columnName": "pet16",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_17",
+            "columnName": "pet17",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_18",
+            "columnName": "pet18",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_19",
+            "columnName": "pet19",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_20",
+            "columnName": "pet20",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_21",
+            "columnName": "pet21",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_22",
+            "columnName": "pet22",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_23",
+            "columnName": "pet23",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_24",
+            "columnName": "pet24",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_25",
+            "columnName": "pet25",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_26",
+            "columnName": "pet26",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_27",
+            "columnName": "pet27",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_28",
+            "columnName": "pet28",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_29",
+            "columnName": "pet29",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet_30",
+            "columnName": "pet30",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "uid"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '04c1865ceefbeffc6745f82f381d5ee7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ed9ee069edfd0315ee36bbddb000f525')"
     ]
   }
 }

@@ -36,6 +36,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createActivity_DescriptionOfActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/activity_description" />
@@ -52,7 +53,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/editTextActivityType"
+                android:id="@+id/createActivity_TypeOfActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:completionThreshold="1" />

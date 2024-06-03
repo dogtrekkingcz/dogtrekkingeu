@@ -17,7 +17,7 @@ class MyPetsAdapter(private val context: Context, private val arrayList: java.ut
         return arrayList.size
     }
     override fun getItem(position: Int): Any {
-        return position
+        return arrayList[position]
     }
     override fun getItemId(position: Int): Long {
         return position.toLong()

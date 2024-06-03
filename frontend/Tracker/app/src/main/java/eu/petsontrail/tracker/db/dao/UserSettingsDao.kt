@@ -5,12 +5,8 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import eu.petsontrail.tracker.db.model.ActivityDto
-import eu.petsontrail.tracker.db.model.LocationDto
-import eu.petsontrail.tracker.db.model.PetDto
-import eu.petsontrail.tracker.db.model.PetGroupDto
+import androidx.room.Update
 import eu.petsontrail.tracker.db.model.UserSettingsDto
-import java.util.UUID
 
 @Dao
 interface UserSettingsDao {
@@ -25,6 +21,9 @@ interface UserSettingsDao {
 
     @Insert
     suspend fun insertOne(vararg userSettings: UserSettingsDto)
+
+    @Update(UserSettingsDto::class)
+    suspend fun update(obj: UserSettingsDto)
 
     @Delete
     suspend fun delete(userSettings: UserSettingsDto)

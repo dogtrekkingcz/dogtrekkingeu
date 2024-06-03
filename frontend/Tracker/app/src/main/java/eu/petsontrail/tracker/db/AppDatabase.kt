@@ -11,12 +11,14 @@ import eu.petsontrail.tracker.db.dao.ActivityPetDao
 import eu.petsontrail.tracker.db.dao.LocationDao
 import eu.petsontrail.tracker.db.dao.PetGroupDao
 import eu.petsontrail.tracker.db.dao.PetDao
+import eu.petsontrail.tracker.db.dao.PreparingActivityDao
 import eu.petsontrail.tracker.db.dao.UserSettingsDao
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.ActivityPetsDto
 import eu.petsontrail.tracker.db.model.LocationDto
 import eu.petsontrail.tracker.db.model.PetDto
 import eu.petsontrail.tracker.db.model.PetGroupDto
+import eu.petsontrail.tracker.db.model.PreparingActivityDto
 import eu.petsontrail.tracker.db.model.UserSettingsDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -29,13 +31,16 @@ import kotlinx.coroutines.launch
         PetGroupDto::class,
         PetDto::class,
         ActivityPetsDto::class,
-        UserSettingsDto::class
+        UserSettingsDto::class,
+        PreparingActivityDto::class
     ],
     autoMigrations = [
-        // AutoMigration ( from = 1, to = 2 )
+        AutoMigration ( from = 1, to = 2 )
     ],
     exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun preparingActivityDao(): PreparingActivityDao
 
     abstract fun activityDao(): ActivityDao
 
@@ -51,7 +56,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         public const val DatabaseName = "PetsOnTrail.DB.v2"
-        public const val LATEST_VERSION = 1
+        public const val LATEST_VERSION = 2
         private var _activity: ActivityDao? = null
         private var _location: LocationDao? = null
 
@@ -111,6 +116,7 @@ abstract class AppDatabase : RoomDatabase() {
                     populateDatabase(database.petDao())
                     populateDatabase(database.activityPetsDao())
                     populateDatabase(database.userSettingsDao())
+                    populateDatabase(database.preparingActivityDao())
                 }
             }
         }
@@ -131,6 +137,9 @@ abstract class AppDatabase : RoomDatabase() {
             // dao.deleteAll()
         }
         suspend fun populateDatabase(dao: UserSettingsDao) {
+            // dao.deleteAll()
+        }
+        suspend fun populateDatabase(dao: PreparingActivityDao) {
             // dao.deleteAll()
         }
     }

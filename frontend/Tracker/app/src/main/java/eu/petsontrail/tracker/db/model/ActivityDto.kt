@@ -16,6 +16,6 @@ data class ActivityDto(
     @ColumnInfo(name = "synchronize", defaultValue = "true") val synchronize: Boolean = true,
     @ColumnInfo(name = "synchronize_every_n_secs", defaultValue = "60") val synchronizeEveryNSecs: Int = 60,
     @ColumnInfo(name = "is_synchronized", defaultValue = "false") val isSynchronized: Boolean = false,
-    @ColumnInfo(name = "start") val start: Long?,
+    @ColumnInfo(name = "start") var start: Long?,
     @ColumnInfo(name = "end") val end: Long?
 )

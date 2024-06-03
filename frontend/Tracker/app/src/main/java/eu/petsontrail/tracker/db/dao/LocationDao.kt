@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.LocationDto
 import java.util.UUID
@@ -32,6 +33,9 @@ interface LocationDao {
 
     @Insert
     suspend fun insertOne(vararg location: LocationDto)
+
+    @Update(LocationDto::class)
+    suspend fun update(obj: LocationDto)
 
     @Delete
     suspend fun delete(location: LocationDto)
