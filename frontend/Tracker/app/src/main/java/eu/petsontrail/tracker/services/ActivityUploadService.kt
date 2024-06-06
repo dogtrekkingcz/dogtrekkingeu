@@ -177,19 +177,6 @@ class ActivityUploadService : Service() {
             channel = ManagedChannelBuilder
                         .forTarget("dns:///petsontrail.eu:4443")
                         .build()
-            var state = channel.getState(true)
-
-            Log.d("Service status", state.toString())
-/*
-            var actionsClient = ActionsGrpc
-                .newBlockingStub(channel)
-                .withCallCredentials(AuthenticationCallCredentials(token))
-
-            var publicActions = actionsClient.getPublicActionsList(Empty.newBuilder().build())
-            Log.d("public actions", publicActions.toString())
-            */
-
-
             var client = ActivitiesGrpc
                 .newBlockingStub(channel)
                 .withCallCredentials(AuthenticationCallCredentials(token))
@@ -200,8 +187,6 @@ class ActivityUploadService : Service() {
                 .setRaceId(Constants.UUID_EMPTY)
                 .setCategoryId(Constants.UUID_EMPTY)
                 .setIsPublic(true)
-                .setStart(activity.start?.let { Timestamp.newBuilder().setSeconds(it) })
-                .setEnd(activity.end?.let { Timestamp.newBuilder().setSeconds(it) })
                 .setDescription(activity.description)
                 .setName(activity.name)
                 .setType(activity.type.toString())
@@ -240,83 +225,18 @@ class ActivityUploadService : Service() {
                     }
                 })
 
+                if (activity.start != null) {
+                    requestBuilder?.setStart(Timestamp.newBuilder().setSeconds(activity.start!!))
+                }
+
+                if (activity.end != null) {
+                    requestBuilder?.setEnd(Timestamp.newBuilder().setSeconds(activity.end!!))
+                }
+
             var request = requestBuilder?.build()
             runBlocking {
                 var response = client.createActivity(request)
             }
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun MapActivity(activity: ActivityDto, pets: List<PetDto>, positions: List<LocationDto>) : CreateOrUpdateActivityDto {
-        val activityPets = ArrayList<CreateOrUpdateActivityPetDto>()
-        val activityPositions = ArrayList<CreateOrUpdateActivityPositionDto>()
-
-        for (pet in pets) {
-            var petBirthDate: LocalDateTime? = null
-            if (pet.birthday != null) {
-                val instant = Instant.ofEpochSecond(pet.birthday)
-
-                val zoneId = ZoneId.systemDefault()
-
-                petBirthDate = instant.atZone(zoneId).toLocalDateTime()
-            }
-
-            activityPets.add(CreateOrUpdateActivityPetDto(
-                id = pet.uid,
-                chip = pet.chip,
-                name = pet.name,
-                breed = "", // pet.breed,
-                color = "", // pet.color,
-                kennel = pet.kennel,
-                birthDate = petBirthDate.toString()
-            ))
-        }
-
-        for (position in positions) {
-            val instant = Instant.ofEpochSecond(position.time)
-            val zoneId = ZoneId.systemDefault()
-            val time = instant.atZone(zoneId).toLocalDateTime()
-
-            activityPositions.add(CreateOrUpdateActivityPositionDto(
-                id = position.uid,
-                time =  time.toString(),
-                latitude = position.latitudeDegrees,
-                longitude = position.longitudeDegrees,
-                altitude = position.altitudeMeters,
-                accuracy = position.horizontalAccuracyMeters,
-                course = null,
-                note =  "",
-                photoUris = null
-            ))
-        }
-
-        var activityStart: LocalDateTime = LocalDateTime.now().minusYears(1)
-        var activityEnd: LocalDateTime = LocalDateTime.now().plusYears(1)
-        val zoneId = ZoneId.systemDefault()
-        if (activity.start != null) {
-            val instant = Instant.ofEpochSecond(activity.start!!)
-
-            activityStart = instant.atZone(zoneId).toLocalDateTime()
-        }
-        if (activity.end != null) {
-            val instant = Instant.ofEpochSecond(activity.end)
-            activityEnd = instant.atZone(zoneId).toLocalDateTime()
-        }
-        val result: CreateOrUpdateActivityDto = CreateOrUpdateActivityDto(
-            id = activity.uid,
-            start = activityStart.toString(),
-            end = activityEnd.toString(),
-            description = "",
-            actionId = null,
-            categoryId = null,
-            isPublic = true,
-            name = activity.name,
-            raceId = null,
-            pets = activityPets.toTypedArray(),
-            positions = activityPositions.toTypedArray()
-        )
-
-        return result
     }
 }

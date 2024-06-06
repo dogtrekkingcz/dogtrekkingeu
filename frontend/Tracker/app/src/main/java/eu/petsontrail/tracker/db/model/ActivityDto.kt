@@ -9,7 +9,7 @@ import java.util.UUID
 @Entity(tableName = "my_activities")
 data class ActivityDto(
     @PrimaryKey val uid: UUID,
-    @ColumnInfo(name = "time") var time: Long?,
+    @ColumnInfo(name = "time") val time: Long?,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "description") val description: String?,
     @ColumnInfo(name = "type") val type: UUID?,
@@ -18,5 +18,5 @@ data class ActivityDto(
     @ColumnInfo(name = "synchronize_every_n_secs", defaultValue = "60") val synchronizeEveryNSecs: Int = 60,
     @ColumnInfo(name = "is_synchronized", defaultValue = "false") val isSynchronized: Boolean = false,
     @ColumnInfo(name = "start") var start: Long?,
-    @ColumnInfo(name = "end") val end: Long?
+    @ColumnInfo(name = "end") var end: Long?
 )

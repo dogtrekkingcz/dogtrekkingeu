@@ -143,6 +143,12 @@ class ActivityFragment : Fragment() {
             this.context?.stopService(intent)
 
             runBlocking {
+                val activity = AppDatabase.getActivityDao(requireContext(), lifecycleScope).getActive()
+                if (activity != null) {
+                    activity.end = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
+                    AppDatabase.getDatabase(requireContext(), lifecycleScope).activityDao().update(activity)
+                }
+
                 AppDatabase.getActivityDao(requireContext(), lifecycleScope).resetActiveActivities()
                 _activityId = null
                 _locationViewModel.setActivityId(_activityId)
