@@ -3,7 +3,6 @@ using PetsOnTrail.Interfaces.Actions.Entities.Activities;
 using PetsOnTrail.Interfaces.Actions.Services;
 using Grpc.Core;
 using MapsterMapper;
-using Protos.Activities.GetMyActivities;
 using GetMyActivitiesRequest = PetsOnTrail.Interfaces.Actions.Entities.Activities.GetMyActivitiesRequest;
 using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 
