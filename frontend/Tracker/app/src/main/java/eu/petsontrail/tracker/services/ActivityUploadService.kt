@@ -194,14 +194,14 @@ class ActivityUploadService : Service() {
                 .newBlockingStub(channel)
                 .withCallCredentials(AuthenticationCallCredentials(token))
 
-            var request: CreateActivityRequest = CreateActivityRequest.newBuilder()
+            var requestBuilder: CreateActivityRequest.Builder? = CreateActivityRequest.newBuilder()
                 .setId(activity.uid.toString())
                 .setActionId(Constants.UUID_EMPTY)
                 .setRaceId(Constants.UUID_EMPTY)
                 .setCategoryId(Constants.UUID_EMPTY)
                 .setIsPublic(true)
-                .setStart(Timestamp.newBuilder().setSeconds(activity.start!!))
-                .setEnd(Timestamp.newBuilder().setSeconds(activity.end!!))
+                .setStart(activity.start?.let { Timestamp.newBuilder().setSeconds(it) })
+                .setEnd(activity.end?.let { Timestamp.newBuilder().setSeconds(it) })
                 .setDescription(activity.description)
                 .setName(activity.name)
                 .setType(activity.type.toString())
@@ -217,25 +217,33 @@ class ActivityUploadService : Service() {
                         .build()
                 })
                 .addAllPositions(positions.map { position ->
-                    CreateActivityRequestOuterClass.PositionDto.newBuilder()
-                        .setId(position.uid.toString())
-                        .setTime(Timestamp.newBuilder().setSeconds(position.time))
-                        .setLatitude(position.latitudeDegrees!!)
-                        .setLongitude(position.longitudeDegrees!!)
-                        .setAltitude(position.altitudeMeters!!)
-                        .setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
-                        .setCourse(position.bearingDegrees!!.toDouble())
-                        .setNote(position.note)
-                        .build()
+                    position.bearingDegrees?.let {
+                        position.latitudeDegrees?.let { it1 ->
+                            position.longitudeDegrees?.let { it2 ->
+                                position.altitudeMeters?.let { it3 ->
+                                    position.horizontalAccuracyMeters?.toDouble()
+                                        ?.let { it4 ->
+                                            CreateActivityRequestOuterClass.PositionDto.newBuilder()
+                                                .setId(position.uid.toString())
+                                                .setTime(Timestamp.newBuilder().setSeconds(position.time))
+                                                .setLatitude(it1)
+                                                .setLongitude(it2)
+                                                .setAltitude(it3)
+                                                .setAccuracy(it4)
+                                                .setCourse(it.toDouble())
+                                                .setNote(position.note)
+                                                .build()
+                                        }
+                                }
+                            }
+                        }
+                    }
                 })
-                .build()
-            Log.d("Service status", "sending request")
 
+            var request = requestBuilder?.build()
             runBlocking {
                 var response = client.createActivity(request)
             }
-
-            Log.d("Service status", "done")
         }
     }
 
