@@ -225,13 +225,13 @@ class ActivityUploadService : Service() {
                     }
                 })
 
-                if (activity.start != null) {
-                    requestBuilder?.setStart(Timestamp.newBuilder().setSeconds(activity.start!!))
-                }
+            if (activity.start != null) {
+                requestBuilder?.setStart(Timestamp.newBuilder().setSeconds(activity.start!!))
+            }
 
-                if (activity.end != null) {
-                    requestBuilder?.setEnd(Timestamp.newBuilder().setSeconds(activity.end!!))
-                }
+            if (activity.end != null) {
+                requestBuilder?.setEnd(Timestamp.newBuilder().setSeconds(activity.end!!))
+            }
 
             var request = requestBuilder?.build()
             runBlocking {
