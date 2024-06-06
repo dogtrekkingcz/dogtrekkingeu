@@ -16,6 +16,7 @@ import com.google.protobuf.Empty
 import eu.petsontrail.tracker.databinding.FragmentCreateActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.model.ActivityDto
+import eu.petsontrail.tracker.db.model.ActivityPetsDto
 import eu.petsontrail.tracker.db.model.PreparingActivityDto
 import eu.petsontrail.tracker.dtos.ActivityTypeDto
 import eu.petsontrail.tracker.dtos.MyPetDto
@@ -24,6 +25,7 @@ import eu.petsontrail.tracker.services.AuthenticationCallCredentials
 import eu.petsontrail.tracker.ui.pets.ActivityTypesAdapter
 import eu.petsontrail.tracker.ui.pets.PetTypesAdapter
 import getmypets.GetMyPetsRequestOuterClass
+import getmypets.GetMyPetsResponseOuterClass
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
 import pets.PetsGrpc
@@ -40,6 +42,9 @@ class CreateActivityFragment : Fragment() {
     private var _activityTypeList: ArrayList<ActivityTypeDto> = ArrayList()
     private lateinit var _preparingActivity: PreparingActivityDto
     private var _selectedActivityType: ActivityTypeDto? = null
+
+    private lateinit var _myPets: GetMyPetsResponseOuterClass.GetMyPetsResponse
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -204,8 +209,8 @@ class CreateActivityFragment : Fragment() {
             var client = PetsGrpc
                 .newBlockingStub(channel)
                 .withCallCredentials(AuthenticationCallCredentials(token))
-            var response = client.getMyPets(GetMyPetsRequestOuterClass.GetMyPetsRequest.newBuilder().build())
-            for (pet in response.petsList) {
+            _myPets = client.getMyPets(GetMyPetsRequestOuterClass.GetMyPetsRequest.newBuilder().build())
+            for (pet in _myPets.petsList) {
                 if (_petList.contains(UUID.fromString(pet.id))) {
                     myPetsLists.add(MyPetDto(UUID.fromString(pet.id), pet.name, pet.chip))
                 }
@@ -274,6 +279,19 @@ class CreateActivityFragment : Fragment() {
                 )
 
                 AppDatabase.getDatabase(requireContext(), this).activityDao().insertOne(newActivity)
+
+                for (pet in _myPets.petsList) {
+                    if (_petList.contains(UUID.fromString(pet.id))) {
+                        val petInActivity = ActivityPetsDto(
+                            uid = UUID.randomUUID(),
+                            activityId = newActivity.uid,
+                            petId = UUID.fromString(pet.id),
+                            note = ""
+                        )
+
+                        AppDatabase.getDatabase(requireContext(), this).activityPetsDao().insertOne(petInActivity)
+                    }
+                }
             }
 
             findNavController().navigate(R.id.action_createActivityFragment_to_activityFragment)
