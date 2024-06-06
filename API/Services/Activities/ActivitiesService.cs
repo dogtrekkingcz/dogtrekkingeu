@@ -11,16 +11,19 @@ internal class ActivitiesService : IActivitiesService
 {
     private readonly IMapper _mapper;
     private readonly IActivitiesRepositoryService _activitiesRepositoryService;
+    private readonly IActivityTypeRepositoryService _activityTypeRepositoryService;
     private readonly ICurrentUserIdService _currentUserIdService;
     
     public ActivitiesService(
         IMapper mapper, 
         ICurrentUserIdService currentUserIdService, 
         IActivitiesRepositoryService activitiesRepositoryService,
+        IActivityTypeRepositoryService activityTypeRepositoryService,
         ILiveUpdateSubscriptionService liveUpdateSubscriptionService)
     {
         _mapper = mapper;
         _activitiesRepositoryService = activitiesRepositoryService;
+        _activityTypeRepositoryService = activityTypeRepositoryService;
         _currentUserIdService = currentUserIdService;
     }
     
@@ -78,5 +81,12 @@ internal class ActivitiesService : IActivitiesService
         var response = await _activitiesRepositoryService.UpdateActivityAsync(updateInternalStorageRequest, cancellationToken);
 
         return _mapper.Map<UpdateActivityResponse>(response);
+    }
+
+    public async Task<GetActivityTypesResponse> GetActivityTypesAsync(CancellationToken cancellationToken)
+    {
+        var activityTypes = await _activityTypeRepositoryService.GetAllAsync(cancellationToken);
+
+        return _mapper.Map<GetActivityTypesResponse>(activityTypes);
     }
 }

@@ -12,6 +12,7 @@ import "Entities/Activities/GetMyActivitiesRequest.proto";
 import "Entities/Activities/GetMyActivitiesResponse.proto";
 import "Entities/Activities/GetActivitiesResponse.proto";
 import "Entities/Activities/GetActivityByUserIdAndActivityIdResponse.proto";
+import "Entities/Activities/GetActivityTypesResponse.proto";
 
 import "google/protobuf/empty.proto";
 
@@ -25,6 +26,8 @@ service Activities {
   rpc getActivities (google.protobuf.Empty) returns (getactivities.GetActivitiesResponse);
 
   rpc getActivityByUserIdAndActivityId (UserIdAndActivityId) returns (getactivitybyuseridandactivityid.GetActivityByUserIdAndActivityIdResponse);
+
+  rpc getActivityTypes (google.protobuf.Empty) returns (getactivitytypes.GetActivityTypesResponse);
 }
 
 message UserIdAndActivityId {

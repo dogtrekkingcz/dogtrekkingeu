@@ -1,6 +1,7 @@
 ﻿using PetsOnTrail.Interfaces.Actions.Entities.Activities;
 using Mapster;
 using Storage.Entities.Activities;
+using Storage.Entities.ActivityTypes;
 
 namespace PetsOnTrail.Actions.Services.Checkpoints;
 
@@ -35,6 +36,9 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdInternalStorageResponse, GetActivityByUserIdAndActivityIdResponse>();
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdInternalStorageResponse.PositionDto, GetActivityByUserIdAndActivityIdResponse.PositionDto>();
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdInternalStorageResponse.PetDto, GetActivityByUserIdAndActivityIdResponse.PetDto>();
+
+        typeAdapterConfig.NewConfig<GetAllActivityTypesInternalStorageResponse, GetActivityTypesResponse>();
+        typeAdapterConfig.NewConfig<GetAllActivityTypesInternalStorageResponse.ActivityTypeDto, GetActivityTypesResponse.ActivityTypeDto>();
 
         return typeAdapterConfig;
     }

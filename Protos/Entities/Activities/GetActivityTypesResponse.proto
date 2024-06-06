@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Activities.GetActivityTypes";
+
+package getactivitytypes;
+
+message GetActivityTypesResponse {
+  repeated ActivityTypeDto ActivityTypes = 1;
+}
+
+message ActivityTypeDto {
+    string Id = 1;
+    string UserId = 2;
+    string Name = 3;
+    string Description = 4;
+    string AdapterPrefix = 5;
+    string IconPath = 6;
+    bool TimeTracking = 7;
+    bool DistanceTracking = 8;
+    bool SpeedTracking = 9;
+    bool PointTracking = 10;
+}
