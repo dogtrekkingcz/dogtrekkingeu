@@ -1,0 +1,27 @@
+﻿@page "/user_activities/{UserId}"
+
+@inherits UserActivitiesViewBase
+
+@inject IStringLocalizer<Resource> Localizer
+
+<h3>User Activities View</h3>
+
+@if (Model == null)
+{
+    <Loading />
+}
+else
+{
+    <div>
+        <h3>@Localizer["Activity"]</h3>
+        <hr />
+        <p>@Localizer["ActivityId"] : @Model.Id</p>
+        <p>@Localizer["Name"] : @Model.Name</p>
+        <p>@Localizer["Description"] : @Model.Description</p>
+        <p>@Localizer["StartTime"] : @Model.Start</p>
+        <p>@Localizer["EndTime"] : @Model.End</p>
+        <p><button class="btn btn-info" @onclick="(async () => await GetActivityDetail(UserId, Model.Id))">@Localizer["Go to this activity"]</button></p>
+        <hr />
+    </div>
+}
+

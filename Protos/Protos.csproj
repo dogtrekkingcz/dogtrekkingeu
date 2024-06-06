@@ -136,6 +136,12 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Entities\Activities\GetActivitiesByUserIdResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
       <Protobuf Include="Entities\Activities\GetActivityByUserIdAndActivityIdResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <OutputDir>obj\Debug\net7.0\</OutputDir>
@@ -701,6 +707,7 @@
       <None Remove="Entities\ActionRights.proto" />
       <None Remove="Entities\ActionSimple.proto" />
       <None Remove="Entities\Actions\GetSimpleActionsListResponse.proto" />
+      <None Remove="Entities\Activities\GetActivitiesByUserIdResponse.proto" />
       <None Remove="Entities\Activities\GetActivitiesResponse.proto" />
       <None Remove="Entities\Activities\GetActivityByUserIdAndActivityIdResponse.proto" />
       <None Remove="Entities\Activities\GetActivityTypesResponse.proto" />

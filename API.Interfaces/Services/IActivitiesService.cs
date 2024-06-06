@@ -17,4 +17,6 @@ public interface IActivitiesService
     Task<UpdateActivityResponse> UpdateActivityAsync(UpdateActivityRequest request, CancellationToken cancellationToken);
 
     Task<GetActivityTypesResponse> GetActivityTypesAsync(CancellationToken cancellationToken);
+
+    Task<GetActivitiesByUserIdResponse> GetActivitiesByUserIdAsync(Guid userId, CancellationToken cancellationToken);
 }

@@ -37,6 +37,8 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
         }
         else
         {
+            // in case of identified user we need to store activity in user profile
+            // TODO: think about it, should be sufficient to store it only in activities and in user profile lets enter only path to activities... ?
             var user = await _profilesService.GetAsync(request.UserId.ToString(), cancellationToken);
             if (user == null)
             {
@@ -51,12 +53,17 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
             var activity = _mapper.Map<UserProfileRecord.ActivityDto>(request);
             user.Activities.Add(activity);
 
-            var createdActivityRecord = await _profilesService.AddOrUpdateAsync(user, cancellationToken);
+            var createdUserActivityRecord = await _profilesService.AddOrUpdateAsync(user, cancellationToken);
 
             response = new CreateActivityInternalStorageResponse
             {
                 Id = Guid.Parse(activity.Id)
             };
+
+            // and also store the users activity in activities collection
+            addRequest.UserId = request.UserId.ToString();
+            var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
+            response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
         }
 
         return response;

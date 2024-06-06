@@ -1,4 +1,5 @@
 ﻿using MapsterMapper;
+using PetsOnTrailApp.Models;
 using PetsOnTrailApp.Providers;
 using Protos.UserProfiles.GetUserProfile;
 using SharedLib.Models;
@@ -26,6 +27,12 @@ public sealed class UserProfileService : IUserProfileService
         _userProfilesClient = userProfilesClient;
         _serviceProvider = serviceProvider;
         _tokenStorage = tokenStorage;
+    }
+
+    public async Task<UserActivitiesModel> GetUserActivitiesAsync(Guid userId, CancellationToken cancellationToken)
+    {
+
+
     }
     
     public async Task<UserProfileModel> GetAsync()

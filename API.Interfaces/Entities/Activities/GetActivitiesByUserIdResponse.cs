@@ -1,13 +1,13 @@
-﻿namespace Storage.Entities.Activities;
+﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Activities;
 
-public sealed record GetActivitiesByUserIdInternalStorageResponse
+public sealed record GetActivitiesByUserIdResponse
 {
-    public Guid UserId { get; set; } = Guid.Empty;
+    public Guid UserId { get; init; } = Guid.Empty;
 
-    public List<ActivityDto> Activities { get; set; } = new();
+    public List<ActivityDto> Activities { get; init; } = new List<ActivityDto>(0);
 
     public sealed record ActivityDto
-    {
+    { 
         public Guid Id { get; set; } = Guid.Empty;
 
         public Guid ActionId { get; set; } = Guid.Empty;
@@ -19,9 +19,9 @@ public sealed record GetActivitiesByUserIdInternalStorageResponse
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
-        
+
         public DateTimeOffset Start { get; set; } = DateTimeOffset.MinValue;
-        
+
         public DateTimeOffset? End { get; set; } = null;
 
         public List<PetDto> Pets { get; set; } = new List<PetDto>(0);

@@ -89,4 +89,11 @@ internal class ActivitiesService : IActivitiesService
 
         return _mapper.Map<GetActivityTypesResponse>(activityTypes);
     }
+
+    public async Task<GetActivitiesByUserIdResponse> GetActivitiesByUserIdAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        var activities = await _activitiesRepositoryService.GetActivitiesByUserId(userId, cancellationToken);
+
+        return _mapper.Map<GetActivitiesByUserIdResponse>(activities);
+    }
 }

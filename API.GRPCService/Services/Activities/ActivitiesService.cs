@@ -5,6 +5,8 @@ using Grpc.Core;
 using MapsterMapper;
 using GetMyActivitiesRequest = PetsOnTrail.Interfaces.Actions.Entities.Activities.GetMyActivitiesRequest;
 using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
+using System.Runtime.CompilerServices;
+using Protos.Activities;
 
 namespace API.GRPCService.Services.Activities;
 
@@ -76,6 +78,21 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
         _logger.LogInformation($"GetActivityByUserIdAndActivityId: {response.Dump()}");
 
         return response;
+    }
+
+    public async override Task<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse> getActivitiesByUserId(UserIdRequest userId, ServerCallContext context)
+    {
+        var result = await _activitiesService.GetActivitiesByUserIdAsync(Guid.Parse(userId.UserId), context.CancellationToken);
+
+        return new Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse
+        {
+            Activities =
+            {
+                result.Activities
+                    .Select(activity => _mapper.Map<Protos.Activities.GetActivitiesByUserId.ActivityDto>(activity))
+                    .ToList()
+            }
+        };
     }
 
     public async override Task<Protos.Activities.GetActivities.GetActivitiesResponse> getActivities(Google.Protobuf.WellKnownTypes.Empty _, ServerCallContext context)
