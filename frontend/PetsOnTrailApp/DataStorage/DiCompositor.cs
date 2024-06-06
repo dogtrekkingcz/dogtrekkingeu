@@ -8,6 +8,7 @@ using Protos.Actions;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
 using Protos.Activities.GetActivityByUserIdAndActivityId;
+using Protos.Activities.GetActivitiesByUserId;
 using static Protos.Actions.Actions;
 using static Protos.Activities.Activities;
 
@@ -54,6 +55,22 @@ public static class DiCompositor
                     var actionsClient = serviceProvider.GetRequiredService<ActionsClient>();
 
                     return await actionsClient.getSimpleActionsListAsync(new IdsRequest { Ids = { ids.Select(id => id.ToString()) } });
+                });
+
+                return obj;
+            })
+            .AddSingleton<IDataStorageService<GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel>>((serviceProvider) =>
+            { 
+                var obj = new DataStorageService<GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel>(
+                    serviceProvider.GetRequiredService<ILocalStorageService>(), 
+                    serviceProvider.GetRequiredService<IMapper>()
+                );
+
+                obj.InitWithItemFunction(async (id) =>
+                {
+                    var activitiesClient = serviceProvider.GetRequiredService<ActivitiesClient>();
+
+                    return await activitiesClient.getActivitiesByUserIdAsync(new Protos.Activities.UserIdRequest { UserId = id.ToString() });
                 });
 
                 return obj;

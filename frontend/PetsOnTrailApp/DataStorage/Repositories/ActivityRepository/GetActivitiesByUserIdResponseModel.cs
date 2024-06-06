@@ -1,6 +1,6 @@
-﻿namespace PetsOnTrailApp.Models;
+﻿namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 
-public sealed record UserActivitiesModel
+public sealed record GetActivitiesByUserIdResponseModel
 {
     public Guid UserId { get; set; } = Guid.Empty;
 
