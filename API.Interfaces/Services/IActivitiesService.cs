@@ -1,5 +1,4 @@
 ﻿using PetsOnTrail.Interfaces.Actions.Entities.Activities;
-using Storage.Entities.Activities;
 
 namespace PetsOnTrail.Interfaces.Actions.Services;
 

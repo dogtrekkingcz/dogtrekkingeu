@@ -94,7 +94,7 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
         };
     }
 
-    public async override Task<Protos.Activities.GetActivityTypes.GetActivityTypesResponse> getActivityTypes(Google.Protobuf.WellKnownTypes.Empty, ServerCallContext context)
+    public async override Task<Protos.Activities.GetActivityTypes.GetActivityTypesResponse> getActivityTypes(Google.Protobuf.WellKnownTypes.Empty _, ServerCallContext context)
     {
         var result = await _activitiesService.GetActivityTypesAsync(context.CancellationToken);
 
