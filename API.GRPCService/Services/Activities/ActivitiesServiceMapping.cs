@@ -13,6 +13,7 @@ internal static class ActivitiesServiceMapping
             .Map(d => d.ActionId, s => Guid.Parse(s.ActionId))
             .Map(d => d.RaceId, s => Guid.Parse(s.RaceId))
             .Map(d => d.CategoryId, s => Guid.Parse(s.CategoryId))
+            .Map(d => d.TypeId, s => Guid.Parse(s.Type))
             .Ignore(d => d.UserId);
         typeAdapterConfig.NewConfig<Protos.Activities.CreateActivity.PositionDto, CreateActivityRequest.PositionDto>()
             .Map(d => d.Id, s => Guid.Parse(s.Id));

@@ -13,11 +13,12 @@ message CreateActivityRequest {
   string CategoryId = 4;
   string Name = 5;
   string Description = 6;
-  google.protobuf.Timestamp Start = 7;
-  google.protobuf.Timestamp End = 8;
-  bool IsPublic = 9;
-  repeated PositionDto Positions = 10;
-  repeated PetDto Pets = 11;
+  string Type = 7;
+  google.protobuf.Timestamp Start = 8;
+  google.protobuf.Timestamp End = 9;
+  bool IsPublic = 10;
+  repeated PositionDto Positions = 11;
+  repeated PetDto Pets = 12;
 }
 
 message PositionDto {

@@ -15,6 +15,8 @@ public sealed record CreateActivityInternalStorageRequest
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;
+
+    public Guid TypeId { get; set; } = Guid.Empty;
         
     public DateTimeOffset Start { get; set; } = DateTimeOffset.Now;
 

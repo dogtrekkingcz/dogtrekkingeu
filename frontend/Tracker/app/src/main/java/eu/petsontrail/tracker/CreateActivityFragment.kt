@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
@@ -38,6 +39,7 @@ class CreateActivityFragment : Fragment() {
     private var _petList: ArrayList<UUID> = ArrayList()
     private var _activityTypeList: ArrayList<ActivityTypeDto> = ArrayList()
     private lateinit var _preparingActivity: PreparingActivityDto
+    private var _selectedActivityType: ActivityTypeDto? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -214,6 +216,9 @@ class CreateActivityFragment : Fragment() {
             for (activityType in activityTypes.activityTypesList) {
                 _activityTypeList.add(ActivityTypeDto(UUID.fromString(activityType.id), activityType.name, activityType.description))
             }
+            binding.createActivityTypeOfActivity.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+                _selectedActivityType = parent.getItemAtPosition(position) as ActivityTypeDto
+            }
 
             val adapter = ActivityTypesAdapter(requireContext(), _activityTypeList)
             binding.createActivityTypeOfActivity.setAdapter(adapter)
@@ -257,6 +262,7 @@ class CreateActivityFragment : Fragment() {
                     uid = UUID.randomUUID(),
                     time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                     name = nameOfActivity,
+                    type = _selectedActivityType!!.id,
                     active = 1,
                     description = "",
                     start = null,

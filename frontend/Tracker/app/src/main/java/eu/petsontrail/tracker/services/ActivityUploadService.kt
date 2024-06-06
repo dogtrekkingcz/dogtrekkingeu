@@ -204,6 +204,7 @@ class ActivityUploadService : Service() {
                 .setEnd(Timestamp.newBuilder().setSeconds(activity.end!!))
                 .setDescription(activity.description)
                 .setName(activity.name)
+                .setType(activity.type.toString())
                 .addAllPets(pets.map { pet ->
                     CreateActivityRequestOuterClass.PetDto.newBuilder()
                         .setId(pet.uid.toString())

@@ -15,6 +15,8 @@ internal sealed record ActivityRecord : IRecord
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;
+
+    public string TypeId { get; set; } = Guid.Empty.ToString();
     
     public DateTimeOffset Start { get; set; } = DateTimeOffset.Now;
 
