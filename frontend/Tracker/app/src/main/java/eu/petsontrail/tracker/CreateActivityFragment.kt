@@ -1,5 +1,6 @@
 package eu.petsontrail.tracker
 
+import activities.ActivitiesGrpc
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,12 +11,17 @@ import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.protobuf.Empty
 import eu.petsontrail.tracker.databinding.FragmentCreateActivityBinding
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.model.ActivityDto
 import eu.petsontrail.tracker.db.model.PreparingActivityDto
+import eu.petsontrail.tracker.dtos.ActivityTypeDto
 import eu.petsontrail.tracker.dtos.MyPetDto
+import eu.petsontrail.tracker.dtos.PetTypeDto
 import eu.petsontrail.tracker.services.AuthenticationCallCredentials
+import eu.petsontrail.tracker.ui.pets.ActivityTypesAdapter
+import eu.petsontrail.tracker.ui.pets.PetTypesAdapter
 import getmypets.GetMyPetsRequestOuterClass
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
@@ -30,6 +36,7 @@ class CreateActivityFragment : Fragment() {
     private var _binding: FragmentCreateActivityBinding? = null
     private val binding get() = _binding!!
     private var _petList: ArrayList<UUID> = ArrayList()
+    private var _activityTypeList: ArrayList<ActivityTypeDto> = ArrayList()
     private lateinit var _preparingActivity: PreparingActivityDto
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -195,14 +202,21 @@ class CreateActivityFragment : Fragment() {
             var client = PetsGrpc
                 .newBlockingStub(channel)
                 .withCallCredentials(AuthenticationCallCredentials(token))
-
             var response = client.getMyPets(GetMyPetsRequestOuterClass.GetMyPetsRequest.newBuilder().build())
-
             for (pet in response.petsList) {
                 if (_petList.contains(UUID.fromString(pet.id))) {
                     myPetsLists.add(MyPetDto(UUID.fromString(pet.id), pet.name, pet.chip))
                 }
             }
+
+            var activityClient = ActivitiesGrpc.newBlockingStub(channel).withCallCredentials(AuthenticationCallCredentials(token))
+            var activityTypes = activityClient.getActivityTypes(Empty.newBuilder().build())
+            for (activityType in activityTypes.activityTypesList) {
+                _activityTypeList.add(ActivityTypeDto(UUID.fromString(activityType.id), activityType.name, activityType.description))
+            }
+
+            val adapter = ActivityTypesAdapter(requireContext(), _activityTypeList)
+            binding.createActivityTypeOfActivity.setAdapter(adapter)
         }
 
         // access the listView from xml file
