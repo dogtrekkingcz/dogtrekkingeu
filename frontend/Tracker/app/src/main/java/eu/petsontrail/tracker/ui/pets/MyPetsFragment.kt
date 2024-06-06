@@ -10,15 +10,22 @@ import android.widget.AdapterView
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
+import eu.petsontrail.tracker.Constants
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.databinding.FragmentMyPetsBinding
 import eu.petsontrail.tracker.db.AppDatabase
+import eu.petsontrail.tracker.db.model.PetDto
 import eu.petsontrail.tracker.dtos.MyPetDto
 import eu.petsontrail.tracker.services.AuthenticationCallCredentials
 import getmypets.GetMyPetsRequestOuterClass
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.runBlocking
 import pets.PetsGrpc
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.UUID
 
 class MyPetsFragment : Fragment() {
@@ -59,7 +66,32 @@ class MyPetsFragment : Fragment() {
 
             for (pet in response.petsList) {
                 myPetsLists.add(MyPetDto(UUID.fromString(pet.id), pet.name, pet.chip))
+
+                if (AppDatabase.getDatabase(requireContext(), this).petDao().getById(UUID.fromString(pet.id)) == null) {
+                    val birthday = LocalDateTime.of(
+                        pet.birthday.year,
+                        pet.birthday.month,
+                        pet.birthday.day,
+                        0,
+                        0,
+                        0
+                    )
+                    val petDto = PetDto(
+                        uid = UUID.fromString(pet.id),
+                        groupId = UUID.fromString(Constants.UUID_EMPTY),
+                        name = pet.name,
+                        kennel = pet.kennel,
+                        chip = pet.chip,
+                        birthday = birthday.toEpochSecond(ZoneOffset.UTC),
+                        breed = pet.pedigree,
+                        color = ""
+                    )
+
+                    AppDatabase.getDatabase(requireContext(), this).petDao().insertOne(petDto)
+                }
             }
+
+
 
             channel.shutdown()
         }

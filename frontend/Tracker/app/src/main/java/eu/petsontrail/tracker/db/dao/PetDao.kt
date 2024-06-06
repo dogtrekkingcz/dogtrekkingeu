@@ -14,6 +14,9 @@ interface PetDao {
     @Query("SELECT * FROM pets")
     suspend fun getAll(): List<PetDto>
 
+    @Query("SELECT * FROM pets WHERE uid = :id")
+    suspend fun getById(id: UUID): PetDto?
+
     @Query("SELECT * FROM pets WHERE uid IN (:ids)")
     suspend fun loadAllByIds(ids: Array<UUID>): List<PetDto>
 
