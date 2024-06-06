@@ -216,6 +216,10 @@ class CreateActivityFragment : Fragment() {
             for (activityType in activityTypes.activityTypesList) {
                 _activityTypeList.add(ActivityTypeDto(UUID.fromString(activityType.id), activityType.name, activityType.description))
             }
+
+            channel.shutdown()
+
+
             binding.createActivityTypeOfActivity.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
                 _selectedActivityType = parent.getItemAtPosition(position) as ActivityTypeDto
             }

@@ -70,6 +70,8 @@ class AddMyPetFragment : Fragment() {
                 _petTypeList.add(PetTypeDto(UUID.fromString(petType.id), petType.name, petType.description))
             }
 
+            channel.shutdown()
+
             val adapter = PetTypesAdapter(requireContext(), _petTypeList)
             binding.editTextPetType.setAdapter(adapter)
 

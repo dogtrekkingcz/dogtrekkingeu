@@ -60,6 +60,8 @@ class MyPetsFragment : Fragment() {
             for (pet in response.petsList) {
                 myPetsLists.add(MyPetDto(UUID.fromString(pet.id), pet.name, pet.chip))
             }
+
+            channel.shutdown()
         }
 
         val adapter = MyPetsAdapter(this.requireContext(), myPetsLists)

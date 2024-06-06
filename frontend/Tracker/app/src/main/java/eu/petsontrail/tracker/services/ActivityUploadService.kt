@@ -234,9 +234,9 @@ class ActivityUploadService : Service() {
             }
 
             var request = requestBuilder?.build()
-            runBlocking {
-                var response = client.createActivity(request)
-            }
+            var response = client.createActivity(request)
+
+            channel.shutdownNow()
         }
     }
 }
