@@ -59,6 +59,9 @@ internal class PetsService : IPetsService
 
     public async Task<GetMyPetsResponse> GetMyPetsAsync(GetMyPetsRequest request, CancellationToken cancellationToken)
     {
+        if (_currentUserIdService.GetUserId() == Guid.Empty)
+            return new GetMyPetsResponse();
+
         var userProfile = await _userProfileRepositoryService.GetUserProfileAsync(
                        new GetUserProfileInternalStorageRequest { UserId = _currentUserIdService.GetUserId() }, cancellationToken);
 
@@ -73,6 +76,9 @@ internal class PetsService : IPetsService
 
     public async Task<AddMyPetResponse> AddMyPetAsync(AddMyPetRequest request, CancellationToken cancellationToken)
     {
+        if (_currentUserIdService.GetUserId() == Guid.Empty)
+            return new AddMyPetResponse();
+
         var userProfile = await _userProfileRepositoryService.GetUserProfileAsync(
                        new GetUserProfileInternalStorageRequest { UserId = _currentUserIdService.GetUserId() }, cancellationToken);
 
