@@ -68,21 +68,25 @@ class MyPetsFragment : Fragment() {
                 myPetsLists.add(MyPetDto(UUID.fromString(pet.id), pet.name, pet.chip))
 
                 if (AppDatabase.getDatabase(requireContext(), this).petDao().getById(UUID.fromString(pet.id)) == null) {
-                    val birthday = LocalDateTime.of(
-                        pet.birthday.year,
-                        pet.birthday.month,
-                        pet.birthday.day,
-                        0,
-                        0,
-                        0
-                    )
+                    var birthday: LocalDateTime? = null
+                    if (pet.birthday != null && pet.birthday.year != 0) {
+                        birthday = LocalDateTime.of(
+                            pet.birthday.year,
+                            pet.birthday.month,
+                            pet.birthday.day,
+                            0,
+                            0,
+                            0
+                        )
+                    }
+
                     val petDto = PetDto(
                         uid = UUID.fromString(pet.id),
                         groupId = UUID.fromString(Constants.UUID_EMPTY),
                         name = pet.name,
                         kennel = pet.kennel,
                         chip = pet.chip,
-                        birthday = birthday.toEpochSecond(ZoneOffset.UTC),
+                        birthday = birthday?.toEpochSecond(ZoneOffset.UTC),
                         breed = pet.pedigree,
                         color = ""
                     )

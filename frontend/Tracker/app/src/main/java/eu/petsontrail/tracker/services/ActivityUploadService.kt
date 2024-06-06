@@ -191,14 +191,19 @@ class ActivityUploadService : Service() {
                 .setName(activity.name)
                 .setType(activity.type.toString())
                 .addAllPets(pets.map { pet ->
-                    CreateActivityRequestOuterClass.PetDto.newBuilder()
+
+                    var petDtoBuilder = CreateActivityRequestOuterClass.PetDto.newBuilder()
                         .setId(pet.uid.toString())
                         .setChip(pet.chip)
                         .setName(pet.name)
                         .setBreed(pet.breed)
                         .setColor(pet.color)
                         .setKennel(pet.kennel)
-                        .setBirthDate(Timestamp.newBuilder().setSeconds(pet.birthday!!))
+
+                    if (pet.birthday != null)
+                        petDtoBuilder.setBirthDate(Timestamp.newBuilder().setSeconds(pet.birthday))
+
+                    petDtoBuilder
                         .build()
                 })
                 .addAllPositions(positions.map { position ->
