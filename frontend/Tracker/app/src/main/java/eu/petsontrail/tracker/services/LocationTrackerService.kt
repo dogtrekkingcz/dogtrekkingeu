@@ -77,8 +77,7 @@ class LocationTrackerService : Service() {
                 for (location in locationResult.locations) {
                     Log.d(
                         "Position",
-                        "Current LocationNN = [lat : ${location.latitude}, lng : ${location.longitude}]")
-
+                        "Current Location = [lat : ${location.latitude}, lng : ${location.longitude}]")
 
                     if (currentActivityId == null)
                         createNewActivity()
@@ -314,6 +313,7 @@ class LocationTrackerService : Service() {
                 uid = currentActivityId!!,
                 time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)),
+                type = null,
                 active = 1,
                 start = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
                 end = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),

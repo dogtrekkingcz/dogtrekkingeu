@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
         PreparingActivityDto::class
     ],
     autoMigrations = [
-        AutoMigration ( from = 1, to = 2 )
+        AutoMigration ( from = 1, to = 2 ),
     ],
     exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
@@ -55,8 +55,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userSettingsDao(): UserSettingsDao
 
     companion object {
-        public const val DatabaseName = "PetsOnTrail.DB.v2"
-        public const val LATEST_VERSION = 2
+        public const val DatabaseName = "PetsOnTrail.DB.v3"
+        public const val LATEST_VERSION = 1
         private var _activity: ActivityDao? = null
         private var _location: LocationDao? = null
 

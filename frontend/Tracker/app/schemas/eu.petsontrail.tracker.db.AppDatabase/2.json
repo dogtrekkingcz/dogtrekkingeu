@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "ed9ee069edfd0315ee36bbddb000f525",
+    "identityHash": "6831e9abf72b8a70c2eb0239380bc0bb",
     "entities": [
       {
         "tableName": "my_activities",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` BLOB NOT NULL, `time` INTEGER, `name` TEXT, `description` TEXT, `active` INTEGER NOT NULL, `synchronize` INTEGER NOT NULL DEFAULT true, `synchronize_every_n_secs` INTEGER NOT NULL DEFAULT 60, `is_synchronized` INTEGER NOT NULL DEFAULT false, `start` INTEGER, `end` INTEGER, PRIMARY KEY(`uid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` BLOB NOT NULL, `time` INTEGER, `name` TEXT, `description` TEXT, `type` BLOB NOT NULL, `active` INTEGER NOT NULL, `synchronize` INTEGER NOT NULL DEFAULT true, `synchronize_every_n_secs` INTEGER NOT NULL DEFAULT 60, `is_synchronized` INTEGER NOT NULL DEFAULT false, `start` INTEGER, `end` INTEGER, PRIMARY KEY(`uid`))",
         "fields": [
           {
             "fieldPath": "uid",
@@ -31,6 +31,12 @@
             "columnName": "description",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "BLOB",
+            "notNull": true
           },
           {
             "fieldPath": "active",
@@ -602,7 +608,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ed9ee069edfd0315ee36bbddb000f525')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6831e9abf72b8a70c2eb0239380bc0bb')"
     ]
   }
 }
