@@ -86,10 +86,17 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
 
         return new Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse
         {
+            UserId = userId.UserId,
             Activities =
             {
                 result.Activities
-                    .Select(activity => _mapper.Map<Protos.Activities.GetActivitiesByUserId.ActivityDto>(activity))
+                    .Select(activity => {
+                        var activityProto = _mapper.Map<Protos.Activities.GetActivitiesByUserId.ActivityDto>(activity);
+                        activityProto.Positions.AddRange(activity.Positions.Select(position => _mapper.Map<Protos.Activities.GetActivitiesByUserId.PositionDto>(position)));
+                        activityProto.Pets.AddRange(activity.Pets.Select(pet => _mapper.Map<Protos.Activities.GetActivitiesByUserId.PetDto>(pet)));
+
+                        return activityProto;
+                    })
                     .ToList()
             }
         };
