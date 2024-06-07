@@ -8,6 +8,7 @@ public sealed record ActivityModel : BaseSynchronizedModel
     public Guid ActionId { get; init; } = Guid.Empty;
     public Guid RaceId { get; init; } = Guid.Empty;
     public Guid CategoryId { get; init; } = Guid.Empty;
+    public Guid TypeId { get; init; } = Guid.Empty;
     public string Name { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
     public DateTime Start { get; init; }

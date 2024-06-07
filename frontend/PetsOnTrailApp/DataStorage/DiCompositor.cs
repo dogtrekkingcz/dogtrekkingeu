@@ -79,8 +79,8 @@ public static class DiCompositor
             {
                 var obj = new DataStorageService<GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel>(
                                        serviceProvider.GetRequiredService<ILocalStorageService>(), 
-                                                          serviceProvider.GetRequiredService<IMapper>()
-                                                                         );
+                                       serviceProvider.GetRequiredService<IMapper>()
+                );
 
                 obj.InitWithListFunction(async (guidList) =>
                 {
