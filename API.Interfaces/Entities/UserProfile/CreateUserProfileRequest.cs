@@ -6,7 +6,7 @@ public sealed record CreateUserProfileRequest
 
     public string UserId { get; init; } = string.Empty;
 
-    public string Email { get; set; } = string.Empty;
+    public string Email { get; init; } = string.Empty;
 
     public Guid CompetitorId { get; init; } = default(Guid);
 
@@ -99,49 +99,51 @@ public sealed record CreateUserProfileRequest
 
     public sealed record ActivityDto
     {
-        public string? Id { get; set; }
+        public string? Id { get; init; }
 
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; init; } = Guid.Empty;
 
-        public string ActionId { get; set; } = Guid.Empty.ToString();
+        public Guid ActionId { get; init; } = Guid.Empty;
 
-        public string RaceId { get; set; } = Guid.Empty.ToString();
+        public Guid RaceId { get; init; } = Guid.Empty;
 
-        public string CategoryId { get; set; } = Guid.Empty.ToString();
+        public Guid CategoryId { get; init; } = Guid.Empty;
 
-        public string Name { get; set; } = string.Empty;
+        public Guid TypeId { get; init; } = Guid.Empty;
 
-        public string Description { get; set; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
 
-        public DateTimeOffset Start { get; set; } = DateTimeOffset.Now;
+        public string Description { get; init; } = string.Empty;
 
-        public DateTimeOffset? End { get; set; } = null;
+        public DateTimeOffset Start { get; init; } = DateTimeOffset.Now;
 
-        public bool IsPublic { get; set; } = true;
+        public DateTimeOffset? End { get; init; } = null;
 
-        public List<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
+        public bool IsPublic { get; init; } = true;
 
-        public List<ActivityPetDto> Pets { get; set; } = new List<ActivityPetDto>(0);
+        public List<PositionDto> Positions { get; init; } = new List<PositionDto>(0);
+
+        public List<ActivityPetDto> Pets { get; init; } = new List<ActivityPetDto>(0);
     }
     public sealed record PositionDto
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; init; } = Guid.NewGuid().ToString();
 
-        public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset Time { get; init; } = DateTimeOffset.Now;
 
-        public double Latitude { get; set; } = double.NaN;
+        public double Latitude { get; init; } = double.NaN;
 
-        public double Longitude { get; set; } = double.NaN;
+        public double Longitude { get; init; } = double.NaN;
 
-        public double Altitude { get; set; } = double.NaN;
+        public double Altitude { get; init; } = double.NaN;
 
-        public double Accuracy { get; set; } = double.NaN;
+        public double Accuracy { get; init; } = double.NaN;
 
-        public double Course { get; set; } = double.NaN;
+        public double Course { get; init; } = double.NaN;
 
-        public string Note { get; set; } = string.Empty;
+        public string Note { get; init; } = string.Empty;
 
-        public List<string> PhotoUris { get; set; } = new();
+        public List<string> PhotoUris { get; init; } = new();
     }
 
     public sealed record ActivityPetDto
