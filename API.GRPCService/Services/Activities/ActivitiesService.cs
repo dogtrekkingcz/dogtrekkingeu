@@ -92,6 +92,8 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
                 result.Activities
                     .Select(activity => {
                         var activityProto = _mapper.Map<Protos.Activities.GetActivitiesByUserId.ActivityDto>(activity);
+
+                        // TODO: Do we need to have the positions and pets in the response? - in this case probably simple list of activities would be enough ... ?
                         activityProto.Positions.AddRange(activity.Positions.Select(position => _mapper.Map<Protos.Activities.GetActivitiesByUserId.PositionDto>(position)));
                         activityProto.Pets.AddRange(activity.Pets.Select(pet => _mapper.Map<Protos.Activities.GetActivitiesByUserId.PetDto>(pet)));
 
