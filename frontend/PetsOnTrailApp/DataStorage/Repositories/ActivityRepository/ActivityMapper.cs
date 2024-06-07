@@ -11,11 +11,14 @@ public static class ActivityMapper
     {
         typeAdapterConfig.NewConfig<Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel>()
             .Map(d => d.Start, s => s.Start.ToDateTimeOffset())
-            .Map(d => d.End, s => s.End.ToDateTimeOffset());
+            .Map(d => d.End, s => s.End.ToDateTimeOffset())
+            .IgnoreNullValues(true);
         typeAdapterConfig.NewConfig<Protos.Activities.GetActivityByUserIdAndActivityId.PositionDto, GetActivityByUserIdAndActivityIdResponseModel.PositionDto>()
-            .Map(d => d.Time, s => s.Time.ToDateTimeOffset());
+            .Map(d => d.Time, s => s.Time.ToDateTimeOffset())
+            .IgnoreNullValues(true);
         typeAdapterConfig.NewConfig<Protos.Activities.GetActivityByUserIdAndActivityId.PetDto, GetActivityByUserIdAndActivityIdResponseModel.PetDto>()
-            .Map(d => d.BirthDate, s => s.BirthDate.ToDateTimeOffset());
+            .Map(d => d.BirthDate, s => s.BirthDate.ToDateTimeOffset())
+            .IgnoreNullValues(true);
 
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel, ActivityModel>()
             .Map(d => d.SynchronizedAt, s => DateTime.Now);

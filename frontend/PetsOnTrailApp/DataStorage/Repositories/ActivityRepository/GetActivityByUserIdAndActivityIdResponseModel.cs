@@ -4,7 +4,7 @@ namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 
 public sealed record GetActivityByUserIdAndActivityIdResponseModel
 {
-    public Guid Id { get; init; }
+    public Guid Id { get; init; } = Guid.Empty;
     public Guid ActionId { get; init; } = Guid.Empty;
     public Guid RaceId { get; init; } = Guid.Empty;
     public Guid CategoryId { get; init; } = Guid.Empty;
