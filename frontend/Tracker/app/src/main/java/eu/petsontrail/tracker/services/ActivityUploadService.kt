@@ -207,27 +207,25 @@ class ActivityUploadService : Service() {
                         .build()
                 })
                 .addAllPositions(positions.map { position ->
-                    position.bearingDegrees?.let {
-                        position.latitudeDegrees?.let { it1 ->
-                            position.longitudeDegrees?.let { it2 ->
-                                position.altitudeMeters?.let { it3 ->
-                                    position.horizontalAccuracyMeters?.toDouble()
-                                        ?.let { it4 ->
-                                            CreateActivityRequestOuterClass.PositionDto.newBuilder()
-                                                .setId(position.uid.toString())
-                                                .setTime(Timestamp.newBuilder().setSeconds(position.time))
-                                                .setLatitude(it1)
-                                                .setLongitude(it2)
-                                                .setAltitude(it3)
-                                                .setAccuracy(it4)
-                                                .setCourse(it.toDouble())
-                                                .setNote(position.note)
-                                                .build()
-                                        }
-                                }
-                            }
-                        }
-                    }
+                    var positionDtoBuilder = CreateActivityRequestOuterClass.PositionDto.newBuilder()
+                        .setId(position.uid.toString())
+                        .setTime(Timestamp.newBuilder().setSeconds(position.time))
+                        .setLatitude(position.latitudeDegrees!!)
+                        .setLongitude(position.longitudeDegrees!!)
+
+                    if (position.altitudeMeters != null)
+                        positionDtoBuilder.setAltitude(position.altitudeMeters!!)
+
+                    if (position.horizontalAccuracyMeters != null)
+                        positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
+
+                    if (position.bearingDegrees != null)
+                        positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
+
+                    if (position.note != null)
+                        positionDtoBuilder.setNote(position.note)
+
+                    positionDtoBuilder.build()
                 })
 
             if (activity.start != null) {

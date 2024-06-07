@@ -30,6 +30,10 @@ public static class ActivityMapper
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponseModel.PositionDto, UserActivitiesModel.PositionDto>();
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponseModel.PetDto, UserActivitiesModel.PetDto>();
 
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel>();
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.ActivityDto, GetActivitiesByUserIdResponseModel.ActivityDto>();
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.PositionDto, GetActivitiesByUserIdResponseModel.PositionDto>();
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.PetDto, GetActivitiesByUserIdResponseModel.PetDto>();
 
         return typeAdapterConfig;
     }

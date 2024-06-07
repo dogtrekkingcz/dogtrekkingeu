@@ -83,7 +83,10 @@ class LocationTrackerService : Service() {
                         createNewActivity()
 
                     runBlocking {
-                        AppDatabase.getLocationDao(this@LocationTrackerService, serviceScope).insertOne(location.toLocationDto(currentActivityId!!))
+                        val locationDto = location.toLocationDto(currentActivityId!!)
+                        AppDatabase.getDatabase(this@LocationTrackerService, serviceScope).locationDao().insertOne(locationDto)
+
+                        Log.d("Location", "Location inserted for activityId: ${currentActivityId} vs ${locationDto.activityId}")
                     }
                 }
             }
