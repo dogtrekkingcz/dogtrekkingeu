@@ -13,6 +13,7 @@ public sealed record CreateActivityRequest : IRequest<CreateActivityResponse>
     public Guid RaceId { get; set; } = Guid.Empty;
 
     public Guid CategoryId { get; set; } = Guid.Empty;
+    public Guid TypeId { get; set;} = Guid.Empty;
 
     public string Name { get; set; } = string.Empty;
 
