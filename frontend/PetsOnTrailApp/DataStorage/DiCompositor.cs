@@ -107,6 +107,7 @@ public static class DiCompositor
                         ActionId = activityRawData.ActionId,
                         RaceId = activityRawData.RaceId,
                         CategoryId = activityRawData.CategoryId,
+                        TypeId = activityRawData.TypeId,
                         Name = activityRawData.Name,
                         Description = activityRawData.Description,
                         Start = activityRawData.Start,
