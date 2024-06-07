@@ -101,13 +101,15 @@ public sealed record GetUserProfileInternalStorageResponse
     {
         public string? Id { get; set; }
 
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
 
-        public string ActionId { get; set; } = Guid.Empty.ToString();
+        public Guid ActionId { get; set; } = Guid.Empty;
 
-        public string RaceId { get; set; } = Guid.Empty.ToString();
+        public Guid RaceId { get; set; } = Guid.Empty;
 
-        public string CategoryId { get; set; } = Guid.Empty.ToString();
+        public Guid CategoryId { get; set; } = Guid.Empty;
+
+        public Guid TypeId { get; set; } = Guid.Empty;
 
         public string Name { get; set; } = string.Empty;
 
