@@ -263,6 +263,110 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                 PointTracking = false
             }, CancellationToken.None))
 
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Hiking,
+                Name = "Hiking",
+                Description = "Hiking without pets",
+                AdapterPrefix = "hiking",
+                IconPath = "/icons/activity_types/hiking.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Biking,
+                Name = "Biking",
+                Description = "Biking without pets",
+                AdapterPrefix = "biking",
+                IconPath = "/icons/activity_types/biking.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Running,
+                Name = "Running",
+                Description = "Running without pets",
+                AdapterPrefix = "running",
+                IconPath = "/icons/activity_types/running.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Walking,
+                Name = "Walking",
+                Description = "Walking without pets",
+                AdapterPrefix = "walking",
+                IconPath = "/icons/activity_types/walking.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Skating,
+                Name = "Skating",
+                Description = "Skating without pets",
+                AdapterPrefix = "skating",
+                IconPath = "/icons/activity_types/skating.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Skiing,
+                Name = "Skiing",
+                Description = "Skiing without pets",
+                AdapterPrefix = "skiing",
+                IconPath = "/icons/activity_types/skiing.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.Snowboarding,
+                Name = "Snowboarding",
+                Description = "Snowboarding without pets",
+                AdapterPrefix = "snowboarding",
+                IconPath = "/icons/activity_types/snowboarding.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
+            .AddUpAction(() => ActivityTypeRepositoryService.AddAsync(new Entities.ActivityTypes.AddActivityTypeInternalStorageRequest
+            {
+                Id = Constants.ActivityType.EScooter,
+                Name = "EScootering",
+                Description = "EScootering",
+                AdapterPrefix = "escootering",
+                IconPath = "/icons/activity_types/escootering.png",
+                TimeTracking = true,
+                DistanceTracking = true,
+                SpeedTracking = true,
+                PointTracking = false
+            }, CancellationToken.None))
+
             // ------------------------------------------------------------------------------------------------------------
 
             .AddUpAction(() => VaccinationTypeRepositoryService.AddAsync(new Entities.VaccinationTypes.AddVaccinationTypeInternalStorageRequest
@@ -321,6 +425,14 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Flyball, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DiscDog, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.DogHiking, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Hiking, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Biking, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Running, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Walking, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Skating, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Skiing, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Snowboarding, CancellationToken.None))
+            .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.EScooter, CancellationToken.None))
             .AddDownAction(() => VaccinationTypeRepositoryService.DeleteAsync(Constants.VaccinationType.Rabies, CancellationToken.None))
             .AddDownAction(() => PetTypeRepositoryService.DeleteAsync(Constants.PetType.Dog, CancellationToken.None))
             .AddDownAction(() => PetTypeRepositoryService.DeleteAsync(Constants.PetType.Cat, CancellationToken.None))

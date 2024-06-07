@@ -22,6 +22,13 @@ public static class ActivityType
     public const string Scooter = "f4f44850-c10e-4c40-997e-65492665ff12";
     public const string EScooter = "2b17494c-faec-4dda-8ed3-29acc94dde90";
     public const string DogTrekking = "f9101c55-532f-4eb2-823f-96130b6ecab4";
+    public const string Snowboarding = "67541ec5-1715-4057-8bb2-2b37ed174f00";
+    public const string Skiing = "5a341758-98e0-45d6-a305-38e261bb4193";
+    public const string Skating = "f8332595-fe1f-4154-a697-f20c48c1c247";
+    public const string Hiking = "e8e7a580-50bc-4ffd-b1ac-1afe223cf6da";
+    public const string Biking = "b9eb998e-66c4-405d-9a54-466894426a49";
+    public const string Running = "e00720e9-0129-454d-89a7-29524aadcece";
+    public const string Walking = "fb9e28de-36f0-478c-84ca-87d41203629b";
 
     public static List<Guid> All => new List<Guid>
     {
@@ -42,6 +49,13 @@ public static class ActivityType
         Guid.Parse(IPO),
         Guid.Parse(Scooter),
         Guid.Parse(EScooter),
-        Guid.Parse(DogTrekking)
+        Guid.Parse(DogTrekking),
+        Guid.Parse(Snowboarding),
+        Guid.Parse(Skiing),
+        Guid.Parse(Skating),
+        Guid.Parse(Hiking),
+        Guid.Parse(Biking),
+        Guid.Parse(Running),
+        Guid.Parse(Walking)
     };
 }
