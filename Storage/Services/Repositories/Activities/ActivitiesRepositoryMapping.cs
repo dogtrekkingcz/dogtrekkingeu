@@ -33,7 +33,7 @@ namespace Storage.Services.Repositories.Activities
             typeAdapterConfig.NewConfig<UserProfileRecord.ActivityPetDto, GetActivityByUserIdAndActivityIdInternalStorageResponse.PetDto>();
 
             typeAdapterConfig.NewConfig<List<ActivityRecord>, GetActivitiesInternalStorageResponse>()
-    .Map(d => d.Activities, s => s);
+                .Map(d => d.Activities, s => s);
             typeAdapterConfig.NewConfig<ActivityRecord, GetActivitiesInternalStorageResponse.ActivityDto>();
             typeAdapterConfig.NewConfig<ActivityRecord.PositionDto, GetActivitiesInternalStorageResponse.PositionDto>();
             typeAdapterConfig.NewConfig<ActivityRecord.PetDto, GetActivitiesInternalStorageResponse.PetDto>();

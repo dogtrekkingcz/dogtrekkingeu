@@ -8,48 +8,50 @@ public sealed record GetActivitiesByUserIdResponse
 
     public sealed record ActivityDto
     { 
-        public Guid Id { get; set; } = Guid.Empty;
+        public Guid Id { get; init; } = Guid.Empty;
 
-        public Guid ActionId { get; set; } = Guid.Empty;
+        public Guid ActionId { get; init; } = Guid.Empty;
 
-        public Guid RaceId { get; set; } = Guid.Empty;
+        public Guid RaceId { get; init; } = Guid.Empty;
 
-        public Guid CategoryId { get; set; } = Guid.Empty;
+        public Guid CategoryId { get; init; } = Guid.Empty;
 
-        public string Name { get; set; } = string.Empty;
+        public Guid TypeId { get; init; } = Guid.Empty;
 
-        public string Description { get; set; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
 
-        public DateTimeOffset Start { get; set; } = DateTimeOffset.MinValue;
+        public string Description { get; init; } = string.Empty;
 
-        public DateTimeOffset? End { get; set; } = null;
+        public DateTimeOffset Start { get; init; } = DateTimeOffset.MinValue;
 
-        public List<PetDto> Pets { get; set; } = new List<PetDto>(0);
+        public DateTimeOffset? End { get; init; } = null;
 
-        public List<PositionDto> Positions { get; set; } = new List<PositionDto>(0);
+        public List<PetDto> Pets { get; init; } = new List<PetDto>(0);
 
-        public bool IsPublic { get; set; } = true;
+        public List<PositionDto> Positions { get; init; } = new List<PositionDto>(0);
+
+        public bool IsPublic { get; init; } = true;
     }
 
     public sealed record PositionDto
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; init; } = Guid.NewGuid().ToString();
 
-        public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset Time { get; init; } = DateTimeOffset.Now;
 
-        public double Latitude { get; set; } = double.NaN;
+        public double Latitude { get; init; } = double.NaN;
 
-        public double Longitude { get; set; } = double.NaN;
+        public double Longitude { get; init; } = double.NaN;
 
-        public double Altitude { get; set; } = double.NaN;
+        public double Altitude { get; init; } = double.NaN;
 
-        public double Accuracy { get; set; } = double.NaN;
+        public double Accuracy { get; init; } = double.NaN;
 
-        public double Course { get; set; } = double.NaN;
+        public double Course { get; init; } = double.NaN;
 
-        public string Note { get; set; } = string.Empty;
+        public string Note { get; init; } = string.Empty;
 
-        public List<string> PhotoUris { get; set; } = new();
+        public List<string> PhotoUris { get; init; } = new();
     }
 
     public sealed record PetDto
