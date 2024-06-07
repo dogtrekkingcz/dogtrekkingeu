@@ -11,8 +11,8 @@ public sealed record ActivityModel : BaseSynchronizedModel
     public Guid TypeId { get; init; } = Guid.Empty;
     public string Name { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
-    public DateTime Start { get; init; }
-    public DateTime End { get; init; }
+    public DateTimeOffset? Start { get; init; } = null;
+    public DateTimeOffset? End { get; init; } = null;
     public bool IsPublic { get; init; }
     public IList<PositionDto> Positions { get; init; } = new List<PositionDto>(0);
     public IList<PetDto> Pets { get; init; } = new List<PetDto>(0);
@@ -38,6 +38,6 @@ public sealed record ActivityModel : BaseSynchronizedModel
         public string Breed { get; init; }
         public string Color { get; init; }
         public string Kennel { get; init; }
-        public DateTime BirthDate { get; init; }
+        public DateTimeOffset? BirthDate { get; init; } = null;
     }
 }

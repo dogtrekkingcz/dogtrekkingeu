@@ -21,10 +21,13 @@ public static class ActivityMapper
             .IgnoreNullValues(true);
 
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel, ActivityModel>()
-            .Map(d => d.SynchronizedAt, s => DateTime.Now);
+            .Map(d => d.SynchronizedAt, s => DateTime.Now)
+            .IgnoreNullValues(true);
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel.PositionDto, ActivityModel.PositionDto>()
-            .Ignore(d => d.Course);
-        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel.PetDto, ActivityModel.PetDto>();
+            .Ignore(d => d.Course)
+            .IgnoreNullValues(true);
+        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel.PetDto, ActivityModel.PetDto>()
+            .IgnoreNullValues(true);
 
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponseModel, UserActivitiesModel>()
             .Map(d => d.SynchronizedAt, s => DateTime.Now);
