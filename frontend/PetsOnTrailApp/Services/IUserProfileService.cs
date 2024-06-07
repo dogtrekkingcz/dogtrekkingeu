@@ -7,7 +7,5 @@ public interface IUserProfileService
 {
     Task<UserProfileModel> GetAsync();
 
-    Task<UserActivitiesModel> GetUserActivitiesAsync(Guid userId, CancellationToken cancellationToken);
-
     void Invalidate();
 }

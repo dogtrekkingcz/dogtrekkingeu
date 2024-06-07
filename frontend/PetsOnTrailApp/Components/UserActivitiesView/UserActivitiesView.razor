@@ -12,16 +12,19 @@
 }
 else
 {
-    <div>
-        <h3>@Localizer["Activity"]</h3>
-        <hr />
-        <p>@Localizer["ActivityId"] : @Model.Id</p>
-        <p>@Localizer["Name"] : @Model.Name</p>
-        <p>@Localizer["Description"] : @Model.Description</p>
-        <p>@Localizer["StartTime"] : @Model.Start</p>
-        <p>@Localizer["EndTime"] : @Model.End</p>
-        <p><button class="btn btn-info" @onclick="(async () => await GetActivityDetail(UserId, Model.Id))">@Localizer["Go to this activity"]</button></p>
-        <hr />
-    </div>
+    foreach (var activity in Model.Activities)
+    {
+        <div>
+            <h3>@Localizer["Activity"]</h3>
+            <hr />
+            <p>@Localizer["ActivityId"] : @activity.Id</p>
+            <p>@Localizer["Name"] : @activity.Name</p>
+            <p>@Localizer["Description"] : @activity.Description</p>
+            <p>@Localizer["StartTime"] : @activity.Start</p>
+            <p>@Localizer["EndTime"] : @activity.End</p>
+            <p><button class="btn btn-info" @onclick="(() => NavigateToActivity(activity.Id.ToString()))">@Localizer["Go to this activity"]</button></p>
+            <hr />
+        </div>
+    }
 }
 

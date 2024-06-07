@@ -1,6 +1,6 @@
 ﻿namespace PetsOnTrailApp.Models;
 
-public sealed record UserActivitiesModel
+public sealed record UserActivitiesModel : BaseSynchronizedModel
 {
     public Guid UserId { get; set; } = Guid.Empty;
 

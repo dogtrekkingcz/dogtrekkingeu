@@ -88,7 +88,7 @@ public static class DiCompositor
 
                     var activityRawData = await activitiesClient.getActivityByUserIdAndActivityIdAsync(new Protos.Activities.UserIdAndActivityId { UserId = guidList[0].ToString(), ActivityId = guidList[1].ToString() });
 
-                    List<PositionDto> filteredPositions = new List<PositionDto>();
+                    List<Protos.Activities.GetActivityByUserIdAndActivityId.PositionDto> filteredPositions = new List<Protos.Activities.GetActivityByUserIdAndActivityId.PositionDto>();
 
                     // filter positions for one item per one second only
                     var latestTime = DateTimeOffset.MinValue;

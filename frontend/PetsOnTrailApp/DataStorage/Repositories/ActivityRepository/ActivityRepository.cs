@@ -38,7 +38,7 @@ public class ActivityRepository : IActivityRepository
         // await LoadAndParseActionsSimpleAsync(typeIds, cancellationToken);
     }
 
-    public async Task<ActivityModel> GetActivitiesByUserId(Protos.Activities.UserIdRequest userIdRequest, CancellationToken cancellationToken)
+    public async Task<UserActivitiesModel> GetActivitiesByUserId(Protos.Activities.UserIdRequest userIdRequest, CancellationToken cancellationToken)
     {
         await semaphoreSlim.WaitAsync();
         try

@@ -29,12 +29,6 @@ public sealed class UserProfileService : IUserProfileService
         _tokenStorage = tokenStorage;
     }
 
-    public async Task<UserActivitiesModel> GetUserActivitiesAsync(Guid userId, CancellationToken cancellationToken)
-    {
-
-
-    }
-    
     public async Task<UserProfileModel> GetAsync()
     {   
         if (string.IsNullOrWhiteSpace(await _tokenStorage.GetAccessToken()))
