@@ -2,7 +2,7 @@
 
 public interface IJwtTokenService
 {
-    public string Parse(string token);
+    public Task<string> Parse(string token, CancellationToken cancellationToken);
 
     public Guid GetUserId();
 }

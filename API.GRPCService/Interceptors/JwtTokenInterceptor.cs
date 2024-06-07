@@ -29,7 +29,7 @@ namespace API.GRPCService.Interceptors
             { 
                 var token = tokenSource?.Value ?? string.Empty;
 
-                _jwtTokenService.Parse(token);
+                await _jwtTokenService.Parse(token, context.CancellationToken);
             }
 
             try

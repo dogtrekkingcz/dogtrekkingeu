@@ -15,7 +15,7 @@ public class JwtTokenFilterAttribute : ActionFilterAttribute
             var jwtTokenService = actionContext.HttpContext.RequestServices.GetRequiredService<IJwtTokenService>();
             
             if (jwtTokenService is not null)
-                jwtTokenService.Parse(token);
+                jwtTokenService.Parse(token, CancellationToken.None).RunSynchronously();
         }
 
         base.OnActionExecuting(actionContext);

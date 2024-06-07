@@ -24,7 +24,7 @@ namespace API.WebApiService.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateActivity([FromBody] CreateActivityRequest request)
         {
-            request.UserId = _jwtTokenService.Parse(HttpContext.Request.Headers["authorization"].FirstOrDefault() ?? string.Empty);
+            request.UserId = await _jwtTokenService.Parse(HttpContext.Request.Headers["authorization"].FirstOrDefault() ?? string.Empty, CancellationToken.None);
 
             var createActivityResponse = await _mediator.Send(request);
 
