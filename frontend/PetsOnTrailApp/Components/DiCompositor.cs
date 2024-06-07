@@ -8,6 +8,7 @@ using PetsOnTrailApp.Components.Results.CategoriesView;
 using PetsOnTrailApp.Components.Results.CategoryView;
 using PetsOnTrailApp.Components.Results.RacesView;
 using PetsOnTrailApp.Components.Results.ResultsAdd;
+using PetsOnTrailApp.Components.UserActivitiesView;
 
 namespace PetsOnTrailApp.Components;
 
@@ -24,7 +25,8 @@ internal static class DiCompositor
             .AddTransient<RaceViewBase>()
             .AddTransient<CategoriesViewBase>()
             .AddTransient<CategoryViewBase>()
-            .AddTransient<ResultsAddBase>();
+            .AddTransient<ResultsAddBase>()
+            .AddTransient<UserActivitiesViewBase>();
 
         return services;
     }
