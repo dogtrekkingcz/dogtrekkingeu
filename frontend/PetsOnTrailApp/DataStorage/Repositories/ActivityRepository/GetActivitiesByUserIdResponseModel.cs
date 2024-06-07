@@ -1,6 +1,8 @@
-﻿namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
+﻿using PetsOnTrailApp.Models;
 
-public sealed record GetActivitiesByUserIdResponseModel
+namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
+
+public sealed record GetActivitiesByUserIdResponseModel : BaseSynchronizedModel
 {
     public Guid UserId { get; set; } = Guid.Empty;
 
@@ -20,7 +22,7 @@ public sealed record GetActivitiesByUserIdResponseModel
 
         public string Description { get; set; } = string.Empty;
 
-        public DateTimeOffset Start { get; set; } = DateTimeOffset.MinValue;
+        public DateTimeOffset? Start { get; set; } = null;
 
         public DateTimeOffset? End { get; set; } = null;
 

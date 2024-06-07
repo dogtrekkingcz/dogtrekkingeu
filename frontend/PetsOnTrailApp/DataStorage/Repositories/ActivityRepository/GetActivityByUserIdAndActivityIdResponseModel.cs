@@ -8,10 +8,11 @@ public sealed record GetActivityByUserIdAndActivityIdResponseModel
     public Guid ActionId { get; init; } = Guid.Empty;
     public Guid RaceId { get; init; } = Guid.Empty;
     public Guid CategoryId { get; init; } = Guid.Empty;
+    public Guid TypeId { get; init; } = Guid.Empty;
     public string Name { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
-    public DateTime Start { get; init; }
-    public DateTime End { get; init; }
+    public DateTimeOffset? Start { get; init; } = null;
+    public DateTimeOffset? End { get; init; } = null;
     public bool IsPublic { get; init; }
     public IList<PositionDto> Positions { get; init; } = new List<PositionDto>(0);
     public IList<PetDto> Pets { get; init; } = new List<PetDto>(0);
@@ -22,7 +23,7 @@ public sealed record GetActivityByUserIdAndActivityIdResponseModel
         public Guid Id { get; init; } = Guid.Empty;
 
         [JsonPropertyName("_t")]
-        public DateTime Time { get; init; }
+        public DateTimeOffset? Time { get; init; } = null;
 
         [JsonPropertyName("la")]
         public double Latitude { get; init; }
@@ -63,6 +64,6 @@ public sealed record GetActivityByUserIdAndActivityIdResponseModel
         public string Kennel { get; init; }
 
         [JsonPropertyName("bd")]
-        public DateTime BirthDate { get; init; }
+        public DateTimeOffset? BirthDate { get; init; } = null;
     }
 }

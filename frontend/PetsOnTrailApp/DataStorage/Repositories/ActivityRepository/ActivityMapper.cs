@@ -2,7 +2,6 @@
 using PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
-using Protos.Activities.GetActivityByUserIdAndActivityId;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
@@ -10,13 +9,13 @@ public static class ActivityMapper
 {
     public static TypeAdapterConfig AddActivityMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel>()
-            .Map(d => d.Start, s => s.Start.ToDateTimeOffset().Value.DateTime)
-            .Map(d => d.End, s => s.End.ToDateTimeOffset().Value.DateTime);
-        typeAdapterConfig.NewConfig<PositionDto, GetActivityByUserIdAndActivityIdResponseModel.PositionDto>()
-            .Map(d => d.Time, s => s.Time.ToDateTimeOffset().Value.DateTime);
-        typeAdapterConfig.NewConfig<PetDto, GetActivityByUserIdAndActivityIdResponseModel.PetDto>()
-            .Map(d => d.BirthDate, s => s.BirthDate.ToDateTimeOffset().Value.DateTime);
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel>()
+            .Map(d => d.Start, s => s.Start.ToDateTimeOffset())
+            .Map(d => d.End, s => s.End.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivityByUserIdAndActivityId.PositionDto, GetActivityByUserIdAndActivityIdResponseModel.PositionDto>()
+            .Map(d => d.Time, s => s.Time.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivityByUserIdAndActivityId.PetDto, GetActivityByUserIdAndActivityIdResponseModel.PetDto>()
+            .Map(d => d.BirthDate, s => s.BirthDate.ToDateTimeOffset());
 
         typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdResponseModel, ActivityModel>()
             .Map(d => d.SynchronizedAt, s => DateTime.Now);
@@ -30,10 +29,15 @@ public static class ActivityMapper
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponseModel.PositionDto, UserActivitiesModel.PositionDto>();
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponseModel.PetDto, UserActivitiesModel.PetDto>();
 
-        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel>();
-        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.ActivityDto, GetActivitiesByUserIdResponseModel.ActivityDto>();
-        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.PositionDto, GetActivitiesByUserIdResponseModel.PositionDto>();
-        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.PetDto, GetActivitiesByUserIdResponseModel.PetDto>();
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel>()
+            .Map(d => d.SynchronizedAt, s => DateTime.Now);
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.ActivityDto, GetActivitiesByUserIdResponseModel.ActivityDto>()
+            .Map(d => d.Start, s => s.Start.ToDateTimeOffset())
+            .Map(d => d.End, s => s.End.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.PositionDto, GetActivitiesByUserIdResponseModel.PositionDto>()
+            .Map(d => d.Time, s => s.Time.ToDateTimeOffset());
+        typeAdapterConfig.NewConfig<Protos.Activities.GetActivitiesByUserId.PetDto, GetActivitiesByUserIdResponseModel.PetDto>()
+            .Map(d => d.BirthDate, s => s.BirthDate.ToDateTimeOffset());
 
         return typeAdapterConfig;
     }
