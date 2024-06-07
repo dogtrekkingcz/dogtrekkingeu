@@ -11,13 +11,14 @@ message GetActivityByUserIdAndActivityIdResponse {
   string ActionId = 2;
   string RaceId = 3;
   string CategoryId = 4;
-  string Name = 5;
-  string Description = 6;
-  google.type.DateTime Start = 7;
-  google.type.DateTime End = 8;
-  bool IsPublic = 9;
-  repeated PositionDto Positions = 10;
-  repeated PetDto Pets = 11;
+  string TypeId = 5;
+  string Name = 6;
+  string Description = 7;
+  google.type.DateTime Start = 8;
+  google.type.DateTime End = 9;
+  bool IsPublic = 10;
+  repeated PositionDto Positions = 11;
+  repeated PetDto Pets = 12;
 }
 
 message PositionDto {
