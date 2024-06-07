@@ -18,7 +18,8 @@ namespace Storage.Services.Repositories.Activities
             typeAdapterConfig.NewConfig<ActivityRecord.PositionDto, AddPointInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<List<ActivityRecord>, GetActivitiesByUserIdInternalStorageResponse>()
-                .Map(d => d.Activities, s => s);
+                .Map(d => d.Activities, s => s)
+                .Ignore(d => d.UserId);
             typeAdapterConfig.NewConfig<ActivityRecord, GetActivitiesByUserIdInternalStorageResponse.ActivityDto>();
             typeAdapterConfig.NewConfig<ActivityRecord.PositionDto, GetActivitiesByUserIdInternalStorageResponse.PositionDto>();
             typeAdapterConfig.NewConfig<ActivityRecord.PetDto, GetActivitiesByUserIdInternalStorageResponse.PetDto>();

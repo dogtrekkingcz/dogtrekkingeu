@@ -1,5 +1,4 @@
-﻿using FisSst.BlazorMaps;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 using PetsOnTrailApp.Models;
 
