@@ -100,6 +100,7 @@ services:
       KC_DB_USERNAME: keycl0ak
       KC_DB_PASSWORD: password
       KC_LOG_LEVEL: info
+      KC_HOSTNAME_URL: https://petsontrail.eu:8443/
       KC_HTTPS_CERTIFICATE_FILE: /opt/keycloak/conf/server.crt.pem
       KC_HTTPS_CERTIFICATE_KEY_FILE: /opt/keycloak/conf/server.key.pem
       KEYCLOAK_ADMIN: administrat0r
