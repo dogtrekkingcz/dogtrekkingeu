@@ -42,7 +42,7 @@
     private IList<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem> _notifications = new List<Protos.LiveUpdatesSubscription.LiveUpdatesSubscriptionItem>();
 
     [CascadingParameter] protected Task<AuthenticationState> AuthenticationStateTask { get; set; }
-    
+
     private string _userId { get; set; }
     private string _checkpointsLink { get; set; }
 
@@ -53,39 +53,31 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _userId = (await UserProfileService.GetAsync())?.UserId ?? "";
-        _checkpointsLink = $"/checkpoints_manage/{Guid.Empty}/{Guid.Empty}/{_userId}";
-        
-        var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
-        {
-            UserId = "",
-            Created = DateTimeOffset.Now.ToGoogleDateTime(),
-            Section = "Entries",
-            AdditionalInfo = "tralalala"
-        });
-        
         var user = (await AuthenticationStateTask).User;
-        
+
         if (user.Identity.IsAuthenticated)
         {
             var claims = user.Claims;
 
             var userId = claims.FirstOrDefault(claim => claim.Type == "sub")?.Value ?? "";
+            _userId = userId;
+            _checkpointsLink = $"/checkpoints_manage/{Guid.Empty}/{Guid.Empty}/{_userId}";
             var firstName = claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? "";
             var lastName = claims.FirstOrDefault(claim => claim.Type == "family_name")?.Value ?? "";
             var emailClaim = claims.FirstOrDefault(claim => claim.Type == "email");
 
-            var loggedUser = await LoadUserDataAsync();
-            
-            if (loggedUser == null || string.IsNullOrEmpty(loggedUser.Id))
+            var stream = LiveUpdatesSubscriptionClient.subscribeForUpdates(new LiveUpdatesSubscriptionRequest
             {
-                await RegisterUserAsync(userId, emailClaim, firstName, lastName);
-            }
-            
-            loggedUser = await LoadUserDataAsync();
+                UserId = _userId,
+                Created = DateTimeOffset.Now.ToGoogleDateTime(),
+                Section = "Entries",
+                AdditionalInfo = "tralalala"
+            });
+
+            HandleIncomingNotificationsAsync(stream.ResponseStream);
+
+            StateHasChanged();
         }
-        
-        HandleIncomingNotificationsAsync(stream.ResponseStream);
     }
     
     private async Task HandleIncomingNotificationsAsync(IAsyncStreamReader<LiveUpdatesSubscriptionItem> responseStream)
