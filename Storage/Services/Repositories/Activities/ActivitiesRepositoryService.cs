@@ -1,5 +1,7 @@
-﻿using MapsterMapper;
+﻿using Amazon.Runtime.Internal;
+using MapsterMapper;
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
 using Storage.Entities.Activities;
 using Storage.Extensions;
 using Storage.Interfaces;
@@ -94,9 +96,13 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
     public async Task<GetActivityByUserIdAndActivityIdInternalStorageResponse> GetActivityByUserIdAndActivityId(Guid userId, string activityId, CancellationToken cancellationToken)
     {
-        var profile = await _profilesService.GetAsync(userId.ToString(), cancellationToken);
+        BsonDocument filter = new BsonDocument();
+        filter
+            .Add(nameof(ActivityRecord.UserId), userId.ToString())
+            .Add(nameof(ActivityRecord.Id), activityId);
 
-        var activity = profile.Activities.FirstOrDefault(a => a.Id == activityId);
+        var activity = await _activitiesService.GetByCustomFilterAsync(filter, cancellationToken);
+
         _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activity.Dump()}");
 
         return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activity) with { UserId = userId };
