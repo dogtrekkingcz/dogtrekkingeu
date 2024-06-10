@@ -91,7 +91,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
     {
         var activities = await _activitiesService.GetByUserId(userId.ToString(), cancellationToken);
 
-        var response =  _mapper.Map<GetActivitiesByUserIdInternalStorageResponse>(activities) with { UserId = userId };
+        var response = _mapper.Map<GetActivitiesByUserIdInternalStorageResponse>(activities) with { UserId = userId };
 
         return response;
     }
