@@ -222,11 +222,14 @@ class ActivityUploadService : Service() {
             if (response != null) {
                 Log.d("Service status", "Activity created")
 
-                for (i in 0..positions.size step 100) {
-                    var positionsChunk = positions.subList(i, Math.min(positions.size, i + 100))
+                var processedPositionsCount = 0
+                for (i in 0..positions.size step 50) {
+                    var positionsChunk = positions.subList(i, Math.min(positions.size - processedPositionsCount, i + 50))
 
                     if (positionsChunk.isEmpty())
                         break
+
+                    processedPositionsCount += positionsChunk.size
 
                     var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
                     addPointsRequestBuilder
@@ -252,6 +255,7 @@ class ActivityUploadService : Service() {
 
                             positionDtoBuilder.build()
                         })
+
                     client.addPoints(addPointsRequestBuilder?.build())
                 }
             }

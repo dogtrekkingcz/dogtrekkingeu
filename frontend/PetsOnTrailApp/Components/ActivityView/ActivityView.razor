@@ -28,7 +28,7 @@ else
         <p>@Localizer["EndTime"] : @Model.End</p>
         <hr />
 
-        <button class="btn btn-info" @onclick="(async () => await LoadAsync())">@Localizer["Race"]</button>
+        <button class="btn btn-info" @onclick="(async () => await LoadAsync())">@Localizer["Refresh"]</button>
         <Map @ref="mapRef" MapOptions="@mapOptions"></Map>
     </div>
 }

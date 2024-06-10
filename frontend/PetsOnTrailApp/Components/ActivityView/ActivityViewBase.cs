@@ -28,6 +28,11 @@ public class ActivityViewBase : ComponentBase
     {
         base.OnInitialized();
 
+        await LoadAsync();
+    }
+
+    protected async Task LoadAsync()
+    {
         Model = await _activityRepository.GetActivityByUserIdAndActivityId(new Protos.Activities.UserIdAndActivityId { UserId = UserId, ActivityId = ActivityId }, CancellationToken.None);
 
         if (Model != null && Model.Positions.Count > 0)
@@ -54,18 +59,9 @@ public class ActivityViewBase : ComponentBase
                 }
             };
 
+            await PolylineFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
+
             StateHasChanged();
         }
-    }
-
-    protected async Task LoadAsync()
-    {
-        //Model.Positions.Select(async p =>
-        //    await MarkerFactory.CreateAndAddToMap(new LatLng(p.Latitude, p.Longitude), mapRef)
-        //);
-
-        await PolylineFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
-
-        StateHasChanged();
     }
 }
