@@ -48,6 +48,9 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<AddPointsRequest.PointDto, UpdateActivityInternalStorageRequest.PositionDto>()
             .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
 
+        typeAdapterConfig.NewConfig<AddPointsRequest.PointDto, CreateActivityInternalStorageRequest.PositionDto>()
+            .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
+
         return typeAdapterConfig;
     }
 }
