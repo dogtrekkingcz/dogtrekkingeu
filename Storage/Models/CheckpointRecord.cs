@@ -1,11 +1,7 @@
 ﻿namespace Storage.Models;
 
-internal sealed record CheckpointRecord : IRecord
+internal sealed record CheckpointRecord : BaseRecord, IRecord
 {
-    public string? Id { get; set; } = Guid.Empty.ToString();
-
-    public string UserId { get; set; } = string.Empty;
-
     public string ActionId { get; set; } = Guid.Empty.ToString();
 
     public string CheckpointId { get; set; } = Guid.Empty.ToString();

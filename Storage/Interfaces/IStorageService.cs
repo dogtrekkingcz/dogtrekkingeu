@@ -9,6 +9,8 @@ internal interface IStorageService<T> where T: IRecord
 
     public Task DeleteAsync(string id, CancellationToken cancellationToken);
 
+    public Task DeleteAllByCorrelationIdAsync(Guid correlationId, CancellationToken cancellationToken);
+
     public Task<T> GetAsync(string id, CancellationToken cancellationToken);
 
     public Task<IReadOnlyList<T>> GetByFilterAsync(IList<(string key, Type typeOfValue, object value)> filterList, CancellationToken cancellationToken);
@@ -19,9 +21,9 @@ internal interface IStorageService<T> where T: IRecord
 
     public Task<IReadOnlyList<T>> GetByCustomFilterAsync(BsonDocument filter, CancellationToken cancellationToken);
 
-    public Task<IReadOnlyList<T>> GetByUserId(string userId, CancellationToken cancellationToken);
+    public Task<IReadOnlyList<T>> GetByUserId(Guid userId, CancellationToken cancellationToken);
 
-    public Task<IReadOnlyList<T>> GetByUserIdAndId(string userId, string id, CancellationToken cancellationToken);
+    public Task<IReadOnlyList<T>> GetByUserIdAndCorrelationId(Guid userId, Guid correlationId, CancellationToken cancellationToken);
 
     public Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken);
 

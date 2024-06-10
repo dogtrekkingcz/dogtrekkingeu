@@ -1,9 +1,7 @@
 ﻿namespace Storage.Models;
 
-internal sealed record ActionRecord : IRecord
+internal sealed record ActionRecord : BaseRecord, IRecord
 {
-    public string? Id { get; set; }
-    public string? UserId { get; set; }    
     public string Type { get; set; }    
     public DateTimeOffset Created { get; set; }
     public string Name { get; set; } = string.Empty;

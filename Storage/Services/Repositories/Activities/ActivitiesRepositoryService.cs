@@ -47,13 +47,14 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
                 user = new UserProfileRecord
                 {
                     Id = request.UserId.ToString(),
-                    UserId = request.UserId.ToString(),
+                    UserId = request.UserId,
                     Roles = new List<Guid> { Guid.Parse(Constants.Roles.InternalUser.Id) },
                 };
             }
 
             // into profile we store only the reference to activity, no position data; its in the activity table itself
             var activity = _mapper.Map<UserProfileRecord.ActivityDto>(request);
+            activity.Positions = new List<UserProfileRecord.PositionDto>(0);    // no need to store positions in user profile
             user.Activities.Add(activity);
 
             var createdUserActivityRecord = await _profilesService.AddOrUpdateAsync(user, cancellationToken);
@@ -65,9 +66,33 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
 
             // and also store the users activity in activities collection
-            addRequest.UserId = request.UserId.ToString();
-            var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
-            response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
+            addRequest.UserId = request.UserId;
+            addRequest.CorrelationId = request.Id;
+            if (addRequest.Positions == null)
+                addRequest.Positions = new List<ActivityRecord.PositionDto>(0);
+
+            // deal with continuation records... mongodb has a limit of 16MB per document
+            if (addRequest.Positions.Count <= 500)
+            { 
+                var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
+                response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
+            }
+            else
+            {
+                await _activitiesService.DeleteAllByCorrelationIdAsync(Guid.Parse(addRequest.Id), cancellationToken);
+
+                for (int i = 0; i < addRequest.Positions.Count; i += 500)
+                {
+                    var positions = addRequest.Positions.Skip(i).Take(500).ToList();
+                    addRequest.Positions = positions;
+                    addRequest.Id = Guid.NewGuid().ToString();
+                    addRequest.UserId = request.UserId;
+                    addRequest.CorrelationId = request.Id;
+                    var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
+                    response = _mapper.Map<CreateActivityInternalStorageResponse>(createdActivityRecord);
+                }
+            }
+            
         }
 
         return response;
@@ -89,16 +114,16 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
     public async Task<GetActivitiesByUserIdInternalStorageResponse> GetActivitiesByUserId(Guid userId, CancellationToken cancellationToken)
     {
-        var activities = await _activitiesService.GetByUserId(userId.ToString(), cancellationToken);
+        var activities = await _activitiesService.GetByUserId(userId, cancellationToken);
 
         var response = _mapper.Map<GetActivitiesByUserIdInternalStorageResponse>(activities) with { UserId = userId };
 
         return response;
     }
 
-    public async Task<GetActivityByUserIdAndActivityIdInternalStorageResponse> GetActivityByUserIdAndActivityId(Guid userId, string activityId, CancellationToken cancellationToken)
+    public async Task<GetActivityByUserIdAndActivityIdInternalStorageResponse> GetActivityByUserIdAndActivityId(Guid userId, Guid activityId, CancellationToken cancellationToken)
     {
-        var activities = await _activitiesService.GetByUserIdAndId(userId.ToString(), activityId, cancellationToken);
+        var activities = await _activitiesService.GetByUserIdAndCorrelationId(userId, activityId, cancellationToken);
         if (activities == null || activities.Count == 0)
         {
             _logger.LogWarning($"Storage: GetActivityByUserIdAndActivityId: No activity found for user '{userId}' and activity '{activityId}'");
@@ -111,7 +136,24 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
         _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activities.Dump()}");
 
-        return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activities.FirstOrDefault()) with { UserId = userId };
+        var response = _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activities.FirstOrDefault()) with { UserId = userId };
+        bool first = true;
+        foreach (var activity in activities)
+        {
+            if (first)
+            {
+                first = false;
+                continue;
+            }
+
+            response.Positions.AddRange(
+                activity.Positions.Select(position => 
+                    _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse.PositionDto>(position)
+                )
+            );
+        }
+
+        return response;
     }
 
     public async Task<GetActivitiesInternalStorageResponse> GetActivitiesAsync(CancellationToken cancellationToken)

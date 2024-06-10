@@ -8,7 +8,8 @@ namespace Storage.Services.Repositories.Activities
     {
         internal static TypeAdapterConfig AddActivitiesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest, ActivityRecord>();
+            typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest, ActivityRecord>()
+                .Map(d => d.CorrelationId, s => s.Id);
             typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PositionDto, ActivityRecord.PositionDto>();
             typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PetDto, ActivityRecord.PetDto>()
                 .Map(d => d.Id, s => s.Id.ToString());
@@ -38,7 +39,8 @@ namespace Storage.Services.Repositories.Activities
             typeAdapterConfig.NewConfig<ActivityRecord.PositionDto, GetActivitiesInternalStorageResponse.PositionDto>();
             typeAdapterConfig.NewConfig<ActivityRecord.PetDto, GetActivitiesInternalStorageResponse.PetDto>();
 
-            typeAdapterConfig.NewConfig<UpdateActivityInternalStorageRequest, ActivityRecord>();
+            typeAdapterConfig.NewConfig<UpdateActivityInternalStorageRequest, ActivityRecord>()
+                .Map(d => d.CorrelationId, s => s.Id);
             typeAdapterConfig.NewConfig<UpdateActivityInternalStorageRequest.PositionDto, ActivityRecord.PositionDto>();
             typeAdapterConfig.NewConfig<UpdateActivityInternalStorageRequest.PetDto, ActivityRecord.PetDto>();
 

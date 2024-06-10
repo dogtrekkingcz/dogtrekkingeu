@@ -13,7 +13,7 @@ namespace Storage.Services.Repositories.ActionRights
             typeAdapterConfig.NewConfig<ActionRightsRecord, AddActionRightsInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<GetAllRightsInternalStorageRequest, ActionRightsRecord>()
-                .MapWith(s => new ActionRightsRecord { UserId = s.UserId.ToString() });
+                .MapWith(s => new ActionRightsRecord { UserId = s.UserId });
             typeAdapterConfig.NewConfig<ActionRightsRecord, GetAllRightsInternalStorageResponse.ActionRightsDto>();
 
             return typeAdapterConfig;

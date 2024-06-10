@@ -55,7 +55,7 @@ internal class ActivitiesService : IActivitiesService
 
     public async Task<AddPointsResponse> AddPointsAsync(AddPointsRequest request, CancellationToken cancellationToken)
     {
-        var activity = await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(_currentUserIdService.GetUserId(), request.ActivityId.ToString(), cancellationToken);
+        var activity = await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(_currentUserIdService.GetUserId(), request.ActivityId, cancellationToken);
 
         List<CreateActivityInternalStorageRequest.PositionDto> positions = activity.Positions.Select(p => _mapper.Map<CreateActivityInternalStorageRequest.PositionDto>(p)).ToList();
         positions.AddRange(request.Points.Select(p => _mapper.Map<CreateActivityInternalStorageRequest.PositionDto>(p)));
@@ -85,7 +85,7 @@ internal class ActivitiesService : IActivitiesService
 
     public async Task<GetActivityByUserIdAndActivityIdResponse> GetActivityByUserIdAndActivityIdAsync(Guid userId, Guid activityId, CancellationToken cancellationToken)
     {
-        var response = await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(userId, activityId.ToString(), cancellationToken);
+        var response = await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(userId, activityId, cancellationToken);
 
         return _mapper.Map<GetActivityByUserIdAndActivityIdResponse>(response);
     }

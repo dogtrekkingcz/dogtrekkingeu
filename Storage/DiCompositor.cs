@@ -107,6 +107,8 @@ public static class DiCompositor
             .Map(d => d, s => s.ToGuid());
         typeAdapterConfig.NewConfig<Guid?, string?>()
             .Map(d => d, s => s.ToString());
+        typeAdapterConfig.NewConfig<object, BaseRecord>()
+            .Ignore(d => d.CorrelationId);
 
         typeAdapterConfig
             .AddActionRepositoryMapping()

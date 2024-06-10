@@ -1,13 +1,9 @@
 ﻿namespace Storage.Models;
 
-internal sealed record EntryRecord : IRecord
+internal sealed record EntryRecord : BaseRecord, IRecord
 {
-    public string? Id { get; set; } = "";
-
     public EntryState State { get; set; } = EntryState.Entered;
 
-    public string UserId { get; set; } = "";
-    
     public string CompetitorId { get; set; } = "";
 
     public string FirstName { get; set; } = "";

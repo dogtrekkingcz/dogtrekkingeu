@@ -1,11 +1,7 @@
 ﻿namespace Storage.Models;
 
-internal sealed record UserProfileRecord : IRecord
+internal sealed record UserProfileRecord : BaseRecord, IRecord
 {
-    public string? Id { get; set; } = string.Empty;
-    
-    public string UserId { get; set; } = string.Empty;
-
     public string Email { get; set; } = string.Empty;
 
     public Guid CompetitorId { get; set; } = default(Guid);

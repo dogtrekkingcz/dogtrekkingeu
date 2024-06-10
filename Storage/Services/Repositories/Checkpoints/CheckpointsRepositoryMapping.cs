@@ -23,7 +23,7 @@ namespace Storage.Services.Repositories.Checkpoints
                 .Map(d => d.Id, s => s.Id.ToGuid())
                 .Map(d => d.ActionId, s => s.ActionId.ToGuid())
                 .Map(d => d.CheckpointId, s => s.CheckpointId.ToGuid())
-                .Map(d => d.UserId, s => s.UserId.ToGuid());
+                .Map(d => d.UserId, s => s.UserId);
             typeAdapterConfig.NewConfig<CheckpointRecord.LatLngDto, GetCheckpointItemsInternalStorageResponse.LatLngDto>();
 
             typeAdapterConfig.NewConfig<CheckpointRecord, GetCheckpointItemInternalStorageResponse>()
@@ -31,7 +31,7 @@ namespace Storage.Services.Repositories.Checkpoints
                 .Map(d => d.Id, s => s.Id.ToGuid())
                 .Map(d => d.ActionId, s => s.ActionId.ToGuid())
                 .Map(d => d.CheckpointId, s => s.CheckpointId.ToGuid())
-                .Map(d => d.UserId, s => s.UserId.ToGuid());
+                .Map(d => d.UserId, s => s.UserId);
             typeAdapterConfig.NewConfig<CheckpointRecord.LatLngDto, GetCheckpointItemInternalStorageResponse.LatLngDto>();
             
             return typeAdapterConfig;

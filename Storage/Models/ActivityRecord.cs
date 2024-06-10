@@ -1,17 +1,13 @@
 ﻿namespace Storage.Models;
 
-internal sealed record ActivityRecord : IRecord
+internal sealed record ActivityRecord : BaseRecord, IRecord
 {
-    public string? Id { get; set; }
-
-    public string UserId { get; set; } = string.Empty;
-
     public string ActionId { get; set; } = Guid.Empty.ToString();
 
     public string RaceId { get; set; } = Guid.Empty.ToString();
 
     public string CategoryId { get; set; } = Guid.Empty.ToString();
-    
+
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;

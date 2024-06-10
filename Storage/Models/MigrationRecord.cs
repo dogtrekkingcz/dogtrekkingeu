@@ -1,12 +1,8 @@
 ﻿namespace Storage.Models;
 
-public sealed record MigrationRecord : IRecord
+internal sealed record MigrationRecord : BaseRecord, IRecord
 {
-    public string? Id { get; set; } = $"{DateTime.Now.ToString("yyyyMMdd_HHmmss")}_NotSpecified";
-    
-    public string? UserId { get; set; }
-    
-    public string Name { get; set; }
+    public string Name { get; set; } = $"{DateTime.Now.ToString("yyyyMMdd_HHmmss")}_NotSpecified";
     
     public DateTimeOffset Created { get; set; } = DateTimeOffset.Now;
 }

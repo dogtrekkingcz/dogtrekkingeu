@@ -74,6 +74,13 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         await _collection.DeleteOneAsync(filter, cancellationToken: cancellationToken);
     }
 
+    public async Task DeleteAllByCorrelationIdAsync(Guid correlationId, CancellationToken cancellationToken)
+    {
+        var filter = Builders<T>.Filter.Eq(x => x.CorrelationId, correlationId);
+        
+        await _collection.DeleteManyAsync(filter, cancellationToken: cancellationToken);
+    }
+
     public async Task<T> GetAsync(string id, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq(x => x.Id, id);
@@ -139,9 +146,9 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return document;
     }
 
-    public async Task<IReadOnlyList<T>> GetByUserId(string userId, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<T>> GetByUserId(Guid userId, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Where(e => e.UserId != null && e.UserId == userId);
+        var filter = Builders<T>.Filter.Where(e => e.UserId == userId);
         
         var documents = await _collection
             .Find(filter)
@@ -150,9 +157,9 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return documents;
     }
 
-    public async Task<IReadOnlyList<T>> GetByUserIdAndId(string userId, string id, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<T>> GetByUserIdAndCorrelationId(Guid userId, Guid correlationId, CancellationToken cancellationToken)
     {
-        var filter = Builders<T>.Filter.Where(e => e.UserId != null && e.UserId == userId && e.Id != null && e.Id == id);
+        var filter = Builders<T>.Filter.Where(e => e.UserId == userId && e.CorrelationId == correlationId);
 
         var documents = await _collection
             .Find(filter)
