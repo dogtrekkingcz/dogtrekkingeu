@@ -2,6 +2,7 @@
 using Mapster;
 using Storage.Entities.Activities;
 using Storage.Entities.ActivityTypes;
+using Amazon.Auth.AccessControlPolicy;
 
 namespace PetsOnTrail.Actions.Services.Checkpoints;
 
@@ -47,9 +48,12 @@ internal static class ActivitiesServiceMapping
 
         typeAdapterConfig.NewConfig<AddPointsRequest.PointDto, UpdateActivityInternalStorageRequest.PositionDto>()
             .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
+        typeAdapterConfig.NewConfig<UpdateActivityInternalStorageResponse, AddPointsResponse>();
 
         typeAdapterConfig.NewConfig<AddPointsRequest.PointDto, CreateActivityInternalStorageRequest.PositionDto>()
             .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
+        typeAdapterConfig.NewConfig<CreateActivityInternalStorageResponse, AddPointsResponse>();
+
 
         return typeAdapterConfig;
     }
