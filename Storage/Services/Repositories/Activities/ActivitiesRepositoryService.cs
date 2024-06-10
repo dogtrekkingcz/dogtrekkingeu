@@ -52,6 +52,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
                 };
             }
 
+            // into profile we store only the reference to activity, no position data; its in the activity table itself
             var activity = _mapper.Map<UserProfileRecord.ActivityDto>(request);
             user.Activities.Add(activity);
 
@@ -61,6 +62,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
             {
                 Id = Guid.Parse(activity.Id)
             };
+
 
             // and also store the users activity in activities collection
             addRequest.UserId = request.UserId.ToString();
