@@ -103,11 +103,11 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
             .Add(nameof(ActivityRecord.UserId), userId.ToString())
             .Add(nameof(ActivityRecord.Id), activityId);
 
-        var activity = await _activitiesService.GetByCustomFilterAsync(filter, cancellationToken);
+        var activities = await _activitiesService.GetByCustomFilterAsync(filter, cancellationToken);
 
-        _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activity.Dump()}");
+        _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activities.Dump()}");
 
-        return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activity) with { UserId = userId };
+        return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activities.FirstOrDefault()) with { UserId = userId };
     }
 
     public async Task<GetActivitiesInternalStorageResponse> GetActivitiesAsync(CancellationToken cancellationToken)
