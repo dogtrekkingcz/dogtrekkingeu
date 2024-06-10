@@ -1,4 +1,7 @@
-﻿FROM quay.io/keycloak/keycloak:latest as builder
+﻿FROM quay.io/keycloak/keycloak:24.0.5 as builder
+# Latest from version 25 - has any problem with defining hostname when starting
+# FROM quay.io/keycloak/keycloak:latest as builder
+
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true

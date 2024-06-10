@@ -90,11 +90,13 @@ services:
     restart: always
 
   keycloak:
+    hostname: petsontrail.eu
     container_name: PetsOnTrail.KeyCloak
     build:
       context: .
       dockerfile: keycloak/Dockerfile
     environment:
+      KEYCLOAK_HOSTNAME: keycloak.localhost
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://keycloakdb:5432/keycl0ak
       KC_DB_USERNAME: keycl0ak
