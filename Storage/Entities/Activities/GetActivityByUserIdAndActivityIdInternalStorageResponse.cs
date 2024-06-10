@@ -4,6 +4,7 @@ public sealed record GetActivityByUserIdAndActivityIdInternalStorageResponse
 {
     public Guid Id { get; init; } = Guid.Empty;
 
+    public Guid UserId { get; init; } = Guid.Empty;
     public Guid ActionId { get; init; } = Guid.Empty;
 
     public Guid RaceId { get; init; } = Guid.Empty;

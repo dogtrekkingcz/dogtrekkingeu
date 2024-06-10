@@ -99,7 +99,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
         var activity = profile.Activities.FirstOrDefault(a => a.Id == activityId);
         _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activity.Dump()}");
 
-        return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activity);
+        return _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activity) with { UserId = userId };
     }
 
     public async Task<GetActivitiesInternalStorageResponse> GetActivitiesAsync(CancellationToken cancellationToken)
