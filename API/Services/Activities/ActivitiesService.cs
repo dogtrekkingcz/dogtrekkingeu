@@ -55,11 +55,16 @@ internal class ActivitiesService : IActivitiesService
 
     public async Task<AddPointsResponse> AddPointsAsync(AddPointsRequest request, CancellationToken cancellationToken)
     {
-        var activity = _mapper.Map<UpdateActivityInternalStorageRequest>(
-                await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(_currentUserIdService.GetUserId(), request.ActivityId.ToString(), cancellationToken)
-            );
-        activity.Positions.AddRange(request.Points.Select(p => _mapper.Map<UpdateActivityInternalStorageRequest.PositionDto>(p)));
-        var response = await _activitiesRepositoryService.UpdateActivityAsync(activity, cancellationToken);
+        var activity = await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(_currentUserIdService.GetUserId(), request.ActivityId.ToString(), cancellationToken);
+
+        List<UpdateActivityInternalStorageRequest.PositionDto> positions = activity.Positions.Select(p => _mapper.Map<UpdateActivityInternalStorageRequest.PositionDto>(p)).ToList();
+        positions.AddRange(request.Points.Select(p => _mapper.Map<UpdateActivityInternalStorageRequest.PositionDto>(p)));
+
+        var updateActivityRequest = _mapper.Map<UpdateActivityInternalStorageRequest>(activity) with
+        {
+            Positions = positions.DistinctBy(p => p.Id).ToList()
+        };
+        var response = await _activitiesRepositoryService.UpdateActivityAsync(updateActivityRequest, cancellationToken);
         
         return _mapper.Map<AddPointsResponse>(response);
     }

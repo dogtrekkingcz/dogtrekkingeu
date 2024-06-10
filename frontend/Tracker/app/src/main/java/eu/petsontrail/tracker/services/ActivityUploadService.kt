@@ -1,6 +1,7 @@
 package eu.petsontrail.tracker.services
 
 import activities.ActivitiesGrpc
+import addpoints.AddPointsRequestOuterClass
 import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
@@ -206,27 +207,6 @@ class ActivityUploadService : Service() {
                     petDtoBuilder
                         .build()
                 })
-                .addAllPositions(positions.map { position ->
-                    var positionDtoBuilder = CreateActivityRequestOuterClass.PositionDto.newBuilder()
-                        .setId(position.uid.toString())
-                        .setTime(Timestamp.newBuilder().setSeconds(position.time))
-                        .setLatitude(position.latitudeDegrees!!)
-                        .setLongitude(position.longitudeDegrees!!)
-
-                    if (position.altitudeMeters != null)
-                        positionDtoBuilder.setAltitude(position.altitudeMeters!!)
-
-                    if (position.horizontalAccuracyMeters != null)
-                        positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
-
-                    if (position.bearingDegrees != null)
-                        positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
-
-                    if (position.note != null)
-                        positionDtoBuilder.setNote(position.note)
-
-                    positionDtoBuilder.build()
-                })
 
             if (activity.start != null) {
                 requestBuilder?.setStart(Timestamp.newBuilder().setSeconds(activity.start!!))
@@ -238,6 +218,36 @@ class ActivityUploadService : Service() {
 
             var request = requestBuilder?.build()
             var response = client.createActivity(request)
+
+            if (response != null) {
+                Log.d("Service status", "Activity created")
+
+                var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
+                addPointsRequestBuilder
+                    ?.setActivityId(activity.uid.toString())
+                    ?.addAllPoints(positions.map { position ->
+                        var positionDtoBuilder = AddPointsRequestOuterClass.PointDto.newBuilder()
+                            .setId(position.uid.toString())
+                            .setTime(Timestamp.newBuilder().setSeconds(position.time))
+                            .setLatitude(position.latitudeDegrees!!)
+                            .setLongitude(position.longitudeDegrees!!)
+
+                        if (position.altitudeMeters != null)
+                            positionDtoBuilder.setAltitude(position.altitudeMeters!!)
+
+                        if (position.horizontalAccuracyMeters != null)
+                            positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
+
+                        if (position.bearingDegrees != null)
+                            positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
+
+                        if (position.note != null)
+                            positionDtoBuilder.setNote(position.note)
+
+                        positionDtoBuilder.build()
+                    })
+                client.addPoints(addPointsRequestBuilder?.build())
+            }
 
             channel.shutdownNow()
         }

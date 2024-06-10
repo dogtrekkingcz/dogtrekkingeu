@@ -14,6 +14,8 @@ public sealed record UpdateActivityRequest : IRequest<UpdateActivityResponse>
 
     public string CategoryId { get; set; } = Guid.Empty.ToString();
 
+    public string TypeId { get; set; } = Guid.Empty.ToString();
+
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;

@@ -24,9 +24,9 @@ public sealed record UpdateActivityInternalStorageRequest
 
     public bool IsPublic { get; init; } = true;
 
-    public List<PetDto> Pets { get; init; } = new List<PetDto>(0);
+    public IList<PetDto> Pets { get; init; } = new List<PetDto>(0);
 
-    public List<PositionDto> Positions { get; init; } = new List<PositionDto>(0);
+    public IList<PositionDto> Positions { get; init; } = new List<PositionDto>(0);
 
     public sealed record PositionDto
     {
