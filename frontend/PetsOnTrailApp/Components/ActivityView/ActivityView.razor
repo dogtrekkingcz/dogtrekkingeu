@@ -29,6 +29,7 @@ else
         <hr />
 
         <button class="btn btn-info" @onclick="(async () => await LoadAsync())">@Localizer["Refresh"]</button>
+        <hr />
         <Map @ref="mapRef" MapOptions="@mapOptions"></Map>
     </div>
 }
