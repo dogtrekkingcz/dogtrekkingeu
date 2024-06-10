@@ -222,31 +222,35 @@ class ActivityUploadService : Service() {
             if (response != null) {
                 Log.d("Service status", "Activity created")
 
-                var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
-                addPointsRequestBuilder
-                    ?.setActivityId(activity.uid.toString())
-                    ?.addAllPoints(positions.map { position ->
-                        var positionDtoBuilder = AddPointsRequestOuterClass.PointDto.newBuilder()
-                            .setId(position.uid.toString())
-                            .setTime(Timestamp.newBuilder().setSeconds(position.time))
-                            .setLatitude(position.latitudeDegrees!!)
-                            .setLongitude(position.longitudeDegrees!!)
+                for (i in 0..positions.size step 100) {
+                    var positionsChunk = positions.subList(i, Math.min(positions.size, i + 100))
 
-                        if (position.altitudeMeters != null)
-                            positionDtoBuilder.setAltitude(position.altitudeMeters!!)
+                    var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
+                    addPointsRequestBuilder
+                        ?.setActivityId(activity.uid.toString())
+                        ?.addAllPoints(positionsChunk.map { position ->
+                            var positionDtoBuilder = AddPointsRequestOuterClass.PointDto.newBuilder()
+                                .setId(position.uid.toString())
+                                .setTime(Timestamp.newBuilder().setSeconds(position.time))
+                                .setLatitude(position.latitudeDegrees!!)
+                                .setLongitude(position.longitudeDegrees!!)
 
-                        if (position.horizontalAccuracyMeters != null)
-                            positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
+                            if (position.altitudeMeters != null)
+                                positionDtoBuilder.setAltitude(position.altitudeMeters!!)
 
-                        if (position.bearingDegrees != null)
-                            positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
+                            if (position.horizontalAccuracyMeters != null)
+                                positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
 
-                        if (position.note != null)
-                            positionDtoBuilder.setNote(position.note)
+                            if (position.bearingDegrees != null)
+                                positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
 
-                        positionDtoBuilder.build()
-                    })
-                client.addPoints(addPointsRequestBuilder?.build())
+                            if (position.note != null)
+                                positionDtoBuilder.setNote(position.note)
+
+                            positionDtoBuilder.build()
+                        })
+                    client.addPoints(addPointsRequestBuilder?.build())
+                }
             }
 
             channel.shutdownNow()
