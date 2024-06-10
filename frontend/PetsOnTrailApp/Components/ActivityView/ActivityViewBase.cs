@@ -30,29 +30,32 @@ public class ActivityViewBase : ComponentBase
 
         Model = await _activityRepository.GetActivityByUserIdAndActivityId(new Protos.Activities.UserIdAndActivityId { UserId = UserId, ActivityId = ActivityId }, CancellationToken.None);
 
-        var left = Model.Positions.Min(p => p.Latitude);
-        var right = Model.Positions.Max(p => p.Latitude);
-        var top = Model.Positions.Max(p => p.Longitude);
-        var bottom = Model.Positions.Min(p => p.Longitude);
-
-        var center = new LatLng((left + right) / 2, (top + bottom) / 2);
-
-        mapOptions = new MapOptions()
+        if (Model != null && Model.Positions.Count > 0)
         {
-            DivId = "mapId",
-            Center = center,
-            Zoom = 13,
-            UrlTileLayer = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            SubOptions = new MapSubOptions()
-            {
-                Attribution = "&copy; <a lhref='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
-                TileSize = 512,
-                ZoomOffset = -1,
-                MaxZoom = 19,
-            }
-        };
+            var left = Model.Positions.Min(p => p.Latitude);
+            var right = Model.Positions.Max(p => p.Latitude);
+            var top = Model.Positions.Max(p => p.Longitude);
+            var bottom = Model.Positions.Min(p => p.Longitude);
 
-        StateHasChanged();
+            var center = new LatLng((left + right) / 2, (top + bottom) / 2);
+
+            mapOptions = new MapOptions()
+            {
+                DivId = "mapId",
+                Center = center,
+                Zoom = 13,
+                UrlTileLayer = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                SubOptions = new MapSubOptions()
+                {
+                    Attribution = "&copy; <a lhref='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+                    TileSize = 512,
+                    ZoomOffset = -1,
+                    MaxZoom = 19,
+                }
+            };
+
+            StateHasChanged();
+        }
     }
 
     protected async Task LoadAsync()
