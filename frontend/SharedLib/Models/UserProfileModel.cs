@@ -10,6 +10,8 @@ public sealed record UserProfileModel
 
     public Guid CompetitorId { get; set; } = default(Guid);
 
+    public string Email { get; set; } = string.Empty;
+
     public string FirstName { get; set; } = string.Empty;
 
     public string LastName { get; set; } = string.Empty;

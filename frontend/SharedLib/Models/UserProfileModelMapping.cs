@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using static Google.Rpc.Context.AttributeContext.Types;
 
 namespace SharedLib.Models;
 
@@ -23,8 +24,9 @@ internal static class UserProfileModelMapping
         typeAdapterConfig.NewConfig<UserProfileModel.VaccinationDto, UserProfileModel.VaccinationDto>();
         typeAdapterConfig.NewConfig<UserProfileModel.LatLngDto, UserProfileModel.LatLngDto>();
         typeAdapterConfig.NewConfig<UserProfileModel.ActionRightsDto, UserProfileModel.ActionRightsDto>();
-        
-        typeAdapterConfig.NewConfig<UserProfileModel, Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest>();
+
+        typeAdapterConfig.NewConfig<UserProfileModel, Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest>()
+            .Ignore(d => d.Activities);
         typeAdapterConfig.NewConfig<UserProfileModel.AddressDto, Protos.UserProfiles.CreateUserProfile.Address>();
         typeAdapterConfig.NewConfig<UserProfileModel.ContactDto, Protos.UserProfiles.CreateUserProfile.Contact>();
         typeAdapterConfig.NewConfig<UserProfileModel.PetDto, Protos.UserProfiles.CreateUserProfile.Pet>();

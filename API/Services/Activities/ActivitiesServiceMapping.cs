@@ -42,7 +42,8 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetAllActivityTypesInternalStorageResponse.ActivityTypeDto, GetActivityTypesResponse.ActivityTypeDto>();
 
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse, GetActivitiesByUserIdResponse>();
-        typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.ActivityDto, GetActivitiesByUserIdResponse.ActivityDto>();
+        typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.ActivityDto, GetActivitiesByUserIdResponse.ActivityDto>()
+            .Ignore(d => d.Positions); // do not send the positions in this list. Will be sent in a separate detailed call
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.PositionDto, GetActivitiesByUserIdResponse.PositionDto>();
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.PetDto, GetActivitiesByUserIdResponse.PetDto>();
 
