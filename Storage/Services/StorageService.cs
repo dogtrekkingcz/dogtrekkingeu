@@ -150,6 +150,17 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return documents;
     }
 
+    public async Task<IReadOnlyList<T>> GetByUserIdAndId(string userId, string id, CancellationToken cancellationToken)
+    {
+        var filter = Builders<T>.Filter.Where(e => e.UserId != null && e.UserId == userId && e.Id != null && e.Id == id);
+
+        var documents = await _collection
+            .Find(filter)
+            .ToListAsync(cancellationToken);
+
+        return documents;
+    }
+
     public async Task<IReadOnlyList<T>> GetByFilterBeLikeAsync(IList<(string key, string likeValue)> filterList, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Empty;

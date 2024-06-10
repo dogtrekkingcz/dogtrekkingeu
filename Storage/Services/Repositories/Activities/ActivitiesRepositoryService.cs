@@ -98,12 +98,16 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
     public async Task<GetActivityByUserIdAndActivityIdInternalStorageResponse> GetActivityByUserIdAndActivityId(Guid userId, string activityId, CancellationToken cancellationToken)
     {
-        BsonDocument filter = new BsonDocument();
-        filter
-            .Add(nameof(ActivityRecord.UserId), userId.ToString())
-            .Add(nameof(ActivityRecord.Id), activityId);
+        var activities = await _activitiesService.GetByUserIdAndId(userId.ToString(), activityId, cancellationToken);
+        if (activities == null || activities.Count == 0)
+        {
+            _logger.LogWarning($"Storage: GetActivityByUserIdAndActivityId: No activity found for user '{userId}' and activity '{activityId}'");
 
-        var activities = await _activitiesService.GetByCustomFilterAsync(filter, cancellationToken);
+            return new GetActivityByUserIdAndActivityIdInternalStorageResponse
+            {
+                UserId = userId
+            };
+        }
 
         _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activities.Dump()}");
 
