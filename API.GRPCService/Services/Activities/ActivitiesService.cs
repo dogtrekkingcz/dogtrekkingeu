@@ -7,6 +7,7 @@ using GetMyActivitiesRequest = PetsOnTrail.Interfaces.Actions.Entities.Activitie
 using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 using System.Runtime.CompilerServices;
 using Protos.Activities;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace API.GRPCService.Services.Activities;
 
@@ -46,6 +47,15 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
         var response = await _activitiesService.AddPointAsync(apiRequest, context.CancellationToken);
 
         return _mapper.Map<Protos.Activities.AddPoint.AddPointResponse>(response);
+    }
+
+    public async override Task<Protos.Activities.AddPoints.AddPointsResponse> addPoints(Protos.Activities.AddPoints.AddPointsRequest request, ServerCallContext context)
+    {
+        var apiRequest = _mapper.Map<AddPointsRequest>(request);
+
+        var response = await _activitiesService.AddPointsAsync(apiRequest, context.CancellationToken);
+
+        return _mapper.Map<Protos.Activities.AddPoints.AddPointsResponse>(response);
     }
 
     public async override Task<Protos.Activities.GetMyActivities.GetMyActivitiesResponse> getMyActivities(Protos.Activities.GetMyActivities.GetMyActivitiesRequest request, ServerCallContext context)

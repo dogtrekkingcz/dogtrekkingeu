@@ -100,6 +100,12 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Entities\Activities\AddPointsRequest.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
       <Protobuf Include="Entities\Activities\AddPointRequest.proto">
         <GrpcServices>Both</GrpcServices>
         <Access>Public</Access>
@@ -108,6 +114,12 @@
         <OutputDir>obj\Debug\net7.0\</OutputDir>
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Protobuf>
+      <Protobuf Include="Entities\Activities\AddPointsResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
       </Protobuf>
       <Protobuf Include="Entities\Activities\AddPointResponse.proto">
         <GrpcServices>Both</GrpcServices>
@@ -707,6 +719,8 @@
       <None Remove="Entities\ActionRights.proto" />
       <None Remove="Entities\ActionSimple.proto" />
       <None Remove="Entities\Actions\GetSimpleActionsListResponse.proto" />
+      <None Remove="Entities\Activities\AddPointsRequest.proto" />
+      <None Remove="Entities\Activities\AddPointsResponse.proto" />
       <None Remove="Entities\Activities\GetActivitiesByUserIdResponse.proto" />
       <None Remove="Entities\Activities\GetActivitiesResponse.proto" />
       <None Remove="Entities\Activities\GetActivityByUserIdAndActivityIdResponse.proto" />

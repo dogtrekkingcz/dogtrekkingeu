@@ -4,6 +4,7 @@ using PetsOnTrail.Interfaces.Actions.Entities.Activities;
 using PetsOnTrail.Interfaces.Actions.Services;
 using Storage.Entities.Activities;
 using Storage.Interfaces;
+using System.Collections.Generic;
 
 namespace PetsOnTrail.Actions.Services.Activities;
 
@@ -50,6 +51,17 @@ internal class ActivitiesService : IActivitiesService
         var response = await _activitiesRepositoryService.AddPointAsync(addPointInternalStorageRequest, cancellationToken);
 
         return _mapper.Map<AddPointResponse>(response);
+    }
+
+    public async Task<AddPointsResponse> AddPointsAsync(AddPointsRequest request, CancellationToken cancellationToken)
+    {
+        var activity = _mapper.Map<UpdateActivityInternalStorageRequest>(
+                await _activitiesRepositoryService.GetActivityByUserIdAndActivityId(_currentUserIdService.GetUserId(), request.ActivityId.ToString(), cancellationToken)
+            );
+        activity.Positions.AddRange(request.Points.Select(p => _mapper.Map<UpdateActivityInternalStorageRequest.PositionDto>(p)));
+        var response = await _activitiesRepositoryService.UpdateActivityAsync(activity, cancellationToken);
+        
+        return _mapper.Map<AddPointsResponse>(response);
     }
 
     public async Task<GetMyActivitiesResponse> GetMyActivitiesAsync(GetMyActivitiesRequest request, CancellationToken cancellationToken)

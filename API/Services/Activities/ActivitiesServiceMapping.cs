@@ -45,6 +45,9 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.PositionDto, GetActivitiesByUserIdResponse.PositionDto>();
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdInternalStorageResponse.PetDto, GetActivitiesByUserIdResponse.PetDto>();
 
+        typeAdapterConfig.NewConfig<AddPointsRequest.PointDto, UpdateActivityInternalStorageRequest.PositionDto>()
+            .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
+
         return typeAdapterConfig;
     }
 }

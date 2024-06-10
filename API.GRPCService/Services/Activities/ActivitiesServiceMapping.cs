@@ -48,6 +48,9 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponse.PetDto, Protos.Activities.GetActivitiesByUserId.PetDto>();
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponse.PositionDto, Protos.Activities.GetActivitiesByUserId.PositionDto>();
 
+        typeAdapterConfig.NewConfig<Protos.Activities.AddPoints.AddPointsRequest, AddPointsRequest>();
+        typeAdapterConfig.NewConfig<AddPointsResponse, Protos.Activities.AddPoints.AddPointsResponse>();
+
         return typeAdapterConfig;
     }
 }
