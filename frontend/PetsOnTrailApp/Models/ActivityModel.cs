@@ -20,7 +20,7 @@ public sealed record ActivityModel : BaseSynchronizedModel
     public sealed record PositionDto
     {
         public Guid Id { get; init; } = Guid.Empty;
-        public DateTime Time { get; init; }
+        public DateTimeOffset? Time { get; init; } = null;
         public double Latitude { get; init; }
         public double Longitude { get; init; }
         public double Altitude { get; init; }
