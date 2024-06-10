@@ -45,6 +45,7 @@ namespace Storage.Services.Repositories.Activities
             typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdInternalStorageResponse, UpdateActivityInternalStorageRequest>();
             typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdInternalStorageResponse.PositionDto, UpdateActivityInternalStorageRequest.PositionDto>();
             typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdInternalStorageResponse.PetDto, UpdateActivityInternalStorageRequest.PetDto>();
+            typeAdapterConfig.NewConfig<GetActivityByUserIdAndActivityIdInternalStorageResponse, UpdateActivityInternalStorageRequest>();
 
             return typeAdapterConfig;
         }
