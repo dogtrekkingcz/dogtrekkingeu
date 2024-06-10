@@ -225,6 +225,9 @@ class ActivityUploadService : Service() {
                 for (i in 0..positions.size step 100) {
                     var positionsChunk = positions.subList(i, Math.min(positions.size, i + 100))
 
+                    if (positionsChunk.isEmpty())
+                        break
+
                     var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
                     addPointsRequestBuilder
                         ?.setActivityId(activity.uid.toString())

@@ -49,6 +49,8 @@ internal static class ActivitiesServiceMapping
         typeAdapterConfig.NewConfig<GetActivitiesByUserIdResponse.PositionDto, Protos.Activities.GetActivitiesByUserId.PositionDto>();
 
         typeAdapterConfig.NewConfig<Protos.Activities.AddPoints.AddPointsRequest, AddPointsRequest>();
+        typeAdapterConfig.NewConfig<AddPointsRequest.PointDto, AddPointsRequest.PointDto>()
+            .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
         typeAdapterConfig.NewConfig<AddPointsResponse, Protos.Activities.AddPoints.AddPointsResponse>();
 
         return typeAdapterConfig;
