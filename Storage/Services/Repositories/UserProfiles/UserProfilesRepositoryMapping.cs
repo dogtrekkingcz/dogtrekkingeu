@@ -10,7 +10,8 @@ namespace Storage.Services.Repositories.UserProfiles
     {
         internal static TypeAdapterConfig AddUserProfilesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest, UserProfileRecord>();
+            typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest, UserProfileRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.AddressDto, UserProfileRecord.AddressDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.ContactDto, UserProfileRecord.ContactDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.VaccinationDto, UserProfileRecord.VaccinationDto>();
@@ -21,7 +22,8 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.ActivityPetDto, UserProfileRecord.ActivityPetDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord, CreateUserProfileInternalStorageResponse>();
             
-            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest, UserProfileRecord>();
+            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest, UserProfileRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.AddressDto, UserProfileRecord.AddressDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.ContactDto, UserProfileRecord.ContactDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.VaccinationDto, UserProfileRecord.VaccinationDto>();

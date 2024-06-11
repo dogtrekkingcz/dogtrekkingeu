@@ -12,7 +12,8 @@ namespace Storage.Services.Repositories.Checkpoints
             typeAdapterConfig.NewConfig<AddCheckpointItemInternalStorageRequest, CheckpointRecord>()
                 .Map(d => d.Id, s => s.Id.ToString())
                 .Map(d => d.ActionId, s => s.ActionId.ToString())
-                .Map(d => d.CheckpointId, s => s.CheckpointId.ToString());
+                .Map(d => d.CheckpointId, s => s.CheckpointId.ToString())
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<AddCheckpointItemInternalStorageRequest.LatLngDto, CheckpointRecord.LatLngDto>();
 
             typeAdapterConfig.NewConfig<CheckpointRecord, AddCheckpointItemInternalStorageResponse>()

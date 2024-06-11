@@ -8,12 +8,14 @@ namespace Storage.Services.Repositories.ActionRights
     {
         internal static TypeAdapterConfig AddActionRightsRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<AddActionRightsInternalStorageRequest, ActionRightsRecord>();
+            typeAdapterConfig.NewConfig<AddActionRightsInternalStorageRequest, ActionRightsRecord>()
+                .Ignore(d => d.CorrelationId);
 
             typeAdapterConfig.NewConfig<ActionRightsRecord, AddActionRightsInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<GetAllRightsInternalStorageRequest, ActionRightsRecord>()
-                .MapWith(s => new ActionRightsRecord { UserId = s.UserId });
+                .MapWith(s => new ActionRightsRecord { UserId = s.UserId })
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<ActionRightsRecord, GetAllRightsInternalStorageResponse.ActionRightsDto>();
 
             return typeAdapterConfig;

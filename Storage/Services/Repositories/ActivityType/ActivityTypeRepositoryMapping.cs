@@ -8,7 +8,8 @@ namespace Storage.Services.Repositories.Actions
     {
         internal static TypeAdapterConfig AddActivityTypeRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<AddActivityTypeInternalStorageRequest, ActivityTypeRecord>();
+            typeAdapterConfig.NewConfig<AddActivityTypeInternalStorageRequest, ActivityTypeRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<ActivityTypeRecord, AddActivityTypeInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<ActivityTypeRecord, GetAllActivityTypesInternalStorageResponse.ActivityTypeDto>();

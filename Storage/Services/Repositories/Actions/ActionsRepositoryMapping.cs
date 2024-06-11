@@ -9,7 +9,8 @@ namespace Storage.Services.Repositories.Actions
     {
         internal static TypeAdapterConfig AddActionRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest, ActionRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>()
                 .Ignore(d => d.PayedDate)
                 .Ignore(d => d.AcceptedDate);
@@ -34,7 +35,8 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.ActionSaleItemDto, ActionRecord.ActionSaleItemDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.PassedCheckpointDto, ActionRecord.PassedCheckpointDto>();
 
-            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest, ActionRecord>();
+            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest, ActionRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RacerDto, ActionRecord.RacerDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.NoteDto, ActionRecord.NoteDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.PaymentDto, ActionRecord.PaymentDto>();
@@ -106,10 +108,12 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord, CreateActionInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<DeleteActionInternalStorageRequest, ActionRecord>()
-                .MapWith(s => new ActionRecord { Id = s.Id });
+                .MapWith(s => new ActionRecord { Id = s.Id })
+                .Ignore(d => d.CorrelationId);
 
             typeAdapterConfig.NewConfig<GetActionInternalStorageRequest, ActionRecord>()
-                .MapWith(s => new ActionRecord { Id = s.Id.ToString() });
+                .MapWith(s => new ActionRecord { Id = s.Id.ToString() })
+                .Ignore(d => d.CorrelationId);
 
             typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>(); 
             typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetActionInternalStorageResponse.RacerDto>();

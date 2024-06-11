@@ -9,10 +9,12 @@ namespace Storage.Services.Repositories.Pets
         internal static TypeAdapterConfig AddPetsRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
             typeAdapterConfig.NewConfig<CreatePetInternalStorageRequest, PetRecord>()
-                .Map(d => d.Id, s => s.Id.ToString());
+                .Map(d => d.Id, s => s.Id.ToString())
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<CreatePetInternalStorageRequest.VaccinationDto, PetRecord.VaccinationDto>();
             
-            typeAdapterConfig.NewConfig<UpdatePetInternalStorageRequest, PetRecord>();
+            typeAdapterConfig.NewConfig<UpdatePetInternalStorageRequest, PetRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<UpdatePetInternalStorageRequest.VaccinationDto, PetRecord.VaccinationDto>();
             
             typeAdapterConfig.NewConfig<PetRecord, GetPetsFilteredByChipInternalStorageResponse.PetDto>();

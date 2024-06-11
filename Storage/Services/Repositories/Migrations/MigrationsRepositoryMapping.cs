@@ -9,7 +9,8 @@ namespace Storage.Services.Repositories.Migrations
     {
         internal static TypeAdapterConfig AddMigrationsRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateMigrationInternalStorageRequest, MigrationRecord>();
+            typeAdapterConfig.NewConfig<CreateMigrationInternalStorageRequest, MigrationRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<MigrationRecord, CreateMigrationInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<MigrationRecord, GetMigrationInternalStorageResponse>();

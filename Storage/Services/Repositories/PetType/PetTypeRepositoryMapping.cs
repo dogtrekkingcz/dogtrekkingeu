@@ -8,7 +8,8 @@ internal static class PetTypeRepositoryMapping
 {
     internal static TypeAdapterConfig AddPetTypeRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
     {
-        typeAdapterConfig.NewConfig<AddPetTypeInternalStorageRequest, PetTypeRecord>();
+        typeAdapterConfig.NewConfig<AddPetTypeInternalStorageRequest, PetTypeRecord>()
+            .Ignore(d => d.CorrelationId);
 
         typeAdapterConfig.NewConfig<PetTypeRecord, GetPetTypesInternalStorageResponse.PetTypeDto>();
 

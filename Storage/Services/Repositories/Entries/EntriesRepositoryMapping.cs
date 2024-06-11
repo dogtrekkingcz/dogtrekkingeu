@@ -9,7 +9,8 @@ namespace Storage.Services.Repositories.Entries
     {
         internal static TypeAdapterConfig AddEntriesRepositoryMapping(this TypeAdapterConfig typeAdapterConfig)
         {
-            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, EntryRecord>();
+            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, EntryRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.EntryState, EntryRecord.EntryState>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.VaccinationDto, EntryRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.PetDto, EntryRecord.PetDto>();
@@ -17,7 +18,8 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.AddressDto, EntryRecord.AddressDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.LatLngDto, EntryRecord.LatLngDto>();
 
-            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest, EntryRecord>();
+            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest, EntryRecord>()
+                .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.EntryState, EntryRecord.EntryState>();
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.VaccinationDto, EntryRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.PetDto, EntryRecord.PetDto>();
