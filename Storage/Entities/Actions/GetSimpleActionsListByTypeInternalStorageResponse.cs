@@ -18,7 +18,7 @@ public sealed record GetSimpleActionsListByTypeInternalStorageResponse
 
         public DateTime End { get; init; }
 
-        public string Type { get; init; }
+        public Guid TypeId { get; init; }
 
         public IList<RaceDto> Races { get; init; }
     }

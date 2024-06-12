@@ -2,7 +2,7 @@
 
 internal sealed record ActionRecord : BaseRecord, IRecord
 {
-    public string Type { get; set; }    
+    public Guid TypeId { get; set; } = Guid.Empty;
     public DateTimeOffset Created { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;

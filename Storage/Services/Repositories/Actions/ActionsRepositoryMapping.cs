@@ -107,12 +107,6 @@ namespace Storage.Services.Repositories.Actions
 
             typeAdapterConfig.NewConfig<ActionRecord, CreateActionInternalStorageResponse>();
 
-            typeAdapterConfig.NewConfig<DeleteActionInternalStorageRequest, ActionRecord>()
-                .Ignore(d => d.CorrelationId);
-
-            typeAdapterConfig.NewConfig<GetActionInternalStorageRequest, ActionRecord>()
-                .Ignore(d => d.CorrelationId);
-
             typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>(); 
             typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetActionInternalStorageResponse.RacerDto>();
             typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetActionInternalStorageResponse.NoteDto>();
@@ -181,7 +175,7 @@ namespace Storage.Services.Repositories.Actions
                     End = src.Term.To.DateTime,
                     City = src.Address.City,
                     Name = src.Name,
-                    Type = src.Type,
+                    TypeId = src.TypeId,
                     Description = src.Description,
                     Races = src.Races
                                 .Select(race => new GetSimpleActionsListByTypeInternalStorageResponse.RaceDto { Id = race.Id, Name = race.Name })
