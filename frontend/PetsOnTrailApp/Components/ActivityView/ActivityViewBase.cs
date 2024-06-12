@@ -28,11 +28,6 @@ public class ActivityViewBase : ComponentBase
     {
         base.OnInitialized();
 
-        await LoadAsync();
-    }
-
-    protected async Task LoadAsync()
-    {
         Model = await _activityRepository.GetActivityByUserIdAndActivityId(new Protos.Activities.UserIdAndActivityId { UserId = UserId, ActivityId = ActivityId }, CancellationToken.None);
 
         if (Model != null && Model.Positions.Count > 0)
@@ -58,10 +53,25 @@ public class ActivityViewBase : ComponentBase
                     MaxZoom = 19,
                 }
             };
-
-            await PolylineFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
-
-            StateHasChanged();
         }
+
+        StateHasChanged();
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && Model != null && Model.Positions.Count > 0)
+        {
+            await PolylineFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
+        }
+    }
+
+    protected async Task LoadAsync()
+    {
+        Model = await _activityRepository.GetActivityByUserIdAndActivityId(new Protos.Activities.UserIdAndActivityId { UserId = UserId, ActivityId = ActivityId }, CancellationToken.None);
+
+        await PolylineFactory.CreateAndAddToMap(Model.Positions.Select(p => new LatLng(p.Latitude, p.Longitude)).ToList(), mapRef);
+
+        StateHasChanged();
     }
 }
