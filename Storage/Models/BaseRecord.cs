@@ -7,7 +7,7 @@ internal record BaseRecord : IRecord
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; } = string.Empty;
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid UserId { get; set; } = Guid.Empty;
 
