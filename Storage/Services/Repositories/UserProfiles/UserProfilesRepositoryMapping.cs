@@ -32,8 +32,7 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.ActivityDto, UserProfileRecord.ActivityDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.PositionDto, UserProfileRecord.PositionDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.ActivityPetDto, UserProfileRecord.ActivityPetDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord, UpdateUserProfileInternalStorageResponse>()
-                .Map(d => d.Id, s => s.Id.ToGuid());
+            typeAdapterConfig.NewConfig<UserProfileRecord, UpdateUserProfileInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<UserProfileRecord, GetUserProfileInternalStorageResponse>();
             typeAdapterConfig.NewConfig<UserProfileRecord.AddressDto, GetUserProfileInternalStorageResponse.AddressDto>();

@@ -2,5 +2,5 @@
 
 public sealed record UpdateActionInternalStorageResponse
 {
-    public string Id { get; set; } = string.Empty;
+    public Guid Id { get; init; } = Guid.Empty;
 }

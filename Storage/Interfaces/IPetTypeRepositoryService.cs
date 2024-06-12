@@ -8,5 +8,5 @@ public interface IPetTypeRepositoryService : IRepositoryService
 
     public Task<GetPetTypesInternalStorageResponse> GetAllAsync(CancellationToken cancellationToken);
 
-    public Task DeleteAsync(string id, CancellationToken cancellationToken);
+    public Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

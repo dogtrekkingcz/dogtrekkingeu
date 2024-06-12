@@ -65,7 +65,7 @@ internal class CheckpointsRepositoryService : ICheckpointsRepositoryService
 
     public async Task<GetCheckpointItemInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken)
     {
-        var item = await _checkpointService.GetAsync(id.ToString(), cancellationToken);
+        var item = await _checkpointService.GetAsync(id, cancellationToken);
 
         return _mapper.Map<GetCheckpointItemInternalStorageResponse>(item);
     }

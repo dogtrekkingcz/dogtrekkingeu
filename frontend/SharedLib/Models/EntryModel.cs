@@ -4,11 +4,11 @@ namespace SharedLib.Models;
 
 public sealed record EntryModel
 {
-    public string? Id { get; set; } = "";
+    public Guid Id { get; set; } = Guid.Empty;
 
     public EntryState State { get; set; } = EntryState.Unspecified;
 
-    public string UserId { get; set; } = "";
+    public Guid UserId { get; set; } = Guid.Empty;
 
     public string CompetitorId { get; set; } = "";
 
@@ -83,7 +83,7 @@ public sealed record EntryModel
     
     public record PetDto
     {
-        public string Id { get; set; } = string.Empty;
+        public Guid Id { get; set; } = Guid.Empty;
         
         public string Name { get; set; } = string.Empty;
 

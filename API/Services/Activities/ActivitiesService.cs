@@ -90,7 +90,7 @@ internal class ActivitiesService : IActivitiesService
         return _mapper.Map<GetActivityByUserIdAndActivityIdResponse>(response);
     }
 
-    [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+    [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
     public async Task<UpdateActivityResponse> UpdateActivityAsync(UpdateActivityRequest request, CancellationToken cancellationToken)
     {
         var updateInternalStorageRequest = _mapper.Map<UpdateActivityInternalStorageRequest>(request);

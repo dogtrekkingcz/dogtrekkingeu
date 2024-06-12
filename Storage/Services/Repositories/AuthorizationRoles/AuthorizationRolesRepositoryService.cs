@@ -37,7 +37,7 @@ namespace Storage.Services.Repositories.AuthorizationRoles
             return response;
         }
 
-        public async Task DeleteAuthorizationRoleAsync(string id, CancellationToken cancellationToken)
+        public async Task DeleteAuthorizationRoleAsync(Guid id, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"Deleting authorization role with id: '{id}'");
 

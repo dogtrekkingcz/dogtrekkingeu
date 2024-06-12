@@ -8,6 +8,6 @@ namespace Storage.Interfaces
 
         public Task<GetAllAuthorizationRolesResponse> GetAllAuthorizationRolesAsync(CancellationToken cancellationToken);
 
-        public Task DeleteAuthorizationRoleAsync(string id, CancellationToken cancellationToken);
+        public Task DeleteAuthorizationRoleAsync(Guid id, CancellationToken cancellationToken);
     }
 }

@@ -27,7 +27,7 @@ internal sealed class MigrationsRepositoryService : IMigrationsRepositoryService
         return new CreateMigrationInternalStorageResponse { Id = createdMigration.Id };
     }
 
-    public async Task<GetMigrationInternalStorageResponse> GetAsync(string id, CancellationToken cancellationToken)
+    public async Task<GetMigrationInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var migration = await _migrationsStorageService.GetAsync(id, cancellationToken);
         if (migration is null)
@@ -38,7 +38,7 @@ internal sealed class MigrationsRepositoryService : IMigrationsRepositoryService
         return _mapper.Map<GetMigrationInternalStorageResponse>(migration);
     }
 
-    public async Task DeleteMigrationAsync(string id, CancellationToken cancellationToken)
+    public async Task DeleteMigrationAsync(Guid id, CancellationToken cancellationToken)
     {
         await _migrationsStorageService.DeleteAsync(id, cancellationToken);
     }

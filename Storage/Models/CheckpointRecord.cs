@@ -2,9 +2,9 @@
 
 internal sealed record CheckpointRecord : BaseRecord, IRecord
 {
-    public string ActionId { get; set; } = Guid.Empty.ToString();
+    public Guid ActionId { get; set; } = Guid.Empty;
 
-    public string CheckpointId { get; set; } = Guid.Empty.ToString();
+    public Guid CheckpointId { get; set; } = Guid.Empty;
 
     public string Name { get; set; } = string.Empty;
 

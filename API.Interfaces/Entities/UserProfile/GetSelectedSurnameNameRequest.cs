@@ -2,6 +2,6 @@
 {
     public sealed record GetSelectedSurnameNameRequest
     {
-        public List<string> Ids { get; set; } = new List<string>();
+        public List<Guid> Ids { get; set; } = new();
     }
 }

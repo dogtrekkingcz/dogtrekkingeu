@@ -33,7 +33,7 @@ internal static class DogtrekkingCzMapping
                     ZipCode = string.Empty
                 },
                 Description = s.Description ?? string.Empty,
-                Type = string.Empty,
+                TypeId = Guid.Empty,
                 ContactMail = s.ContactMail ?? string.Empty,
                 Checkpoints = new List<CreateActionInternalStorageRequest.CheckpointDto>(),
                 Sale = new CreateActionInternalStorageRequest.ActionSaleDto
@@ -90,7 +90,7 @@ internal static class DogtrekkingCzMapping
                                 Finish = racer.Finish,
                                 Pets = racer.Dogs.Select(dog => new CreateActionInternalStorageRequest.PetDto
                                     {
-                                        Id = dog.Id.ToString(),
+                                        Id = dog.Id,
                                         Name = dog.Name,
                                         Chip = dog.Chip,
                                         Pedigree = dog.Pedigree,

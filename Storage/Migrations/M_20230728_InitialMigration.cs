@@ -12,15 +12,15 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
     protected override string Name { get; init; } = nameof(M_20230728_InitialMigration);
 
 
-    private string _userIdAdmin = "29bf10f1-8f4a-43f3-8e1b-448d0fbf7bef";
-    private string _userIdRadekKotesovec = "fdf633bc-91d0-4f2d-ab78-f01657eca190";
+    private Guid _userIdAdmin => Guid.Parse("29bf10f1-8f4a-43f3-8e1b-448d0fbf7bef");
+    private Guid _userIdRadekKotesovec => Guid.Parse("fdf633bc-91d0-4f2d-ab78-f01657eca190");
 
     public M_20230728_InitialMigration(IServiceProvider serviceProvider) : base(serviceProvider) 
     {
         this
             .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
-                Id = Constants.Roles.InternalAdministrator.Id,
+                Id = Constants.Roles.InternalAdministrator.GUID,
                 Name = Constants.Roles.InternalAdministrator.Name,
                 Actions = new List<Constants.ActionType>
                 {
@@ -33,7 +33,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
             .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
-                Id = Constants.Roles.InternalUser.Id,
+                Id = Constants.Roles.InternalUser.GUID,
                 Name = Constants.Roles.InternalUser.Name,
                 Actions = new List<Constants.ActionType>
                 {
@@ -46,7 +46,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
             .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
-                Id = Constants.Roles.ExternalUser.Id,
+                Id = Constants.Roles.ExternalUser.GUID,
                 Name = Constants.Roles.ExternalUser.Name,
                 Actions = new List<Constants.ActionType>
                 {
@@ -59,7 +59,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddUpAction(() => UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
             {
                 Id = _userIdAdmin,
-                UserId = Guid.Parse(_userIdAdmin),
+                UserId = _userIdAdmin,
                 FirstName = "Admin",
                 LastName = "Admin",
                 Contact = new CreateUserProfileInternalStorageRequest.ContactDto
@@ -68,16 +68,16 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                     PhoneNumber = "+420 728 245 996"
                 },
                 Email = "admin@petsontrail.eu",
-                Roles = new List<string>
+                Roles = new List<Guid>
                 {
-                    Constants.Roles.InternalAdministrator.Id
+                    Constants.Roles.InternalAdministrator.GUID
                 }
             }, CancellationToken.None))
 
             .AddUpAction(() => UserProfilesRepositoryService.AddUserProfileAsync(new CreateUserProfileInternalStorageRequest
             {
                 Id = _userIdRadekKotesovec,
-                UserId = Guid.Parse(_userIdRadekKotesovec),
+                UserId = _userIdRadekKotesovec,
                 FirstName = "Radek",
                 LastName = "Kotěšovec",
                 Contact = new CreateUserProfileInternalStorageRequest.ContactDto
@@ -86,9 +86,9 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
                     PhoneNumber = "+420 728 245 996"
                 },
                 Email = "radek.kotesovec@dogtrekking.cz",
-                Roles = new List<string>
+                Roles = new List<Guid>
                 {
-                    Constants.Roles.InternalAdministrator.Id
+                    Constants.Roles.InternalAdministrator.GUID
                 }
             }, CancellationToken.None))
 
@@ -409,9 +409,9 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
 
             .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdRadekKotesovec }, CancellationToken.None))
             .AddDownAction(() => UserProfilesRepositoryService.DeleteUserProfileAsync(new DeleteUserProfileInternalStorageRequest { Id = _userIdAdmin }, CancellationToken.None))
-            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalAdministrator.Id.ToString(), CancellationToken.None))
-            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalUser.Id.ToString(), CancellationToken.None))
-            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.ExternalUser.Id.ToString(), CancellationToken.None))
+            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalAdministrator.GUID, CancellationToken.None))
+            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.InternalUser.GUID, CancellationToken.None))
+            .AddDownAction(() => AuthorizationRolesRepositoryService.DeleteAuthorizationRoleAsync(Constants.Roles.ExternalUser.GUID, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Dogtrekking, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.Obedience, CancellationToken.None))
             .AddDownAction(() => ActivityTypeRepositoryService.DeleteAsync(Constants.ActivityType.RallyObedience, CancellationToken.None))

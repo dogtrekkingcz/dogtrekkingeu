@@ -2,5 +2,5 @@
 
 public sealed record CreateEntryInternalStorageResponse
 {
-    public string Id { get; init; }
+    public Guid Id { get; init; } = Guid.Empty;
 }

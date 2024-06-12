@@ -93,7 +93,7 @@
         });
     }
 
-    private async Task RegisterUserAsync(string userId, Claim emailClaim, string firstName, string lastName)
+    private async Task RegisterUserAsync(Guid userId, Claim emailClaim, string firstName, string lastName)
     {
         var model = new UserProfileModel
             {

@@ -4,11 +4,11 @@ public sealed record UserProfileModel
 {
     public IList<ActionRightsDto> Rights { get; set; } = new List<ActionRightsDto>();
     
-    public string? Id { get; set; } = string.Empty;
+    public Guid Id { get; set; } = Guid.Empty;
     
-    public string UserId { get; set; } = string.Empty;
+    public Guid UserId { get; set; } = Guid.Empty;
 
-    public Guid CompetitorId { get; set; } = default(Guid);
+    public Guid CompetitorId { get; set; } = Guid.Empty;
 
     public string Email { get; set; } = string.Empty;
 
@@ -57,9 +57,9 @@ public sealed record UserProfileModel
 
     public record PetDto
     {
-        public string? Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
 
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
 
         public string Name { get; set; } = string.Empty;
 
@@ -99,19 +99,12 @@ public sealed record UserProfileModel
     
     public record ActionRightsDto
     {
-        public string? Id { get; set; } = Guid.Empty.ToString();
+        public Guid Id { get; set; } = Guid.Empty;
 
-        public string UserId { get; set; } = string.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
 
-        public string ActionId { get; set; } = string.Empty;
+        public Guid ActionId { get; set; } = Guid.Empty;
         
-        public IList<string> Roles { get; set; } = new List<string>();
-        
-        public enum RoleType
-        {
-            None = 0,
-            User = 1,
-            Owner = 2
-        }
+        public IList<Guid> Roles { get; set; } = new List<Guid>();
     }
 }

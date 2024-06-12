@@ -108,11 +108,9 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord, CreateActionInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<DeleteActionInternalStorageRequest, ActionRecord>()
-                .MapWith(s => new ActionRecord { Id = s.Id })
                 .Ignore(d => d.CorrelationId);
 
             typeAdapterConfig.NewConfig<GetActionInternalStorageRequest, ActionRecord>()
-                .MapWith(s => new ActionRecord { Id = s.Id.ToString() })
                 .Ignore(d => d.CorrelationId);
 
             typeAdapterConfig.NewConfig<ActionRecord, GetActionInternalStorageResponse>(); 
@@ -178,7 +176,7 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord, GetSimpleActionsListByTypeInternalStorageResponse.ActionDto>()
                 .MapWith((src) => new GetSimpleActionsListByTypeInternalStorageResponse.ActionDto
                 {
-                    Id = Guid.Parse(src.Id),
+                    Id = src.Id,
                     Begin = src.Term.From.DateTime,
                     End = src.Term.To.DateTime,
                     City = src.Address.City,

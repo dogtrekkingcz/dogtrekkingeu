@@ -6,13 +6,13 @@
         
         public sealed record ActionRightsDto
         {
-            public string? Id { get; set; } = Guid.Empty.ToString();
+            public Guid Id { get; set; } = Guid.Empty;
 
-            public string UserId { get; set; } = string.Empty;
+            public Guid UserId { get; set; } = Guid.Empty;
 
             public Guid ActionId { get; set; } = Guid.Empty;
         
-            public IList<string> Roles { get; set; } = new List<string>();
+            public IList<Guid> Roles { get; set; } = new List<Guid>();
         }
     }
 }

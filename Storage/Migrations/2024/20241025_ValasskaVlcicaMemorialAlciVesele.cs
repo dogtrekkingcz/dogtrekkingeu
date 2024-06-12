@@ -12,7 +12,7 @@ internal class _20241025_ValasskaVlcicaMemorialAlciVesele : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "Valašská Vlčica - Memoriál Alči Veselé",
-                Type = Constants.ActivityType.Dogtrekking,
+                TypeId = Constants.ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Chřiby"

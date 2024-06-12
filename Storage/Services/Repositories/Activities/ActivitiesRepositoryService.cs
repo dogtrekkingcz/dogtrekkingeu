@@ -41,14 +41,14 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
         {
             // in case of identified user we need to store activity in user profile
             // TODO: think about it, should be sufficient to store it only in activities and in user profile lets enter only path to activities... ?
-            var user = await _profilesService.GetAsync(request.UserId.ToString(), cancellationToken);
+            var user = await _profilesService.GetAsync(request.UserId, cancellationToken);
             if (user == null)
             {
                 user = new UserProfileRecord
                 {
-                    Id = request.UserId.ToString(),
+                    Id = request.UserId,
                     UserId = request.UserId,
-                    Roles = new List<Guid> { Guid.Parse(Constants.Roles.InternalUser.Id) },
+                    Roles = new List<Guid> { Constants.Roles.InternalUser.GUID },
                 };
             }
 
@@ -79,13 +79,13 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
             }
             else
             {
-                await _activitiesService.DeleteAllByCorrelationIdAsync(Guid.Parse(addRequest.Id), cancellationToken);
+                await _activitiesService.DeleteAllByCorrelationIdAsync(addRequest.Id, cancellationToken);
 
                 for (int i = 0; i < addRequest.Positions.Count; i += 500)
                 {
                     var positions = addRequest.Positions.Skip(i).Take(500).ToList();
                     addRequest.Positions = positions;
-                    addRequest.Id = Guid.NewGuid().ToString();
+                    addRequest.Id = Guid.NewGuid();
                     addRequest.UserId = request.UserId;
                     addRequest.CorrelationId = request.Id;
                     var createdActivityRecord = await _activitiesService.AddOrUpdateAsync(addRequest, cancellationToken);
@@ -100,7 +100,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
     public async Task<AddPointInternalStorageResponse> AddPointAsync(AddPointInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        var activity = await _activitiesService.GetAsync(request.ActivityId.ToString(), cancellationToken);
+        var activity = await _activitiesService.GetAsync(request.ActivityId, cancellationToken);
         
         activity.Positions.Add(_mapper.Map<ActivityRecord.PositionDto>(request));
 
@@ -165,7 +165,7 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
     public async Task<UpdateActivityInternalStorageResponse> UpdateActivityAsync(UpdateActivityInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        var activity = await _activitiesService.GetAsync(request.Id.ToString(), cancellationToken);
+        var activity = await _activitiesService.GetAsync(request.Id, cancellationToken);
 
         activity.Positions.Add(_mapper.Map<ActivityRecord.PositionDto>(request));
 

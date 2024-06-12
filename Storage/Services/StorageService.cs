@@ -23,8 +23,8 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
     public async Task<T> AddOrUpdateAsync(T request, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq(x => x.Id, request.Id);
-        if (string.IsNullOrEmpty(request.Id))
-            request.Id = Guid.NewGuid().ToString();
+        if (request.Id == Guid.Empty)
+            request.Id = Guid.NewGuid();
 
         BackupHistory(request);
         UpdateSeedWithLatestData(request);
@@ -67,7 +67,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         }
     }
 
-    public async Task DeleteAsync(string id, CancellationToken cancellationToken)
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq(x => x.Id, id);
         
@@ -81,7 +81,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         await _collection.DeleteManyAsync(filter, cancellationToken: cancellationToken);
     }
 
-    public async Task<T> GetAsync(string id, CancellationToken cancellationToken)
+    public async Task<T> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq(x => x.Id, id);
 
@@ -92,7 +92,7 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
         return document;
     }
 
-    public async Task<IReadOnlyList<T>> GetSelectedListAsync(IList<string> ids, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<T>> GetSelectedListAsync(IList<Guid> ids, CancellationToken cancellationToken)
     {
         FilterDefinition<T> filter = Builders<T>.Filter
             .In(x => x.Id, ids.Select(id => id));
@@ -103,13 +103,8 @@ internal class StorageService<T> : IStorageService<T> where T: IRecord
 
         return document;
     }
-    
-    public async Task<IReadOnlyList<T>> GetSelectedListAsync(IList<Guid> ids, CancellationToken cancellationToken)
-    {
-        return await GetSelectedListAsync(ids.Select(id => id.ToString()).ToList(), cancellationToken);
-    }
 
-    public async Task<IReadOnlyList<T>> GetSelectedListAsync(string key, IList<string> ids, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<T>> GetSelectedListAsync(string key, IList<Guid> ids, CancellationToken cancellationToken)
     {
         FilterDefinition<T> filter = Builders<T>.Filter
             .In(key, ids.Select(id => id));

@@ -135,8 +135,8 @@ else
         _canAcceptPayment = (await UserProfileService.GetAsync())?
             .Rights?
             .FirstOrDefault(right =>
-                right.ActionId == Action.Id.ToString() &&
-                right.Roles.Contains(UserProfileModel.ActionRightsDto.RoleType.Owner.ToString())
+                right.ActionId == Action.Id &&
+                right.Roles.Contains(Constants.Roles.OwnerOfAction.GUID)
                 ) != null;
     }
 

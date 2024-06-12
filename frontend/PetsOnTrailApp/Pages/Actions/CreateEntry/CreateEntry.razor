@@ -99,7 +99,7 @@
             Entry.LastName = userProfile.LastName;
             Entry.Email = userProfile.Contact.EmailAddress;
             Entry.Phone = userProfile.Contact.PhoneNumber;
-            Entry.UserId = userProfile.Id ?? Guid.Empty.ToString();
+            Entry.UserId = userProfile.Id;
             Entry.CompetitorId = userProfile.CompetitorId.ToString();
             Entry.Pets = userProfile.Pets
                 .Where(pet => pet.Decease == null)

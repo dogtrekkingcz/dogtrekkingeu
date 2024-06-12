@@ -60,7 +60,7 @@ internal abstract class M_00_MigrationBase : IMigration
     {
         Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is running...");
 
-        var migration = await MigrationsRepositoryService.GetAsync(Id.ToString(), cancellationToken);
+        var migration = await MigrationsRepositoryService.GetAsync(Id, cancellationToken);
         if (migration is not null)
         {
             Console.WriteLine($"[MIGRATION-UP] -> '{Name}' is already done, the ID is exists");
@@ -91,7 +91,7 @@ internal abstract class M_00_MigrationBase : IMigration
     {
         Console.WriteLine($"[MIGRATION-DOWN] -> '{Name}' is running...");
 
-        if (await MigrationsRepositoryService.GetAsync(Id.ToString(), cancellationToken) is null)
+        if (await MigrationsRepositoryService.GetAsync(Id, cancellationToken) is null)
         {
             Console.WriteLine($"[MIGRATION-DOWN] -> '{Name}' is already done, the ID is exists");
             return;
@@ -106,7 +106,7 @@ internal abstract class M_00_MigrationBase : IMigration
         }
         
 
-        await MigrationsRepositoryService.DeleteMigrationAsync(Id.ToString(), cancellationToken);
+        await MigrationsRepositoryService.DeleteMigrationAsync(Id, cancellationToken);
 
         Console.WriteLine($"[MIGRATION-DOWN] -> '{Name}' is finished");
     }

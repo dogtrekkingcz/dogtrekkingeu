@@ -49,7 +49,7 @@ internal class PetTypeRepositoryService : IPetTypeRepositoryService
         return response;
     }
 
-    public async Task DeleteAsync(string id, CancellationToken cancellationToken)
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         _logger.LogInformation($"{nameof(DeleteAsync)} - id: '{id}'");
 

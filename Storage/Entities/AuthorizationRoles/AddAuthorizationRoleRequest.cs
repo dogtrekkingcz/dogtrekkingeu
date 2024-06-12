@@ -2,7 +2,7 @@
 {
     public record AddAuthorizationRoleRequest
     {
-        public string? Id { get; init; }
+        public Guid Id { get; init; } = Guid.Empty;
 
         public string UserId { get; init; } = string.Empty;
 

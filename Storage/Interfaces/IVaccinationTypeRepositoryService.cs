@@ -8,5 +8,5 @@ public interface IVaccinationTypeRepositoryService : IRepositoryService
 
     public Task<GetAllVaccinationTypesInternalStorageResponse> GetAllAsync(CancellationToken cancellationToken);
 
-    public Task DeleteAsync(string id, CancellationToken cancellationToken);
+    public Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

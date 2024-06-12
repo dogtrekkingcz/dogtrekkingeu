@@ -2,7 +2,7 @@
 
 public sealed record CreateUserProfileInternalStorageRequest
 {
-    public string? Id { get; init; } = string.Empty;
+    public Guid Id { get; init; } = Guid.Empty;
 
     public Guid UserId { get; init; } = Guid.Empty;
 
@@ -24,7 +24,7 @@ public sealed record CreateUserProfileInternalStorageRequest
 
     public List<PetDto> Pets { get; init; } = new List<PetDto>();
 
-    public List<string> Roles { get; init; } = new List<string>();
+    public List<Guid> Roles { get; init; } = new List<Guid>();
 
     public List<ActivityDto> Activities { get; init; } = new List<ActivityDto>();
     

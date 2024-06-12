@@ -22,14 +22,14 @@ namespace Storage.Services.Repositories.ActionRights
 
             if (addRequest.Id == null)
             {
-                addRequest.Id = Guid.NewGuid().ToString();
+                addRequest.Id = Guid.NewGuid();
             }
 
             var addedActionRightsRecord = await _actionRightsStorageService.AddOrUpdateAsync(addRequest, cancellationToken);
 
             var response = new AddActionRightsInternalStorageResponse
             {
-                Id = addedActionRightsRecord?.Id ?? ""
+                Id = addedActionRightsRecord?.Id ?? Guid.Empty
             };
 
             return response;

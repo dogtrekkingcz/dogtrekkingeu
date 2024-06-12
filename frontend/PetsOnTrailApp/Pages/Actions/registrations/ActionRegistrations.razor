@@ -221,10 +221,10 @@ else
 
         if ((rights?
                 .SelectMany(right => right.Roles)
-                .Any(role => role == global::Constants.Roles.InternalAdministrator.Id) ?? false) ||
+                .Any(role => role == global::Constants.Roles.InternalAdministrator.GUID) ?? false) ||
             (rights
-                .FirstOrDefault(right => right.ActionId == Action.Id.ToString())?.Roles?
-                .Any(role => role == global::Constants.Roles.OwnerOfAction.Id) ?? false))
+                .FirstOrDefault(right => right.ActionId == Action.Id)?.Roles?
+                .Any(role => role == global::Constants.Roles.OwnerOfAction.GUID) ?? false))
         {
             CanAcceptPayments = true;
             CanAcceptRegistrations = true;

@@ -46,13 +46,13 @@ namespace Storage.Services.Repositories.Pets
 
             return new UpdatePetInternalStorageResponse
             {
-                Id = result.Id?.ToGuid() ?? Guid.Empty
+                Id = result.Id
             };
         }
 
         public async Task<GetPetInternalStorageResponse> GetPetAsync(GetPetInternalStorageRequest request, CancellationToken cancellationToken)
         {
-            var pet = await _petStorageService.GetAsync(request.Id.ToString(), cancellationToken);
+            var pet = await _petStorageService.GetAsync(request.Id, cancellationToken);
 
             return _mapper.Map<GetPetInternalStorageResponse>(pet);
         }

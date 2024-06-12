@@ -2,5 +2,5 @@
 
 public sealed record GetSelectedUserProfilesInternalStorageRequest
 {
-    public List<string> Ids { get; set; } = new();
+    public List<Guid> Ids { get; set; } = new();
 }

@@ -38,7 +38,7 @@ internal class AuthorizationService : IAuthorizationService
                         .Where(right => Guid.Empty == right.ActionId || (right.ActionId == actionId))
                         .SelectMany(right => right.Roles)
                         .ToList()
-                    ?? new List<string>();
+                    ?? new List<Guid>();
 
         return userRoles.Intersect(requiredRoles).Any();
     }

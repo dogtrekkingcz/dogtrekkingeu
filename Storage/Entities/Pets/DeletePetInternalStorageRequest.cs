@@ -2,6 +2,6 @@
 {
     public sealed record DeletePetInternalStorageRequest
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
     }
 }

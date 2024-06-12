@@ -2,5 +2,5 @@
 
 public sealed record DeleteEntryInternalStorageRequest
 {
-    public string Id { get; set; }
+    public Guid Id { get; init; } = Guid.Empty;
 }

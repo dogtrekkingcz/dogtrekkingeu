@@ -51,14 +51,14 @@
         if (rights == null)
             return false;
         
-        if (rights.SelectMany(right => right.Roles).Contains(global::Constants.Roles.InternalAdministrator.Id))
+        if (rights.SelectMany(right => right.Roles).Contains(global::Constants.Roles.InternalAdministrator.GUID))
             return true;
 
-        var actionRights = rights.FirstOrDefault(right => right.ActionId == Model.Id.ToString());
+        var actionRights = rights.FirstOrDefault(right => right.ActionId == Model.Id);
         if (actionRights == null)
             return false;
 
-        if (actionRights.Roles.Contains(global::Constants.Roles.OwnerOfAction.Id))
+        if (actionRights.Roles.Contains(global::Constants.Roles.OwnerOfAction.GUID))
             return true;
 
         return false;

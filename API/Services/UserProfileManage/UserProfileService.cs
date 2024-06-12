@@ -24,7 +24,7 @@ namespace PetsOnTrail.Actions.Services.UserProfileManage
             var createUserProfileRequest = _mapper.Map<CreateUserProfileInternalStorageRequest>(request) with
             {
                 UserId = _currentUserIdService.GetUserId(),
-                Roles = new List<string> { Constants.Roles.InternalUser.Id }
+                Roles = new List<Guid> { Constants.Roles.InternalUser.GUID }
             };
 
             await _userProfilesRepositoryService.AddUserProfileAsync(createUserProfileRequest, cancellationToken);

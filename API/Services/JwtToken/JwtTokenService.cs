@@ -65,7 +65,7 @@ public class JwtTokenService : IJwtTokenService
                 new Storage.Entities.UserProfiles.CreateUserProfileInternalStorageRequest 
                 { 
                     UserId = _userId,
-                    Roles = new List<string> { Constants.Roles.InternalUser.Id },
+                    Roles = new List<Guid> { Constants.Roles.InternalUser.GUID },
                     FirstName = securityToken?.Claims?.FirstOrDefault(c => c.Type == "given_name")?.Value ?? "",
                     LastName = securityToken?.Claims?.FirstOrDefault(c => c.Type == "family_name")?.Value ?? "",
                     Contact = new CreateUserProfileInternalStorageRequest.ContactDto

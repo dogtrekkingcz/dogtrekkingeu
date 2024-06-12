@@ -63,10 +63,10 @@ public sealed class UserProfileService : IUserProfileService
             {
                 userRights.Add(new UserProfileModel.ActionRightsDto
                 {
-                    Id = right.Id,
-                    ActionId = right.ActionId,
-                    UserId = right.UserId,
-                    Roles = right.Roles
+                    Id = Guid.Parse(right.Id),
+                    ActionId = Guid.Parse(right.ActionId),
+                    UserId = Guid.Parse(right.UserId),
+                    Roles = right.Roles.Select(role => Guid.Parse(role)).ToList()
                 });
             }
 

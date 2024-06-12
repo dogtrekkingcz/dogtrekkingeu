@@ -54,16 +54,6 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
                 Created = DateTimeOffset.Now
             };            
 
-            foreach (var race in addActionRequest.Races)
-            {
-                race.Id = Guid.NewGuid();
-
-                foreach (var category in race.Categories)
-                {
-                    category.Id = Guid.NewGuid();
-                }
-            }
-
             var result = await _actionsRepositoryService.AddActionAsync(addActionRequest, cancellationToken);
 
             await _actionRightsRepositoryService.AddActionRightsAsync(new Storage.Entities.ActionRights.AddActionRightsInternalStorageRequest
@@ -71,7 +61,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
                 Id = Guid.NewGuid(),
                 ActionId = result.Id,
                 UserId = _currentUserIdService.GetUserId(),
-                Roles = new List<string> { Constants.Roles.OwnerOfAction.Id }
+                Roles = new List<Guid> { Constants.Roles.OwnerOfAction.GUID }
             }, cancellationToken);
 
             var response = _mapper.Map<CreateActionResponse>(result);
@@ -79,7 +69,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
         public async Task<UpdateActionResponse> UpdateActionAsync(UpdateActionRequest request, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(UpdateActionAsync)), request.Id, cancellationToken))
@@ -94,7 +84,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return response;
         }
         
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
         public async Task<GetActionDetailResponse> GetActionDetailAsync(Guid id, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetActionDetailAsync)), id, cancellationToken))
@@ -137,7 +127,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return _mapper.Map<GetActionDetailResponse>(actionDetail);
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID)]
         public async Task<GetAllActionsResponse> GetAllActionsAsync(GetAllActionsRequest request, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetAllActionsAsync)), Guid.Empty, cancellationToken))
@@ -150,7 +140,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID)]
         public async Task<GetAllActionsWithDetailsResponse> GetAllActionsWithDetailsAsync(GetAllActionsWithDetailsRequest request, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetAllActionsWithDetailsAsync)), Guid.Empty, cancellationToken))
@@ -163,7 +153,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
         public async Task<GetActionResponse> GetActionAsync(Guid id, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetActionAsync)), id, cancellationToken))
@@ -176,7 +166,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
         public async Task DeleteActionAsync(Guid id, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(DeleteActionAsync)), id, cancellationToken))
@@ -219,7 +209,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return response;
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID)]
         public async Task<GetSelectedActionsResponse> GetSelectedActionsAsync(GetSelectedActionsRequest request, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetSelectedActionsAsync)), Guid.Empty, cancellationToken))
@@ -232,7 +222,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             return _mapper.Map<GetSelectedActionsResponse>(result);
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
         public async Task AcceptRegistrationAsync(Guid registrationId, CancellationToken cancellationToken)
         {
             var registration = await _entriesRepositoryService.GetAsync(registrationId, cancellationToken);
@@ -284,7 +274,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             await _entriesRepositoryService.UpdateEntryAsync(updateEntryRequest, cancellationToken);
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
         public async Task AcceptCheckpointAsync(AcceptCheckpointRequest request, CancellationToken cancellationToken)
         {
             var checkpoint = await _checkpointsRepositoryService.GetAsync(request.Id, cancellationToken);
@@ -310,7 +300,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             
         }
 
-        [RequiredRoles(Constants.Roles.InternalAdministrator.Id, Constants.Roles.OwnerOfAction.Id)]
+        [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
         public async Task AcceptPaymentAsync(AcceptPaymentRequest request, CancellationToken cancellationToken)
         {
             if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(AcceptPaymentAsync)), request.ActionId, cancellationToken))

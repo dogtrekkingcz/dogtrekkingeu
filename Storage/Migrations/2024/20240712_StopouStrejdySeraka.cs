@@ -12,7 +12,7 @@ internal class _20240712_StopouStrejdySeraka : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "Stopou strejdy Šeráka",
-                Type = Constants.ActivityType.Dogtrekking,
+                TypeId = Constants.ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Lipová lázně"

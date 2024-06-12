@@ -2,5 +2,5 @@
 
 public sealed record DeleteEntryRequest
 {
-    public string Id { get; set; }
+    public Guid Id { get; set; } = Guid.Empty;
 }

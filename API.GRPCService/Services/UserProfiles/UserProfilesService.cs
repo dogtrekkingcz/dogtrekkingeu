@@ -60,7 +60,7 @@ public class UserProfilesService : Protos.UserProfiles.UserProfiles.UserProfiles
 
     public async override Task<Protos.UserProfiles.GetSelectedSurnameName.GetSelectedSurnameNameResponse> getSelectedSurnameName(Protos.UserProfiles.GetSelectedSurnameName.GetSelectedSurnameNameRequest request, ServerCallContext context)
     {
-        var selectedUsers = await _userProfileService.GetSelectedSurnameNameAsync(new GetSelectedSurnameNameRequest { Ids = request.Ids.ToList() }, context.CancellationToken);
+        var selectedUsers = await _userProfileService.GetSelectedSurnameNameAsync(new GetSelectedSurnameNameRequest { Ids = request.Ids.Select(id => Guid.Parse(id)).ToList() }, context.CancellationToken);
 
         var response = new Protos.UserProfiles.GetSelectedSurnameName.GetSelectedSurnameNameResponse
         {

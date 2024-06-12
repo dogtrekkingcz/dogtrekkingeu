@@ -31,7 +31,7 @@ namespace Storage.Services.Repositories.Actions
 
             var response = new CreateActionInternalStorageResponse
             {
-                Id = addedActionRecord?.Id ?? ""
+                Id = addedActionRecord?.Id ?? Guid.Empty
             };
 
             return response;
@@ -53,12 +53,12 @@ namespace Storage.Services.Repositories.Actions
         public async Task DeleteActionAsync(Guid id, CancellationToken cancellationToken)
         {
             Console.WriteLine($"{nameof(DeleteActionAsync)} - id: '{id}'");
-            await _actionsStorageService.DeleteAsync(id.ToString(), cancellationToken);
+            await _actionsStorageService.DeleteAsync(id, cancellationToken);
         }
 
         public async Task<GetActionInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _actionsStorageService.GetAsync(id.ToString(), cancellationToken);
+            var result = await _actionsStorageService.GetAsync(id, cancellationToken);
             Console.WriteLine($"{nameof(GetAsync)} - response from storage: '{result?.Dump()}'");
             
             var response = _mapper.Map<GetActionInternalStorageResponse>(result);
@@ -96,7 +96,7 @@ namespace Storage.Services.Repositories.Actions
         public async Task<AddResultInternalStorageResponse> AddResultAsync(AddResultInternalStorageRequest request, CancellationToken cancellationToken)
         {
             Console.WriteLine($"{nameof(AddResultAsync)} - request: '{request?.Dump()}'");
-            var action = await _actionsStorageService.GetAsync(request.ActionId.ToString(), cancellationToken);
+            var action = await _actionsStorageService.GetAsync(request.ActionId, cancellationToken);
 
             var race = action.Races.First(race => race.Id == request.RaceId);
 
@@ -139,7 +139,7 @@ namespace Storage.Services.Repositories.Actions
         {
             Console.WriteLine($"{nameof(GetSimpleActionsListByTypeAsync)} - typeIds: '{typeIds?.Dump()}'");
 
-            var actions = await _actionsStorageService.GetSelectedListAsync("Type", typeIds.Select(id => id.ToString()).ToList(), cancellationToken);
+            var actions = await _actionsStorageService.GetSelectedListAsync("Type", typeIds.Select(id => id).ToList(), cancellationToken);
 
             var response = new GetSimpleActionsListByTypeInternalStorageResponse
             {

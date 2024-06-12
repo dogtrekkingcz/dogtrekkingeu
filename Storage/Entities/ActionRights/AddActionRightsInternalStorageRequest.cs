@@ -6,8 +6,8 @@
 
         public Guid UserId { get; init; } = Guid.Empty;
 
-        public string ActionId { get; init; } = string.Empty;
+        public Guid ActionId { get; init; } = Guid.Empty;
     
-        public IList<string> Roles { get; set; } = new List<string>();
+        public IList<Guid> Roles { get; set; } = new List<Guid>();
     }
 }

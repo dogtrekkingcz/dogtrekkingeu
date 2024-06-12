@@ -8,6 +8,6 @@ namespace Storage.Interfaces
 
         public Task<GetAllActivityTypesInternalStorageResponse> GetAllAsync(CancellationToken cancellationToken);
 
-        public Task DeleteAsync(string id, CancellationToken cancellationToken);
+        public Task DeleteAsync(Guid id, CancellationToken cancellationToken);
     }
 }

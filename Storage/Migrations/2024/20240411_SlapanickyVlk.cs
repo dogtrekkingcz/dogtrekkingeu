@@ -26,7 +26,7 @@ internal class _20240411_SlapanickyVlk : M_00_MigrationBase
             {
                 Id = Id,
                 Name = "Šlapanický vlk",
-                Type = Constants.ActivityType.Dogtrekking,
+                TypeId = Constants.ActivityType.Dogtrekking,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Šlapanice"
