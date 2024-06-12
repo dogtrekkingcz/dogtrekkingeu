@@ -1,0 +1,1 @@
+docker exec -i db4dbc582f36 mongoexport --authenticationDatabase=admin -h localhost:27017  -u root -p password --db saveInfo -d PetsOnTrailDb --collection Activities --type=json --out /data/db/export.json;
