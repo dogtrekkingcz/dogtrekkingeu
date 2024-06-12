@@ -64,7 +64,7 @@ public static class PublicActionMapper
                 Description = src.Data.Actions[0].Description,
                 Begin = src.Data.Actions[0].Term.From.DateTime,
                 End = src.Data.Actions[0].Term.To.DateTime,
-                Type = Guid.Parse(src.Data.Actions[0].Type),
+                TypeId = src.Data.Actions[0].TypeId,
                 City = src.Data.Actions[0].Address.City,
                 Races = src.Data.Actions[0].Races.Select(race => new SimpleActionModel.RaceDto
                 { 
@@ -110,7 +110,7 @@ public static class PublicActionMapper
                     Id = Guid.Parse(action.Id),
                     Name = action.Name,
                     Description = action.Description,
-                    Type = Guid.Parse(action.Type),
+                    TypeId = Guid.Parse(action.TypeId),
                     Begin = action.Begin.ToDateTimeOffset().Value.DateTime,
                     End = action.End.ToDateTimeOffset().Value.DateTime,
                     City = action.City,

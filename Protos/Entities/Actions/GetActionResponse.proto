@@ -18,7 +18,7 @@ message GetActionResponse {
   repeated CheckpointDto Checkpoints = 8;
   repeated RaceDto Races = 9;
   ActionSaleDto Sale = 10;
-  string Type = 11;
+  string TypeId = 11;
 }
 
 message CheckpointDto {

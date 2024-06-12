@@ -21,7 +21,7 @@ message Action {
   AddressDto Address = 7;
   repeated RaceDto Races = 8;
   ActionSaleDto Sale = 9;
-  string Type = 10;
+  string TypeId = 10;
 }
 
 message RaceDto {

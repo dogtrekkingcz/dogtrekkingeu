@@ -11,7 +11,7 @@ message GetActionEntrySettingsResponse {
   string Name = 2;
   repeated RaceDto Races = 3;
   repeated CategoryDto Categories = 4;
-  string Type = 5;
+  string TypeId = 5;
 }
 
 message RaceDto {

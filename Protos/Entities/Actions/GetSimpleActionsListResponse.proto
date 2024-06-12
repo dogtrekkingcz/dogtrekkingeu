@@ -17,7 +17,7 @@ message SimpleActionDto {
   string City = 4;
   google.type.DateTime Begin = 5;
   google.type.DateTime End = 6;
-  string Type = 7;
+  string TypeId = 7;
   repeated RaceDto Races = 8;
 }
 

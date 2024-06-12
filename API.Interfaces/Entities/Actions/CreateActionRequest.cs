@@ -2,7 +2,7 @@
 
 public sealed record CreateActionRequest
 {
-    public string Type { get; set; } = string.Empty;
+    public Guid TypeId { get; set; } = Guid.Empty;
     
     public string Name { get; set; } = string.Empty;
 

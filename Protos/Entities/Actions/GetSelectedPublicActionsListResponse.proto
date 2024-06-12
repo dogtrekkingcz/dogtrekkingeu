@@ -13,7 +13,7 @@ message GetSelectedPublicActionsListResponse {
 
 message ActionDto {
   string Id = 1;
-  string Type = 2;
+  string TypeId = 2;
   string Name = 3;
   string Description = 4;
   string ContactMail = 5;

@@ -8,7 +8,7 @@ public sealed record GetActionInternalStorageResponse
     
     public DateTimeOffset Created { get; set; }
     
-    public string Type { get; set; }
+    public Guid TypeId { get; set; } = Guid.Empty;
 
     public string Name { get; set; } = string.Empty;
 

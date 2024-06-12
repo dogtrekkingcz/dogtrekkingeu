@@ -8,7 +8,7 @@ import "google/type/datetime.proto";
 import "google/type/latlng.proto";
 
 message CreateActionRequest {
-  string Type = 1;
+  string TypeId = 1;
   string Name = 2;
   string Description = 3;
   string ContactMail = 4;

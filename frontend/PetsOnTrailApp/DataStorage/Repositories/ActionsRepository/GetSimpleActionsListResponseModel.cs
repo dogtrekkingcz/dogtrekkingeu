@@ -15,7 +15,7 @@ public sealed record GetSimpleActionsListResponseModel
         public string City { get; set; }
         public DateTime Begin { get; set; }
         public DateTime End { get; set; }
-        public Guid Type { get; set; }    
+        public Guid TypeId { get; set; }
         public IList<RaceDto> Races { get; set; }
     }
 

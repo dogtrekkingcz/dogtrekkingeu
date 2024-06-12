@@ -282,15 +282,15 @@ public class ActionsRepository : IActionsRepository
 
                 foreach (var action in actionsInDataStorage.Data.Actions)
                 {
-                    if (_actionsSimple.TryGetValue(action.Type, out var tmp) == false)
-                        _actionsSimple[action.Type] = new List<SimpleActionModel>();
+                    if (_actionsSimple.TryGetValue(action.TypeId, out var tmp) == false)
+                        _actionsSimple[action.TypeId] = new List<SimpleActionModel>();
 
-                    _actionsSimple[action.Type].Add(new SimpleActionModel
+                    _actionsSimple[action.TypeId].Add(new SimpleActionModel
                     {
                         Id = action.Id,
                         Name = action.Name,
                         Description = action.Description,
-                        Type = action.Type,
+                        TypeId = action.TypeId,
                         Begin = action.Begin,
                         End = action.End,
                         City = action.City,

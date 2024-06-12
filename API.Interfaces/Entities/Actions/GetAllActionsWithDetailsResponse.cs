@@ -6,6 +6,10 @@ public sealed record GetAllActionsWithDetailsResponse
 
     public sealed record ActionDto
     {
+        public Guid Id { get; init; } = Guid.Empty;
+
+        public Guid TypeId { get; init; } = Guid.Empty;
+
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; } = string.Empty;
