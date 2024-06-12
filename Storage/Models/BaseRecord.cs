@@ -6,7 +6,6 @@ namespace Storage.Models;
 internal record BaseRecord : IRecord
 {
     [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
     public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid UserId { get; set; } = Guid.Empty;
