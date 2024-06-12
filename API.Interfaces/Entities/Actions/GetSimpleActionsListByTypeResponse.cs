@@ -8,25 +8,25 @@ public sealed record GetSimpleActionsListByTypeResponse
     {
         public Guid Id { get; init; }
 
-        public string Name { get; init; }
+        public string Name { get; init; } = string.Empty;
 
-        public string Description { get; init; }
+        public string Description { get; init; } = string.Empty;
 
-        public string City { get; init; }
+        public string City { get; init; } = string.Empty;
 
         public DateTime Begin { get; init; }
 
         public DateTime End { get; init; }
 
-        public string Type { get; init; }
+        public Guid TypeId { get; init; }
 
-        public IList<RaceDto> Races { get; init; }
+        public IList<RaceDto> Races { get; init; } = new List<RaceDto>();
     }
 
     public sealed record RaceDto
     {
         public Guid Id { get; init; }
 
-        public string Name { get; init; }
+        public string Name { get; init; } = string.Empty;
     }
 }
