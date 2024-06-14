@@ -1,7 +1,6 @@
 package eu.petsontrail.tracker.services
 
 import activities.ActivitiesGrpc
-import addpoints.AddPointsRequestOuterClass
 import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
@@ -27,14 +26,11 @@ import eu.petsontrail.tracker.MainActivity
 import eu.petsontrail.tracker.R
 import eu.petsontrail.tracker.db.AppDatabase
 import eu.petsontrail.tracker.db.model.ActivityDto
-import eu.petsontrail.tracker.db.model.LocationDto
-import eu.petsontrail.tracker.db.model.PetDto
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
+import io.grpc.stub.StreamObserver
 import kotlinx.coroutines.runBlocking
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
+import synchronizeFromClient.SynchronizeFromClientRequestOuterClass
 import java.util.UUID
 
 
@@ -223,41 +219,81 @@ class ActivityUploadService : Service() {
                 Log.d("Service status", "Activity created")
 
                 var processedPositionsCount = 0
-                for (i in 0..positions.size step 50) {
-                    var positionsChunk = positions.subList(i, Math.min(positions.size - processedPositionsCount, i + 50))
+                val requestObserver: StreamObserver<SynchronizeFromClientRequestOuterClass.SynchronizeFromClientRequest>
+                    = client.synchronizeFromClient(io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver)
 
-                    if (positionsChunk.isEmpty())
-                        break
+                try {
+                    for (i in 0..positions.size step 50) {
+                        var positionsChunk = positions.subList(i, Math.min(positions.size - processedPositionsCount, i + 50))
 
-                    processedPositionsCount += positionsChunk.size
+                        if (positionsChunk.isEmpty())
+                            break
 
-                    var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
-                    addPointsRequestBuilder
-                        ?.setActivityId(activity.uid.toString())
-                        ?.addAllPoints(positionsChunk.map { position ->
-                            var positionDtoBuilder = AddPointsRequestOuterClass.PointDto.newBuilder()
-                                .setId(position.uid.toString())
-                                .setTime(Timestamp.newBuilder().setSeconds(position.time))
-                                .setLatitude(position.latitudeDegrees!!)
-                                .setLongitude(position.longitudeDegrees!!)
+                        processedPositionsCount += positionsChunk.size
 
-                            if (position.altitudeMeters != null)
-                                positionDtoBuilder.setAltitude(position.altitudeMeters!!)
+                        var synchronizedPointsRequestBuilder: SynchronizeFromClientRequestOuterClass.SynchronizeFromClientRequest.Builder? = SynchronizeFromClientRequestOuterClass.SynchronizeFromClientRequest.newBuilder()
+                        synchronizedPointsRequestBuilder
+                            ?.setActivityId(activity.uid.toString())
+                            ?.addAllPoints(positionsChunk.map { position ->
+                                var positionDtoBuilder = SynchronizeFromClientRequestOuterClass.PointDto.newBuilder()
+                                    .setId(position.uid.toString())
+                                    .setTime(Timestamp.newBuilder().setSeconds(position.time))
+                                    .setLatitude(position.latitudeDegrees!!)
+                                    .setLongitude(position.longitudeDegrees!!)
 
-                            if (position.horizontalAccuracyMeters != null)
-                                positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
+                                if (position.altitudeMeters != null)
+                                    positionDtoBuilder.setAltitude(position.altitudeMeters!!)
 
-                            if (position.bearingDegrees != null)
-                                positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
+                                if (position.horizontalAccuracyMeters != null)
+                                    positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
 
-                            if (position.note != null)
-                                positionDtoBuilder.setNote(position.note)
+                                if (position.bearingDegrees != null)
+                                    positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
 
-                            positionDtoBuilder.build()
-                        })
+                                if (position.note != null)
+                                    positionDtoBuilder.setNote(position.note)
 
-                    client.addPoints(addPointsRequestBuilder?.build())
+                                positionDtoBuilder.build()
+                            })
+
+                        requestObserver.onNext(synchronizedPointsRequestBuilder?.build())
+
+                        /*
+                        var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
+                        addPointsRequestBuilder
+                            ?.setActivityId(activity.uid.toString())
+                            ?.addAllPoints(positionsChunk.map { position ->
+                                var positionDtoBuilder = AddPointsRequestOuterClass.PointDto.newBuilder()
+                                    .setId(position.uid.toString())
+                                    .setTime(Timestamp.newBuilder().setSeconds(position.time))
+                                    .setLatitude(position.latitudeDegrees!!)
+                                    .setLongitude(position.longitudeDegrees!!)
+
+                                if (position.altitudeMeters != null)
+                                    positionDtoBuilder.setAltitude(position.altitudeMeters!!)
+
+                                if (position.horizontalAccuracyMeters != null)
+                                    positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
+
+                                if (position.bearingDegrees != null)
+                                    positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
+
+                                if (position.note != null)
+                                    positionDtoBuilder.setNote(position.note)
+
+                                positionDtoBuilder.build()
+                            })
+
+                        client.addPoints(addPointsRequestBuilder?.build())
+
+                         */
+                    }
+                } catch (e: RuntimeException) {
+                    requestObserver.onError(e)
+                    throw e
                 }
+
+                requestObserver.onCompleted()
             }
 
             channel.shutdownNow()
