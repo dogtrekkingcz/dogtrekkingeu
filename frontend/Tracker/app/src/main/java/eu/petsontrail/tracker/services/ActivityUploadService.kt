@@ -279,36 +279,6 @@ class ActivityUploadService : Service() {
                             })
 
                         requestObserver.onNext(synchronizedPointsRequestBuilder?.build())
-
-                        /*
-                        var addPointsRequestBuilder: AddPointsRequestOuterClass.AddPointsRequest.Builder? = AddPointsRequestOuterClass.AddPointsRequest.newBuilder()
-                        addPointsRequestBuilder
-                            ?.setActivityId(activity.uid.toString())
-                            ?.addAllPoints(positionsChunk.map { position ->
-                                var positionDtoBuilder = AddPointsRequestOuterClass.PointDto.newBuilder()
-                                    .setId(position.uid.toString())
-                                    .setTime(Timestamp.newBuilder().setSeconds(position.time))
-                                    .setLatitude(position.latitudeDegrees!!)
-                                    .setLongitude(position.longitudeDegrees!!)
-
-                                if (position.altitudeMeters != null)
-                                    positionDtoBuilder.setAltitude(position.altitudeMeters!!)
-
-                                if (position.horizontalAccuracyMeters != null)
-                                    positionDtoBuilder.setAccuracy(position.horizontalAccuracyMeters!!.toDouble())
-
-                                if (position.bearingDegrees != null)
-                                    positionDtoBuilder.setCourse(position.bearingDegrees!!.toDouble())
-
-                                if (position.note != null)
-                                    positionDtoBuilder.setNote(position.note)
-
-                                positionDtoBuilder.build()
-                            })
-
-                        client.addPoints(addPointsRequestBuilder?.build())
-
-                         */
                     }
                 } catch (e: RuntimeException) {
                     requestObserver.onError(e)

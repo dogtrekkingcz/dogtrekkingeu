@@ -44,5 +44,20 @@ namespace API.GRPCService.Interceptors
                 throw;
             }
         }
+
+        public override AsyncClientStreamingCall<TRequest, TResponse> AsyncClientStreamingCall<TRequest, TResponse>(ClientInterceptorContext<TRequest, TResponse> context, AsyncClientStreamingCallContinuation<TRequest, TResponse> continuation)
+        {
+            _logger.LogInformation($"{nameof(JwtTokenInterceptor)}: running async client streaming call with context: '{context}'");
+
+            var tokenSource = context.Options.Headers?.Get("authorization");
+            if (tokenSource is not null)
+            {
+                var token = tokenSource?.Value ?? string.Empty;
+
+                _jwtTokenService.Parse(token, CancellationToken.None);
+            }
+
+            return base.AsyncClientStreamingCall(context, continuation);
+        }
     }
 }
