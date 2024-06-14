@@ -15,6 +15,8 @@ namespace API.GRPCService.Interceptors
         { 
             _logger = logger;
             _jwtTokenService = jwtTokenService;
+
+            _logger.LogInformation($"{nameof(JwtTokenInterceptor)}: created");
         }
 
         public override async Task<TResponse> UnaryServerHandler<TRequest, TResponse>(

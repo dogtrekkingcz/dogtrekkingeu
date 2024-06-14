@@ -21,6 +21,8 @@ public class JwtTokenService : IJwtTokenService
         _logger = logger;
         _currentUserIdService = currentUserIdService;
         _userProfilesRepositoryService = userProfilesRepositoryService;
+
+        _logger.LogInformation($"{nameof(JwtTokenService)}: created");
     }
 
     public async Task<string> Parse(string token, CancellationToken cancellationToken)
