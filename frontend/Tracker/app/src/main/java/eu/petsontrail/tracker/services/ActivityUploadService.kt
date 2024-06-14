@@ -18,6 +18,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
+import com.google.protobuf.Empty
 import com.google.protobuf.Timestamp
 import createactivity.CreateActivityRequestOuterClass
 import createactivity.CreateActivityRequestOuterClass.CreateActivityRequest
@@ -178,6 +179,10 @@ class ActivityUploadService : Service() {
                 .newBlockingStub(channel)
                 .withCallCredentials(AuthenticationCallCredentials(token))
 
+            var clientNonBlocking = ActivitiesGrpc
+                .newStub(channel)
+                .withCallCredentials(AuthenticationCallCredentials(token))
+
             var requestBuilder: CreateActivityRequest.Builder? = CreateActivityRequest.newBuilder()
                 .setId(activity.uid.toString())
                 .setActionId(Constants.UUID_EMPTY)
@@ -220,7 +225,19 @@ class ActivityUploadService : Service() {
 
                 var processedPositionsCount = 0
                 val requestObserver: StreamObserver<SynchronizeFromClientRequestOuterClass.SynchronizeFromClientRequest>
-                    = client.synchronizeFromClient(io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver)
+                    = clientNonBlocking.synchronizeFromClient(object : StreamObserver<Empty> {
+                        override fun onNext(value: Empty?) {
+                            Log.d("Service status", "Synchronization completed")
+                        }
+
+                        override fun onError(t: Throwable?) {
+                            Log.d("Service status", "Synchronization error")
+                        }
+
+                        override fun onCompleted() {
+                            Log.d("Service status", "Synchronization completed")
+                        }
+                    })
 
                 try {
                     for (i in 0..positions.size step 50) {
