@@ -45,19 +45,27 @@ namespace API.GRPCService.Interceptors
             }
         }
 
-        public override AsyncClientStreamingCall<TRequest, TResponse> AsyncClientStreamingCall<TRequest, TResponse>(ClientInterceptorContext<TRequest, TResponse> context, AsyncClientStreamingCallContinuation<TRequest, TResponse> continuation)
+        public override async Task<TResponse> ClientStreamingServerHandler<TRequest, TResponse>(IAsyncStreamReader<TRequest> requestStream, ServerCallContext context, ClientStreamingServerMethod<TRequest, TResponse> continuation)
         {
-            _logger.LogInformation($"{nameof(JwtTokenInterceptor)}: running async client streaming call with context: '{context}'");
+            _logger.LogInformation($"{nameof(JwtTokenInterceptor)}: running client streaming server handler with context: '{context}'");
 
-            var tokenSource = context.Options.Headers?.Get("authorization");
+            var tokenSource = context.RequestHeaders.Get("authorization");
             if (tokenSource is not null)
             {
                 var token = tokenSource?.Value ?? string.Empty;
 
-                _jwtTokenService.Parse(token, CancellationToken.None);
+                await _jwtTokenService.Parse(token, context.CancellationToken);
             }
 
-            return base.AsyncClientStreamingCall(context, continuation);
+            try
+            {
+                return await continuation(requestStream, context);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{nameof(JwtTokenInterceptor)}: error while trying to run continuation with accepted request: '{requestStream}'/context: '{context}'");
+                throw;
+            }
         }
     }
 }
