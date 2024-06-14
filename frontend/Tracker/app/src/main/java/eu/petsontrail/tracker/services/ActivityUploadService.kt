@@ -175,12 +175,8 @@ class ActivityUploadService : Service() {
             channel = ManagedChannelBuilder
                         .forTarget("dns:///petsontrail.eu:4443")
                         .build()
-            var client = ActivitiesGrpc
+            val client = ActivitiesGrpc
                 .newBlockingStub(channel)
-                .withCallCredentials(AuthenticationCallCredentials(token))
-
-            var clientNonBlocking = ActivitiesGrpc
-                .newStub(channel)
                 .withCallCredentials(AuthenticationCallCredentials(token))
 
             var requestBuilder: CreateActivityRequest.Builder? = CreateActivityRequest.newBuilder()
@@ -224,6 +220,15 @@ class ActivityUploadService : Service() {
                 Log.d("Service status", "Activity created")
 
                 var processedPositionsCount = 0
+
+                val channelNonBlocking = ManagedChannelBuilder
+                    .forTarget("dns:///petsontrail.eu:4443")
+                    .build()
+
+                val clientNonBlocking = ActivitiesGrpc
+                    .newStub(channelNonBlocking)
+                    .withCallCredentials(AuthenticationCallCredentials(token))
+
                 val requestObserver: StreamObserver<SynchronizeFromClientRequestOuterClass.SynchronizeFromClientRequest>
                     = clientNonBlocking.synchronizeFromClient(object : StreamObserver<Empty> {
                         override fun onNext(value: Empty?) {
