@@ -145,8 +145,6 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
         var userId = _jwtTokenService.GetUserId();
         _logger.LogInformation($"SynchronizeFromClient: {userId}");
 
-        _logger.LogInformation($"SynchronizeFromClient: Context: '{context.Dump()}'");
-
         await foreach (var response in requestStream.ReadAllAsync())
         {
             var apiRequest = _mapper.Map<AddPointsRequest>(response) with

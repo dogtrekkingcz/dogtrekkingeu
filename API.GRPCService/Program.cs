@@ -85,7 +85,7 @@ typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddSingleton(typeAdapterConfig)
     .AddScoped<IMapper, ServiceMapper>()
-    .AddScoped<JwtTokenInterceptor>()
+    .AddSingleton<JwtTokenInterceptor>() // TODO: this was scope... Need to check this
     .AddLogging(config =>
     {
         config.AddConsole();
