@@ -54,7 +54,8 @@ internal static class ActivitiesServiceMapping
             .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
         typeAdapterConfig.NewConfig<AddPointsResponse, Protos.Activities.AddPoints.AddPointsResponse>();
 
-        typeAdapterConfig.NewConfig<Protos.Activities.SynchronizeFromClient.SynchronizeFromClientRequest, AddPointsRequest>();
+        typeAdapterConfig.NewConfig<Protos.Activities.SynchronizeFromClient.SynchronizeFromClientRequest, AddPointsRequest>()
+            .Ignore(d => d.UserId);
         typeAdapterConfig.NewConfig<Protos.Activities.SynchronizeFromClient.PointDto, AddPointsRequest.PointDto>()
             .Map(d => d.PhotoUris, s => new List<string> { s.PhotoUris });
 
