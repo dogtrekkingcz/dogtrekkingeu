@@ -142,11 +142,14 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
 
     public async override Task<Google.Protobuf.WellKnownTypes.Empty> synchronizeFromClient(IAsyncStreamReader<Protos.Activities.SynchronizeFromClient.SynchronizeFromClientRequest> requestStream, ServerCallContext context)
     {
+        var userId = _jwtTokenService.GetUserId();
+        _logger.LogInformation($"SynchronizeFromClient: {userId}");
+
         await foreach (var response in requestStream.ReadAllAsync())
         {
             var apiRequest = _mapper.Map<AddPointsRequest>(response) with
             {
-                UserId = _jwtTokenService.GetUserId()
+                UserId = userId
             };
 
             await _activitiesService.AddPointsAsync(apiRequest, context.CancellationToken);
