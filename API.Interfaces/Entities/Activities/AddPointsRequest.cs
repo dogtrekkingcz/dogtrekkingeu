@@ -4,6 +4,8 @@ public sealed record AddPointsRequest
 {
     public Guid ActivityId { get; init; } = Guid.Empty;
 
+    public Guid UserId { get; init; } = Guid.Empty;
+
     public List<PointDto> Points { get; init; } = new(0);
 
     public sealed record PointDto

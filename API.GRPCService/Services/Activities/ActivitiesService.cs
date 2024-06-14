@@ -52,7 +52,10 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
 
     public async override Task<Protos.Activities.AddPoints.AddPointsResponse> addPoints(Protos.Activities.AddPoints.AddPointsRequest request, ServerCallContext context)
     {
-        var apiRequest = _mapper.Map<AddPointsRequest>(request);
+        var apiRequest = _mapper.Map<AddPointsRequest>(request) with
+        {
+            UserId = _jwtTokenService.GetUserId()
+        };
 
         var response = await _activitiesService.AddPointsAsync(apiRequest, context.CancellationToken);
 
@@ -141,7 +144,10 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
     {
         await foreach (var response in requestStream.ReadAllAsync())
         {
-            var apiRequest = _mapper.Map<AddPointsRequest>(response);
+            var apiRequest = _mapper.Map<AddPointsRequest>(response) with
+            {
+                UserId = _jwtTokenService.GetUserId()
+            };
 
             await _activitiesService.AddPointsAsync(apiRequest, context.CancellationToken);
         }
