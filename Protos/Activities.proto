@@ -16,6 +16,7 @@ import "Entities/Activities/GetActivityTypesResponse.proto";
 import "Entities/Activities/GetActivitiesByUserIdResponse.proto";
 import "Entities/Activities/AddPointsRequest.proto";
 import "Entities/Activities/AddPointsResponse.proto";
+import "Entities/Activities/SynchronizeFromClientRequest.proto";
 
 import "google/protobuf/empty.proto";
 
@@ -35,6 +36,8 @@ service Activities {
   rpc getActivityTypes (google.protobuf.Empty) returns (getactivitytypes.GetActivityTypesResponse);
 
   rpc addPoints (addpoints.AddPointsRequest) returns (addpoints.AddPointsResponse);
+
+  rpc synchronizeFromClient (stream synchronizeFromClient.SynchronizeFromClientRequest) returns (google.protobuf.Empty);
 }
 
 message UserIdAndActivityId {

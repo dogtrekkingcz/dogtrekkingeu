@@ -26,8 +26,6 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
     public async Task<CreateActivityInternalStorageResponse> CreateActivityAsync(CreateActivityInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"ActivitiesRepository::{nameof(CreateActivityAsync)}: '{request?.Dump()}'");
-
         CreateActivityInternalStorageResponse response = null;
             
         var addRequest = _mapper.Map<ActivityRecord>(request);
@@ -133,8 +131,6 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
                 UserId = userId
             };
         }
-
-        _logger.LogInformation($"Storage: GetActivityByUserIdAndActivityId: {activities.Dump()}");
 
         var response = _mapper.Map<GetActivityByUserIdAndActivityIdInternalStorageResponse>(activities.FirstOrDefault()) with { UserId = userId };
         bool first = true;

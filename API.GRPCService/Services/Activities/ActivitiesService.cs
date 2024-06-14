@@ -8,6 +8,7 @@ using PetsOnTrail.Interfaces.Actions.Entities.JwtToken;
 using System.Runtime.CompilerServices;
 using Protos.Activities;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Xml.Serialization;
 
 namespace API.GRPCService.Services.Activities;
 
@@ -134,5 +135,17 @@ public class ActivitiesService : Protos.Activities.Activities.ActivitiesBase
         var result = await _activitiesService.GetActivityTypesAsync(context.CancellationToken);
 
         return _mapper.Map<Protos.Activities.GetActivityTypes.GetActivityTypesResponse>(result);
+    }
+
+    public async override Task<Google.Protobuf.WellKnownTypes.Empty> synchronizeFromClient(IAsyncStreamReader<Protos.Activities.SynchronizeFromClient.SynchronizeFromClientRequest> requestStream, ServerCallContext context)
+    {
+        await foreach (var response in requestStream.ReadAllAsync())
+        {
+            var apiRequest = _mapper.Map<AddPointsRequest>(response);
+
+            await _activitiesService.AddPointsAsync(apiRequest, context.CancellationToken);
+        }
+
+        return new Google.Protobuf.WellKnownTypes.Empty();
     }
 }
