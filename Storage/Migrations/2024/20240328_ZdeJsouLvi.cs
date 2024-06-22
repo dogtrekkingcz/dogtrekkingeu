@@ -65,6 +65,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Hamáková", 
                                         Start = start,
                                         Finish = start.AddHours(12).AddMinutes(37),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -79,6 +80,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Ježovičová", 
                                         Start = start,
                                         Finish = start.AddHours(13).AddMinutes(02),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -93,6 +95,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Cudráková", 
                                         Start = start,
                                         Finish = start.AddHours(13).AddMinutes(18),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -107,6 +110,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Hajlichová", 
                                         Start = start,
                                         Finish = start.AddHours(13).AddMinutes(18),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -121,6 +125,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Lédlová", 
                                         Start = start,
                                         Finish = start.AddHours(14).AddMinutes(44),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -135,6 +140,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Dolečková", 
                                         Start = start,
                                         Finish = start.AddHours(17).AddMinutes(59),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -149,6 +155,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Drugdová", 
                                         Start = start,
                                         Finish = start.AddHours(18).AddMinutes(19),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -163,6 +170,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Wáwrová", 
                                         Start = start,
                                         Finish = start.AddHours(18).AddMinutes(58),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -177,6 +185,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Šonská", 
                                         Start = start,
                                         Finish = start.AddHours(21).AddMinutes(33),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -191,6 +200,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Jandeková", 
                                         Start = start,
                                         Finish = start.AddHours(31).AddMinutes(09),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -205,6 +215,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Dvořáková", 
                                         Start = start,
                                         Finish = start.AddHours(31).AddMinutes(26),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -227,6 +238,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Šotkovský", 
                                         Start = start,
                                         Finish = start.AddHours(9).AddMinutes(15),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -241,6 +253,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Fukala", 
                                         Start = start,
                                         Finish = start.AddHours(9).AddMinutes(51),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -259,6 +272,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Tryzna", 
                                         Start = start,
                                         Finish = start.AddHours(10).AddMinutes(32),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -273,6 +287,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Byrtus", 
                                         Start = start,
                                         Finish = start.AddHours(10).AddMinutes(50),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -287,6 +302,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Koplík", 
                                         Start = start,
                                         Finish = start.AddHours(13).AddMinutes(18),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -301,6 +317,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Rečka", 
                                         Start = start,
                                         Finish = start.AddHours(15).AddMinutes(33),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -319,6 +336,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Fuk", 
                                         Start = start,
                                         Finish = start.AddHours(16).AddMinutes(28),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -333,6 +351,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Hartl", 
                                         Start = start,
                                         Finish = start.AddHours(21).AddMinutes(40),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -347,6 +366,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Adámek", 
                                         Start = start,
                                         Finish = start.AddHours(32).AddMinutes(07),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -361,6 +381,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Polášek", 
                                         Start = start,
                                         Finish = start.AddHours(39).AddMinutes(05),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -383,6 +404,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Bayerová", 
                                         Start = start,
                                         Finish = start.AddHours(10).AddMinutes(45),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -397,6 +419,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         FirstName = "Helena",
                                         Start = start,
                                         Finish = start.AddHours(14).AddMinutes(41),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -411,6 +434,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Knopová", 
                                         Start = start,
                                         Finish = start.AddHours(15).AddMinutes(01),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -429,6 +453,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Hadravová",
                                         Start = start,
                                         Finish = start.AddHours(16).AddMinutes(15),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -443,6 +468,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Čížková",
                                         Start = start,
                                         Finish = start.AddHours(17).AddMinutes(53),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -457,6 +483,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Kalinová", 
                                         Start = start,
                                         Finish = start.AddHours(21).AddMinutes(40),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -471,6 +498,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Němcová", 
                                         Start = start,
                                         Finish = start.AddHours(30).AddMinutes(03),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -485,6 +513,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Mayerová", 
                                         Start = start,
                                         Finish = start.AddHours(31).AddMinutes(09),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -503,6 +532,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Lojkásková", 
                                         Start = start,
                                         Finish = start.AddHours(31).AddMinutes(52),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -517,6 +547,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Dluhošová", 
                                         Start = start,
                                         Finish = start.AddHours(32).AddMinutes(07),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -552,6 +583,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Adámek", 
                                         Start = start,
                                         Finish = start.AddHours(9).AddMinutes(13),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -566,6 +598,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Chvalný", 
                                         Start = start,
                                         Finish = start.AddHours(12).AddMinutes(38),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -580,6 +613,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Lédl", 
                                         Start = start,
                                         Finish = start.AddHours(14).AddMinutes(46),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -594,6 +628,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Šeda", 
                                         Start = start,
                                         Finish = start.AddHours(15).AddMinutes(50),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -608,6 +643,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Suchý", 
                                         Start = start,
                                         Finish = start.AddHours(16).AddMinutes(59),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -622,6 +658,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Egg", 
                                         Start = start,
                                         Finish = start.AddHours(17).AddMinutes(09),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -636,6 +673,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Školník", 
                                         Start = start,
                                         Finish = start.AddHours(18).AddMinutes(21),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -650,6 +688,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Machů", 
                                         Start = start,
                                         Finish = start.AddHours(27).AddMinutes(03),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -664,6 +703,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Hirsch", 
                                         Start = start,
                                         Finish = start.AddHours(30).AddMinutes(14),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -678,6 +718,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Bolehovský", 
                                         Start = start,
                                         Finish = start.AddHours(31).AddMinutes(09),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -692,6 +733,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Vejtasa", 
                                         Start = start,
                                         Finish = start.AddHours(31).AddMinutes(19),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -710,6 +752,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Dvořák", 
                                         Start = start,
                                         Finish = start.AddHours(31).AddMinutes(28),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -724,6 +767,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "Polášek", 
                                         Start = start,
                                         Finish = start.AddHours(39).AddMinutes(05),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -754,6 +798,7 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                         LastName = "dmw1_Tester", 
                                         Start = start,
                                         Finish = start.AddHours(21).AddMinutes(40),
+                                        State = RaceState.Finished,
                                         Pets = new List<PetDto>
                                         {
                                             new PetDto
@@ -764,72 +809,6 @@ internal class _20240328_ZdeJsouLvi : M_00_MigrationBase
                                     },
                                 }
                             },
-                            new CategoryDto
-                            {
-                                Id = IdMidDmw2,
-                                Name = "DMW2",
-                                Racers = new List<RacerDto>
-                                { 
-                                    new RacerDto
-                                    {
-                                        FirstName = "dmw2_tester", 
-                                        LastName = "dmw2_Tester", 
-                                        Start = start,
-                                        Finish = start.AddHours(10).AddMinutes(45),
-                                        Pets = new List<PetDto>
-                                        {
-                                            new PetDto
-                                            {
-                                                Name = "Darko",
-                                            }
-                                        }
-                                    },
-                                }
-                            },
-                            new CategoryDto
-                            {
-                                Id = IdMidDmm1,
-                                Name = "DMM1",
-                                Racers = new List<RacerDto>
-                                { 
-                                    new RacerDto
-                                    {
-                                        FirstName = "dmm1_tester", 
-                                        LastName = "dmm1_Tester", 
-                                        Start = start,
-                                        Finish = start.AddHours(9).AddMinutes(15),
-                                        Pets = new List<PetDto>
-                                        {
-                                            new PetDto
-                                            {
-                                                Name = "Delta",
-                                            }
-                                        }
-                                    },
-                                }
-                            },
-                            new CategoryDto
-                            {
-                                Id = IdMidDmm2,
-                                Name = "DMM2",
-                                Racers = new List<RacerDto>
-                                { 
-                                    new RacerDto
-                                    {
-                                        FirstName = "dmm2_tester", 
-                                        LastName = "dmm2_Tester", 
-                                        Start = start,
-                                        Finish = start.AddHours(9).AddMinutes(13),
-                                        Pets = new List<PetDto>
-                                        {
-                                            new PetDto
-                                            {
-                                                Name = "Neo",
-                                            }
-                                        }
-                                    },
-                                }
-                            }
                         }
                     }
                 }
