@@ -22,6 +22,9 @@ message ActionDto {
   repeated CheckpointDto Checkpoints = 8;
   repeated RaceDto Races = 9;
   ActionSaleDto Sale = 10;
+  string ResultsCanEdit = 11;
+  string CompetitorsCanEdit = 12;
+  string ActionCanEdit = 13;
 }
 
 message CheckpointDto {

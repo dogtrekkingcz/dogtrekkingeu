@@ -16,6 +16,12 @@ public sealed record GetSelectedPublicActionsListResponse
 
         public string ContactMail { get; set; } = string.Empty;
 
+        public Guid ResultsCanEdit { get; set; } = Guid.Empty;
+
+        public Guid CompetitorsCanEdit { get; set; } = Guid.Empty;
+
+        public Guid ActionCanEdit { get; set; } = Guid.Empty;
+
         public TermDto Term { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();
