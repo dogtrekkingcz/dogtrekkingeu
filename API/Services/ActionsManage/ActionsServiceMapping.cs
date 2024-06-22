@@ -24,8 +24,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.RaceDto, GetAllActionsResponse.RaceDto>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.RaceState, GetAllActionsResponse.RaceState>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.TermDto, GetAllActionsResponse.TermDto>();
-        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.VaccinationDto, GetAllActionsResponse.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.VaccinationType, GetAllActionsResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.ActionSaleDto, GetAllActionsResponse.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.LatLngDto, GetAllActionsResponse.LatLngDto>();
         typeAdapterConfig.NewConfig<GetAllActionsInternalStorageResponse.MerchandizeItemDto, GetAllActionsResponse.MerchandizeItemDto>();
@@ -49,8 +47,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.RaceDto, GetSelectedActionsResponse.RaceDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.RaceState, GetSelectedActionsResponse.RaceState>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.TermDto, GetSelectedActionsResponse.TermDto>();
-        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.VaccinationDto, GetSelectedActionsResponse.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.VaccinationType, GetSelectedActionsResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.ActionSaleDto, GetSelectedActionsResponse.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.LatLngDto, GetSelectedActionsResponse.LatLngDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsInternalStorageResponse.MerchandizeItemDto, GetSelectedActionsResponse.MerchandizeItemDto>();
@@ -80,8 +76,6 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.Id);
         typeAdapterConfig.NewConfig<CreateActionRequest.RaceState, CreateActionInternalStorageRequest.RaceState>();
         typeAdapterConfig.NewConfig<CreateActionRequest.TermDto, CreateActionInternalStorageRequest.TermDto>();
-        typeAdapterConfig.NewConfig<CreateActionRequest.VaccinationDto, CreateActionInternalStorageRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<CreateActionRequest.VaccinationType, CreateActionInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<CreateActionRequest.ActionSaleDto, CreateActionInternalStorageRequest.ActionSaleDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.LatLngDto, CreateActionInternalStorageRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<CreateActionRequest.MerchandizeItemDto, CreateActionInternalStorageRequest.MerchandizeItemDto>();
@@ -112,8 +106,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceDto, GetActionResponse.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceState, GetActionResponse.RaceState>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.TermDto, GetActionResponse.TermDto>();
-        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.VaccinationDto, GetActionResponse.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.VaccinationType, GetActionResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleDto, GetActionResponse.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LatLngDto, GetActionResponse.LatLngDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.MerchandizeItemDto, GetActionResponse.MerchandizeItemDto>();
@@ -136,8 +128,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<UpdateActionRequest.RaceDto, UpdateActionInternalStorageRequest.RaceDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.RaceState, UpdateActionInternalStorageRequest.RaceState>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.TermDto, UpdateActionInternalStorageRequest.TermDto>();
-        typeAdapterConfig.NewConfig<UpdateActionRequest.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<UpdateActionRequest.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.ActionSaleDto, UpdateActionInternalStorageRequest.ActionSaleDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<UpdateActionRequest.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
@@ -161,8 +151,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceDto, UpdateActionInternalStorageRequest.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceState, UpdateActionInternalStorageRequest.RaceState>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.TermDto, UpdateActionInternalStorageRequest.TermDto>();
-        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleDto, UpdateActionInternalStorageRequest.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
@@ -182,8 +170,6 @@ internal static class ActionsServiceMapping
             .Ignore(d => d.PayedDate)
             .Ignore(d => d.AcceptedDate);
             
-        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();
-        typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>()
             .Ignore(d => d.UserId)
             .Ignore(d => d.Kennel)
@@ -207,8 +193,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceDto, GetRacesForActionResponse.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceState, GetRacesForActionResponse.RaceState>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.TermDto, GetRacesForActionResponse.TermDto>();
-        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.VaccinationDto, GetRacesForActionResponse.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.VaccinationType, GetRacesForActionResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleDto, GetRacesForActionResponse.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LatLngDto, GetRacesForActionResponse.LatLngDto>();
         typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.MerchandizeItemDto, GetRacesForActionResponse.MerchandizeItemDto>();

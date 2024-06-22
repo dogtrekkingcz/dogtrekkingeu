@@ -12,7 +12,6 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest, EntryRecord>()
                 .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.EntryState, EntryRecord.EntryState>();
-            typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.VaccinationDto, EntryRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.PetDto, EntryRecord.PetDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.MerchandizeItemDto, EntryRecord.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<CreateEntryInternalStorageRequest.AddressDto, EntryRecord.AddressDto>();
@@ -21,7 +20,6 @@ namespace Storage.Services.Repositories.Entries
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest, EntryRecord>()
                 .Ignore(d => d.CorrelationId);
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.EntryState, EntryRecord.EntryState>();
-            typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.VaccinationDto, EntryRecord.VaccinationDto>();
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.PetDto, EntryRecord.PetDto>();
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.MerchandizeItemDto, EntryRecord.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<UpdateEntryInternalStorageRequest.AddressDto, EntryRecord.AddressDto>();
@@ -29,7 +27,6 @@ namespace Storage.Services.Repositories.Entries
 
             typeAdapterConfig.NewConfig<EntryRecord, GetEntryInternalStorageResponse>();
             typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetEntryInternalStorageResponse.EntryState>();
-            typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntryInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<EntryRecord.PetDto, GetEntryInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetEntryInternalStorageResponse.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<EntryRecord.AddressDto, GetEntryInternalStorageResponse.AddressDto>();
@@ -37,7 +34,6 @@ namespace Storage.Services.Repositories.Entries
 
             typeAdapterConfig.NewConfig<EntryRecord, GetEntriesByActionInternalStorageResponse.EntryDto>();
             typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetEntriesByActionInternalStorageResponse.EntryState>();
-            typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetEntriesByActionInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<EntryRecord.PetDto, GetEntriesByActionInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetEntriesByActionInternalStorageResponse.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<EntryRecord.AddressDto, GetEntriesByActionInternalStorageResponse.AddressDto>();
@@ -45,7 +41,6 @@ namespace Storage.Services.Repositories.Entries
             
             typeAdapterConfig.NewConfig<EntryRecord, GetAllEntriesInternalStorageResponse.EntryDto>();
             typeAdapterConfig.NewConfig<EntryRecord.EntryState, GetAllEntriesInternalStorageResponse.EntryState>();
-            typeAdapterConfig.NewConfig<EntryRecord.VaccinationDto, GetAllEntriesInternalStorageResponse.VaccinationDto>();
             typeAdapterConfig.NewConfig<EntryRecord.PetDto, GetAllEntriesInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<EntryRecord.MerchandizeItemDto, GetAllEntriesInternalStorageResponse.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<EntryRecord.AddressDto, GetAllEntriesInternalStorageResponse.AddressDto>();

@@ -96,10 +96,8 @@ internal static class DogtrekkingCzMapping
                                         Pedigree = dog.Pedigree,
                                         Birthday = null,
                                         Contact = racer.Email,
-                                        Decease = null,
                                         Kennel = string.Empty,
-                                        Vaccinations = new(),
-                                        UserId = string.Empty,
+                                        UserId = Guid.Empty,
                                         UriToPhoto = string.Empty
                                     })
                                     .ToList(),

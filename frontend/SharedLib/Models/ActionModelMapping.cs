@@ -21,8 +21,6 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.CreateAction.RaceDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceState, Protos.Actions.CreateAction.RaceState>();
         typeAdapterConfig.NewConfig<ActionModel.TermDto, Protos.Actions.CreateAction.TermDto>();
-        typeAdapterConfig.NewConfig<ActionModel.VaccinationDto, Protos.Actions.CreateAction.VaccinationDto>();
-        typeAdapterConfig.NewConfig<ActionModel.VaccinationType, Protos.Actions.CreateAction.VaccinationType>();
         typeAdapterConfig.NewConfig<ActionModel.ActionSaleDto, Protos.Actions.CreateAction.ActionSaleDto>();
         typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.CreateAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.CreateAction.PaymentDefinitionDto>();
@@ -45,8 +43,6 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<ActionModel.RaceDto, Protos.Actions.UpdateAction.RaceDto>();
         typeAdapterConfig.NewConfig<ActionModel.RaceState, Protos.Actions.UpdateAction.RaceState>();
         typeAdapterConfig.NewConfig<ActionModel.TermDto, Protos.Actions.UpdateAction.TermDto>();
-        typeAdapterConfig.NewConfig<ActionModel.VaccinationDto, Protos.Actions.UpdateAction.VaccinationDto>();
-        typeAdapterConfig.NewConfig<ActionModel.VaccinationType, Protos.Actions.UpdateAction.VaccinationType>();
         typeAdapterConfig.NewConfig<ActionModel.ActionSaleDto, Protos.Actions.UpdateAction.ActionSaleDto>();
         typeAdapterConfig.NewConfig<ActionModel.MerchandizeItemDto, Protos.Actions.UpdateAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<ActionModel.PaymentDefinitionDto, Protos.Actions.UpdateAction.PaymentDefinitionDto>();
@@ -80,10 +76,6 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.TermDto, ActionModel.TermDto>()
             .Map(d => d.From, s => s.From.ToDateTimeOffset())
             .Map(d => d.To, s => s.To.ToDateTimeOffset());
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.VaccinationDto, ActionModel.VaccinationDto>()
-            .Map(d => d.Date, s => s.Date.ToDateTimeOffset())
-            .Map(d => d.ValidUntil, s => s.ValidUntil.ToDateTimeOffset());
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.VaccinationType, ActionModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.ActionSaleDto, ActionModel.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.MerchandizeItemDto, ActionModel.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>()
@@ -108,8 +100,6 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RaceDto, ActionModel.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.RaceState, ActionModel.RaceState>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.TermDto, ActionModel.TermDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.VaccinationDto, ActionModel.VaccinationDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.VaccinationType, ActionModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.ActionSaleDto, ActionModel.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.MerchandizeItemDto, ActionModel.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAllActions.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>();
@@ -133,8 +123,7 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.CategoryDto, ActionModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.PetDto, ActionModel.PetDto>()
             .Ignore(d => d.Decease)
-            .Ignore(d => d.Contact)
-            .Ignore(d => d.Vaccinations);
+            .Ignore(d => d.Contact);
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.LimitsDto, ActionModel.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RaceDto, ActionModel.RaceDto>()
             .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset())
@@ -169,8 +158,7 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.CategoryDto, ActionModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.PetDto, ActionModel.PetDto>()
             .Ignore(d => d.Decease)
-            .Ignore(d => d.Contact)
-            .Ignore(d => d.Vaccinations);
+            .Ignore(d => d.Contact);
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.LimitsDto, ActionModel.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.RaceDto, ActionModel.RaceDto>()
             .Map(d => d.Begin, s => s.Begin.ToDateTimeOffset())
@@ -206,8 +194,6 @@ namespace SharedLib.Models;
             .Map(d => d.EnteringTo, s => s.EnteringTo.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.RaceState, ActionModel.RaceState>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.TermDto, ActionModel.TermDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.VaccinationDto, ActionModel.VaccinationDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.VaccinationType, ActionModel.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.ActionSaleDto, ActionModel.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.MerchandizeItemDto, ActionModel.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedActions.PaymentDefinitionDto, ActionModel.PaymentDefinitionDto>()

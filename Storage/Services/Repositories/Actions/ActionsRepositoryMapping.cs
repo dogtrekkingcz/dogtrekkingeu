@@ -26,8 +26,6 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RaceDto, ActionRecord.RaceDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.RaceState, ActionRecord.RaceState>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.TermDto, ActionRecord.TermDto>();
-            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.VaccinationDto, ActionRecord.VaccinationDto>();
-            typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.VaccinationType, ActionRecord.VaccinationType>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.ActionSaleDto, ActionRecord.ActionSaleDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.LatLngDto, ActionRecord.LatLngDto>();
             typeAdapterConfig.NewConfig<CreateActionInternalStorageRequest.MerchandizeItemDto, ActionRecord.MerchandizeItemDto>();
@@ -50,8 +48,6 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RaceDto, ActionRecord.RaceDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.RaceState, ActionRecord.RaceState>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.TermDto, ActionRecord.TermDto>();
-            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.VaccinationDto, ActionRecord.VaccinationDto>();
-            typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.VaccinationType, ActionRecord.VaccinationType>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.ActionSaleDto, ActionRecord.ActionSaleDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.LatLngDto, ActionRecord.LatLngDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.MerchandizeItemDto, ActionRecord.MerchandizeItemDto>();
@@ -73,8 +69,6 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetAllActionsInternalStorageResponse.RaceDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetAllActionsInternalStorageResponse.RaceState>();
             typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetAllActionsInternalStorageResponse.TermDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.VaccinationDto, GetAllActionsInternalStorageResponse.VaccinationDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.VaccinationType, GetAllActionsInternalStorageResponse.VaccinationType>();
             typeAdapterConfig.NewConfig<ActionRecord.ActionSaleDto, GetAllActionsInternalStorageResponse.ActionSaleDto>();
             typeAdapterConfig.NewConfig<ActionRecord.LatLngDto, GetAllActionsInternalStorageResponse.LatLngDto>();
             typeAdapterConfig.NewConfig<ActionRecord.MerchandizeItemDto, GetAllActionsInternalStorageResponse.MerchandizeItemDto>();
@@ -96,8 +90,6 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetSelectedActionsInternalStorageResponse.RaceDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetSelectedActionsInternalStorageResponse.RaceState>();
             typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetSelectedActionsInternalStorageResponse.TermDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.VaccinationDto, GetSelectedActionsInternalStorageResponse.VaccinationDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.VaccinationType, GetSelectedActionsInternalStorageResponse.VaccinationType>();
             typeAdapterConfig.NewConfig<ActionRecord.ActionSaleDto, GetSelectedActionsInternalStorageResponse.ActionSaleDto>();
             typeAdapterConfig.NewConfig<ActionRecord.LatLngDto, GetSelectedActionsInternalStorageResponse.LatLngDto>();
             typeAdapterConfig.NewConfig<ActionRecord.MerchandizeItemDto, GetSelectedActionsInternalStorageResponse.MerchandizeItemDto>();
@@ -121,8 +113,6 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<ActionRecord.RaceDto, GetActionInternalStorageResponse.RaceDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RaceState, GetActionInternalStorageResponse.RaceState>();
             typeAdapterConfig.NewConfig<ActionRecord.TermDto, GetActionInternalStorageResponse.TermDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.VaccinationDto, GetActionInternalStorageResponse.VaccinationDto>();
-            typeAdapterConfig.NewConfig<ActionRecord.VaccinationType, GetActionInternalStorageResponse.VaccinationType>();
             typeAdapterConfig.NewConfig<ActionRecord.ActionSaleDto, GetActionInternalStorageResponse.ActionSaleDto>();
             typeAdapterConfig.NewConfig<ActionRecord.LatLngDto, GetActionInternalStorageResponse.LatLngDto>();
             typeAdapterConfig.NewConfig<ActionRecord.MerchandizeItemDto, GetActionInternalStorageResponse.MerchandizeItemDto>();
@@ -155,10 +145,8 @@ namespace Storage.Services.Repositories.Actions
                 .Ignore(d => d.Payments)
                 .Ignore(d => d.RequestedPayments)
                 .Ignore(d => d.PassedCheckpoints);
-            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationType, UpdateActionInternalStorageRequest.VaccinationType>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.AddressDto, UpdateActionInternalStorageRequest.AddressDto>();
-            typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.VaccinationDto, UpdateActionInternalStorageRequest.VaccinationDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>()
                 .Ignore(d => d.UserId)

@@ -61,11 +61,6 @@ public static class NewActionRegistrationReceivedEmailMapping
             .TwoWays();
 
         typeAdapterConfig
-            .NewConfig<NewActionRegistrationEmailRequest.VaccinationDto, NewActionRegistrationEmailRequest.VaccinationDto>()
-            .IgnoreNullValues(true)
-            .TwoWays();
-
-        typeAdapterConfig
                 .NewConfig<Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>, Dictionary<NewActionRegistrationEmailRequest.TermDto, NewActionRegistrationEmailRequest.PaymentDto>>()
                 .MapWith(s => CreateCopyOfPayments(s));
 

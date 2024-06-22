@@ -96,29 +96,6 @@ message PetDto {
   google.type.DateTime Decease = 8;
   string UriToPhoto = 9;
   string Contact = 10;
-  repeated VaccinationDto Vaccinations = 11;
-}
-
-message VaccinationDto {
-  google.type.DateTime Date = 1;
-  google.type.DateTime ValidUntil = 2;
-  VaccinationType Type = 3;
-  string UriToPhoto = 4;
-  string Note = 5;
-}
-
-enum VaccinationType {
-  NotValid = 0;
-  Rabies = 1; // Vzteklina
-  Psinka = 2;
-  Parvoviroza = 3;
-  HepatitidaContagiosaCanis = 4;
-  Leptospiroza = 5;
-  Parainfluenza = 6;
-  LymskaBorelioza = 7;
-  Babesioza = 8;
-  PlisnoveInfekce = 9;
-  Leishmanioza = 10;
 }
 
 message RequestedPaymentsDto {

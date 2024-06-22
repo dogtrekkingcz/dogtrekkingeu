@@ -12,8 +12,6 @@ internal static class EntriesMapping
         typeAdapterConfig.NewConfig<CreateEntryRequest, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.MerchandizeItemDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.PetDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.PetDto>();
-        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<CreateEntryRequest.VaccinationType, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.AddressDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.AddressDto>();
         typeAdapterConfig.NewConfig<CreateEntryRequest.LatLngDto, PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<CreateEntryResponse, Entities.CreateEntryResponse>();
@@ -22,14 +20,10 @@ internal static class EntriesMapping
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse, Entities.GetEntriesByActionResponse>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.EntryDto, Entities.GetEntriesByActionResponse.EntryDto>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.PetDto, Entities.GetEntriesByActionResponse.PetDto>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationDto, Entities.GetEntriesByActionResponse.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetEntriesByActionResponse.VaccinationType, Entities.GetEntriesByActionResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.MerchandizeItemDto, Entities.GetEntriesByActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.AddressDto, Entities.GetEntriesByActionResponse.AddressDto>();
         typeAdapterConfig.NewConfig<GetEntriesByActionResponse.LatLngDto, Entities.GetEntriesByActionResponse.LatLngDto>();
 
-        typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationDto, Entities.GetEntriesByActionResponse.VaccinationDto>();
-        typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.VaccinationType, Entities.GetEntriesByActionResponse.VaccinationType>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.PetDto, Entities.GetEntriesByActionResponse.PetDto>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.MerchandizeItemDto, Entities.GetEntriesByActionResponse.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<PetsOnTrail.Interfaces.Actions.Entities.Entries.CreateEntryRequest.AddressDto, Entities.GetEntriesByActionResponse.AddressDto>();

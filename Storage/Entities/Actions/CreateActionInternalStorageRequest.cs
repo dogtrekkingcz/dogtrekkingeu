@@ -16,6 +16,8 @@ public sealed record CreateActionInternalStorageRequest
 
     public string ContactMail { get; init; } = string.Empty;
 
+    public string Www { get; init; } = string.Empty;
+
     public TermDto Term { get; init; } = new();
 
     public AddressDto Address { get; init; } = new();
@@ -137,60 +139,21 @@ public sealed record CreateActionInternalStorageRequest
 
         public string Text { get; init; } = string.Empty;
     }
-    
+
     public record PetDto
     {
-        public Guid Id { get; init; }
-
-        public string UserId { get; init; } = string.Empty;
-
-        public string Name { get; init; } = string.Empty;
-
-        public string Kennel { get; init; } = string.Empty;
-
-        public string Pedigree { get; init; } = string.Empty;
-
-        public string Chip { get; init; } = string.Empty;
-
-        public DateTimeOffset? Birthday { get; init; } = null;
-
-        public DateTimeOffset? Decease { get; init; } = null;
-
-        public string UriToPhoto { get; init; } = string.Empty;
-
-        public string Contact { get; init; } = string.Empty;
-
-        public List<VaccinationDto> Vaccinations { get; init; } = new List<VaccinationDto>();
+        public Guid Id { get; set; } = Guid.Empty;
+        public Guid UserId { get; set; } = Guid.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Breed { get; set; } = string.Empty;
+        public Guid PetType { get; set; } = Guid.Empty;
+        public string Kennel { get; set; } = string.Empty;
+        public string Pedigree { get; set; } = string.Empty;
+        public string Chip { get; set; } = string.Empty;
+        public DateTimeOffset? Birthday { get; set; } = null;
+        public string UriToPhoto { get; set; } = string.Empty;
+        public string Contact { get; set; } = string.Empty;
     }
-    
-    public sealed record VaccinationDto
-    {
-        public DateTimeOffset? Date { get; init; } = DateTimeOffset.Now;
-
-        public DateTimeOffset? ValidUntil { get; init; } = DateTimeOffset.Now;
-
-        public VaccinationType Type { get; init; } = VaccinationType.NotValid;
-
-        public string UriToPhoto { get; init; } = string.Empty;
-
-        public string Note { get; init; } = string.Empty;
-    }
-
-    public enum VaccinationType
-    {
-        NotValid = 0,
-        Rabies = 1, // Vzteklina
-        Psinka = 2,
-        Parvoviroza = 3,
-        HepatitidaContagiosaCanis = 4,
-        Leptospiroza = 5,
-        Parainfluenza = 6,
-        LymskaBorelioza = 7,
-        Babesioza = 8,
-        PlisnoveInfekce = 9,
-        Leishmanioza = 10
-    }
-
 
     public sealed record RequestedPaymentsDto
     {

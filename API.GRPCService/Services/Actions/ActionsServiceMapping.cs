@@ -29,8 +29,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetAllActionsResponse.RaceDto, Protos.Actions.GetAllActions.RaceDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.RaceState, Protos.Actions.GetAllActions.RaceState>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.TermDto, Protos.Actions.GetAllActions.TermDto>();
-        typeAdapterConfig.NewConfig<GetAllActionsResponse.VaccinationDto, Protos.Actions.GetAllActions.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetAllActionsResponse.VaccinationType, Protos.Actions.GetAllActions.VaccinationType>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.ActionSaleDto, Protos.Actions.GetAllActions.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.MerchandizeItemDto, Protos.Actions.GetAllActions.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetAllActionsResponse.PaymentDefinitionDto, Protos.Actions.GetAllActions.PaymentDefinitionDto>();
@@ -55,8 +53,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.RaceDto, Protos.Actions.GetSelectedActions.RaceDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.RaceState, Protos.Actions.GetSelectedActions.RaceState>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.TermDto, Protos.Actions.GetSelectedActions.TermDto>();
-        typeAdapterConfig.NewConfig<GetSelectedActionsResponse.VaccinationDto, Protos.Actions.GetSelectedActions.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetSelectedActionsResponse.VaccinationType, Protos.Actions.GetSelectedActions.VaccinationType>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.ActionSaleDto, Protos.Actions.GetSelectedActions.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.MerchandizeItemDto, Protos.Actions.GetSelectedActions.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetSelectedActionsResponse.PaymentDefinitionDto, Protos.Actions.GetSelectedActions.PaymentDefinitionDto>();
@@ -79,8 +75,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetActionResponse.RaceDto, Protos.Actions.GetAction.RaceDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.RaceState, Protos.Actions.GetAction.RaceState>();
         typeAdapterConfig.NewConfig<GetActionResponse.TermDto, Protos.Actions.GetAction.TermDto>();
-        typeAdapterConfig.NewConfig<GetActionResponse.VaccinationDto, Protos.Actions.GetAction.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetActionResponse.VaccinationType, Protos.Actions.GetAction.VaccinationType>();
         typeAdapterConfig.NewConfig<GetActionResponse.ActionSaleDto, Protos.Actions.GetAction.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.MerchandizeItemDto, Protos.Actions.GetAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetActionResponse.PaymentDefinitionDto, Protos.Actions.GetAction.PaymentDefinitionDto>();
@@ -102,8 +96,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.RaceDto, CreateActionRequest.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.RaceState, CreateActionRequest.RaceState>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.TermDto, CreateActionRequest.TermDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.VaccinationDto, CreateActionRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.VaccinationType, CreateActionRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.ActionSaleDto, CreateActionRequest.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.MerchandizeItemDto, CreateActionRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.CreateAction.PaymentDefinitionDto, CreateActionRequest.PaymentDefinitionDto>();
@@ -127,8 +119,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RaceDto, UpdateActionRequest.RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.RaceState, UpdateActionRequest.RaceState>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.TermDto, UpdateActionRequest.TermDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.VaccinationDto, UpdateActionRequest.VaccinationDto>();
-        typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.VaccinationType, UpdateActionRequest.VaccinationType>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.ActionSaleDto, UpdateActionRequest.ActionSaleDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.MerchandizeItemDto, UpdateActionRequest.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.UpdateAction.PaymentDefinitionDto, UpdateActionRequest.PaymentDefinitionDto>();
@@ -157,8 +147,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.RaceDto, Protos.Actions.GetRacesForAction.RaceDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.RaceState, Protos.Actions.GetRacesForAction.RaceState>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.TermDto, Protos.Actions.GetRacesForAction.TermDto>();
-        typeAdapterConfig.NewConfig<GetRacesForActionResponse.VaccinationDto, Protos.Actions.GetRacesForAction.VaccinationDto>();
-        typeAdapterConfig.NewConfig<GetRacesForActionResponse.VaccinationType, Protos.Actions.GetRacesForAction.VaccinationType>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.ActionSaleDto, Protos.Actions.GetRacesForAction.ActionSaleDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.MerchandizeItemDto, Protos.Actions.GetRacesForAction.MerchandizeItemDto>();
         typeAdapterConfig.NewConfig<GetRacesForActionResponse.PaymentDefinitionDto, Protos.Actions.GetRacesForAction.PaymentDefinitionDto>();
