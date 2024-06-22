@@ -65,6 +65,32 @@
 
                             var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
                             string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int)totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
+                            
+                            switch (racer.State)
+                            {
+                                case Models.ResultsModel.ResultState.DidNotFinished:
+                                    time = Localizer["Results.DNF"];
+                                    break;
+                                        
+                                case Models.ResultsModel.ResultState.Disqualified:
+                                    time = Localizer["Results.DSQ"];
+                                    break;
+
+                                case Models.ResultsModel.ResultState.NotStarted:
+                                    time = Localizer["Results.DNS"];
+                                    break;
+
+                                case Models.ResultsModel.ResultState.NotValid:
+                                    time = Localizer["Results.NV"];
+                                    break;
+
+                                case Models.ResultsModel.ResultState.Started:
+                                    time = Localizer["Results.Started"];
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         }
                         <div class="col-12">@Localizer["Results.Start"]: @start</div>
                         <div class="col-12">@Localizer["Results.Finish"]: @finish</div>
