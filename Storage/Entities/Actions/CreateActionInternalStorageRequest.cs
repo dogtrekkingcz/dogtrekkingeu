@@ -16,6 +16,12 @@ public sealed record CreateActionInternalStorageRequest
 
     public string ContactMail { get; init; } = string.Empty;
 
+    public Guid ResultsCanEdit { get; set; } = Constants.Roles.InternalUser.GUID;
+
+    public Guid CompetitorsCanEdit { get; set; } = Constants.Roles.InternalUser.GUID;
+
+    public Guid ActionCanEdit { get; set; } = Constants.Roles.InternalUser.GUID;
+
     public string Www { get; init; } = string.Empty;
 
     public TermDto Term { get; init; } = new();

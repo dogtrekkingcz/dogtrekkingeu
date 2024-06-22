@@ -13,6 +13,9 @@ internal class _20240509_DT_RudolfJedeNaSazavu : M_00_MigrationBase
                 Id = Id,
                 Name = "DT Rudolf jede na Sázavu",
                 TypeId = Constants.ActivityType.Dogtrekking,
+                ResultsCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                CompetitorsCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                ActionCanEdit = Constants.Roles.InternalAdministrator.GUID,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Kácov"

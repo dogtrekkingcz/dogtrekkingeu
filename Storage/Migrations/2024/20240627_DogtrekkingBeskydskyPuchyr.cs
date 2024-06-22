@@ -18,7 +18,9 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                 Id = Id,
                 Name = "Dogtrekking Beskydský puchýř",
                 TypeId = Constants.ActivityType.Dogtrekking,
-                
+                ResultsCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                CompetitorsCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                ActionCanEdit = Constants.Roles.InternalAdministrator.GUID,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Palkovice",

@@ -13,6 +13,9 @@ internal class _20241017_DogtrekkingBileKarpaty : M_00_MigrationBase
                 Id = Id,
                 Name = "Dogtrekking Bílé Karpaty",
                 TypeId = Constants.ActivityType.Dogtrekking,
+                ResultsCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                CompetitorsCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                ActionCanEdit = Constants.Roles.InternalAdministrator.GUID,
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Bílé Karpaty"
