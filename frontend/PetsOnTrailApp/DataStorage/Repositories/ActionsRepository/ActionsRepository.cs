@@ -5,10 +5,11 @@ using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
 using Protos.Results;
+using System.Linq;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
-public class ActionsRepository : IActionsRepository
+public class ActionsRepository : BaseRepository, IActionsRepository
 {
     private readonly IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> _dataStorageServicePublicActions;
     private readonly IDataStorageService<GetSimpleActionsListResponse, GetSimpleActionsListResponseModel> _dataStorageServiceActionsByType;
@@ -179,6 +180,19 @@ public class ActionsRepository : IActionsRepository
         }
 
         return result;
+    }
+
+    public async Task<bool> CanIEditResultsAsync(Guid actionId, CancellationToken cancellationToken)
+    {
+        var action = await _dataStorageServicePublicActions.GetAsync(actionId, cancellationToken);
+
+        if ((action != null)
+            && (GetMyRoles().Contains(action.Data.Actions.FirstOrDefault(action => action.Id == actionId)?.ResultsCanEdit ?? Guid.Empty))) // TODO: check if I am in role "internal administrator"
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public async Task<ActionModel> GetActionModelAsync(Guid actionId, CancellationToken cancellationToken)

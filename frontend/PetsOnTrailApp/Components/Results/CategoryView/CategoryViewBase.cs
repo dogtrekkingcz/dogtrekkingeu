@@ -14,11 +14,24 @@ public class CategoryViewBase : ComponentBase
     [Inject] private IActionsRepository _actionsRepository { get; set; }
 
     public ResultsModel Model { get; set; } = null;
+    public bool CanIEditResults { get; set; } = false;
 
     protected async override Task OnInitializedAsync()
     {
         base.OnInitialized();
 
         Model = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId));
+
+        CanIEditResults = await _actionsRepository.CanIEditResultsAsync(Guid.Parse(ActionId), CancellationToken.None);
+    }
+
+    public void EditStart(Guid racerId)
+    {
+        // TODO: Implement
+    }
+
+    public void EditFinish(Guid racerId)
+    {
+        // TODO: Implement
     }
 }

@@ -92,8 +92,26 @@
                                     break;
                             }
                         }
-                        <div class="col-12">@Localizer["Results.Start"]: @start</div>
-                        <div class="col-12">@Localizer["Results.Finish"]: @finish</div>
+                        <div class="col-12">
+                            @Localizer["Results.Start"]: @start
+                            
+                            @if (CanIEditResults)
+                            {
+                                <button class="btn btn-sm btn-primary" @onclick="() => EditStart(racer.Id)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            })
+                        </div>
+                        <div class="col-12">
+                            @Localizer["Results.Finish"]: @finish
+
+                            @if (CanIEditResults)
+                            {
+                                <button class="btn btn-sm btn-primary" @onclick="() => EditFinish(racer.Id)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            }
+                        </div>
                         <hr />
                         <div class="col-12"><b>@time</b></div>
                     </div>

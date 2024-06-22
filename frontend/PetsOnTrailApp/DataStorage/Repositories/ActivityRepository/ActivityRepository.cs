@@ -4,7 +4,7 @@ using Protos.Activities.GetActivityByUserIdAndActivityId;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 
-public class ActivityRepository : IActivityRepository
+public class ActivityRepository : BaseRepository, IActivityRepository
 {
     private readonly IDataStorageService<Protos.Activities.GetActivityByUserIdAndActivityId.GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel> _dataStorageServiceActivityByUserIdAndActivityId;
     private readonly IDataStorageService<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel> _dataStorageServiceActivityByUserId;

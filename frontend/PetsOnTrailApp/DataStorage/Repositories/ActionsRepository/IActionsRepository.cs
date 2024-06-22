@@ -2,7 +2,7 @@
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
-public interface IActionsRepository
+public interface IActionsRepository : IBaseRepository
 {
     Task<IList<SimpleActionModel>> GetAllActionsByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken);
 
@@ -19,4 +19,6 @@ public interface IActionsRepository
     Task<ResultsModel> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId);
 
     Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result);
+
+    Task<bool> CanIEditResultsAsync(Guid actionId, CancellationToken cancellationToken);
 }
