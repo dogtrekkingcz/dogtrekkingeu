@@ -61,7 +61,7 @@ internal sealed record ActionRecord : BaseRecord, IRecord
     {
         public Guid Id { get; set; } = Guid.Empty;
         
-        public string CompetitorId { get; set; } = string.Empty;
+        public Guid CompetitorId { get; set; } = Guid.Empty;
 
         public string CheckpointData { get; set; } = string.Empty;
 

@@ -100,7 +100,7 @@
             Entry.Email = userProfile.Contact.EmailAddress;
             Entry.Phone = userProfile.Contact.PhoneNumber;
             Entry.UserId = userProfile.Id;
-            Entry.CompetitorId = userProfile.CompetitorId.ToString();
+            Entry.CompetitorId = userProfile.CompetitorId;
             Entry.Pets = userProfile.Pets
                 .Where(pet => pet.Decease == null)
                 .Select(pet => new EntryModel.PetDto

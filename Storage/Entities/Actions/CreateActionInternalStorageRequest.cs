@@ -87,7 +87,7 @@ public sealed record CreateActionInternalStorageRequest
     {
         public Guid Id { get; init; } = Guid.NewGuid();
         
-        public string CompetitorId { get; init; } = string.Empty;
+        public Guid CompetitorId { get; init; } = Guid.Empty;
         
         public string CheckpointData { get; init; } = string.Empty;
 

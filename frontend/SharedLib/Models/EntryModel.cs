@@ -10,7 +10,7 @@ public sealed record EntryModel
 
     public Guid UserId { get; set; } = Guid.Empty;
 
-    public string CompetitorId { get; set; } = "";
+    public Guid CompetitorId { get; set; } = Guid.Empty;
 
     [Required]
     public string FirstName { get; set; } = "";

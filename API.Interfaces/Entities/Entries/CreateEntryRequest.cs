@@ -4,7 +4,7 @@ public sealed record CreateEntryRequest
 {
     public string LanguageCode { get; set; } = "en-US";
     
-    public string CompetitorId { get; set; } = "";
+    public Guid CompetitorId { get; set; } = Guid.Empty;
 
     public string FirstName { get; set; } = "";
 

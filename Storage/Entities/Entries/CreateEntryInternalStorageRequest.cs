@@ -8,7 +8,7 @@ public sealed record CreateEntryInternalStorageRequest
 
     public Guid UserId { get; set; } = Guid.Empty;
     
-    public string CompetitorId { get; set; } = "";
+    public Guid CompetitorId { get; set; } = Guid.Empty;
 
     public string FirstName { get; set; } = "";
 

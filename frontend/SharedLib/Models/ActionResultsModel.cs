@@ -40,7 +40,7 @@ public record ActionResultsModel
     {
         public Guid Id { get; set; }
         
-        public string CompetitorId { get; set; }
+        public Guid CompetitorId { get; set; }
         
         public string FirstName { get; set; }
         

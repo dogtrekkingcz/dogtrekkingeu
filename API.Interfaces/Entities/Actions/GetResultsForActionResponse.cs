@@ -39,8 +39,8 @@ public sealed record GetResultsForActionResponse
     public sealed record RacerResultDto
     {
         public Guid Id { get; set; }
-        
-        public string CompetitorId { get; set; }
+
+        public Guid CompetitorId { get; set; } = Guid.Empty;
         
         public string FirstName { get; set; }
         

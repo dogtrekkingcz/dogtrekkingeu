@@ -4,7 +4,7 @@ internal sealed record EntryRecord : BaseRecord, IRecord
 {
     public EntryState State { get; set; } = EntryState.Entered;
 
-    public string CompetitorId { get; set; } = "";
+    public Guid CompetitorId { get; set; } = Guid.Empty;
 
     public string FirstName { get; set; } = "";
 

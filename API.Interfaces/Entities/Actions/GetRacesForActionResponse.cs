@@ -54,7 +54,7 @@ public sealed record GetRacesForActionResponse
     {
         public Guid Id { get; set; } = Guid.Empty;
         
-        public string CompetitorId { get; set; } = string.Empty;
+        public Guid CompetitorId { get; set; } = Guid.Empty;
 
         public string FirstName { get; set; } = string.Empty;
 

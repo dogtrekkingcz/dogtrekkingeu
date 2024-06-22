@@ -92,7 +92,7 @@ public sealed record GetSelectedPublicActionsListResponseModel
     {
         public Guid Id { get; init; } = Guid.Empty;
 
-        public string CompetitorId { get; init; } = string.Empty;
+        public Guid CompetitorId { get; init; } = Guid.Empty;
 
         public string CheckpointData { get; init; } = string.Empty;
 

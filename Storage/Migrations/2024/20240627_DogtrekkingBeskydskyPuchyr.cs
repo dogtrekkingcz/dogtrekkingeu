@@ -875,7 +875,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
-                                Id = Guid.Parse("57acdf69-a6f7-49b7-a665-3c3b217a8423"),
+                                Id = Guid.Parse("089f5dc3-0f02-4ee5-923c-3d238f7cf2a4"),
                                 Name = "DMM 2",
                                 Description = "Muži nad 40 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>

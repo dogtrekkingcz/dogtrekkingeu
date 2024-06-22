@@ -6,13 +6,13 @@ public sealed record GetAllEntriesResponse
     
     public sealed record EntryDto
     {
-        public string? Id { get; set; } = "";
+        public Guid Id { get; set; } = Guid.Empty;
 
         public EntryState State { get; set; } = EntryState.Unspecified;
 
-        public string UserId { get; set; } = "";
+        public Guid UserId { get; set; } = Guid.Empty;
 
-        public string CompetitorId { get; set; } = "";
+        public Guid CompetitorId { get; set; } = Guid.Empty;
 
         public string FirstName { get; set; } = "";
 
