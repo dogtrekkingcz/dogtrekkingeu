@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.DeleteStart";
+
+package deletestart;
+
+message DeleteStartResponse {
+  string State = 1;
+}

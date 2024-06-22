@@ -30,6 +30,20 @@ import "Entities/Actions/GetPublicActionsListResponse.proto";
 import "Entities/Actions/GetSelectedPublicActionsListRequest.proto";
 import "Entities/Actions/GetSelectedPublicActionsListResponse.proto";
 import "Entities/Actions/GetSimpleActionsListResponse.proto";
+import "Entities/Actions/StartNowRequest.proto";
+import "Entities/Actions/StartNowResponse.proto";
+import "Entities/Actions/FinishNowRequest.proto";
+import "Entities/Actions/FinishNowResponse.proto";
+import "Entities/Actions/DeleteStartRequest.proto";
+import "Entities/Actions/DeleteStartResponse.proto";
+import "Entities/Actions/DeleteFinishRequest.proto";
+import "Entities/Actions/DeleteFinishResponse.proto";
+import "Entities/Actions/DnsRequest.proto";
+import "Entities/Actions/DnsResponse.proto";
+import "Entities/Actions/DsqRequest.proto";
+import "Entities/Actions/DsqResponse.proto";
+import "Entities/Actions/DnfRequest.proto";
+import "Entities/Actions/DnfResponse.proto";
 
 service Actions {
   rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
@@ -48,6 +62,14 @@ service Actions {
   
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
   rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);
+
+  rpc StartNow (startnow.StartNowRequest) returns (startnow.StartNowResponse);
+  rpc FinishNow (finishnow.FinishNowRequest) returns (finishnow.FinishNowResponse);
+  rpc DeleteStart (deletestart.DeleteStartRequest) returns (deletestart.DeleteStartResponse);
+  rpc DeleteFinish (deletefinish.DeleteFinishRequest) returns (deletefinish.DeleteFinishResponse);
+  rpc Dns (dns.DnsRequest) returns (dns.DnsResponse);
+  rpc Dsq (dsq.DsqRequest) returns (dsq.DsqResponse);
+  rpc Dnf (dnf.DnfRequest) returns (dnf.DnfResponse);
 }
 
 message ImportRegistrationToActionRequest {

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.StartNow";
+
+package startnow;
+
+message StartNowResponse {
+  string State = 1;
+}

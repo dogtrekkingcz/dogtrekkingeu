@@ -98,7 +98,15 @@
                             @if (CanIEditResults)
                             {
                                 <button class="btn btn-sm btn-primary" @onclick="() => EditStart(racer.Id)">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
+                                </button>
+
+                                <button class="btn btn-sm btn-danger" @onclick="() => DeleteStart(racer.Id)">
+                                    <i class="fas fa-trash">@Localizer["Results.Delete"]</i>
+                                </button>
+
+                                <button class="btn btn-sm btn-warning" @onclick="() => StartNow(racer.Id)">
+                                    <i class="fas fa-times">@Localizer["Results.Now"]</i>
                                 </button>
                             })
                         </div>
@@ -108,12 +116,36 @@
                             @if (CanIEditResults)
                             {
                                 <button class="btn btn-sm btn-primary" @onclick="() => EditFinish(racer.Id)">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
+                                </button>
+
+                                <button class="btn btn-sm btn-danger" @onclick="() => DeleteFinish(racer.Id)">
+                                    <i class="fas fa-trash">@Localizer["Results.Delete"]</i>
+                                </button>
+
+                                <button class="btn btn-sm btn-warning" @onclick="() => FinishNow(racer.Id)">
+                                    <i class="fas fa-times">@Localizer["Results.Now"]</i>
                                 </button>
                             }
                         </div>
                         <hr />
-                        <div class="col-12"><b>@time</b></div>
+                        <div class="col-12"><b>@time</b>
+
+                        @if (CanIEditResults)
+                        {
+                            <button class="btn btn-sm btn-danger" @onclick="() => Dns(racer.Id)">
+                                <i class="fas fa-edit">@Localizer["Results.Dns"]</i>
+                            </button>
+
+                            <button class="btn btn-sm btn-danger" @onclick="() => Dnf(racer.Id)">
+                                <i class="fas fa-edit">@Localizer["Results.Dnf"]</i>
+                            </button>
+
+                            <button class="btn btn-sm btn-danger" @onclick="() => Dsq(racer.Id)">
+                                <i class="fas fa-edit">@Localizer["Results.Dsq"]</i>
+                            </button>
+                        }
+                        </div>
                     </div>
                 </div>
             </td>

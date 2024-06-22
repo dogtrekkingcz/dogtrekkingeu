@@ -1,11 +1,9 @@
 ﻿using MapsterMapper;
-using Microsoft.Extensions.Options;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
-using Protos.Results;
-using System.Linq;
+using static Protos.Actions.Actions;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
@@ -26,7 +24,8 @@ public class ActionsRepository : BaseRepository, IActionsRepository
     public ActionsRepository(
         IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> dataStorageServicePublicActions,
         IDataStorageService<GetSimpleActionsListResponse, GetSimpleActionsListResponseModel> dataStorageServiceActionsByType,
-        IMapper mapper)
+        IMapper mapper,
+        ActionsClient actionsClient) : base(actionsClient)
     {
         _dataStorageServicePublicActions = dataStorageServicePublicActions;
         _dataStorageServiceActionsByType = dataStorageServiceActionsByType;
@@ -239,6 +238,83 @@ public class ActionsRepository : BaseRepository, IActionsRepository
     public Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result)
     {
         throw new NotImplementedException();
+    }
+
+    public Task StartNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.StartNow(new StartNowRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
+    }
+
+    public Task FinishNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.FinishNow(new FinishNowRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
+    }
+
+    public Task DeleteStart(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.DeleteStart(new DeleteStartRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
+    }
+
+    public Task DeleteFinish(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.DeleteFinish(new DeleteFinishRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
+    }
+
+    public Task Dns(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.Dns(new DnsRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
+    }
+
+    public Task Dnf(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.Dnf(new DnfRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
+    }
+
+    public Task Dsq(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.Dsq(new DsqRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
     }
 
     private async Task LoadAndParseActionAsync(Guid actionId, CancellationToken cancellationToken)

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.DeleteStart";
+
+package deletestart;
+
+message DeleteStartRequest {
+  string ActionId = 1;
+  string RaceId = 2;
+  string CategoryId = 3;
+  string RacerId = 4;
+}

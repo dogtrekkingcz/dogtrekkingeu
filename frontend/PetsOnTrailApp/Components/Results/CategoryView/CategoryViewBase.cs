@@ -34,4 +34,39 @@ public class CategoryViewBase : ComponentBase
     {
         // TODO: Implement
     }
+
+    public void StartNow(Guid racerId)
+    {
+        _actionsRepository.StartNow(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
+
+    public void FinishNow(Guid racerId)
+    {
+        _actionsRepository.FinishNow(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
+
+    public void DeleteStart(Guid racerId)
+    {
+        _actionsRepository.DeleteStart(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
+
+    public void DeleteFinish(Guid racerId)
+    {
+        _actionsRepository.DeleteFinish(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
+
+    public void Dns(Guid racerId)
+    {
+        _actionsRepository.Dns(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
+
+    public void Dnf(Guid racerId)
+    {
+        _actionsRepository.Dnf(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
+
+    public void Dsq(Guid racerId)
+    {
+        _actionsRepository.Dsq(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
 }

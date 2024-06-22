@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.DeleteFinish";
+
+package deletefinish;
+
+message DeleteFinishResponse {
+  string State = 1;
+}

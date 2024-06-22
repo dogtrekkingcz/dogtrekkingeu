@@ -21,4 +21,12 @@ public interface IActionsRepository : IBaseRepository
     Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result);
 
     Task<bool> CanIEditResultsAsync(Guid actionId, CancellationToken cancellationToken);
+
+    Task StartNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
+    Task FinishNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
+    Task DeleteStart(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
+    Task DeleteFinish(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
+    Task Dns(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
+    Task Dnf(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
+    Task Dsq(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
 }

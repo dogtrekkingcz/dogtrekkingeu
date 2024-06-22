@@ -8,6 +8,8 @@ using MapsterMapper;
 using Protos.Actions;
 using AcceptPaymentRequest = PetsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
 using Action = Protos.Actions.GetAllActions.Action;
+using System.Net;
+using System.Security.Cryptography;
 
 namespace API.GRPCService.Services.Actions;
 
@@ -211,4 +213,14 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
             throw;
         }
     }
+
+    /*
+    rpc StartNow(startnow.StartNowRequest) returns(startnow.StartNowResponse);
+    rpc FinishNow(finishnow.FinishNowRequest) returns(finishnow.FinishNowResponse);
+    rpc DeleteStart(deletestart.DeleteStartRequest) returns(deletestart.DeleteStartResponse);
+    rpc DeleteFinish(deletefinish.DeleteFinishRequest) returns(deletefinish.DeleteFinishResponse);
+    rpc Dns(dns.DnsRequest) returns(dns.DnsResponse);
+    rpc Dsq(dsq.DsqRequest) returns(dsq.DsqResponse);
+    rpc Dnf(dnf.DnfRequest) returns(dnf.DnfResponse);
+    */
 }
