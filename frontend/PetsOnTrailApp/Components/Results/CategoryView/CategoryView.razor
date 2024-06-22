@@ -33,9 +33,6 @@
             return (long) totalTime.TotalSeconds;
         }))
     {
-        var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
-        string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int) totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
-
         <tr>
             <td>
                 <div class="col-12">?</div>
@@ -62,8 +59,15 @@
             <td>
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">@Localizer["Results.Start"]: @racer.Start?.ToString("dd HH:mm:ss") ?? "-- --:--:--"</div>
-                        <div class="col-12">@Localizer["Results.Finish"]: @racer.Finish?.ToString("dd HH:mm:ss") ?? "-- --:--:--"</div>
+                        @{
+                            var start = racer.Start?.ToString("dd HH:mm:ss") ?? "-- --:--:--";
+                            var finish = racer.Finish?.ToString("dd HH:mm:ss") ?? "-- --:--:--";
+
+                            var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
+                            string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int)totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
+                        }
+                        <div class="col-12">@Localizer["Results.Start"]: @start</div>
+                        <div class="col-12">@Localizer["Results.Finish"]: @finish</div>
                         <hr />
                         <div class="col-12"><b>@time</b></div>
                     </div>
