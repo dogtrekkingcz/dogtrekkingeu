@@ -36,6 +36,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                 {
                     new Entities.Actions.CreateActionInternalStorageRequest.RaceDto
                     {
+                        Id = Guid.Parse("2b34bf0e-800a-46e3-aa50-4820d4788481"),
                         Name = "Dogtrekking",
                         Distance = 93,
                         Incline = 2471,
@@ -45,6 +46,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("42719606-a893-4cf2-8e2e-98ad19dbc648"),
                                 Name = "DTW 1",
                                 Description = "Ženy do 35 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -105,6 +107,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("9e62f74b-008f-4799-8538-bbb34a48c637"),
                                 Name = "DTW 2",
                                 Description = "Ženy nad 35 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -238,6 +241,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("75d84ef9-a9fe-49bf-9d61-f2c2c0bcd4ef"),
                                 Name = "DTM 1",
                                 Description = "Muži do 40 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -280,6 +284,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("20c728ed-3312-46b5-a608-5ef402445005"),
                                 Name = "DTM 2",
                                 Description = "Muži nad 40 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -383,6 +388,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                     },
                     new Entities.Actions.CreateActionInternalStorageRequest.RaceDto
                     {
+                        Id = Guid.Parse("8baddf26-ad2e-46c5-91ea-f4483cc18bcc"),
                         Name = "Dogmid",
                         Distance = 45 ,
                         Incline = 890,
@@ -392,6 +398,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("aeaabd9c-30db-4f11-952f-c2aeebe990ca"),
                                 Name = "DMW 1",
                                 Description = "Ženy do 35 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -522,6 +529,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("20bc0735-ac89-4b18-8601-cac457bdcce2"),
                                 Name = "DMW 2",
                                 Description = "Ženy nad 35 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -788,6 +796,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("57acdf69-a6f7-49b7-a665-3c3b217a8423"),
                                 Name = "DMM 1",
                                 Description = "Muži do 40 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -866,6 +875,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                             },
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("57acdf69-a6f7-49b7-a665-3c3b217a8423"),
                                 Name = "DMM 2",
                                 Description = "Muži nad 40 let",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -974,6 +984,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                     },
                     new Entities.Actions.CreateActionInternalStorageRequest.RaceDto
                     {
+                        Id = Guid.Parse("12cd4b53-aa18-4adb-be5e-08ac5cc017cc"),
                         Name = "Short",
                         Distance = 21,
                         Begin = new DateTime(2024, 6, 29, 8, 0, 0),
@@ -982,6 +993,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("061034ce-31ec-4f28-96f6-c816ea930e1e"),
                                 Name = "Short",
                                 Description = "Všichni bez rozdílu",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
@@ -1426,6 +1438,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                     },
                     new Entities.Actions.CreateActionInternalStorageRequest.RaceDto
                     {
+                        Id = Guid.Parse("d9431a85-5894-4e6d-8534-49e10b2a9546"),
                         Name = "Dětská / štěněcí",
                         Distance = 3,
                         Begin = new DateTime(2024, 6, 29, 8, 0, 0),
@@ -1434,6 +1447,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
                             {
+                                Id = Guid.Parse("446be227-1059-4311-9f9a-521195476835"),
                                 Name = "Dětská / štěněcí",
                                 Description = "Všichni bez rozdílu",
                                 Racers = new List<Entities.Actions.CreateActionInternalStorageRequest.RacerDto>
