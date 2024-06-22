@@ -159,8 +159,6 @@ public sealed record GetSelectedActionsInternalStorageResponse
 
         public DateTimeOffset? Birthday { get; init; } = null;
 
-        public DateTimeOffset? Decease { get; init; } = null;
-
         public string UriToPhoto { get; init; } = string.Empty;
 
         public string Contact { get; init; } = string.Empty;
