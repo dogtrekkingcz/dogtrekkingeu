@@ -66,7 +66,6 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
         {
             var loadedData = await _functionByList.Invoke(ids);
-            Console.WriteLine(loadedData.Dump());
 
             var model = _mapper.Map<R>(loadedData);
 

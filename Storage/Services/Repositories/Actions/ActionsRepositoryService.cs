@@ -139,7 +139,7 @@ namespace Storage.Services.Repositories.Actions
         {
             Console.WriteLine($"{nameof(GetSimpleActionsListByTypeAsync)} - typeIds: '{typeIds?.Dump()}'");
 
-            var actions = await _actionsStorageService.GetSelectedListAsync("Type", typeIds.Select(id => id).ToList(), cancellationToken);
+            var actions = await _actionsStorageService.GetSelectedListAsync("TypeId", typeIds.Select(id => id).ToList(), cancellationToken);
 
             var response = new GetSimpleActionsListByTypeInternalStorageResponse
             {

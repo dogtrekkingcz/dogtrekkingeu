@@ -21,6 +21,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
                 Id = Constants.Roles.InternalAdministrator.GUID,
+                UserId = _userIdAdmin,
                 Name = Constants.Roles.InternalAdministrator.Name,
                 Actions = new List<Constants.ActionType>
                 {
@@ -34,6 +35,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
                 Id = Constants.Roles.InternalUser.GUID,
+                UserId = _userIdAdmin,
                 Name = Constants.Roles.InternalUser.Name,
                 Actions = new List<Constants.ActionType>
                 {
@@ -47,6 +49,7 @@ internal class M_20230728_InitialMigration : M_00_MigrationBase
             .AddUpAction(() => AuthorizationRolesRepositoryService.AddAuthorizationRoleAsync(new AddAuthorizationRoleRequest
             {
                 Id = Constants.Roles.ExternalUser.GUID,
+                UserId = _userIdAdmin,
                 Name = Constants.Roles.ExternalUser.Name,
                 Actions = new List<Constants.ActionType>
                 {
