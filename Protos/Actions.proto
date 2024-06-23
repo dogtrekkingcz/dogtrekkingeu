@@ -63,13 +63,13 @@ service Actions {
   rpc importRegistrationToAction (ImportRegistrationToActionRequest) returns (ImportRegistrationToActionResponse);
   rpc acceptPayment (AcceptPaymentRequest) returns (AcceptPaymentResponse);
 
-  rpc StartNow (startnow.StartNowRequest) returns (startnow.StartNowResponse);
-  rpc FinishNow (finishnow.FinishNowRequest) returns (finishnow.FinishNowResponse);
-  rpc DeleteStart (deletestart.DeleteStartRequest) returns (deletestart.DeleteStartResponse);
-  rpc DeleteFinish (deletefinish.DeleteFinishRequest) returns (deletefinish.DeleteFinishResponse);
-  rpc Dns (dns.DnsRequest) returns (dns.DnsResponse);
-  rpc Dsq (dsq.DsqRequest) returns (dsq.DsqResponse);
-  rpc Dnf (dnf.DnfRequest) returns (dnf.DnfResponse);
+  rpc startNow (startnow.StartNowRequest) returns (startnow.StartNowResponse);
+  rpc finishNow (finishnow.FinishNowRequest) returns (finishnow.FinishNowResponse);
+  rpc deleteStart (deletestart.DeleteStartRequest) returns (deletestart.DeleteStartResponse);
+  rpc deleteFinish (deletefinish.DeleteFinishRequest) returns (deletefinish.DeleteFinishResponse);
+  rpc dns (dns.DnsRequest) returns (dns.DnsResponse);
+  rpc dsq (dsq.DsqRequest) returns (dsq.DsqResponse);
+  rpc dnf (dnf.DnfRequest) returns (dnf.DnfResponse);
 }
 
 message ImportRegistrationToActionRequest {
