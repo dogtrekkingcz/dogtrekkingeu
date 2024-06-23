@@ -204,6 +204,26 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeResponse.RaceDto, Protos.Actions.GetSimpleActionsList.RaceDto>();
         typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeResponse.ActionDto, Protos.Actions.GetSimpleActionsList.SimpleActionDto>();
 
+        typeAdapterConfig.NewConfig<Protos.Actions.StartNow.StartNowRequest, StartNowRequest>();
+        typeAdapterConfig.NewConfig<StartNowResponse, Protos.Actions.StartNow.StartNowResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.FinishNow.FinishNowRequest, FinishNowRequest>();
+        typeAdapterConfig.NewConfig<FinishNowResponse, Protos.Actions.FinishNow.FinishNowResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.DeleteStart.DeleteStartRequest, DeleteStartRequest>();
+        typeAdapterConfig.NewConfig<DeleteStartResponse, Protos.Actions.DeleteStart.DeleteStartResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.DeleteFinish.DeleteFinishRequest, DeleteFinishRequest>();
+        typeAdapterConfig.NewConfig<DeleteFinishResponse, Protos.Actions.DeleteFinish.DeleteFinishResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.Dns.DnsRequest, DnsRequest>();
+        typeAdapterConfig.NewConfig<DnsResponse, Protos.Actions.Dns.DnsResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.Dsq.DsqRequest, DsqRequest>();
+        typeAdapterConfig.NewConfig<DsqResponse, Protos.Actions.Dsq.DsqResponse>();
+
+        typeAdapterConfig.NewConfig<Protos.Actions.Dnf.DnfRequest, DnfRequest>();
+        typeAdapterConfig.NewConfig<DnfResponse, Protos.Actions.Dnf.DnfResponse>();
 
         return typeAdapterConfig;
     }

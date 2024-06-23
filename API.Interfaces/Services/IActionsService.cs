@@ -1,6 +1,8 @@
 ﻿using PetsOnTrail.Interfaces.Actions.Entities;
 using PetsOnTrail.Interfaces.Actions.Entities.Actions;
 using PetsOnTrail.Interfaces.Actions.Entities.Results;
+using System.Net;
+using System.Security.Cryptography;
 
 namespace PetsOnTrail.Interfaces.Actions.Services
 {
@@ -41,5 +43,13 @@ namespace PetsOnTrail.Interfaces.Actions.Services
         Task<GetSelectedPublicActionsListResponse> GetSelectedPublicActionsListAsync(GetSelectedPublicActionsListRequest request, CancellationToken cancellationToken);
 
         Task<GetSimpleActionsListByTypeResponse> GetSimpleActionsListByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken);
+
+        Task<StartNowResponse> StartNowAsync(StartNowRequest request, CancellationToken cancellationToken);
+        Task<FinishNowResponse> FinishNowAsync(FinishNowRequest request, CancellationToken cancellationToken);
+        Task<DeleteStartResponse> DeleteStartAsync(DeleteStartRequest request, CancellationToken cancellationToken);
+        Task<DeleteFinishResponse> DeleteFinishAsync(DeleteFinishRequest request, CancellationToken cancellationToken);
+        Task<DnsResponse> DnsAsync(DnsRequest request, CancellationToken cancellationToken);
+        Task<DsqResponse> DsqAsync(DsqRequest request, CancellationToken cancellationToken);
+        Task<DnfResponse> DnfAsync(DnfRequest request, CancellationToken cancellationToken);
     }
 }

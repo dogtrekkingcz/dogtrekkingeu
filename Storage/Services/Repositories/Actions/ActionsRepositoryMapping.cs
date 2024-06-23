@@ -55,6 +55,27 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.ActionSaleItemDto, ActionRecord.ActionSaleItemDto>();
             typeAdapterConfig.NewConfig<UpdateActionInternalStorageRequest.PassedCheckpointDto, ActionRecord.PassedCheckpointDto>();
 
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse, UpdateActionInternalStorageRequest>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RacerDto, UpdateActionInternalStorageRequest.RacerDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.NoteDto, UpdateActionInternalStorageRequest.NoteDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PaymentDto, UpdateActionInternalStorageRequest.PaymentDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RequestedPaymentItem, UpdateActionInternalStorageRequest.RequestedPaymentItem>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RequestedPaymentsDto, UpdateActionInternalStorageRequest.RequestedPaymentsDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.AddressDto, UpdateActionInternalStorageRequest.AddressDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.CategoryDto, UpdateActionInternalStorageRequest.CategoryDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LimitsDto, UpdateActionInternalStorageRequest.LimitsDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.CheckpointDto, UpdateActionInternalStorageRequest.CheckpointDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceDto, UpdateActionInternalStorageRequest.RaceDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.RaceState, UpdateActionInternalStorageRequest.RaceState>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.TermDto, UpdateActionInternalStorageRequest.TermDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleDto, UpdateActionInternalStorageRequest.ActionSaleDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.LatLngDto, UpdateActionInternalStorageRequest.LatLngDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PaymentDefinitionDto, UpdateActionInternalStorageRequest.PaymentDefinitionDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.ActionSaleItemDto, UpdateActionInternalStorageRequest.ActionSaleItemDto>();
+            typeAdapterConfig.NewConfig<GetActionInternalStorageResponse.PassedCheckpointDto, UpdateActionInternalStorageRequest.PassedCheckpointDto>();
+
             typeAdapterConfig.NewConfig<ActionRecord, GetAllActionsInternalStorageResponse.ActionDto>();
             typeAdapterConfig.NewConfig<ActionRecord.RacerDto, GetAllActionsInternalStorageResponse.RacerDto>();
             typeAdapterConfig.NewConfig<ActionRecord.NoteDto, GetAllActionsInternalStorageResponse.NoteDto>();

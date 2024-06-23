@@ -1,6 +1,7 @@
 ﻿using MapsterMapper;
 using PetsOnTrailApp.Models;
 using Protos.Activities.GetActivityByUserIdAndActivityId;
+using static Protos.Actions.Actions;
 
 namespace PetsOnTrailApp.DataStorage.Repositories.ActivityRepository;
 
@@ -15,7 +16,8 @@ public class ActivityRepository : BaseRepository, IActivityRepository
     public ActivityRepository(
         IDataStorageService<GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel> dataStorageServiceActivityByUserIdAndActivityId, 
         IMapper mapper,
-        IDataStorageService<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel> dataStorageServiceActivityByUserId)
+        IDataStorageService<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel> dataStorageServiceActivityByUserId,
+        ActionsClient actionsClient) : base(actionsClient)
     {
         _dataStorageServiceActivityByUserIdAndActivityId = dataStorageServiceActivityByUserIdAndActivityId;
         _mapper = mapper;

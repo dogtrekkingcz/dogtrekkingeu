@@ -7,9 +7,6 @@ using Grpc.Core;
 using MapsterMapper;
 using Protos.Actions;
 using AcceptPaymentRequest = PetsOnTrail.Interfaces.Actions.Entities.Actions.AcceptPaymentRequest;
-using Action = Protos.Actions.GetAllActions.Action;
-using System.Net;
-using System.Security.Cryptography;
 
 namespace API.GRPCService.Services.Actions;
 
@@ -214,13 +211,52 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
         }
     }
 
-    /*
-    rpc StartNow(startnow.StartNowRequest) returns(startnow.StartNowResponse);
-    rpc FinishNow(finishnow.FinishNowRequest) returns(finishnow.FinishNowResponse);
-    rpc DeleteStart(deletestart.DeleteStartRequest) returns(deletestart.DeleteStartResponse);
-    rpc DeleteFinish(deletefinish.DeleteFinishRequest) returns(deletefinish.DeleteFinishResponse);
-    rpc Dns(dns.DnsRequest) returns(dns.DnsResponse);
-    rpc Dsq(dsq.DsqRequest) returns(dsq.DsqResponse);
-    rpc Dnf(dnf.DnfRequest) returns(dnf.DnfResponse);
-    */
+    public async override Task<Protos.Actions.StartNow.StartNowResponse> startNow(Protos.Actions.StartNow.StartNowRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.StartNowAsync(_mapper.Map<StartNowRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.StartNow.StartNowResponse>(result);
+    }
+
+    public async override Task<Protos.Actions.FinishNow.FinishNowResponse> finishNow(Protos.Actions.FinishNow.FinishNowRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.FinishNowAsync(_mapper.Map<FinishNowRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.FinishNow.FinishNowResponse>(result);
+    }
+
+    public async override Task<Protos.Actions.DeleteStart.DeleteStartResponse> deleteStart(Protos.Actions.DeleteStart.DeleteStartRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.DeleteStartAsync(_mapper.Map<DeleteStartRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.DeleteStart.DeleteStartResponse>(result);
+    }
+
+    public async override Task<Protos.Actions.DeleteFinish.DeleteFinishResponse> deleteFinish(Protos.Actions.DeleteFinish.DeleteFinishRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.DeleteFinishAsync(_mapper.Map<DeleteFinishRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.DeleteFinish.DeleteFinishResponse>(result);
+    }
+
+    public async override Task<Protos.Actions.Dns.DnsResponse> dns(Protos.Actions.Dns.DnsRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.DnsAsync(_mapper.Map<DnsRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.Dns.DnsResponse>(result);
+    }
+
+    public async override Task<Protos.Actions.Dsq.DsqResponse> dsq(Protos.Actions.Dsq.DsqRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.DsqAsync(_mapper.Map<DsqRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.Dsq.DsqResponse>(result);
+    }
+
+    public async override Task<Protos.Actions.Dnf.DnfResponse> dnf(Protos.Actions.Dnf.DnfRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.DnfAsync(_mapper.Map<DnfRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.Dnf.DnfResponse>(result);
+    }
 }

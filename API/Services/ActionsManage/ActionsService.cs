@@ -422,5 +422,96 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
 
             return _mapper.Map<GetSimpleActionsListByTypeResponse>(actions);
         }
+
+        public async Task<StartNowResponse> StartNowAsync(StartNowRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.Start = request.Time;
+            
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new StartNowResponse();
+        }
+
+        public async Task<FinishNowResponse> FinishNowAsync(FinishNowRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.Finish = request.Time;
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new FinishNowResponse();
+        }
+
+        public async Task<DeleteStartResponse> DeleteStartAsync(DeleteStartRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.Start = null;
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new DeleteStartResponse();
+        }
+
+        public async Task<DeleteFinishResponse> DeleteFinishAsync(DeleteFinishRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.Finish = null;
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new DeleteFinishResponse();
+        }
+
+        public async Task<DnsResponse> DnsAsync(DnsRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.State = GetActionInternalStorageResponse.RaceState.NotStarted;
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new DnsResponse();
+        }
+
+        public async Task<DsqResponse> DsqAsync(DsqRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.State = GetActionInternalStorageResponse.RaceState.Disqualified;
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new DsqResponse();
+        }
+
+        public async Task<DnfResponse> DnfAsync(DnfRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.State = GetActionInternalStorageResponse.RaceState.DidNotFinished;
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new DnfResponse();
+        }
     }
 }
