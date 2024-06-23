@@ -2,5 +2,5 @@
 
 public sealed record DnsResponse
 {
-    string State { get; init; } = string.Empty;
+    public string State { get; init; } = string.Empty;
 }

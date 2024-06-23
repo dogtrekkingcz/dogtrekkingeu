@@ -2,5 +2,5 @@
 
 public sealed record DsqResponse
 {
-    string State { get; init; } = string.Empty;
+    public string State { get; init; } = string.Empty;
 }
