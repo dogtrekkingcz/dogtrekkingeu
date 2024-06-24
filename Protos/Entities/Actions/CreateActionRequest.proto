@@ -92,13 +92,15 @@ message PetDto {
   string Id = 1;
   string UserId = 2;
   string Name = 3;
-  string Kennel = 4;
-  string Pedigree = 5;
-  string Chip = 6;
-  google.type.DateTime Birthday = 7;
-  google.type.DateTime Decease = 8;
-  string UriToPhoto = 9;
-  string Contact = 10;
+  string Breed = 4;
+  string PetType = 5;
+  string Kennel = 6;
+  string Pedigree = 7;
+  string Chip = 8;
+  google.type.DateTime Birthday = 9;
+  google.type.DateTime Decease = 10;
+  string UriToPhoto = 11;
+  string Contact = 12;
 }
 
 message RequestedPaymentsDto {

@@ -140,6 +140,10 @@ public sealed record CreateActionRequest
 
         public string Name { get; set; } = string.Empty;
 
+        public string Breed { get; set; } = string.Empty;
+
+        public Guid PetType { get; set; } = Guid.Empty;
+
         public string Kennel { get; set; } = string.Empty;
 
         public string Pedigree { get; set; } = string.Empty;
