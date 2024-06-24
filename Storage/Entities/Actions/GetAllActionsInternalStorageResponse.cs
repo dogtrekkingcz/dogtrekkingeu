@@ -145,23 +145,17 @@ public sealed record GetAllActionsInternalStorageResponse
     
     public record PetDto
     {
-        public string? Id { get; init; }
-
-        public string UserId { get; init; } = string.Empty;
-
-        public string Name { get; init; } = string.Empty;
-
-        public string Kennel { get; init; } = string.Empty;
-
-        public string Pedigree { get; init; } = string.Empty;
-
-        public string Chip { get; init; } = string.Empty;
-
-        public DateTimeOffset? Birthday { get; init; } = null;
-
-        public string UriToPhoto { get; init; } = string.Empty;
-
-        public string Contact { get; init; } = string.Empty;
+        public Guid Id { get; init; } = Guid.Empty;
+        public Guid UserId { get; init; } = Guid.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Breed { get; set; } = string.Empty;
+        public Guid PetType { get; set; } = Guid.Empty;
+        public string Kennel { get; set; } = string.Empty;
+        public string Pedigree { get; set; } = string.Empty;
+        public string Chip { get; set; } = string.Empty;
+        public DateTimeOffset? Birthday { get; set; } = null;
+        public string UriToPhoto { get; set; } = string.Empty;
+        public string Contact { get; set; } = string.Empty;
     }
 
     public sealed record RequestedPaymentsDto
