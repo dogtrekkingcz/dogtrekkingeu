@@ -172,7 +172,6 @@ namespace Storage.Services.Repositories.Actions
             typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>()
                 .Ignore(d => d.UserId)
                 .Ignore(d => d.Kennel)
-                .Ignore(d => d.Decease)
                 .Ignore(d => d.UriToPhoto)
                 .Ignore(d => d.Contact);
 

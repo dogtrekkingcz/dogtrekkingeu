@@ -173,7 +173,6 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.PetDto, UpdateActionInternalStorageRequest.PetDto>()
             .Ignore(d => d.UserId)
             .Ignore(d => d.Kennel)
-            .Ignore(d => d.Decease)
             .Ignore(d => d.UriToPhoto)
             .Ignore(d => d.Contact);
         typeAdapterConfig.NewConfig<GetEntryInternalStorageResponse.MerchandizeItemDto, UpdateActionInternalStorageRequest.MerchandizeItemDto>();
