@@ -144,6 +144,10 @@
                             <button class="btn btn-sm btn-danger" @onclick="() => Dsq(racer.Id)">
                                 <i class="fas fa-edit">@Localizer["Results.Dsq"]</i>
                             </button>
+
+                            <button class="btn btn-sm btn-danger" @onclick="() => ResetStates(racer.Id)">
+                                <i class="fas fa-edit">@Localizer["Results.ResetStates"]</i>
+                            </button>
                         }
                         </div>
                     </div>

@@ -242,7 +242,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public Task StartNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.StartNow(new Protos.Actions.StartNow.StartNowRequest
+        ActionsClientInstance.startNow(new Protos.Actions.StartNow.StartNowRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -256,7 +256,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public Task FinishNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.FinishNow(new Protos.Actions.FinishNow.FinishNowRequest
+        ActionsClientInstance.finishNow(new Protos.Actions.FinishNow.FinishNowRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -270,7 +270,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public Task DeleteStart(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.DeleteStart(new Protos.Actions.DeleteStart.DeleteStartRequest
+        ActionsClientInstance.deleteStart(new Protos.Actions.DeleteStart.DeleteStartRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -283,7 +283,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public Task DeleteFinish(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.DeleteFinish(new Protos.Actions.DeleteFinish.DeleteFinishRequest
+        ActionsClientInstance.deleteFinish(new Protos.Actions.DeleteFinish.DeleteFinishRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -296,7 +296,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public Task Dns(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.Dns(new Protos.Actions.Dns.DnsRequest
+        ActionsClientInstance.dns(new Protos.Actions.Dns.DnsRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -309,7 +309,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public Task Dnf(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.Dnf(new Protos.Actions.Dnf.DnfRequest
+        ActionsClientInstance.dnf(new Protos.Actions.Dnf.DnfRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -322,7 +322,20 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public Task Dsq(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.Dsq(new Protos.Actions.Dsq.DsqRequest
+        ActionsClientInstance.dsq(new Protos.Actions.Dsq.DsqRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            RacerId = racerId.ToString()
+        });
+
+        return Task.CompletedTask;
+    }
+
+    public Task ResetStates(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    {
+        ActionsClientInstance.resetStates(new Protos.Actions.ResetStates.ResetStatesRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),

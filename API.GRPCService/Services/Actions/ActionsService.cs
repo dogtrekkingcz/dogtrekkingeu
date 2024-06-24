@@ -259,4 +259,11 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         return _mapper.Map<Protos.Actions.Dnf.DnfResponse>(result);
     }
+
+    public async override Task<Protos.Actions.ResetStates.ResetStatesResponse> resetStates(Protos.Actions.ResetStates.ResetStatesRequest request, ServerCallContext context)
+    {
+        await _actionsService.ResetStatesAsync(_mapper.Map<ResetStatesRequest>(request), context.CancellationToken);
+
+        return new Protos.Actions.ResetStates.ResetStatesResponse();
+    }
 }

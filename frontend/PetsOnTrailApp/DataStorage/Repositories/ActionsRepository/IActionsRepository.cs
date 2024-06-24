@@ -29,4 +29,5 @@ public interface IActionsRepository : IBaseRepository
     Task Dns(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
     Task Dnf(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
     Task Dsq(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
+    Task ResetStates(Guid actionId, Guid raceId, Guid categoryId, Guid racerId);
 }

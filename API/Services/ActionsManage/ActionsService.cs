@@ -513,5 +513,18 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
 
             return new DnfResponse();
         }
+
+        public async Task<ResetStatesResponse> ResetStatesAsync(ResetStatesRequest request, CancellationToken cancellationToken)
+        {
+            var action = await _actionsRepositoryService.GetAsync(request.ActionId, cancellationToken);
+            var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
+            var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
+            var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
+            racer.State = GetActionInternalStorageResponse.RaceState.NotValid;
+
+            await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
+
+            return new ResetStatesResponse();
+        }
     }
 }

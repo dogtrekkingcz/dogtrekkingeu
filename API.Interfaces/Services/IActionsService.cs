@@ -51,5 +51,6 @@ namespace PetsOnTrail.Interfaces.Actions.Services
         Task<DnsResponse> DnsAsync(DnsRequest request, CancellationToken cancellationToken);
         Task<DsqResponse> DsqAsync(DsqRequest request, CancellationToken cancellationToken);
         Task<DnfResponse> DnfAsync(DnfRequest request, CancellationToken cancellationToken);
+        Task<ResetStatesResponse> ResetStatesAsync(ResetStatesRequest request, CancellationToken cancellationToken);
     }
 }

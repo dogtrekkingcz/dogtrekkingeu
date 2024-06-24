@@ -69,4 +69,9 @@ public class CategoryViewBase : ComponentBase
     {
         _actionsRepository.Dsq(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
     }
+
+    public void ResetStates(Guid racerId)
+    {
+        _actionsRepository.ResetStates(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+    }
 }
