@@ -64,8 +64,7 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.AddressDto, ActionModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CategoryDto, ActionModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PetDto, ActionModel.PetDto>()
-            .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset())
-            .Map(d => d.Decease, s => s.Decease.ToDateTimeOffset());
+            .Map(d => d.Birthday, s => s.Birthday.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.LimitsDto, ActionModel.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.CheckpointDto, ActionModel.CheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RaceDto, ActionModel.RaceDto>()
@@ -122,7 +121,6 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.AddressDto, ActionModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.CategoryDto, ActionModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.PetDto, ActionModel.PetDto>()
-            .Ignore(d => d.Decease)
             .Ignore(d => d.Contact);
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.LimitsDto, ActionModel.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetPublicActionsList.RaceDto, ActionModel.RaceDto>()
@@ -157,7 +155,6 @@ namespace SharedLib.Models;
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.AddressDto, ActionModel.AddressDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.CategoryDto, ActionModel.CategoryDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.PetDto, ActionModel.PetDto>()
-            .Ignore(d => d.Decease)
             .Ignore(d => d.Contact);
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.LimitsDto, ActionModel.LimitsDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetSelectedPublicActionsList.RaceDto, ActionModel.RaceDto>()
