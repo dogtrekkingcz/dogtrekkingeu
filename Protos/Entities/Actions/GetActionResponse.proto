@@ -101,9 +101,8 @@ message PetDto {
   string Pedigree = 5;
   string Chip = 6;
   google.type.DateTime Birthday = 7;
-  google.type.DateTime Decease = 8;
-  string UriToPhoto = 9;
-  string Contact = 10;
+  string UriToPhoto = 8;
+  string Contact = 9;
 }
 
 message RequestedPaymentsDto {
