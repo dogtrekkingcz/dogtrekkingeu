@@ -162,8 +162,6 @@ public record ActionModel
 
         public DateTimeOffset? Birthday { get; set; } = null;
 
-        public DateTimeOffset? Decease { get; set; } = null;
-
         public string UriToPhoto { get; set; } = string.Empty;
 
         public string Contact { get; set; } = string.Empty;
