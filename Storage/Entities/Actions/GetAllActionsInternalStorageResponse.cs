@@ -159,12 +159,11 @@ public sealed record GetAllActionsInternalStorageResponse
 
         public DateTimeOffset? Birthday { get; init; } = null;
 
-        public DateTimeOffset? Decease { get; init; } = null;
-
         public string UriToPhoto { get; init; } = string.Empty;
 
         public string Contact { get; init; } = string.Empty;
     }
+
     public sealed record RequestedPaymentsDto
     {
         public string VariableNumber { get; init; } = string.Empty;
