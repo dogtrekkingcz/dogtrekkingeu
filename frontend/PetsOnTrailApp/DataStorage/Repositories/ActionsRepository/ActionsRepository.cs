@@ -188,10 +188,20 @@ public class ActionsRepository : BaseRepository, IActionsRepository
     {
         var action = await _dataStorageServicePublicActions.GetAsync(actionId, cancellationToken);
 
-        if ((action != null)
-            && (GetMyRoles().Contains(action.Data.Actions.FirstOrDefault(action => action.Id == actionId)?.ResultsCanEdit ?? Guid.Empty))) // TODO: check if I am in role "internal administrator"
+        if (action != null)
         {
-            return true;
+            var actionData = action.Data.Actions.FirstOrDefault(action => action.Id == actionId);
+            
+            if (actionData != null)
+            {
+                var requiredRole = actionData.ResultsCanEdit;
+                Console.WriteLine($"requiredRole: '{requiredRole}', having roles: '{GetMyRoles().Dump()}'");
+
+                if (GetMyRoles().Contains(requiredRole))
+                {
+                    return true;
+                }
+            }
         }
 
         return false;

@@ -134,15 +134,15 @@
                         @if (CanIEditResults)
                         {
                             <button class="btn btn-sm btn-danger" @onclick="() => Dns(racer.Id)">
-                                <i class="fas fa-edit">@Localizer["Results.Dns"]</i>
+                                <i class="fas fa-edit">@Localizer["Results.DNS"]</i>
                             </button>
 
                             <button class="btn btn-sm btn-danger" @onclick="() => Dnf(racer.Id)">
-                                <i class="fas fa-edit">@Localizer["Results.Dnf"]</i>
+                                <i class="fas fa-edit">@Localizer["Results.DNF"]</i>
                             </button>
 
                             <button class="btn btn-sm btn-danger" @onclick="() => Dsq(racer.Id)">
-                                <i class="fas fa-edit">@Localizer["Results.Dsq"]</i>
+                                <i class="fas fa-edit">@Localizer["Results.DSQ"]</i>
                             </button>
 
                             <button class="btn btn-sm btn-danger" @onclick="() => ResetStates(racer.Id)">
