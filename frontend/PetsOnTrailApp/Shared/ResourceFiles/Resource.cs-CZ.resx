@@ -695,9 +695,17 @@
   </data>
   <data name="Results.NV" xml:space="preserve">
     <value>Nesprávná hodnota</value>
-    <comment> </comment>
   </data>
   <data name="Results.Started" xml:space="preserve">
     <value>Odstartoval/a</value>
+  </data>
+  <data name="Results.Delete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Results.Edit" xml:space="preserve">
+    <value>Upravit</value>
+  </data>
+  <data name="Results.Now" xml:space="preserve">
+    <value>Nyní</value>
   </data>
 </root>

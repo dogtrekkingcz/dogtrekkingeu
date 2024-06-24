@@ -1483,6 +1483,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Results_Delete {
+            get {
+                return ResourceManager.GetString("Results.Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DNF.
         /// </summary>
         internal static string Results_DNF {
@@ -1506,6 +1515,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         internal static string Results_DSQ {
             get {
                 return ResourceManager.GetString("Results.DSQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string Results_Edit {
+            get {
+                return ResourceManager.GetString("Results.Edit", resourceCulture);
             }
         }
         
@@ -1569,6 +1587,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         internal static string Results_Manage_Add_Start {
             get {
                 return ResourceManager.GetString("Results.Manage.Add.Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Now.
+        /// </summary>
+        internal static string Results_Now {
+            get {
+                return ResourceManager.GetString("Results.Now", resourceCulture);
             }
         }
         

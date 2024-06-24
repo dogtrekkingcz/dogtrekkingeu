@@ -145,19 +145,22 @@ public class ActionsRepository : BaseRepository, IActionsRepository
         return result;
     }
 
-    public async Task<ResultsModel> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId)
+    public async Task<ResultsModel> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId, bool forceReloadFromServer)
     {
         var result = null as ResultsModel;
 
         await semaphoreSlim.WaitAsync();
 
-        try
-        {
-            result = _results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel));
-        }
-        finally
-        {
-            semaphoreSlim.Release();
+        if (forceReloadFromServer == false)
+        { 
+            try
+            {
+                result = _results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel));
+            }
+            finally
+            {
+                semaphoreSlim.Release();
+            }
         }
 
         if (result == null)

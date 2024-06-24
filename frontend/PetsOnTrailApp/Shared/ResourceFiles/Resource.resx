@@ -699,4 +699,13 @@
   <data name="Results.Started" xml:space="preserve">
     <value>Started</value>
   </data>
+  <data name="Results.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Results.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Results.Now" xml:space="preserve">
+    <value>Now</value>
+  </data>
 </root>
