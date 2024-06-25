@@ -9,9 +9,9 @@ public interface IDataStorageService<T, R> where T : class where R: class
     void InitWithListFunction(Func<IList<Guid>, Task<T>> function);
 
 
-    Task<DataStorageModel<R>> GetAsync(Guid id, CancellationToken cancellationToken);
+    Task<DataStorageModel<R>> GetAsync(Guid id, bool forceReloadFromServer, CancellationToken cancellationToken);
 
-    Task<DataStorageModel<R>> GetListAsync(IList<Guid> ids, CancellationToken cancellationToken);
+    Task<DataStorageModel<R>> GetListAsync(IList<Guid> ids, bool forceReloadFromServer, CancellationToken cancellationToken);
 
     Task PutAsync(Guid id, R value, CancellationToken cancellationToken);
 }

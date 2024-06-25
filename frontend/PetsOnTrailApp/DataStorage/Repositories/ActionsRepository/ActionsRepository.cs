@@ -90,7 +90,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
         if (result == null)
         {
-            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+            await LoadAndParseActionAsync(actionId, false, CancellationToken.None);
         }
 
 
@@ -129,7 +129,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
         if (result == null)
         {
-            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+            await LoadAndParseActionAsync(actionId, false, CancellationToken.None);
         }
 
         await semaphoreSlim.WaitAsync();
@@ -165,7 +165,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
         if (result == null)
         {
-            await LoadAndParseActionAsync(actionId, CancellationToken.None);
+            await LoadAndParseActionAsync(actionId, forceReloadFromServer, CancellationToken.None);
         }
 
         await semaphoreSlim.WaitAsync();
@@ -184,7 +184,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public async Task<bool> CanIEditResultsAsync(Guid actionId, CancellationToken cancellationToken)
     {
-        var action = await _dataStorageServicePublicActions.GetAsync(actionId, cancellationToken);
+        var action = await _dataStorageServicePublicActions.GetAsync(actionId, false, cancellationToken);
 
         if (action != null)
         {
@@ -341,9 +341,9 @@ public class ActionsRepository : BaseRepository, IActionsRepository
         });
     }
 
-    private async Task LoadAndParseActionAsync(Guid actionId, CancellationToken cancellationToken)
+    private async Task LoadAndParseActionAsync(Guid actionId, bool forceReloadFromServer, CancellationToken cancellationToken)
     {
-        var action = await _dataStorageServicePublicActions.GetAsync(actionId, cancellationToken);
+        var action = await _dataStorageServicePublicActions.GetAsync(actionId, forceReloadFromServer, cancellationToken);
 
         if (action != null)
         {
@@ -382,7 +382,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
     private async Task LoadAndParseActionsSimpleAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
     {
         Console.WriteLine($"LoadAndParseActionsSimpleAsync -> dataStorage: {_dataStorageServiceActionsByType}");
-        var actionsInDataStorage = await _dataStorageServiceActionsByType.GetListAsync(typeIds, cancellationToken);
+        var actionsInDataStorage = await _dataStorageServiceActionsByType.GetListAsync(typeIds, false,cancellationToken);
 
         Console.WriteLine($"actionsInDataStorage: {actionsInDataStorage.Dump()}");
 

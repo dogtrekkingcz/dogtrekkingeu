@@ -27,11 +27,11 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         _functionByList = function;
     }
 
-    public async Task<DataStorageModel<R>> GetAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<DataStorageModel<R>> GetAsync(Guid id, bool forceReloadFromServer, CancellationToken cancellationToken)
     {
         DataStorageModel<R> data = null;
 
-        if (await _localStorage.ContainKeyAsync(id.ToString()))
+        if (forceReloadFromServer == false && await _localStorage.ContainKeyAsync(id.ToString()))
             data = await _localStorage.GetItemAsync<DataStorageModel<R>>(id.ToString(), cancellationToken);
 
         if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
@@ -54,13 +54,13 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         return data;
     }
 
-    public async Task<DataStorageModel<R>> GetListAsync(IList<Guid> ids, CancellationToken cancellationToken)
+    public async Task<DataStorageModel<R>> GetListAsync(IList<Guid> ids, bool forceReloadFromServer, CancellationToken cancellationToken)
     {
         DataStorageModel<R> data = null;
 
         var id = string.Join(":", ids.Select(id => id.ToString()));
 
-        if (await _localStorage.ContainKeyAsync(id))
+        if (forceReloadFromServer == false && await _localStorage.ContainKeyAsync(id))
             data = await _localStorage.GetItemAsync<DataStorageModel<R>>(id, cancellationToken);
 
         if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))

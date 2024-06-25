@@ -29,7 +29,7 @@ public class ActivityRepository : BaseRepository, IActivityRepository
         await semaphoreSlim.WaitAsync();
         try
         {
-            var activities = await _dataStorageServiceActivityByUserIdAndActivityId.GetListAsync(new List<Guid> { Guid.Parse(userIdAndActivityId.UserId), Guid.Parse(userIdAndActivityId.ActivityId) }, cancellationToken);
+            var activities = await _dataStorageServiceActivityByUserIdAndActivityId.GetListAsync(new List<Guid> { Guid.Parse(userIdAndActivityId.UserId), Guid.Parse(userIdAndActivityId.ActivityId) }, false, cancellationToken);
             return _mapper.Map<ActivityModel>(activities.Data);
         }
         finally
@@ -45,7 +45,7 @@ public class ActivityRepository : BaseRepository, IActivityRepository
         await semaphoreSlim.WaitAsync();
         try
         {
-            var activities = await _dataStorageServiceActivityByUserId.GetAsync(Guid.Parse(userIdRequest.UserId), cancellationToken);
+            var activities = await _dataStorageServiceActivityByUserId.GetAsync(Guid.Parse(userIdRequest.UserId), false, cancellationToken);
             return _mapper.Map<UserActivitiesModel>(activities.Data);
         }
         finally
