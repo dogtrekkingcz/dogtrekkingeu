@@ -194,10 +194,10 @@ public class ActionsRepository : BaseRepository, IActionsRepository
             
             if (actionData != null)
             {
-                var requiredRole = actionData.ResultsCanEdit;
-                Console.WriteLine($"requiredRole: '{requiredRole}', having roles: '{GetMyRoles().Dump()}'");
+                var requiredRoles = actionData.ResultsCanEdit;
+                Console.WriteLine($"requiredRole: '{requiredRoles}', having roles: '{GetMyRoles().Dump()}'");
 
-                if (GetMyRoles().Contains(requiredRole))
+                if (GetMyRoles().Any(role => requiredRoles.Contains(role)))
                 {
                     return true;
                 }
