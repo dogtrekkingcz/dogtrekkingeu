@@ -2,5 +2,5 @@
 
 public sealed record StartNowResponse
 {
-    string State { get; init; } = string.Empty;
+    public string State { get; init; } = string.Empty;
 }

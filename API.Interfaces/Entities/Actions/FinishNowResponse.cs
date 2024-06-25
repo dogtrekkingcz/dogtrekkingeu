@@ -2,5 +2,5 @@
 
 public sealed record FinishNowResponse
 {
-    string State { get; init; } = string.Empty;
+    public string State { get; init; } = string.Empty;
 }
