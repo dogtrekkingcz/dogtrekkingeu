@@ -23,6 +23,8 @@ public class BaseRepository : IBaseRepository
         if (user == null)
             return result;
 
+        Console.WriteLine("User rights from server: " + user.Dump());
+
         var userRoles = user.Rights.SelectMany(right => right.Roles).ToList();
         Console.WriteLine("User roles from server: " + userRoles.Dump());
 

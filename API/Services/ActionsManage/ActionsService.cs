@@ -430,6 +430,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
             var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
             racer.Start = request.Time;
+            racer.State = racer.Finish != null ? GetActionInternalStorageResponse.RaceState.Finished : GetActionInternalStorageResponse.RaceState.Started;
             
             await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
 
@@ -443,6 +444,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
             var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
             racer.Finish = request.Time;
+            racer.State = racer.Start != null ? GetActionInternalStorageResponse.RaceState.Finished : GetActionInternalStorageResponse.RaceState.NotValid;
 
             await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
 
@@ -456,6 +458,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
             var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
             racer.Start = null;
+            racer.State = GetActionInternalStorageResponse.RaceState.NotValid;
 
             await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
 
@@ -469,6 +472,7 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
             var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
             racer.Finish = null;
+            racer.State = racer.Start == null ? GetActionInternalStorageResponse.RaceState.NotValid : GetActionInternalStorageResponse.RaceState.Started;
 
             await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
 
@@ -520,7 +524,16 @@ namespace PetsOnTrail.Actions.Services.ActionsManage
             var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
             var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
             var racer = category.Racers.FirstOrDefault(racer => racer.Id == request.RacerId);
-            racer.State = GetActionInternalStorageResponse.RaceState.NotValid;
+            
+            if (racer.Start != null && racer.Finish != null)
+                racer.State = GetActionInternalStorageResponse.RaceState.Finished;
+            
+            else if (racer.Start != null && racer.Finish == null)
+                racer.State = GetActionInternalStorageResponse.RaceState.Started;
+
+            else
+                racer.State = GetActionInternalStorageResponse.RaceState.NotValid;
+
 
             await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
 

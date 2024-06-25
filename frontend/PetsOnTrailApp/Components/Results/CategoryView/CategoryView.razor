@@ -59,34 +59,33 @@
             <td>
                 <div class="container">
                     <div class="row">
-                        @{
-                            var start = racer.Start?.ToString("dd HH:mm:ss") ?? "-- --:--:--";
-                            var finish = racer.Finish?.ToString("dd HH:mm:ss") ?? "-- --:--:--";
+                            @{
+                                var start = racer.Start?.ToString("dd HH:mm:ss") ?? "-- --:--:--";
+                                var finish = racer.Finish?.ToString("dd HH:mm:ss") ?? "-- --:--:--";
 
-                            var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
-                            string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int)totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
-                            
-                            switch (racer.State)
-                            {
-                                case Models.ResultsModel.ResultState.DidNotFinished:
-                                    time = Localizer["Results.DNF"];
-                                    break;
-                                        
-                                case Models.ResultsModel.ResultState.Disqualified:
-                                    time = Localizer["Results.DSQ"];
-                                    break;
+                                var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
+                                string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int)totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
 
-                                case Models.ResultsModel.ResultState.NotStarted:
-                                    time = Localizer["Results.DNS"];
-                                    break;
+                                switch (racer.State)
+                                {
+                                    case Models.ResultsModel.ResultState.DidNotFinished:
+                                        time = Localizer["Results.DNF"];
+                                        break;
 
-                                case Models.ResultsModel.ResultState.NotValid:
-                                    time = Localizer["Results.NV"];
-                                    break;
+                                    case Models.ResultsModel.ResultState.Disqualified:
+                                        time = Localizer["Results.DSQ"];
+                                        break;
 
-                                case Models.ResultsModel.ResultState.Started:
-                                    time = Localizer["Results.Started"];
-                                    break;
+                                    case Models.ResultsModel.ResultState.NotStarted:
+                                        time = Localizer["Results.DNS"];
+                                        break;
+
+                                    case Models.ResultsModel.ResultState.Started:
+                                        time = Localizer["Results.Started"];
+                                        break;
+
+                                    case Models.ResultsModel.ResultState.Finished:
+                                        break;
 
                                 default:
                                     break;

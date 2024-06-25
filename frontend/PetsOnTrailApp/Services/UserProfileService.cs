@@ -34,7 +34,7 @@ public sealed class UserProfileService : IUserProfileService
         if (string.IsNullOrWhiteSpace(await _tokenStorage.GetAccessToken()))
             return null;
 
-        if (IsValidTime != null && IsValidTime > DateTimeOffset.Now.AddMinutes(-5))
+        if (IsValidTime != null && IsValidTime > DateTimeOffset.Now.AddMinutes(-5) && _userProfileModel != null)
             return _userProfileModel;
                 
         try
