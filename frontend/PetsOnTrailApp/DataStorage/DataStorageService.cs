@@ -34,8 +34,9 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         if (forceReloadFromServer == false && await _localStorage.ContainKeyAsync(id.ToString()))
             data = await _localStorage.GetItemAsync<DataStorageModel<R>>(id.ToString(), cancellationToken);
 
-        if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
+        if (forceReloadFromServer == true || data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
         {
+            Console.WriteLine("Loading data from server for id " + id);
             var loadedData = await _function.Invoke(id);
             Console.WriteLine(loadedData.Dump());
 
@@ -63,7 +64,7 @@ public class DataStorageService<T, R> : IDataStorageService<T, R> where T : clas
         if (forceReloadFromServer == false && await _localStorage.ContainKeyAsync(id))
             data = await _localStorage.GetItemAsync<DataStorageModel<R>>(id, cancellationToken);
 
-        if (data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
+        if (forceReloadFromServer == true || data == null || data.Created < DateTimeOffset.Now.AddMinutes(-DATA_VALID_TIMEOUT))
         {
             var loadedData = await _functionByList.Invoke(ids);
 

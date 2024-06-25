@@ -151,10 +151,10 @@ public class ActionsRepository : BaseRepository, IActionsRepository
     {
         var result = null as ResultsModel;
 
-        await semaphoreSlim.WaitAsync();
-
         if (forceReloadFromServer == false)
-        { 
+        {
+            await semaphoreSlim.WaitAsync();
+
             try
             {
                 result = _results.GetValueOrDefault((actionId, raceId, categoryId), default(ResultsModel));
@@ -347,10 +347,14 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     private async Task LoadAndParseActionAsync(Guid actionId, bool forceReloadFromServer, CancellationToken cancellationToken)
     {
+        Console.WriteLine($"LoadAndParseActionAsync -> {actionId}, force: {forceReloadFromServer} ...");
+
         var action = await _dataStorageServicePublicActions.GetAsync(actionId, forceReloadFromServer, cancellationToken);
 
         if (action != null)
         {
+            Console.WriteLine($"action.Data.Actions: {action.Data.Actions.Dump()}");
+
             await semaphoreSlim.WaitAsync();
 
             try
