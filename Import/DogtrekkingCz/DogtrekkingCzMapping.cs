@@ -35,7 +35,6 @@ internal static class DogtrekkingCzMapping
                 Description = s.Description ?? string.Empty,
                 TypeId = Guid.Empty,
                 ContactMail = s.ContactMail ?? string.Empty,
-                Checkpoints = new List<CreateActionInternalStorageRequest.CheckpointDto>(),
                 Sale = new CreateActionInternalStorageRequest.ActionSaleDto
                 {
                     Items = s.TShirts.Select(tshirt => new CreateActionInternalStorageRequest.ActionSaleItemDto
@@ -62,6 +61,7 @@ internal static class DogtrekkingCzMapping
                         EnteringFrom = DateTimeOffset.MinValue,
                         EnteringTo = DateTimeOffset.MinValue,
                         MaxNumberOfCompetitors = int.MaxValue,
+                        Checkpoints = new List<CreateActionInternalStorageRequest.CheckpointDto>(),
                         Categories = race.Categories.Select(ctg => new CreateActionInternalStorageRequest.CategoryDto
                         {
                             Id = ctg.Id,
