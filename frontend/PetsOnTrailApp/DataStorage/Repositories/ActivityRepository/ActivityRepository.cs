@@ -1,5 +1,6 @@
 ﻿using MapsterMapper;
 using PetsOnTrailApp.Models;
+using PetsOnTrailApp.Services;
 using Protos.Activities.GetActivityByUserIdAndActivityId;
 using static Protos.Actions.Actions;
 
@@ -17,7 +18,8 @@ public class ActivityRepository : BaseRepository, IActivityRepository
         IDataStorageService<GetActivityByUserIdAndActivityIdResponse, GetActivityByUserIdAndActivityIdResponseModel> dataStorageServiceActivityByUserIdAndActivityId, 
         IMapper mapper,
         IDataStorageService<Protos.Activities.GetActivitiesByUserId.GetActivitiesByUserIdResponse, GetActivitiesByUserIdResponseModel> dataStorageServiceActivityByUserId,
-        ActionsClient actionsClient) : base(actionsClient)
+        ActionsClient actionsClient,
+        IUserProfileService userProfileService) : base(actionsClient, userProfileService)
     {
         _dataStorageServiceActivityByUserIdAndActivityId = dataStorageServiceActivityByUserIdAndActivityId;
         _mapper = mapper;

@@ -76,6 +76,8 @@
 
             HandleIncomingNotificationsAsync(stream.ResponseStream);
 
+            var userProfileModel = await LoadUserDataAsync();
+
             StateHasChanged();
         }
     }

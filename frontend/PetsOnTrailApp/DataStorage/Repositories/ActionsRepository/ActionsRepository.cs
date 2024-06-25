@@ -1,6 +1,7 @@
 ﻿using MapsterMapper;
 using PetsOnTrailApp.Extensions;
 using PetsOnTrailApp.Models;
+using PetsOnTrailApp.Services;
 using Protos.Actions.GetSelectedPublicActionsList;
 using Protos.Actions.GetSimpleActionsList;
 using static Protos.Actions.Actions;
@@ -25,7 +26,8 @@ public class ActionsRepository : BaseRepository, IActionsRepository
         IDataStorageService<GetSelectedPublicActionsListResponse, GetSelectedPublicActionsListResponseModel> dataStorageServicePublicActions,
         IDataStorageService<GetSimpleActionsListResponse, GetSimpleActionsListResponseModel> dataStorageServiceActionsByType,
         IMapper mapper,
-        ActionsClient actionsClient) : base(actionsClient)
+        ActionsClient actionsClient,
+        IUserProfileService userProfileService) : base(actionsClient, userProfileService)
     {
         _dataStorageServicePublicActions = dataStorageServicePublicActions;
         _dataStorageServiceActionsByType = dataStorageServiceActionsByType;
@@ -193,7 +195,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
             if (actionData != null)
             {
                 var requiredRoles = actionData.ResultsCanEdit;
-                Console.WriteLine($"requiredRole: '{requiredRoles}', having roles: '{GetMyRoles().Dump()}'");
+                Console.WriteLine($"requiredRole: '{requiredRoles.Dump()}', having roles: '{GetMyRoles().Dump()}'");
 
                 if (GetMyRoles().Any(role => requiredRoles.Contains(role)))
                 {
