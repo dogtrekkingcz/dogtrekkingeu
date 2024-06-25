@@ -23,6 +23,9 @@ message Action {
   repeated RaceDto Races = 9;
   ActionSaleDto Sale = 10;
   string TypeId = 11;
+  repeated string ResultsCanEdit = 12;
+  repeated string CompetitorsCanEdit = 13;
+  repeated string ActionCanEdit = 14;
 }
 
 message CheckpointDto {

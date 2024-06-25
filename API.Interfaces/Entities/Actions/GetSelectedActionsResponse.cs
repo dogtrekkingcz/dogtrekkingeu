@@ -18,6 +18,12 @@ public sealed record GetSelectedActionsResponse
 
         public string ContactMail { get; set; } = string.Empty;
 
+        public List<Guid> ResultsCanEdit { get; set; } = new List<Guid>();
+
+        public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid>();
+
+        public List<Guid> ActionCanEdit { get; set; } = new List<Guid>();
+
         public TermDto Term { get; set; } = new();
 
         public AddressDto Address { get; set; } = new();

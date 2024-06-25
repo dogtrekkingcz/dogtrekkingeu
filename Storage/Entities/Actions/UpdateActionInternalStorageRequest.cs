@@ -20,6 +20,12 @@ public sealed record UpdateActionInternalStorageRequest
 
     public AddressDto Address { get; set; } = new();
 
+    public List<Guid> ResultsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
+
+    public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
+
+    public List<Guid> ActionCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
+
     public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
     public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 

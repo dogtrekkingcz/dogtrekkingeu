@@ -12,9 +12,9 @@ message CreateActionRequest {
   string Name = 2;
   string Description = 3;
   string ContactMail = 4;
-  string ResultsCanEdit = 5;
-  string CompetitorsCanEdit = 6;
-  string ActionCanEdit = 7;
+  repeated string ResultsCanEdit = 5;
+  repeated string CompetitorsCanEdit = 6;
+  repeated string ActionCanEdit = 7;
   TermDto Term = 8;
   AddressDto Address = 9;
   repeated CheckpointDto Checkpoints = 10; 
