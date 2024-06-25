@@ -40,7 +40,7 @@ message RaceDto {
   repeated CategoryDto Categories = 10;
   repeated PaymentDefinitionDto Payments = 11;
   LimitsDto Limits = 12;
-  repeated CheckpointDto Checkpoints = 8;
+  repeated CheckpointDto Checkpoints = 13;
 }
 
 message CheckpointDto {
