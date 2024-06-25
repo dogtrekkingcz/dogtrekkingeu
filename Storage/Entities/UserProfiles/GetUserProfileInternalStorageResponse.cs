@@ -24,7 +24,7 @@ public sealed record GetUserProfileInternalStorageResponse
 
     public List<PetDto> Pets { get; set; } = new List<PetDto>();
 
-    public List<string> Roles { get; set; } = new List<string>();
+    public List<Guid> Roles { get; set; } = new List<Guid>();
 
     public List<ActivityDto> Activities { get; set; } = new List<ActivityDto>();
     

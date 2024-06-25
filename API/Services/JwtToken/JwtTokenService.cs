@@ -3,6 +3,7 @@ using PetsOnTrail.Interfaces.Actions.Services;
 using Microsoft.Extensions.Logging;
 using Storage.Interfaces;
 using Storage.Entities.UserProfiles;
+using PetsOnTrail.Actions.Extensions;
 
 // list of the jwt claims: https://www.iana.org/assignments/jwt/jwt.xhtml
 
@@ -80,7 +81,7 @@ public class JwtTokenService : IJwtTokenService
             _user = await _userProfilesRepositoryService.GetUserProfileAsync(new Storage.Entities.UserProfiles.GetUserProfileInternalStorageRequest { UserId = _userId }, cancellationToken);
         }
 
-        _logger.LogInformation($"Logged user: ID: '{_user.Id}', FirstName: '{_user.FirstName}', LastName: '{_user.LastName}', Email: '{_user.Email}', Phone: '{_user.Contact.PhoneNumber}'");
+        _logger.LogInformation($"Logged user: ID: '{_user.Id}', FirstName: '{_user.FirstName}', LastName: '{_user.LastName}', Email: '{_user.Email}', Phone: '{_user.Contact.PhoneNumber}', Roles: '{_user.Roles.Dump()}'");
 
         return _userId.ToString();
     }
