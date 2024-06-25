@@ -26,7 +26,16 @@ public sealed record ResultsModel : BaseSynchronizedModel
 
         public DateTimeOffset? Finish { get; set; } = null;
 
+        public List<CheckpointDto> Checkpoints { get; set; } = new();
+
         public ResultState State { get; set; } = ResultState.NotValid;
+    }
+
+    public sealed record CheckpointDto
+    {
+        public Guid Id { get; init; } = Guid.Empty;
+        public string Name { get; init; } = string.Empty;
+        public DateTimeOffset? Time { get; init; } = null;
     }
 
     public enum ResultState

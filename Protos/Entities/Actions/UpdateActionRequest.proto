@@ -15,16 +15,9 @@ message UpdateActionRequest {
   string ContactMail = 5;
   TermDto Term = 6;
   AddressDto Address = 7;
-  repeated CheckpointDto Checkpoints = 8;
-  repeated RaceDto Races = 9;
-  ActionSaleDto Sale = 10;
-  string TypeId = 11;
-}
-
-message CheckpointDto {
-  string Id = 1;
-  string Name = 2;
-  google.type.LatLng Position = 3;
+  repeated RaceDto Races = 8;
+  ActionSaleDto Sale = 9;
+  string TypeId = 10;
 }
 
 message RaceDto {
@@ -40,6 +33,13 @@ message RaceDto {
   repeated CategoryDto Categories = 10;
   repeated PaymentDefinitionDto Payments = 11;
   LimitsDto Limits = 12;
+  repeated CheckpointDto Checkpoints = 13;
+}
+
+message CheckpointDto {
+  string Id = 1;
+  string Name = 2;
+  google.type.LatLng Position = 3;
 }
 
 message CategoryDto {

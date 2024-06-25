@@ -33,18 +33,7 @@ public sealed record GetSelectedPublicActionsListResponseModel
 
         public List<RaceDto> Races { get; init; } = new List<RaceDto>();
 
-        public List<CheckpointDto> Checkpoints { get; init; } = new List<CheckpointDto>();
-
         public ActionSaleDto Sale { get; init; } = new();
-    }
-
-    public sealed record CheckpointDto
-    {
-        public Guid Id { get; init; } = default(Guid);
-
-        public string Name { get; init; } = string.Empty;
-
-        public LatLngDto Position { get; init; } = new();
     }
 
     public sealed record RaceDto
@@ -70,7 +59,16 @@ public sealed record GetSelectedPublicActionsListResponseModel
 
         public IList<PaymentDefinitionDto> Payments { get; init; } = new List<PaymentDefinitionDto>();
 
+        public List<CheckpointDto> Checkpoints { get; init; } = new List<CheckpointDto>();
+
         public LimitsDto Limits { get; init; } = new();
+    }
+
+    public sealed record CheckpointDto
+    {
+        public Guid Id { get; init; } = default(Guid);
+        public string Name { get; init; } = string.Empty;
+        public LatLngDto Position { get; init; } = new();
     }
 
     public sealed record CategoryDto

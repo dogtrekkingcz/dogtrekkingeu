@@ -365,6 +365,8 @@ public class ActionsRepository : BaseRepository, IActionsRepository
                 {
                     var raceId = race.Id;
 
+                    var checkpointsInRace = race.Checkpoints;
+
                     _categories[(actionId, raceId)] = _mapper.Map<CategoriesModel>(race) with
                     {
                         ActionId = action.Data.Actions[0].Id,

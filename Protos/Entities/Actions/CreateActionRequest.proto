@@ -17,14 +17,8 @@ message CreateActionRequest {
   repeated string ActionCanEdit = 7;
   TermDto Term = 8;
   AddressDto Address = 9;
-  repeated CheckpointDto Checkpoints = 10; 
-  repeated RaceDto Races = 11;
-  ActionSaleDto Sale = 12;
-}
-
-message CheckpointDto {
-  string Name = 1;
-  google.type.LatLng Position = 2;
+  repeated RaceDto Races = 10;
+  ActionSaleDto Sale = 11;
 }
 
 message RaceDto {
@@ -39,6 +33,13 @@ message RaceDto {
   repeated CategoryDto Categories = 9;
   repeated PaymentDefinitionDto Payments = 10;
   LimitsDto Limits = 11;
+  repeated CheckpointDto Checkpoints = 12;
+}
+
+message CheckpointDto {
+  string Id = 1;
+  string Name = 2;
+  google.type.LatLng Position = 3;
 }
 
 message CategoryDto {

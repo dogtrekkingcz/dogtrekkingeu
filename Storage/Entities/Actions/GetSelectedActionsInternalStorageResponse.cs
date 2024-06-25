@@ -29,48 +29,34 @@ public sealed record GetSelectedActionsInternalStorageResponse
         public TermDto Term { get; init; } = new();
 
         public AddressDto Address { get; init; } = new();
-
-        public List<CheckpointDto> Checkpoints { get; init; } = new List<CheckpointDto>();
-
         public List<RaceDto> Races { get; init; } = new List<RaceDto>();
-
         public ActionSaleDto Sale { get; init; } = new();
-    }
-    
-    public sealed record CheckpointDto
-    {
-        public Guid Id { get; init; } = default(Guid);
-
-        public string Name { get; init; } = string.Empty;
-
-        public LatLngDto Position { get; init; } = new();
     }
     
     public sealed record RaceDto
     {
         public Guid Id { get; init; } = default(Guid);
         public string Name { get; init; } = string.Empty;
-        
         public double? Distance { get; init; } = 0.0;
-        
         public double? Incline { get; init; } = 0.0;
-
         public DateTimeOffset EnteringFrom = DateTimeOffset.Now;
-        
         public DateTimeOffset EnteringTo = DateTimeOffset.Now.AddYears(1);
-        
         public int MaxNumberOfCompetitors = Int32.MaxValue;
-        
         public DateTimeOffset Begin = DateTimeOffset.Now;
         public DateTimeOffset End = DateTimeOffset.Now.AddDays(10);
-        
         public IList<CategoryDto> Categories { get; init; } = new List<CategoryDto>();
-
         public IList<PaymentDefinitionDto> Payments { get; init; } = new List<PaymentDefinitionDto>();
-
         public LimitsDto Limits { get; init; } = new();
+        public List<CheckpointDto> Checkpoints { get; init; } = new List<CheckpointDto>();
     }
-    
+
+    public sealed record CheckpointDto
+    {
+        public Guid Id { get; init; } = default(Guid);
+        public string Name { get; init; } = string.Empty;
+        public LatLngDto Position { get; init; } = new();
+    }
+
     public sealed record CategoryDto
     {
         public Guid Id { get; init; } = default(Guid);

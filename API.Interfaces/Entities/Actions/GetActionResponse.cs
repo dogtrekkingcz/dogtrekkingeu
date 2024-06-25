@@ -24,20 +24,9 @@ public sealed record GetActionResponse
 
     public AddressDto Address { get; set; } = new();
 
-    public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
-    
     public List<RaceDto> Races { get; set; } = new List<RaceDto>();
 
     public ActionSaleDto Sale { get; set; } = new();
-    
-    public sealed record CheckpointDto
-    {
-        public Guid Id { get; set; } = default(Guid);
-
-        public string Name { get; set; } = string.Empty;
-
-        public LatLngDto Position { get; set; } = new();
-    }
     
     public sealed record RaceDto
     {
@@ -60,10 +49,17 @@ public sealed record GetActionResponse
         public IList<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
         public IList<PaymentDefinitionDto> Payments { get; set; } = new List<PaymentDefinitionDto>();
-
         public LimitsDto Limits { get; set; } = new();
+        public List<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
     }
-    
+
+    public sealed record CheckpointDto
+    {
+        public Guid Id { get; set; } = default(Guid);
+        public string Name { get; set; } = string.Empty;
+        public LatLngDto Position { get; set; } = new();
+    }
+
     public sealed record CategoryDto
     {
         public Guid Id { get; set; } = default(Guid);
