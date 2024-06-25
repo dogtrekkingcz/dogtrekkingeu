@@ -1,4 +1,6 @@
-﻿@using PetsOnTrailApp.Models
+﻿@page "/category/{ActionId}/{RaceId}/{CategoryId}/add"
+
+@using PetsOnTrailApp.Models
 
 @inherits ResultsAddBase
 
@@ -53,6 +55,7 @@
 
         <div class="form-group row">
             <button type="submit" class="btn btn-primary">@Localizer["Results.Manage.Add.Submit"]</button>
+            <button class="btn btn-secondary" @onclick="() => Cancel()">@Localizer["Results.Manage.Add.Cancel"]</button>
         </div>
     </EditForm>
 </section>

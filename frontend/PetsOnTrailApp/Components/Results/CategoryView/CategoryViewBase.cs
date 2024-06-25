@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Google.Api;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Maui.Controls;
 using PetsOnTrailApp.DataStorage;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using PetsOnTrailApp.Models;
@@ -12,8 +14,10 @@ public class CategoryViewBase : ComponentBase
     [Parameter] public string CategoryId { get; set; } = string.Empty;
 
     [Inject] private IActionsRepository _actionsRepository { get; set; }
+    [Inject] private NavigationManager _navigationManager { get; set; }
 
     public ResultsModel Model { get; set; } = null;
+    public RaceModel RaceModel { get; set; } = null;
     public bool CanIEditResults { get; set; } = false;
 
     protected async override Task OnInitializedAsync()
@@ -27,13 +31,10 @@ public class CategoryViewBase : ComponentBase
 
     private async Task Reload(bool forceReloadFromServerStorage)
     {
-        Console.WriteLine("Reloading results for action ");
         Model = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), forceReloadFromServerStorage);
-        Console.WriteLine("Results reloaded");
+        RaceModel = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
 
-        Console.WriteLine("Starting refreshing UI");
         StateHasChanged();
-        Console.WriteLine("UI refreshed");
     }
 
     public async Task EditStart(Guid racerId)
@@ -92,5 +93,10 @@ public class CategoryViewBase : ComponentBase
     {
         await _actionsRepository.ResetStates(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
         await Reload(true);
+    }
+
+    public void AddResult()
+    {
+        _navigationManager.NavigateTo($"category/{ActionId}/{RaceId}/{CategoryId}/add");
     }
 }

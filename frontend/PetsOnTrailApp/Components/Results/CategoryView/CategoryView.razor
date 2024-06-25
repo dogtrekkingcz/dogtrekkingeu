@@ -1,6 +1,6 @@
 ﻿@page "/category/{ActionId}/{RaceId}/{CategoryId}"
 
-@using PetsOnTrailApp.Components.ActionView
+@using PetsOnTrailApp.Components.ActionViewHeader
 
 @inherits CategoryViewBase
 
@@ -16,6 +16,18 @@
 <hr /> *@
 
 <ActionViewHeader ActionId="@ActionId" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-primary" @onclick="() => AddResult()">
+                <i class="fas fa-plus">@Localizer["Results.Add"]</i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<hr />
 
 <table class="table">
     <thead>

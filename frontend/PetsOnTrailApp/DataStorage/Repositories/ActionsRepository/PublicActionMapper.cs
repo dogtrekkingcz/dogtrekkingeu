@@ -118,6 +118,44 @@ public static class PublicActionMapper
                 }).ToList()
             });
 
+        typeAdapterConfig.NewConfig<GetSelectedPublicActionsListResponseModel.RaceDto, RaceModel>()
+            .MapWith((race) => new RaceModel
+            {
+                SynchronizedAt = DateTime.Now,
+                Data = new RaceModel.RaceDto
+                {
+                    Id = race.Id,
+                    Name = race.Name,
+                    Begin = race.Begin,
+                    End = race.End,
+                    Distance = race.Distance,
+                    Incline = race.Incline,
+                    EnteringFrom = race.EnteringFrom,
+                    EnteringTo = race.EnteringTo,
+                    MaxNumberOfCompetitors = race.MaxNumberOfCompetitors,
+                    Categories = race.Categories
+                                        .Select(ctg => new RaceModel.CategoryDto 
+                                                        { 
+                                                            Id = ctg.Id, 
+                                                            Description = ctg.Description, 
+                                                            Name = ctg.Name 
+                                                        })
+                                        .ToList(),
+                    Checkpoints = race.Checkpoints
+                                        .Select(cp => new RaceModel.CheckpointDto 
+                                                        { 
+                                                            Id = cp.Id, 
+                                                            Name = cp.Name, 
+                                                            Position = new RaceModel.LatLngDto 
+                                                                        { 
+                                                                            Latitude = cp.Position.Latitude, 
+                                                                            Longitude = cp.Position.Longitude 
+                                                                        } 
+                                                        })
+                                        .ToList()
+                }
+            });
+
 
         return typeAdapterConfig;
     }

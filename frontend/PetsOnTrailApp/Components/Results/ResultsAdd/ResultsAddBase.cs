@@ -3,29 +3,21 @@ using System.Text.RegularExpressions;
 using static Protos.Results.Results;
 using MapsterMapper;
 using PetsOnTrailApp.Models;
+using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 
 namespace PetsOnTrailApp.Components.Results.ResultsAdd;
 
 public class ResultsAddBase : ComponentBase
 {
-    [Parameter] 
-    public string ActionId { get; set; }
-    [Parameter] 
-    public Guid RaceId { get; set; }
-    [Parameter] 
-    public Guid CategoryId { get; set; }
-    [Parameter] 
-    public DateTimeOffset RaceBegin { get; set; }
-    [Parameter] 
-    public DateTimeOffset RaceEnd { get; set; }
-    [Parameter] 
-    public EventCallback OnResultAddedCallback { get; set; }
+    [Parameter] public string ActionId { get; set; }
+    [Parameter] public Guid RaceId { get; set; }
+    [Parameter] public Guid CategoryId { get; set; }
+    [Parameter] public EventCallback? OnResultAddedCallback { get; set; } = null;
 
-    [Inject]
-    private ResultsClient _resultsClient { get; set; }
-
-    [Inject]
-    private IMapper _mapper { get; set; }
+    [Inject] private ResultsClient _resultsClient { get; set; }
+    [Inject] private IActionsRepository _actionsRepository { get; set; }
+    [Inject] private IMapper _mapper { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
 
 
     protected ResultsModel.ResultDto Model = new();
@@ -51,10 +43,15 @@ public class ResultsAddBase : ComponentBase
         ResultsModel.ResultState.Finished,
     }).Contains(Model.State);
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Start = RaceBegin;
-        Finish = RaceEnd;
+        var race = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), RaceId, CancellationToken.None);
+
+        if (race != null && race.Data != null)
+        { 
+            Start = race.Data.Begin;
+            Finish = race.Data.End;
+        }
     }
 
     protected async Task OnFormValid()
@@ -159,9 +156,14 @@ public class ResultsAddBase : ComponentBase
                 break;
         }
 
-        Model.Start = RaceBegin;
-        Model.Finish = RaceBegin.AddHours(hours).AddMinutes(minutes).AddSeconds(seconds);
+        Model.Start = Start;
+        Model.Finish = Start.AddHours(hours).AddMinutes(minutes).AddSeconds(seconds);
 
         StateHasChanged();
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo($"/category/{ActionId}/{RaceId}/{CategoryId}");
     }
 }

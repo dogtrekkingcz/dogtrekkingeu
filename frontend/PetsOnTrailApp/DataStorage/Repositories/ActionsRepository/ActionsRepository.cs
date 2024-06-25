@@ -19,6 +19,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
     private Dictionary<Guid, ActionModel> _actions = new Dictionary<Guid, ActionModel>();
     private Dictionary<Guid, IList<SimpleActionModel>> _actionsSimple = new Dictionary<Guid, IList<SimpleActionModel>>();
     private Dictionary<Guid, RacesModel> _races = new Dictionary<Guid, RacesModel>();
+    private Dictionary<(Guid actionId, Guid raceId), RaceModel> _race = new Dictionary<(Guid, Guid), RaceModel>();
     private Dictionary<(Guid actionId, Guid raceId), CategoriesModel> _categories = new Dictionary<(Guid, Guid), CategoriesModel>();
     private Dictionary<(Guid actionId, Guid raceId, Guid categoryId), ResultsModel> _results = new Dictionary<(Guid, Guid, Guid), ResultsModel>();
 
@@ -90,10 +91,12 @@ public class ActionsRepository : BaseRepository, IActionsRepository
             semaphoreSlim.Release();
         }
 
-        if (result == null)
+        if (result != null)
         {
-            await LoadAndParseActionAsync(actionId, false, CancellationToken.None);
+            return result;
         }
+
+        await LoadAndParseActionAsync(actionId, false, CancellationToken.None);
 
 
         await semaphoreSlim.WaitAsync();
@@ -112,7 +115,37 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     public async Task<RaceModel> GetRaceForActionAsync(Guid actionId, Guid raceId, CancellationToken cancellationToken)
     {
-        return null;
+        var result = null as RaceModel;
+
+        await semaphoreSlim.WaitAsync();
+        try
+        {
+            result = _race.GetValueOrDefault((actionId, raceId), default(RaceModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
+
+        if (result != null) 
+        { 
+            return result;
+        }
+
+
+        await LoadAndParseActionAsync(actionId, false, CancellationToken.None);
+
+        await semaphoreSlim.WaitAsync();
+        try
+        {
+            result = _race.GetValueOrDefault((actionId, raceId), default(RaceModel));
+        }
+        finally
+        {
+            semaphoreSlim.Release();
+        }
+
+        return result;
     }
 
     public async Task<CategoriesModel> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId)
@@ -380,6 +413,13 @@ public class ActionsRepository : BaseRepository, IActionsRepository
                             SynchronizedAt = action.Created
                         };
                     }
+
+                    _race[(actionId, raceId)] = _mapper.Map<RaceModel>(race) with
+                    {
+                        SynchronizedAt = action.Created,
+                        ActionId = actionId,
+                        RaceId = raceId
+                    };
                 }
             }
             finally
