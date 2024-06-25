@@ -27,9 +27,13 @@ public class CategoryViewBase : ComponentBase
 
     private async Task Reload(bool forceReloadFromServerStorage)
     {
+        Console.WriteLine("Reloading results for action ");
         Model = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), forceReloadFromServerStorage);
+        Console.WriteLine("Results reloaded");
 
+        Console.WriteLine("Starting refreshing UI");
         StateHasChanged();
+        Console.WriteLine("UI refreshed");
     }
 
     public async Task EditStart(Guid racerId)
