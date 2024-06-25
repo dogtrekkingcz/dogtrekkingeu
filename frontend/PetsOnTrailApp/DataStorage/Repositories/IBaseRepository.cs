@@ -6,5 +6,5 @@ public interface IBaseRepository
 {
     protected ActionsClient ActionsClientInstance { get; init; }
 
-    List<Guid> GetMyRoles();
+    Task<List<Guid>> GetMyRolesAsync();
 }
