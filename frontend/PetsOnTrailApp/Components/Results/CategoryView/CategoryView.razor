@@ -97,15 +97,15 @@
                             
                             @if (CanIEditResults)
                             {
-                                <button class="btn btn-sm btn-primary" @onclick="() => EditStart(racer.Id)">
+                                <button class="btn btn-sm btn-primary" @onclick="async () => await EditStart(racer.Id)">
                                     <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
                                 </button>
 
-                                <button class="btn btn-sm btn-danger" @onclick="() => DeleteStart(racer.Id)">
+                                <button class="btn btn-sm btn-danger" @onclick="async () => await DeleteStart(racer.Id)">
                                     <i class="fas fa-trash">@Localizer["Results.Delete"]</i>
                                 </button>
 
-                                <button class="btn btn-sm btn-warning" @onclick="() => StartNow(racer.Id)">
+                                <button class="btn btn-sm btn-warning" @onclick="async () => await StartNow(racer.Id)">
                                     <i class="fas fa-times">@Localizer["Results.Now"]</i>
                                 </button>
                             })
@@ -115,15 +115,15 @@
 
                             @if (CanIEditResults)
                             {
-                                <button class="btn btn-sm btn-primary" @onclick="() => EditFinish(racer.Id)">
+                                <button class="btn btn-sm btn-primary" @onclick="async () => await EditFinish(racer.Id)">
                                     <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
                                 </button>
 
-                                <button class="btn btn-sm btn-danger" @onclick="() => DeleteFinish(racer.Id)">
+                                <button class="btn btn-sm btn-danger" @onclick="async () => await DeleteFinish(racer.Id)">
                                     <i class="fas fa-trash">@Localizer["Results.Delete"]</i>
                                 </button>
 
-                                <button class="btn btn-sm btn-warning" @onclick="() => FinishNow(racer.Id)">
+                                <button class="btn btn-sm btn-warning" @onclick="async () => await FinishNow(racer.Id)">
                                     <i class="fas fa-times">@Localizer["Results.Now"]</i>
                                 </button>
                             }
@@ -133,19 +133,19 @@
 
                         @if (CanIEditResults)
                         {
-                            <button class="btn btn-sm btn-danger" @onclick="() => Dns(racer.Id)">
+                            <button class="btn btn-sm btn-danger" @onclick="async () => await Dns(racer.Id)">
                                 <i class="fas fa-edit">@Localizer["Results.DNS"]</i>
                             </button>
 
-                            <button class="btn btn-sm btn-danger" @onclick="() => Dnf(racer.Id)">
+                            <button class="btn btn-sm btn-danger" @onclick="async () => await Dnf(racer.Id)">
                                 <i class="fas fa-edit">@Localizer["Results.DNF"]</i>
                             </button>
 
-                            <button class="btn btn-sm btn-danger" @onclick="() => Dsq(racer.Id)">
+                            <button class="btn btn-sm btn-danger" @onclick="async () => await Dsq(racer.Id)">
                                 <i class="fas fa-edit">@Localizer["Results.DSQ"]</i>
                             </button>
 
-                            <button class="btn btn-sm btn-danger" @onclick="() => ResetStates(racer.Id)">
+                            <button class="btn btn-sm btn-danger" @onclick="async () => await ResetStates(racer.Id)">
                                 <i class="fas fa-edit">@Localizer["Results.ResetStates"]</i>
                             </button>
                         }

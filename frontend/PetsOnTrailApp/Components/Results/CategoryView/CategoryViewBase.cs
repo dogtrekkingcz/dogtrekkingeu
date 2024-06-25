@@ -32,61 +32,61 @@ public class CategoryViewBase : ComponentBase
         StateHasChanged();
     }
 
-    public void EditStart(Guid racerId)
+    public async Task EditStart(Guid racerId)
     {
         // TODO: Implement
     }
 
-    public void EditFinish(Guid racerId)
+    public async Task EditFinish(Guid racerId)
     {
         // TODO: Implement
     }
 
-    public void StartNow(Guid racerId)
+    public async Task StartNow(Guid racerId)
     {
-        _actionsRepository.StartNow(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.StartNow(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 
-    public void FinishNow(Guid racerId)
+    public async Task FinishNow(Guid racerId)
     {
-        _actionsRepository.FinishNow(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.FinishNow(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 
-    public void DeleteStart(Guid racerId)
+    public async Task DeleteStart(Guid racerId)
     {
-        _actionsRepository.DeleteStart(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.DeleteStart(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 
-    public void DeleteFinish(Guid racerId)
+    public async Task DeleteFinish(Guid racerId)
     {
-        _actionsRepository.DeleteFinish(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.DeleteFinish(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 
-    public void Dns(Guid racerId)
+    public async Task Dns(Guid racerId)
     {
-        _actionsRepository.Dns(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.Dns(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 
-    public void Dnf(Guid racerId)
+    public async Task Dnf(Guid racerId)
     {
-        _actionsRepository.Dnf(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.Dnf(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 
-    public void Dsq(Guid racerId)
+    public async Task Dsq(Guid racerId)
     {
-        _actionsRepository.Dsq(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.Dsq(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 
-    public void ResetStates(Guid racerId)
+    public async Task ResetStates(Guid racerId)
     {
-        _actionsRepository.ResetStates(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
-        Reload(true);
+        await _actionsRepository.ResetStates(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), racerId);
+        await Reload(true);
     }
 }

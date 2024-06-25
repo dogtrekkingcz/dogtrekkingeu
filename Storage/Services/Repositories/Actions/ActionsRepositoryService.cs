@@ -22,10 +22,7 @@ internal class ActionsRepositoryService : IActionsRepositoryService
 
     public async Task<CreateActionInternalStorageResponse> AddActionAsync(CreateActionInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation($"{nameof(AddActionAsync)} - request: '{request?.Dump()}'");
-
         var addRequest = _mapper.Map<ActionRecord>(request);
-        _logger.LogInformation($"{nameof(AddActionAsync)} - addRequest: '{addRequest?.Dump()}'");
         
         var addedActionRecord = await _actionsStorageService.AddOrUpdateAsync(addRequest, cancellationToken);
 
@@ -39,7 +36,6 @@ internal class ActionsRepositoryService : IActionsRepositoryService
 
     public async Task<UpdateActionInternalStorageResponse> UpdateActionAsync(UpdateActionInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"{nameof(UpdateActionAsync)} - request: '{request?.Dump()}'");
         var updateRequest = _mapper.Map<ActionRecord>(request);
         
         var result = await _actionsStorageService.AddOrUpdateAsync(updateRequest, cancellationToken);
@@ -52,20 +48,16 @@ internal class ActionsRepositoryService : IActionsRepositoryService
 
     public async Task DeleteActionAsync(Guid id, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"{nameof(DeleteActionAsync)} - id: '{id}'");
         await _actionsStorageService.DeleteAsync(id, cancellationToken);
     }
 
     public async Task<GetActionInternalStorageResponse> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var result = await _actionsStorageService.GetAsync(id, cancellationToken);
-        Console.WriteLine($"{nameof(GetAsync)} - response from storage: '{result?.Dump()}'");
         
         var response = _mapper.Map<GetActionInternalStorageResponse>(result);
         if (response == null)
             Console.WriteLine($"{nameof(GetAsync)} - action with id: '{id}' not found");
-        else
-            Console.WriteLine($"{nameof(GetAsync)}: '{response.Dump()}'");
 
         return response;
     }
@@ -73,8 +65,6 @@ internal class ActionsRepositoryService : IActionsRepositoryService
     public async Task<GetAllActionsInternalStorageResponse> GetAllActionsAsync(CancellationToken cancellationToken)
     {
         var getAllActions = await _actionsStorageService.GetAllAsync(cancellationToken);
-
-        _logger.LogInformation($"{nameof(GetAllActionsAsync)} - response from storage: '{getAllActions?.Dump()}'");
 
         var actions = new List<GetAllActionsInternalStorageResponse.ActionDto>();
         foreach (var action in getAllActions
@@ -87,8 +77,6 @@ internal class ActionsRepositoryService : IActionsRepositoryService
         {
             Actions = actions
         };
-
-        _logger.LogInformation($"{nameof(GetAllActionsAsync)} - response: '{response?.Dump()}'");
         
         return response;
     }
@@ -115,14 +103,11 @@ internal class ActionsRepositoryService : IActionsRepositoryService
 
     public async Task<GetSelectedActionsInternalStorageResponse> GetSelectedActionsAsync(GetSelectedActionsInternalStorageRequest request, CancellationToken cancellationToken)
     {
-        _logger.LogInformation($"{nameof(GetSelectedActionsAsync)} - request: '{request?.Dump()}'");
-        
         var selectedActions = await _actionsStorageService.GetSelectedListAsync(request.Ids, cancellationToken);
 
         var actions = new List<GetSelectedActionsInternalStorageResponse.ActionDto>();
         foreach (var action in selectedActions)
         {
-            _logger.LogInformation($"{nameof(GetSelectedActionsAsync)} - adding action: '{action?.Dump()}'");
             actions.Add(_mapper.Map<GetSelectedActionsInternalStorageResponse.ActionDto>(action));
         }
 
@@ -131,23 +116,17 @@ internal class ActionsRepositoryService : IActionsRepositoryService
             Actions = actions
         };
         
-        _logger.LogInformation($"{nameof(GetSelectedActionsAsync)} - response: '{response?.Dump()}'");
-        
         return response;
     }
 
     public async Task<GetSimpleActionsListByTypeInternalStorageResponse> GetSimpleActionsListByTypeAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"{nameof(GetSimpleActionsListByTypeAsync)} - typeIds: '{typeIds?.Dump()}'");
-
         var actions = await _actionsStorageService.GetSelectedListAsync("TypeId", typeIds.Select(id => id).ToList(), cancellationToken);
 
         var response = new GetSimpleActionsListByTypeInternalStorageResponse
         {
             Actions = actions.Select(action => _mapper.Map<GetSimpleActionsListByTypeInternalStorageResponse.ActionDto>(action)).ToList()
         };
-
-        Console.WriteLine($"{nameof(GetSimpleActionsListByTypeAsync)} - response: '{response?.Dump()}'");
 
         return response;
     }

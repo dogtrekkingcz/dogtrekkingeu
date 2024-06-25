@@ -168,8 +168,6 @@ public class ActionsRepository : BaseRepository, IActionsRepository
             await LoadAndParseActionAsync(actionId, CancellationToken.None);
         }
 
-
-
         await semaphoreSlim.WaitAsync();
 
         try
@@ -253,9 +251,9 @@ public class ActionsRepository : BaseRepository, IActionsRepository
         throw new NotImplementedException();
     }
 
-    public Task StartNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task StartNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.startNow(new Protos.Actions.StartNow.StartNowRequest
+        await ActionsClientInstance.startNowAsync(new Protos.Actions.StartNow.StartNowRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -263,13 +261,11 @@ public class ActionsRepository : BaseRepository, IActionsRepository
             RacerId = racerId.ToString(),
             Time = DateTimeOffset.UtcNow.ToGoogleTimestamp()
         });
-
-        return Task.CompletedTask;
     }
 
-    public Task FinishNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task FinishNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.finishNow(new Protos.Actions.FinishNow.FinishNowRequest
+        await ActionsClientInstance.finishNowAsync(new Protos.Actions.FinishNow.FinishNowRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
@@ -277,86 +273,72 @@ public class ActionsRepository : BaseRepository, IActionsRepository
             RacerId = racerId.ToString(),
             Time = DateTimeOffset.UtcNow.ToGoogleTimestamp()
         });
-
-        return Task.CompletedTask;
     }
 
-    public Task DeleteStart(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task DeleteStart(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.deleteStart(new Protos.Actions.DeleteStart.DeleteStartRequest
+        await ActionsClientInstance.deleteStartAsync(new Protos.Actions.DeleteStart.DeleteStartRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
             CategoryId = categoryId.ToString(),
             RacerId = racerId.ToString()
         });
-
-        return Task.CompletedTask;
     }
 
-    public Task DeleteFinish(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task DeleteFinish(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.deleteFinish(new Protos.Actions.DeleteFinish.DeleteFinishRequest
+        await ActionsClientInstance.deleteFinishAsync(new Protos.Actions.DeleteFinish.DeleteFinishRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
             CategoryId = categoryId.ToString(),
             RacerId = racerId.ToString()
         });
-
-        return Task.CompletedTask;
     }
 
-    public Task Dns(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task Dns(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.dns(new Protos.Actions.Dns.DnsRequest
+        await ActionsClientInstance.dnsAsync(new Protos.Actions.Dns.DnsRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
             CategoryId = categoryId.ToString(),
             RacerId = racerId.ToString()
         });
-
-        return Task.CompletedTask;
     }
 
-    public Task Dnf(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task Dnf(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.dnf(new Protos.Actions.Dnf.DnfRequest
+        await ActionsClientInstance.dnfAsync(new Protos.Actions.Dnf.DnfRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
             CategoryId = categoryId.ToString(),
             RacerId = racerId.ToString()
         });
-
-        return Task.CompletedTask;
     }
 
-    public Task Dsq(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task Dsq(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.dsq(new Protos.Actions.Dsq.DsqRequest
+        await ActionsClientInstance.dsqAsync(new Protos.Actions.Dsq.DsqRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
             CategoryId = categoryId.ToString(),
             RacerId = racerId.ToString()
         });
-
-        return Task.CompletedTask;
     }
 
-    public Task ResetStates(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
+    public async Task ResetStates(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)
     {
-        ActionsClientInstance.resetStates(new Protos.Actions.ResetStates.ResetStatesRequest
+        await ActionsClientInstance.resetStatesAsync(new Protos.Actions.ResetStates.ResetStatesRequest
         {
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
             CategoryId = categoryId.ToString(),
             RacerId = racerId.ToString()
         });
-
-        return Task.CompletedTask;
     }
 
     private async Task LoadAndParseActionAsync(Guid actionId, CancellationToken cancellationToken)
