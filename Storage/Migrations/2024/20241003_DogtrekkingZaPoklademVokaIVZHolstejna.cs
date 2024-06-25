@@ -13,9 +13,9 @@ internal class _20241003_DogtrekkingZaPoklademVokaIVZHolstejna : M_00_MigrationB
                 Id = Id,
                 Name = "Dogtrekking za pokladem Voka IV. z Holštejna",
                 TypeId = Constants.ActivityType.Dogtrekking,
-                ResultsCanEdit = Constants.Roles.InternalAdministrator.GUID,
-                CompetitorsCanEdit = Constants.Roles.InternalAdministrator.GUID,
-                ActionCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                ResultsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
+                CompetitorsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
+                ActionCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Moravský kras"

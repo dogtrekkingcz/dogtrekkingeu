@@ -13,9 +13,9 @@ internal class _20240919_DTKostalov : M_00_MigrationBase
                 Id = Id,
                 Name = "DT Košťálov",
                 TypeId = Constants.ActivityType.Dogtrekking,
-                ResultsCanEdit = Constants.Roles.InternalAdministrator.GUID,
-                CompetitorsCanEdit = Constants.Roles.InternalAdministrator.GUID,
-                ActionCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                ResultsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
+                CompetitorsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
+                ActionCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Košťálov"

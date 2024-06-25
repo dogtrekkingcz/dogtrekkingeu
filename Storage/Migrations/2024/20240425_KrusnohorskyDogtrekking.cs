@@ -15,9 +15,9 @@ internal class _20240425_KrusnohorskyDogtrekking : M_00_MigrationBase
                 Id = Id,
                 Name = "Krušnohorský dogtrekking",
                 TypeId = ActivityType.Dogtrekking,
-                ResultsCanEdit = Constants.Roles.InternalAdministrator.GUID,
-                CompetitorsCanEdit = Constants.Roles.InternalAdministrator.GUID,
-                ActionCanEdit = Constants.Roles.InternalAdministrator.GUID,
+                ResultsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
+                CompetitorsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
+                ActionCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Kemp Stebnice, obec Lipová u Chebu"
