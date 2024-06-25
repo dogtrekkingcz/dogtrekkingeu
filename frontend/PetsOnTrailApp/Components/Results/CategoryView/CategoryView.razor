@@ -60,8 +60,8 @@
                 <div class="container">
                     <div class="row">
                             @{
-                                var start = racer.Start?.ToLocalTime().ToString("dd HH:mm:ss") ?? "-- --:--:--";
-                                var finish = racer.Finish?.ToLocalTime().ToString("dd HH:mm:ss") ?? "-- --:--:--";
+                                var start = racer.Start?.LocalDateTime.ToString("dd HH:mm:ss") ?? "-- --:--:--";
+                                var finish = racer.Finish?.LocalDateTime.ToString("dd HH:mm:ss") ?? "-- --:--:--";
 
                                 var totalTime = racer.Finish.HasValue && racer.Start.HasValue ? racer.Finish.Value - racer.Start.Value : TimeSpan.MaxValue;
                                 string time = totalTime == System.TimeSpan.MaxValue ? "--:--:--" : (int)totalTime.TotalHours + totalTime.ToString(@"\:mm\:ss");
