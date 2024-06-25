@@ -10,8 +10,8 @@ namespace PetsOnTrailApp.Components.Results.ResultsAdd;
 public class ResultsAddBase : ComponentBase
 {
     [Parameter] public string ActionId { get; set; }
-    [Parameter] public Guid RaceId { get; set; }
-    [Parameter] public Guid CategoryId { get; set; }
+    [Parameter] public string RaceId { get; set; }
+    [Parameter] public string CategoryId { get; set; }
     [Parameter] public EventCallback? OnResultAddedCallback { get; set; } = null;
 
     [Inject] private ResultsClient _resultsClient { get; set; }
@@ -45,7 +45,7 @@ public class ResultsAddBase : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        var race = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), RaceId, CancellationToken.None);
+        var race = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
 
         if (race != null && race.Data != null)
         { 
