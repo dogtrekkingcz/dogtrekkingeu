@@ -44,6 +44,14 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                         Incline = 2471,
                         Begin = new DateTime(2024, 6, 28, 5, 0, 0),
                         End = new DateTime(2024, 6, 30, 10, 0, 0),
+                        Checkpoints = new List<Entities.Actions.CreateActionInternalStorageRequest.CheckpointDto>
+                        {
+                            new Entities.Actions.CreateActionInternalStorageRequest.CheckpointDto
+                            {
+                                Id = Guid.Parse("1882514b-4bcf-4232-96e6-153f4ea1e363"),
+                                Name = "Živá"
+                            }
+                        },
                         Categories = new List<Entities.Actions.CreateActionInternalStorageRequest.CategoryDto>
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto
@@ -396,6 +404,14 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                         Incline = 890,
                         Begin = new DateTime(2024, 6, 29, 6, 0, 0),
                         End = new DateTime(2024, 6, 30, 10, 0, 0),
+                        Checkpoints = new List<Entities.Actions.CreateActionInternalStorageRequest.CheckpointDto>
+                        {
+                            new Entities.Actions.CreateActionInternalStorageRequest.CheckpointDto
+                            {
+                                Id = Guid.Parse("a066625a-f3d5-4b19-ae56-5579b2e157d6"),
+                                Name = "Živá"
+                            }
+                        },
                         Categories = new List<Entities.Actions.CreateActionInternalStorageRequest.CategoryDto>
                         {
                             new Entities.Actions.CreateActionInternalStorageRequest.CategoryDto

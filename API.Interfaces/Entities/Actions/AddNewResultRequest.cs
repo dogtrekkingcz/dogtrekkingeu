@@ -13,6 +13,8 @@ public sealed record AddNewResultRequest
     public DateTimeOffset? Start { get; init; } = null;
     public DateTimeOffset? Finish { get; init; } = null;
 
+    public List<CheckpointDto> Checkpoints { get; init; } = new();
+
     public enum RaceState
     {
         NotSpecified = 0,
@@ -21,5 +23,11 @@ public sealed record AddNewResultRequest
         Finished = 3,
         DidNotFinished = 4,
         Disqualified = 5
+    }
+
+    public sealed record CheckpointDto
+    {
+        public Guid Id { get; init; } = default(Guid);
+        public DateTimeOffset? Time { get; init; } = null;
     }
 }

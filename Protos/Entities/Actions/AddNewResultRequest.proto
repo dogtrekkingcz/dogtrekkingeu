@@ -17,6 +17,7 @@ message AddNewResultRequest {
   RaceState State = 8;
   google.protobuf.Timestamp Start = 9;
   google.protobuf.Timestamp Finish = 10;
+  repeated Checkpointdto Checkpoints = 11;
 }
 
 enum RaceState {
@@ -26,4 +27,9 @@ enum RaceState {
   Finished = 3;
   DidNotFinished = 4;
   Disqualified = 5;
+}
+
+message Checkpointdto {
+  string Id = 1;
+  google.protobuf.Timestamp Time = 2;
 }

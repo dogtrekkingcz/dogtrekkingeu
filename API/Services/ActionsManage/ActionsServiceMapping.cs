@@ -300,6 +300,19 @@ internal static class ActionsServiceMapping
                 break;
         }
 
+        var passedCheckpoints = new List<GetActionInternalStorageResponse.PassedCheckpointDto>();
+        foreach (var checkpoint in request.Checkpoints)
+        {
+            if (checkpoint.Time.HasValue)
+            { 
+                passedCheckpoints.Add(new GetActionInternalStorageResponse.PassedCheckpointDto
+                {
+                    Id = checkpoint.Id,
+                    Passed = checkpoint.Time.Value
+                });
+            }
+        }
+
         return new GetActionInternalStorageResponse.RacerDto
         {
             Id = request.Id != default(Guid) ? request.Id : Guid.NewGuid(),
@@ -308,7 +321,8 @@ internal static class ActionsServiceMapping
             Pets = pets,
             State = state,
             Start = request.Start,
-            Finish = request.Finish
+            Finish = request.Finish,
+            PassedCheckpoints = passedCheckpoints
         };
     }
 }
