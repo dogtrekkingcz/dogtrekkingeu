@@ -44,6 +44,14 @@
                 <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Start" @onblur="(args) => StartIsFilled(args)"></InputDateTime>
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
             </div>
+            @foreach (var checkpoint in Model.Checkpoints)
+            {
+                <div class="form-group row" hidden="@(IsStartShown == false)">
+                    <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Checkpoint"]: @checkpoint.Name</label>
+                    <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@_checkpoints[checkpoint.Id]" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
+                    <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
+                </div>
+            }
             <div class="form-group row" hidden="@(IsFinishShown == false)">
                 <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
                 <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Finish" @onblur="(args) => FinishIsFilled(args)"></InputDateTime>
