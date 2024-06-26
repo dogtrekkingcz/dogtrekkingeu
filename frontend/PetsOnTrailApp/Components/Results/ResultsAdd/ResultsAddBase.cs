@@ -58,6 +58,10 @@ public class ResultsAddBase : ComponentBase
     {
         await _actionsRepository.AddResultAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), Model);
 
+        // reload data from server after editation/adding process ...
+        await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), true);
+
+
         NavigationManager.NavigateTo($"/category/{ActionId}/{RaceId}/{CategoryId}");
     }
 
