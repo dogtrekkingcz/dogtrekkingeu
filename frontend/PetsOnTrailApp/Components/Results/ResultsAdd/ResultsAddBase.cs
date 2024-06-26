@@ -79,6 +79,12 @@ public class ResultsAddBase : ComponentBase
                     Model.Finish = racer.Finish;
                     Model.Checkpoints = racer.Checkpoints;
 
+                    Console.WriteLine($"RacerModel: {Model.Dump()}");
+
+                    Start = racer.Start.HasValue ? racer.Start.Value : Start;
+                    Finish = racer.Finish.HasValue ? racer.Finish.Value : Finish;
+                    State = racer.State;
+
                     foreach (var raceCheckpoint in race.Data.Checkpoints)
                     {
                         var existsCheckpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == raceCheckpoint.Id);
@@ -103,6 +109,8 @@ public class ResultsAddBase : ComponentBase
                 }
             }
         }
+
+        StateHasChanged();
     }
 
     protected async Task OnFormValid()
