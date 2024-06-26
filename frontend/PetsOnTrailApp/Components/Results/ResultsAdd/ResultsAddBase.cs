@@ -28,7 +28,6 @@ public class ResultsAddBase : ComponentBase
     protected string _pets { get; set; } = string.Empty;
     
     protected DateTimeOffset Start { get; set; }
-    protected Dictionary<Guid, DateTimeOffset> Checkpoints = new Dictionary<Guid, DateTimeOffset>();
     protected DateTimeOffset Finish { get; set; }
 
     protected ResultsModel.ResultState State { get; set; } = ResultsModel.ResultState.NotValid;
@@ -64,11 +63,6 @@ public class ResultsAddBase : ComponentBase
                 }).ToList();
             }
 
-            Console.WriteLine($"race.Data.Checkpoints: {race.Data.Checkpoints.Dump()}");
-
-            Checkpoints = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => race.Data.Begin);
-            Console.WriteLine($"Checkpoints: {Checkpoints.Dump()}");
-
             if (RacerId is not null)
             {
                 var racers = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), false);
@@ -94,12 +88,14 @@ public class ResultsAddBase : ComponentBase
                             {
                                 Id = raceCheckpoint.Id,
                                 Name = raceCheckpoint.Name,
-                                IsCheckpointPassed = false
+                                IsCheckpointPassed = false,
+                                TempPassed = DateTimeOffset.MinValue
                             });
                         }
                         else
                         { 
                             existsCheckpoint.IsCheckpointPassed = true; 
+                            existsCheckpoint.TempPassed = existsCheckpoint.Time.Value;
                         }
                     }
                 }
@@ -109,6 +105,8 @@ public class ResultsAddBase : ComponentBase
 
     protected async Task OnFormValid()
     {
+        Model.Checkpoints.RemoveAll(checkpoint => checkpoint.IsCheckpointPassed == false);
+
         await _actionsRepository.AddResultAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), Model);
 
         // reload data from server after editation/adding process ...
@@ -145,30 +143,24 @@ public class ResultsAddBase : ComponentBase
     {
         Console.WriteLine($"CheckpointIsFilled with value: {checkpointId}");
 
-        if (Checkpoints.ContainsKey(checkpointId))
+        var checkpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId);
+        if (checkpoint.IsCheckpointPassed == false)
         {
-            if (Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId).IsCheckpointPassed == false)
+            checkpoint.TempPassed = DateTimeOffset.MinValue;
+        }
+        else
+        { 
+            if (checkpoint != null)
             {
-                Checkpoints[checkpointId] = DateTimeOffset.Now;
-                
-                Model.Checkpoints.RemoveAll(checkpoint => checkpoint.Id == checkpointId);
+                checkpoint.Time = checkpoint.TempPassed;
             }
             else
-            { 
-                var racerCheckpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId);
-
-                if (racerCheckpoint != null)
+            {
+                Model.Checkpoints.Add(new ResultsModel.CheckpointDto()
                 {
-                    racerCheckpoint.Time = Checkpoints[checkpointId];
-                }
-                else
-                {
-                    Model.Checkpoints.Add(new ResultsModel.CheckpointDto()
-                    {
-                        Id = checkpointId,
-                        Time = Checkpoints[checkpointId]
-                    });
-                }
+                    Id = checkpointId,
+                    Time = checkpoint.TempPassed
+                });
             }
         }
 

@@ -47,7 +47,7 @@
                 <div class="form-group row" hidden="@(IsStartShown == false)">
                     <label for="checkpointStartDate" class="col-sm-3">@Localizer["Results.Manage.Add.Checkpoint"]: @checkpoint.Name</label>
                     <InputCheckbox id="checkpointPassed" class="form-control col-sm-8" @bind-Value="@checkpoint.IsCheckpointPassed" @onchange="(args) => CheckpointPassed(checkpoint.Id, args)"></InputCheckbox>
-                    <InputDateTime id="checkpointStartDate" class="form-control col-sm-8" disabled="@checkpoint.IsCheckpointPassed" @bind-Value="@Checkpoints[checkpoint.Id]" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
+                    <InputDateTime id="checkpointStartDate" class="form-control col-sm-8" disabled="@checkpoint.IsCheckpointPassed" @bind-Value="@checkpoint.TempPassed" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
                     <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
                 </div>
             }

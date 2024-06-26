@@ -28,6 +28,7 @@ public sealed record ResultsModel : BaseSynchronizedModel
     {
         public Guid Id { get; set; } = Guid.Empty;
         public bool IsCheckpointPassed { get; set; } = false;
+        public DateTimeOffset TempPassed { get; set; } = DateTimeOffset.Now;
         public string Name { get; set; } = string.Empty;
         public DateTimeOffset? Time { get; set; } = null;
     }
