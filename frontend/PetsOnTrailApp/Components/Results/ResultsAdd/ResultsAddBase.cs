@@ -4,6 +4,7 @@ using static Protos.Results.Results;
 using MapsterMapper;
 using PetsOnTrailApp.Models;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
+using PetsOnTrailApp.Extensions;
 
 namespace PetsOnTrailApp.Components.Results.ResultsAdd;
 
@@ -64,8 +65,13 @@ public class ResultsAddBase : ComponentBase
                 }).ToList();
             }
 
+            Console.WriteLine($"race.Data.Checkpoints: {race.Data.Checkpoints.Dump()}");
+
             Checkpoints = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => race.Data.Begin);
+            Console.WriteLine($"Checkpoints: {Checkpoints.Dump()}");
+
             IsCheckpointPassed = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => false);
+            Console.WriteLine($"IsCheckpointPassed: {IsCheckpointPassed.Dump()}");
 
             if (RacerId is not null)
             {

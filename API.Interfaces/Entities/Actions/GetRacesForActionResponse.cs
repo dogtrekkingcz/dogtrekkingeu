@@ -97,23 +97,13 @@ public sealed record GetRacesForActionResponse
     public record PetDto
     {
         public string? Id { get; set; }
-
         public string UserId { get; set; } = string.Empty;
-
         public string Name { get; set; } = string.Empty;
-
         public string Kennel { get; set; } = string.Empty;
-
         public string Pedigree { get; set; } = string.Empty;
-
         public string Chip { get; set; } = string.Empty;
-
         public DateTimeOffset? Birthday { get; set; } = null;
-
-        public DateTimeOffset? Decease { get; set; } = null;
-
         public string UriToPhoto { get; set; } = string.Empty;
-
         public string Contact { get; set; } = string.Empty;
     }
     
