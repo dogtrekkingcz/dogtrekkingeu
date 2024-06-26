@@ -48,8 +48,8 @@
                 <div class="form-group row" hidden="@(IsStartShown == false)">
                     <label for="@("checkpointStartDate_" + checkpoint.Id)" @key="@(checkpoint.Id + "_labelforkey")" class="col-sm-3">@Localizer["Results.Manage.Add.Checkpoint"]: @checkpoint.Name</label>
                     <InputCheckbox @key="@(checkpoint.Id + "_inputcheckboxkey")" @bind-Value="@checkpoint.IsCheckpointPassed" @onchange="(args) => CheckpointPassed(checkpoint.Id, args)"></InputCheckbox>
-                    <InputDateTime id="@("checkpointStartDate_" + checkpoint.Id)" class="form-control col-sm-8" disabled="@checkpoint.IsCheckpointPassed" @bind-Value="@checkpoint.TempPassed" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
-                    <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>checkpoint.TempPassed)"></ValidationMessage>
+                    <InputDateTime @key="@(checkpoint.Id + "_inputdatetimekey")" id="@("checkpointStartDate_" + checkpoint.Id)" class="form-control col-sm-8" disabled="@checkpoint.IsCheckpointPassed" @bind-Value="@checkpoint.TempPassed" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
+                    <ValidationMessage @key="@(checkpoint.Id + "_validationmessagekey")" class="offset-sm-3 col-sm-8" For="(()=>checkpoint.TempPassed)"></ValidationMessage>
                 </div>
             }
             <div class="form-group row" hidden="@(IsFinishShown == false)">
