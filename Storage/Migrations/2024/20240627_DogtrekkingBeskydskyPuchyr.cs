@@ -1183,7 +1183,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                             {
                                                 Name = "Torin",
                                                 Breed = "ADT",
-                                                Birthday = new DateTime(2019),
+                                                Birthday = new DateTime(2019, 1, 1),
                                                 PetType = Constants.PetType.Dog
                                             }
                                         }
@@ -1228,7 +1228,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                             {
                                                 Name = "Baldr",
                                                 Breed = "SH",
-                                                Birthday = new DateTime(2020),
+                                                Birthday = new DateTime(2020, 1, 1),
                                                 PetType = Constants.PetType.Dog
                                             }
                                         }
@@ -2879,7 +2879,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                             {
                                                 Name = "{PetName}",
                                                 Breed = "{PetBreed}",
-                                                Birthday = new DateTime(0000, 00, 00), // Placeholder for actual date
+                                                Birthday = new DateTime(2020, 1, 1), // Placeholder for actual date
                                                 PetType = Constants.PetType.Dog
                                             }
                                         }
