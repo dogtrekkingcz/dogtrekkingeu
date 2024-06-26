@@ -301,6 +301,7 @@ internal static class ActionsServiceMapping
 
         return new UpdateActionInternalStorageRequest.RacerDto
         {
+            Id = Guid.NewGuid(),
             FirstName = request.FirstName,
             LastName = request.LastName,
             Pets = pets,
