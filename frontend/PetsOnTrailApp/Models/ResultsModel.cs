@@ -26,9 +26,9 @@ public sealed record ResultsModel : BaseSynchronizedModel
 
     public sealed record CheckpointDto
     {
-        public Guid Id { get; init; } = Guid.Empty;
-        public string Name { get; init; } = string.Empty;
-        public DateTimeOffset? Time { get; init; } = null;
+        public Guid Id { get; set; } = Guid.Empty;
+        public string Name { get; set; } = string.Empty;
+        public DateTimeOffset? Time { get; set; } = null;
     }
 
     public enum ResultState

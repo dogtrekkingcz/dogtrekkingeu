@@ -25,6 +25,7 @@ public class ResultsAddBase : ComponentBase
 
     protected string WholeTime { get; set; } = string.Empty;
     protected string _pets { get; set; } = string.Empty;
+    protected Dictionary<Guid, DateTimeOffset?> _checkpoints = new Dictionary<Guid, DateTimeOffset?>();
 
     protected DateTimeOffset Start { get; set; }
     protected DateTimeOffset Finish { get; set; }
@@ -87,6 +88,31 @@ public class ResultsAddBase : ComponentBase
         Model.Finish = Finish;
 
         StartAndFinishIsFilledCountResult();
+    }
+
+    protected void CheckpointIsFilled(Guid checkpointId, Microsoft.AspNetCore.Components.Web.FocusEventArgs args)
+    {
+        Console.WriteLine($"CheckpointIsFilled with value: {checkpointId}");
+
+        if (_checkpoints.ContainsKey(checkpointId))
+        {
+            var racerCheckpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId);
+
+            if (racerCheckpoint != null)
+            {
+                racerCheckpoint.Time = _checkpoints[checkpointId];
+            }
+            else
+            {
+                Model.Checkpoints.Add(new ResultsModel.CheckpointDto()
+                {
+                    Id = checkpointId,
+                    Time = _checkpoints[checkpointId]
+                });
+            }
+        }
+
+        StateHasChanged();
     }
 
     protected void StartAndFinishIsFilledCountResult()
