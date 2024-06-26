@@ -53,6 +53,35 @@ public class ResultsAddBase : ComponentBase
         { 
             Start = race.Data.Begin;
             Finish = race.Data.End;
+
+            if (Model.Checkpoints.Count == 0 && race.Data.Checkpoints.Count > 0)
+            { 
+                Model.Checkpoints = race.Data.Checkpoints.Select(checkpoint => new ResultsModel.CheckpointDto()
+                {
+                    Id = checkpoint.Id,
+                    Name = checkpoint.Name
+                }).ToList();
+            }
+
+            _checkpoints = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => (DateTimeOffset?)null);
+
+            if (RacerId is not null)
+            {
+                var racers = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), false);
+                var racer = racers.Results.FirstOrDefault(racer => racer.Id == Guid.Parse(RacerId));
+                
+                if (racer != null)
+                { 
+                    Model.Id = racer.Id;
+                    Model.FirstName = racer.FirstName;
+                    Model.LastName = racer.LastName;
+                    Model.Pets = racer.Pets;
+                    Model.State = racer.State;
+                    Model.Start = racer.Start;
+                    Model.Finish = racer.Finish;
+                    Model.Checkpoints = racer.Checkpoints;
+                }
+            }
         }
     }
 

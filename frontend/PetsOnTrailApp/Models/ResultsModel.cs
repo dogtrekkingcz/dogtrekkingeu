@@ -14,7 +14,7 @@ public sealed record ResultsModel : BaseSynchronizedModel
 
     public sealed record ResultDto
     {
-        public Guid Id { get; init; }
+        public Guid Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public List<string> Pets { get; set; } = new List<string>();
