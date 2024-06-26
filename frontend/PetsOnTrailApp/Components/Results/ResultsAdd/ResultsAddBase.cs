@@ -265,6 +265,20 @@ public class ResultsAddBase : ComponentBase
 
     protected void CheckpointPassed(Guid checkpointId, Microsoft.AspNetCore.Components.ChangeEventArgs args)
     {
+        var checkpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId);
+        if (checkpoint != null)
+        {
+            if (checkpoint.IsCheckpointPassed)
+            { 
+                checkpoint.Time = DateTimeOffset.Now;
+                checkpoint.TempPassed = checkpoint.Time.Value;
+            }
+            else
+            {
+                checkpoint.Time = null;
+            }
+        }
+
         StateHasChanged();
     }
 }
