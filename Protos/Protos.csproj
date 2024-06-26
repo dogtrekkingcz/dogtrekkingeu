@@ -40,6 +40,12 @@
         <Generator>MSBuild:Compile</Generator>
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Protobuf>
+      <Protobuf Include="Entities\Actions\AddNewResultResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
       <Protobuf Include="Entities\Actions\DeleteFinishResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <OutputDir>obj\Debug\net7.0\</OutputDir>
@@ -47,6 +53,12 @@
         <Generator>MSBuild:Compile</Generator>
       </Protobuf>
       <Protobuf Include="Entities\Actions\DeleteStartResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\AddNewResultRequest.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <OutputDir>obj\Debug\net7.0\</OutputDir>
         <CompileOutputs>True</CompileOutputs>
@@ -820,6 +832,8 @@
       <None Remove="Entities\ActionDetail.proto" />
       <None Remove="Entities\ActionRights.proto" />
       <None Remove="Entities\ActionSimple.proto" />
+      <None Remove="Entities\Actions\AddNewResultRequest.proto" />
+      <None Remove="Entities\Actions\AddNewResultResponse.proto" />
       <None Remove="Entities\Actions\DeleteFinishRequest.proto" />
       <None Remove="Entities\Actions\DeleteFinishResponse.proto" />
       <None Remove="Entities\Actions\DeleteStartRequest.proto" />

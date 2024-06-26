@@ -266,4 +266,11 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
 
         return new Protos.Actions.ResetStates.ResetStatesResponse();
     }
+
+    public async override Task<Protos.Actions.AddNewResult.AddNewResultResponse> addNewResult(Protos.Actions.AddNewResult.AddNewResultRequest request, ServerCallContext context)
+    {
+        var result = await _actionsService.AddNewResultAsync(_mapper.Map<AddNewResultRequest>(request), context.CancellationToken);
+
+        return _mapper.Map<Protos.Actions.AddNewResult.AddNewResultResponse>(result);
+    }
 }

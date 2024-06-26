@@ -46,6 +46,8 @@ import "Entities/Actions/DnfRequest.proto";
 import "Entities/Actions/DnfResponse.proto";
 import "Entities/Actions/ResetStatesRequest.proto";
 import "Entities/Actions/ResetStatesResponse.proto";
+import "Entities/Actions/AddNewResultRequest.proto";
+import "Entities/Actions/AddNewResultResponse.proto";
 
 service Actions {
   rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
@@ -73,6 +75,7 @@ service Actions {
   rpc dsq (dsq.DsqRequest) returns (dsq.DsqResponse);
   rpc dnf (dnf.DnfRequest) returns (dnf.DnfResponse);
   rpc resetStates (resetstates.ResetStatesRequest) returns (resetstates.ResetStatesResponse);
+  rpc addNewResult (addnewresult.AddNewResultRequest) returns (addnewresult.AddNewResultResponse);
 }
 
 message ImportRegistrationToActionRequest {

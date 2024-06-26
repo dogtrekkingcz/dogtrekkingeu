@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.AddNewResult";
+
+package addnewresult;
+
+import "google/protobuf/timestamp.proto";
+
+message AddNewResultResponse {
+  string State = 1;
+}

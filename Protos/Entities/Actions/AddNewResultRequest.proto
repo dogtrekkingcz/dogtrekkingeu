@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.AddNewResult";
+
+package addnewresult;
+
+import "google/protobuf/timestamp.proto";
+
+message AddNewResultRequest {
+  string ActionId = 1;
+  string RaceId = 2;
+  string CategoryId = 3;
+  string FirstName = 4;
+  string LastName = 5;
+  repeated string Pets = 6;
+  RaceState State = 7;
+  google.protobuf.Timestamp Start = 8;
+  google.protobuf.Timestamp Finish = 9;
+}
+
+enum RaceState {
+  NotSpecified = 0;
+  NotStarted = 1;
+  Started = 2;
+  Finished = 3;
+  DidNotFinished = 4;
+  Disqualified = 5;
+}

@@ -283,9 +283,53 @@ public class ActionsRepository : BaseRepository, IActionsRepository
         return result;
     }
 
-    public Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result)
+    public async Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result)
     {
-        throw new NotImplementedException();
+        Protos.Actions.AddNewResult.RaceState state = Protos.Actions.AddNewResult.RaceState.NotSpecified;
+        switch (result.State)
+        {
+            case ResultsModel.ResultState.NotValid:
+                state = Protos.Actions.AddNewResult.RaceState.NotSpecified;
+                break;
+
+            case ResultsModel.ResultState.NotStarted:
+                state = Protos.Actions.AddNewResult.RaceState.NotStarted;
+                break;
+
+            case ResultsModel.ResultState.Started:
+                state = Protos.Actions.AddNewResult.RaceState.Started;
+                break;
+
+            case ResultsModel.ResultState.Finished:
+                state = Protos.Actions.AddNewResult.RaceState.Finished;
+                break;
+
+            case ResultsModel.ResultState.DidNotFinished:
+                state = Protos.Actions.AddNewResult.RaceState.DidNotFinished;
+                break;
+
+            case ResultsModel.ResultState.Disqualified:
+                state = Protos.Actions.AddNewResult.RaceState.Disqualified;
+                break;
+
+            default:
+                state = Protos.Actions.AddNewResult.RaceState.NotSpecified;
+                break;
+
+        }
+
+        await ActionsClientInstance.addNewResultAsync(new Protos.Actions.AddNewResult.AddNewResultRequest
+        {
+            ActionId = actionId.ToString(),
+            RaceId = raceId.ToString(),
+            CategoryId = categoryId.ToString(),
+            FirstName = result.FirstName,
+            LastName = result.LastName,
+            Pets = { result.Pets },
+            State = state,
+            Start = result.Start?.ToGoogleTimestamp(),
+            Finish = result.Finish?.ToGoogleTimestamp(),
+        });
     }
 
     public async Task StartNow(Guid actionId, Guid raceId, Guid categoryId, Guid racerId)

@@ -249,6 +249,64 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeInternalStorageResponse.ActionDto, GetSimpleActionsListByTypeResponse.ActionDto>();
         typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeInternalStorageResponse.RaceDto, GetSimpleActionsListByTypeResponse.RaceDto>();
 
+        typeAdapterConfig.NewConfig<AddNewResultRequest, UpdateActionInternalStorageRequest.RacerDto>()
+            .MapWith(req => MapToRacerDto(req));
+
         return typeAdapterConfig;
+    }
+
+    private static UpdateActionInternalStorageRequest.RacerDto MapToRacerDto(AddNewResultRequest request)
+    {
+        var pets = new List<UpdateActionInternalStorageRequest.PetDto>();
+        foreach (var pet in request.Pets)
+        {
+            pets.Add(new UpdateActionInternalStorageRequest.PetDto
+            {
+                Id = Guid.NewGuid(),
+                Name = pet
+            });
+        }
+
+        var state = UpdateActionInternalStorageRequest.RaceState.NotValid;
+        switch (request.State)
+        {
+            case AddNewResultRequest.RaceState.NotSpecified:
+                state = UpdateActionInternalStorageRequest.RaceState.NotValid;
+                break;
+
+            case AddNewResultRequest.RaceState.NotStarted:
+                state = UpdateActionInternalStorageRequest.RaceState.NotStarted;
+                break;
+
+            case AddNewResultRequest.RaceState.Started:
+                state = UpdateActionInternalStorageRequest.RaceState.Started;
+                break;
+
+            case AddNewResultRequest.RaceState.Finished:
+                state = UpdateActionInternalStorageRequest.RaceState.Finished;
+                break;
+
+            case AddNewResultRequest.RaceState.DidNotFinished:
+                state = UpdateActionInternalStorageRequest.RaceState.DidNotFinished;
+                break;
+
+            case AddNewResultRequest.RaceState.Disqualified:
+                state = UpdateActionInternalStorageRequest.RaceState.Disqualified;
+                break;
+
+            default:
+                state = UpdateActionInternalStorageRequest.RaceState.NotValid;
+                break;
+        }
+
+        return new UpdateActionInternalStorageRequest.RacerDto
+        {
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Pets = pets,
+            State = state,
+            Start = request.Start,
+            Finish = request.Finish
+        };
     }
 }
