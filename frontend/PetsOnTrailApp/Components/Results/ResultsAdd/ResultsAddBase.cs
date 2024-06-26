@@ -28,6 +28,7 @@ public class ResultsAddBase : ComponentBase
     
     protected DateTimeOffset Start { get; set; }
     protected Dictionary<Guid, DateTimeOffset> Checkpoints = new Dictionary<Guid, DateTimeOffset>();
+    protected Dictionary<Guid, bool> IsCheckpointPassed = new Dictionary<Guid, bool>();
     protected DateTimeOffset Finish { get; set; }
 
     protected ResultsModel.ResultState State { get; set; } = ResultsModel.ResultState.NotValid;
@@ -64,6 +65,7 @@ public class ResultsAddBase : ComponentBase
             }
 
             Checkpoints = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => race.Data.Begin);
+            IsCheckpointPassed = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => false);
 
             if (RacerId is not null)
             {
@@ -123,21 +125,30 @@ public class ResultsAddBase : ComponentBase
     {
         Console.WriteLine($"CheckpointIsFilled with value: {checkpointId}");
 
-        if (Checkpoints.ContainsKey(checkpointId))
+        if (IsCheckpointPassed.ContainsKey(checkpointId) && Checkpoints.ContainsKey(checkpointId))
         {
-            var racerCheckpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId);
-
-            if (racerCheckpoint != null)
+            if (IsCheckpointPassed[checkpointId] == false)
             {
-                racerCheckpoint.Time = Checkpoints[checkpointId];
+                Checkpoints[checkpointId] = DateTimeOffset.Now;
+                
+                Model.Checkpoints.RemoveAll(checkpoint => checkpoint.Id == checkpointId);
             }
             else
-            {
-                Model.Checkpoints.Add(new ResultsModel.CheckpointDto()
+            { 
+                var racerCheckpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId);
+
+                if (racerCheckpoint != null)
                 {
-                    Id = checkpointId,
-                    Time = Checkpoints[checkpointId]
-                });
+                    racerCheckpoint.Time = Checkpoints[checkpointId];
+                }
+                else
+                {
+                    Model.Checkpoints.Add(new ResultsModel.CheckpointDto()
+                    {
+                        Id = checkpointId,
+                        Time = Checkpoints[checkpointId]
+                    });
+                }
             }
         }
 
@@ -228,5 +239,10 @@ public class ResultsAddBase : ComponentBase
     public void Cancel()
     {
         NavigationManager.NavigateTo($"/category/{ActionId}/{RaceId}/{CategoryId}");
+    }
+
+    protected void CheckpointPassed(Guid checkpointId, Microsoft.AspNetCore.Components.ChangeEventArgs args)
+    {
+        StateHasChanged();
     }
 }
