@@ -223,6 +223,7 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<DnfResponse, Protos.Actions.Dnf.DnfResponse>();
 
         typeAdapterConfig.NewConfig<Protos.Actions.AddNewResult.AddNewResultRequest, AddNewResultRequest>();
+        typeAdapterConfig.NewConfig<Protos.Actions.AddNewResult.Checkpointdto, AddNewResultRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<AddNewResultResponse, Protos.Actions.AddNewResult.AddNewResultResponse>();
 
         return typeAdapterConfig;
