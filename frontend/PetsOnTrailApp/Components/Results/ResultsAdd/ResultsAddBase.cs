@@ -12,6 +12,7 @@ public class ResultsAddBase : ComponentBase
     [Parameter] public string ActionId { get; set; }
     [Parameter] public string RaceId { get; set; }
     [Parameter] public string CategoryId { get; set; }
+    [Parameter] public string RacerId { get; set; } = null;
     [Parameter] public EventCallback? OnResultAddedCallback { get; set; } = null;
 
     [Inject] private ResultsClient _resultsClient { get; set; }
