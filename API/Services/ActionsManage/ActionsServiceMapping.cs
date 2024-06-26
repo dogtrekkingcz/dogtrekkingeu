@@ -3,6 +3,7 @@ using Mapster;
 using Storage.Entities.Actions;
 using Storage.Entities.Checkpoints;
 using Storage.Entities.Entries;
+using Amazon.Auth.AccessControlPolicy;
 
 namespace PetsOnTrail.Actions.Services.ActionsManage;
 
@@ -249,57 +250,57 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeInternalStorageResponse.ActionDto, GetSimpleActionsListByTypeResponse.ActionDto>();
         typeAdapterConfig.NewConfig<GetSimpleActionsListByTypeInternalStorageResponse.RaceDto, GetSimpleActionsListByTypeResponse.RaceDto>();
 
-        typeAdapterConfig.NewConfig<AddNewResultRequest, UpdateActionInternalStorageRequest.RacerDto>()
+        typeAdapterConfig.NewConfig<AddNewResultRequest, GetActionInternalStorageResponse.RacerDto>()
             .MapWith(req => MapToRacerDto(req));
 
         return typeAdapterConfig;
     }
 
-    private static UpdateActionInternalStorageRequest.RacerDto MapToRacerDto(AddNewResultRequest request)
+    private static GetActionInternalStorageResponse.RacerDto MapToRacerDto(AddNewResultRequest request)
     {
-        var pets = new List<UpdateActionInternalStorageRequest.PetDto>();
+        var pets = new List<GetActionInternalStorageResponse.PetDto>();
         foreach (var pet in request.Pets)
         {
-            pets.Add(new UpdateActionInternalStorageRequest.PetDto
+            pets.Add(new GetActionInternalStorageResponse.PetDto
             {
                 Id = Guid.NewGuid(),
                 Name = pet
             });
         }
 
-        var state = UpdateActionInternalStorageRequest.RaceState.NotValid;
+        var state = GetActionInternalStorageResponse.RaceState.NotValid;
         switch (request.State)
         {
             case AddNewResultRequest.RaceState.NotSpecified:
-                state = UpdateActionInternalStorageRequest.RaceState.NotValid;
+                state = GetActionInternalStorageResponse.RaceState.NotValid;
                 break;
 
             case AddNewResultRequest.RaceState.NotStarted:
-                state = UpdateActionInternalStorageRequest.RaceState.NotStarted;
+                state = GetActionInternalStorageResponse.RaceState.NotStarted;
                 break;
 
             case AddNewResultRequest.RaceState.Started:
-                state = UpdateActionInternalStorageRequest.RaceState.Started;
+                state = GetActionInternalStorageResponse.RaceState.Started;
                 break;
 
             case AddNewResultRequest.RaceState.Finished:
-                state = UpdateActionInternalStorageRequest.RaceState.Finished;
+                state = GetActionInternalStorageResponse.RaceState.Finished;
                 break;
 
             case AddNewResultRequest.RaceState.DidNotFinished:
-                state = UpdateActionInternalStorageRequest.RaceState.DidNotFinished;
+                state = GetActionInternalStorageResponse.RaceState.DidNotFinished;
                 break;
 
             case AddNewResultRequest.RaceState.Disqualified:
-                state = UpdateActionInternalStorageRequest.RaceState.Disqualified;
+                state = GetActionInternalStorageResponse.RaceState.Disqualified;
                 break;
 
             default:
-                state = UpdateActionInternalStorageRequest.RaceState.NotValid;
+                state = GetActionInternalStorageResponse.RaceState.NotValid;
                 break;
         }
 
-        return new UpdateActionInternalStorageRequest.RacerDto
+        return new GetActionInternalStorageResponse.RacerDto
         {
             Id = request.RacerId != default(Guid) ? request.RacerId : Guid.NewGuid(),
             FirstName = request.FirstName,

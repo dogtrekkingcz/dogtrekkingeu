@@ -95,6 +95,11 @@ public class CategoryViewBase : ComponentBase
         await Reload(true);
     }
 
+    public async Task Edit(Guid racerId)
+    {
+        _navigationManager.NavigateTo($"category/{ActionId}/{RaceId}/{CategoryId}/{racerId}/edit");
+    }
+
     public void AddResult()
     {
         _navigationManager.NavigateTo($"category/{ActionId}/{RaceId}/{CategoryId}/add");

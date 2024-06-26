@@ -1,0 +1,63 @@
+﻿@page "/category/{ActionId}/{RaceId}/{CategoryId}/{RacerId}/edit"
+
+@using PetsOnTrailApp.Models
+
+@inherits ResultsAddBase
+
+
+@inject IStringLocalizer<Resource> Localizer
+
+<h3>@Localizer["Results.Manage.Edit"]</h3>
+<i>@Model.RacerId</i>
+<hr />
+<section>
+    <EditForm Model="@Model" OnValidSubmit="OnFormValid" OnInvalidSubmit="OnFormInvalid" FormName="FormResultAdd">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="container">
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.Firstname"]</label>
+                <InputText class="form-control col-sm-8" @bind-Value="@Model.FirstName" />
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.Lastname"]</label>
+                <InputText class="form-control col-sm-8" @bind-Value="@Model.LastName" />
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.Pets"]</label>
+                <InputText class="form-control col-sm-8" Value="@_pets" ValueChanged="PetsChanged" ValueExpression="() => _pets" placeholder="@Localizer["Results.Manage.Add.Pets.DividedByComma"]" />
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.State"]</label>
+                <InputSelect class="form-control col-sm-8" Value="@State" ValueChanged="@((ResultsModel.ResultState state) => RaceStateChanged(state))" ValueExpression="() => State">
+                    <option value="@ResultsModel.ResultState.NotValid">@Localizer["Results.Manage.Add.State.Choose"]</option>
+                    <option value="@ResultsModel.ResultState.NotStarted">@Localizer["Results.Manage.Add.State.NotStarted"]</option>
+                    <option value="@ResultsModel.ResultState.Started">@Localizer["Results.Manage.Add.State.Started"]</option>
+                    <option value="@ResultsModel.ResultState.Finished">@Localizer["Results.Manage.Add.State.Finished"]</option>
+                    <option value="@ResultsModel.ResultState.DidNotFinished">@Localizer["Results.Manage.Add.State.DidNotFinished"]</option>
+                    <option value="@ResultsModel.ResultState.Disqualified">@Localizer["Results.Manage.Add.State.Disqualified"]</option>
+                </InputSelect>
+            </div>
+            <div class="form-group row" hidden="@(IsStartShown == false)">
+                <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
+                <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Start" @onblur="(args) => StartIsFilled(args)"></InputDateTime>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
+            </div>
+            <div class="form-group row" hidden="@(IsFinishShown == false)">
+                <label for="finishDate" class="col-sm-3">@Localizer["Results.Manage.Add.Finish"]</label>
+                <InputDateTime id="finishDate" class="form-control col-sm-8" @bind-Value="@Finish" @onblur="(args) => FinishIsFilled(args)"></InputDateTime>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Finish)"></ValidationMessage>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3">@Localizer["Results.Manage.Add.WholeTime"]</label>
+                <InputText class="form-control col-sm-8" Value="@WholeTime" ValueChanged="WholeTimeChanged" ValueExpression="() => WholeTime" placeholder="hh:mm:ss / hh:mm / hh"></InputText>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <button type="submit" class="btn btn-primary">@Localizer["Results.Manage.Add.Submit"]</button>
+            <button class="btn btn-secondary" @onclick="() => Cancel()">@Localizer["Results.Manage.Add.Cancel"]</button>
+        </div>
+    </EditForm>
+</section>
