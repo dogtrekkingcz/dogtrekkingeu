@@ -708,4 +708,34 @@
   <data name="Results.Now" xml:space="preserve">
     <value>Now</value>
   </data>
+  <data name="Results.Manage.Add.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Results.Manage.Add.Pets" xml:space="preserve">
+    <value>Pets, divided by comma {,]</value>
+  </data>
+  <data name="Results.Manage.Add.State" xml:space="preserve">
+    <value>State of racer</value>
+  </data>
+  <data name="Results.Manage.Add.State.Choose" xml:space="preserve">
+    <value>--== Choose ==--</value>
+  </data>
+  <data name="Results.Manage.Add.State.DidNotFinished" xml:space="preserve">
+    <value>DNF</value>
+  </data>
+  <data name="Results.Manage.Add.State.Disqualified" xml:space="preserve">
+    <value>DSQ</value>
+  </data>
+  <data name="Results.Manage.Add.State.Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="Results.Manage.Add.State.NotStarted" xml:space="preserve">
+    <value>DNS</value>
+  </data>
+  <data name="Results.Manage.Add.State.Started" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="Results.Manage.Add.Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
 </root>

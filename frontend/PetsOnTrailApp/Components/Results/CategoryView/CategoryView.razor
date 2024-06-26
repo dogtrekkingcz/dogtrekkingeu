@@ -69,13 +69,13 @@
                     
                     @if (CanIEditResults)
                     {
-                    <div class="row">
-                        <div class="col-12">
-                            <button class="btn btn-sm btn-primary" @onclick="async () => await Edit(racer.Id)">
-                                <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
-                            </button>
+                        <div class="row">
+                            <div class="col-12">
+                                <button class="btn btn-sm btn-primary" @onclick="() => Edit(racer.Id)">
+                                    <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
                     }
                 </div>
             </td>

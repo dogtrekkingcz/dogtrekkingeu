@@ -1546,6 +1546,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Results_Manage_Add_Cancel {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finish.
         /// </summary>
         internal static string Results_Manage_Add_Finish {
@@ -1582,11 +1591,92 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pets, divided by comma {,].
+        /// </summary>
+        internal static string Results_Manage_Add_Pets {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Pets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         internal static string Results_Manage_Add_Start {
             get {
                 return ResourceManager.GetString("Results.Manage.Add.Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State of racer.
+        /// </summary>
+        internal static string Results_Manage_Add_State {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.State", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to --== Choose ==--.
+        /// </summary>
+        internal static string Results_Manage_Add_State_Choose {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.State.Choose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DNF.
+        /// </summary>
+        internal static string Results_Manage_Add_State_DidNotFinished {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.State.DidNotFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DSQ.
+        /// </summary>
+        internal static string Results_Manage_Add_State_Disqualified {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.State.Disqualified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finished.
+        /// </summary>
+        internal static string Results_Manage_Add_State_Finished {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.State.Finished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DNS.
+        /// </summary>
+        internal static string Results_Manage_Add_State_NotStarted {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.State.NotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started.
+        /// </summary>
+        internal static string Results_Manage_Add_State_Started {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.State.Started", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        internal static string Results_Manage_Add_Submit {
+            get {
+                return ResourceManager.GetString("Results.Manage.Add.Submit", resourceCulture);
             }
         }
         

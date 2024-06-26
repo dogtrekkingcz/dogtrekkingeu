@@ -8,7 +8,7 @@
 @inject IStringLocalizer<Resource> Localizer
 
 <h3>@Localizer["Results.Manage.Edit"]</h3>
-<i>@Model.RacerId</i>
+<i>@Model.Id</i>
 <hr />
 <section>
     <EditForm Model="@Model" OnValidSubmit="OnFormValid" OnInvalidSubmit="OnFormInvalid" FormName="FormResultAdd">

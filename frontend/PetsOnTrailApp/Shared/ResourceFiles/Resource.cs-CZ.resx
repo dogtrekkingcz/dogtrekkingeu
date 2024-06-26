@@ -708,4 +708,34 @@
   <data name="Results.Now" xml:space="preserve">
     <value>Nyní</value>
   </data>
+  <data name="Results.Manage.Add.Cancel" xml:space="preserve">
+    <value>Zpět</value>
+  </data>
+  <data name="Results.Manage.Add.Pets" xml:space="preserve">
+    <value>Mazlíci, odděleni čárkou</value>
+  </data>
+  <data name="Results.Manage.Add.State" xml:space="preserve">
+    <value>Stav závodníka</value>
+  </data>
+  <data name="Results.Manage.Add.State.Choose" xml:space="preserve">
+    <value>--== Vyber ==--</value>
+  </data>
+  <data name="Results.Manage.Add.State.DidNotFinished" xml:space="preserve">
+    <value>DNF</value>
+  </data>
+  <data name="Results.Manage.Add.State.Disqualified" xml:space="preserve">
+    <value>DSQ</value>
+  </data>
+  <data name="Results.Manage.Add.State.Finished" xml:space="preserve">
+    <value>V cíli</value>
+  </data>
+  <data name="Results.Manage.Add.State.NotStarted" xml:space="preserve">
+    <value>DNS</value>
+  </data>
+  <data name="Results.Manage.Add.State.Started" xml:space="preserve">
+    <value>Odstartován-a</value>
+  </data>
+  <data name="Results.Manage.Add.Submit" xml:space="preserve">
+    <value>Odeslat</value>
+  </data>
 </root>
