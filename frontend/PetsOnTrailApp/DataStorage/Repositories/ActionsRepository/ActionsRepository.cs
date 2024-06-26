@@ -328,8 +328,19 @@ public class ActionsRepository : BaseRepository, IActionsRepository
             LastName = result.LastName,
             Pets = { result.Pets },
             State = state,
-            Start = result.Start?.ToGoogleTimestamp(),
-            Finish = result.Finish?.ToGoogleTimestamp(),
+            Start = result.Start?.ToUniversalTime().ToGoogleTimestamp(),
+            Finish = result.Finish?.ToUniversalTime().ToGoogleTimestamp(),
+            Checkpoints = 
+            { 
+                result.Checkpoints
+                        .Where(checkpoint => checkpoint.Time != null)
+                        .Select(checkpoint => new Protos.Actions.AddNewResult.Checkpointdto
+                                {
+                                    Id = checkpoint.Id.ToString(),
+                                    Time = checkpoint.Time?.ToUniversalTime().ToGoogleTimestamp()
+                                })
+                        .ToList() 
+            }
         });
     }
 
