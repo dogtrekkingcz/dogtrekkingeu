@@ -25,9 +25,9 @@ public class ResultsAddBase : ComponentBase
 
     protected string WholeTime { get; set; } = string.Empty;
     protected string _pets { get; set; } = string.Empty;
-    protected Dictionary<Guid, DateTimeOffset?> _checkpoints = new Dictionary<Guid, DateTimeOffset?>();
-
+    
     protected DateTimeOffset Start { get; set; }
+    protected Dictionary<Guid, DateTimeOffset> Checkpoints = new Dictionary<Guid, DateTimeOffset>();
     protected DateTimeOffset Finish { get; set; }
 
     protected ResultsModel.ResultState State { get; set; } = ResultsModel.ResultState.NotValid;
@@ -63,7 +63,7 @@ public class ResultsAddBase : ComponentBase
                 }).ToList();
             }
 
-            _checkpoints = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => (DateTimeOffset?)null);
+            Checkpoints = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => race.Data.Begin);
 
             if (RacerId is not null)
             {
@@ -123,20 +123,20 @@ public class ResultsAddBase : ComponentBase
     {
         Console.WriteLine($"CheckpointIsFilled with value: {checkpointId}");
 
-        if (_checkpoints.ContainsKey(checkpointId))
+        if (Checkpoints.ContainsKey(checkpointId))
         {
             var racerCheckpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId);
 
             if (racerCheckpoint != null)
             {
-                racerCheckpoint.Time = _checkpoints[checkpointId];
+                racerCheckpoint.Time = Checkpoints[checkpointId];
             }
             else
             {
                 Model.Checkpoints.Add(new ResultsModel.CheckpointDto()
                 {
                     Id = checkpointId,
-                    Time = _checkpoints[checkpointId]
+                    Time = Checkpoints[checkpointId]
                 });
             }
         }

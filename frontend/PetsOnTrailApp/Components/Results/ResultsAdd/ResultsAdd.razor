@@ -46,7 +46,7 @@
             {
                 <div class="form-group row" hidden="@(IsStartShown == false)">
                     <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Checkpoint"]: @checkpoint.Name</label>
-                    <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@_checkpoints[checkpoint.Id]" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
+                    <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Checkpoints[checkpoint.Id]" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
                     <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
                 </div>
             }
