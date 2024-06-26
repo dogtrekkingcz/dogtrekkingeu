@@ -56,11 +56,14 @@ public class ResultsAddBase : ComponentBase
 
     protected async Task OnFormValid()
     {
+        await _actionsRepository.AddResultAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), Model);
+
+        NavigationManager.NavigateTo($"/category/{ActionId}/{RaceId}/{CategoryId}");
     }
 
     protected async Task OnFormInvalid()
     {
-
+        Console.WriteLine("OnFormInvalid");
     }
 
     protected void StartIsFilled(Microsoft.AspNetCore.Components.Web.FocusEventArgs args)
