@@ -135,7 +135,7 @@
                         @foreach (var checkpoint in RaceModel.Data.Checkpoints)
                         {
                             <div class="col-12">
-                                @Localizer["Results.Checkpoint"]: @checkpoint.Name: <i>@(racer.Checkpoints.FirstOrDefault(chpt => chpt.Id == checkpoint.Id).Time?.ToString("dd HH:mm:ss") ?? "-- --:--:--")</i>
+                                @Localizer["Results.Checkpoint"]: @checkpoint.Name: <i>@(racer.Checkpoints.FirstOrDefault(chpt => chpt.Id == checkpoint.Id)?.Time?.ToString("dd HH:mm:ss") ?? "-- --:--:--")</i>
                             </div>
                         }
                         <div class="col-12">

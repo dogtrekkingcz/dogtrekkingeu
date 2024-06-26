@@ -81,13 +81,11 @@ public sealed record GetAllEntriesInternalStorageResponse
     public record PetDto
     {
         public string? Id { get; set; }
-        
         public string Name { get; set; } = string.Empty;
-
+        public string Breed { get; set; } = string.Empty;
+        public Guid PetType { get; set; } = Guid.Empty;
         public string Pedigree { get; set; } = string.Empty;
-
         public string Chip { get; set; } = string.Empty;
-
         public DateTimeOffset? Birthday { get; set; } = null;
     }
     
