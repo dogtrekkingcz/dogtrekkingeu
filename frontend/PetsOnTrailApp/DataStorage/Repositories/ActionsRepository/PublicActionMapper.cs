@@ -183,7 +183,13 @@ public static class PublicActionMapper
                     GetSelectedPublicActionsListResponseModel.RaceState.DidNotFinished => ResultsModel.ResultState.DidNotFinished,
                     GetSelectedPublicActionsListResponseModel.RaceState.Disqualified => ResultsModel.ResultState.Disqualified,
                     _ => ResultsModel.ResultState.NotValid
-                }
+                },
+                Checkpoints = racer.PassedCheckpoints.Select(cp => new ResultsModel.CheckpointDto
+                {
+                    Id = cp.Id,
+                    Time = cp.Passed.DateTime,
+                    IsCheckpointPassed = true
+                }).ToList()
             });
         }
 

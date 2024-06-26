@@ -27,6 +27,7 @@ public sealed record ResultsModel : BaseSynchronizedModel
     public sealed record CheckpointDto
     {
         public Guid Id { get; set; } = Guid.Empty;
+        public bool IsCheckpointPassed { get; set; } = false;
         public string Name { get; set; } = string.Empty;
         public DateTimeOffset? Time { get; set; } = null;
     }

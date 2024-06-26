@@ -29,7 +29,6 @@ public class ResultsAddBase : ComponentBase
     
     protected DateTimeOffset Start { get; set; }
     protected Dictionary<Guid, DateTimeOffset> Checkpoints = new Dictionary<Guid, DateTimeOffset>();
-    protected Dictionary<Guid, bool> IsCheckpointPassed = new Dictionary<Guid, bool>();
     protected DateTimeOffset Finish { get; set; }
 
     protected ResultsModel.ResultState State { get; set; } = ResultsModel.ResultState.NotValid;
@@ -70,9 +69,6 @@ public class ResultsAddBase : ComponentBase
             Checkpoints = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => race.Data.Begin);
             Console.WriteLine($"Checkpoints: {Checkpoints.Dump()}");
 
-            IsCheckpointPassed = race.Data.Checkpoints.ToDictionary(checkpoint => checkpoint.Id, checkpoint => false);
-            Console.WriteLine($"IsCheckpointPassed: {IsCheckpointPassed.Dump()}");
-
             if (RacerId is not null)
             {
                 var racers = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), false);
@@ -88,6 +84,24 @@ public class ResultsAddBase : ComponentBase
                     Model.Start = racer.Start;
                     Model.Finish = racer.Finish;
                     Model.Checkpoints = racer.Checkpoints;
+
+                    foreach (var raceCheckpoint in race.Data.Checkpoints)
+                    {
+                        var existsCheckpoint = Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == raceCheckpoint.Id);
+                        if (existsCheckpoint == null)
+                        {
+                            Model.Checkpoints.Add(new ResultsModel.CheckpointDto()
+                            {
+                                Id = raceCheckpoint.Id,
+                                Name = raceCheckpoint.Name,
+                                IsCheckpointPassed = false
+                            });
+                        }
+                        else
+                        { 
+                            existsCheckpoint.IsCheckpointPassed = true; 
+                        }
+                    }
                 }
             }
         }
@@ -131,9 +145,9 @@ public class ResultsAddBase : ComponentBase
     {
         Console.WriteLine($"CheckpointIsFilled with value: {checkpointId}");
 
-        if (IsCheckpointPassed.ContainsKey(checkpointId) && Checkpoints.ContainsKey(checkpointId))
+        if (Checkpoints.ContainsKey(checkpointId))
         {
-            if (IsCheckpointPassed[checkpointId] == false)
+            if (Model.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId).IsCheckpointPassed == false)
             {
                 Checkpoints[checkpointId] = DateTimeOffset.Now;
                 
