@@ -2,19 +2,18 @@
 
 @using PetsOnTrailApp.Models
 
-@inherits ResultsAddBase
+@inherits ResultsEditBase
 
 
 @inject IStringLocalizer<Resource> Localizer
 
 <h3>@Localizer["Results.Manage.Edit"]</h3>
-<i>@Model.Id</i>
-<hr />
 <section>
-    <EditForm Model="@Model" OnValidSubmit="OnFormValid" OnInvalidSubmit="OnFormInvalid" FormName="FormResultAdd">
+    <EditForm Model="@Model" OnValidSubmit="OnFormValid" OnInvalidSubmit="OnFormInvalid" FormName="FormResultEdit">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
+        <i>@Model.Id</i>
         <div class="container">
             <div class="form-group row">
                 <label class="col-sm-3">@Localizer["Results.Manage.Add.Firstname"]</label>
@@ -48,7 +47,7 @@
             {
                 <div class="form-group row" hidden="@(IsStartShown == false)">
                     <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Checkpoint"]: @checkpoint.Name</label>
-                    <InputCheckbox id="checkpointPassed" class="form-control col-sm-8" @bind-Value="@checkpoint.IsCheckpointPassed" @onchange="(args) => CheckpointPassed(checkpoint.Id, args)"></InputCheckbox>
+                    <InputCheckbox @bind-Value="@checkpoint.IsCheckpointPassed" @onchange="(args) => CheckpointPassed(checkpoint.Id, args)"></InputCheckbox>
                     <InputDateTime id="checkpointStartDate" class="form-control col-sm-8" disabled="@checkpoint.IsCheckpointPassed" @bind-Value="@checkpoint.TempPassed" @onblur="(args) => CheckpointIsFilled(checkpoint.Id, args)"></InputDateTime>
                     <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
                 </div>
