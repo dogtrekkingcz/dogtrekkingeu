@@ -119,10 +119,6 @@
                             
                             @if (CanIEditResults)
                             {
-                                <button class="btn btn-sm btn-primary" @onclick="async () => await EditStart(racer.Id)">
-                                    <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
-                                </button>
-
                                 <button class="btn btn-sm btn-danger" @onclick="async () => await DeleteStart(racer.Id)">
                                     <i class="fas fa-trash">@Localizer["Results.Delete"]</i>
                                 </button>
@@ -130,7 +126,7 @@
                                 <button class="btn btn-sm btn-warning" @onclick="async () => await StartNow(racer.Id)">
                                     <i class="fas fa-times">@Localizer["Results.Now"]</i>
                                 </button>
-                            })
+                            }
                         </div>
                         @foreach (var checkpoint in RaceModel.Data.Checkpoints)
                         {
@@ -143,10 +139,6 @@
 
                             @if (CanIEditResults)
                             {
-                                <button class="btn btn-sm btn-primary" @onclick="async () => await EditFinish(racer.Id)">
-                                    <i class="fas fa-edit">@Localizer["Results.Edit"]</i>
-                                </button>
-
                                 <button class="btn btn-sm btn-danger" @onclick="async () => await DeleteFinish(racer.Id)">
                                     <i class="fas fa-trash">@Localizer["Results.Delete"]</i>
                                 </button>

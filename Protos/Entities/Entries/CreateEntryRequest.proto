@@ -38,9 +38,11 @@ message Address {
 message Pet {
   string Id = 1;
   string Name = 2;
-  string Pedigree = 3;
-  string Chip = 4;
-  google.type.DateTime Birthday = 5;
+  string Breed = 3;
+  string PetType = 4;
+  string Pedigree = 5;
+  string Chip = 6;
+  google.type.DateTime Birthday = 7;
 }
 
 message MerchandizeItem {

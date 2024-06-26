@@ -39,7 +39,8 @@
             </div>
             <div class="form-group row" hidden="@(IsStartShown == false)">
                 <label for="startDate" class="col-sm-3">@Localizer["Results.Manage.Add.Start"]</label>
-                <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Start" @onblur="(args) => StartIsFilled(args)"></InputDateTime>
+                @* <InputDateTime id="startDate" class="form-control col-sm-8" @bind-Value="@Start" @onblur="(args) => StartIsFilled(args)"></InputDateTime> *@
+                <InputDate Type="InputDateType.Time" id="startDate" class="form-control col-sm-8"  @bind-Value="@Start" @onblur="(args) => StartIsFilled(args)" />
                 <ValidationMessage class="offset-sm-3 col-sm-8" For="(()=>Start)"></ValidationMessage>
             </div>
             @foreach (var checkpoint in Model.Checkpoints)

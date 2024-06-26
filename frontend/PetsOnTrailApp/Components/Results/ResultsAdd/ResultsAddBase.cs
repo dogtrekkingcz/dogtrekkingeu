@@ -98,6 +98,8 @@ public class ResultsAddBase : ComponentBase
                             existsCheckpoint.TempPassed = existsCheckpoint.Time.Value;
                         }
                     }
+
+                    _pets = string.Join(", ", Model.Pets);
                 }
             }
         }
