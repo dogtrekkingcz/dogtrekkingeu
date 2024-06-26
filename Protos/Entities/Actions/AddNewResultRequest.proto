@@ -7,10 +7,10 @@ package addnewresult;
 import "google/protobuf/timestamp.proto";
 
 message AddNewResultRequest {
-  string ActionId = 1;
-  string RaceId = 2;
-  string CategoryId = 3;
-  string RacerId = 4;
+  string Id = 1;
+  string ActionId = 2;
+  string RaceId = 3;
+  string CategoryId = 4;
   string FirstName = 5;
   string LastName = 6;
   repeated string Pets = 7;

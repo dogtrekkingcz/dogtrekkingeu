@@ -302,7 +302,7 @@ internal static class ActionsServiceMapping
 
         return new GetActionInternalStorageResponse.RacerDto
         {
-            Id = request.RacerId != default(Guid) ? request.RacerId : Guid.NewGuid(),
+            Id = request.Id != default(Guid) ? request.Id : Guid.NewGuid(),
             FirstName = request.FirstName,
             LastName = request.LastName,
             Pets = pets,

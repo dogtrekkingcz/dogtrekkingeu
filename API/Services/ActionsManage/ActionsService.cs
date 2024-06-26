@@ -548,8 +548,8 @@ internal class ActionsService : IActionsService
         var racer = _mapper.Map<GetActionInternalStorageResponse.RacerDto>(request);
 
         // in case of update - replace it with new one
-        if (category.Racers.Any(r => r.Id == request.RacerId))
-            category.Racers.Remove(category.Racers.First(r => r.Id == request.RacerId));
+        if (category.Racers.Any(r => r.Id == request.Id))
+            category.Racers.Remove(category.Racers.First(r => r.Id == request.Id));
 
         category.Racers.Add(_mapper.Map<GetActionInternalStorageResponse.RacerDto>(request));
 

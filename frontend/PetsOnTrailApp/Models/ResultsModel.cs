@@ -15,19 +15,12 @@ public sealed record ResultsModel : BaseSynchronizedModel
     public sealed record ResultDto
     {
         public Guid Id { get; init; }
-
         public string FirstName { get; set; } = string.Empty;
-
         public string LastName { get; set; } = string.Empty;
-
         public List<string> Pets { get; set; } = new List<string>();
-
         public DateTimeOffset? Start { get; set; } = null;
-
         public DateTimeOffset? Finish { get; set; } = null;
-
         public List<CheckpointDto> Checkpoints { get; set; } = new();
-
         public ResultState State { get; set; } = ResultState.NotValid;
     }
 
