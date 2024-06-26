@@ -320,6 +320,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
         await ActionsClientInstance.addNewResultAsync(new Protos.Actions.AddNewResult.AddNewResultRequest
         {
+            Id = result.Id != Guid.Empty ? result.Id.ToString() : Guid.NewGuid().ToString(),
             ActionId = actionId.ToString(),
             RaceId = raceId.ToString(),
             CategoryId = categoryId.ToString(),
