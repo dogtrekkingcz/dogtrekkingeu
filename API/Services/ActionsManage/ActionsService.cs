@@ -545,7 +545,14 @@ internal class ActionsService : IActionsService
         var race = action.Races.FirstOrDefault(race => race.Id == request.RaceId);
         var category = race.Categories.FirstOrDefault(category => category.Id == request.CategoryId);
 
+        var racer = _mapper.Map<GetActionInternalStorageResponse.RacerDto>(request);
+
+        // in case of update - replace it with new one
+        if (category.Racers.Any(r => r.Id == request.RacerId))
+            category.Racers.Remove(category.Racers.First(r => r.Id == request.RacerId));
+
         category.Racers.Add(_mapper.Map<GetActionInternalStorageResponse.RacerDto>(request));
+
 
         await _actionsRepositoryService.UpdateActionAsync(_mapper.Map<UpdateActionInternalStorageRequest>(action), cancellationToken);
 

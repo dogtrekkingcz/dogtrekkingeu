@@ -5,6 +5,7 @@ public sealed record AddNewResultRequest
     public Guid ActionId { get; init; } = default(Guid);
     public Guid RaceId { get; init; } = default(Guid);
     public Guid CategoryId { get; init; } = default(Guid);
+    public Guid RacerId { get; init; } = default(Guid);
     public string FirstName { get; init; } = string.Empty;
     public string LastName { get; init; } = string.Empty;
     public List<string> Pets { get; init; } = new();

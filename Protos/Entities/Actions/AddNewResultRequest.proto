@@ -10,12 +10,13 @@ message AddNewResultRequest {
   string ActionId = 1;
   string RaceId = 2;
   string CategoryId = 3;
-  string FirstName = 4;
-  string LastName = 5;
-  repeated string Pets = 6;
-  RaceState State = 7;
-  google.protobuf.Timestamp Start = 8;
-  google.protobuf.Timestamp Finish = 9;
+  string RacerId = 4;
+  string FirstName = 5;
+  string LastName = 6;
+  repeated string Pets = 7;
+  RaceState State = 8;
+  google.protobuf.Timestamp Start = 9;
+  google.protobuf.Timestamp Finish = 10;
 }
 
 enum RaceState {
