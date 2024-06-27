@@ -253,11 +253,14 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
         await semaphoreSlim.WaitAsync();
 
+
+        Console.WriteLine($"_actionsSimple: {_actionsSimple.Dump()}");
+
         try
         {
             result = _actionsSimple
                         .FirstOrDefault(it => it.Value.Any(i => i.Id == actionId))
-                        .Value.FirstOrDefault(result => result.Id == actionId);
+                        .Value?.FirstOrDefault(result => result.Id == actionId);
         }
         finally
         {
@@ -274,7 +277,9 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
         try
         {
-            result = _actionsSimple.FirstOrDefault(it => it.Value.Any(i => i.Id == actionId)).Value[0];
+            result = _actionsSimple
+                        .FirstOrDefault(it => it.Value.Any(i => i.Id == actionId))
+                        .Value?.FirstOrDefault(result => result.Id == actionId);
         }
         finally
         {
