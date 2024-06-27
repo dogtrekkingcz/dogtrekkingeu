@@ -12,10 +12,9 @@ internal sealed record ActionRecord : BaseRecord, IRecord
     public List<RaceDto> Races { get; set; } = new List<RaceDto>();
     public ActionSaleDto Sale { get; set; } = new();
 
+    public List<Guid> DetailsCanSee { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
     public List<Guid> ResultsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
-
     public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
-
     public List<Guid> ActionCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
 
     public sealed record RaceDto
