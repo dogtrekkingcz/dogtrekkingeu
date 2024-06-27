@@ -54,12 +54,24 @@ else
             @foreach (var category in Model.Categories)
             {
                 var resultsPerCategory = Results[category.Id];
+                var order = 1;
 
                 @foreach (var racer in resultsPerCategory.Results.OrderBy(r => r.Finish.HasValue && r.Start.HasValue ? r.Finish.Value - r.Start.Value : TimeSpan.MaxValue))
                 {
                     <tr>
                         <td>
-                            <div class="col-12">?</div>
+                            <div class="col-12">
+                                @if (racer.State == Models.ResultsModel.ResultState.Finished)
+                                {
+                                    <i>@order</i>
+                                    
+                                    order++;
+                                }
+                                else
+                                {
+                                    <i>-</i>
+                                }
+                            </div>
                         </td>
                         <td>
                             @category.Name
