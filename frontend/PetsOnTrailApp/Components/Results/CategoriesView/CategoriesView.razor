@@ -82,7 +82,7 @@ else
                         <td>
                             @if (racer.Start.HasValue)
                             {
-                                @racer.Start.Value.ToLocalTime().ToString("dd HH:mm:ss")
+                                @racer.Start.Value.LocalDateTime.ToString("dd HH:mm:ss")
                             }
                             
                             @if (CanIEditResults)
@@ -95,7 +95,7 @@ else
                         <td>
                             @if (racer.Finish.HasValue)
                             {
-                                @racer.Finish.Value.ToLocalTime().ToString("dd HH:mm:ss")
+                                @racer.Finish.Value.LocalDateTime.ToString("dd HH:mm:ss")
                             }
 
                             @if (CanIEditResults)
