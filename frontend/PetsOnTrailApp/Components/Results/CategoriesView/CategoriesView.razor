@@ -1,6 +1,8 @@
 ﻿@page "/categories/{ActionId}/{RaceId}"
 
 @using PetsOnTrailApp.Components.ActionView
+@using PetsOnTrailApp.Components.ActionViewHeader
+@using PetsOnTrailApp.Components.Loading
 
 @inherits CategoriesViewBase
 
@@ -17,21 +19,94 @@ else
     <ActionViewHeader ActionId="@ActionId" />
 
     <div class="vh-100 d-flex flex-column align-items-stretch">
+        @{
+            bool isEven = true;
+        }
 
-    @{
-        bool isEven = true;
-    }
+        <div class="container">
+            <div class="row">
+                @foreach (var category in Model.Categories)
+                {
+                    var color = isEven ? "btn-primary" : "btn-info";
 
-    @foreach (var category in Model.Categories)
-    {
-        var color = isEven ? "btn-primary" : "btn-info";
+                    <div class="col">
+                        <button class="btn @color" @onclick="(() => NavigateToCategoryOf(category.Id))">
+                            @category.Name
+                        </button>
+                    </div>
 
-        <button class="btn @color" @onclick="(() => NavigateToCategoryOf(category.Id))">
-            @category.Name
-        </button>
-
-        isEven = !isEven;
-    }
-
+                    isEven = !isEven;
+                }
+            </div>
+        </div>
     </div>
+
+    <hr />
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@Localizer["#"]</th>
+            <th>@Localizer["Results.Category"]</th>
+            <th>@Localizer["Results.SurnameName"]</th>
+            <th>@Localizer["Results.Start"]</th>
+            <th>@Localizer["Results.Finish"]</th>
+            <th>@Localizer["Results.Time"]</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model.Categories)
+            {
+                var resultsPerCategory = Results[category.Id];
+
+                @foreach (var racer in resultsPerCategory.Results.OrderBy(r => r.Finish.HasValue && r.Start.HasValue ? r.Finish.Value - r.Start.Value : TimeSpan.MaxValue))
+                {
+                    <tr>
+                        <td>
+                            <div class="col-12">?</div>
+                        </td>
+                        <td>
+                            @category.Name
+                        </td>
+                        <td>
+                            @racer.LastName, @racer.FirstName
+                        </td>
+                        <td>
+                            @if (racer.Start.HasValue)
+                            {
+                                @racer.Start.Value.ToString("HH:mm:ss")
+                                @if (CanIEditResults)
+                                {
+                                    <button class="btn btn-sm btn-warning" @onclick="async () => await StartNow(category.Id, racer.Id)">
+                                        <i class="fas fa-times">@Localizer["Results.Now"]</i>
+                                    </button>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (racer.Finish.HasValue)
+                            {
+                                @racer.Finish.Value.ToString("HH:mm:ss")
+                                @if (CanIEditResults)
+                                {
+                                    <button class="btn btn-sm btn-warning" @onclick="async () => await FinishNow(category.Id, racer.Id)">
+                                        <i class="fas fa-times">@Localizer["Results.Now"]</i>
+                                    </button>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <div class="col-12">
+                                @if (racer.Finish.HasValue && racer.Start.HasValue)
+                                {
+                                    var totalTime = racer.Finish.Value - racer.Start.Value;
+                                    @totalTime.ToString(@"hh\:mm\:ss")
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 }

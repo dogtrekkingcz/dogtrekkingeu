@@ -6,26 +6,20 @@
 
 @inject IStringLocalizer<Resource> Localizer
 
-@* <ResultsAdd 
-    ActionId="@ActionId" 
-    RaceId="@RaceId"
-    RaceBegin="@actionRace.Begin"
-    RaceEnd="@actionRace.End"
-    CategoryId="@CategoryId"
-    OnResultAddedCallback="(args) => ResultAdded(args.Item1, args.Item2, args.Item3)" />
-<hr /> *@
-
 <ActionViewHeader ActionId="@ActionId" />
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <button class="btn btn-primary" @onclick="() => AddResult()">
-                <i class="fas fa-plus">@Localizer["Results.Add"]</i>
-            </button>
+@if (CanIEditResults)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" @onclick="() => AddResult()">
+                    <i class="fas fa-plus">@Localizer["Results.Add"]</i>
+                </button>
+            </div>
         </div>
     </div>
-</div>
+}
 
 <hr />
 

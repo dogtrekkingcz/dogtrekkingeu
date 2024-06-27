@@ -255,8 +255,9 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
         try
         {
-            // TODO validate it!!!
-            result = _actionsSimple.FirstOrDefault(it => it.Value.Any(i => i.Id == actionId)).Value[0];
+            result = _actionsSimple
+                        .FirstOrDefault(it => it.Value.Any(i => i.Id == actionId))
+                        .Value.FirstOrDefault(result => result.Id == actionId);
         }
         finally
         {

@@ -52,7 +52,22 @@
     <script src="js/libs/jsQR.js"></script>
     <script src="js/Checkpoints/QrCodeReader.js"></script>
     <script src="js/MapUtils/GetGpsLocation.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
+    
+    <!--<script>navigator.serviceWorker.register('service-worker.js');</script>-->
+
+    <script>
+        navigator.serviceWorker
+            .register('/sw.js', { scope: '/' })
+            .then(() => {
+                console.info('Developer for Life Service Worker Registered');
+            }, err => console.error("Developer for Life Service Worker registration failed: ", err));
+
+        navigator.serviceWorker
+            .ready
+            .then(() => {
+                console.info('Developer for Life Service Worker Ready');
+            });
+    </script>
 </body>
 
 </html>
