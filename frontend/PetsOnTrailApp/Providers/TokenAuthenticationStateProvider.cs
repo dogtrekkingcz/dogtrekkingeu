@@ -21,7 +21,6 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         var token = await tokenStorage.GetAccessToken();
-        await tokenStorage.SetTokensAsync(token, "");
 
         var identity = string.IsNullOrEmpty(token)
             ? new ClaimsIdentity()
