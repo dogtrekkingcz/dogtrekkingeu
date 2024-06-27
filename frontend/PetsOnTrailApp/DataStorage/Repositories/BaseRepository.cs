@@ -17,18 +17,12 @@ public class BaseRepository : IBaseRepository
 
     public async Task<List<Guid>> GetMyRolesAsync() 
     {
-        var result = new List<Guid> { Constants.Roles.InternalAdministrator.GUID }; // TODO: Get from user data when login
+        var result = new List<Guid> { };
 
         var user = await _userProfileService.GetAsync();
         if (user == null)
             return result;
 
-        Console.WriteLine("User rights from server: " + user.Dump());
-
-        var userRoles = user.Roles;
-
-        Console.WriteLine("User roles from server: " + userRoles.Dump());
-
-        return result;
+        return user.Roles;
     }
 }
