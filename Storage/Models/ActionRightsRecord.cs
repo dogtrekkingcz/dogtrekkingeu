@@ -2,7 +2,7 @@
 
 internal sealed record ActionRightsRecord : BaseRecord, IRecord
 {
-    public string ActionId { get; set; } = string.Empty;
+    public Guid ActionId { get; set; } = Guid.Empty;
     
-    public IList<string> Roles { get; set; } = new List<string>();
+    public List<Guid> Roles { get; set; } = new List<Guid>();
 }

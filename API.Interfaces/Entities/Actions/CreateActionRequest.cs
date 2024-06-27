@@ -10,6 +10,8 @@ public sealed record CreateActionRequest
 
     public string ContactMail { get; set; } = string.Empty;
 
+    public string Www { get; set; } = string.Empty;
+
     public List<Guid> ResultsCanEdit { get; set; } = new List<Guid>();
 
     public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid>();
