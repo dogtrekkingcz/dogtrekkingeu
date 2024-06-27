@@ -25,6 +25,7 @@ public class CategoriesViewBase : ComponentBase
         Model = await _actionsRepository.GetCategoriesForActionRaceAsync(Guid.Parse(ActionId), Guid.Parse(RaceId));
 
         CanIEditResults = await _actionsRepository.CanIEditResultsAsync(Guid.Parse(ActionId), CancellationToken.None);
+        Console.WriteLine($"CanIEditResults: {CanIEditResults}");
 
         await Reload(false);
     }

@@ -18,26 +18,22 @@ else
 {
     <ActionViewHeader ActionId="@ActionId" />
 
-    <div class="vh-100 d-flex flex-column align-items-stretch">
-        @{
-            bool isEven = true;
-        }
+    bool isEven = true;
 
-        <div class="container">
-            <div class="row">
-                @foreach (var category in Model.Categories)
-                {
-                    var color = isEven ? "btn-primary" : "btn-info";
+    <div class="container">
+        <div class="row">
+            @foreach (var category in Model.Categories)
+            {
+                var color = isEven ? "btn-primary" : "btn-info";
 
-                    <div class="col">
-                        <button class="btn @color" @onclick="(() => NavigateToCategoryOf(category.Id))">
-                            @category.Name
-                        </button>
-                    </div>
+                <div class="col">
+                    <button class="btn @color" @onclick="(() => NavigateToCategoryOf(category.Id))">
+                        @category.Name
+                    </button>
+                </div>
 
-                    isEven = !isEven;
-                }
-            </div>
+                isEven = !isEven;
+            }
         </div>
     </div>
 
@@ -74,25 +70,27 @@ else
                         <td>
                             @if (racer.Start.HasValue)
                             {
-                                @racer.Start.Value.ToString("HH:mm:ss")
-                                @if (CanIEditResults)
-                                {
-                                    <button class="btn btn-sm btn-warning" @onclick="async () => await StartNow(category.Id, racer.Id)">
-                                        <i class="fas fa-times">@Localizer["Results.Now"]</i>
-                                    </button>
-                                }
+                                @racer.Start.Value.ToString("dd HH:mm:ss")
+                            }
+                            
+                            @if (CanIEditResults)
+                            {
+                                <button class="btn btn-sm btn-warning" @onclick="async () => await StartNow(category.Id, racer.Id)">
+                                    <i class="fas fa-times">@Localizer["Results.Now"]</i>
+                                </button>
                             }
                         </td>
                         <td>
                             @if (racer.Finish.HasValue)
                             {
-                                @racer.Finish.Value.ToString("HH:mm:ss")
-                                @if (CanIEditResults)
-                                {
-                                    <button class="btn btn-sm btn-warning" @onclick="async () => await FinishNow(category.Id, racer.Id)">
-                                        <i class="fas fa-times">@Localizer["Results.Now"]</i>
-                                    </button>
-                                }
+                                @racer.Finish.Value.ToString("dd HH:mm:ss")
+                            }
+
+                            @if (CanIEditResults)
+                            {
+                                <button class="btn btn-sm btn-warning" @onclick="async () => await FinishNow(category.Id, racer.Id)">
+                                    <i class="fas fa-times">@Localizer["Results.Now"]</i>
+                                </button>
                             }
                         </td>
                         <td>
