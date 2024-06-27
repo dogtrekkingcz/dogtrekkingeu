@@ -159,6 +159,7 @@ public sealed record GetUserProfileInternalStorageResponse
         public string? Color { get; init; }
 
         public string Kennel { get; init; }
+        public Guid PetType { get; set; } = Guid.Empty;
 
         public DateTimeOffset? BirthDate { get; init; }
     }
