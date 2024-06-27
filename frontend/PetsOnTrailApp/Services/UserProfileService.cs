@@ -14,6 +14,7 @@ public sealed class UserProfileService : IUserProfileService
     private readonly Protos.UserProfiles.UserProfiles.UserProfilesClient _userProfilesClient;
     private readonly IServiceProvider _serviceProvider;
     private readonly TokenStorage _tokenStorage;
+    private readonly SharedLib.Providers.ITokenProvider _tokenProvider;
 
     private DateTimeOffset? IsValidTime { get; set; } = null;
 
@@ -21,20 +22,28 @@ public sealed class UserProfileService : IUserProfileService
         Protos.ActionRights.ActionRights.ActionRightsClient actionRightsClient, 
         Protos.UserProfiles.UserProfiles.UserProfilesClient userProfilesClient,
         TokenStorage tokenStorage,
+        SharedLib.Providers.ITokenProvider tokenProvider,
         IServiceProvider serviceProvider)
     {
         _actionRightsClient = actionRightsClient;
         _userProfilesClient = userProfilesClient;
         _serviceProvider = serviceProvider;
         _tokenStorage = tokenStorage;
+        _tokenProvider = tokenProvider;
     }
 
     public async Task<UserProfileModel> GetAsync()
     {
         var token = await _tokenStorage.GetAccessToken();
-        Console.WriteLine($"UserProfile: GetAsync: {token}");
         if (string.IsNullOrWhiteSpace(token))
-            return null;
+        {
+            token = await _tokenProvider.GetTokenAsync();
+
+            if (string.IsNullOrWhiteSpace(token))
+                return null;
+
+            await _tokenStorage.SetTokensAsync(token, "");
+        }
 
         if (IsValidTime != null && IsValidTime > DateTimeOffset.Now.AddMinutes(-5) && _userProfileModel != null)
             return _userProfileModel;

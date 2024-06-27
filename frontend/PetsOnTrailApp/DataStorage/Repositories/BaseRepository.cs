@@ -25,7 +25,8 @@ public class BaseRepository : IBaseRepository
 
         Console.WriteLine("User rights from server: " + user.Dump());
 
-        var userRoles = user.Rights.SelectMany(right => right.Roles).ToList();
+        var userRoles = user.Roles;
+
         Console.WriteLine("User roles from server: " + userRoles.Dump());
 
         return result;
