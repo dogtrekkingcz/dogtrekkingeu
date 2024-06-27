@@ -30,8 +30,10 @@ public sealed class UserProfileService : IUserProfileService
     }
 
     public async Task<UserProfileModel> GetAsync()
-    {   
-        if (string.IsNullOrWhiteSpace(await _tokenStorage.GetAccessToken()))
+    {
+        var token = await _tokenStorage.GetAccessToken();
+        Console.WriteLine($"UserProfile: GetAsync: {token}");
+        if (string.IsNullOrWhiteSpace(token))
             return null;
 
         if (IsValidTime != null && IsValidTime > DateTimeOffset.Now.AddMinutes(-5) && _userProfileModel != null)
