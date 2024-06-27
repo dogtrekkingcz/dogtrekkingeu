@@ -19,8 +19,6 @@ internal static class UserProfileMapping
         typeAdapterConfig.NewConfig<API_GetUserProfileResponse.VaccinationDto, GetUserProfileResponse.VaccinationDto>();
         typeAdapterConfig.NewConfig<API_GetUserProfileResponse.LatLngDto, GetUserProfileResponse.LatLngDto>();
         typeAdapterConfig.NewConfig<API_GetUserProfileResponse.ActivityDto, GetUserProfileResponse.ActivityDto>();
-        typeAdapterConfig.NewConfig<API_GetUserProfileResponse.PositionDto, GetUserProfileResponse.PositionDto>();
-        typeAdapterConfig.NewConfig<API_GetUserProfileResponse.ActivityPetDto, GetUserProfileResponse.ActivityPetDto>();
 
         typeAdapterConfig.NewConfig<CreateUserProfileRequest, API_CreateUserProfileRequest>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.AddressDto, API_CreateUserProfileRequest.AddressDto>();
@@ -29,8 +27,6 @@ internal static class UserProfileMapping
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.VaccinationDto, API_CreateUserProfileRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.LatLngDto, API_CreateUserProfileRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileRequest.ActivityDto, API_CreateUserProfileRequest.ActivityDto>();
-        typeAdapterConfig.NewConfig<CreateUserProfileRequest.PositionDto, API_CreateUserProfileRequest.PositionDto>();
-        typeAdapterConfig.NewConfig<CreateUserProfileRequest.ActivityPetDto, API_CreateUserProfileRequest.ActivityPetDto>();
         typeAdapterConfig.NewConfig<API_CreateUserProfileResponse, CreateUserProfileResponse>();
 
         return typeAdapterConfig;

@@ -72,29 +72,4 @@ message Activity {
   google.type.DateTime Start = 9;
   google.type.DateTime End = 10;
   bool IsPublic = 11;
-  repeated Position Positions = 12;
-  repeated ActivityPet Pets = 13;
-}
-
-message Position {
-  string Id = 1;
-  google.type.DateTime Time = 2;
-  double Latitude = 3;
-  double Longitude = 4;
-  double Altitude = 5;
-  double Accuracy = 6;
-  double Course = 7;
-  string Note = 8;
-  repeated string PhotoUris = 9;
-}
-
-message ActivityPet {
-  string Id = 1;
-  string Chip = 2;
-  string Name = 3;
-  string Breed = 4;
-  string Color = 5;
-  string Kennel = 6;
-  string PetType = 7;
-  google.type.DateTime BirthDate = 8;
 }

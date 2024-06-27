@@ -116,47 +116,5 @@ internal sealed record UserProfileRecord : BaseRecord, IRecord
         public DateTimeOffset? End { get; set; } = null;
 
         public bool IsPublic { get; set; } = true;
-
-        public List<PositionDto> Positions { get; set; } = new List<PositionDto>();
-
-        public List<ActivityPetDto> Pets { get; set; } = new List<ActivityPetDto>();
-    }
-    public sealed record PositionDto
-    {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-
-        public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
-
-        public double Latitude { get; set; } = double.NaN;
-
-        public double Longitude { get; set; } = double.NaN;
-
-        public double Altitude { get; set; } = double.NaN;
-
-        public double Accuracy { get; set; } = double.NaN;
-
-        public double Course { get; set; } = double.NaN;
-
-        public string Note { get; set; } = string.Empty;
-
-        public List<string> PhotoUris { get; set; } = new();
-    }
-
-    public sealed record ActivityPetDto
-    {
-        public string Id { get; init; } = Guid.NewGuid().ToString();
-
-        public string? Chip { get; init; }
-
-        public string? Name { get; init; }
-
-        public string? Breed { get; init; }
-
-        public string? Color { get; init; }
-
-        public string Kennel { get; init; }
-        public Guid PetType { get; set; } = Guid.Empty;
-
-        public DateTimeOffset? BirthDate { get; init; }
     }
 }

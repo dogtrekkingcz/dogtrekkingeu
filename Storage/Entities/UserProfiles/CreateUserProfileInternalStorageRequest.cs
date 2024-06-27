@@ -120,46 +120,5 @@ public sealed record CreateUserProfileInternalStorageRequest
         public DateTimeOffset? End { get; init; } = null;
 
         public bool IsPublic { get; init; } = true;
-
-        public List<PositionDto> Positions { get; init; } = new List<PositionDto>(0);
-
-        public List<ActivityPetDto> Pets { get; init; } = new List<ActivityPetDto>(0);
-    }
-    public sealed record PositionDto
-    {
-        public string Id { get; init; } = Guid.NewGuid().ToString();
-
-        public DateTimeOffset Time { get; init; } = DateTimeOffset.Now;
-
-        public double Latitude { get; init; } = double.NaN;
-
-        public double Longitude { get; init; } = double.NaN;
-
-        public double Altitude { get; init; } = double.NaN;
-
-        public double Accuracy { get; init; } = double.NaN;
-
-        public double Course { get; init; } = double.NaN;
-
-        public string Note { get; init; } = string.Empty;
-
-        public List<string> PhotoUris { get; init; } = new();
-    }
-
-    public sealed record ActivityPetDto
-    {
-        public string Id { get; init; } = Guid.NewGuid().ToString();
-
-        public string? Chip { get; init; }
-
-        public string? Name { get; init; }
-
-        public string? Breed { get; init; }
-
-        public string? Color { get; init; }
-
-        public string Kennel { get; init; }
-
-        public DateTimeOffset? BirthDate { get; init; }
     }
 }

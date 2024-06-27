@@ -52,7 +52,6 @@ internal class ActivitiesRepositoryService : IActivitiesRepositoryService
 
             // into profile we store only the reference to activity, no position data; its in the activity table itself
             var activity = _mapper.Map<UserProfileRecord.ActivityDto>(request);
-            activity.Positions = new List<UserProfileRecord.PositionDto>(0);    // no need to store positions in user profile
             user.Activities.Add(activity);
 
             var createdUserActivityRecord = await _profilesService.AddOrUpdateAsync(user, cancellationToken);

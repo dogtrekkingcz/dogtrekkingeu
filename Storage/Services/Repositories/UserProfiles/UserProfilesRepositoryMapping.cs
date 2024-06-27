@@ -18,8 +18,6 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.LatLngDto, UserProfileRecord.LatLngDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.PetDto, UserProfileRecord.PetDto>();
             typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.ActivityDto, UserProfileRecord.ActivityDto>();
-            typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.PositionDto, UserProfileRecord.PositionDto>();
-            typeAdapterConfig.NewConfig<CreateUserProfileInternalStorageRequest.ActivityPetDto, UserProfileRecord.ActivityPetDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord, CreateUserProfileInternalStorageResponse>();
             
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest, UserProfileRecord>()
@@ -30,8 +28,6 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.LatLngDto, UserProfileRecord.LatLngDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.PetDto, UserProfileRecord.PetDto>();
             typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.ActivityDto, UserProfileRecord.ActivityDto>();
-            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.PositionDto, UserProfileRecord.PositionDto>();
-            typeAdapterConfig.NewConfig<UpdateUserProfileInternalStorageRequest.ActivityPetDto, UserProfileRecord.ActivityPetDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord, UpdateUserProfileInternalStorageResponse>();
 
             typeAdapterConfig.NewConfig<UserProfileRecord, GetUserProfileInternalStorageResponse>();
@@ -41,8 +37,6 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord.LatLngDto, GetUserProfileInternalStorageResponse.LatLngDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.PetDto, GetUserProfileInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.ActivityDto, GetUserProfileInternalStorageResponse.ActivityDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.PositionDto, GetUserProfileInternalStorageResponse.PositionDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.ActivityPetDto, GetUserProfileInternalStorageResponse.ActivityPetDto>();
 
             typeAdapterConfig.NewConfig<UserProfileRecord, GetSelectedUserProfilesInternalStorageResponse.UserProfileDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.AddressDto, GetSelectedUserProfilesInternalStorageResponse.AddressDto>();
@@ -51,8 +45,6 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<UserProfileRecord.LatLngDto, GetSelectedUserProfilesInternalStorageResponse.LatLngDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.PetDto, GetSelectedUserProfilesInternalStorageResponse.PetDto>();
             typeAdapterConfig.NewConfig<UserProfileRecord.ActivityDto, GetSelectedUserProfilesInternalStorageResponse.ActivityDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.PositionDto, GetSelectedUserProfilesInternalStorageResponse.PositionDto>();
-            typeAdapterConfig.NewConfig<UserProfileRecord.ActivityPetDto, GetSelectedUserProfilesInternalStorageResponse.ActivityPetDto>();
 
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse,  UpdateUserProfileInternalStorageRequest>();
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.AddressDto,  UpdateUserProfileInternalStorageRequest.AddressDto>();
@@ -61,12 +53,8 @@ namespace Storage.Services.Repositories.UserProfiles
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.LatLngDto, UpdateUserProfileInternalStorageRequest.LatLngDto>();
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PetDto, UpdateUserProfileInternalStorageRequest.PetDto>();
             typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ActivityDto, UpdateUserProfileInternalStorageRequest.ActivityDto>();
-            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.PositionDto, UpdateUserProfileInternalStorageRequest.PositionDto>();
-            typeAdapterConfig.NewConfig<GetUserProfileInternalStorageResponse.ActivityPetDto, UpdateUserProfileInternalStorageRequest.ActivityPetDto>();
 
             typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest, UserProfileRecord.ActivityDto>();
-            typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PositionDto, UserProfileRecord.PositionDto>();
-            typeAdapterConfig.NewConfig<CreateActivityInternalStorageRequest.PetDto, UserProfileRecord.ActivityPetDto>();
 
             return typeAdapterConfig;
         }

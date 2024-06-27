@@ -14,8 +14,6 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<GetUserProfileResponse.VaccinationDto, Protos.UserProfiles.GetUserProfile.VaccinationDto>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.LatLngDto, Google.Type.LatLng>();
         typeAdapterConfig.NewConfig<GetUserProfileResponse.ActivityDto, Protos.UserProfiles.GetUserProfile.Activity>();
-        typeAdapterConfig.NewConfig<GetUserProfileResponse.PositionDto, Protos.UserProfiles.GetUserProfile.Position>();
-        typeAdapterConfig.NewConfig<GetUserProfileResponse.ActivityPetDto, Protos.UserProfiles.GetUserProfile.ActivityPet>();
 
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.CreateUserProfileRequest, CreateUserProfileRequest>()
             .Ignore(d => d.Roles);
@@ -25,8 +23,6 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Vaccination, CreateUserProfileRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, CreateUserProfileRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Activity, CreateUserProfileRequest.ActivityDto>();
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.ActivityPet, CreateUserProfileRequest.ActivityPetDto>();
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.CreateUserProfile.Position, CreateUserProfileRequest.PositionDto>();
         typeAdapterConfig.NewConfig<CreateUserProfileResponse, Protos.UserProfiles.CreateUserProfile.CreateUserProfileResponse>();
         
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileRequest, UpdateUserProfileRequest>();
@@ -35,8 +31,6 @@ internal static class UserProfilesServiceMapping
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Pet, UpdateUserProfileRequest.PetDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Vaccination, UpdateUserProfileRequest.VaccinationDto>();
         typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Activity, UpdateUserProfileRequest.ActivityDto>();
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.ActivityPet, UpdateUserProfileRequest.ActivityPetDto>();
-        typeAdapterConfig.NewConfig<Protos.UserProfiles.UpdateUserProfile.Position, UpdateUserProfileRequest.PositionDto>();
         typeAdapterConfig.NewConfig<Google.Type.LatLng, UpdateUserProfileRequest.LatLngDto>();
         typeAdapterConfig.NewConfig<UpdateUserProfileResponse, Protos.UserProfiles.UpdateUserProfile.UpdateUserProfileResponse>();
         
