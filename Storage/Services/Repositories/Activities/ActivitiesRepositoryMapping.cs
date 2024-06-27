@@ -29,7 +29,9 @@ namespace Storage.Services.Repositories.Activities
             typeAdapterConfig.NewConfig<ActivityRecord.PositionDto, GetActivityByUserIdAndActivityIdInternalStorageResponse.PositionDto>();
             typeAdapterConfig.NewConfig<ActivityRecord.PetDto, GetActivityByUserIdAndActivityIdInternalStorageResponse.PetDto>();
 
-            typeAdapterConfig.NewConfig<UserProfileRecord.ActivityDto, GetActivityByUserIdAndActivityIdInternalStorageResponse>();
+            typeAdapterConfig.NewConfig<UserProfileRecord.ActivityDto, GetActivityByUserIdAndActivityIdInternalStorageResponse>()
+                .Ignore(d => d.Positions)
+                .Ignore(d => d.Pets);
 
             typeAdapterConfig.NewConfig<List<ActivityRecord>, GetActivitiesInternalStorageResponse>()
                 .Map(d => d.Activities, s => s);
