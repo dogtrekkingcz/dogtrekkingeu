@@ -63,25 +63,27 @@ public sealed class UserProfileService : IUserProfileService
                 SetUserProfile(mapper.Map<UserProfileModel>(userProfile));
             }
 
-            var getActionRightsResponse = await _actionRightsClient.getActionRightsAsync(
-                new Protos.ActionRights.GetActionRights.GetActionRightsRequest
-                {
-                    Id = ""
-                });
 
-            var userRights = new List<UserProfileModel.ActionRightsDto>();
-            foreach (var right in getActionRightsResponse.Rights)
-            {
-                userRights.Add(new UserProfileModel.ActionRightsDto
-                {
-                    Id = Guid.Parse(right.Id),
-                    ActionId = Guid.Parse(right.ActionId),
-                    UserId = Guid.Parse(right.UserId),
-                    Roles = right.Roles.Select(role => Guid.Parse(role)).ToList()
-                });
-            }
+            // TODO: Do I need this? The rights for actions are stored in the actions themselves as the list of required roles...
+            //var getActionRightsResponse = await _actionRightsClient.getActionRightsAsync(
+            //    new Protos.ActionRights.GetActionRights.GetActionRightsRequest
+            //    {
+            //        Id = ""
+            //    });
 
-            SetRights(userRights);
+            //var userRights = new List<UserProfileModel.ActionRightsDto>();
+            //foreach (var right in getActionRightsResponse.Rights)
+            //{
+            //    userRights.Add(new UserProfileModel.ActionRightsDto
+            //    {
+            //        Id = Guid.Parse(right.Id),
+            //        ActionId = Guid.Parse(right.ActionId),
+            //        UserId = Guid.Parse(right.UserId),
+            //        Roles = right.Roles.Select(role => Guid.Parse(role)).ToList()
+            //    });
+            //}
+
+            //SetRights(userRights);
 
             IsValidTime = DateTimeOffset.Now;
 
