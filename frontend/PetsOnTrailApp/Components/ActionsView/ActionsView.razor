@@ -20,7 +20,7 @@ else
         </tr>
         </thead>
         <tbody>
-        @foreach (var action in Model)
+        @foreach (var action in Model.OrderBy(a => a.Begin))
         {
             <tr>
                 <td>
