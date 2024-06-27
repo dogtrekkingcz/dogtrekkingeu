@@ -13,13 +13,14 @@ message CreateActionRequest {
   string Description = 3;
   string ContactMail = 4;
   string Www = 5;
-  repeated string ResultsCanEdit = 6;
-  repeated string CompetitorsCanEdit = 7;
-  repeated string ActionCanEdit = 8;
-  TermDto Term = 9;
-  AddressDto Address = 10;
-  repeated RaceDto Races = 11;
-  ActionSaleDto Sale = 12;
+  repeated string DetailsCanSee = 6;
+  repeated string ResultsCanEdit = 7;
+  repeated string CompetitorsCanEdit = 8;
+  repeated string ActionCanEdit = 9;
+  TermDto Term = 10;
+  AddressDto Address = 11;
+  repeated RaceDto Races = 12;
+  ActionSaleDto Sale = 13;
 }
 
 message RaceDto {

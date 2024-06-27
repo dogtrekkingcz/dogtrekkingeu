@@ -16,6 +16,7 @@ public sealed record CreateActionInternalStorageRequest
 
     public string ContactMail { get; init; } = string.Empty;
 
+    public List<Guid> DetailsCanSee { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
     public List<Guid> ResultsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
 
     public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };

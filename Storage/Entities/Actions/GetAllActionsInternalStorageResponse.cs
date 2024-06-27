@@ -20,6 +20,7 @@ public sealed record GetAllActionsInternalStorageResponse
 
         public string ContactMail { get; init; } = string.Empty;
 
+        public List<Guid> DetailsCanSee { get; set; } = new List<Guid>();
         public List<Guid> ResultsCanEdit { get; set; } = new List<Guid>();
 
         public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid>();

@@ -21,9 +21,10 @@ message ActionDto {
   AddressDto Address = 7;
   repeated RaceDto Races = 8;
   ActionSaleDto Sale = 9;
-  repeated string ResultsCanEdit = 10;
-  repeated string CompetitorsCanEdit = 11;
-  repeated string ActionCanEdit = 12;
+  repeated string DetailsCanSee = 10;
+  repeated string ResultsCanEdit = 11;
+  repeated string CompetitorsCanEdit = 12;
+  repeated string ActionCanEdit = 13;
 }
 
 message RaceDto {

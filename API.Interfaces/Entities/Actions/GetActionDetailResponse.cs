@@ -1,4 +1,6 @@
-﻿namespace PetsOnTrail.Interfaces.Actions.Entities.Actions
+﻿using Microsoft.VisualBasic;
+
+namespace PetsOnTrail.Interfaces.Actions.Entities.Actions
 {
     public sealed record GetActionDetailResponse
     {
@@ -12,6 +14,7 @@
 
         public string ContactMail { get; set; } = string.Empty;
 
+        public List<Guid> DetailsCanSee { get; set; } = new List<Guid>();
         public List<Guid> ResultsCanEdit { get; set; } = new List<Guid>();
 
         public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid>();

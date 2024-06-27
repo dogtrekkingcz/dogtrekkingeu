@@ -18,9 +18,10 @@ message GetActionResponse {
   repeated RaceDto Races = 8;
   ActionSaleDto Sale = 9;
   string TypeId = 10;
-  repeated string ResultsCanEdit = 11;
-  repeated string CompetitorsCanEdit = 12;
-  repeated string ActionCanEdit = 13;
+  repeated string DetailsCanSee = 11;
+  repeated string ResultsCanEdit = 12;
+  repeated string CompetitorsCanEdit = 13;
+  repeated string ActionCanEdit = 14;
 }
 
 message CheckpointDto {

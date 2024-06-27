@@ -9,15 +9,19 @@ import "google/type/latlng.proto";
 
 message UpdateActionRequest {
   string Id = 1;
-  google.type.DateTime Created = 2;
+  string TypeId = 2;
   string Name = 3;
   string Description = 4;
   string ContactMail = 5;
-  TermDto Term = 6;
-  AddressDto Address = 7;
-  repeated RaceDto Races = 8;
-  ActionSaleDto Sale = 9;
-  string TypeId = 10;
+  string Www = 6;
+  repeated string DetailsCanSee = 7;
+  repeated string ResultsCanEdit = 8;
+  repeated string CompetitorsCanEdit = 9;
+  repeated string ActionCanEdit = 10;
+  TermDto Term = 11;
+  AddressDto Address = 12;
+  repeated RaceDto Races = 13;
+  ActionSaleDto Sale = 14;
 }
 
 message RaceDto {
