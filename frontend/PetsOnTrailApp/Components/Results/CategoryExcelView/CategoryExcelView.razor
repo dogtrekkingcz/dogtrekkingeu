@@ -1,0 +1,46 @@
+﻿@page "/category/{ActionId}/{RaceId}/{CategoryId}/excel"
+
+@using PetsOnTrailApp.Components.ActionViewHeader
+
+@inherits CategoryExcelViewBase
+
+@inject IStringLocalizer<Resource> Localizer
+
+<ActionViewHeader ActionId="@ActionId" />
+
+@if (CanIEditResults)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="excel-table">
+                    <thead>
+                        <tr>
+                            <th>@Localizer["#"]</th>
+                            <th>@Localizer["Results.Surname"]</th>
+                            <th>@Localizer["Results.Name"]</th>
+                            <th>@Localizer["Results.Pet"]</th>
+                            <th>@Localizer["Results.Start"]</th>
+                            <th>@Localizer["Results.Checkpoint1"]</th>
+                            <th>@Localizer["Results.Finish"]</th>
+                            <th>@Localizer["Results.Time"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in tableData)
+                        {
+                            <tr>
+                                @foreach (var cell in row)
+                                {
+                                    <td>
+                                        <input type="text" @bind="cell.Value" @bind:event="oninput" />
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

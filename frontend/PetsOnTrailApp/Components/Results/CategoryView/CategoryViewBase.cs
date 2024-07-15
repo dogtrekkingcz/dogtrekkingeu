@@ -104,4 +104,9 @@ public class CategoryViewBase : ComponentBase
     {
         _navigationManager.NavigateTo($"category/{ActionId}/{RaceId}/{CategoryId}/add");
     }
+
+    public void SwitchToExcelLikeTable()
+    {
+        _navigationManager.NavigateTo($"category/{ActionId}/{RaceId}/{CategoryId}/excel");
+    }
 }
