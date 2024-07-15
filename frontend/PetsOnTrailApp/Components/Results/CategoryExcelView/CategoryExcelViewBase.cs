@@ -17,15 +17,22 @@ public class CategoryExcelViewBase : ComponentBase
     public RaceModel RaceModel { get; set; } = null;
     public bool CanIEditResults { get; set; } = false;
 
-    public List<List<Cell>> tableData = new List<List<Cell>>
+    public List<Competitor> tableData = new List<Competitor>
     {
-        new List<Cell> { new Cell { Value = "Cell 1" }, new Cell { Value = "Cell 2" }, new Cell { Value = "Cell 3" }, new Cell { Value = "Cell 4" } },
-        new List<Cell> { new Cell { Value = "Cell 5" }, new Cell { Value = "Cell 6" }, new Cell { Value = "Cell 7" }, new Cell { Value = "Cell 8" } }
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
+        new Competitor { Start = DateTimeOffset.Now },
     };
 
-    public class Cell
+    public class Competitor
     {
-        public string Value { get; set; }
+        public DateTimeOffset? Start { get; set; } = null;
     }
 
 
