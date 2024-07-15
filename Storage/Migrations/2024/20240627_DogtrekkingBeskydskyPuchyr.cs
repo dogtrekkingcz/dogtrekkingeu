@@ -74,7 +74,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "739167676",
                                         Email = "v.erda.frankova@gmail.com",
                                         Start = new DateTime(2024, 6, 28, 5, 29, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 4, 49, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -100,7 +101,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "602569924",
                                         Email = "nikol-hamakova@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 51, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 1, 42, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -126,7 +128,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "702114351",
                                         Email = "kristyna.ledlova@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 26, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 4, 50, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -152,7 +155,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "776391059",
                                         Email = "da.petru235@gmail.com",
                                         Start = new DateTime(2024, 6, 28, 5, 41, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -178,7 +181,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "731464733",
                                         Email = "elissaen@gmail.com",
                                         Start = new DateTime(2024, 6, 28, 6, 41, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -204,7 +207,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "607750817",
                                         Email = "dobrodruzka@atlas.cz",
                                         Start = new DateTime(2024, 6, 28, 7, 0, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 21, 34, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -238,7 +242,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "731491945",
                                         Email = "mila.bauerova@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 35, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -264,7 +268,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "604711491",
                                         Email = "bayerovahelena21@gmail.com",
                                         Start = new DateTime(2024, 6, 28, 5, 0, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -340,7 +344,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "737071489",
                                         Email = "knopovak@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 31, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 5, 05, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -373,7 +378,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "605153777",
                                         Email = "romanakratochvil@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 26, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 5, 01, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -399,7 +405,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "608865496",
                                         Email = "rlibova@gmail.com",
                                         Start = new DateTime(2024, 6, 28, 5, 25, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -425,7 +431,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "732182191",
                                         Email = "mariepayne@atlas.cz",
                                         Start = new DateTime(2024, 6, 28, 6, 37, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -451,7 +457,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "605973600",
                                         Email = "barbanekx@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 27, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 23, 42, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -485,7 +492,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "722938552",
                                         Email = "Brabec.Roman@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 6, 37, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -517,7 +524,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "774515321",
                                         Email = "mdurisik@centrum.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 25, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -542,7 +549,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "731975208",
                                         Email = "Mfaurkeakla@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 6, 48, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 1, 35, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -567,7 +575,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "723509553",
                                         Email = "ji.tyl@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 29, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 4, 49, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -599,7 +608,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "606822852",
                                         Email = "reckav@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 26, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 4, 50, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -624,7 +634,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "604654504",
                                         Email = "vinkllukas@gmail.com",
                                         Start = new DateTime(2024, 6, 28, 5, 41, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -658,7 +668,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "731491938",
                                         Email = "vitbauer@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 35, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -683,7 +693,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "724086237",
                                         Email = "jdustir@gmail.com",
                                         Start = new DateTime(2024, 6, 28, 5, 1, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 30, 0, 1, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -715,7 +726,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "770158635",
                                         Email = "egg.j@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 42, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 11, 43, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -740,7 +752,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "732215641",
                                         Email = "romanpolasek75@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 6, 37, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 20, 52, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -765,7 +778,8 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "602582404",
                                         Email = "janseda@mybox.cz",
                                         Start = new DateTime(2024, 6, 28, 6, 5, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        Finish = new DateTime(2024, 6, 29, 12, 20, 0),
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Finished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
@@ -790,7 +804,7 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                                         Phone = "602730321",
                                         Email = "michal.vejtasa@seznam.cz",
                                         Start = new DateTime(2024, 6, 28, 5, 27, 0),
-                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.Started,
+                                        State = Entities.Actions.CreateActionInternalStorageRequest.RaceState.DidNotFinished,
                                         Pets = new List<Entities.Actions.CreateActionInternalStorageRequest.PetDto>
                                         {
                                             new Entities.Actions.CreateActionInternalStorageRequest.PetDto
