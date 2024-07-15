@@ -19,22 +19,20 @@ public class CategoryExcelViewBase : ComponentBase
     public RaceModel RaceModel { get; set; } = null;
     public bool CanIEditResults { get; set; } = false;
 
-    public List<Competitor> tableData = new List<Competitor>
-    {
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-        new Competitor { Start = DateTimeOffset.Now },
-    };
+    public List<Competitor> competitorsData = new List<Competitor>(0);
 
     public class Competitor
     {
+        public Guid Id { get; set; }
+        public int? Order { get; set; } = 0;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Pets { get; set; } = string.Empty;
         public DateTimeOffset? Start { get; set; } = null;
+        public DateTimeOffset? Checkpoint1 { get; set; } = null;
+        public DateTimeOffset? Finish { get; set; } = null;
+        public string ResultTime { get; set; } = "Started";
+
     }
 
 
@@ -61,6 +59,33 @@ public class CategoryExcelViewBase : ComponentBase
         Model = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), forceReloadFromServerStorage);
         RaceModel = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
 
+        var order = 1;
+        foreach (var competitor in Model.Results)
+        {
+            competitorsData.Add(new Competitor
+            {
+                Id = competitor.Id,
+                Order = order,
+                FirstName = competitor.FirstName,
+                LastName = competitor.LastName,
+                Pets = string.Join(", ", competitor.Pets.Select(pet => pet)),
+                Start = competitor.Start,
+                Checkpoint1 = competitor.Checkpoints[0]?.Time,
+                Finish = competitor.Finish,
+                ResultTime = competitor.Finish.HasValue ? competitor.Finish.Value.Subtract(competitor.Start.Value).ToString(@"hh\:mm\:ss") : "Started"
+            });
+
+            if (competitor.Finish.HasValue && competitor.Start.HasValue)
+            { 
+                order++;
+            }
+        }
+
         StateHasChanged();
+    }
+
+    protected void Save(Competitor competitor)
+    {
+        // _actionsRepository.SaveResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), Model, CancellationToken.None);
     }
 }

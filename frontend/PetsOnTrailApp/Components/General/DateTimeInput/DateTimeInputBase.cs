@@ -27,8 +27,8 @@ public class DateTimeInputBase : ComponentBase
                 int hours = parsedValueHhMm / 100;
                 int minutes = parsedValueHhMm % 100;
 
-                DateTime now = DateTime.UtcNow;
-                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, now.Day, hours, minutes, 0, DateTimeKind.Utc));
+                DateTime now = DateTime.Now;
+                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, now.Day, hours, minutes, 0, DateTimeKind.Local).ToUniversalTime());
             }
             else if (inputValue.Length == 6 && int.TryParse(inputValue, out int parsedValueDdHhMm))
             {
@@ -36,8 +36,8 @@ public class DateTimeInputBase : ComponentBase
                 int hours = (parsedValueDdHhMm % 10000) / 100;
                 int minutes = parsedValueDdHhMm % 100;
 
-                DateTime now = DateTime.UtcNow;
-                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, day, hours, minutes, 0, DateTimeKind.Utc));
+                DateTime now = DateTime.Now;
+                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, day, hours, minutes, 0, DateTimeKind.Local).ToUniversalTime());
             }
             else
             {
@@ -53,8 +53,8 @@ public class DateTimeInputBase : ComponentBase
                 int minutes = (parsedValueHhMmSs % 10000) / 100;
                 int seconds = parsedValueHhMmSs % 100;
 
-                DateTime now = DateTime.UtcNow;
-                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds, DateTimeKind.Utc));
+                DateTime now = DateTime.Now;
+                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds, DateTimeKind.Local).ToUniversalTime());
             }
             else if (inputValue.Length == 8 && int.TryParse(inputValue, out int parsedValueDdHhMmSs))
             {
@@ -63,8 +63,8 @@ public class DateTimeInputBase : ComponentBase
                 int minutes = (parsedValueDdHhMmSs % 10000) / 100;
                 int seconds = parsedValueDdHhMmSs % 100;
 
-                DateTime now = DateTime.UtcNow;
-                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, day, hours, minutes, seconds, DateTimeKind.Utc));
+                DateTime now = DateTime.Now;
+                Value = new DateTimeOffset(new DateTime(now.Year, now.Month, day, hours, minutes, seconds, DateTimeKind.Local).ToUniversalTime());
             }
             else
             {

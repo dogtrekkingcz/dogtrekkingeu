@@ -42,19 +42,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var competitor in tableData)
+                        @foreach (var competitor in competitorsData)
                         {
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>@competitor.Order</td>
+                                <td>@competitor.LastName</td>
+                                <td>@competitor.FirstName</td>
+                                <td>@competitor.Pets</td>
                                 <td>
-                                    <DateTimeInput Value="competitor.Start" />
+                                    <DateTimeInput Value="competitor.Start?.ToLocalTime()" />
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <DateTimeInput Value="competitor.Checkpoint1?.ToLocalTime()" />
+                                </td>
+                                <td>
+                                    <DateTimeInput Value="competitor.Finish?.ToLocalTime()" />
+                                </td>
+                                <td>@competitor.ResultTime</td>
+                                <td>
+                                    <button class="btn btn-primary" @onclick="() => Save(competitor)">@Localizer["Submit"]</button>
+                                </td>
                             </tr>
                         }
                     </tbody>
