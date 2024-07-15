@@ -8,12 +8,13 @@
             numpadOverlay.style.left = '0';
             numpadOverlay.style.right = '0';
 
-            dotNetHelper.invokeMethodAsync('ShowNumpad', input);
+            dotNetHelper.invokeMethodAsync('ShowNumpad', , Blazor.platform.toJavaScriptObjectReference(input)););
         });
     });
 };
 
-window.updateInputValue = (input, value) => {
+window.updateInputValue = (inputRef, value) => {
+    const input = Blazor.platform.toJavaScriptObject(inputRef);
     input.value = value;
 };
 
