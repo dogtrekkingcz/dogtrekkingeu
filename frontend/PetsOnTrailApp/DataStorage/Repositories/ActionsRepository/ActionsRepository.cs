@@ -442,14 +442,10 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     private async Task LoadAndParseActionAsync(Guid actionId, bool forceReloadFromServer, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"LoadAndParseActionAsync -> {actionId}, force: {forceReloadFromServer} ...");
-
         var action = await _dataStorageServicePublicActions.GetAsync(actionId, forceReloadFromServer, cancellationToken);
 
         if (action != null)
         {
-            Console.WriteLine($"action.Data.Actions: {action.Data.Actions.Dump()}");
-
             await semaphoreSlim.WaitAsync();
 
             try
@@ -493,10 +489,7 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
     private async Task LoadAndParseActionsSimpleAsync(IList<Guid> typeIds, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"LoadAndParseActionsSimpleAsync -> dataStorage: {_dataStorageServiceActionsByType}");
         var actionsInDataStorage = await _dataStorageServiceActionsByType.GetListAsync(typeIds, false,cancellationToken);
-
-        Console.WriteLine($"actionsInDataStorage: {actionsInDataStorage.Dump()}");
 
         if (_actionsSimple != null && actionsInDataStorage != null)
         {
@@ -504,8 +497,6 @@ public class ActionsRepository : BaseRepository, IActionsRepository
 
             try
             {
-                Console.WriteLine($"actionsInDataStorage.Data.Actions: {actionsInDataStorage.Data.Actions.Dump()}");
-
                 foreach (var action in actionsInDataStorage.Data.Actions)
                 {
                     if (_actionsSimple.TryGetValue(action.TypeId, out var tmp) == false)
