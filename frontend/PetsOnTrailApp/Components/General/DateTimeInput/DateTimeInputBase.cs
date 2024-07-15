@@ -17,12 +17,6 @@ public class DateTimeInputBase : ComponentBase
 
     protected string inputValue;
 
-    protected void ShowNumPad(ElementReference input)
-    {
-        inputValue = Value.HasValue ? Value.Value.ToString(WithSeconds ? "ddHHmmss" : "ddHHmm") : "";
-        JSRuntime.InvokeVoidAsync("ShowNumpad", input);
-    }
-
     protected void FormatInput(ChangeEventArgs e)
     {
         if (WithSeconds == false)

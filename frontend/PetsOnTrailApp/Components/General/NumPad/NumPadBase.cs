@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace PetsOnTrailApp.Components.General.NumPad;
+namespace PetsOnTrailApp.Components.General.Numpad;
 
-public class NumPadBase : ComponentBase
+public class NumpadBase : ComponentBase
 {
     [Inject] protected IJSRuntime JSRuntime { get; set; }
 

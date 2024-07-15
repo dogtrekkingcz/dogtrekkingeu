@@ -2,12 +2,11 @@
 
 @using PetsOnTrailApp.Components.ActionViewHeader
 @using PetsOnTrailApp.Components.General.DateTimeInput
-@using PetsOnTrailApp.Components.General.NumPad
+@using PetsOnTrailApp.Components.General.Numpad
 
 @inherits CategoryExcelViewBase
 
 @inject IStringLocalizer<Resource> Localizer
-
 
 <ActionViewHeader ActionId="@ActionId" />
 
@@ -64,5 +63,5 @@
         </div>
     </div>
 
-    <NumPad />
+    <Numpad />
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Maui.Controls;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using PetsOnTrailApp.Models;
 
