@@ -22,6 +22,13 @@ window.updateInputValue = (inputId, value) => {
     }
 };
 
+window.submitInputValue = (inputId) => {
+    const input = document.getElementById(inputId);
+    if (input) {
+        input.blur();
+    }
+}
+
 window.hideNumpad = () => {
     document.querySelector('.numpad-overlay').style.display = 'none';
 };

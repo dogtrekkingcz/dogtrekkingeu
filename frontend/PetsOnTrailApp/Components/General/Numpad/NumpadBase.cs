@@ -48,6 +48,8 @@ public class NumpadBase : ComponentBase
     protected void OK()
     {
         JSRuntime.InvokeVoidAsync("updateInputValue", currentInputId, currentValue);
+        JSRuntime.InvokeVoidAsync("submitInputValue", currentInputId);
+
         CloseNumpad();
     }
 
