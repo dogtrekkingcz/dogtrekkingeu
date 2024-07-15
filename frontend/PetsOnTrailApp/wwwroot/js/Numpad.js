@@ -1,5 +1,5 @@
 ﻿window.initializeNumpad = (dotNetHelper) => {
-    document.querySelectorAll('input[type="text"], input[type="datetime-local"]').forEach(input => {
+    document.querySelectorAll('input.simple-datetime').forEach(input => {
         input.addEventListener('focus', () => {
             const rect = input.getBoundingClientRect();
             const numpadOverlay = document.querySelector('.numpad-overlay');
