@@ -8,14 +8,18 @@
             numpadOverlay.style.left = '0';
             numpadOverlay.style.right = '0';
 
-            dotNetHelper.invokeMethodAsync('ShowNumpad', , Blazor.platform.toJavaScriptObjectReference(input)););
+            dotNetHelper.invokeMethodAsync('ShowNumpad', input.id);
         });
     });
 };
 
-window.updateInputValue = (inputRef, value) => {
-    const input = Blazor.platform.toJavaScriptObject(inputRef);
-    input.value = value;
+window.updateInputValue = (inputId, value) => {
+    const input = document.getElementById(inputId);
+    if (input) {
+        input.value = value;
+        const event = new Event('input', { bubbles: true });
+        input.dispatchEvent(event);
+    }
 };
 
 window.hideNumpad = () => {

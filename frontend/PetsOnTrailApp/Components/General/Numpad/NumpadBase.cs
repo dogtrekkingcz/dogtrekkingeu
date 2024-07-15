@@ -13,6 +13,7 @@ public class NumpadBase : ComponentBase
     }
 
     private ElementReference currentInput;
+    private string currentInputId;
     private string currentValue;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -24,9 +25,9 @@ public class NumpadBase : ComponentBase
     }
 
     [JSInvokable]
-    public void ShowNumpad(ElementReference input)
+    public void ShowNumpad(string inputId)
     {
-        currentInput = input;
+        currentInputId = inputId;
         currentValue = "";
         StateHasChanged();
     }
@@ -34,19 +35,19 @@ public class NumpadBase : ComponentBase
     protected void AppendNumber(string number)
     {
         currentValue += number;
-        JSRuntime.InvokeVoidAsync("updateInputValue", currentInput, currentValue);
+        JSRuntime.InvokeVoidAsync("updateInputValue", currentInputId, currentValue);
     }
 
     protected void Cancel()
     {
         currentValue = "";
-        JSRuntime.InvokeVoidAsync("updateInputValue", currentInput, currentValue);
+        JSRuntime.InvokeVoidAsync("updateInputValue", currentInputId, currentValue);
         CloseNumpad();
     }
 
     protected void OK()
     {
-        JSRuntime.InvokeVoidAsync("updateInputValue", currentInput, currentValue);
+        JSRuntime.InvokeVoidAsync("updateInputValue", currentInputId, currentValue);
         CloseNumpad();
     }
 
