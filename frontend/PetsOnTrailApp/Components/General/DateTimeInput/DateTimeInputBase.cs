@@ -16,6 +16,7 @@ public class DateTimeInputBase : ComponentBase
     }
 
     protected string inputValue;
+    protected string inputId = Guid.NewGuid().ToString();
 
     protected void FormatInput(ChangeEventArgs e)
     {
