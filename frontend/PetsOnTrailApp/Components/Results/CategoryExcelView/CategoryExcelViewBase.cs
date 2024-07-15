@@ -47,16 +47,20 @@ public class CategoryExcelViewBase : ComponentBase
         await Reload(false);
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeNumpad", DotNetObjectReference.Create(this));
+            await Task.Delay(100); // Add a delay to ensure inputs are rendered
+        }
+    }
+
     private async Task Reload(bool forceReloadFromServerStorage)
     {
         Model = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), forceReloadFromServerStorage);
         RaceModel = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
 
         StateHasChanged();
-    }
-
-    protected void ShowNumPad(ElementReference input)
-    {
-        JSRuntime.InvokeVoidAsync("ShowNumpad", input);
     }
 }

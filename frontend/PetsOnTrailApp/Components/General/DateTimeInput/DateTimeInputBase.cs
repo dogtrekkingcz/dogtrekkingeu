@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace PetsOnTrailApp.Components.General.DateTimeInput;
 
@@ -7,12 +8,20 @@ public class DateTimeInputBase : ComponentBase
     [Parameter] public DateTimeOffset? Value { get; set; } = null;
     [Parameter] public bool WithSeconds { get; set; } = false;
 
+    [Inject] protected IJSRuntime JSRuntime { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
     }
 
     protected string inputValue;
+
+    protected void ShowNumPad(ElementReference input)
+    {
+        inputValue = Value.HasValue ? Value.Value.ToString(WithSeconds ? "ddHHmmss" : "ddHHmm") : "";
+        JSRuntime.InvokeVoidAsync("ShowNumpad", input);
+    }
 
     protected void FormatInput(ChangeEventArgs e)
     {
