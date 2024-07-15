@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using PetsOnTrailApp.DataStorage.Repositories.ActionsRepository;
 using PetsOnTrailApp.Models;
 
@@ -12,6 +13,7 @@ public class CategoryExcelViewBase : ComponentBase
 
     [Inject] private IActionsRepository _actionsRepository { get; set; }
     [Inject] private NavigationManager _navigationManager { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
 
     public ResultsModel Model { get; set; } = null;
     public RaceModel RaceModel { get; set; } = null;
@@ -51,5 +53,10 @@ public class CategoryExcelViewBase : ComponentBase
         RaceModel = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
 
         StateHasChanged();
+    }
+
+    protected void ShowNumPad(ElementReference input)
+    {
+        JSRuntime.InvokeVoidAsync("ShowNumpad", input);
     }
 }

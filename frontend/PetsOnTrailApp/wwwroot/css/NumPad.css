@@ -30,13 +30,11 @@
     }
 
     .numpad .cancel {
-        grid-column: span 2;
         background: red;
         color: white;
     }
 
     .numpad .ok {
-        grid-column: span 1;
         background: green;
         color: white;
     }
