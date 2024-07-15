@@ -7,10 +7,11 @@ public class DateTimeInputBase : ComponentBase
 {
     [Parameter] public DateTimeOffset? Value { get; set; } = null;
     [Parameter] public bool WithSeconds { get; set; } = false;
+    [Parameter] public EventCallback<DateTimeOffset?> OnTimeUpdate { get; set; }
 
     [Inject] protected IJSRuntime JSRuntime { get; set; }
 
-    public EventCallback<DateTimeOffset?> OnTimeUpdate { get; set; }
+    
 
     protected override void OnInitialized()
     {
