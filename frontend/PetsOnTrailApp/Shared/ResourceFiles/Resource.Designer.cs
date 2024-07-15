@@ -1735,6 +1735,15 @@ namespace PetsOnTrailApp.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HHMM or DDHHMM, numbers only; Finish with Enter or Tab.
+        /// </summary>
+        internal static string Results_Time_FormatMessage_HHMM_OR_DDHHMM {
+            get {
+                return ResourceManager.GetString("Results.Time.FormatMessage.HHMM_OR_DDHHMM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Term.
         /// </summary>
         internal static string Term {

@@ -738,4 +738,7 @@
   <data name="Results.Manage.Add.Submit" xml:space="preserve">
     <value>Odeslat</value>
   </data>
+  <data name="Results.Time.FormatMessage.HHMM_OR_DDHHMM" xml:space="preserve">
+    <value>HHMM nebo DDHHMM, pouze čísla, ukončit Enter nebo Tab</value>
+  </data>
 </root>

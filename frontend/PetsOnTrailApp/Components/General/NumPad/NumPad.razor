@@ -1,4 +1,4 @@
-﻿@inject IJSRuntime JSRuntime
+﻿@inherits NumPadBase
 
 <div class="numpad-overlay" @onclick="CloseNumpad">
     <div class="numpad-container" @onclick:stopPropagation>
@@ -13,48 +13,3 @@
         </div>
     </div>
 </div>
-
-@code {
-    private ElementReference currentInput;
-    private string currentValue;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("initializeNumpad", DotNetObjectReference.Create(this));
-        }
-    }
-
-    [JSInvokable]
-    public void ShowNumpad(ElementReference input)
-    {
-        currentInput = input;
-        currentValue = "";
-        StateHasChanged();
-    }
-
-    private void AppendNumber(string number)
-    {
-        currentValue += number;
-        JSRuntime.InvokeVoidAsync("updateInputValue", currentInput, currentValue);
-    }
-
-    private void Cancel()
-    {
-        currentValue = "";
-        JSRuntime.InvokeVoidAsync("updateInputValue", currentInput, currentValue);
-        CloseNumpad();
-    }
-
-    private void OK()
-    {
-        JSRuntime.InvokeVoidAsync("updateInputValue", currentInput, currentValue);
-        CloseNumpad();
-    }
-
-    private void CloseNumpad()
-    {
-        JSRuntime.InvokeVoidAsync("hideNumpad");
-    }
-}

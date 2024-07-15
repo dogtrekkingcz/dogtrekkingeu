@@ -2,6 +2,7 @@
 
 @using PetsOnTrailApp.Components.ActionViewHeader
 @using PetsOnTrailApp.Components.General.DateTimeInput
+@using PetsOnTrailApp.Components.General.NumPad
 
 @inherits CategoryExcelViewBase
 
@@ -22,7 +23,20 @@
                             <th>@Localizer["Results.Surname"]</th>
                             <th>@Localizer["Results.Name"]</th>
                             <th>@Localizer["Results.Pet"]</th>
-                            <th>@Localizer["Results.Start"]</th>
+                            <th>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            @Localizer["Results.Start"]
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            @Localizer["Results.Time.FormatMessage.HHMM_OR_DDHHMM"]
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
                             <th>@Localizer["Results.Checkpoint1"]</th>
                             <th>@Localizer["Results.Finish"]</th>
                             <th>@Localizer["Results.Time"]</th>
@@ -49,4 +63,6 @@
             </div>
         </div>
     </div>
+
+    <NumPad />
 }
