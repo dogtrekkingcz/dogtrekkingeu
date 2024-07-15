@@ -10,7 +10,9 @@ const filesToCache = [
     'js/app.js',
     '_framework/blazor.webassembly.js',
     '_framework/blazor.boot.json',
-    // Add other necessary files to cache
+    'js/Numpad.js',
+    'css/Numpad.css',
+    'js/libs/jsQR.js',
 ];
 
 // Install the service worker and cache all necessary files
