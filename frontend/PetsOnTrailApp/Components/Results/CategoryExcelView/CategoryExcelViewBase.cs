@@ -31,7 +31,7 @@ public class CategoryExcelViewBase : ComponentBase
         public DateTimeOffset? Start { get; set; } = null;
         public DateTimeOffset? Checkpoint1 { get; set; } = null;
         public DateTimeOffset? Finish { get; set; } = null;
-        public string ResultTime { get; set; } = "Started";
+        public TimeSpan? ResultTime { get; set; } = null;
 
     }
 
@@ -59,7 +59,7 @@ public class CategoryExcelViewBase : ComponentBase
         Model = await _actionsRepository.GetResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), forceReloadFromServerStorage);
         RaceModel = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
 
-        var order = 1;
+        var order = 0;
         foreach (var competitor in Model.Results)
         {
             competitorsData.Add(new Competitor
@@ -72,14 +72,26 @@ public class CategoryExcelViewBase : ComponentBase
                 Start = competitor.Start,
                 Checkpoint1 = competitor.Checkpoints.Count > 0 ? competitor.Checkpoints[0].Time : null,
                 Finish = competitor.Finish,
-                ResultTime = competitor.Finish.HasValue ? competitor.Finish.Value.Subtract(competitor.Start.Value).ToString(@"hh\:mm\:ss") : "Started"
+                ResultTime = competitor.Finish.HasValue ? competitor.Finish.Value.Subtract(competitor.Start.Value) : null
             });
-
-            if (competitor.Finish.HasValue && competitor.Start.HasValue)
-            { 
-                order++;
-            }
         }
+
+        var competitorsDataOrdered = competitorsData
+            .OrderBy(competitor => competitor.ResultTime ?? TimeSpan.MaxValue)
+            .Select((competitor, index) => new Competitor {
+                Id = competitor.Id,
+                FirstName = competitor.FirstName,
+                LastName = competitor.LastName,
+                Pets = competitor.Pets,
+                Start = competitor.Start,
+                Checkpoint1 = competitor.Checkpoint1,
+                Finish = competitor.Finish,
+                ResultTime = competitor.ResultTime,
+                Order = (competitor.ResultTime != null ? index + 1 : null)
+            })
+            .OrderBy(competitor => competitor.LastName)
+            .ThenBy(competitor => competitor.FirstName)
+            .ToList();
 
         StateHasChanged();
     }
