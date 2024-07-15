@@ -70,7 +70,7 @@ public class CategoryExcelViewBase : ComponentBase
                 LastName = competitor.LastName,
                 Pets = string.Join(", ", competitor.Pets.Select(pet => pet)),
                 Start = competitor.Start,
-                Checkpoint1 = competitor.Checkpoints[0]?.Time,
+                Checkpoint1 = competitor.Checkpoints.Count > 0 ? competitor.Checkpoints[0].Time : null,
                 Finish = competitor.Finish,
                 ResultTime = competitor.Finish.HasValue ? competitor.Finish.Value.Subtract(competitor.Start.Value).ToString(@"hh\:mm\:ss") : "Started"
             });
