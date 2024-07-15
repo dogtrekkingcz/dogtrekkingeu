@@ -25,7 +25,8 @@ window.updateInputValue = (inputId, value) => {
 window.submitInputValue = (inputId) => {
     const input = document.getElementById(inputId);
     if (input) {
-        input.blur();
+        var event = new Event('change');
+        input.dispatchEvent(event);
     }
 }
 
