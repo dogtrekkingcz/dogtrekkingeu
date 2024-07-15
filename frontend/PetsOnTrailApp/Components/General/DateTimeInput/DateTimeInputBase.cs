@@ -10,6 +10,8 @@ public class DateTimeInputBase : ComponentBase
 
     [Inject] protected IJSRuntime JSRuntime { get; set; }
 
+    public EventCallback<DateTimeOffset?> OnTimeUpdate { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -29,6 +31,8 @@ public class DateTimeInputBase : ComponentBase
 
                 DateTime now = DateTime.Now;
                 Value = new DateTimeOffset(new DateTime(now.Year, now.Month, now.Day, hours, minutes, 0, DateTimeKind.Local).ToUniversalTime());
+
+                OnTimeUpdate.InvokeAsync(Value);
             }
             else if (inputValue.Length == 6 && int.TryParse(inputValue, out int parsedValueDdHhMm))
             {
@@ -38,11 +42,14 @@ public class DateTimeInputBase : ComponentBase
 
                 DateTime now = DateTime.Now;
                 Value = new DateTimeOffset(new DateTime(now.Year, now.Month, day, hours, minutes, 0, DateTimeKind.Local).ToUniversalTime());
+
+                OnTimeUpdate.InvokeAsync(Value);
             }
             else
             {
                 // Handle invalid input or reset the formatted date
                 Value = DateTimeOffset.MinValue;
+                OnTimeUpdate.InvokeAsync(null);
             }
         }
         else
@@ -55,6 +62,8 @@ public class DateTimeInputBase : ComponentBase
 
                 DateTime now = DateTime.Now;
                 Value = new DateTimeOffset(new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds, DateTimeKind.Local).ToUniversalTime());
+
+                OnTimeUpdate.InvokeAsync(Value);
             }
             else if (inputValue.Length == 8 && int.TryParse(inputValue, out int parsedValueDdHhMmSs))
             {
@@ -65,11 +74,14 @@ public class DateTimeInputBase : ComponentBase
 
                 DateTime now = DateTime.Now;
                 Value = new DateTimeOffset(new DateTime(now.Year, now.Month, day, hours, minutes, seconds, DateTimeKind.Local).ToUniversalTime());
+
+                OnTimeUpdate.InvokeAsync(Value);
             }
             else
             {
                 // Handle invalid input or reset the formatted date
                 Value = DateTimeOffset.MinValue;
+                OnTimeUpdate.InvokeAsync(null);
             }
         }
     }

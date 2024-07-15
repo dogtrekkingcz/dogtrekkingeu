@@ -20,6 +20,7 @@ public class CategoryExcelViewBase : ComponentBase
     public bool CanIEditResults { get; set; } = false;
 
     public List<Competitor> competitorsData = new List<Competitor>(0);
+    public List<Competitor> competitorsDataOrdered = new List<Competitor>(0);
 
     public class Competitor
     {
@@ -76,7 +77,7 @@ public class CategoryExcelViewBase : ComponentBase
             });
         }
 
-        var competitorsDataOrdered = competitorsData
+        competitorsDataOrdered = competitorsData
             .OrderBy(competitor => competitor.ResultTime ?? TimeSpan.MaxValue)
             .Select((competitor, index) => new Competitor {
                 Id = competitor.Id,
