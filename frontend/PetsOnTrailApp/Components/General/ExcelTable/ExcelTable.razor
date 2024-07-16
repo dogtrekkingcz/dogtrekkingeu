@@ -37,17 +37,20 @@
                     if (!column.Hidden)
                     {
                         <td style="width: @(column.Width)px;">
-                            @if (column.Type == ColumnDefinition.ColumnType.Text)
+                            @switch (column.Type)
                             {
-                                <input type="text" @bind="@row[column.Id]" />
-                            }
-                            else if (column.Type == ColumnDefinition.ColumnType.Number)
-                            {
-                                <input type="number" @bind="@row[column.Id]" />
-                            }
-                            else if (column.Type == ColumnDefinition.ColumnType.Date)
-                            {
-                                <PetsOnTrailApp.Components.General.DateTimeInput.DateTimeInput Value="@((DateTimeOffset?) row[column.Id])" />
+                                case ColumnDefinition.ColumnType.Text:
+                                case ColumnDefinition.ColumnType.Number:
+                                    <input @bind="@row[column.Id]" />
+                                    break;
+
+                                case ColumnDefinition.ColumnType.Date:
+                                    <PetsOnTrailApp.Components.General.DateTimeInput.DateTimeInput Value="@((DateTimeOffset?) row[column.Id])" />
+                                    break;
+
+                                default:
+                                    <input @bind="@row[column.Id]" />
+                                    break;
                             }
                         </td>
                     }
