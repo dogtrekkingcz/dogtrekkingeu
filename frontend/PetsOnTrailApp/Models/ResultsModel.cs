@@ -17,6 +17,7 @@ public sealed record ResultsModel : BaseSynchronizedModel
         public Guid Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
         public List<string> Pets { get; set; } = new List<string>();
         public DateTimeOffset? Start { get; set; } = null;
         public DateTimeOffset? Finish { get; set; } = null;

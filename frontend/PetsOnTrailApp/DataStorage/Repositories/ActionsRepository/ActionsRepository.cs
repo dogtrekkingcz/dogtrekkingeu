@@ -217,6 +217,26 @@ public class ActionsRepository : BaseRepository, IActionsRepository
         return result;
     }
 
+    public async Task<ResultsModel> GetResultsForActionRaceAsync(Guid actionId, Guid raceId, bool forceReloadFromServer)
+    {
+        var categories = await GetCategoriesForActionRaceAsync(actionId, raceId);
+
+        var result = new ResultsModel
+        {
+            RaceId = raceId,
+            ActionId = actionId,
+            SynchronizedAt = categories.SynchronizedAt
+        };
+
+        foreach (var category in categories.Categories)
+        {
+            var ctg = await GetResultsForActionRaceCategoryAsync(actionId, raceId, category.Id, forceReloadFromServer);
+            result.Results.AddRange(ctg.Results);
+        }
+
+        return result;
+    }
+
     public async Task<bool> CanIEditResultsAsync(Guid actionId, CancellationToken cancellationToken)
     {
         var action = await _dataStorageServicePublicActions.GetAsync(actionId, false, cancellationToken);

@@ -99,7 +99,7 @@ public static class PublicActionMapper
             {
                 SynchronizedAt = DateTime.Now,
                 CategoryId = category.Id,
-                Results = MapFromModelResults(category.Racers)
+                Results = MapFromModelResults(category.Racers, category.Name)
             });
 
         typeAdapterConfig.NewConfig<Protos.Actions.GetSimpleActionsList.GetSimpleActionsListResponse, GetSimpleActionsListResponseModel>()
@@ -160,7 +160,7 @@ public static class PublicActionMapper
         return typeAdapterConfig;
     }
 
-    private static List<ResultsModel.ResultDto> MapFromModelResults(IList<GetSelectedPublicActionsListResponseModel.RacerDto> racers)
+    private static List<ResultsModel.ResultDto> MapFromModelResults(IList<GetSelectedPublicActionsListResponseModel.RacerDto> racers, string categoryName)
     {
         var result = new List<ResultsModel.ResultDto>();
 
@@ -170,6 +170,7 @@ public static class PublicActionMapper
             result.Add(new ResultsModel.ResultDto
             {
                 Id = racer.Id,
+                Category = categoryName,
                 FirstName = racer.FirstName,
                 LastName = racer.LastName,
                 Start = racer.Start?.DateTime,

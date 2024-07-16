@@ -49,6 +49,7 @@
     <ItemGroup>
       <Content Remove="Components\Results\CategoriesView\CategoriesView.razor" />
       <Content Remove="Components\Results\CategoryExcelView\CategoryExcelView.razor" />
+      <Content Remove="Components\Results\RaceExcelView\RaceExcelView.razor" />
       <Content Remove="Components\Results\ResultsAdd\ResultsEdit.razor" />
     </ItemGroup>
 
@@ -107,6 +108,7 @@
 
     <ItemGroup>
       <AdditionalFiles Include="Components\Results\CategoriesView\CategoriesView.razor" />
+      <AdditionalFiles Include="Components\Results\RaceExcelView\RaceExcelView.razor" />
       <AdditionalFiles Include="Components\Results\CategoryExcelView\CategoryExcelView.razor" />
       <AdditionalFiles Include="Components\Results\RacesView\RacesView.razor" />
       <AdditionalFiles Include="Components\Results\ResultsEdit\ResultsEdit.razor" />

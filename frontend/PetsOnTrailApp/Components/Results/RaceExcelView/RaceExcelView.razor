@@ -1,0 +1,63 @@
+﻿@page "/category/{ActionId}/{RaceId}/excel"
+
+@using PetsOnTrailApp.Components.ActionViewHeader
+@using PetsOnTrailApp.Components.General.DateTimeInput
+@using PetsOnTrailApp.Components.General.Numpad
+
+@inherits RaceExcelViewBase
+
+@inject IStringLocalizer<Resource> Localizer
+
+<ActionViewHeader ActionId="@ActionId" />
+
+@if (CanIEditResults)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="excel-table">
+                    <thead>
+                        <tr>
+                            <th>@Localizer["#"]</th>
+                            <th>@Localizer["Results.Category"]</th>
+                            <th>@Localizer["Results.Surname"]</th>
+                            <th>@Localizer["Results.Name"]</th>
+                            <th>@Localizer["Results.Pet"]</th>
+                            <th>@Localizer["Results.Start"]</th>
+                            <th>@Localizer["Results.Checkpoint1"]</th>
+                            <th>@Localizer["Results.Finish"]</th>
+                            <th>@Localizer["Results.Time"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var competitor in competitorsDataOrdered)
+                        {
+                            <tr>
+                                <td>@competitor.Order</td>
+                                <td>@competitor.Category</td>
+                                <td>@competitor.LastName</td>
+                                <td>@competitor.FirstName</td>
+                                <td>@competitor.Pets</td>
+                                <td>
+                                    <DateTimeInput Value="competitor.Start?.ToLocalTime()" OnTimeUpdate="(newTime) => competitor.Start = newTime" />
+                                </td>
+                                <td>
+                                    <DateTimeInput Value="competitor.Checkpoint1?.ToLocalTime()" />
+                                </td>
+                                <td>
+                                    <DateTimeInput Value="competitor.Finish?.ToLocalTime()" OnTimeUpdate="(newTime) => competitor.Finish = newTime" />
+                                </td>
+                                <td>@competitor.ResultTime</td>
+                                <td>
+                                    <button class="btn btn-primary" @onclick="() => Save(competitor)">@Localizer["Submit"]</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <Numpad />
+}

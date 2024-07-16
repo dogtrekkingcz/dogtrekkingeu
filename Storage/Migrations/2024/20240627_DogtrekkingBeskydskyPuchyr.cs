@@ -9,6 +9,11 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
     protected override Guid Id { get; init; } = Guid.Parse("2d87002d-611e-4130-99d9-564b7d4d6fb5");
     protected override string Name { get; init; } = nameof(_20240627_DogtrekkingBeskydskyPuchyr);
 
+    private Guid DetailsCanSee { get; set; } = Guid.Parse("3bdb9651-19ea-4bef-9b6d-f513911da126");
+    private Guid ResultsCanEdit { get; set; } = Guid.Parse("182e2ff7-924f-458f-b72d-33cfea772ab8");
+    private Guid CompetitorsCanEdit { get; set; } = Guid.Parse("eb4680da-bfc9-4767-b6da-6ec591b1ab9c");
+    private Guid ActionCanEdit { get; set; } = Guid.Parse("bdc9f54e-0b51-4d64-97a2-c6273d5ffd9e");
+
 
     public _20240627_DogtrekkingBeskydskyPuchyr(IServiceProvider serviceProvider) : base(serviceProvider)
     {
@@ -18,9 +23,26 @@ internal class _20240627_DogtrekkingBeskydskyPuchyr : M_00_MigrationBase
                 Id = Id,
                 Name = "Dogtrekking Beskydský puchýř",
                 TypeId = Constants.ActivityType.Dogtrekking,
-                ResultsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
-                CompetitorsCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
-                ActionCanEdit = new List<Guid> { Constants.Roles.InternalAdministrator.GUID },
+                ResultsCanEdit = new List<Guid> 
+                { 
+                    Constants.Roles.InternalAdministrator.GUID, 
+                    ResultsCanEdit 
+                },
+                CompetitorsCanEdit = new List<Guid> 
+                { 
+                    Constants.Roles.InternalAdministrator.GUID, 
+                    CompetitorsCanEdit 
+                },
+                ActionCanEdit = new List<Guid> 
+                { 
+                    Constants.Roles.InternalAdministrator.GUID, 
+                    ActionCanEdit 
+                },
+                DetailsCanSee = new List<Guid> 
+                { 
+                    Constants.Roles.InternalAdministrator.GUID, 
+                    DetailsCanSee 
+                },
                 Address = new Entities.Actions.CreateActionInternalStorageRequest.AddressDto
                 {
                     City = "Palkovice",

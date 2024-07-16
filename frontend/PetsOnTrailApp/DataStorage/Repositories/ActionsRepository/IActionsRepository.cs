@@ -17,6 +17,7 @@ public interface IActionsRepository : IBaseRepository
     Task<CategoriesModel> GetCategoriesForActionRaceAsync(Guid actionId, Guid raceId);
 
     Task<ResultsModel> GetResultsForActionRaceCategoryAsync(Guid actionId, Guid raceId, Guid categoryId, bool forceReloadFromServer);
+    Task<ResultsModel> GetResultsForActionRaceAsync(Guid actionId, Guid raceId, bool forceReloadFromServer);
 
     Task AddResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultsModel.ResultDto result);
 
