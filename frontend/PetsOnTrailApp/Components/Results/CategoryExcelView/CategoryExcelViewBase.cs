@@ -19,7 +19,6 @@ public class CategoryExcelViewBase : ComponentBase
     public RaceModel RaceModel { get; set; } = null;
     public bool CanIEditResults { get; set; } = false;
 
-    public List<Competitor> competitorsData = new List<Competitor>(0);
     public List<Competitor> competitorsDataOrdered = new List<Competitor>(0);
 
     public class Competitor
@@ -63,7 +62,7 @@ public class CategoryExcelViewBase : ComponentBase
         var order = 0;
         foreach (var competitor in Model.Results)
         {
-            competitorsData.Add(new Competitor
+            competitorsDataOrdered.Add(new Competitor
             {
                 Id = competitor.Id,
                 Order = order,
@@ -84,7 +83,7 @@ public class CategoryExcelViewBase : ComponentBase
 
     private void SortThemAllAndFillTheOrder()
     {
-        competitorsDataOrdered = competitorsData
+        competitorsDataOrdered = competitorsDataOrdered
             .OrderBy(competitor => competitor.ResultTime ?? TimeSpan.MaxValue)
             .Select((competitor, index) => new Competitor
             {
