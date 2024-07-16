@@ -65,14 +65,12 @@ public class RaceExcelViewBase : ComponentBase
         RaceModel = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
         Model = await _actionsRepository.GetResultsForActionRaceAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), forceReloadFromServerStorage);
 
-
-        var order = 0;
         foreach (var competitor in Model.Results)
         {
             competitorsDataOrdered.Add(new Competitor
             {
                 Id = competitor.Id,
-                Order = order,
+                Order = null,
                 FirstName = competitor.FirstName,
                 LastName = competitor.LastName,
                 Pets = string.Join(", ", competitor.Pets.Select(pet => pet)),
@@ -115,6 +113,11 @@ public class RaceExcelViewBase : ComponentBase
 
     protected void SortByOrder()
     {
+        var notOrderedCompetitors = competitorsDataOrdered
+                        .Where(competitor => competitor.Order.HasValue == false || competitor.Order.Value == 0)
+                        .OrderBy(competitor => competitor.LastName)
+                        .ThenBy(competitor => competitor.FirstName);
+
         if (_orderByOrderDescending)
         {
             competitorsDataOrdered = competitorsDataOrdered
@@ -125,16 +128,13 @@ public class RaceExcelViewBase : ComponentBase
         else
         {
             competitorsDataOrdered = competitorsDataOrdered
-                .Where(competitor => competitor.Order.HasValue)
+                .Where(competitor => competitor.Order.HasValue && competitor.Order.Value != 0)
                 .OrderBy(competitor => competitor.Order)
                 .ToList();
         }
 
         competitorsDataOrdered
-            .AddRange(competitorsDataOrdered
-                        .Where(competitor => competitor.Order.HasValue == false || competitor.Order.Value == 0)
-                        .OrderBy(competitor => competitor.LastName)
-                        .ThenBy(competitor => competitor.FirstName));
+            .AddRange(notOrderedCompetitors);
 
         _orderByOrderDescending = !_orderByOrderDescending;
 
