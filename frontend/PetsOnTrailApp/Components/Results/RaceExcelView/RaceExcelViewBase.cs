@@ -101,6 +101,10 @@ public class RaceExcelViewBase : ComponentBase
             {
                 competitorsDataOrdered[i].Order = i + 1;
             }
+            else
+            {
+                competitorsDataOrdered[i].Order = null;
+            }
         }
 
         competitorsDataOrdered = competitorsDataOrdered
@@ -114,18 +118,25 @@ public class RaceExcelViewBase : ComponentBase
         if (_orderByOrderDescending)
         {
             competitorsDataOrdered = competitorsDataOrdered
+                .Where(competitor => competitor.Order.HasValue && competitor.Order.Value != 0)
                 .OrderByDescending(competitor => competitor.Order)
                 .ToList();
         }
         else
         {
             competitorsDataOrdered = competitorsDataOrdered
-            .OrderBy(competitor => competitor.Order)
-            .ToList();
+                .Where(competitor => competitor.Order.HasValue)
+                .OrderBy(competitor => competitor.Order)
+                .ToList();
         }
 
+        competitorsDataOrdered
+            .AddRange(competitorsDataOrdered
+                        .Where(competitor => competitor.Order.HasValue == false || competitor.Order.Value == 0)
+                        .OrderBy(competitor => competitor.LastName)
+                        .ThenBy(competitor => competitor.FirstName));
+
         _orderByOrderDescending = !_orderByOrderDescending;
-        
 
         StateHasChanged();
     }
