@@ -18,7 +18,6 @@ public class RaceExcelViewBase : ComponentBase
     public RaceModel RaceModel { get; set; } = null;
     public bool CanIEditResults { get; set; } = false;
 
-    public List<Competitor> competitorsData = new List<Competitor>(0);
     public List<Competitor> competitorsDataOrdered = new List<Competitor>(0);
 
     public class Competitor
@@ -64,7 +63,7 @@ public class RaceExcelViewBase : ComponentBase
         var order = 0;
         foreach (var competitor in Model.Results)
         {
-            competitorsData.Add(new Competitor
+            competitorsDataOrdered.Add(new Competitor
             {
                 Id = competitor.Id,
                 Order = order,
@@ -86,21 +85,19 @@ public class RaceExcelViewBase : ComponentBase
 
     private void SortThemAllAndFillTheOrder()
     {
-        competitorsDataOrdered = competitorsData
+        competitorsDataOrdered = competitorsDataOrdered
             .OrderBy(competitor => competitor.ResultTime ?? TimeSpan.MaxValue)
-            .Select((competitor, index) => new Competitor
+            .ToList();
+
+        for (int i = 0; i < competitorsDataOrdered.Count; i++)
+        {
+            if (competitorsDataOrdered[i].ResultTime != null)
             {
-                Id = competitor.Id,
-                FirstName = competitor.FirstName,
-                LastName = competitor.LastName,
-                Pets = competitor.Pets,
-                Start = competitor.Start,
-                Checkpoint1 = competitor.Checkpoint1,
-                Finish = competitor.Finish,
-                ResultTime = competitor.ResultTime,
-                Order = (competitor.ResultTime != null ? index + 1 : null),
-                Category = competitor.Category
-            })
+                competitorsDataOrdered[i].Order = i + 1;
+            }
+        }
+
+        competitorsDataOrdered = competitorsDataOrdered
             .OrderBy(competitor => competitor.LastName)
             .ThenBy(competitor => competitor.FirstName)
             .ToList();

@@ -85,18 +85,17 @@ public class CategoryExcelViewBase : ComponentBase
     {
         competitorsDataOrdered = competitorsDataOrdered
             .OrderBy(competitor => competitor.ResultTime ?? TimeSpan.MaxValue)
-            .Select((competitor, index) => new Competitor
+            .ToList();
+
+        for (int i = 0; i < competitorsDataOrdered.Count; i++)
+        {
+            if (competitorsDataOrdered[i].ResultTime != null)
             {
-                Id = competitor.Id,
-                FirstName = competitor.FirstName,
-                LastName = competitor.LastName,
-                Pets = competitor.Pets,
-                Start = competitor.Start,
-                Checkpoint1 = competitor.Checkpoint1,
-                Finish = competitor.Finish,
-                ResultTime = competitor.ResultTime,
-                Order = (competitor.ResultTime != null ? index + 1 : null)
-            })
+                competitorsDataOrdered[i].Order = i + 1;
+            }
+        }
+
+        competitorsDataOrdered = competitorsDataOrdered
             .OrderBy(competitor => competitor.LastName)
             .ThenBy(competitor => competitor.FirstName)
             .ToList();
