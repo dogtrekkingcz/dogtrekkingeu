@@ -11,13 +11,13 @@
         border: 1px solid #ddd;
         padding: 8px;
         position: relative;
-        background-color: #f4f4f4;
         color: #333;
         text-align: left;
     }
 
     .excel-table th {
         cursor: col-resize;
+        background-color: #f4f4f4;
     }
 
     .excel-table th button {

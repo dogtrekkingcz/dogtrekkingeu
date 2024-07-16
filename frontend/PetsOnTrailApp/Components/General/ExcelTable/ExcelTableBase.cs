@@ -6,20 +6,24 @@ namespace PetsOnTrailApp.Components.General.ExcelTable;
 
 public class ExcelTableBase : ComponentBase
 {
+    private static Guid _column1Id => Guid.NewGuid();
+    private static Guid _column2Id => Guid.NewGuid();
+    private static Guid _column3Id => Guid.NewGuid();
+
     [Inject] protected IJSRuntime JSRuntime { get; set; }
 
     protected List<ColumnDefinition> Columns = new List<ColumnDefinition>
     {
-        new ColumnDefinition { Header = "Name", Width = 150 },
-        new ColumnDefinition { Header = "Age", Width = 100 },
-        new ColumnDefinition { Header = "Country", Width = 200 }
+        new ColumnDefinition { Id = _column1Id, Header = "Name", Width = 150 },
+        new ColumnDefinition { Id = _column2Id, Header = "Age", Width = 100 },
+        new ColumnDefinition { Id = _column3Id, Header = "Country", Width = 200 }
     };
 
-    protected List<Dictionary<string, object>> Data = new List<Dictionary<string, object>>
+    protected List<Dictionary<Guid, object>> Data = new List<Dictionary<Guid, object>>
     {
-        new Dictionary<string, object> { { "Name", "John Doe" }, { "Age", 30 }, { "Country", "USA" } },
-        new Dictionary<string, object> { { "Name", "Jane Smith" }, { "Age", 25 }, { "Country", "UK" } },
-        new Dictionary<string, object> { { "Name", "Samuel Johnson" }, { "Age", 35 }, { "Country", "Canada" } }
+        new Dictionary<Guid, object> { { _column1Id, "John Doe" }, { _column2Id, 30 }, { _column3Id, "USA" } },
+        new Dictionary<Guid, object> { { _column1Id, "Jane Smith" }, { _column2Id, 25 }, { _column3Id, "UK" } },
+        new Dictionary<Guid, object> { { _column1Id, "Samuel Johnson" }, { _column2Id, 35 }, { _column3Id, "Canada" } }
     };
 
     private bool isResizing = false;
@@ -59,6 +63,32 @@ public class ExcelTableBase : ComponentBase
     protected void HideColumn(ColumnDefinition column)
     {
         column.Hidden = true;
+
+        StateHasChanged();
+    }
+
+    protected void ShowColumn(ColumnDefinition column)
+    {
+        column.Hidden = false;
+
+        StateHasChanged();
+    }
+
+    protected void SortBy(ColumnDefinition column)
+    {
+        foreach (var col in Columns)
+        {
+            col.SortBy = false;
+            col.SortByDescending = false;
+        }
+
+        column.SortBy = true;
+        column.SortByDescending = !column.SortByDescending;
+
+        Data = column.SortByDescending
+            ? Data.OrderByDescending(row => row[column.Id]).ToList()
+            : Data.OrderBy(row => row[column.Id]).ToList();
+
         StateHasChanged();
     }
 
@@ -84,8 +114,11 @@ public class ExcelTableBase : ComponentBase
 
     public class ColumnDefinition
     {
+        public Guid Id { get; set; } = Guid.Empty;
         public string Header { get; set; }
         public double Width { get; set; }
-        public bool Hidden { get; set; }
+        public bool Hidden { get; set; } = false;
+        public bool SortBy { get; set; } = false;
+        public bool SortByDescending { get; set; } = false;
     }
 }
