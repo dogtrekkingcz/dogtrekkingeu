@@ -9,21 +9,23 @@ public class ExcelTableBase : ComponentBase
     private static Guid _column1Id = Guid.Parse("fa17345a-8acb-47d6-aa40-31924c176641");
     private static Guid _column2Id = Guid.Parse("18d833aa-0ef8-4f6a-9e31-18586ebb5569");
     private static Guid _column3Id = Guid.Parse("e72e1802-2ef0-4a0c-8a02-ef2c7991a87e");
+    private static Guid _column4Id = Guid.Parse("9720f620-8f3c-4837-ae82-b2c2907e78d9");
 
     [Inject] protected IJSRuntime JSRuntime { get; set; }
 
-    protected List<ColumnDefinition> Columns = new List<ColumnDefinition>
+    protected virtual List<ColumnDefinition> Columns { get; set; } = new List<ColumnDefinition>
     {
-        new ColumnDefinition { Id = _column1Id, Header = "Name", Width = 150 },
-        new ColumnDefinition { Id = _column2Id, Header = "Age", Width = 100 },
-        new ColumnDefinition { Id = _column3Id, Header = "Country", Width = 200 }
+        new ColumnDefinition { Id = _column1Id, Header = "Name", Width = 150, Type = ColumnDefinition.ColumnType.Text },
+        new ColumnDefinition { Id = _column2Id, Header = "Age", Width = 100, Type = ColumnDefinition.ColumnType.Number },
+        new ColumnDefinition { Id = _column3Id, Header = "Country", Width = 200, Type = ColumnDefinition.ColumnType.Text },
+        new ColumnDefinition { Id = _column4Id, Header = "Entered", Width = 100, Type = ColumnDefinition.ColumnType.Date }
     };
 
-    protected List<Dictionary<Guid, object>> Data = new List<Dictionary<Guid, object>>
+    protected virtual List<Dictionary<Guid, object>> Data { get; set; } = new List<Dictionary<Guid, object>>
     {
-        new Dictionary<Guid, object> { { _column1Id, "John Doe" }, { _column2Id, 30 }, { _column3Id, "USA" } },
-        new Dictionary<Guid, object> { { _column1Id, "Jane Smith" }, { _column2Id, 25 }, { _column3Id, "UK" } },
-        new Dictionary<Guid, object> { { _column1Id, "Samuel Johnson" }, { _column2Id, 35 }, { _column3Id, "Canada" } }
+        new Dictionary<Guid, object> { { _column1Id, "John Doe" }, { _column2Id, 30 }, { _column3Id, "USA" }, { _column4Id, DateTimeOffset.Now } },
+        new Dictionary<Guid, object> { { _column1Id, "Jane Smith" }, { _column2Id, 25 }, { _column3Id, "UK" }, { _column4Id, DateTimeOffset.Now.AddDays(-1) } },
+        new Dictionary<Guid, object> { { _column1Id, "Samuel Johnson" }, { _column2Id, 35 }, { _column3Id, "Canada" }, { _column4Id, DateTimeOffset.Now.AddDays(-2) } }
     };
 
     private bool isResizing = false;
@@ -120,5 +122,13 @@ public class ExcelTableBase : ComponentBase
         public bool Hidden { get; set; } = false;
         public bool SortBy { get; set; } = false;
         public bool SortByDescending { get; set; } = false;
+        public ColumnType Type { get; set; } = ColumnType.Text;
+
+        public enum ColumnType
+        {
+            Text,
+            Number,
+            Date
+        }
     }
 }
