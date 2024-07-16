@@ -6,9 +6,9 @@ namespace PetsOnTrailApp.Components.General.ExcelTable;
 
 public class ExcelTableBase : ComponentBase
 {
-    private static Guid _column1Id => Guid.NewGuid();
-    private static Guid _column2Id => Guid.NewGuid();
-    private static Guid _column3Id => Guid.NewGuid();
+    private static Guid _column1Id = Guid.Parse("fa17345a-8acb-47d6-aa40-31924c176641");
+    private static Guid _column2Id = Guid.Parse("18d833aa-0ef8-4f6a-9e31-18586ebb5569");
+    private static Guid _column3Id = Guid.Parse("e72e1802-2ef0-4a0c-8a02-ef2c7991a87e");
 
     [Inject] protected IJSRuntime JSRuntime { get; set; }
 
