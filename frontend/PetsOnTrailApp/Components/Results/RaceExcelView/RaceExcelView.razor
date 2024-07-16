@@ -3,12 +3,17 @@
 @using PetsOnTrailApp.Components.ActionViewHeader
 @using PetsOnTrailApp.Components.General.DateTimeInput
 @using PetsOnTrailApp.Components.General.Numpad
+@using PetsOnTrailApp.Components.General.ExcelTable
 
 @inherits RaceExcelViewBase
 
 @inject IStringLocalizer<Resource> Localizer
 
 <ActionViewHeader ActionId="@ActionId" />
+
+<ExcelTable>
+
+</ExcelTable>
 
 @if (CanIEditResults)
 {

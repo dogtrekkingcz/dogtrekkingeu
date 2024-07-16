@@ -1,0 +1,32 @@
+﻿@inherits ExcelTableBase
+
+<table class="excel-table">
+    <thead>
+        <tr>
+            @foreach (var column in Columns)
+            {
+                if (!column.Hidden)
+                {
+                    <th @onmousedown="@(e => OnMouseDown(e, column))" style="width: @(column.Width)px;">
+                        @column.Header
+                        <button @onclick="() => HideColumn(column)">Hide</button>
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Data)
+        {
+            <tr>
+                @foreach (var column in Columns)
+                {
+                    if (!column.Hidden)
+                    {
+                        <td style="width: @(column.Width)px;">@row[column.Header]</td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
