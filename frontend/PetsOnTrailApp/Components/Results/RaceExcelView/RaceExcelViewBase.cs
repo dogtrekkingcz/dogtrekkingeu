@@ -59,7 +59,7 @@ public class RaceExcelViewBase : ComponentBase
     {
         RaceModel = await _actionsRepository.GetRaceForActionAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), CancellationToken.None);
         Model = await _actionsRepository.GetResultsForActionRaceAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), forceReloadFromServerStorage);
-        
+
 
         var order = 0;
         foreach (var competitor in Model.Results)
@@ -79,9 +79,17 @@ public class RaceExcelViewBase : ComponentBase
             });
         }
 
+        SortThemAllAndFillTheOrder();
+
+        StateHasChanged();
+    }
+
+    private void SortThemAllAndFillTheOrder()
+    {
         competitorsDataOrdered = competitorsData
             .OrderBy(competitor => competitor.ResultTime ?? TimeSpan.MaxValue)
-            .Select((competitor, index) => new Competitor {
+            .Select((competitor, index) => new Competitor
+            {
                 Id = competitor.Id,
                 FirstName = competitor.FirstName,
                 LastName = competitor.LastName,
@@ -90,13 +98,12 @@ public class RaceExcelViewBase : ComponentBase
                 Checkpoint1 = competitor.Checkpoint1,
                 Finish = competitor.Finish,
                 ResultTime = competitor.ResultTime,
-                Order = (competitor.ResultTime != null ? index + 1 : null)
+                Order = (competitor.ResultTime != null ? index + 1 : null),
+                Category = competitor.Category
             })
             .OrderBy(competitor => competitor.LastName)
             .ThenBy(competitor => competitor.FirstName)
             .ToList();
-
-        StateHasChanged();
     }
 
     protected void OnTimeUpdateFinish(Competitor competitor, DateTimeOffset? value)
@@ -111,6 +118,8 @@ public class RaceExcelViewBase : ComponentBase
             competitor.Finish = null;
             competitor.ResultTime = null;
         }
+
+        SortThemAllAndFillTheOrder();
 
         StateHasChanged();
     }
@@ -131,6 +140,8 @@ public class RaceExcelViewBase : ComponentBase
             competitor.Start = null;
             competitor.ResultTime = null;
         }
+
+        SortThemAllAndFillTheOrder();
 
         StateHasChanged();
     }

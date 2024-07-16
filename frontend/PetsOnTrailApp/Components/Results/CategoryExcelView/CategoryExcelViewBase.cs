@@ -77,9 +77,17 @@ public class CategoryExcelViewBase : ComponentBase
             });
         }
 
+        SortThemAllAndFillTheOrder();
+
+        StateHasChanged();
+    }
+
+    private void SortThemAllAndFillTheOrder()
+    {
         competitorsDataOrdered = competitorsData
             .OrderBy(competitor => competitor.ResultTime ?? TimeSpan.MaxValue)
-            .Select((competitor, index) => new Competitor {
+            .Select((competitor, index) => new Competitor
+            {
                 Id = competitor.Id,
                 FirstName = competitor.FirstName,
                 LastName = competitor.LastName,
@@ -93,8 +101,6 @@ public class CategoryExcelViewBase : ComponentBase
             .OrderBy(competitor => competitor.LastName)
             .ThenBy(competitor => competitor.FirstName)
             .ToList();
-
-        StateHasChanged();
     }
 
     protected void OnTimeUpdateFinish(Competitor competitor, DateTimeOffset? value)
@@ -109,6 +115,8 @@ public class CategoryExcelViewBase : ComponentBase
             competitor.Finish = null;
             competitor.ResultTime = null;
         }
+
+        SortThemAllAndFillTheOrder();
 
         StateHasChanged();
     }
@@ -129,6 +137,8 @@ public class CategoryExcelViewBase : ComponentBase
             competitor.Start = null;
             competitor.ResultTime = null;
         }
+
+        SortThemAllAndFillTheOrder();
 
         StateHasChanged();
     }
