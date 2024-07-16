@@ -47,6 +47,11 @@ public class CategoriesViewBase : ComponentBase
         Navigation.NavigateTo($"category/{ActionId}/{RaceId}/{categoryId}");
     }
 
+    protected void NavigateToEditRaceInExcel()
+    {
+        Navigation.NavigateTo($"race/{ActionId}/{RaceId}/excel");
+    }
+
     private async Task Reload(bool forceReloadFromServerStorage)
     {
         foreach (var category in Model.Categories)
