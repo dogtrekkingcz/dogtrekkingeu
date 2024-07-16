@@ -47,7 +47,7 @@
                                 <td>
                                     <DateTimeInput Value="competitor.Finish?.ToLocalTime()" OnTimeUpdate="(newTime) => OnTimeUpdateFinish(competitor, newTime)" />
                                 </td>
-                                <td>@competitor.ResultTime.ToString(@"hh\:mm")</td>
+                                <td>@competitor.ResultTime?.ToString(@"hh\:mm")</td>
                                 <td>
                                     <button class="btn btn-primary" @onclick="() => Save(competitor)">@Localizer["Submit"]</button>
                                 </td>
