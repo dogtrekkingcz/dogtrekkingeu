@@ -37,13 +37,13 @@
                                 <td>@competitor.FirstName</td>
                                 <td>@competitor.Pets</td>
                                 <td>
-                                    <DateTimeInput Value="competitor.Start?.ToLocalTime()" OnTimeUpdate="(newTime) => competitor.Start = newTime" />
+                                    <DateTimeInput Value="competitor.Start?.ToLocalTime()" OnTimeUpdate="(newTime) => OnTimeUpdateStart(competitor, newTime)" />
                                 </td>
                                 <td>
                                     <DateTimeInput Value="competitor.Checkpoint1?.ToLocalTime()" />
                                 </td>
                                 <td>
-                                    <DateTimeInput Value="competitor.Finish?.ToLocalTime()" OnTimeUpdate="(newTime) => competitor.Finish = newTime" />
+                                    <DateTimeInput Value="competitor.Finish?.ToLocalTime()" OnTimeUpdate="(newTime) => OnTimeUpdateFinish(competitor, newTime)" />
                                 </td>
                                 <td>@competitor.ResultTime</td>
                                 <td>

@@ -99,6 +99,42 @@ public class RaceExcelViewBase : ComponentBase
         StateHasChanged();
     }
 
+    protected void OnTimeUpdateFinish(Competitor competitor, DateTimeOffset? value)
+    {
+        if (value.HasValue)
+        {
+            competitor.Finish = value;
+            competitor.ResultTime = competitor.Finish.Value.Subtract(competitor.Start.Value);
+        }
+        else
+        {
+            competitor.Finish = null;
+            competitor.ResultTime = null;
+        }
+
+        StateHasChanged();
+    }
+
+    protected void OnTimeUpdateStart(Competitor competitor, DateTimeOffset? value)
+    {
+        if (value.HasValue)
+        {
+            competitor.Start = value;
+
+            if (competitor.Finish.HasValue)
+            {
+                competitor.ResultTime = competitor.Finish.Value.Subtract(competitor.Start.Value);
+            }
+        }
+        else
+        {
+            competitor.Start = null;
+            competitor.ResultTime = null;
+        }
+
+        StateHasChanged();
+    }
+
     protected void Save(Competitor competitor)
     {
         // _actionsRepository.SaveResultsForActionRaceCategoryAsync(Guid.Parse(ActionId), Guid.Parse(RaceId), Guid.Parse(CategoryId), Model, CancellationToken.None);
