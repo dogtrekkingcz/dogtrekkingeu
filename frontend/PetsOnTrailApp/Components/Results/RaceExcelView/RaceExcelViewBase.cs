@@ -20,6 +20,9 @@ public class RaceExcelViewBase : ComponentBase
 
     public List<Competitor> competitorsDataOrdered = new List<Competitor>(0);
 
+    private bool _orderByOrderDescending = false;
+    private bool _orderBySurnameNameDescending = false;
+
     public class Competitor
     {
         public Guid Id { get; set; }
@@ -101,6 +104,47 @@ public class RaceExcelViewBase : ComponentBase
             .OrderBy(competitor => competitor.LastName)
             .ThenBy(competitor => competitor.FirstName)
             .ToList();
+    }
+
+    protected void SortByOrder()
+    {
+        if (_orderByOrderDescending)
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderByDescending(competitor => competitor.Order)
+                .ToList();
+        }
+        else
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+            .OrderBy(competitor => competitor.Order)
+            .ToList();
+        }
+
+        _orderByOrderDescending = !_orderByOrderDescending;
+        
+
+        StateHasChanged();
+    }
+
+    protected void SortBySurnameName()
+    {
+        if (_orderBySurnameNameDescending)
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderByDescending(competitor => competitor.LastName)
+                .ThenBy(competitor => competitor.FirstName)
+                .ToList();
+        }
+        else
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderBy(competitor => competitor.LastName)
+                .ThenBy(competitor => competitor.FirstName)
+                .ToList();
+        }
+
+        _orderByOrderDescending = !_orderByOrderDescending;
     }
 
     protected void OnTimeUpdateFinish(Competitor competitor, DateTimeOffset? value)

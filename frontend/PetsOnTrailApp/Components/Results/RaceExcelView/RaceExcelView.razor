@@ -18,10 +18,10 @@
                 <table class="excel-table">
                     <thead>
                         <tr>
-                            <th>@Localizer["#"]</th>
+                            <th><a @onclick="() => SortByOrder()">@Localizer["#"]</a></th>
                             <th>@Localizer["Results.Category"]</th>
-                            <th>@Localizer["Results.Surname"]</th>
-                            <th>@Localizer["Results.Name"]</th>
+                            <th><a @onclick="() => SortBySurnameName()">@Localizer["Results.Surname"]</a></th>
+                            <th><a @onclick="() => SortBySurnameName()">@Localizer["Results.Name"]</a></th>
                             <th>@Localizer["Results.Pet"]</th>
                             <th>@Localizer["Results.Start"]</th>
                             <th>@Localizer["Results.Checkpoint1"]</th>
