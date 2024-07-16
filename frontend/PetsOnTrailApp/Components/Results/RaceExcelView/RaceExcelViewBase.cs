@@ -22,6 +22,9 @@ public class RaceExcelViewBase : ComponentBase
 
     private bool _orderByOrderDescending = false;
     private bool _orderBySurnameNameDescending = false;
+    private bool _orderByStartDescending = false;
+    private bool _orderByCheckpointDescending = false;
+    private bool _orderByFinishDescending = false;
 
     public class Competitor
     {
@@ -144,7 +147,61 @@ public class RaceExcelViewBase : ComponentBase
                 .ToList();
         }
 
-        _orderByOrderDescending = !_orderByOrderDescending;
+        _orderBySurnameNameDescending = !_orderBySurnameNameDescending;
+    }
+
+    protected void SortByStart()
+    {
+        if (_orderByStartDescending)
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderByDescending(competitor => competitor.Start)
+                .ToList();
+        }
+        else
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderBy(competitor => competitor.Start)
+                .ToList();
+        }
+
+        _orderByStartDescending = !_orderByStartDescending;
+    }
+
+    protected void SortByCheckpoint()
+    {
+        if (_orderByCheckpointDescending)
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderByDescending(competitor => competitor.Checkpoint1)
+                .ToList();
+        }
+        else
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderBy(competitor => competitor.Checkpoint1)
+                .ToList();
+        }
+
+        _orderByCheckpointDescending = !_orderByCheckpointDescending;
+    }
+
+    protected void SortByFinish()
+    {
+        if (_orderByFinishDescending)
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderByDescending(competitor => competitor.Finish)
+                .ToList();
+        }
+        else
+        {
+            competitorsDataOrdered = competitorsDataOrdered
+                .OrderBy(competitor => competitor.Finish)
+                .ToList();
+        }
+
+        _orderByFinishDescending = !_orderByFinishDescending;
     }
 
     protected void OnTimeUpdateFinish(Competitor competitor, DateTimeOffset? value)
