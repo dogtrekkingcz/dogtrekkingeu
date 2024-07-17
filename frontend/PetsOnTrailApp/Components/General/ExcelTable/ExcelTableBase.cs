@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using PetsOnTrailApp.Components.General.EditableInput;
 using System.ComponentModel;
 using System.Globalization;
 
@@ -17,10 +18,10 @@ public class ExcelTableBase : ComponentBase
 
     protected virtual List<ColumnDefinition> Columns { get; set; } = new List<ColumnDefinition>
     {
-        new ColumnDefinition { Id = _column1Id, Header = "Name", Width = 150, Type = ColumnDefinition.ColumnType.Text },
-        new ColumnDefinition { Id = _column2Id, Header = "Age", Width = 100, Type = ColumnDefinition.ColumnType.Number },
-        new ColumnDefinition { Id = _column3Id, Header = "Country", Width = 200, Type = ColumnDefinition.ColumnType.Text },
-        new ColumnDefinition { Id = _column4Id, Header = "Entered", Width = 100, Type = ColumnDefinition.ColumnType.Date }
+        new ColumnDefinition { Id = _column1Id, Header = "Name", Width = 150, Type = EditableInputBase.InputType.Text },
+        new ColumnDefinition { Id = _column2Id, Header = "Age", Width = 100, Type = EditableInputBase.InputType.Number },
+        new ColumnDefinition { Id = _column3Id, Header = "Country", Width = 200, Type = EditableInputBase.InputType.Text },
+        new ColumnDefinition { Id = _column4Id, Header = "Entered", Width = 100, Type = EditableInputBase.InputType.Date }
     };
 
     protected virtual List<Dictionary<Guid, object>> Data { get; set; } = new List<Dictionary<Guid, object>>
@@ -124,13 +125,6 @@ public class ExcelTableBase : ComponentBase
         public bool Hidden { get; set; } = false;
         public bool SortBy { get; set; } = false;
         public bool SortByDescending { get; set; } = false;
-        public ColumnType Type { get; set; } = ColumnType.Text;
-
-        public enum ColumnType
-        {
-            Text,
-            Number,
-            Date
-        }
+        public EditableInputBase.InputType Type { get; set; } = EditableInputBase.InputType.Text;
     }
 }

@@ -37,21 +37,7 @@
                     if (!column.Hidden)
                     {
                         <td style="width: @(column.Width)px;">
-                            @switch (column.Type)
-                            {
-                                case ColumnDefinition.ColumnType.Text:
-                                case ColumnDefinition.ColumnType.Number:
-                                    <input @bind="@row[column.Id]" />
-                                    break;
-
-                                case ColumnDefinition.ColumnType.Date:
-                                    <PetsOnTrailApp.Components.General.DateTimeInput.DateTimeInput Value="@((DateTimeOffset?) row[column.Id])" />
-                                    break;
-
-                                default:
-                                    <input @bind="@row[column.Id]" />
-                                    break;
-                            }
+                            <PetsOnTrailApp.Components.General.EditableInput.EditableInput Value="@row[column.Id]" Type="@column.Type" />
                         </td>
                     }
                 }
