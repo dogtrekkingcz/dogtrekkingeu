@@ -226,6 +226,11 @@ internal static class ActionsServiceMapping
         typeAdapterConfig.NewConfig<Protos.Actions.AddNewResult.Checkpointdto, AddNewResultRequest.CheckpointDto>();
         typeAdapterConfig.NewConfig<AddNewResultResponse, Protos.Actions.AddNewResult.AddNewResultResponse>();
 
+        typeAdapterConfig.NewConfig<Protos.Actions.GetActions.GetActionsRequest, PetsOnTrail.Interfaces.Actions.Entities.Actions.GetActionsRequest>();
+        typeAdapterConfig.NewConfig<GetActionsResponse, Protos.Actions.GetActions.GetActionsResponse>();
+        typeAdapterConfig.NewConfig<GetActionsResponse.ActionDto, Protos.Actions.GetActions.ActionDto>();
+
+
         return typeAdapterConfig;
     }
 }
