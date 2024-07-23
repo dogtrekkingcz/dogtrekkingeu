@@ -24,6 +24,11 @@ internal class AuthorizationService : IAuthorizationService
     
     public async Task<bool> IsAuthorizedAsync(MethodInfo methodInfo, Guid actionId, CancellationToken cancellationToken)
     {
+        if (_currentUserIdService.GetUserId() == Guid.Empty)
+        {
+            return false;
+        }
+
         var requiredRoles = methodInfo.GetCustomAttributes(true)
             .OfType<RequiredRolesAttribute>()
             .SelectMany(attr => attr.Roles)
