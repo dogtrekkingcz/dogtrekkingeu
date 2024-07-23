@@ -179,6 +179,7 @@ public sealed record GetAllActionsInternalStorageResponse
 
     public record PaymentDto
     {
+        public Guid Id { get; init; } = Guid.Empty;
         public DateTimeOffset Date { get; init; } = DateTimeOffset.Now;
 
         public double Amount { get; init; } = 0.0;

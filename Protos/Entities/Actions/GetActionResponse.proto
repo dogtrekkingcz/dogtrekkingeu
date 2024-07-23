@@ -122,11 +122,12 @@ message RequestedPaymentItem {
 }
 
 message PaymentDto {
-  google.type.DateTime Date = 1;
-  double Amount = 2;
-  string Currency = 3;
-  string BankAccount = 4;
-  string Note = 5;
+  string Id = 1;
+  google.type.DateTime Date = 2;
+  double Amount = 3;
+  string Currency = 4;
+  string BankAccount = 5;
+  string Note = 6;
 }
 
 message MerchandizeItemDto {

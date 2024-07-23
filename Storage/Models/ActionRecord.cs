@@ -64,28 +64,17 @@ internal sealed record ActionRecord : BaseRecord, IRecord
 
     public record RacerDto
     {
-        public Guid Id { get; set; } = Guid.Empty;
-        
+        public Guid Id { get; set; } = Guid.Empty;        
         public Guid CompetitorId { get; set; } = Guid.Empty;
-
         public string CheckpointData { get; set; } = string.Empty;
-
         public string FirstName { get; set; } = string.Empty;
-
         public string LastName { get; set; } = string.Empty;
-
         public string Phone { get; set; } = string.Empty;
-
         public string Email { get; set; } = string.Empty;
-
         public List<PetDto> Pets { get; set; } = new List<PetDto>();
-
         public DateTimeOffset? Start { get; set; } = null;
-
         public DateTimeOffset? Finish { get; set; } = null;
-
         public RaceState State { get; set; } = RaceState.NotValid;
-
         public bool Accepted { get; set; } = false;
         
         public DateTimeOffset? AcceptedDate { get; set; }
@@ -109,17 +98,14 @@ internal sealed record ActionRecord : BaseRecord, IRecord
     
     public sealed record PassedCheckpointDto
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        
+        public Guid Id { get; set; } = Guid.NewGuid();        
         public DateTimeOffset Passed { get; set; } = DateTimeOffset.Now;
-
         public LatLngDto Position { get; set; } = new();
     }
     
     public class NoteDto
     {
         public DateTimeOffset Time { get; set; } = DateTimeOffset.Now;
-
         public string Text { get; set; } = string.Empty;
     }
     
@@ -150,22 +136,17 @@ internal sealed record ActionRecord : BaseRecord, IRecord
     public sealed record RequestedPaymentItem
     {
         public string Name { get; set; } = string.Empty;
-
         public double Price { get; set; } = double.NaN;
-
         public string Currency { get; set; } = string.Empty;
     }
 
     public record PaymentDto
     {
+        public Guid Id { get; set; } = Guid.Empty;
         public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
-
         public double Amount { get; set; } = 0.0;
-
         public string Currency { get; set; } = "Kč";
-
         public string BankAccount { get; set; } = string.Empty;
-
         public string Note { get; set; } = string.Empty;
     }
 
