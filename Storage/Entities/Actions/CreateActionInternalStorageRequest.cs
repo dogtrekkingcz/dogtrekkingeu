@@ -2,37 +2,22 @@
 
 public sealed record CreateActionInternalStorageRequest
 {
-    public Guid Id { get; init; } = Guid.NewGuid();
-    
-    public Guid UserId { get; init; } = Guid.Empty;
-    
-    public DateTimeOffset Created { get; init; }
-    
+    public Guid Id { get; init; } = Guid.NewGuid();    
+    public Guid UserId { get; init; } = Guid.Empty;    
+    public DateTimeOffset Created { get; init; }    
     public Guid TypeId { get; init; } = Guid.Empty;
-
     public string Name { get; init; } = string.Empty;
-
     public string Description { get; init; } = string.Empty;
-
     public string ContactMail { get; init; } = string.Empty;
-
     public List<Guid> DetailsCanSee { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
     public List<Guid> ResultsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
-
     public List<Guid> CompetitorsCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
-
     public List<Guid> ActionCanEdit { get; set; } = new List<Guid> { Constants.Roles.InternalUser.GUID };
-
     public string Www { get; init; } = string.Empty;
-
     public TermDto Term { get; init; } = new();
-
     public AddressDto Address { get; init; } = new();
-
     public List<RaceDto> Races { get; init; } = new List<RaceDto>();
-
-    public ActionSaleDto Sale { get; init; } = new();
-    
+    public ActionSaleDto Sale { get; init; } = new();    
     public sealed record RaceDto
     {
         public Guid Id { get; init; } = Guid.NewGuid();
@@ -179,14 +164,11 @@ public sealed record CreateActionInternalStorageRequest
 
     public record PaymentDto
     {
+        public Guid Id { get; init; } = Guid.Empty;
         public DateTimeOffset Date { get; init; } = DateTimeOffset.Now;
-
         public double Amount { get; init; } = 0.0;
-
         public string Currency { get; init; } = "Kč";
-
         public string BankAccount { get; init; } = string.Empty;
-
         public string Note { get; init; } = string.Empty;
     }
 
