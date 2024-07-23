@@ -561,7 +561,13 @@ internal class ActionsService : IActionsService
 
     public async Task<GetActionsResponse> GetActionsAsync(GetActionsRequest request, CancellationToken cancellationToken) {
         var allActions = await _actionsRepositoryService.GetAllActionsAsync(cancellationToken);
-        var filteredByType = allActions.Actions.Where(a => request.TypeIds.Contains(a.TypeId));
+
+        IEnumerable<GetAllActionsInternalStorageResponse.ActionDto> filteredByType = null;
+        
+        if (request.TypeIds == null || request.TypeIds.Count() == 0)
+            filteredByType = allActions.Actions;
+        else
+            filteredByType = allActions.Actions.Where(a => request.TypeIds.Contains(a.TypeId));
 
         var result = new GetActionsResponse
         {
