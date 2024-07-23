@@ -581,7 +581,7 @@ internal class ActionsService : IActionsService
                 Latitude = action.Address.Position.Latitude,
                 Longitude = action.Address.Position.Longitude
             })
-        };      
+        };
     
         return result;
     }
