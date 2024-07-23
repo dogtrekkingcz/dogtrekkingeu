@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "Protos.Actions.GetActions";
+
+package getactions;
+
+import "google/type/datetime.proto";
+
+message GetActionsResponse {
+  repeated ActionDto Actions = 1;
+}
+
+message ActionDto {
+  string Id = 1;
+  string TypeId = 2;
+  string Name = 3;
+  string Description = 4;
+  google.type.DateTime From = 5;
+  google.type.DateTime To = 6;
+  string Country = 7;
+  string Province = 8;
+  string City = 9;
+  string PostalCode = 10;
+  string Address = 11;
+  double Latitude = 12;
+  double Longitude = 13;
+}

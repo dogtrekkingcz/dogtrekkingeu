@@ -558,4 +558,31 @@ internal class ActionsService : IActionsService
 
         return new AddNewResultResponse();
     }
+
+    public async Task<GetActionsResponse> GetActionsAsync(GetActionsRequest request, CancellationToken cancellationToken) {
+        var allActions = await _actionsRepositoryService.GetAllActionsAsync(cancellationToken);
+        var filteredByType = allActions.Actions.Where(a => request.TypeIds.Contains(a.TypeId));
+
+        var result = new GetActionsResponse
+        {
+            Actions = filteredByType.Select(action => new GetActionsResponse.ActionDto
+            {
+                Id = action.Id,
+                TypeId = action.TypeId,
+                Name = action.Name,
+                Description = action.Description,
+                From = action.Term.From,
+                To = action.Term.To,
+                Country = action.Address.Country,
+                Province = string.Empty,
+                City = action.Address.City,
+                PostalCode = string.Empty,
+                Address = action.Address.Street,
+                Latitude = action.Address.Position.Latitude,
+                Longitude = action.Address.Position.Longitude
+            })
+        };      
+    
+        return result;
+    }
 }

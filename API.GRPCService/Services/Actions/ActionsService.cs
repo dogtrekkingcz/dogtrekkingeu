@@ -23,6 +23,17 @@ internal class ActionsService : Protos.Actions.Actions.ActionsBase
         _actionsService = actionsService;
     }
 
+    public async override Task<Protos.Actions.GetActions.GetActionsResponse> getActions(Protos.Actions.GetActions.GetActionsRequest request, ServerCallContext context)
+    {
+        var getActionsRequest = _mapper.Map<GetActionsRequest>(request);
+
+        var actions = await _actionsService.GetActionsAsync(getActionsRequest, context.CancellationToken);
+
+        var response = _mapper.Map<Protos.Actions.GetActions.GetActionsResponse>(actions);
+
+        return response;
+    }
+
     public async override Task<Protos.Actions.GetAllActions.GetAllActionsResponse> getAllActions(Protos.Actions.GetAllActions.GetAllActionsRequest request, ServerCallContext context)
     {
         var getAllActionsRequest = _mapper.Map<GetAllActionsRequest>(request);

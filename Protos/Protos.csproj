@@ -64,6 +64,24 @@
         <CompileOutputs>True</CompileOutputs>
         <Generator>MSBuild:Compile</Generator>
       </Protobuf>
+      <Protobuf Include="Entities\Actions\GetActionsRequest.proto">
+        <Access>Public</Access>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <GrpcServices>Both</GrpcServices>
+        <ProtoCompile>True</ProtoCompile>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
+      <Protobuf Include="Entities\Actions\GetActionsResponse.proto">
+        <Access>Public</Access>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <GrpcServices>Both</GrpcServices>
+        <ProtoCompile>True</ProtoCompile>
+        <OutputDir>obj\Debug\net7.0\</OutputDir>
+        <CompileOutputs>True</CompileOutputs>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
       <Protobuf Include="Entities\Actions\ResetStatesResponse.proto" Access="Public" GrpcServices="Both" ProtoCompile="True">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         <OutputDir>obj\Debug\net7.0\</OutputDir>
@@ -846,6 +864,8 @@
       <None Remove="Entities\Actions\DsqResponse.proto" />
       <None Remove="Entities\Actions\FinishNowRequest.proto" />
       <None Remove="Entities\Actions\FinishNowResponse.proto" />
+      <None Remove="Entities\Actions\GetActionsRequest.proto" />
+      <None Remove="Entities\Actions\GetActionsResponse.proto" />
       <None Remove="Entities\Actions\GetSimpleActionsListResponse.proto" />
       <None Remove="Entities\Actions\ResetStatesRequest.proto" />
       <None Remove="Entities\Actions\ResetStatesResponse.proto" />

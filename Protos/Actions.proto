@@ -19,6 +19,8 @@ import "Entities/Actions/GetAllActionsRequest.proto";
 import "Entities/Actions/GetAllActionsResponse.proto";
 import "Entities/Actions/GetActionRequest.proto";
 import "Entities/Actions/GetActionResponse.proto";
+import "Entities/Actions/GetActionsRequest.proto";
+import "Entities/Actions/GetActionsResponse.proto";
 import "Entities/Actions/GetSelectedActionsRequest.proto";
 import "Entities/Actions/GetSelectedActionsResponse.proto";
 import "Entities/Actions/DeleteActionRequest.proto";
@@ -50,12 +52,15 @@ import "Entities/Actions/AddNewResultRequest.proto";
 import "Entities/Actions/AddNewResultResponse.proto";
 
 service Actions {
+  rpc getAction    (getaction.GetActionRequest) returns (getaction.GetActionResponse);				// *  
+  rpc getActions (getactions.GetActionsRequest) returns (getactions.GetActionsResponse);			// *
+
   rpc createAction (createaction.CreateActionRequest) returns (createaction.CreateActionResponse);
   rpc updateAction (updateaction.UpdateActionRequest) returns (updateaction.UpdateActionResponse);
   rpc getRacesForAction (getracesforaction.GetRacesForActionRequest) returns (getracesforaction.GetRacesForActionResponse);
   rpc getActionEntrySettings (getactionentrysettings.GetActionEntrySettingsRequest) returns (getactionentrysettings.GetActionEntrySettingsResponse);
   rpc getAllActions (getallactions.GetAllActionsRequest) returns (getallactions.GetAllActionsResponse);
-  rpc getAction    (getaction.GetActionRequest) returns (getaction.GetActionResponse);
+  
   rpc getSelectedActions (getselectedactions.GetSelectedActionsRequest) returns (getselectedactions.GetSelectedActionsResponse);
   rpc deleteAction (deleteaction.DeleteActionRequest) returns (deleteaction.DeleteActionResponse);
   rpc getResultsForAction (getresultsforaction.GetResultsForActionRequest) returns (getresultsforaction.GetResultsForActionResponse);
