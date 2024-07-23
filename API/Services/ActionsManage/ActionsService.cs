@@ -155,10 +155,33 @@ internal class ActionsService : IActionsService
     [RequiredRoles(Constants.Roles.InternalAdministrator.ID, Constants.Roles.OwnerOfAction.ID)]
     public async Task<GetActionResponse> GetActionAsync(Guid id, CancellationToken cancellationToken)
     {
-        if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetActionAsync)), id, cancellationToken))
-            throw new NotAuthorizedForThisActionException();
-        
         var result = await _actionsRepositoryService.GetAsync(id, cancellationToken);
+
+        // if user is not authorized, return only basic/public informations
+        if (!await _authorizationService.IsAuthorizedAsync(GetType().GetMethod(nameof(GetActionAsync)), id, cancellationToken))
+            return new GetActionResponse
+            {
+                Id = result.Id,
+                TypeId = result.TypeId,
+                Name = result.Name,
+                Description = result.Description,
+                Term = new GetActionResponse.TermDto
+                {
+                    From = result.Term.From,
+                    To = result.Term.To
+                },
+                Address = new GetActionResponse.AddressDto
+                {
+                    Country = result.Address.Country,
+                    City = result.Address.City,
+                    Street = result.Address.Street,
+                    Position = new GetActionResponse.LatLngDto
+                    {
+                        Latitude = result.Address.Position.Latitude,
+                        Longitude = result.Address.Position.Longitude
+                    }
+                }
+            };
 
         var response = _mapper.Map<GetActionResponse>(result);
 
