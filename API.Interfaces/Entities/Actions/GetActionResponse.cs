@@ -177,14 +177,11 @@ public sealed record GetActionResponse
 
     public record PaymentDto
     {
+        public Guid Id { get; set; } = Guid.Empty;
         public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
-
         public double Amount { get; set; } = 0.0;
-
         public string Currency { get; set; } = "Kč";
-
         public string BankAccount { get; set; } = string.Empty;
-
         public string Note { get; set; } = string.Empty;
     }
 
