@@ -180,7 +180,64 @@ internal class ActionsService : IActionsService
                         Latitude = result.Address.Position.Latitude,
                         Longitude = result.Address.Position.Longitude
                     }
-                }
+                },
+                Races = result.Races.Select(race => new GetActionResponse.RaceDto
+                {
+                    Id = race.Id,
+                    Name = race.Name,
+                    Begin = race.Begin,
+                    End = race.End,
+                    Distance = race.Distance,
+                    EnteringFrom = race.EnteringFrom,
+                    EnteringTo = race.EnteringTo,
+                    Incline = race.Incline,
+                    MaxNumberOfCompetitors = race.MaxNumberOfCompetitors,
+                    Checkpoints = race.Checkpoints.Select(checkpoint => new GetActionResponse.CheckpointDto
+                    {
+                        Id = checkpoint.Id,
+                        Name = checkpoint.Name
+                    }).ToList(),
+                    Limits = race.Limits != null ? new GetActionResponse.LimitsDto
+                    {
+                        MinimalAgeOfThePetInDayes = race.Limits?.MinimalAgeOfThePetInDayes ?? 0,
+                        WithPets = race.Limits?.WithPets ?? true
+                    } : null,
+                    Categories = race.Categories.Select(category => new GetActionResponse.CategoryDto
+                    {
+                        Id = category.Id,
+                        Name = category.Name,
+                        Description = category.Description,
+                        Racers = category.Racers.Select(racer => new GetActionResponse.RacerDto
+                        {
+                            Id = racer.Id,
+                            FirstName = racer.FirstName,
+                            LastName = racer.LastName,
+                            CompetitorId = racer.CompetitorId,
+                            Start = racer.Start,
+                            Finish = racer.Finish,
+                            State = racer.State.ToGetActionResponseRaceState(),
+                            PassedCheckpoints = racer.PassedCheckpoints.Select(checkpoint => new GetActionResponse.PassedCheckpointDto
+                            {
+                                Id = checkpoint.Id,
+                                Position = new GetActionResponse.LatLngDto
+                                {
+                                    Latitude = checkpoint.Position.Latitude,
+                                    Longitude = checkpoint.Position.Longitude
+                                }
+                            }).ToList(),
+                            Pets = racer.Pets.Select(pet => new GetActionResponse.PetDto
+                            {
+                                Id = pet.Id,
+                                Name = pet.Name,
+                                Breed = pet.Breed,
+                                Kennel = pet.Kennel,
+                                PetType = pet.PetType,
+                                Chip = pet.Chip,
+                                Pedigree = pet.Pedigree
+                            }).ToList()
+                        }).ToList()
+                    }).ToList()
+                }).ToList()
             };
 
         var response = _mapper.Map<GetActionResponse>(result);
